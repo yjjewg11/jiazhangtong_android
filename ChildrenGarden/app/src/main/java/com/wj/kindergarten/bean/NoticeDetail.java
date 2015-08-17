@@ -16,6 +16,17 @@ public class NoticeDetail extends BaseModel {
     private String share_url;
     @Expose
     private Notice data;
+    @Expose
+    private boolean isFavor;
+
+
+    public boolean isFavor() {
+        return isFavor;
+    }
+
+    public void setIsFavor(boolean isFavor) {
+        this.isFavor = isFavor;
+    }
 
     public int getCount() {
         return count;

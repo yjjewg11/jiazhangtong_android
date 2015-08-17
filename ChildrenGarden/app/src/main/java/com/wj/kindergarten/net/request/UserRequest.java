@@ -1,17 +1,23 @@
 package com.wj.kindergarten.net.request;
 
 import android.content.Context;
+import android.telephony.TelephonyManager;
 
 import com.loopj.android.http.RequestParams;
+import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GsonUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * RsaResponse
@@ -28,6 +34,7 @@ public final class UserRequest {
     private static final String SMS_CODE = "rest/sms/sendCode.json";
     private static final String INTERACTION_LIST = "rest/classnews/getClassNewsByMy.json";
     private static final String ZAN = "rest/dianzan/save.json";
+    private static final String ZAN_CANCEL = "rest/dianzan/delete.json";
     private static final String INTERACTION_SEND = "rest/classnews/save.json";
     private static final String ZAN_LIST = "rest/dianzan/getByNewsuuid.json";//get newsuuid
     private static final String REPLY_LIST = "rest/reply/getReplyByNewsuuid.json";//get newsuuid pageNo
@@ -42,6 +49,8 @@ public final class UserRequest {
     private static final String ARTICLE = "rest/share/getArticleJSON.json";
     private static final String APPRAISE_TEACHER_LIST = "rest/teachingjudge/getTeachersAndJudges.json";
     private static final String APPRAISE = "rest/teachingjudge/save.json";
+    private static final String UPDATE_PASSWORD = "rest/userinfo/updatepassword.json";
+    private static final String DEVICE_SAVE = "rest/pushMsgDevice/save.json";//消息设备注册
 
     private UserRequest() {
     }
@@ -130,12 +139,11 @@ public final class UserRequest {
             jsonObject.put("classuuid", classuuid);
             jsonObject.put("uuid", uuid);
             jsonObject.put("content", content);
+            SendRequest.getInstance().post(context, RequestType.INTERACTION_SEND, jsonObject.toString(),
+                    RequestHttpUtil.BASE_URL + INTERACTION_SEND, requestResultI);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        SendRequest.getInstance().post(context, RequestType.INTERACTION_SEND, jsonObject.toString(),
-                RequestHttpUtil.BASE_URL + INTERACTION_SEND, requestResultI);
     }
 
     public static void zan(Context context, String newsUuid, String type, RequestResultI requestResultI) {
@@ -143,12 +151,22 @@ public final class UserRequest {
         try {
             jsonObject.put("newsuuid", newsUuid);
             jsonObject.put("type", type);
+            SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(),
+                    RequestHttpUtil.BASE_URL + ZAN, requestResultI);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(),
-                RequestHttpUtil.BASE_URL + ZAN, requestResultI);
+    public static void zanCancel(Context context, String newsUuid, RequestResultI requestResultI) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("newsuuid", newsUuid);
+            SendRequest.getInstance().post(context, RequestType.ZAN_CANCEL, jsonObject.toString(),
+                    RequestHttpUtil.BASE_URL + ZAN_CANCEL, requestResultI);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void getZanList(Context context, String newsuuid, RequestResultI requestResultI) {
@@ -245,11 +263,67 @@ public final class UserRequest {
             jsonObject.put("teacheruuid", teacheruuid);
             jsonObject.put("content", content);
             jsonObject.put("type", type);
+            SendRequest.getInstance().post(context, RequestType.APPRAISE_TEACHER, jsonObject.toString(),
+                    RequestHttpUtil.BASE_URL + APPRAISE, requestResultI);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        SendRequest.getInstance().post(context, RequestType.APPRAISE_TEACHER, jsonObject.toString(),
-                RequestHttpUtil.BASE_URL + APPRAISE, requestResultI);
+
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param context
+     * @param oldpassowrd
+     * @param password
+     */
+    public static void updatePassword(Context context, String oldpassowrd, String password, RequestResultI resultI) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("oldpassword", Utils.getMd5(oldpassowrd));
+            jsonObject.put("password", Utils.getMd5(password));
+            SendRequest.getInstance().post(context, RequestType.UPDATE_PASSWORD, jsonObject.toString(), RequestHttpUtil.BASE_URL + UPDATE_PASSWORD, resultI);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 设备注册
+     */
+    public static void deviceSave(final Context context) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String device_id = CGSharedPreference.getDeviceId();
+//            if (Utils.stringIsNull(device_id)) {
+//                TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//                device_id = tm.getDeviceId();
+//            }
+            jsonObject.put("device_id", device_id);
+            jsonObject.put("device_type", "android");
+            jsonObject.put("status", 0);
+            SendRequest.getInstance().post(context, RequestType.DEVICE_SAVE, jsonObject.toString(), RequestHttpUtil.BASE_URL + DEVICE_SAVE, new RequestResultI() {
+                @Override
+                public void result(BaseModel domain) {
+                    CGLog.d("device register success");
+                }
+
+                @Override
+                public void result(List<BaseModel> domains, int total) {
+
+                }
+
+                @Override
+                public void failure(String message) {
+                    if (!Utils.stringIsNull(message)) {
+                        Utils.showToast(context, message);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

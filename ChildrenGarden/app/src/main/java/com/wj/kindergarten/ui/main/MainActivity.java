@@ -11,6 +11,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionFragment;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity {
         MainFragment.GRID_ITEM_HW = Utils.getWidthByScreenWeight(4);
 
         initTab();
+
+        ActivityManger.getInstance().addActivity(this);
     }
 
     /**

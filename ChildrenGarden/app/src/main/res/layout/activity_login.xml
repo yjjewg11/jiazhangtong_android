@@ -40,6 +40,7 @@
                 style="@style/loginEditStyle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
+                android:textColor="@color/white"
                 android:background="@android:color/transparent" />
         </LinearLayout>
 
@@ -62,6 +63,7 @@
                 style="@style/loginEditStyle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
+                android:textColor="@color/white"
                 android:background="@android:color/transparent"
                 android:inputType="textPassword" />
         </LinearLayout>

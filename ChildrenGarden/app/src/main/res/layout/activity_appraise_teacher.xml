@@ -16,6 +16,17 @@
         android:textColor="@color/white"
         android:textSize="@dimen/normal_text" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/appraise_teacher_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <ListView
         android:id="@+id/appraise_teacher_list"
         android:layout_width="match_parent"

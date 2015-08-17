@@ -29,5 +29,13 @@ public class RequestType {
     public final static int ARTICLE = 117;
     public final static int APPRAISE_TEACHER_LIST = 118;
     public final static int APPRAISE_TEACHER = 119;
-
+    public final static int TEACHERS = 120;//通讯录获得园长和老师列表
+    public final static int GET_LEADER_MESSAGE = 121;//获得园长和家长的消息列表
+    public final static int GET_EMOT = 122;//获得表情符号列表
+    public final static int SEND_MESSAGE_TO_LEADER = 124;//给园长发消息
+    public final static int UPDATE_PASSWORD = 125;//修改密码
+    public final static int GET_TEACHER_MESSAGE = 126;//获得老师和家长的消息列表
+    public final static int SEND_MESSAGE_TO_TEACHER = 127;//给老师发消息
+    public final static int ZAN_CANCEL = 128;
+    public final static int DEVICE_SAVE = 129;
 }

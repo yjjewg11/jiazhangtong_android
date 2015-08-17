@@ -13,12 +13,14 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.mobads.AdView;
+import com.baidu.mobads.AdViewListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.MainItem;
 import com.wj.kindergarten.common.Constants;
-import com.wj.kindergarten.compounets.SlideShowView;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.AppraiseTeacherActivity;
 import com.wj.kindergarten.ui.func.ArticleListActivity;
@@ -27,7 +29,10 @@ import com.wj.kindergarten.ui.func.FoodListActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NoticeListActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +47,14 @@ import java.util.List;
 public class MainFragment extends Fragment {
     public static int GRID_ITEM_HW = 240;
     private View rootView;
-    private SlideShowView adSSV = null;
-    private ImageView adLeftIv = null;
-    private ImageView adRightIv = null;
     private GridView mainGv = null;
 
     private Context mContext = null;
     private List<MainItem> mainItems = new ArrayList();
     private GridViewAdapter mainGridAdapter = null;
 
+    private RelativeLayout layoutAD = null;
+    private AdView adView = null;
 
     @Nullable
     @Override
@@ -60,6 +64,7 @@ public class MainFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
             initViews(rootView);
+//            loadAD();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
@@ -70,9 +75,7 @@ public class MainFragment extends Fragment {
     }
 
     private void initViews(View rootView) {
-        adSSV = (SlideShowView) rootView.findViewById(R.id.main_ad);
-        adLeftIv = (ImageView) rootView.findViewById(R.id.main_ad_left);
-        adRightIv = (ImageView) rootView.findViewById(R.id.main_ad_right);
+        layoutAD = (RelativeLayout) rootView.findViewById(R.id.layout_ad);
         mainGv = (GridView) rootView.findViewById(R.id.main_grid);
 
         initMainItem();
@@ -86,10 +89,72 @@ public class MainFragment extends Fragment {
         });
     }
 
+    //加载广告
+    private void loadAD() {
+        adView = new AdView(getActivity());
+        adView.setListener(new AdViewListener() {
+            public void onAdSwitch() {
+                CGLog.d("onAdSwitch");
+            }
+
+            public void onAdShow(JSONObject info) {
+                // 广告已经渲染出来
+                CGLog.d("onAdShow " + info.toString());
+            }
+
+            public void onAdReady(AdView adView) {
+                // 资源已经缓存完毕，还没有渲染出来
+                CGLog.d("onAdReady " + adView);
+            }
+
+            public void onAdFailed(String reason) {
+                CGLog.d("onAdFailed " + reason);
+            }
+
+            public void onAdClick(JSONObject info) {
+                CGLog.d("onAdClick " + info.toString());
+            }
+
+            public void onVideoStart() {
+                CGLog.d("onVideoStart");
+            }
+
+            public void onVideoFinish() {
+                CGLog.d("onVideoFinish");
+            }
+
+            @Override
+            public void onVideoClickAd() {
+                CGLog.d("onVideoFinish");
+            }
+
+            @Override
+            public void onVideoClickClose() {
+                CGLog.d("onVideoFinish");
+            }
+
+            @Override
+            public void onVideoClickReplay() {
+                CGLog.d("onVideoFinish");
+            }
+
+            @Override
+            public void onVideoError() {
+                CGLog.d("onVideoFinish");
+            }
+        });
+
+        //将adView添加到父控件中(注：该父控件不一定为您的根控件，只要该控件能通过addView能添加广告视图即可)
+        RelativeLayout.LayoutParams rllp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        rllp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutAD.addView(adView, rllp);
+    }
+
     private void initMainItem() {
         mainItems.clear();
 
-        MainItem gardenInteraction = new MainItem(R.drawable.main_item, "互动", Constants.GARDEN_INTERACTION);
+        MainItem gardenInteraction = new MainItem(R.drawable.main_hudong, "互动", Constants.GARDEN_INTERACTION);
         MainItem gardenDes = new MainItem(R.drawable.main_item_xiaoyuan, "园区介绍", Constants.GARDEN_DES);
         MainItem gardenNotice = new MainItem(R.drawable.main_item_gonggao, "公告", Constants.GARDEN_NOTICE);
         MainItem gardenSign = new MainItem(R.drawable.main_item_qiandao, "签到记录", Constants.GARDEN_SIGN);
@@ -98,7 +163,7 @@ public class MainFragment extends Fragment {
         MainItem gardenArticle = new MainItem(R.drawable.main_item_jingpin, "精品文章", Constants.GARDEN_ARTICLE);
         MainItem gardenSpecial = new MainItem(R.drawable.main_item_techang, "特长课程", Constants.GARDEN_SPECIAL);
         MainItem gardenTeacher = new MainItem(R.drawable.main_item_pinjia, "评价老师", Constants.GARDEN_TEACHER);
-        MainItem gardenMore = new MainItem(R.drawable.main_item, "更多", Constants.GARDEN_MORE);
+        MainItem gardenMore = new MainItem(R.drawable.main_more, "更多", Constants.GARDEN_MORE);
 
         mainItems.add(gardenInteraction);
         mainItems.add(gardenDes);
@@ -200,4 +265,5 @@ public class MainFragment extends Fragment {
             return mainItems.size();
         }
     }
+
 }

@@ -3,6 +3,7 @@ package com.wj.kindergarten.common;
 import android.content.SharedPreferences;
 
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.utils.Utils;
 
 /**
  * JJGSharedPrefrence
@@ -60,5 +61,19 @@ public class CGSharedPreference {
 //        return loginInfo;
 //    }
 
+    public static void saveDeviceId(String id) {
+        if(!Utils.stringIsNull(id)) {
+            SharedPreferences sharedPreferences = getSharedPreferences();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("deviceId", id);
+            editor.commit();
+        }
+    }
+
+    public static String getDeviceId() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        String deviceId = sharedPreferences.getString("deviceId", "");
+        return deviceId;
+    }
 
 }

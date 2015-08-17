@@ -86,6 +86,15 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
+    <!-- dialog style -->
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <style name="detail_line">
         <item name="android:layout_marginLeft">@dimen/normal_padding</item>
         <item name="android:background">@color/line</item>
@@ -93,5 +102,15 @@
 
     <style name="loginCheck" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/login_check_bg</item>
+    </style>
+
+    <style name="Theme.UMDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="ShareAnimBase">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 </resources>

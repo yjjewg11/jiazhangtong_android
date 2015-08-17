@@ -1,14 +1,18 @@
 package com.wj.kindergarten.ui.func;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
+import android.view.ViewGroup;
+
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.CGApplication;
-import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Food;
-import com.wj.kindergarten.bean.FoodList;
-import com.wj.kindergarten.net.RequestResultI;
-import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,7 +26,11 @@ import java.util.TimeZone;
  * @CreateDate: 2015/8/2 21:03
  */
 public class FoodListActivity extends BaseActivity {
+    private ViewPager viewPager;
     private List<Food> foods = new ArrayList<>();
+    private final int MAX_DAY = 41;
+    private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
 
     @Override
     protected void setContentLayout() {
@@ -31,57 +39,62 @@ public class FoodListActivity extends BaseActivity {
 
     @Override
     protected void setNeedLoading() {
-        isNeedLoading = true;
+        isNeedLoading = false;
     }
 
     @Override
     protected void loadData() {
-        setTitleText("每日食谱");
 
-        getFoodList();
     }
 
     @Override
     protected void onCreate() {
         setTitleText("每日食谱");
+        viewPager = (ViewPager) findViewById(R.id.food_fragment);
 
+        viewPager.setAdapter(new FoodFragmentAdapter(getSupportFragmentManager()));
+        viewPager.setCurrentItem(MAX_DAY / 2, false);
     }
 
-    private void getFoodList() {
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isProgressDialogIsShowing()) {
+                hideProgressDialog();
+            }
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private String calculateCurrentDate(int current) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String mYear = String.valueOf(calendar.get(Calendar.YEAR)); // 获取当前年份
-        String mMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);// 获取当前月份
-        String mDay = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
-        String mWay = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
-//        String date = mYear + "-" + mMonth + "-" + mDay;
-        String date = "2015-8-1";//TODO  test data
-        String uuid = "";
-        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getList() != null
-                && CGApplication.getInstance().getLogin().getList().size() > 0) {
-            uuid = CGApplication.getInstance().getLogin().getList().get(0).getGroupuuid();
+        int middle = MAX_DAY / 2;
+        calendar.add(Calendar.DAY_OF_MONTH, current - middle);
+        return df.format(calendar.getTime());
+    }
+
+    class FoodFragmentAdapter extends FragmentPagerAdapter {
+        public FoodFragmentAdapter(FragmentManager fm) {
+            super(fm);
         }
-        UserRequest.getFoodList(mContext, date, date, uuid, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                FoodList foodList = (FoodList) domain;
-                if (foodList != null && foodList.getList() != null && foodList.getList().size() > 0) {
-                    foods.addAll(foodList.getList());
-                    loadSuc();
-                } else {
-                    loadEmpty();
-                }
-            }
 
-            @Override
-            public void result(List<BaseModel> domains, int total) {
+        @Override
+        public Fragment getItem(int position) {
+            return FoodFragment.buildFoodFragment(calculateCurrentDate(position));
+        }
 
-            }
+        @Override
+        public int getCount() {
+            return MAX_DAY;
+        }
 
-            @Override
-            public void failure(String message) {
-                loadFailed();
-            }
-        });
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+
+        }
     }
 }

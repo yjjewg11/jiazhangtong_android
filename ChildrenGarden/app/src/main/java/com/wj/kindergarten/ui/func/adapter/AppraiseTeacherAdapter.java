@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AppraiseTeacher;
 import com.wj.kindergarten.bean.AppraiseTeacherOver;
-import com.wj.kindergarten.ui.func.AppraiseTeacherActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -131,8 +130,8 @@ public class AppraiseTeacherAdapter extends BaseAdapter {
                     appraiseTeacherOverTemp.setTeacheruuid(appraiseTeacher.getTeacher_uuid());
                     appraiseTeacherOverTemp.setIsEditState(true);
                     alreadyTeacherMap.put(appraiseTeacher.getTeacher_uuid(), appraiseTeacherOverTemp);
-                    ((AppraiseTeacherActivity) context).appraiseTeacher(contentTv.getText().toString()
-                            , appraiseTeacher.getTeacher_uuid(), type);
+//                    ((AppraiseTeacherActivity) context).appraiseTeacher(contentTv.getText().toString()
+//                            , appraiseTeacher.getTeacher_uuid(), type);
                 }
             });
             goodTv.setOnClickListener(new View.OnClickListener() {

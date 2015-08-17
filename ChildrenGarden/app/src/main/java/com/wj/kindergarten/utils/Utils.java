@@ -1,5 +1,8 @@
 package com.wj.kindergarten.utils;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -9,17 +12,21 @@ import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -49,7 +56,7 @@ import java.util.Date;
  * @version: v1.0
  */
 public class Utils {
-    private static final int ANIMATION_DURATION = 300;//动画执行时间
+    public static final int ANIMATION_DURATION = 200;//动画执行时间
     public static final SimpleDateFormat timestampFormatter = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss.sss");
 
@@ -280,19 +287,46 @@ public class Utils {
      * @param moveLayout 要执行动画的view
      * @param deltaY     Y轴偏移量
      */
-//    public static void doBottomSlidAnimations(View moveLayout, float deltaY) {
-//        if (Build.VERSION.SDK_INT < 11) {
-//            com.nineoldandroids.animation.ObjectAnimator animY
-//                    = com.nineoldandroids.animation.ObjectAnimator.ofFloat(moveLayout,
-// "translationY", deltaY);
-//            animY.setDuration(300);
-//            animY.start();
-//        } else {
-//            ObjectAnimator animY = ObjectAnimator.ofFloat(moveLayout, "translationY", deltaY);
-//            animY.setDuration(300);
-//            animY.start();
-//        }
-//    }
+    /**
+     * 上下平移动画
+     *
+     * @param moveLayout
+     * @param fromH      h
+     * @param toH        h
+     */
+    public static void showLayout(final View moveLayout, float fromH, float toH,int time) {
+        if (Build.VERSION.SDK_INT < 11) {
+            com.nineoldandroids.animation.ValueAnimator animY
+                    = com.nineoldandroids.animation.ObjectAnimator.ofFloat(moveLayout, "height", fromH, toH);
+            animY.setDuration(time);
+            animY.setInterpolator(new DecelerateInterpolator());
+            animY.addUpdateListener(new com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(com.nineoldandroids.animation.ValueAnimator valueAnimator) {
+                    float val = ((Float) valueAnimator.getAnimatedValue());
+                    ViewGroup.LayoutParams layoutParams = moveLayout.getLayoutParams();
+                    layoutParams.height = (int) val;
+                    moveLayout.setLayoutParams(layoutParams);
+                }
+            });
+            animY.start();
+        } else {
+            ValueAnimator animY = ObjectAnimator.ofFloat(moveLayout, "height", fromH, toH);
+            animY.setDuration(ANIMATION_DURATION);
+            animY.setInterpolator(new DecelerateInterpolator());
+            animY.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float val = ((Float) valueAnimator.getAnimatedValue());
+                    ViewGroup.LayoutParams layoutParams = moveLayout.getLayoutParams();
+                    layoutParams.height = (int) val;
+                    moveLayout.setLayoutParams(layoutParams);
+                }
+            });
+            animY.start();
+        }
+    }
 
 
     /**
@@ -562,4 +596,37 @@ public class Utils {
             }
         }).start();
     }
+
+    public static String getGroupNameFromId(String uuid) {
+        if (uuid == null) {
+            return "";
+        }
+        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getGroup_list() != null) {
+            for (Group group : CGApplication.getInstance().getLogin().getGroup_list()) {
+                if (uuid.equals(group.getUuid())) {
+                    return group.getBrand_name();
+                }
+            }
+        }
+        return "";
+    }
+
+
+    /**
+     * 获取版本号
+     *
+     * @return 当前应用的版本号
+     */
+    public static String getVersion(Context context) {
+        String vn = "";
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            vn = info.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vn;
+    }
+
 }

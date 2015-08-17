@@ -2,6 +2,8 @@ package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.List;
+
 /**
  * Food
  *
@@ -33,15 +35,20 @@ public class Food extends BaseModel {
     @Expose
     private String uuid;
     @Expose
-    private CookBook list_time_1;
+    private List<CookBook> list_time_1;
     @Expose
-    private CookBook list_time_2;
+    private List<CookBook> list_time_2;
     @Expose
-    private CookBook list_time_3;
+    private List<CookBook> list_time_3;
     @Expose
-    private CookBook list_time_4;
+    private List<CookBook> list_time_4;
     @Expose
-    private CookBook list_time_5;
+    private List<CookBook> list_time_5;
+    @Expose
+    private DianZan dianzan;
+    @Expose
+    private ChildReplyList replyPage;
+
 
     public String getTime_1() {
         return time_1;
@@ -131,44 +138,60 @@ public class Food extends BaseModel {
         this.uuid = uuid;
     }
 
-    public CookBook getList_time_1() {
+    public List<CookBook> getList_time_1() {
         return list_time_1;
     }
 
-    public void setList_time_1(CookBook list_time_1) {
+    public void setList_time_1(List<CookBook> list_time_1) {
         this.list_time_1 = list_time_1;
     }
 
-    public CookBook getList_time_2() {
+    public List<CookBook> getList_time_2() {
         return list_time_2;
     }
 
-    public void setList_time_2(CookBook list_time_2) {
+    public void setList_time_2(List<CookBook> list_time_2) {
         this.list_time_2 = list_time_2;
     }
 
-    public CookBook getList_time_3() {
+    public List<CookBook> getList_time_3() {
         return list_time_3;
     }
 
-    public void setList_time_3(CookBook list_time_3) {
+    public void setList_time_3(List<CookBook> list_time_3) {
         this.list_time_3 = list_time_3;
     }
 
-    public CookBook getList_time_4() {
+    public List<CookBook> getList_time_4() {
         return list_time_4;
     }
 
-    public void setList_time_4(CookBook list_time_4) {
+    public void setList_time_4(List<CookBook> list_time_4) {
         this.list_time_4 = list_time_4;
     }
 
-    public CookBook getList_time_5() {
+    public List<CookBook> getList_time_5() {
         return list_time_5;
     }
 
-    public void setList_time_5(CookBook list_time_5) {
+    public void setList_time_5(List<CookBook> list_time_5) {
         this.list_time_5 = list_time_5;
+    }
+
+    public DianZan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(DianZan dianzan) {
+        this.dianzan = dianzan;
+    }
+
+    public ChildReplyList getReplyPage() {
+        return replyPage;
+    }
+
+    public void setReplyPage(ChildReplyList replyPage) {
+        this.replyPage = replyPage;
     }
 
     public class CookBook extends BaseModel {

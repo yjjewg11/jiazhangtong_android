@@ -15,6 +15,10 @@
     <dimen name="button_conner">5dp</dimen>
     <dimen name="line_width">1px</dimen>
     <dimen name="normal_padding">16dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_3">3dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="big_padding">24dp</dimen>
     <dimen name="popwindow_padding_lr">16dp</dimen>
@@ -23,4 +27,8 @@
     <dimen name="head_width">78dp</dimen>
     <dimen name="head_width_big">80dp</dimen>
     <dimen name="pic_width_big">120dp</dimen>
+
+    <dimen name="layout_height_60">60dp</dimen>
+    <dimen name="layout_height_40">40dp</dimen>
+    <dimen name="divider_height">1px</dimen>
 </resources>

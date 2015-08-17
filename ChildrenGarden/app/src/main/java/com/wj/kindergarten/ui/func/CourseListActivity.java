@@ -1,15 +1,18 @@
 package com.wj.kindergarten.ui.func;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
+
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.CGApplication;
-import com.wj.kindergarten.bean.BaseModel;
-import com.wj.kindergarten.bean.CourseList;
-import com.wj.kindergarten.net.RequestResultI;
-import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -20,6 +23,11 @@ import java.util.TimeZone;
  * @CreateDate: 2015/8/2 17:08
  */
 public class CourseListActivity extends BaseActivity {
+    private ViewPager viewPager;
+
+    private final int MAX_WEEKEND = 21;
+    private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
 
     @Override
     protected void setContentLayout() {
@@ -28,54 +36,58 @@ public class CourseListActivity extends BaseActivity {
 
     @Override
     protected void setNeedLoading() {
-        isNeedLoading = true;
-    }
-
-    @Override
-    protected void loadData() {
-        setTitleText("课程表");
-        getCourseList();
+        isNeedLoading = false;
     }
 
     @Override
     protected void onCreate() {
         setTitleText("课程表");
 
+        viewPager = (ViewPager) findViewById(R.id.course_pager);
+        CourseFragmentAdapter courseFragmentAdapter = new CourseFragmentAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(courseFragmentAdapter);
+        viewPager.setCurrentItem(MAX_WEEKEND / 2, false);
     }
 
-    private void getCourseList() {
+    private String calculateCurrentDate(int current) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String mYear = String.valueOf(calendar.get(Calendar.YEAR)); // 获取当前年份
-        String mMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);// 获取当前月份
-        String mDay = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
-        String mWay = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
-        String date = mYear + "-" + mMonth + "-" + mDay;
-        String uuid = "";
-        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getList() != null
-                && CGApplication.getInstance().getLogin().getList().size() > 0) {
-            uuid = CGApplication.getInstance().getLogin().getList().get(0).getClassuuid();
+        Date date = new Date(System.currentTimeMillis());
+        calendar.setTime(date);
+        int middle = MAX_WEEKEND / 2;
+        calendar.add(Calendar.DAY_OF_MONTH, 7 * (current - middle));
+        int dayWeek = calendar.get(Calendar.DAY_OF_WEEK);//获得当前日期是一个星期的第几天
+        if (1 == dayWeek) {
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
         }
-        UserRequest.getCourseList(mContext, date, date, uuid, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                CourseList courseList = (CourseList) domain;
-                if (courseList != null && courseList.getList() != null && courseList.getList().size() > 0) {
-                    loadSuc();
-                } else {
-                    loadEmpty();
-                }
-            }
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        calendar.add(Calendar.DATE, calendar.getFirstDayOfWeek() - day);
+        String startDay = df.format(calendar.getTime());
+        calendar.add(Calendar.DATE, 6);
+        String endDay = df.format(calendar.getTime());
+        return startDay + "~" + endDay;
+    }
 
-            @Override
-            public void result(List<BaseModel> domains, int total) {
+    class CourseFragmentAdapter extends FragmentPagerAdapter {
+        public CourseFragmentAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-            }
+        @Override
+        public Fragment getItem(int position) {
+            return CourseFragment.buildCourseFragment(calculateCurrentDate(position));
+        }
 
-            @Override
-            public void failure(String message) {
-                loadFailed();
-            }
-        });
+        @Override
+        public int getCount() {
+            return MAX_WEEKEND;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+
+        }
     }
 }

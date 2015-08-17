@@ -14,7 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.mobstat.StatService;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
 import com.wj.kindergarten.utils.Utils;
@@ -93,18 +94,20 @@ public abstract class BaseActivity extends ActionBarActivity {
             setActionBarLayout();
             onCreate();
         }
+
+        PushAgent.getInstance(this).onAppStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        StatService.onResume(mContext);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        StatService.onPause(mContext);
+        MobclickAgent.onPause(this);
     }
 
     private void initLoadView() {
@@ -388,7 +391,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     /**
      * 显示菊花对话框
      */
-    protected void showProgressDialog() {
+    public void showProgressDialog() {
         showProgressDialog(getString(R.string.loading_content));
     }
 
@@ -397,7 +400,7 @@ public abstract class BaseActivity extends ActionBarActivity {
      *
      * @param info 提示内容
      */
-    protected void showProgressDialog(String info) {
+    public void showProgressDialog(String info) {
         if (progressDialog == null) {
             progressDialog = new NormalProgressDialog(this, info);
             if (!progressDialog.isShowing()) {
@@ -414,10 +417,14 @@ public abstract class BaseActivity extends ActionBarActivity {
     /**
      * 隐藏菊花对话框
      */
-    protected void hideProgressDialog() {
+    public void hideProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
+    }
+
+    public boolean isProgressDialogIsShowing() {
+        return progressDialog != null && progressDialog.isShowing();
     }
 
     /**

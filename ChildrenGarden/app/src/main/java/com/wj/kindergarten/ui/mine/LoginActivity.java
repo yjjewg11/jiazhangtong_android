@@ -6,14 +6,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.TestActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.utils.Utils;
 
@@ -68,9 +71,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         actionLoginTv.setOnClickListener(this);
         registerTv.setOnClickListener(this);
 
+        //TODO test acc
         accEt.setText("13628037996");
-//        accEt.setText("13628037991");
         pwdEt.setText("123456");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -87,10 +102,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.login_action:
                 acc = accEt.getText().toString();
                 pwd = pwdEt.getText().toString();
-
-//                startActivity(new Intent(mContext, MainActivity.class));
-//                finish();
-                login();
+                if (checkDataIsOk()) {
+                    login();
+                }
                 break;
             case R.id.login_register:
                 Intent intentL = new Intent(mContext, RegisterActivity.class);
@@ -100,6 +114,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
+    private boolean checkDataIsOk() {
+        if (acc.length() < 1) {
+            Utils.showToast(mContext, "请输入账号");
+            return false;
+        }
+        if (pwd.length() < 6 || pwd.length() > 16) {
+            Utils.showToast(mContext, "请填写长度为6-16位的密码");
+            return false;
+        }
+        return true;
+    }
+
     private void login() {
         showProgressDialog("登录中...");
         UserRequest.login(mContext, acc, pwd, new RequestResultI() {
@@ -107,6 +133,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void result(BaseModel domain) {
                 ((CGApplication) CGApplication.getInstance()).setLogin((Login) domain);
                 hideProgressDialog();
+                UserRequest.deviceSave(LoginActivity.this);//注册设备
+                AddressBookRequest.getEmot(LoginActivity.this);//获取表情列表
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             }

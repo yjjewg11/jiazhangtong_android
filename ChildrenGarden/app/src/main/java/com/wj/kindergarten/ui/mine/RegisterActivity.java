@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine;
 
+import android.graphics.Canvas;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -72,7 +73,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (Utils.stringIsNull(mobileEt.getText().toString()) && mobileEt.getText().length() != 11) {
-                    Utils.showToast(CGApplication.getInstance(), "请输入电话号码");
+                    Utils.showToast(CGApplication.getInstance(), "请输入手机号码");
                     return;
                 }
 
@@ -96,6 +97,30 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private boolean checkData() {
+        if (Utils.stringIsNull(mobileEt.getText().toString())) {
+            Utils.showToast(RegisterActivity.this, "请输入手机号码");
+            return false;
+        }
+
+        if (Utils.stringIsNull(pwdEt.getText().toString())) {
+            Utils.showToast(RegisterActivity.this, "请输入用户密码");
+            return false;
+        }
+
+        if (Utils.stringIsNull(pwdDEt.getText().toString())) {
+            Utils.showToast(RegisterActivity.this, "确认密码不能为空");
+            return false;
+        }
+
+        if (!pwdEt.getText().toString().equals(pwdDEt.getText().toString())) {
+            Utils.showToast(RegisterActivity.this, "用户密码和确认密码不一致");
+            return false;
+        }
+
+        if (Utils.stringIsNull(smsEt.getText().toString())) {
+            Utils.showToast(RegisterActivity.this, "验证码不能为空");
+            return false;
+        }
         return true;
     }
 

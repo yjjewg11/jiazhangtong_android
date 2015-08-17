@@ -28,6 +28,9 @@ public class Reply extends BaseModel {
     private String type;
     @Expose
     private String create_useruuid;
+    @Expose
+    private DianZan dianzan;
+
 
     public String getContent() {
         return content;
@@ -99,5 +102,13 @@ public class Reply extends BaseModel {
 
     public void setCreate_useruuid(String create_useruuid) {
         this.create_useruuid = create_useruuid;
+    }
+
+    public DianZan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(DianZan dianzan) {
+        this.dianzan = dianzan;
     }
 }

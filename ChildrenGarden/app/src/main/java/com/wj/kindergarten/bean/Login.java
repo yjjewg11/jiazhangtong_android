@@ -16,6 +16,11 @@ public class Login extends BaseModel {
     private UserInfo userinfo;
     @Expose
     private List<ChildInfo> list;
+    @Expose
+    private List<Group> group_list;
+    @Expose
+    private List<Class> class_list;
+
 
     public UserInfo getUserinfo() {
         return userinfo;
@@ -31,5 +36,21 @@ public class Login extends BaseModel {
 
     public void setList(List<ChildInfo> list) {
         this.list = list;
+    }
+
+    public List<Group> getGroup_list() {
+        return group_list;
+    }
+
+    public void setGroup_list(List<Group> group_list) {
+        this.group_list = group_list;
+    }
+
+    public List<Class> getClass_list() {
+        return class_list;
+    }
+
+    public void setClass_list(List<Class> class_list) {
+        this.class_list = class_list;
     }
 }

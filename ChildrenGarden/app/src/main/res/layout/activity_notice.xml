@@ -60,76 +60,7 @@
                 android:text="test"
                 android:textColor="@color/hint_gray" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginRight="@dimen/normal_padding"
-                android:layout_marginTop="@dimen/small_padding">
-
-                <TextView
-                    android:id="@+id/notice_see"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/eye"
-                    android:drawablePadding="@dimen/small_padding"
-                    android:text="浏览200次"
-                    android:textColor="@color/title_bg"
-                    android:textSize="@dimen/small_text" />
-
-                <ImageView
-                    android:id="@+id/notice_reply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/interaction_reply" />
-
-                <ImageView
-                    android:id="@+id/notice_zan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/normal_padding"
-                    android:layout_toLeftOf="@+id/notice_reply"
-                    android:src="@drawable/interaction_zan_off" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/notice_zan_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginRight="@dimen/normal_padding"
-                android:layout_marginTop="@dimen/small_padding"
-                android:drawableLeft="@drawable/interaction_mine_zan"
-                android:drawablePadding="@dimen/small_padding"
-                android:text="0人觉得很赞"
-                android:textColor="@color/black"
-                android:textSize="@dimen/small_text" />
-
-            <LinearLayout
-                android:id="@+id/notice_reply_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/notice_reply_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginRight="@dimen/normal_padding"
-                android:layout_marginTop="@dimen/small_padding"
-                android:background="@drawable/login_edit_bg2"
-                android:hint="我也说一句..."
-                android:paddingBottom="@dimen/small_padding"
-                android:paddingLeft="@dimen/small_padding"
-                android:paddingRight="@dimen/small_padding"
-                android:paddingTop="@dimen/small_padding"
-                android:textColor="@color/hint_gray"
-                android:textColorHint="@color/hint_gray"
-                android:textSize="@dimen/normal_padding" />
+            <include layout="@layout/layout_common_reply"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -4,33 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <com.baidu.mobads.AdView
+        android:id="@+id/layout_ad"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <com.wj.kindergarten.compounets.SlideShowView
-            android:id="@+id/main_ad"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/main_ad_left"
-            android:layout_width="@dimen/title_height"
-            android:layout_height="@dimen/title_height"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/normal_padding"
-            android:src="@drawable/main_ad_left" />
-
-        <ImageView
-            android:id="@+id/main_ad_right"
-            android:layout_width="@dimen/title_height"
-            android:layout_height="@dimen/title_height"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/normal_padding"
-            android:src="@drawable/main_ad_right" />
-    </RelativeLayout>
+        android:layout_height="wrap_content" />
 
     <FrameLayout
         android:layout_width="match_parent"

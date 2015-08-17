@@ -69,7 +69,15 @@ public class SignAdapter extends BaseAdapter {
         viewHolder.timeTv.setText("时间：" + sign.getSign_time());
         viewHolder.placeTv.setText("地点：" + sign.getGroupname());
         viewHolder.nameTv.setText("打卡人：" + sign.getSign_name());
-        viewHolder.typeTv.setText("打卡类型：" + sign.getType() + "");
+        if (sign.getType() == 1) {
+            viewHolder.typeTv.setText("打卡类型：家长打卡");
+        } else if (sign.getType() == 2) {
+            viewHolder.typeTv.setText("打卡类型：老师签到");
+        } else if (sign.getType() == 3) {
+            viewHolder.typeTv.setText("打卡类型：家长签到");
+        } else {
+            viewHolder.typeTv.setText("打卡类型：");
+        }
 
         return view;
     }

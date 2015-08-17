@@ -1,26 +1,32 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.bean.Notice;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.IntervalUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -166,18 +172,39 @@ public class NoticeListActivity extends BaseActivity {
             }
 
             Notice notice = notices.get(i);
-//            ImageLoaderUtil.displayImage(notice.get);
-            viewHolder.head.setImageResource(R.drawable.touxiang);
+
+            viewHolder.head.setImageResource(R.drawable.group_img);
+            getImage(notice.getGroupuuid(), viewHolder.head);
             viewHolder.title.setText(notice.getTitle());
-//            viewHolder.
-            viewHolder.date.setText(notice.getCreate_time());
+            viewHolder.content.setText(notice.getMessage());
+            viewHolder.date.setText(IntervalUtil.getInterval(notice.getCreate_time()));
 
             return view;
         }
     }
 
+    private void getImage(String groupUuid, CircleImage imageView) {
+        try {
+            for (Group group : CGApplication.getInstance().getLogin().getGroup_list()) {
+                if (groupUuid.equals(group.getUuid())) {
+                    DisplayImageOptions options = new DisplayImageOptions.Builder()
+                            .showImageOnLoading(R.drawable.group_img)
+                            .showImageForEmptyUri(R.drawable.group_img)
+                            .showImageOnFail(R.drawable.group_img)
+                            .cacheInMemory(true)
+                            .bitmapConfig(Bitmap.Config.RGB_565)
+                            .cacheOnDisk(true)
+                            .displayer(new RoundedBitmapDisplayer(0)).build();
+                    ImageLoaderUtil.displayImage(group.getImg(), imageView, options);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     class ViewHolder {
-        ImageView head;
+        CircleImage head;
         TextView title;
         TextView content;
         TextView place;

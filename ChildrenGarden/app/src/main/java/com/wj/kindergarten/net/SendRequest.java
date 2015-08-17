@@ -7,6 +7,9 @@ import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.AddressBook;
+import com.wj.kindergarten.bean.AddressBookEmot;
+import com.wj.kindergarten.bean.AddressBookMessage;
 import com.wj.kindergarten.bean.AppraiseTeacherList;
 import com.wj.kindergarten.bean.ArticleDetail;
 import com.wj.kindergarten.bean.ArticleList;
@@ -21,13 +24,13 @@ import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SignList;
 import com.wj.kindergarten.bean.ZanItem;
+import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GsonUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -66,14 +69,14 @@ public class SendRequest {
     public void post(Context context, final int requestType, RequestParams params, String url,
                      final RequestResultI resultI) {
         if (Utils.isNetworkAvailable(CGApplication.getInstance())) {
-            CGLog.d("SendRequest", requestType + "->" + url + "?" + params);
+            CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
             RequestHttpUtil.post(context, url, params, new JsonHttpResponseHandler() {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] header, JSONObject response) {
                     super.onSuccess(statusCode, header, response);
                     try {
-                        CGLog.i("SendRequest", requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
+                        CGLog.i("SendRequest：" + requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
 
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
@@ -92,21 +95,21 @@ public class SendRequest {
                 public void onFailure(int statusCode, Header[] headers,
                                       String responseBody, Throwable e) {
                     super.onFailure(statusCode, headers, responseBody, e);
-                    CGLog.d("SendRequest", requestType + "->" + responseBody);
+                    CGLog.d("SendRequest：" + requestType + "->" + responseBody);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
-                    CGLog.d("SendRequest", requestType + "->" + errorResponse);
+                    CGLog.d("SendRequest：" + requestType + "->" + errorResponse);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
-                    CGLog.d("SendRequest", requestType + "->" + errorResponse);
+                    CGLog.d("SendRequest：" + requestType + "->" + errorResponse);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
             });
@@ -118,8 +121,8 @@ public class SendRequest {
     public void post(final Context context, final int requestType, String json, String url,
                      final RequestResultI resultI) {
         if (Utils.isNetworkAvailable(CGApplication.getInstance())) {
-            CGLog.d("SendRequest", requestType + "->" + url + "?" + json);
-            HttpEntity httpEntity = null;
+            CGLog.d("SendRequest：" + requestType + "->" + url + "?" + json);
+            StringEntity httpEntity = null;
             try {
                 httpEntity = new StringEntity(json, "utf-8");
             } catch (Exception e) {
@@ -131,7 +134,7 @@ public class SendRequest {
                 public void onSuccess(int statusCode, Header[] header, JSONObject response) {
                     super.onSuccess(statusCode, header, response);
                     try {
-                        CGLog.i("SendRequest", requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
+                        CGLog.i("SendRequest：" + requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
 
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
@@ -155,21 +158,21 @@ public class SendRequest {
                 public void onFailure(int statusCode, Header[] headers,
                                       String responseBody, Throwable e) {
                     super.onFailure(statusCode, headers, responseBody, e);
-                    CGLog.d("SendRequest", requestType + "->" + responseBody);
+                    CGLog.d("SendRequest：" + requestType + "->" + responseBody);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
-                    CGLog.d("SendRequest", requestType + "->" + errorResponse);
+                    CGLog.d("SendRequest：" + requestType + "->" + errorResponse);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
-                    CGLog.d("SendRequest", requestType + "->" + errorResponse);
+                    CGLog.d("SendRequest：" + requestType + "->" + errorResponse);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
             });
@@ -181,17 +184,24 @@ public class SendRequest {
     public void get(final Context context, final int requestType, RequestParams params, String url,
                     final RequestResultI resultI) {
         if (Utils.isNetworkAvailable(CGApplication.getInstance())) {
-            CGLog.d("SendRequest", requestType + "->" + url + "?" + params);
+            CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
             RequestHttpUtil.get(context, url, params, new JsonHttpResponseHandler() {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     super.onSuccess(statusCode, headers, response);
                     try {
-                        CGLog.d("SendRequest", requestType + "->" + response.toString());
+                        CGLog.d("SendRequest：" + requestType + "->" + response.toString());
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
-                            result(requestType, response.toString(), resultI);
+                            if (requestType != RequestType.GET_EMOT) {
+                                result(requestType, response.toString(), resultI);
+                            } else {
+                                AddressBookEmot emot = (AddressBookEmot) getDomain(response.toString(), AddressBookEmot.class);
+                                if (null != emot) {
+                                    EmotManager.addEmots(emot.getList());
+                                }
+                            }
                         } else if ("failed".equals(baseResponse.getResMsg().getStatus())) {
                             resultI.failure(baseResponse.getResMsg().getMessage());
                         } else if ("sessionTimeout".equals(baseResponse.getResMsg().getStatus())) {
@@ -211,21 +221,21 @@ public class SendRequest {
                 public void onFailure(int statusCode, Header[] headers,
                                       String responseBody, Throwable e) {
                     super.onFailure(statusCode, headers, responseBody, e);
-                    CGLog.d("SendRequest", requestType + "->" + responseBody);
+                    CGLog.d("SendRequest：" + requestType + "->" + responseBody);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
-                    CGLog.d("SendRequest", requestType + "->" + throwable);
+                    CGLog.d("SendRequest：" + requestType + "->" + throwable);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
-                    CGLog.d("SendRequest", requestType + "->" + throwable);
+                    CGLog.d("SendRequest：" + requestType + "->" + throwable);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
             });
@@ -247,6 +257,7 @@ public class SendRequest {
             case RequestType.FORGET_PWD:
             case RequestType.CHANGE_CHILD:
             case RequestType.ZAN:
+            case RequestType.ZAN_CANCEL:
             case RequestType.REPLY:
             case RequestType.INTERACTION_SEND:
                 resultI.result(getDomain(domain, BaseModel.class));
@@ -288,7 +299,21 @@ public class SendRequest {
                 resultI.result(getDomain(domain, AppraiseTeacherList.class));
                 break;
             case RequestType.APPRAISE_TEACHER:
-
+                break;
+            case RequestType.TEACHERS:
+                resultI.result(getDomain(domain, AddressBook.class));
+                break;
+            case RequestType.GET_LEADER_MESSAGE:
+            case RequestType.GET_TEACHER_MESSAGE:
+                resultI.result(getDomain(domain, AddressBookMessage.class));
+                break;
+            case RequestType.SEND_MESSAGE_TO_LEADER:
+            case RequestType.SEND_MESSAGE_TO_TEACHER:
+            case RequestType.UPDATE_PASSWORD:
+            case RequestType.DEVICE_SAVE:
+                resultI.result(new BaseModel());
+                break;
+            default:
                 break;
         }
     }

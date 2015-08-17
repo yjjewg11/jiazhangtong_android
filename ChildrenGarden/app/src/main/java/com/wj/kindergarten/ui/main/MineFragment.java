@@ -16,6 +16,7 @@ import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.ui.mine.ChildActivity;
+import com.wj.kindergarten.ui.mine.SettingActivity;
 
 /**
  * MainFragment
@@ -53,6 +54,12 @@ public class MineFragment extends Fragment {
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
         collectTv = (TextView) rootView.findViewById(R.id.mine_collect);
         settingTv = (TextView) rootView.findViewById(R.id.mine_setting);
+        settingTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), SettingActivity.class));
+            }
+        });
     }
 
     private void addChildren() {

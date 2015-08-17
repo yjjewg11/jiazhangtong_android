@@ -30,7 +30,10 @@ public class Notice extends BaseModel {
     private String classuuids;
     @Expose
     private String classnames;
-
+    @Expose
+    private DianZan dianzan;
+    @Expose
+    private ChildReplyList replyPage;
 
     public String getMessage() {
         return message;
@@ -110,5 +113,21 @@ public class Notice extends BaseModel {
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
+    }
+
+    public DianZan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(DianZan dianzan) {
+        this.dianzan = dianzan;
+    }
+
+    public ChildReplyList getReplyPage() {
+        return replyPage;
+    }
+
+    public void setReplyPage(ChildReplyList replyPage) {
+        this.replyPage = replyPage;
     }
 }

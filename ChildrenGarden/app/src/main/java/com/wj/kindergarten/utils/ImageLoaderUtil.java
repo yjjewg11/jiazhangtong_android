@@ -1,6 +1,9 @@
 package com.wj.kindergarten.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
@@ -8,10 +11,12 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.wenjie.jiazhangtong.R;
 
 import java.io.File;
 
@@ -28,26 +33,30 @@ public class ImageLoaderUtil {
 
 
     private static void initImageLoader(Context context, int loadingResource, int emptyResource, int failResource, String cachePath, int diskCacheSize, int roundeSize) {
-        File cacheDir = StorageUtils.getOwnCacheDirectory(
-                context.getApplicationContext(), cachePath);
+        File cacheDir = StorageUtils.getOwnCacheDirectory(context.getApplicationContext(), "CG/Cache");
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                context).threadPriority(2)
+                context).threadPriority(3)
                 .denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .diskCache(new UnlimitedDiscCache(cacheDir))
-                .diskCacheSize(diskCacheSize * 1024 * 1024).build();
+                .diskCacheSize(50 * 1024 * 1024)
+                .memoryCacheSize(2 * 1024 * 1024)
+                .diskCacheFileCount(200)
+                .build();
+
+        ImageLoader.getInstance().init(config);
 
         options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(loadingResource)
                 .showImageForEmptyUri(emptyResource)
-                .showImageOnFail(failResource).cacheInMemory(true)
+                .showImageOnFail(failResource)
+                .cacheInMemory(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
                 .cacheOnDisk(true)
                 .displayer(new RoundedBitmapDisplayer(roundeSize)).build();
 
         imageLoader = ImageLoader.getInstance();
-
-        imageLoader.init(config);
     }
 
     public static void initImageLoader(Context context, int loadingResource, String cachePath, int diskCacheSize, int roundeSize) {
@@ -56,17 +65,49 @@ public class ImageLoaderUtil {
     }
 
     public static void displayImage(String url, ImageView imageView) {
-        imageLoader.displayImage(url, imageView,options);
+        imageLoader.displayImage(url, imageView, options);
     }
 
     public static void displayImage(String url, ImageView imageView, DisplayImageOptions displayImageOptions) {
         if (displayImageOptions == null) {
             return;
         }
-        imageLoader.displayImage(url, imageView, displayImageOptions);
+        imageLoader.displayImage(url, imageView, displayImageOptions, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
+        });
     }
 
     public static void downLoadImageLoader(String url, ImageLoadingListener imageLoadingListener) {
         imageLoader.loadImage(url, imageLoadingListener);
+    }
+
+
+    public static Bitmap getImageFromCache(String imageUri) {
+        Bitmap bitmap = imageLoader.getMemoryCache().get(imageUri);
+        if (null != bitmap) {
+            return bitmap;
+        } else {
+            String path = imageLoader.getDiskCache().get(imageUri).getPath();
+            bitmap = BitmapFactory.decodeFile(path);
+            return bitmap;
+        }
     }
 }

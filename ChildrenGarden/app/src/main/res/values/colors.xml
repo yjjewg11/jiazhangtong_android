@@ -6,5 +6,7 @@
     <color name="translucence">#506050</color>
     <color name="bg_gray">#e2e2e2</color>
     <color name="green">#65e17b</color>
-
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_333333">#333333</color>
+    <color name="translate">#00000000</color>
 </resources>
