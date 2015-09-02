@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Spanned;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class ShareUtils {
     public static UMSocialService mController;
     private static Context context;
     private static final String appId = "wx6699cf8b21e12618";
-    private static final String appSecret = "639c78a45d012434370f4c1afc57acd1";
+    private static final String appSecret = "a2b1783f3ad9e6db4154d45d6e23ed4a";
     private static boolean flag = false;//防止弹窗多次
     private static boolean isShow = false;//分享图标是否显示
     public final static String PIC_SCALE = ".360x240.jpg";//用于提交服务器缩放图片
@@ -59,6 +60,7 @@ public class ShareUtils {
      *
      * @param con
      * @param view
+     * @param content
      */
     public static void showShareDialog(final Context con, final View view, final String title, final String content, final String pic, final String url) {
         if (!isShow) {
@@ -68,9 +70,9 @@ public class ShareUtils {
             if (mController == null) {
                 mController = UMServiceFactory.getUMSocialService("com.umeng.share", RequestType.SOCIAL);
                 // 添加新浪微博SSO授权支持
-                mController.getConfig().setSsoHandler(new SinaSsoHandler());
+                //   mController.getConfig().setSsoHandler(new SinaSsoHandler());
                 //关闭自带的toast
-                // mController.getConfig().closeToast();
+                mController.getConfig().closeToast();
             }
 
             View popupView = View.inflate(con, R.layout.share_layout, null);
@@ -116,6 +118,7 @@ public class ShareUtils {
                     isShow = false;
                     mPopupWindow.dismiss();
                     shareTo(SHARE_MEDIA.SINA, title, content, pic, url);
+                    Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -128,6 +131,7 @@ public class ShareUtils {
                             "SumAAk7jtaUSnZqd");
                     qqSsoHandler.addToSocialSDK();
                     shareTo(SHARE_MEDIA.QQ, title, content, pic, url);
+                    Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -156,7 +160,6 @@ public class ShareUtils {
     private static void shareTo(final SHARE_MEDIA share_media, final String title, final String content, final String pic, final String url) {
         if (share_media == SHARE_MEDIA.WEIXIN_CIRCLE || share_media == SHARE_MEDIA.WEIXIN) {
             try {
-                Utils.showToast(context,"微信分享");
                 directShare(share_media, title, content, pic, url);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -195,6 +198,9 @@ public class ShareUtils {
     }
 
     private static void directShare(SHARE_MEDIA share_media, String title, String content, String pic, String url) {
+        if (Utils.stringIsNull(url)) {
+            url = "http://www.wenjienet.com/";
+        }
         try {
             UMImage localImage = null;
             if (!Utils.stringIsNull(pic)) {
@@ -203,16 +209,16 @@ public class ShareUtils {
                 localImage = new UMImage(context, R.drawable.ic_launcher);
             }
             if (share_media == SHARE_MEDIA.QQ) {
-                Utils.showToast(context,"QQ分享中...");
                 QQShareContent qqShareContent = new QQShareContent(localImage);
-                qqShareContent.setShareContent(content + url);
+                qqShareContent.setShareContent(title + content);
+                qqShareContent.setTargetUrl(url);
                 mController.setShareMedia(qqShareContent);
             } else if (share_media == SHARE_MEDIA.SINA) {
                 SinaShareContent sinaShareContent = new SinaShareContent(localImage);
-                sinaShareContent.setShareContent(content + url);
+                sinaShareContent.setTargetUrl(url);
+                sinaShareContent.setShareContent(title + url);
                 mController.setShareMedia(sinaShareContent);
             } else if (share_media == SHARE_MEDIA.WEIXIN) {
-                Utils.showToast(context,"微信分享中...8");
                 WeiXinShareContent weixinContent = new WeiXinShareContent();
                 weixinContent.setShareContent(content);
                 weixinContent.setTitle(title);
@@ -239,7 +245,6 @@ public class ShareUtils {
                         @Override
                         public void onComplete(SHARE_MEDIA platform, int eCode,
                                                SocializeEntity entity) {
-                            Toast.makeText(context, "Share Code " + eCode, Toast.LENGTH_SHORT).show();
                             if (!flag) {
                                 flag = true;
                                 if (eCode == 200) {
@@ -249,8 +254,6 @@ public class ShareUtils {
                                 } else {
                                     Toast.makeText(context, "分享失败", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                Toast.makeText(context, "分享失败", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

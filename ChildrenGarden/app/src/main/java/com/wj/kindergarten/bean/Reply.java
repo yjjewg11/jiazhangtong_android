@@ -30,7 +30,16 @@ public class Reply extends BaseModel {
     private String create_useruuid;
     @Expose
     private DianZan dianzan;
+    @Expose
+    private String create_img;
 
+    public String getCreate_img() {
+        return create_img;
+    }
+
+    public void setCreate_img(String create_img) {
+        this.create_img = create_img;
+    }
 
     public String getContent() {
         return content;

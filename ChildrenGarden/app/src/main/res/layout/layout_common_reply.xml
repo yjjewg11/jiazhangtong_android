@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_common_reply"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/eye"
             android:drawablePadding="@dimen/small_padding"
-            android:text="浏览200次"
+            android:text="浏览0次"
             android:textColor="@color/title_bg"
             android:textSize="@dimen/small_text" />
 
@@ -63,17 +63,15 @@
 
     <TextView
         android:id="@+id/notice_reply_more"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/condition_height"
-        android:layout_marginBottom="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
         android:layout_marginLeft="@dimen/normal_padding"
         android:layout_marginRight="@dimen/normal_padding"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/login_button_selector"
-        android:gravity="center"
-        android:text="更多"
-        android:textColor="@color/white"
-        android:textSize="@dimen/normal_text"
+        android:paddingLeft="@dimen/small_padding"
+        android:text="显示更多"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/small_text"
         android:visibility="gone" />
 
     <RelativeLayout
@@ -83,13 +81,13 @@
         android:layout_marginRight="@dimen/normal_padding"
         android:layout_marginTop="@dimen/small_padding">
 
-        <EditText
+        <TextView
             android:id="@+id/notice_reply_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/notice_reply_send"
-            android:background="@drawable/login_edit_bg2"
-            android:hint="我也说一句..."
+            android:background="@drawable/login_edit_bg1"
+            android:hint="写下您的评论..."
             android:paddingBottom="@dimen/small_padding"
             android:paddingLeft="@dimen/small_padding"
             android:paddingRight="@dimen/small_padding"
@@ -105,7 +103,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/small_padding"
-            android:text="发送" />
+            android:text="发送"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <View

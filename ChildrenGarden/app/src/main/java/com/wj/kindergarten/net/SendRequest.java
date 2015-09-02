@@ -18,11 +18,18 @@ import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
 import com.wj.kindergarten.bean.InteractionList;
+import com.wj.kindergarten.bean.Ka;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.bean.MoreData;
+import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.ReplyList;
+import com.wj.kindergarten.bean.SchoolList;
 import com.wj.kindergarten.bean.SignList;
+import com.wj.kindergarten.bean.StoreList;
+import com.wj.kindergarten.bean.TeacherInfo;
+import com.wj.kindergarten.bean.UserInfo;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -192,6 +199,7 @@ public class SendRequest {
                     super.onSuccess(statusCode, headers, response);
                     try {
                         CGLog.d("SendRequest：" + requestType + "->" + response.toString());
+
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
                             if (requestType != RequestType.GET_EMOT) {
@@ -258,8 +266,13 @@ public class SendRequest {
             case RequestType.CHANGE_CHILD:
             case RequestType.ZAN:
             case RequestType.ZAN_CANCEL:
+            case RequestType.STORE:
+            case RequestType.CANCEL_STORE:
             case RequestType.REPLY:
+            case RequestType.APPRAISE_TEACHER:
             case RequestType.INTERACTION_SEND:
+            case RequestType.LOGIN_OUT:
+            case RequestType.READ_MESSAGE:
                 resultI.result(getDomain(domain, BaseModel.class));
                 break;
             case RequestType.ZAN_LIST:
@@ -293,12 +306,12 @@ public class SendRequest {
                 resultI.result(getDomain(domain, ArticleList.class));
                 break;
             case RequestType.ARTICLE:
+                ArticleDetail detail = (ArticleDetail) getDomain(domain, ArticleDetail.class);
+                CGLog.d("isFavour: " + detail.isFavor());
                 resultI.result(getDomain(domain, ArticleDetail.class));
                 break;
             case RequestType.APPRAISE_TEACHER_LIST:
                 resultI.result(getDomain(domain, AppraiseTeacherList.class));
-                break;
-            case RequestType.APPRAISE_TEACHER:
                 break;
             case RequestType.TEACHERS:
                 resultI.result(getDomain(domain, AddressBook.class));
@@ -312,6 +325,24 @@ public class SendRequest {
             case RequestType.UPDATE_PASSWORD:
             case RequestType.DEVICE_SAVE:
                 resultI.result(new BaseModel());
+                break;
+            case RequestType.QUERY_MESSAGE:
+                resultI.result(getDomain(domain, Msg.class));
+                break;
+            case RequestType.QUERY_MORE:
+                resultI.result(getDomain(domain, MoreData.class));
+                break;
+            case RequestType.QUERY_SCHOOL:
+                resultI.result(getDomain(domain, SchoolList.class));
+                break;
+            case RequestType.QUERY_STORE:
+                resultI.result(getDomain(domain, StoreList.class));
+                break;
+            case RequestType.QUERY_TEACHER_INFO:
+                resultI.result(getDomain(domain, TeacherInfo.class));
+                break;
+            case RequestType.KA_INFO:
+                resultI.result(getDomain(domain, Ka.class));
                 break;
             default:
                 break;

@@ -6,6 +6,7 @@
     <color name="normal_bg">#ffffff</color>
     <color name="normal_text_gray">#b3b3b3</color>
     <color name="hint_gray">#666666</color>
+    <color name="blue">#191970</color>
 
     <color name="tab_bg">#e5e5e5</color>
     <color name="main_pop_bg">#333333</color>
@@ -20,4 +21,8 @@
     <color name="title_right">#ffffff</color>
     <color name="often_red">#cf3020</color>
     <color name="color_666666">#666666</color>
+    <color name="color_929292">#929292</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
+
+    <color name="photo_gallery_bg">#444444</color>
 </resources>

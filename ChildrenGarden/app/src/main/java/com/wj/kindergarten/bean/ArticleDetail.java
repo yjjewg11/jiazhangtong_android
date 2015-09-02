@@ -16,6 +16,8 @@ public class ArticleDetail extends BaseModel {
     private int count;
     @Expose
     private String share_url;
+    @Expose
+    private boolean isFavor;
 
 
     public Article getData() {
@@ -40,5 +42,13 @@ public class ArticleDetail extends BaseModel {
 
     public void setShare_url(String share_url) {
         this.share_url = share_url;
+    }
+
+    public boolean isFavor() {
+        return isFavor;
+    }
+
+    public void setIsFavor(boolean isFavor) {
+        this.isFavor = isFavor;
     }
 }

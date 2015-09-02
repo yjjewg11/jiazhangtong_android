@@ -173,7 +173,7 @@ public class NoticeListActivity extends BaseActivity {
 
             Notice notice = notices.get(i);
 
-            viewHolder.head.setImageResource(R.drawable.group_img);
+            //  viewHolder.head.setImageResource(R.drawable.group_img);
             getImage(notice.getGroupuuid(), viewHolder.head);
             viewHolder.title.setText(notice.getTitle());
             viewHolder.content.setText(notice.getMessage());
@@ -195,7 +195,7 @@ public class NoticeListActivity extends BaseActivity {
                             .bitmapConfig(Bitmap.Config.RGB_565)
                             .cacheOnDisk(true)
                             .displayer(new RoundedBitmapDisplayer(0)).build();
-                    ImageLoaderUtil.displayImage(group.getImg(), imageView, options);
+                    ImageLoaderUtil.displayImage(group.getImg(), imageView, options, null);
                 }
             }
         } catch (Exception e) {

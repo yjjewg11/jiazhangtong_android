@@ -19,10 +19,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/big_padding"
-            android:background="@color/white"
+            android:background="@drawable/setting_item_click_selector"
             android:orientation="vertical">
 
             <View
@@ -53,10 +54,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/big_padding"
-            android:background="@color/white"
+            android:background="@drawable/setting_item_click_selector"
             android:orientation="vertical">
 
             <View

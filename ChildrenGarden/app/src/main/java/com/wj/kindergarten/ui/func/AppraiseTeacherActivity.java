@@ -1,9 +1,10 @@
 package com.wj.kindergarten.ui.func;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,10 +14,11 @@ import com.wj.kindergarten.bean.AppraiseTeacher;
 import com.wj.kindergarten.bean.AppraiseTeacherList;
 import com.wj.kindergarten.bean.AppraiseTeacherOver;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
-import com.wj.kindergarten.ui.func.adapter.AppraiseTeacherAdapter;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class AppraiseTeacherActivity extends BaseActivity {
     private ListView mListView;
     private LinearLayout contentLayout;
 
-    private AppraiseTeacherAdapter appraiseTeacherAdapter;
+    //    private AppraiseTeacherAdapter appraiseTeacherAdapter;
     private Map<String, AppraiseTeacherOver> alreadyTeacherMap = new HashMap<>();
     private List<AppraiseTeacher> teachers = new ArrayList<>();
 
@@ -79,9 +81,14 @@ public class AppraiseTeacherActivity extends BaseActivity {
             final TextView normalTv = (TextView) cView.findViewById(R.id.item_appraise_normal);
             final TextView badTv = (TextView) cView.findViewById(R.id.item_appraise_bad);
             final EditText contentTv = (EditText) cView.findViewById(R.id.item_appraise_edit);
-            final ImageView submitIv = (ImageView) cView.findViewById(R.id.item_appraise_submit);
+            final TextView submitIv = (TextView) cView.findViewById(R.id.item_appraise_submit);
+            final CircleImage head = (CircleImage) cView.findViewById(R.id.c_head);
 
             final AppraiseTeacher appraiseTeacher = teachers.get(i);
+            if (null == appraiseTeacher) {
+                return;
+            }
+            ImageLoaderUtil.displayImage(appraiseTeacher.getImg(), head);
             if (alreadyTeacherMap.containsKey(appraiseTeacher.getTeacher_uuid())
                     && !alreadyTeacherMap.get(appraiseTeacher.getTeacher_uuid()).isEditState()) {
                 contentTv.setEnabled(false);
@@ -102,15 +109,19 @@ public class AppraiseTeacherActivity extends BaseActivity {
                         badTv.setCompoundDrawables(null, drawable, null, null);
                     }
                     contentTv.setText(appraiseTeacherOver.getContent());
-                    submitIv.setImageResource(R.drawable.appraise_commit_no);
+                    submitIv.setCompoundDrawables(null, null, null, null);
+                    submitIv.setText("已评价");
                 }
             } else {
                 nameTv.setText(appraiseTeacher.getName());
-                submitIv.setImageResource(R.drawable.appraise_commit_yes);
+                Drawable drawable = getResources().getDrawable(R.drawable.appraise_commit_yes);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                submitIv.setCompoundDrawables(null, null, drawable, null);
+                submitIv.setText("");
                 submitIv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int type = 1;
+                        int type = 0;
                         Drawable drawableGood = goodTv.getCompoundDrawables()[1];
                         Drawable drawableNormal = normalTv.getCompoundDrawables()[1];
                         Drawable drawableBad = badTv.getCompoundDrawables()[1];
@@ -131,8 +142,13 @@ public class AppraiseTeacherActivity extends BaseActivity {
                         appraiseTeacherOverTemp.setIsEditState(true);
                         alreadyTeacherMap.put(appraiseTeacher.getTeacher_uuid(), appraiseTeacherOverTemp);
 
-                        appraiseTeacher(contentTv.getText().toString(), appraiseTeacher.getTeacher_uuid(),
-                                type, goodTv, normalTv, badTv, contentTv, submitIv);
+                        if (type == 0 || Utils.stringIsNull(contentTv.getText().toString())) {
+                            Utils.showToast(AppraiseTeacherActivity.this, "请填写正确的评价");
+                            return;
+                        } else {
+                            appraiseTeacher(appraiseTeacher.getName(), contentTv.getText().toString(), appraiseTeacher.getTeacher_uuid(),
+                                    type, goodTv, normalTv, badTv, contentTv, submitIv);
+                        }
                     }
                 });
                 goodTv.setOnClickListener(new View.OnClickListener() {
@@ -217,33 +233,49 @@ public class AppraiseTeacherActivity extends BaseActivity {
         });
     }
 
-    public void appraiseTeacher(String content, final String teacherUUID, int type,
-                                final TextView goodTv, final TextView normalTv, final TextView noTv, final EditText editText, final ImageView iv) {
-        showProgressDialog("提交评价中");
-        UserRequest.appraiseTeacher(mContext, content, teacherUUID, type, new RequestResultI() {
+    public void appraiseTeacher(String name, final String content, final String teacherUUID, final int type,
+                                final TextView goodTv, final TextView normalTv, final TextView noTv, final EditText editText, final TextView submitIv) {
+        new AlertDialog.Builder(this).setMessage("确定对" + name + "进行评价?")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setTitle("提示")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        showProgressDialog("提交评价中");
+                        UserRequest.appraiseTeacher(mContext, content, teacherUUID, type, new RequestResultI() {
+                            @Override
+                            public void result(BaseModel domain) {
+                                hideProgressDialog();
+                                goodTv.setEnabled(false);
+                                normalTv.setEnabled(false);
+                                noTv.setEnabled(false);
+                                editText.setEnabled(false);
+                                submitIv.setEnabled(false);
+                                submitIv.setCompoundDrawables(null, null, null, null);
+                                submitIv.setText("已评价");
+                            }
+
+                            @Override
+                            public void result(List<BaseModel> domains, int total) {
+
+                            }
+
+                            @Override
+                            public void failure(String message) {
+                                hideProgressDialog();
+                                if (!Utils.stringIsNull(message)) {
+                                    Utils.showToast(mContext, message);
+                                }
+                            }
+                        });
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
             @Override
-            public void result(BaseModel domain) {
-                hideProgressDialog();
-
-                goodTv.setEnabled(false);
-                normalTv.setEnabled(false);
-                noTv.setEnabled(false);
-                editText.setEnabled(false);
-                iv.setEnabled(false);
-                iv.setImageResource(R.drawable.appraise_commit_no);
+            public void onClick(DialogInterface dialog, int which) {
+                // 点击“返回”后的操作,这里不设置没有任何操作
             }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-                hideProgressDialog();
-                Utils.showToast(mContext, message);
-//                appraiseTeacherAdapter.setTeacherIsEditByKey(teacherUUID);
-            }
-        });
+        }).show();
     }
 }

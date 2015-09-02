@@ -8,7 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Sign;
+import com.wj.kindergarten.compounets.CircleImage;
+import com.wj.kindergarten.net.RequestHttpUtil;
+import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +31,9 @@ public class SignAdapter extends BaseAdapter {
     private List<Sign> datas = new ArrayList<>();
     private Context context;
 
-    public SignAdapter(Context context) {
+    public SignAdapter(Context context, List<Sign> datas) {
         this.context = context;
-    }
-
-    public void setDatas(List<Sign> datas) {
         this.datas = datas;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -54,7 +57,8 @@ public class SignAdapter extends BaseAdapter {
         if (view == null) {
             viewHolder = new ViewHolder();
             view = View.inflate(context, R.layout.item_sign_list, null);
-            viewHolder.headIv = (ImageView) view.findViewById(R.id.item_sign_list_head);
+            viewHolder.name = (TextView) view.findViewById(R.id.tv_student_name);
+            viewHolder.headIv = (CircleImage) view.findViewById(R.id.item_sign_list_head);
             viewHolder.timeTv = (TextView) view.findViewById(R.id.item_sign_list_time);
             viewHolder.placeTv = (TextView) view.findViewById(R.id.item_sign_list_place);
             viewHolder.nameTv = (TextView) view.findViewById(R.id.item_sign_list_name);
@@ -65,7 +69,13 @@ public class SignAdapter extends BaseAdapter {
         }
 
         Sign sign = datas.get(i);
-//        viewHolder.headIv
+        ChildInfo info = getImageUrl(sign.getStudentuuid());
+        if (null != info) {
+            ImageLoaderUtil.displayImage(info.getHeadimg(), viewHolder.headIv);
+            viewHolder.name.setText(Utils.getText(info.getName()));
+        } else {
+            ImageLoaderUtil.displayImage("", viewHolder.headIv);
+        }
         viewHolder.timeTv.setText("时间：" + sign.getSign_time());
         viewHolder.placeTv.setText("地点：" + sign.getGroupname());
         viewHolder.nameTv.setText("打卡人：" + sign.getSign_name());
@@ -82,8 +92,20 @@ public class SignAdapter extends BaseAdapter {
         return view;
     }
 
+    private ChildInfo getImageUrl(String uuid) {
+        if (CGApplication.getInstance().getLogin() != null) {
+            for (ChildInfo childInfo : CGApplication.getInstance().getLogin().getList()) {
+                if (null != childInfo && childInfo.getUuid().equals(uuid)) {
+                    return childInfo;
+                }
+            }
+        }
+        return null;
+    }
+
     class ViewHolder {
-        ImageView headIv;
+        TextView name;
+        CircleImage headIv;
         TextView timeTv;
         TextView placeTv;
         TextView nameTv;

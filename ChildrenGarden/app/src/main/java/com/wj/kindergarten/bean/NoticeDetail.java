@@ -19,7 +19,6 @@ public class NoticeDetail extends BaseModel {
     @Expose
     private boolean isFavor;
 
-
     public boolean isFavor() {
         return isFavor;
     }

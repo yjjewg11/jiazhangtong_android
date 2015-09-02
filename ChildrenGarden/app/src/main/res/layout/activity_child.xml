@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +23,10 @@
                 layout="@layout/item_mine_list" />
 
             <include
+                android:id="@+id/child_school"
+                layout="@layout/item_child_parent" />
+
+            <include
                 android:id="@+id/child_father"
                 layout="@layout/item_child_parent" />
 
@@ -30,24 +35,12 @@
                 layout="@layout/item_child_parent" />
 
             <include
-                android:id="@+id/child_ye"
-                layout="@layout/item_child_parent" />
+                android:id="@+id/child_other"
+                layout="@layout/item_child_other" />
 
             <include
-                android:id="@+id/child_nai"
-                layout="@layout/item_child_parent" />
-
-            <include
-                android:id="@+id/child_wg"
-                layout="@layout/item_child_parent" />
-
-            <include
-                android:id="@+id/child_wp"
-                layout="@layout/item_child_parent" />
-
-            <include
-                android:id="@+id/child_school"
-                layout="@layout/item_child_parent" />
+                android:id="@+id/child_ka"
+                layout="@layout/item_child_ka_info" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

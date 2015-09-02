@@ -25,7 +25,7 @@ public class MyMessage {
     @Expose
     private String group_uuid;
     @Expose
-    private int isread;
+    private int isread;//0表示未读
     @Expose
     private String send_useruuid;
     @Expose

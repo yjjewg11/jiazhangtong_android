@@ -1,6 +1,7 @@
 package com.wj.kindergarten.net;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -11,8 +12,12 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.utils.CGLog;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.cookie.Cookie;
+
+import java.util.List;
 
 /**
  * RequestHttpUtil
@@ -23,7 +28,8 @@ import org.apache.http.HttpEntity;
  */
 public class RequestHttpUtil {
     private static AsyncHttpClient client;    //实例话对象
-    public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
+    // public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
+    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {
         if (client == null) {
@@ -78,7 +84,10 @@ public class RequestHttpUtil {
     }
 
     //带参数 提交数据
-    protected static void post(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {
+    public static void post(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {
+        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
+        List<Cookie> cookies = myCookieStore.getCookies();
+        MyCookieManager.add(cookies);
         getClient().post(context, uString, params, resp);
     }
 

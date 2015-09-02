@@ -6,59 +6,158 @@
 
     <include layout="@layout/title_normal" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/normal_padding">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/article_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="标题"
-                android:textColor="@color/black"
-                android:textSize="@dimen/big_text" />
-
-            <TextView
-                android:id="@+id/article_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_padding"
-                android:textColor="@color/hint_gray"
-                android:textSize="@dimen/normal_text" />
+            android:layout_above="@+id/ll_items"
+            android:scrollbars="none"
+            android:padding="@dimen/normal_padding">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="@dimen/normal_padding"
-                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/article_name"
+                    android:id="@+id/article_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="姓名"
-                    android:textColor="@color/hint_gray"
-                    android:textSize="@dimen/normal_text" />
+                    android:layout_gravity="center_horizontal"
+                    android:text="标题"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/big_text" />
 
                 <TextView
-                    android:id="@+id/article_time"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/article_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_padding"
-                    android:text="2015-12-12"
                     android:textColor="@color/hint_gray"
                     android:textSize="@dimen/normal_text" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/normal_padding"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/article_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓名"
+                        android:textColor="@color/hint_gray"
+                        android:textSize="@dimen/normal_text" />
+
+                    <TextView
+                        android:id="@+id/article_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_padding"
+                        android:text="2015-12-12"
+                        android:textColor="@color/hint_gray"
+                        android:textSize="@dimen/normal_text" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_items"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <include layout="@layout/line" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_height"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="1dp"
+                        android:drawableTop="@drawable/zan1"
+                        android:gravity="center"
+                        android:text="赞"
+                        android:textColor="@color/color_929292"
+                        android:textSize="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="1dp"
+                        android:drawableTop="@drawable/share1"
+                        android:gravity="center"
+                        android:text="分享"
+                        android:textColor="@color/color_929292"
+                        android:textSize="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="1dp"
+                        android:drawableTop="@drawable/store1"
+                        android:gravity="center"
+                        android:text="收藏"
+                        android:textColor="@color/color_929292"
+                        android:textSize="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textview_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawablePadding="1dp"
+                        android:drawableTop="@drawable/comment1"
+                        android:gravity="center"
+                        android:text="评论"
+                        android:textColor="@color/color_929292"
+                        android:textSize="10dp" />
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-
+    </RelativeLayout>
 </LinearLayout>

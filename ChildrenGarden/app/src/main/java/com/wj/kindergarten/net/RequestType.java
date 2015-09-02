@@ -38,4 +38,14 @@ public class RequestType {
     public final static int SEND_MESSAGE_TO_TEACHER = 127;//给老师发消息
     public final static int ZAN_CANCEL = 128;
     public final static int DEVICE_SAVE = 129;
+    public final static int QUERY_MESSAGE = 130;//消息
+    public final static int QUERY_SCHOOL = 131;//首页title
+    public final static int QUERY_MORE = 132;//首页more
+    public final static int QUERY_STORE = 133;//收藏列表
+    public final static int STORE = 134;//收藏
+    public final static int CANCEL_STORE = 135;//取消收藏
+    public final static int QUERY_TEACHER_INFO = 136;//获取老师的信息
+    public final static int LOGIN_OUT = 137;//退出
+    public final static int KA_INFO = 138;//学生卡号信息
+    public final static int READ_MESSAGE = 139;//消息阅读
 }

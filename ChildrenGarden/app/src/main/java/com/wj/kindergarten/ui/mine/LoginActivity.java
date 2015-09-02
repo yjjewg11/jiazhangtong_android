@@ -1,9 +1,15 @@
 package com.wj.kindergarten.ui.mine;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
@@ -11,13 +17,15 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
-import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
-import com.wj.kindergarten.ui.TestActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.EditTextCleanWatcher;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -42,6 +50,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String acc;
     private String pwd;
 
+    private RelativeLayout layoutLogin = null;
+    private RelativeLayout layoutPassword = null;
+    private ImageView ivCleanLogin = null;
+    private ImageView ivCleanPassword = null;
+
     @Override
     protected void setContentLayout() {
         layoutId = R.layout.activity_login;
@@ -56,7 +69,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         hideActionbar();
 
         circleImage = (CircleImage) findViewById(R.id.login_head);
-        circleImage.setImageResource(R.drawable.touxiang);
 
         accEt = (EditText) findViewById(R.id.login_acc);
         pwdEt = (EditText) findViewById(R.id.login_pwd);
@@ -65,6 +77,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         forgetTv = (TextView) findViewById(R.id.login_forget);
         actionLoginTv = (TextView) findViewById(R.id.login_action);
         registerTv = (TextView) findViewById(R.id.login_register);
+        layoutLogin = (RelativeLayout) findViewById(R.id.layout_clean_4);
+        layoutPassword = (RelativeLayout) findViewById(R.id.layout_clean_5);
+        ivCleanLogin = (ImageView) findViewById(R.id.iv_clean_1);
+        ivCleanPassword = (ImageView) findViewById(R.id.iv_clean_2);
+
+        accEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanLogin, accEt));
+        pwdEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanPassword, pwdEt));
+        layoutLogin.setOnClickListener(this);
+        layoutPassword.setOnClickListener(this);
 
         rememberTv.setOnClickListener(this);
         forgetTv.setOnClickListener(this);
@@ -72,8 +93,37 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         registerTv.setOnClickListener(this);
 
         //TODO test acc
-        accEt.setText("13628037996");
-        pwdEt.setText("123456");
+        checkBox.setChecked(CGSharedPreference.getRemerberPassword());
+        String[] str = CGSharedPreference.getLogin();
+        accEt.setText(str[0]);
+        if (CGSharedPreference.getRemerberPassword()) {
+            pwdEt.setText(str[1]);
+        } else {
+            pwdEt.setText("");
+        }
+
+        circleImage.setImageResource(R.drawable.logo);
+//        if (Utils.stringIsNull(str[2])) {
+//            circleImage.setImageResource(R.drawable.touxiang);
+//        } else {
+//            ImageLoaderUtil.displayImage(str[2], circleImage);
+//        }
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                CGSharedPreference.saveRemerberPassword(isChecked);
+            }
+        });
+
+        // accEt.setText("13628037996");
+        // pwdEt.setText("123456");
+
+        accEt.setSelection(accEt.getText().length());
+        pwdEt.setSelection(pwdEt.getText().length());
+
+        acc = accEt.getText().toString().trim();
+        pwd = pwdEt.getText().toString().trim();
     }
 
     @Override
@@ -93,6 +143,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.login_check_text:
                 checkBox.setChecked(!checkBox.isChecked());
+                CGLog.d("tag: " + checkBox.isChecked());
+                CGSharedPreference.saveRemerberPassword(checkBox.isChecked());
                 break;
             case R.id.login_forget:
                 Intent intentF = new Intent(mContext, RegisterActivity.class);
@@ -100,8 +152,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 startActivity(intentF);
                 break;
             case R.id.login_action:
-                acc = accEt.getText().toString();
-                pwd = pwdEt.getText().toString();
+                acc = accEt.getText().toString().trim();
+                pwd = pwdEt.getText().toString().trim();
                 if (checkDataIsOk()) {
                     login();
                 }
@@ -110,6 +162,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Intent intentL = new Intent(mContext, RegisterActivity.class);
                 intentL.putExtra("from", "login_register");
                 startActivity(intentL);
+                break;
+            case R.id.layout_clean_4:
+                accEt.setText("");
+                break;
+            case R.id.layout_clean_5:
+                pwdEt.setText("");
+                break;
+            default:
                 break;
         }
     }
@@ -127,14 +187,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void login() {
-        showProgressDialog("登录中...");
+        showProgressDialog("登录中，请稍后...");
         UserRequest.login(mContext, acc, pwd, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                ((CGApplication) CGApplication.getInstance()).setLogin((Login) domain);
+                Login login = (Login) domain;
+                CGApplication.getInstance().setLogin((Login) domain);
+                CGLog.d("J: " + login.getJSESSIONID());
+                String imgPath = "";
+                if (null != login && null != login.getUserinfo()) {
+                    imgPath = Utils.getText(login.getUserinfo().getImg());
+                }
+                CGSharedPreference.saveLogin(accEt.getText().toString(), pwdEt.getText().toString(), imgPath);
+                if (CGSharedPreference.getNoticeState(1)) {
+                    UserRequest.deviceSave(LoginActivity.this, 0);//注册设备
+                } else {
+                    UserRequest.deviceSave(LoginActivity.this, 2);//注册设备
+                }
+                CGSharedPreference.setLoginOut(false);
                 hideProgressDialog();
-                UserRequest.deviceSave(LoginActivity.this);//注册设备
-                AddressBookRequest.getEmot(LoginActivity.this);//获取表情列表
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             }
@@ -151,4 +222,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         });
     }
+
 }

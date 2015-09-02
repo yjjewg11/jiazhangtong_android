@@ -15,11 +15,16 @@ import com.umeng.message.UmengRegistrar;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
+import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.common.CGSharedPreference;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
+
+import java.util.List;
 
 
 /**
@@ -31,7 +36,7 @@ import com.wj.kindergarten.utils.Utils;
  */
 public class SplashActivity extends Activity {
     private static final int SPLASH_DELAY = 0;
-    private static final int SLASH_DELAY_TIME = 0 * 1000;
+    private static final int SLASH_DELAY_TIME = 3 * 1000;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -40,7 +45,9 @@ public class SplashActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SPLASH_DELAY:
-                    if (Utils.isLoginIn()) {
+                    if (Utils.isLoginIn() && !CGSharedPreference.getLoginOut()) {
+                        String[] str = CGSharedPreference.getLogin();
+                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
                         Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                         mainIntent.putExtra("from", "splash");
                         startActivity(mainIntent);
@@ -99,7 +106,11 @@ public class SplashActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

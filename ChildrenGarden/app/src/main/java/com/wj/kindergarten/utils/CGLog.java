@@ -11,7 +11,7 @@ import android.util.Log;
  */
 public final class CGLog {
     public static boolean isDebug = true;//is print log
-    public static final String TAG = "JJGLog";//log tag
+    public static final String TAG = "CGLog";//log tag
 
     /**
      * util class avoid to instantiate

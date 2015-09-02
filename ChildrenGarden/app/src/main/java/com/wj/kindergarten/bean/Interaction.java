@@ -2,6 +2,8 @@ package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.List;
+
 /**
  * Interaction
  *
@@ -34,6 +36,48 @@ public class Interaction extends BaseModel {
     private String uuid;
     @Expose
     private String create_useruuid;
+
+    @Expose
+    private DianZan dianzan;
+    @Expose
+    private ChildReplyList replyPage;
+    @Expose
+    private List<String> imgsList;
+    @Expose
+    private String create_img;
+
+
+    public String getCreate_img() {
+        return create_img;
+    }
+
+    public void setCreate_img(String create_img) {
+        this.create_img = create_img;
+    }
+
+    public List<String> getImgsList() {
+        return imgsList;
+    }
+
+    public void setImgsList(List<String> imgsList) {
+        this.imgsList = imgsList;
+    }
+
+    public DianZan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(DianZan dianzan) {
+        this.dianzan = dianzan;
+    }
+
+    public ChildReplyList getReplyPage() {
+        return replyPage;
+    }
+
+    public void setReplyPage(ChildReplyList replyPage) {
+        this.replyPage = replyPage;
+    }
 
     public String getContent() {
         return content;

@@ -3,7 +3,6 @@ package com.wj.kindergarten.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
@@ -11,12 +10,10 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-import com.wenjie.jiazhangtong.R;
 
 import java.io.File;
 
@@ -68,31 +65,12 @@ public class ImageLoaderUtil {
         imageLoader.displayImage(url, imageView, options);
     }
 
-    public static void displayImage(String url, ImageView imageView, DisplayImageOptions displayImageOptions) {
+    public static void displayImage(String url, ImageView imageView, DisplayImageOptions displayImageOptions,
+                                    ImageLoadingListener imageLoadingListener) {
         if (displayImageOptions == null) {
             return;
         }
-        imageLoader.displayImage(url, imageView, displayImageOptions, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
-
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-
-            }
-        });
+        imageLoader.displayImage(url, imageView, displayImageOptions, imageLoadingListener);
     }
 
     public static void downLoadImageLoader(String url, ImageLoadingListener imageLoadingListener) {

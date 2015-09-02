@@ -15,7 +15,7 @@ import android.widget.Button;
  */
 public class CountDownButton extends Button {
     private static final int START_DOWN = 0;
-    private int countDownMax = 120;
+    private int countDownMax = 60;
     private int countDown = countDownMax;
     private String normalText = "获取";
 

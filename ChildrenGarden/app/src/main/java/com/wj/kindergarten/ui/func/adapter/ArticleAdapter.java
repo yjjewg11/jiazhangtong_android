@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.Article;
+import com.wj.kindergarten.utils.IntervalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +66,24 @@ public class ArticleAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         Article article = articles.get(i);
-        viewHolder.nameTv.setText(article.getCreate_user());
-        viewHolder.titleTv.setText(article.getTitle());
-        viewHolder.contentTv.setText(article.getContent());
-        viewHolder.timeTv.setText(article.getCreate_time());
-        viewHolder.zanCountTv.setText(article.getCount() + "");
+        if (null != article) {
+            viewHolder.nameTv.setText(article.getCreate_user());
+            viewHolder.titleTv.setText(article.getTitle());
+            viewHolder.contentTv.setText(article.getContent());
+            viewHolder.timeTv.setText(IntervalUtil.getInterval(article.getCreate_time()));
+            if (null != article.getDianzan()) {
+                viewHolder.zanCountTv.setText(article.getDianzan().getCount() + "");
+                if (article.getDianzan().getCount() > 0) {
+                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.interaction_mine_zan_on);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                    viewHolder.zanCountTv.setCompoundDrawables(drawable, null, null, null);
+                } else {
+                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.interaction_mine_zan);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                    viewHolder.zanCountTv.setCompoundDrawables(drawable, null, null, null);
+                }
+            }
+        }
 
         return view;
     }

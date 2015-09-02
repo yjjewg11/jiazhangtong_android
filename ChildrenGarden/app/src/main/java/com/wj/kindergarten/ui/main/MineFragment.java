@@ -17,6 +17,9 @@ import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.ui.mine.ChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
+import com.wj.kindergarten.ui.mine.store.StoreActivity;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.Utils;
 
 /**
  * MainFragment
@@ -28,8 +31,8 @@ import com.wj.kindergarten.ui.mine.SettingActivity;
 public class MineFragment extends Fragment {
     private View rootView;
     private LinearLayout childContent;
-    private TextView collectTv;
-    private TextView settingTv;
+    private LinearLayout llStore;
+    private LinearLayout llSetting;
     private Login login;
 
     @Nullable
@@ -52,17 +55,24 @@ public class MineFragment extends Fragment {
 
     private void initViews(View rootView) {
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
-        collectTv = (TextView) rootView.findViewById(R.id.mine_collect);
-        settingTv = (TextView) rootView.findViewById(R.id.mine_setting);
-        settingTv.setOnClickListener(new View.OnClickListener() {
+        llStore = (LinearLayout) rootView.findViewById(R.id.ll_store);
+        llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
+        llSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().startActivity(new Intent(getActivity(), SettingActivity.class));
             }
         });
+
+        llStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), StoreActivity.class));
+            }
+        });
     }
 
-    private void addChildren() {
+    public void addChildren() {
         childContent.removeAllViews();
         if (login != null && login.getList() != null) {
             int i = 0;
@@ -78,7 +88,7 @@ public class MineFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getActivity(), ChildActivity.class);
-                        intent.putExtra("child", childInfo);
+                        intent.putExtra("uuid", childInfo.getUuid());
                         startActivity(intent);
                     }
                 });
@@ -88,7 +98,11 @@ public class MineFragment extends Fragment {
                 TextView nickTv = (TextView) view.findViewById(R.id.item_mine_list_nike);
                 TextView sexBTv = (TextView) view.findViewById(R.id.item_mine_list_sexb);
 
-                headIv.setImageResource(R.drawable.touxiang);
+                if (!Utils.stringIsNull(childInfo.getHeadimg())) {
+                    ImageLoaderUtil.displayImage(childInfo.getHeadimg(), headIv);
+                } else {
+                    headIv.setImageResource(R.drawable.touxiang);
+                }
                 nameTv.setText(childInfo.getName());
                 nickTv.setText("昵称:" + childInfo.getNickname());
                 sexBTv.setText((childInfo.getSex() == 0 ? "男" : "女") + "        " + childInfo.getBirthday());

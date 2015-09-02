@@ -27,7 +27,10 @@
         android:layout_marginRight="@dimen/normal_padding"
         android:background="@drawable/login_edit_bg1"
         android:gravity="start"
+        android:lineSpacingExtra="@dimen/margin_3"
+        android:maxLength="300"
         android:padding="@dimen/small_padding"
-        android:text="" />
+        android:text=""
+        android:textSize="@dimen/normal_text" />
 
 </LinearLayout>

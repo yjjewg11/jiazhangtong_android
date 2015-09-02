@@ -212,7 +212,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener {
                     .showImageOnFail(R.drawable.default_pic)
                     .showImageOnLoading(R.drawable.default_pic).build();
 
-            ImageLoaderUtil.displayImage(((ImageViewTag) imageView.getTag()).url + "", imageView, options);
+            ImageLoaderUtil.displayImage(((ImageViewTag) imageView.getTag()).url + "", imageView, options, null);
             container.addView(imageViewsList.get(position));
             return imageViewsList.get(position);
         }

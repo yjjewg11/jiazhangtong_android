@@ -35,6 +35,8 @@ public class ArticleListActivity extends BaseActivity {
     private List<Article> articles = new ArrayList<>();
     private ArticleAdapter articleAdapter;
     private int currentPage = 1;
+    private Article article = null;
+    private static final int ZAN = 1;
 
     @Override
     protected void setContentLayout() {
@@ -67,14 +69,30 @@ public class ArticleListActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(mContext, ArticleActivity.class);
-                intent.putExtra("uuid", articles.get(i - 1).getUuid());
-                startActivity(intent);
+                article = articles.get(i - 1);
+                if (null != article) {
+                    intent.putExtra("uuid", article.getUuid());
+                    intent.putExtra("fromStore", false);
+                    startActivityForResult(intent, ZAN);
+                }
             }
         });
         articleAdapter = new ArticleAdapter(mContext);
         mListView.setAdapter(articleAdapter);
 
         mHandler.sendEmptyMessageDelayed(1, 300);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case ZAN:
+                    getArticleList(1);
+                    break;
+            }
+        }
     }
 
     private Handler mHandler = new Handler() {
@@ -90,6 +108,7 @@ public class ArticleListActivity extends BaseActivity {
             }
         }
     };
+
 
     private void getArticleList(final int page) {
         UserRequest.getArticleList(mContext, page, new RequestResultI() {

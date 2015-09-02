@@ -11,13 +11,13 @@
         android:layout_marginTop="@dimen/margin_10"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.wj.kindergarten.compounets.CircleImage
             android:id="@+id/iv_teacher_photo"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/main_tab_mine_off" />
+             />
 
         <RelativeLayout
             android:layout_width="wrap_content"

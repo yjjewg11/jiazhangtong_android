@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -17,7 +18,9 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
+import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.Utils;
 
 
@@ -60,6 +63,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     private ProgressBar progressBar;
     private ImageView ivReload;
     private RelativeLayout layoutReload;
+    private RelativeLayout titleRightButton;
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -102,6 +106,17 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+        if (!getClass().getSimpleName().equals("LoginActivity")
+                && !getClass().getSimpleName().equals("MainActivity")
+                && !getClass().getSimpleName().equals("RegisterActivity")) {
+            if (CGApplication.getInstance().getLogin() == null) {
+                hideProgressDialog();
+                Utils.showToast(mContext, "登录超时，请重新登录");
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        }
     }
 
     @Override
@@ -218,7 +233,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         titleLeftImageView = (ImageView) findViewById(R.id.normal_title_left_image);
         titleCenterTextView = (TextView) findViewById(R.id.normal_title_center_text);
-//        titleRightButton = (RelativeLayout) findViewById(R.id.normal_title_right_layout);
+        titleRightButton = (RelativeLayout) findViewById(R.id.normal_title_right_layout);
         titleRightTextView = (TextView) findViewById(R.id.normal_title_right_text);
         titleRightImageView = (ImageView) findViewById(R.id.normal_title_right_icon);
         titleLine = findViewById(R.id.normal_title_line);
@@ -316,7 +331,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (!Utils.stringIsNull(rightText)) {
             titleRightTextView.setVisibility(View.VISIBLE);
             titleRightTextView.setText(rightText);
-            titleRightTextView.setOnClickListener(new View.OnClickListener() {
+            titleRightButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     titleRightButtonListener();
@@ -351,7 +366,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             titleRightTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
             titleRightTextView.setCompoundDrawablePadding(1);
             titleRightTextView.setVisibility(View.VISIBLE);
-            titleRightTextView.setOnClickListener(new View.OnClickListener() {
+            titleRightButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     titleRightButtonListener();
@@ -379,7 +394,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             titleRightTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
             titleRightTextView.setCompoundDrawablePadding(1);
             titleRightTextView.setVisibility(View.VISIBLE);
-            titleRightTextView.setOnClickListener(new View.OnClickListener() {
+            titleRightButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     titleRightButtonListener();
@@ -411,6 +426,12 @@ public abstract class BaseActivity extends ActionBarActivity {
                 progressDialog.show();
             }
             progressDialog.setInfo(info);
+        }
+    }
+
+    public void setProgressDialogCancelable(boolean isCancel) {
+        if (progressDialog != null) {
+            progressDialog.setCancelable(isCancel);
         }
     }
 
@@ -453,5 +474,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     public interface ReLoginConfig {
         public void getConfig();
     }
+
 
 }

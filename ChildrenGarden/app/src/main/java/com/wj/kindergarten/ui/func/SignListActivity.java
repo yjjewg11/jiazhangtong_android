@@ -1,5 +1,8 @@
 package com.wj.kindergarten.ui.func;
 
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
@@ -10,6 +13,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.SignAdapter;
+import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +27,10 @@ import java.util.List;
  */
 public class SignListActivity extends BaseActivity {
     private PullToRefreshListView mListView;
+    private LinearLayout contentLayout;
+    private LinearLayout noneLayout;
     private SignAdapter signAdapter;
     private List<Sign> datas = new ArrayList<>();
-
 
     @Override
     protected void setContentLayout() {
@@ -49,9 +54,18 @@ public class SignListActivity extends BaseActivity {
 
         mListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
         mListView.setMode(PullToRefreshBase.Mode.DISABLED);
-        signAdapter = new SignAdapter(mContext);
+        signAdapter = new SignAdapter(mContext, datas);
         mListView.setAdapter(signAdapter);
-        signAdapter.setDatas(datas);
+        contentLayout = (LinearLayout) findViewById(R.id.sign_content);
+        noneLayout = (LinearLayout) findViewById(R.id.sign_none);
+
+        if (datas == null || datas.size() <= 0) {
+            contentLayout.setVisibility(View.GONE);
+            noneLayout.setVisibility(View.VISIBLE);
+        } else {
+            contentLayout.setVisibility(View.VISIBLE);
+            noneLayout.setVisibility(View.GONE);
+        }
     }
 
     private void getSignList() {
@@ -61,10 +75,8 @@ public class SignListActivity extends BaseActivity {
                 SignList signList = (SignList) domain;
                 if (signList.getList() != null && signList.getList().getData() != null) {
                     datas.addAll((ArrayList) ((SignList) domain).getList().getData());
-                    loadSuc();
-                } else {
-                    loadFailed();
                 }
+                loadSuc();
             }
 
             @Override
@@ -74,6 +86,9 @@ public class SignListActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
+                if (!Utils.stringIsNull(message)) {
+                    Utils.showToast(SignListActivity.this, message);
+                }
                 loadFailed();
             }
         });

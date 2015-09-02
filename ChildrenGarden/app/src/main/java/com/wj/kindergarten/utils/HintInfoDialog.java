@@ -20,8 +20,8 @@ public class HintInfoDialog extends Dialog {
         this.info = info;
     }
 
-    public HintInfoDialog(Context context){
-        super(context,R.style.Dialog);
+    public HintInfoDialog(Context context) {
+        super(context, R.style.Dialog);
         this.info = context.getString(R.string.loading_content);
     }
 
@@ -33,4 +33,7 @@ public class HintInfoDialog extends Dialog {
         tvInfo.setText(info);
     }
 
+    public void setText(String info) {
+        tvInfo.setText(info);
+    }
 }

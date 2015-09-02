@@ -2,7 +2,9 @@ package com.wj.kindergarten.utils;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * TimeUtil 时间工具类
@@ -20,26 +22,6 @@ public final class TimeUtil {
     }
 
     /**
-     * 是否删除旧数据
-     *
-     * @param datetime
-     * @return
-     */
-    public static boolean hasDeleteOldData(String datetime) {
-        try {
-            Date d1 = new Date();
-            Date d2 = format.parse(datetime);
-            int day = (int) ((d1.getTime() - d2.getTime()) / 86400000);
-            if (day > DELETE_DAY) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
      * 获取当前时间
      *
      * @return
@@ -47,5 +29,45 @@ public final class TimeUtil {
     public static String getNowDate() {
         Date date = new Date();
         return format.format(date);
+    }
+
+    public static String getWeekOfDay(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+            c.setTime(format.parse(date));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String mWay = c.get(Calendar.DAY_OF_WEEK) + "";
+        if ("1".equals(mWay)) {
+            mWay = "天";
+        } else if ("2".equals(mWay)) {
+            mWay = "一";
+        } else if ("3".equals(mWay)) {
+            mWay = "二";
+        } else if ("4".equals(mWay)) {
+            mWay = "三";
+        } else if ("5".equals(mWay)) {
+            mWay = "四";
+        } else if ("6".equals(mWay)) {
+            mWay = "五";
+        } else if ("7".equals(mWay)) {
+            mWay = "六";
+        }
+        return "星期" + mWay;
+    }
+
+    public static int getWeekOfDayNum(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+            c.setTime(format.parse(date));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return c.get(Calendar.DAY_OF_WEEK) - 1;
     }
 }

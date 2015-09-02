@@ -22,27 +22,53 @@
 
     <LinearLayout
         android:id="@+id/l_v"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:paddingBottom="35dp">
 
-        <TextView
-            android:id="@+id/tv_version"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/color_666666"
-            android:textSize="@dimen/normal_text" />
+            android:paddingLeft="20dp"
+            android:src="@drawable/er1" />
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_5"
-            android:gravity="center"
-            android:text="官方网站：www.wenjienet.com"
-            android:textColor="@color/color_666666"
-            android:textSize="@dimen/normal_text" />
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/margin_10">
+
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="v1.1.1"
+                android:textColor="@color/color_666666"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="官方网站:"
+                android:textColor="@color/color_666666"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="www.wenjienet.com"
+                android:textColor="@color/color_666666"
+                android:textSize="12dp" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

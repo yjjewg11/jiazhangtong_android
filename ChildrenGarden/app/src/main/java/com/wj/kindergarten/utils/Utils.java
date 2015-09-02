@@ -47,6 +47,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utils
@@ -294,7 +296,7 @@ public class Utils {
      * @param fromH      h
      * @param toH        h
      */
-    public static void showLayout(final View moveLayout, float fromH, float toH,int time) {
+    public static void showLayout(final View moveLayout, float fromH, float toH, int time) {
         if (Build.VERSION.SDK_INT < 11) {
             com.nineoldandroids.animation.ValueAnimator animY
                     = com.nineoldandroids.animation.ObjectAnimator.ofFloat(moveLayout, "height", fromH, toH);
@@ -322,6 +324,63 @@ public class Utils {
                     ViewGroup.LayoutParams layoutParams = moveLayout.getLayoutParams();
                     layoutParams.height = (int) val;
                     moveLayout.setLayoutParams(layoutParams);
+                }
+            });
+            animY.start();
+        }
+    }
+
+    /**
+     * 执行Y轴平移动画，并保持动画结束时状态
+     *
+     * @param moveLayout 要执行动画的view
+     * @param deltaY     Y轴偏移量
+     */
+    /**
+     * 上下平移动画
+     *
+     * @param moveLayout
+     * @param fromH      h
+     * @param toH        h
+     */
+    public static void showLayout(final View moveLayout, float fromH, final float toH, int time, final View view) {
+        if (Build.VERSION.SDK_INT < 11) {
+            com.nineoldandroids.animation.ValueAnimator animY
+                    = com.nineoldandroids.animation.ObjectAnimator.ofFloat(moveLayout, "height", fromH, toH);
+            animY.setDuration(time);
+            animY.setInterpolator(new DecelerateInterpolator());
+            animY.addUpdateListener(new com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(com.nineoldandroids.animation.ValueAnimator valueAnimator) {
+                    float val = ((Float) valueAnimator.getAnimatedValue());
+                    ViewGroup.LayoutParams layoutParams = moveLayout.getLayoutParams();
+                    layoutParams.height = (int) val;
+                    moveLayout.setLayoutParams(layoutParams);
+                    CGLog.d("toH" + String.valueOf(toH));
+                    CGLog.d("val" + String.valueOf(val));
+                    if (toH == val) {
+                        view.setVisibility(View.GONE);
+                    }
+                }
+            });
+            animY.start();
+        } else {
+            ValueAnimator animY = ObjectAnimator.ofFloat(moveLayout, "height", fromH, toH);
+            animY.setDuration(ANIMATION_DURATION);
+            animY.setInterpolator(new DecelerateInterpolator());
+            animY.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float val = ((Float) valueAnimator.getAnimatedValue());
+                    ViewGroup.LayoutParams layoutParams = moveLayout.getLayoutParams();
+                    layoutParams.height = (int) val;
+                    moveLayout.setLayoutParams(layoutParams);
+                    CGLog.d("toH" + String.valueOf(toH));
+                    CGLog.d("val" + String.valueOf(val));
+                    if (toH == val) {
+                        view.setVisibility(View.GONE);
+                    }
                 }
             });
             animY.start();
@@ -609,6 +668,32 @@ public class Utils {
             }
         }
         return "";
+    }
+
+    public static String getClassNameFromId(String uuid) {
+        if (uuid == null) {
+            return "";
+        }
+        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getClass_list() != null) {
+            for (com.wj.kindergarten.bean.Class group : CGApplication.getInstance().getLogin().getClass_list()) {
+                if (uuid.equals(group.getUuid())) {
+                    return group.getName();
+                }
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 输入电话号码是否合法
+     *
+     * @return
+     */
+    public static boolean isMobiPhoneNum(String telNum) {
+        String regex = "^((13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$";
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(telNum);
+        return m.matches();
     }
 
 

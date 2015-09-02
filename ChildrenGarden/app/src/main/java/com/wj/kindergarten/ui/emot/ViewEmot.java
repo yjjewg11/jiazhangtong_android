@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
 import android.view.Gravity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -22,6 +24,7 @@ import com.wj.kindergarten.bean.Emot;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.viewpager.CirclePageIndicator;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -42,7 +45,7 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
     private ViewPagerAdapter adapter = null;
 
     private ArrayList<View> pageViews;
-    private static final int PAGE_SIZE = 18;//每一页显示的表情个数 显示3行
+    private static final int PAGE_SIZE = 21;//每一页显示的表情个数 显示3行
     private ChooseFaceImpl chooseFaceImpl = null;
     private ArrayList<Emot> emojis = new ArrayList<Emot>();
     public ArrayList<ArrayList<Emot>> emojiLists = new ArrayList<ArrayList<Emot>>();
@@ -50,8 +53,12 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
     private LinearLayout layoutImgs = null;//表情符号列表
     private int height = 0;
     private boolean isShow = false;
+    private boolean isJianPan = true;//是否是
+    private ImageView imageView = null;
 
     private SendMessage sendMessage = null;
+
+    private ImageView ivDelete = null;
 
     public ViewEmot(Context context, SendMessage sendMessage) {
         super(context);
@@ -71,9 +78,13 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
         etMessage = (EditText) findViewById(R.id.et_message);
         layoutSend = (RelativeLayout) findViewById(R.id.layout_send);
         layoutImgs = (LinearLayout) findViewById(R.id.layout_images_1);
+        imageView = (ImageView) findViewById(R.id.iv_biao_qing);
         layoutBQ.setOnClickListener(this);
         layoutSend.setOnClickListener(this);
         etMessage.setOnClickListener(this);
+
+        ivDelete = (ImageView) findViewById(R.id.delete);
+        ivDelete.setOnClickListener(this);
     }
 
     //表情分页
@@ -124,7 +135,7 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
             GridView view = new GridView(context);
             FaceAdapter adapter = new FaceAdapter(context, emojiLists.get(i), chooseFaceImpl);
             view.setAdapter(adapter);
-            view.setNumColumns(6);
+            view.setNumColumns(7);
             view.setBackgroundColor(Color.TRANSPARENT);
             view.setHorizontalSpacing(1);
             view.setVerticalSpacing(1);
@@ -158,17 +169,42 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.layout_biao_qing:
-                Utils.inputMethod(context, false, layoutImgs);//先隐藏输入法
-                handler.sendEmptyMessageDelayed(1, 300);
+                if (isJianPan) {
+                    Utils.inputMethod(context, false, layoutImgs);//先隐藏输入法
+                    handler.sendEmptyMessageDelayed(1, 300);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.jianpan));
+                    isJianPan = false;
+                } else {
+                    Utils.showLayout(layoutImgs, height, 0, Utils.ANIMATION_DURATION);
+                    handler.sendEmptyMessageDelayed(2, 300);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.bq));
+                    isJianPan = true;
+                }
                 break;
             case R.id.et_message:
-                if (isShow) {
-                    isShow = false;
+                if (!isJianPan) {
+                    isJianPan = true;
                     Utils.showLayout(layoutImgs, height, 0, 100);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.bq));
                 }
                 break;
             case R.id.layout_send:
-                sendMessage.send(etMessage.getText().toString().trim());
+                if(Utils.stringIsNull(etMessage.getText().toString())){
+                    Utils.showToast(context,"消息不能为空");
+                    return;
+                }else {
+                    sendMessage.send(etMessage.getText().toString().trim());
+                }
+                break;
+            case R.id.delete:
+                if (!Utils.stringIsNull(etMessage.getText().toString())) {
+                    int index = etMessage.getSelectionStart();
+                    if (index > 0) {
+                        CGLog.d("index" + index);
+                        Editable editable = etMessage.getText();
+                        editable.delete(index - 1, index);
+                    }
+                }
                 break;
             default:
                 break;
@@ -180,13 +216,9 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
-                if (!isShow) {
-                    isShow = true;
-                    Utils.showLayout(layoutImgs, 0, height, Utils.ANIMATION_DURATION);
-                } else {
-                    isShow = false;
-                    Utils.showLayout(layoutImgs, height, 0, Utils.ANIMATION_DURATION);
-                }
+                Utils.showLayout(layoutImgs, 0, height, Utils.ANIMATION_DURATION);
+            } else if (msg.what == 2) {
+                Utils.inputMethod(context, true, layoutImgs);//先隐藏输入法
             }
         }
     };
@@ -217,9 +249,12 @@ public class ViewEmot extends LinearLayout implements View.OnClickListener {
      * 点击表情图片的其它地方时隐藏表情
      */
     public void hideFaceLayout() {
-        if (isShow) {
-            isShow = false;
+        if (!isJianPan) {
+            isJianPan = true;
             Utils.showLayout(layoutImgs, height, 0, Utils.ANIMATION_DURATION);
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.jianpan));
         }
+
+        Utils.inputMethod(context, false, layoutImgs);//先隐藏输入法
     }
 }

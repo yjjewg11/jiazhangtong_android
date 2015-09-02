@@ -76,7 +76,7 @@ public class CourseListActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return CourseFragment.buildCourseFragment(calculateCurrentDate(position));
+            return CourseListFragment.buildCourseFragment(calculateCurrentDate(position));
         }
 
         @Override

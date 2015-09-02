@@ -19,9 +19,12 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.MyMessage;
 import com.wj.kindergarten.bean.Teacher;
+import com.wj.kindergarten.bean.TeacherInfo;
 import com.wj.kindergarten.bean.UserInfo;
+import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.AddressBookRequest;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.addressbook.scroll.MyScrollView;
 import com.wj.kindergarten.ui.emot.EmotUtil;
@@ -31,6 +34,7 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,6 +53,7 @@ public class TeacherMessageActivty extends BaseActivity {
     private UserInfo userInfo = null;
     private LinearLayout layoutFaces = null;
     private ViewEmot viewEmot = null;
+    private boolean sendSuccess = false;
 
     @Override
     protected void setContentLayout() {
@@ -64,6 +69,9 @@ public class TeacherMessageActivty extends BaseActivity {
     protected void loadData() {
         teacher = (Teacher) getIntent().getSerializableExtra("teacher");
         setTitleText(teacher.getName());
+        if (teacher.isFormMessage()) {
+            queryTeacherInfo();
+        }
         queryMessage();
     }
 
@@ -94,6 +102,30 @@ public class TeacherMessageActivty extends BaseActivity {
         });
 
     }
+
+    private void queryTeacherInfo() {
+        UserRequest.queryTeacherInfo(TeacherMessageActivty.this, teacher.getTeacher_uuid(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                TeacherInfo userInfo = (TeacherInfo) domain;
+                if (null != userInfo && userInfo.getData() != null) {
+                    teacher.setName(userInfo.getData().getName());
+                    setTitleText(userInfo.getData().getName());
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
 
     //请求老师 的消息
     private void queryMessage() {
@@ -145,10 +177,8 @@ public class TeacherMessageActivty extends BaseActivity {
         if (null != m) {
             View view = LayoutInflater.from(TeacherMessageActivty.this).inflate(R.layout.view_my_message, null);
             TextView textView = (TextView) view.findViewById(R.id.tv_my_message);
-            ImageView head = (ImageView) view.findViewById(R.id.iv_my_photo);
-            if (!Utils.stringIsNull(headImg)) {
-                ImageLoaderUtil.displayImage(headImg, head);
-            }
+            CircleImage head = (CircleImage) view.findViewById(R.id.iv_my_photo);
+            ImageLoaderUtil.displayImage(headImg, head);
             ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.send_message_progress);
             progressBar.setVisibility(View.GONE);
             ImageView falure = (ImageView) view.findViewById(R.id.iv_send_failure);
@@ -162,10 +192,8 @@ public class TeacherMessageActivty extends BaseActivity {
         if (null != m) {
             View view = LayoutInflater.from(TeacherMessageActivty.this).inflate(R.layout.view_teacher_message, null);
             TextView textView = (TextView) view.findViewById(R.id.tv_teacher_message);
-            ImageView head = (ImageView) view.findViewById(R.id.iv_teacher_photo);
-            if (!Utils.stringIsNull(teacher.getImg())) {
-                ImageLoaderUtil.displayImage(teacher.getImg(), head);
-            }
+            CircleImage head = (CircleImage) view.findViewById(R.id.iv_teacher_photo);
+            ImageLoaderUtil.displayImage(teacher.getImg(), head);
             textView.setText(EmotUtil.getEmotionContent(TeacherMessageActivty.this, m.getMessage()));
             layoutMessage.addView(view);
         }
@@ -190,6 +218,7 @@ public class TeacherMessageActivty extends BaseActivity {
             public void result(BaseModel domain) {
                 bar.setVisibility(View.GONE);
                 handler.sendEmptyMessage(3);
+                sendSuccess = true;
             }
 
             @Override
@@ -205,7 +234,7 @@ public class TeacherMessageActivty extends BaseActivity {
 
                 imageView.setVisibility(View.VISIBLE);
                 bar.setVisibility(View.GONE);
-                textView.setText("消息发送失败");
+                sendSuccess = false;
             }
         });
     }
@@ -213,18 +242,30 @@ public class TeacherMessageActivty extends BaseActivity {
     /**
      * 显示消息
      */
-    private void addMessage(String msg) {
+    private void addMessage(final String msg) {
+        sendSuccess = false;
         View view = LayoutInflater.from(TeacherMessageActivty.this).inflate(R.layout.view_my_message, null);
-        TextView textView = (TextView) view.findViewById(R.id.tv_my_message);
+        final TextView textView = (TextView) view.findViewById(R.id.tv_my_message);
         ImageView head = (ImageView) view.findViewById(R.id.iv_my_photo);
         if (null != userInfo && !Utils.stringIsNull(userInfo.getImg())) {
             ImageLoaderUtil.displayImage(userInfo.getImg(), head);
         }
-        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.send_message_progress);
-        ImageView falure = (ImageView) view.findViewById(R.id.iv_send_failure);
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.send_message_progress);
+        final ImageView falure = (ImageView) view.findViewById(R.id.iv_send_failure);
         textView.setText(EmotUtil.getEmotionContent(TeacherMessageActivty.this, msg));
         layoutMessage.addView(view);
         sendMessage(msg, falure, progressBar, textView);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!sendSuccess) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    falure.setVisibility(View.GONE);
+                    sendMessage(msg, falure, progressBar, textView);
+                }
+            }
+        });
 
         handler.post(new Runnable() {
             @Override
@@ -239,6 +280,7 @@ public class TeacherMessageActivty extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 2) {
+                sort(myMessages);
                 success();
                 return;
             } else if (msg.what == 3) {
@@ -247,6 +289,15 @@ public class TeacherMessageActivty extends BaseActivity {
             }
         }
     };
+
+    //排序
+    private List<MyMessage> sort(List<MyMessage> list) {
+        if (list != null && list.size() > 1) {
+            CompareMessage compareMessage = new CompareMessage();
+            Collections.sort(list, compareMessage);
+        }
+        return list;
+    }
 
     //发送消息
     private class SendMessageImpl implements SendMessage {

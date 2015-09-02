@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
@@ -79,7 +78,7 @@ public class AppraiseTeacherAdapter extends BaseAdapter {
         final TextView normalTv = (TextView) cView.findViewById(R.id.item_appraise_normal);
         final TextView badTv = (TextView) cView.findViewById(R.id.item_appraise_bad);
         final EditText contentTv = (EditText) cView.findViewById(R.id.item_appraise_edit);
-        ImageView submitIv = (ImageView) cView.findViewById(R.id.item_appraise_submit);
+        TextView submitIv = (TextView) cView.findViewById(R.id.item_appraise_submit);
 
         final AppraiseTeacher appraiseTeacher = teachers.get(i);
         if (alreadyTeacherMap.containsKey(appraiseTeacher.getTeacher_uuid())
@@ -102,11 +101,11 @@ public class AppraiseTeacherAdapter extends BaseAdapter {
                     badTv.setCompoundDrawables(null, drawable, null, null);
                 }
                 contentTv.setText(appraiseTeacherOver.getContent());
-                submitIv.setImageResource(R.drawable.appraise_commit_no);
+                submitIv.setBackgroundResource(R.drawable.appraise_commit_no);
             }
         } else {
             nameTv.setText(appraiseTeacher.getName());
-            submitIv.setImageResource(R.drawable.appraise_commit_yes);
+            submitIv.setBackgroundResource(R.drawable.appraise_commit_yes);
             submitIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

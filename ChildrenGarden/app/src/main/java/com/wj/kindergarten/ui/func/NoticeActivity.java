@@ -1,28 +1,32 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
-import android.text.method.LinkMovementMethod;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.DianZan;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.Reply;
-import com.wj.kindergarten.bean.ReplyList;
-import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.emot.EmotUtil;
+import com.wj.kindergarten.ui.emot.SendMessage;
+import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.utils.URLImageParser;
 import com.wj.kindergarten.utils.Utils;
 
@@ -40,18 +44,22 @@ public class NoticeActivity extends BaseActivity {
     private TextView contentTv;
     private TextView orgTv;
     private TextView dateTv;
+
     private TextView seeTv;
     private TextView zanCountTv;
-    private EditText iReplyEt;
+    private TextView iReplyEt;
     private ImageView zanIv;
     private ImageView replyIv;
     private LinearLayout replyLayout;
     private TextView showMoreReplyTv;
-    private TextView sendTv;
+
+    private RelativeLayout rootView;
+    private LinearLayout bottomLayou;
+    private ViewEmot2 emot2 = null;
 
     private NoticeDetail notice;
     private String uuid = "";
-    private boolean isZanDoing = false;
+    private boolean zanLock = false;
 
 
     @Override
@@ -76,50 +84,19 @@ public class NoticeActivity extends BaseActivity {
         setTitleText("公告详情");
 
         initViews();
-
-//        getZanList();
-//        getReplyList();
     }
 
     private void initViews() {
+        rootView = (RelativeLayout) findViewById(R.id.notice_root);
         titleTv = (TextView) findViewById(R.id.notice_title);
         contentTv = (TextView) findViewById(R.id.notice_content);
         orgTv = (TextView) findViewById(R.id.notice_org);
         dateTv = (TextView) findViewById(R.id.notice_date);
-        seeTv = (TextView) findViewById(R.id.notice_see);
-        zanCountTv = (TextView) findViewById(R.id.notice_zan_count);
-        iReplyEt = (EditText) findViewById(R.id.notice_reply_edit);
-        zanIv = (ImageView) findViewById(R.id.notice_zan);
-        zanIv.setOnClickListener(new View.OnClickListener() {
+
+        rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isZanDoing) {
-                    return;
-                }
-                Drawable drawable = zanIv.getDrawable();
-                if (getResources().getDrawable(R.drawable.interaction_zan_off).getConstantState()
-                        .equals(drawable.getConstantState())) {
-                    zan();
-                } else {
-                    cancelZan();
-                }
-            }
-        });
-        replyIv = (ImageView) findViewById(R.id.notice_reply);
-        replyIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mHandler.sendEmptyMessageDelayed(1, 200);
-            }
-        });
-        replyLayout = (LinearLayout) findViewById(R.id.notice_reply_content);
-        showMoreReplyTv = (TextView) findViewById(R.id.notice_reply_more);
-        showMoreReplyTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, NormalReplyListActivity.class);
-                intent.putExtra("replyId", notice.getData().getUuid());
-                startActivity(intent);
+                hideBottomLayout();
             }
         });
 
@@ -127,18 +104,82 @@ public class NoticeActivity extends BaseActivity {
         contentTv.setText(Html.fromHtml(notice.getData().getMessage(), new URLImageParser(contentTv, mContext), null));
         orgTv.setText(Utils.getGroupNameFromId(notice.getData().getGroupuuid()));
         dateTv.setText(notice.getData().getCreate_time());
+
+        bottomLayou = (LinearLayout) findViewById(R.id.notice_bottom);
+        emot2 = new ViewEmot2(this, new SendMessage() {
+            @Override
+            public void send(String message) {
+                sendReply(message);
+            }
+        });
+        bottomLayou.addView(emot2);
+
+        seeTv = (TextView) findViewById(R.id.notice_see);
+        zanIv = (ImageView) findViewById(R.id.notice_zan);
+        replyIv = (ImageView) findViewById(R.id.notice_reply);
+        zanCountTv = (TextView) findViewById(R.id.notice_zan_count);
+        iReplyEt = (TextView) findViewById(R.id.notice_reply_edit);
+        replyLayout = (LinearLayout) findViewById(R.id.notice_reply_content);
+        showMoreReplyTv = (TextView) findViewById(R.id.notice_reply_more);
+
         seeTv.setText("浏览" + notice.getCount() + "次");
-        sendTv = (TextView) findViewById(R.id.notice_reply_send);
-        sendTv.setOnClickListener(new View.OnClickListener() {
+
+        zanIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendReply();
+                if (zanLock) {
+                    return;
+                }
+                zanLock = true;
+                Drawable drawable = zanIv.getDrawable();
+                if (mContext.getResources().getDrawable(R.drawable.interaction_zan_off).getConstantState()
+                        .equals(drawable.getConstantState())) {
+                    zan();
+                } else {
+                    cancelZan();
+                }
             }
         });
 
-        if (notice.getData() == null) {
-            return;
-        }
+        showMoreReplyTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, NormalReplyListActivity.class);
+                intent.putExtra("replyId", notice.getData().getUuid());
+                intent.putExtra("type", NormalReplyListActivity.REPLY_TYPE_SCHOOL_NOTICE);
+                mContext.startActivity(intent);
+            }
+        });
+
+        replyIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mHandler.sendEmptyMessageDelayed(1, 200);
+            }
+        });
+
+        iReplyEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mHandler.sendEmptyMessageDelayed(1, 200);
+            }
+        });
+
+        showMoreReplyTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, NormalReplyListActivity.class);
+                intent.putExtra("type", NormalReplyListActivity.REPLY_TYPE_SCHOOL_NOTICE);
+                intent.putExtra("replyId", notice.getData().getUuid());
+                startActivity(intent);
+            }
+        });
+
+        setZanData();
+        setReplyData();
+    }
+
+    private void setZanData() {
         DianZan dianZan = notice.getData().getDianzan();
         if (dianZan.isCanDianzan()) {
             zanIv.setImageResource(R.drawable.interaction_zan_off);
@@ -146,18 +187,23 @@ public class NoticeActivity extends BaseActivity {
             zanIv.setImageResource(R.drawable.interaction_zan_on);
         }
         if (dianZan != null && dianZan.getCount() > 0) {
-            zanCountTv.setText(dianZan.getNames() + "等" + dianZan.getCount() + "人觉得很赞");
+            String temp = "<font  color='#ff4966'>" + dianZan.getNames() + "</font>" + "等"
+                    + dianZan.getCount() + "人觉得很赞";
+            zanCountTv.setText(Html.fromHtml(temp));
         } else {
             zanCountTv.setText("0人觉得很赞");
         }
+    }
 
+    private void setReplyData() {
         if (notice.getData().getReplyPage() != null && notice.getData().getReplyPage().getData() != null) {
             List<Reply> replies = notice.getData().getReplyPage().getData();
             addReplyView(replyLayout, replies);
 
-            if (notice.getData().getReplyPage().getTotalCount() > notice.getData().getReplyPage().getPageNo()
-                    * notice.getData().getReplyPage().getPageSize()) {
+            if (notice.getData().getReplyPage().getTotalCount() > notice.getData().getReplyPage().getPageSize()) {
                 showMoreReplyTv.setVisibility(View.VISIBLE);
+            } else {
+                showMoreReplyTv.setVisibility(View.GONE);
             }
         }
     }
@@ -168,35 +214,51 @@ public class NoticeActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    iReplyEt.requestFocus();
-                    iReplyEt.setSelection(iReplyEt.getText().length());
-                    Utils.inputMethod(mContext, true, iReplyEt);
+                    bottomLayou.setVisibility(View.VISIBLE);
+                    emot2.showSoftKeyboard();
                     break;
             }
         }
     };
 
-    private void sendReply() {
-        UserRequest.reply(mContext, notice.getData().getUuid(), iReplyEt.getText().toString().trim(), "", 0, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                Reply reply = new Reply();
-                reply.setContent(iReplyEt.getText().toString().trim());
-                reply.setCreate_user("我");
-                iReplyEt.setText("");
-                addReplyView(replyLayout, reply);
-            }
+    public void hideBottomLayout() {
+        emot2.hideFaceLayout();
+        bottomLayou.setVisibility(View.GONE);
+    }
 
-            @Override
-            public void result(List<BaseModel> domains, int total) {
+    private void sendReply(final String message) {
+        if (Utils.stringIsNull(message)) {
+            Utils.showToast(mContext, "请输入评论内容");
+            return;
+        }
+        showProgressDialog();
+        UserRequest.reply(mContext, notice.getData().getUuid(), message, "",
+                NormalReplyListActivity.REPLY_TYPE_SCHOOL_NOTICE, new RequestResultI() {
+                    @Override
+                    public void result(BaseModel domain) {
+                        hideProgressDialog();
+                        emot2.cleanEditText();
+                        bottomLayou.setVisibility(View.GONE);
+                        emot2.hideSoftKeyboard();
 
-            }
+                        Reply reply = new Reply();
+                        reply.setContent(message);
+                        reply.setCreate_user(CGApplication.getInstance().getLogin().getUserinfo().getName());
 
-            @Override
-            public void failure(String message) {
+                        addReplyView(replyLayout, reply);
+                    }
 
-            }
-        });
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
+
+                    }
+
+                    @Override
+                    public void failure(String message) {
+                        hideProgressDialog();
+                        Utils.showToast(mContext, message);
+                    }
+                });
     }
 
     private void getNotice() {
@@ -215,7 +277,10 @@ public class NoticeActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
-
+                loadFailed();
+                if (!Utils.stringIsNull(message)) {
+                    Utils.showToast(NoticeActivity.this, message);
+                }
             }
         });
     }
@@ -224,38 +289,58 @@ public class NoticeActivity extends BaseActivity {
         replyContent.removeAllViews();
         if (replies != null && replies.size() > 0) {
             for (Reply reply : replies) {
-                TextView textView = new TextView(mContext);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-                        , ViewGroup.LayoutParams.WRAP_CONTENT);
-                textView.setLayoutParams(layoutParams);
-                String info = "<font  color='#ff4966'>" + reply.getCreate_user() + ":</font>"
-                        + reply.getContent().trim().replace("<div>", "").replace("</div>", "");
-                textView.setText(Html.fromHtml(info, new URLImageParser(textView, mContext), null), TextView.BufferType.SPANNABLE);
-                textView.setMovementMethod(LinkMovementMethod.getInstance());
-                replyContent.addView(textView);
+                if (replyContent.getChildCount() < 5) {
+                    View view = View.inflate(mContext, R.layout.item_layout_reply_text, null);
+                    TextView nameTv = (TextView) view.findViewById(R.id.item_reply_text_name);
+                    String temp = reply.getCreate_user() + ":";
+                    SpannableString spanString = new SpannableString(temp);
+                    ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#ff4966"));
+                    spanString.setSpan(span, 0, temp.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    nameTv.setText(spanString);
+                    TextView contentTTv = (TextView) view.findViewById(R.id.item_reply_text_content);
+                    contentTTv.setText(EmotUtil.getEmotionContent(mContext, reply.getContent()));
+                    replyContent.addView(view);
+                } else {
+                    break;
+                }
             }
         }
     }
 
     private void addReplyView(LinearLayout replyContent, Reply reply) {
-        TextView textView = new TextView(mContext);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-                , ViewGroup.LayoutParams.WRAP_CONTENT);
-        textView.setLayoutParams(layoutParams);
-        String info = "<font  color='#ff4966'>" + reply.getCreate_user() + ":</font>"
-                + reply.getContent().trim();
-        textView.setText(Html.fromHtml(info, new URLImageParser(textView, mContext), null), TextView.BufferType.SPANNABLE);
-        textView.setMovementMethod(LinkMovementMethod.getInstance());
-        replyContent.addView(textView, 0);
+        View view = View.inflate(mContext, R.layout.item_layout_reply_text, null);
+        TextView nameTv = (TextView) view.findViewById(R.id.item_reply_text_name);
+        String temp = reply.getCreate_user() + ":";
+        SpannableString spanString = new SpannableString(temp);
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#ff4966"));
+        spanString.setSpan(span, 0, temp.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        nameTv.setText(spanString);
+        TextView contentTTv = (TextView) view.findViewById(R.id.item_reply_text_content);
+        contentTTv.setText(EmotUtil.getEmotionContent(mContext, reply.getContent()));
+        replyContent.addView(view, 0);
+
+        if (replyContent.getChildCount() > 5) {
+            replyContent.removeViewAt(5);
+        }
     }
 
     private void zan() {
-        isZanDoing = true;
-        UserRequest.zan(mContext, notice.getData().getUuid(), "0", new RequestResultI() {
+        UserRequest.zan(mContext, notice.getData().getUuid(), NormalReplyListActivity.REPLY_TYPE_SCHOOL_NOTICE
+                , new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                isZanDoing = false;
                 zanIv.setImageResource(R.drawable.interaction_zan_on);
+                if (Utils.stringIsNull(notice.getData().getDianzan().getNames())) {
+                    notice.getData().getDianzan().setNames(CGApplication.getInstance().getLogin().getUserinfo().getName());
+                } else {
+                    notice.getData().getDianzan().setNames(notice.getData().getDianzan().getNames()
+                            + "," + CGApplication.getInstance().getLogin().getUserinfo().getName());
+                }
+                notice.getData().getDianzan().setCount(notice.getData().getDianzan().getCount() + 1);
+                notice.getData().getDianzan().setCanDianzan(false);
+                zanLock = false;
+
+                setZanData();
             }
 
             @Override
@@ -265,64 +350,34 @@ public class NoticeActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
-                isZanDoing = false;
-
+                zanLock = false;
+                Utils.showToast(mContext, "点赞失败");
             }
         });
     }
 
     private void cancelZan() {
-        isZanDoing = true;
         UserRequest.zanCancel(mContext, notice.getData().getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                isZanDoing = false;
                 zanIv.setImageResource(R.drawable.interaction_zan_off);
-            }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-                isZanDoing = false;
-
-            }
-        });
-    }
-
-    private void getReplyList() {
-        UserRequest.getReplyList(mContext, notice.getData().getUuid(), 1, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                ReplyList replyList = (ReplyList) domain;
-                addReplyView(replyLayout, replyList.getList().getData());
-            }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
-    }
-
-    private void getZanList() {
-        UserRequest.getZanList(mContext, notice.getData().getUuid(), new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                ZanItem zanItem = (ZanItem) domain;
-                if (zanItem.getCount() > 0) {
-                    zanCountTv.setText(zanItem.getNames() + "等" + zanItem.getCount() + "人觉得很赞");
-                } else {
-                    zanCountTv.setText("0人觉得很赞");
+                if (notice.getData().getDianzan().getNames().contains("," +
+                        CGApplication.getInstance().getLogin().getUserinfo().getName())) {
+                    notice.getData().getDianzan().setNames(notice.getData().getDianzan().getNames().replace(","
+                            + CGApplication.getInstance().getLogin().getUserinfo().getName(), ""));
+                } else if (notice.getData().getDianzan().getNames().contains(
+                        CGApplication.getInstance().getLogin().getUserinfo().getName() + ",")) {
+                    notice.getData().getDianzan().setNames(notice.getData().getDianzan().getNames().replace(
+                            CGApplication.getInstance().getLogin().getUserinfo().getName() + ",", ""));
+                } else if (notice.getData().getDianzan().getNames().contains(CGApplication.getInstance().getLogin().getUserinfo().getName())) {
+                    notice.getData().getDianzan().setNames(notice.getData().getDianzan().getNames()
+                            .replace(CGApplication.getInstance().getLogin().getUserinfo().getName(), ""));
                 }
+                notice.getData().getDianzan().setCount(notice.getData().getDianzan().getCount() - 1);
+                notice.getData().getDianzan().setCanDianzan(true);
+                zanLock = false;
+
+                setZanData();
             }
 
             @Override
@@ -332,7 +387,8 @@ public class NoticeActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
-
+                zanLock = false;
+                Utils.showToast(mContext, "取消点赞失败");
             }
         });
     }

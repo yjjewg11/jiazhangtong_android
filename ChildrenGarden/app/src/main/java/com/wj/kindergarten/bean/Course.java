@@ -22,6 +22,10 @@ public class Course extends BaseModel {
     private String classuuid;
     @Expose
     private int count;
+    @Expose
+    private DianZan dianzan;
+    @Expose
+    private ChildReplyList replyPage;
 
     public String getUuid() {
         return uuid;
@@ -69,5 +73,21 @@ public class Course extends BaseModel {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public DianZan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(DianZan dianzan) {
+        this.dianzan = dianzan;
+    }
+
+    public ChildReplyList getReplyPage() {
+        return replyPage;
+    }
+
+    public void setReplyPage(ChildReplyList replyPage) {
+        this.replyPage = replyPage;
     }
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -17,12 +18,19 @@ import com.umeng.update.UpdateStatus;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.common.CGSharedPreference;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.TestActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.HintInfoDialog;
+import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -91,17 +99,64 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(SettingActivity.this, AboutActivity.class));
                 break;
             case R.id.layout_5://检查更新
-                // startActivity(new Intent(SettingActivity.this, TestActivity.class));
                 checkVersion();
                 break;
             case R.id.layout_6://退出
-                // MobclickAgent.onKillProcess(SettingActivity.this);
-                ActivityManger.getInstance().exit();
+                exit();
                 break;
             default:
                 break;
         }
     }
+
+    private void loginOut() {
+        final HintInfoDialog dialog = new HintInfoDialog(SettingActivity.this, "注销中，请稍后...");
+        dialog.show();
+        UserRequest.loginOut(SettingActivity.this, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                dialog.dismiss();
+                ShareUtils.clear();
+                ActivityManger.getInstance().exit();
+                CGSharedPreference.setLoginOut(true);
+                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+                dialog.dismiss();
+                if (!Utils.stringIsNull(message)) {
+                    Utils.showToast(SettingActivity.this, message);
+                }
+            }
+        });
+    }
+
+    private void exit() {
+        new AlertDialog.Builder(this).setTitle("提示")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setMessage("您确认注销吗？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“确认”后的操作
+                        loginOut();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 点击“返回”后的操作,这里不设置没有任何操作
+            }
+        }).show();
+    }
+
 
     /**
      * 版本检测
@@ -133,10 +188,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void showUpdateDialog(final String downloadUrl, final String message) {
+        CGLog.d("message: " + message);
         AlertDialog.Builder updateAlertDialog = new AlertDialog.Builder(this);
         updateAlertDialog.setIcon(R.drawable.ic_launcher);
-        updateAlertDialog.setTitle(R.string.app_name);
-        updateAlertDialog.setMessage(getString(R.string.update_hint, message));
+        updateAlertDialog.setTitle(R.string.update_hint);
+        updateAlertDialog.setMessage(message);
         updateAlertDialog.setNegativeButton(R.string.update_ok,
                 new DialogInterface.OnClickListener() {
                     @Override

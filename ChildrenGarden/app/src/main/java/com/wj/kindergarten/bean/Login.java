@@ -21,7 +21,6 @@ public class Login extends BaseModel {
     @Expose
     private List<Class> class_list;
 
-
     public UserInfo getUserinfo() {
         return userinfo;
     }

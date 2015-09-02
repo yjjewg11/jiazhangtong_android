@@ -1,8 +1,9 @@
 package com.wj.kindergarten.ui.mine;
 
-import android.graphics.Canvas;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
@@ -12,6 +13,7 @@ import com.wj.kindergarten.compounets.CountDownButton;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.utils.EditTextCleanWatcher;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -33,6 +35,15 @@ public class RegisterActivity extends BaseActivity {
     private TextView actionTv;
     private int type = 0;//0 register  1 forget
 
+
+    private RelativeLayout layout1 = null;
+    private RelativeLayout layout2 = null;
+    private RelativeLayout layout3 = null;
+    private RelativeLayout layout4 = null;
+    private ImageView imageView1 = null;
+    private ImageView imageView2 = null;
+    private ImageView imageView3 = null;
+    private ImageView imageView4 = null;
 
     @Override
     protected void setNeedLoading() {
@@ -69,16 +80,79 @@ public class RegisterActivity extends BaseActivity {
         actionTv = (TextView) findViewById(R.id.register_action);
         pwdTv = (TextView) findViewById(R.id.register_pwd_text);
 
+        layout1 = (RelativeLayout) findViewById(R.id.layout_clean_6);
+        layout2 = (RelativeLayout) findViewById(R.id.layout_clean_7);
+        layout3 = (RelativeLayout) findViewById(R.id.layout_clean_8);
+        layout4 = (RelativeLayout) findViewById(R.id.layout_clean_9);
+        imageView1 = (ImageView) findViewById(R.id.iv_clean_6);
+        imageView2 = (ImageView) findViewById(R.id.iv_clean_7);
+        imageView3 = (ImageView) findViewById(R.id.iv_clean_8);
+        imageView4 = (ImageView) findViewById(R.id.iv_clean_9);
+
+        mobileEt.addTextChangedListener(new EditTextCleanWatcher(imageView1,mobileEt));
+        pwdEt.addTextChangedListener(new EditTextCleanWatcher(imageView2,pwdEt));
+        pwdDEt.addTextChangedListener(new EditTextCleanWatcher(imageView3,pwdDEt));
+        smsEt.addTextChangedListener(new EditTextCleanWatcher(imageView4,smsEt));
+
+        layout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mobileEt.setText("");
+            }
+        });
+
+        layout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pwdEt.setText("");
+            }
+        });
+
+        layout3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pwdDEt.setText("");
+            }
+        });
+
+        layout4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                smsEt.setText("");
+            }
+        });
+
         smsCDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.stringIsNull(mobileEt.getText().toString()) && mobileEt.getText().length() != 11) {
                     Utils.showToast(CGApplication.getInstance(), "请输入手机号码");
                     return;
+                } else if (!Utils.isMobiPhoneNum(mobileEt.getText().toString())) {
+                    Utils.showToast(RegisterActivity.this, "您输入的手机号码有误");
+                    return;
                 }
 
-                smsCDB.startCountDown();
+                UserRequest.getSmsCode(mContext, mobileEt.getText().toString(), type + 1, new RequestResultI() {
+                    @Override
+                    public void result(BaseModel domain) {
 
+                    }
+
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
+
+                    }
+
+                    @Override
+                    public void failure(String message) {
+                        if (!Utils.stringIsNull(message)) {
+                            Utils.showToast(mContext, message);
+                        }
+                        smsCDB.stopCountDown();
+                    }
+                });
+                smsCDB.startCountDown();
             }
         });
 
@@ -95,6 +169,7 @@ public class RegisterActivity extends BaseActivity {
             }
         });
     }
+
 
     private boolean checkData() {
         if (Utils.stringIsNull(mobileEt.getText().toString())) {
@@ -131,7 +206,7 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void result(BaseModel domain) {
                         hideProgressDialog();
-
+                        Utils.showToast(mContext, "注册成功");
                         finish();
                     }
 
@@ -143,7 +218,9 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void failure(String message) {
                         hideProgressDialog();
-                        Utils.showToast(mContext, message);
+                        if (!Utils.stringIsNull(message)) {
+                            Utils.showToast(mContext, message);
+                        }
                     }
                 });
     }

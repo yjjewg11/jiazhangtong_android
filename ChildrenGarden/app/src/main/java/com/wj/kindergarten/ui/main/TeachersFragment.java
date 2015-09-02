@@ -19,6 +19,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Teacher;
+import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -135,8 +136,12 @@ public class TeachersFragment extends Fragment {
     private void addLeader(int i, final Teacher teacher, int count) {
         if (null != teacher) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_teacher_item, null);
-            ImageView head = (ImageView) view.findViewById(R.id.iv_head);
-            ImageLoaderUtil.displayImage(teacher.getImg(), head);
+            CircleImage head = (CircleImage) view.findViewById(R.id.iv_head);
+            if (!Utils.stringIsNull(teacher.getImg())) {
+                ImageLoaderUtil.displayImage(teacher.getImg(), head);
+            } else {
+                head.setImageDrawable(getResources().getDrawable(R.drawable.ty));
+            }
             TextView name = (TextView) view.findViewById(R.id.tv_name);
             name.setText(Utils.getText(teacher.getName()));
             ImageView call = (ImageView) view.findViewById(R.id.iv_call);
@@ -162,7 +167,7 @@ public class TeachersFragment extends Fragment {
     private void addTeacher(int i, final Teacher teacher, int count) {
         if (null != teacher) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_teacher_item, null);
-            ImageView head = (ImageView) view.findViewById(R.id.iv_head);
+            CircleImage head = (CircleImage) view.findViewById(R.id.iv_head);
             ImageLoaderUtil.displayImage(teacher.getImg(), head);
             TextView name = (TextView) view.findViewById(R.id.tv_name);
             name.setText(Utils.getText(teacher.getName()));

@@ -7,17 +7,29 @@
     android:paddingBottom="@dimen/small_padding"
     android:paddingTop="@dimen/small_padding">
 
-    <ImageView
-        android:id="@+id/item_sign_list_head"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/normal_padding"
-        android:src="@drawable/touxiang" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.wj.kindergarten.compounets.CircleImage
+            android:id="@+id/item_sign_list_head"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <TextView
+            android:id="@+id/tv_student_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_3"
+            android:textColor="@color/hint_gray"
+            android:textSize="13dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/normal_padding"
         android:layout_marginRight="@dimen/normal_padding"
         android:orientation="vertical">
 

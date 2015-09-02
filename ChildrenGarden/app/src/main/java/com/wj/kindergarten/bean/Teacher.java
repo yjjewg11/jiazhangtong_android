@@ -23,6 +23,16 @@ public class Teacher implements Serializable{
     @Expose
     private String teacher_uuid;
 
+    private boolean isFormMessage = false;
+
+    public boolean isFormMessage() {
+        return isFormMessage;
+    }
+
+    public void setIsFormMessage(boolean isFormMessage) {
+        this.isFormMessage = isFormMessage;
+    }
+
     public String getImg() {
         return img;
     }

@@ -83,7 +83,7 @@ public class FoodListActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return FoodFragment.buildFoodFragment(calculateCurrentDate(position));
+            return FoodPageFragment.buildFoodPageFragment(calculateCurrentDate(position));
         }
 
         @Override

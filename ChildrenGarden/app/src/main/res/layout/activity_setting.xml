@@ -146,7 +146,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingLeft="@dimen/normal_padding"
-            android:text="退出"
+            android:text="注销"
             android:textSize="@dimen/normal_text" />
 
         <ImageView

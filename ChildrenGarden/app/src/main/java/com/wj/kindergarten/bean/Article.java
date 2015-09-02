@@ -26,16 +26,14 @@ public class Article extends BaseModel {
     private int type;
     @Expose
     private String groupuuid;
-
     @Expose
     private String message;
     @Expose
     private String content;
     @Expose
-    private int count;
+    private Zan dianzan;
     @Expose
-    private String share_url;
-
+    private int count;
 
     public String getUuid() {
         return uuid;
@@ -117,19 +115,19 @@ public class Article extends BaseModel {
         this.message = message;
     }
 
+    public Zan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(Zan dianzan) {
+        this.dianzan = dianzan;
+    }
+
     public int getCount() {
         return count;
     }
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-    public String getShare_url() {
-        return share_url;
-    }
-
-    public void setShare_url(String share_url) {
-        this.share_url = share_url;
     }
 }

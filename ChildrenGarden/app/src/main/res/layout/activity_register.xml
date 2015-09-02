@@ -30,14 +30,39 @@
                 android:paddingLeft="@dimen/small_padding"
                 android:text="手机号码" />
 
-            <EditText
-                android:id="@+id/register_mobile"
-                style="@style/loginEditStyle"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:background="@android:color/transparent"
-                android:hint="请输入手机号码" />
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/register_mobile"
+                    style="@style/loginEditStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/layout_clean_6"
+                    android:background="@android:color/transparent"
+                    android:hint="请输入手机号码"
+                    android:inputType="number"
+                    android:maxLength="11" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_clean_6"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/iv_clean_6"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clean"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -57,13 +82,37 @@
                 android:paddingLeft="@dimen/small_padding"
                 android:text="用户密码" />
 
-            <EditText
-                android:id="@+id/register_pwd"
-                style="@style/loginEditStyle"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="请输入用户密码" />
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/register_pwd"
+                    style="@style/loginEditStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/layout_clean_7"
+                    android:background="@android:color/transparent"
+                    android:hint="请输入用户密码"
+                    android:inputType="textPassword"
+                    android:maxLength="18" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_clean_7"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/iv_clean_7"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clean"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -82,13 +131,39 @@
                 android:paddingLeft="@dimen/small_padding"
                 android:text="确认密码" />
 
-            <EditText
-                android:id="@+id/register_pwd_double"
-                style="@style/loginEditStyle"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="再次输入密码" />
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/register_pwd_double"
+                    style="@style/loginEditStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/layout_clean_8"
+                    android:background="@android:color/transparent"
+                    android:hint="再次输入密码"
+                    android:inputType="textPassword"
+                    android:maxLength="18" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_clean_8"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/iv_clean_8"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/clean"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
         </LinearLayout>
 
         <RelativeLayout
@@ -112,14 +187,38 @@
                     android:paddingLeft="@dimen/small_padding"
                     android:text="验证码" />
 
-                <EditText
-                    android:id="@+id/register_sms"
-                    style="@style/loginEditStyle"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:background="@android:color/transparent"
-                    android:hint="请输入验证码" />
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/register_sms"
+                        style="@style/loginEditStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/layout_clean_9"
+                        android:background="@android:color/transparent"
+                        android:hint="请输入验证码"
+                        android:inputType="number"
+                        android:maxLength="4" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_clean_9"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true">
+
+                        <ImageView
+                            android:id="@+id/iv_clean_9"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/clean"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <com.wj.kindergarten.compounets.CountDownButton

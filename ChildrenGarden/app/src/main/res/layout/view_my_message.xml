@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingRight="5dp"
-                    android:src="@drawable/main_item"
+                    android:src="@drawable/send_failure"
                     android:visibility="gone" />
 
                 <RelativeLayout
@@ -60,13 +60,12 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <ImageView
+            <com.wj.kindergarten.compounets.CircleImage
                 android:id="@+id/iv_my_photo"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/main_tab_mine_off" />
+                android:layout_marginLeft="5dp" />
         </RelativeLayout>
     </RelativeLayout>
 

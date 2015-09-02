@@ -13,14 +13,20 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.baidu.mobads.AdView;
-import com.baidu.mobads.AdViewListener;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.bean.MainItem;
+import com.wj.kindergarten.bean.More;
+import com.wj.kindergarten.bean.MoreData;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.AppraiseTeacherActivity;
 import com.wj.kindergarten.ui.func.ArticleListActivity;
@@ -29,10 +35,10 @@ import com.wj.kindergarten.ui.func.FoodListActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NoticeListActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
-import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.ui.more.MoreUtil;
+import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
+import com.wj.kindergarten.ui.webview.WebviewActivity;
 import com.wj.kindergarten.utils.Utils;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,18 +59,30 @@ public class MainFragment extends Fragment {
     private List<MainItem> mainItems = new ArrayList();
     private GridViewAdapter mainGridAdapter = null;
 
-    private RelativeLayout layoutAD = null;
-    private AdView adView = null;
+    private Group chooseTile = null;
+    private ArrayList<Group> titles = new ArrayList<Group>();
+
+    private LinearLayout layoutT = null;
+    private LinearLayout layoutTitles = null;
+    private int height = 0;
+    private boolean isShow = false;
+
+    private ArrayList<More> list = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).setTitleText("金太阳幼儿园");
+        if(null != chooseTile) {
+            ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
+        }else{
+            ((MainActivity) getActivity()).setTitleText("首页");
+        }
         ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
             initViews(rootView);
-//            loadAD();
+            success();
+            queryMore();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
@@ -74,9 +92,132 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+    private void queryMore() {
+        UserRequest.queryMore(getActivity(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                MoreData data = (MoreData) domain;
+                if (null != data) {
+                    list.clear();
+                    list.addAll(data.getList());
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+                if (!Utils.stringIsNull(message)) {
+                    Utils.showToast(CGApplication.getInstance(), message);
+                }
+            }
+        });
+    }
+
+    public void loadData() {
+        if (titles.size() == 0) {
+            success();
+        }
+    }
+
+    //获取title列表
+    private void success() {
+        if (CGApplication.getInstance().getLogin() == null) {
+            return;
+        }
+        titles.clear();
+        titles.addAll(CGApplication.getInstance().getLogin().getGroup_list());
+        String uuid = CGSharedPreference.getTitleUUID();
+        chooseTile = getTitleModel(uuid);
+        if (null == chooseTile) {
+            chooseTile = titles.get(0);
+            CGSharedPreference.saveTitle(chooseTile);
+        }
+
+        ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
+        if (titles.size() > 1) {
+            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
+        }
+
+        initTitleNames();
+    }
+
+    private void initTitleNames() {
+        for (int i = 0; i < titles.size(); i++) {
+            final Group t = titles.get(i);
+            if (null != t) {
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.view_title_item, null);
+                TextView name = (TextView) view.findViewById(R.id.tv_title_name);
+                name.setText(Utils.getText(t.getBrand_name()));
+                LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout_title_name);
+                layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        chooseTile = t;
+                        CGSharedPreference.saveTitle(t);
+                        ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
+                        hideLayout();
+                    }
+                });
+                LinearLayout line = (LinearLayout) view.findViewById(R.id.line1);
+                if (i + 1 == titles.size()) {
+                    line.setVisibility(View.GONE);
+                } else {
+                    line.setVisibility(View.VISIBLE);
+                }
+                layoutTitles.addView(view);
+            }
+        }
+
+        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        layoutTitles.measure(w, h);
+        height = layoutTitles.getMeasuredHeight();
+        ViewGroup.LayoutParams layoutParamsChild = layoutTitles.getLayoutParams();
+        layoutParamsChild.height = 0;
+        layoutTitles.setLayoutParams(layoutParamsChild);
+    }
+
+    private Group getTitleModel(String uuid) {
+        for (Group m : titles) {
+            if (null != m && uuid.equals(m.getUuid())) {
+                return m;
+            }
+        }
+        return null;
+    }
+
+    public void changeTitle() {
+        if (!isShow) {
+            isShow = true;
+            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_up);
+            layoutT.setVisibility(View.VISIBLE);
+            Utils.showLayout(layoutTitles, 0, height, 300);
+        } else {
+            hideLayout();
+        }
+    }
+
+    private void hideLayout() {
+        isShow = false;
+        ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
+        Utils.showLayout(layoutTitles, height, 0, 300, layoutT);
+    }
+
     private void initViews(View rootView) {
-        layoutAD = (RelativeLayout) rootView.findViewById(R.id.layout_ad);
         mainGv = (GridView) rootView.findViewById(R.id.main_grid);
+        layoutT = (LinearLayout) rootView.findViewById(R.id.list_title_layout);
+        layoutTitles = (LinearLayout) rootView.findViewById(R.id.layout_titles);
+        layoutT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideLayout();
+            }
+        });
+
 
         initMainItem();
         mainGridAdapter = new GridViewAdapter();
@@ -89,73 +230,12 @@ public class MainFragment extends Fragment {
         });
     }
 
-    //加载广告
-    private void loadAD() {
-        adView = new AdView(getActivity());
-        adView.setListener(new AdViewListener() {
-            public void onAdSwitch() {
-                CGLog.d("onAdSwitch");
-            }
-
-            public void onAdShow(JSONObject info) {
-                // 广告已经渲染出来
-                CGLog.d("onAdShow " + info.toString());
-            }
-
-            public void onAdReady(AdView adView) {
-                // 资源已经缓存完毕，还没有渲染出来
-                CGLog.d("onAdReady " + adView);
-            }
-
-            public void onAdFailed(String reason) {
-                CGLog.d("onAdFailed " + reason);
-            }
-
-            public void onAdClick(JSONObject info) {
-                CGLog.d("onAdClick " + info.toString());
-            }
-
-            public void onVideoStart() {
-                CGLog.d("onVideoStart");
-            }
-
-            public void onVideoFinish() {
-                CGLog.d("onVideoFinish");
-            }
-
-            @Override
-            public void onVideoClickAd() {
-                CGLog.d("onVideoFinish");
-            }
-
-            @Override
-            public void onVideoClickClose() {
-                CGLog.d("onVideoFinish");
-            }
-
-            @Override
-            public void onVideoClickReplay() {
-                CGLog.d("onVideoFinish");
-            }
-
-            @Override
-            public void onVideoError() {
-                CGLog.d("onVideoFinish");
-            }
-        });
-
-        //将adView添加到父控件中(注：该父控件不一定为您的根控件，只要该控件能通过addView能添加广告视图即可)
-        RelativeLayout.LayoutParams rllp = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        rllp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutAD.addView(adView, rllp);
-    }
 
     private void initMainItem() {
         mainItems.clear();
 
         MainItem gardenInteraction = new MainItem(R.drawable.main_hudong, "互动", Constants.GARDEN_INTERACTION);
-        MainItem gardenDes = new MainItem(R.drawable.main_item_xiaoyuan, "园区介绍", Constants.GARDEN_DES);
+        MainItem gardenDes = new MainItem(R.drawable.main_item_xiaoyuan, "校园相关", Constants.GARDEN_DES);
         MainItem gardenNotice = new MainItem(R.drawable.main_item_gonggao, "公告", Constants.GARDEN_NOTICE);
         MainItem gardenSign = new MainItem(R.drawable.main_item_qiandao, "签到记录", Constants.GARDEN_SIGN);
         MainItem gardenCourse = new MainItem(R.drawable.main_item_kebiao, "课程表", Constants.GARDEN_COURSE);
@@ -163,7 +243,7 @@ public class MainFragment extends Fragment {
         MainItem gardenArticle = new MainItem(R.drawable.main_item_jingpin, "精品文章", Constants.GARDEN_ARTICLE);
         MainItem gardenSpecial = new MainItem(R.drawable.main_item_techang, "特长课程", Constants.GARDEN_SPECIAL);
         MainItem gardenTeacher = new MainItem(R.drawable.main_item_pinjia, "评价老师", Constants.GARDEN_TEACHER);
-        MainItem gardenMore = new MainItem(R.drawable.main_more, "更多", Constants.GARDEN_MORE);
+        MainItem gardenMore = new MainItem(R.drawable.main_more_1, "更多", Constants.GARDEN_MORE);
 
         mainItems.add(gardenInteraction);
         mainItems.add(gardenDes);
@@ -178,37 +258,47 @@ public class MainFragment extends Fragment {
     }
 
     private void mainItemsClick(MainItem mainItem) {
-        Utils.showToast(mContext, mainItem.getText());
+        //  Utils.showToast(mContext, mainItem.getText());
         switch (mainItem.getTag()) {
-            case Constants.GARDEN_INTERACTION:
+            case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));
                 break;
-            case Constants.GARDEN_DES:
-
+            case Constants.GARDEN_DES://校园相关
+                Intent intent = new Intent(getActivity(), SchoolIntroduceActivity.class);
+                intent.putExtra("type", 1);
+                intent.putExtra("uuid", chooseTile.getUuid());
+                startActivity(intent);
                 break;
-            case Constants.GARDEN_NOTICE:
+            case Constants.GARDEN_NOTICE://公告
                 startActivity(new Intent(mContext, NoticeListActivity.class));
                 break;
-            case Constants.GARDEN_SIGN:
+            case Constants.GARDEN_SIGN://签到记录
                 startActivity(new Intent(mContext, SignListActivity.class));
                 break;
-            case Constants.GARDEN_COURSE:
+            case Constants.GARDEN_COURSE://课程表
                 startActivity(new Intent(mContext, CourseListActivity.class));
                 break;
-            case Constants.GARDEN_FOODS:
+            case Constants.GARDEN_FOODS://食谱
                 startActivity(new Intent(mContext, FoodListActivity.class));
                 break;
-            case Constants.GARDEN_ARTICLE:
+            case Constants.GARDEN_ARTICLE://精品文章
                 startActivity(new Intent(mContext, ArticleListActivity.class));
                 break;
             case Constants.GARDEN_SPECIAL:
-
+                Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
+                intent1.putExtra("title", "特长课程");
+                intent1.putExtra("url", "http://jz.wenjienet.com/px-mobile/px/index.html");
+                getActivity().startActivity(intent1);
                 break;
-            case Constants.GARDEN_TEACHER:
+            case Constants.GARDEN_TEACHER://评价老师
                 startActivity(new Intent(mContext, AppraiseTeacherActivity.class));
                 break;
-            case Constants.GARDEN_MORE:
-
+            case Constants.GARDEN_MORE://更多
+                if (list.size() > 0) {
+                    MoreUtil.more(getActivity(), list, mainGv);
+                }
+                break;
+            default:
                 break;
         }
     }
@@ -266,4 +356,8 @@ public class MainFragment extends Fragment {
         }
     }
 
+
+    public Group getChooseTile() {
+        return chooseTile;
+    }
 }

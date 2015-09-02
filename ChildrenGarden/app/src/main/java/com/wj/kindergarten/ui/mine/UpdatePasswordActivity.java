@@ -97,6 +97,11 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
             return false;
         }
 
+        if (editText2.getText().toString().length() < 6 || editText2.getText().toString().length() > 16) {
+            Utils.showToast(mContext, "请填写长度为6-16位的密码");
+            return false;
+        }
+
         if (Utils.stringIsNull(editText3.getText().toString())) {
             Utils.showToast(UpdatePasswordActivity.this, "确认密码不能为空");
             return false;
@@ -135,8 +140,12 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
 
             @Override
             public void failure(String message) {
-                if (Utils.stringIsNull(message)) {
-                    Utils.showToast(UpdatePasswordActivity.this, message);
+                if (!Utils.stringIsNull(message)) {
+                    if("Oldpassword不匹配！".equals(message)){
+                        Utils.showToast(UpdatePasswordActivity.this,"原密码输入错误");
+                    }else {
+                        Utils.showToast(UpdatePasswordActivity.this, message);
+                    }
                 }
                 dialog.dismiss();
             }

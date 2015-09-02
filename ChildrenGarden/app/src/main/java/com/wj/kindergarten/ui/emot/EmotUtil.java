@@ -7,6 +7,8 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
 
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Emot;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -64,7 +66,12 @@ public class EmotUtil {
         }
         String url = getImageUrlByName(name);
         if (!Utils.stringIsNull(url)) {
-            return ImageLoaderUtil.getImageFromCache(url);
+            int width;
+            int height;
+            width = height = CGApplication.getInstance().getResources().getDimensionPixelSize(R.dimen.big_text);
+            if (ImageLoaderUtil.getImageFromCache(url) != null) {
+                return Bitmap.createScaledBitmap(ImageLoaderUtil.getImageFromCache(url), width, height, true);
+            }
         }
         return null;
     }

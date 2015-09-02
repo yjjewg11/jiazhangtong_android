@@ -38,8 +38,8 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name="com.wj.kindergarten.CGApplication"
@@ -61,6 +61,12 @@
 
         <activity
             android:name="com.wj.kindergarten.ui.main.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".wxapi.message.MessageActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -118,7 +124,7 @@
             android:name="com.wj.kindergarten.ui.func.InteractionSentActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name="com.wj.kindergarten.ui.func.InteractionListActivity"
@@ -205,6 +211,47 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
+        <activity
+            android:name="com.wj.kindergarten.ui.func.NormalReplyListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.webview.WebviewActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.webview.SchoolIntroduceActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.store.StoreActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.EditOthersActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.imagescan.GalleryImagesActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.imagescan.PhotoWallActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name="com.wj.kindergarten.ui.TestActivity"
@@ -339,9 +386,15 @@
         <!-- um message -->
 
         <!-- baidu guang gao -->
-        <meta-data android:name="BaiduMobAd_APP_ID" android:value="f1a880e5" />
-        <meta-data android:name="BaiduMobAd_APP_SEC" android:value="f1a880e5" />
-        <activity android:name="com.baidu.mobads.AppActivity"
+        <meta-data
+            android:name="BaiduMobAd_APP_ID"
+            android:value="f1a880e5" />
+        <meta-data
+            android:name="BaiduMobAd_APP_SEC"
+            android:value="f1a880e5" />
+
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
         <!-- baidu guang gao -->
     </application>
