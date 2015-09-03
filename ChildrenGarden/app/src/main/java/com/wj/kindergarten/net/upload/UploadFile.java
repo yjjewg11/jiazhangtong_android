@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 
+import android.os.Environment;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
@@ -52,16 +53,14 @@ public class UploadFile {
     public void upload(String path) {
         if (Utils.isNetworkAvailable(context)) {
             try {
+                File file = new File(path);
                 if (isompress(path)) {
                     Bitmap bitmap = compressBySize(path, width, height);
-                    // Bitmap bitmap2 = compressImage(bitmap);
-                    saveFile(bitmap, path, 70);
+                    file = saveFile(bitmap, 70);
                     if (bitmap != null && !bitmap.isRecycled()) {
                         bitmap.recycle();
                     }
                 }
-
-                File file = new File(path);
                 uploadImg(file, path);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -72,8 +71,8 @@ public class UploadFile {
         }
     }
 
-    private void uploadImg(final File file, final String path) throws Exception {
-        if (file.exists() && file.length() > 0) {
+    private void uploadImg(final File file, final String path) {
+        if (file != null && file.exists() && file.length() > 0) {
             try {
                 RequestParams params = new RequestParams();
                 params.put("file", file);
@@ -208,13 +207,10 @@ public class UploadFile {
 
 
     //存储进SD卡
-    public void saveFile(Bitmap bm, String fileName, int size) throws Exception {
-        File dirFile = new File(fileName);
-        //检测图片是否存在
-        if (dirFile.exists()) {
-            dirFile.delete();  //删除原图片
-        }
-        File myCaptureFile = new File(fileName);
+    public File saveFile(Bitmap bm, int size) throws Exception {
+        String tempPath = Environment.getExternalStorageDirectory() + File.separator + "jiazhangtong_temp.jpg";
+        File myCaptureFile = new File(tempPath);
+
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
         //size 100表示不进行压缩，70表示压缩率为30%
         bm.compress(Bitmap.CompressFormat.JPEG, size, bos);
@@ -227,5 +223,6 @@ public class UploadFile {
         }
         bos.flush();
         bos.close();
+        return myCaptureFile;
     }
 }

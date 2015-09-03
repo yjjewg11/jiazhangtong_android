@@ -5,9 +5,9 @@ android {
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId 'com.wenjie.jiazhangtong'
-        minSdkVersion 16
-        versionCode 3
-        versionName "0.0.9"
+        minSdkVersion 14
+        versionCode 4
+        versionName "0.1.0"
         multiDexEnabled true
     }
     buildTypes {
