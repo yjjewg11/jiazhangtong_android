@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.CountDownButton;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -232,7 +233,9 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void result(BaseModel domain) {
                         hideProgressDialog();
-
+                        Utils.showToast(RegisterActivity.this, "设置密码成功");
+                        String[] str = CGSharedPreference.getLogin();
+                        CGSharedPreference.saveLogin(str[0], "", str[2]);
                         finish();
                     }
 

@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -130,6 +131,8 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
             public void result(BaseModel domain) {
                 dialog.dismiss();
                 Utils.showToast(UpdatePasswordActivity.this, "修改密码成功");
+                String[] str = CGSharedPreference.getLogin();
+                CGSharedPreference.saveLogin(str[0], "", str[2]);
                 finish();
             }
 
@@ -141,9 +144,9 @@ public class UpdatePasswordActivity extends BaseActivity implements View.OnClick
             @Override
             public void failure(String message) {
                 if (!Utils.stringIsNull(message)) {
-                    if("Oldpassword不匹配！".equals(message)){
-                        Utils.showToast(UpdatePasswordActivity.this,"原密码输入错误");
-                    }else {
+                    if ("Oldpassword不匹配！".equals(message)) {
+                        Utils.showToast(UpdatePasswordActivity.this, "原密码输入错误");
+                    } else {
                         Utils.showToast(UpdatePasswordActivity.this, message);
                     }
                 }

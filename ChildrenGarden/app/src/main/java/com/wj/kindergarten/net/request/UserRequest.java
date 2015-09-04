@@ -33,7 +33,7 @@ import java.util.List;
 public final class UserRequest {
     private static final String LOGIN = "rest/userinfo/login.json";
     private static final String REGISTER = "rest/userinfo/reg.json";
-    private static final String FORGET_PWD = "rest/userinfo/updatepasswordBySms.json";
+    private static final String FORGET_PWD = "rest/userinfo/updatePasswordBySms.json";
     private static final String CHANGE_CHILD = "rest/student/save.json";
     private static final String SMS_CODE = "rest/sms/sendCode.json";
     private static final String INTERACTION_LIST = "rest/classnews/getClassNewsByMy.json";

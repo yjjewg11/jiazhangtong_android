@@ -635,8 +635,11 @@ public class Utils {
     }
 
     public static boolean isLoginIn() {
-        return !(stringIsNull(CGSharedPreference.getLogin()[0])
-                || stringIsNull(CGSharedPreference.getLogin()[1]));
+        if(!Utils.stringIsNull(CGSharedPreference.getLogin()[0]) && !Utils.stringIsNull(CGSharedPreference.getLogin()[1])){
+            return true;
+        }
+
+        return false;
     }
 
     public static void loginOut(Context mContext) {

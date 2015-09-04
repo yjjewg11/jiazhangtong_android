@@ -418,9 +418,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     public void showProgressDialog(String info) {
         if (progressDialog == null) {
             progressDialog = new NormalProgressDialog(this, info);
-            if (!progressDialog.isShowing()) {
-                progressDialog.show();
-            }
+            progressDialog.show();
         } else {
             if (!progressDialog.isShowing()) {
                 progressDialog.show();

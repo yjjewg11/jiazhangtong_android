@@ -132,7 +132,7 @@ public class MainFragment extends Fragment {
         titles.addAll(CGApplication.getInstance().getLogin().getGroup_list());
         String uuid = CGSharedPreference.getTitleUUID();
         chooseTile = getTitleModel(uuid);
-        if (null == chooseTile) {
+        if (null == chooseTile && titles.size() > 0) {
             chooseTile = titles.get(0);
             CGSharedPreference.saveTitle(chooseTile);
         }
