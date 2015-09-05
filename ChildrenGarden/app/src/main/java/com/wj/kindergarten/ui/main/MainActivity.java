@@ -45,7 +45,8 @@ public class MainActivity extends BaseActivity {
             MineFragment.class};
     //Tab选项卡图片
     private int mImageViewArray[] = {R.drawable.main_tab, R.drawable.contact_tab,
-            R.drawable.message_tab, R.drawable.mine_tab};
+            R.drawable.message_tab_2, R.drawable.mine_tab};
+
     //Tab选项卡的文字
     private String mTabIdArray[] = {"首页", "通讯录", "消息", "我的"};
     private FragmentTabHost mTabHost;
@@ -56,7 +57,8 @@ public class MainActivity extends BaseActivity {
     private static final int BACK_QUIT = 2000;
     public static final int FIND_TO_MAP = 1;
     private long pre_back = 0;
-
+    private boolean isClickMessage = false;
+    private ImageView msgImageView = null;
 
     @Override
     protected void setContentLayout() {
@@ -157,6 +159,10 @@ public class MainActivity extends BaseActivity {
                             mineFragment.loadData();
                         }
                     }
+                } else if (msg.what == 1088) {
+                    if (!mTabIdArray[2].equals(nowTab)) {
+                        msgImageView.setImageResource(R.drawable.message_tab_2);
+                    }
                 }
             }
         });
@@ -169,8 +175,6 @@ public class MainActivity extends BaseActivity {
             MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
             mineFragment.addChildren();
         }
-
-
     }
 
     /**
@@ -238,14 +242,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabChanged(String tabId) {
                 nowTab = tabId;
-//                if (tabId.equals(mTabIdArray[2])) {
-//                    MessageFragment messageFragment = (MessageFragment) getSupportFragmentManager()
-//                            .findFragmentByTag(mTabIdArray[2]);
-//                    if (messageFragment != null) {
-//                        getNotReadMessage();
-////                        messageFragment.showSystemTip(systemNotReadCount);
-//                    }
-//                }
+                if (tabId.equals(mTabIdArray[2])) {
+                    isClickMessage = true;
+                } else {
+                    if (isClickMessage) {
+                        msgImageView.setImageResource(R.drawable.message_tab);
+                    }
+                }
             }
         });
         loadTab();
@@ -286,14 +289,17 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
     /**
      * 给Tab按钮设置图标和文字
      */
     private View getTabItemView(int index) {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.main_tab_item, null);
-
         ImageView imageView = (ImageView) view.findViewById(R.id.main_tab_item_image);
+        if (index == 2) {
+            msgImageView = imageView;
+        }
         imageView.setImageResource(mImageViewArray[index]);
         TextView textView = (TextView) view.findViewById(R.id.main_tab_item_text);
         textView.setText(mTabIdArray[index]);

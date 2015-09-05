@@ -146,10 +146,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
                     childInfo.setNickname(data.getStringExtra("nick"));
                     childInfo.setSex(data.getIntExtra("sex", 0));
                     childInfo.setBirthday(data.getStringExtra("birth"));
-                    String img = data.getStringExtra("img");
-                    if (!Utils.stringIsNull(img)) {
-                        childInfo.setHeadimg(img);
-                    }
+                    childInfo.setIdcard(data.getStringExtra("idCard"));
                     break;
                 case BA:
                     childInfo.setBa_name(data.getStringExtra("name"));

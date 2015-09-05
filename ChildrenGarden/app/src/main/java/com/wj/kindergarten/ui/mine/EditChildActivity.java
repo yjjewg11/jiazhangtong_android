@@ -332,7 +332,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 ownIntent.putExtra("nick", nickEt.getText().toString());
                 ownIntent.putExtra("sex", sex);
                 ownIntent.putExtra("birth", birthEt.getText().toString());
-                ownIntent.putExtra("img", imgPath);
+                ownIntent.putExtra("idCard", idEt.getText().toString());
                 setResult(RESULT_OK, ownIntent);
                 finish();
             }
@@ -358,13 +358,13 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
             return false;
         }
 
-        if (!Utils.stringIsNull(idEt.getText().toString())) {
-            IDCardUtil cardUtil = new IDCardUtil();
-            if (!cardUtil.verify(idEt.getText().toString())) {
-                Utils.showToast(EditChildActivity.this, "身份证不合法");
-                return false;
-            }
-        }
+//        if (!Utils.stringIsNull(idEt.getText().toString())) {
+//            IDCardUtil cardUtil = new IDCardUtil();
+//            if (!cardUtil.verify(idEt.getText().toString())) {
+//                Utils.showToast(EditChildActivity.this, "身份证不合法");
+//                return false;
+//            }
+//        }
         return true;
     }
 

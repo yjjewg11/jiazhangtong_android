@@ -13,6 +13,7 @@ import com.umeng.message.UmengBaseIntentService;
 import com.umeng.message.entity.UMessage;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.common.CGSharedPreference;
+import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.utils.CGLog;
 
@@ -75,6 +76,8 @@ public class MyPushIntentService extends UmengBaseIntentService {
             resultPendingIntent = PendingIntent.getActivity(this, 0,
                     resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
+
+        GlobalHandler.getHandler().sendEmptyMessage(1088);
 
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
