@@ -10,6 +10,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,7 +42,7 @@ import java.util.List;
  */
 public class NoticeActivity extends BaseActivity {
     private TextView titleTv;
-    private TextView contentTv;
+    private WebView contentTv;
     private TextView orgTv;
     private TextView dateTv;
 
@@ -89,7 +90,7 @@ public class NoticeActivity extends BaseActivity {
     private void initViews() {
         rootView = (RelativeLayout) findViewById(R.id.notice_root);
         titleTv = (TextView) findViewById(R.id.notice_title);
-        contentTv = (TextView) findViewById(R.id.notice_content);
+        contentTv = (WebView) findViewById(R.id.notice_content);
         orgTv = (TextView) findViewById(R.id.notice_org);
         dateTv = (TextView) findViewById(R.id.notice_date);
 
@@ -101,7 +102,10 @@ public class NoticeActivity extends BaseActivity {
         });
 
         titleTv.setText(notice.getData().getTitle());
-        contentTv.setText(Html.fromHtml(notice.getData().getMessage(), new URLImageParser(contentTv, mContext), null));
+        contentTv.getSettings().setJavaScriptEnabled(true);
+        contentTv.setBackgroundColor(0);
+        contentTv.setAlpha(2);
+        contentTv.loadDataWithBaseURL(null, notice.getData().getMessage(), "text/html", "utf-8", null);
         orgTv.setText(Utils.getGroupNameFromId(notice.getData().getGroupuuid()));
         dateTv.setText(notice.getData().getCreate_time());
 
