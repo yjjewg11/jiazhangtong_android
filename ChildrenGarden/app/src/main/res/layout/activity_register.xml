@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/condition_height"
-        android:layout_marginRight="@dimen/condition_height"
+        android:layout_marginLeft="@dimen/normal_padding"
+        android:layout_marginRight="@dimen/normal_padding"
         android:layout_marginTop="@dimen/normal_padding"
         android:orientation="vertical">
 
@@ -227,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginLeft="@dimen/margin_10"
                 android:background="@drawable/login_button_selector"
                 android:text="获取"
                 android:textColor="@color/white" />
