@@ -3,8 +3,10 @@ package com.wj.kindergarten.ui.func;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
+import android.text.Spanned;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +36,7 @@ import java.util.List;
  */
 public class ArticleActivity extends BaseActivity implements View.OnClickListener {
     private TextView titleTv;
-    private TextView contentTv;
+    private WebView contentTv;
     private TextView nameTv;
     private TextView timeTv;
 
@@ -50,6 +52,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
     private boolean formStore = false;
     private final static int COMMENT = 1;
     private boolean isZan = false;
+    private TextView tvContent = null;
 
     @Override
     protected void setContentLayout() {
@@ -77,12 +80,18 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private void init() {
         titleTv = (TextView) findViewById(R.id.article_title);
-        contentTv = (TextView) findViewById(R.id.article_content);
+        contentTv = (WebView) findViewById(R.id.article_content);
         nameTv = (TextView) findViewById(R.id.article_name);
         timeTv = (TextView) findViewById(R.id.article_time);
 
+        tvContent = (TextView) findViewById(R.id.tv_con);
+        tvContent.setText(Html.fromHtml(article.getData().getMessage(), new URLImageParser(tvContent, mContext), null));
+
         titleTv.setText(article.getData().getTitle());
-        contentTv.setText(Html.fromHtml(article.getData().getMessage(), new URLImageParser(contentTv, mContext), null));
+        contentTv.setBackgroundColor(0);
+        contentTv.setAlpha(2);
+        contentTv.getSettings().setJavaScriptEnabled(true);
+        contentTv.loadDataWithBaseURL(null, article.getData().getMessage(), "text/html", "utf-8", null);
         nameTv.setText(article.getData().getCreate_user());
         timeTv.setText(article.getData().getCreate_time());
 
@@ -126,7 +135,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private void success() {
         if (null != article) {
-            CGLog.d("isFavour"+ article.isFavor());
+            CGLog.d("isFavour" + article.isFavor());
             if (!article.isFavor()) {
                 store1();
             } else {
@@ -212,8 +221,17 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.textview_2://分享
                 CGLog.d("share_url " + article.getShare_url());
-                ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
-                        contentTv.getText().toString(), "", article.getShare_url());
+                if (null != article) {
+                    CGLog.d("c: " + tvContent.getText().toString());
+                    CGLog.d("c:" + tvContent.getText().toString().length());
+                    if (!Utils.stringIsNull(tvContent.getText().toString()) && !article.getData().getMessage().contains("<img")) {
+                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
+                                tvContent.getText().toString(), "", article.getShare_url());
+                    } else {
+                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
+                                titleTv.getText().toString(), "", article.getShare_url());
+                    }
+                }
                 break;
             case R.id.textview_3://收藏
                 if ("收藏".equals(tvStore.getText().toString())) {
