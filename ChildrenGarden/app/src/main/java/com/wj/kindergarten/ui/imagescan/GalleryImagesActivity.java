@@ -50,7 +50,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
     //改变目录 第一个特殊
     private final int CHANGE_PHOTO_DIR_S = 3;
     //拍照ICON
-    private final String CAMERA_ICON = "android.resource://com.funi.tenement/drawable/photo";
+    //private final String CAMERA_ICON = "android.resource://com.wenjie.jiazhangtong/drawable/photo";
     //最多能选择图片数量
     public final static int IMAGE_MAX = 9;
     //取值key
@@ -141,8 +141,8 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
         changeDirBg.setOnClickListener(this);
 
         mGridView = (GridView) findViewById(R.id.child_grid);
-        galleryList.add(CAMERA_ICON);
-        scanList.add(CAMERA_ICON);
+//        galleryList.add(0, "");
+//        scanList.add(0, "");
         adapter = new GalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -334,7 +334,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                     galleryList.clear();
                     galleryList.addAll(scanList);
                     Collections.reverse(galleryList);
-                    galleryList.add(0, CAMERA_ICON);
+                    galleryList.add(0, "");
                     adapter.notifyDataSetChanged();
                     nowDir = getString(R.string.all_photo);
                     break;
@@ -343,6 +343,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                     galleryList.clear();
                     galleryList.addAll(showListS);
                     Collections.reverse(galleryList);
+                    galleryList.add(0, "");
                     adapter.setFirstSpecial(true);
                     adapter.notifyDataSetChanged();
                     break;
