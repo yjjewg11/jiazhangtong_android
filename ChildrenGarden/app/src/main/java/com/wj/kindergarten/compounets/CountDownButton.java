@@ -59,7 +59,6 @@ public class CountDownButton extends Button {
                         setText(countDown + "秒");
                         mHandler.sendEmptyMessageDelayed(START_DOWN, 1000);
                     } else {
-                        setEnabled(true);
                         setText(normalText);
                     }
                     break;
@@ -70,7 +69,6 @@ public class CountDownButton extends Button {
 
     public void startCountDown() {
         countDown = countDownMax;
-        setEnabled(false);
         mHandler.removeMessages(START_DOWN);
         setText(countDown + "秒");
         mHandler.sendEmptyMessageDelayed(START_DOWN, 1000);
@@ -79,7 +77,6 @@ public class CountDownButton extends Button {
     public void stopCountDown() {
         mHandler.removeMessages(START_DOWN);
         setText(normalText);
-        setEnabled(true);
         countDown = countDownMax;
     }
 

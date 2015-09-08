@@ -200,8 +200,7 @@
                         android:layout_toLeftOf="@+id/layout_clean_9"
                         android:background="@android:color/transparent"
                         android:hint="请输入验证码"
-                        android:inputType="number"
-                        android:maxLength="4" />
+                        android:inputType="number" />
 
                     <RelativeLayout
                         android:id="@+id/layout_clean_9"
