@@ -79,6 +79,7 @@ public final class UserRequest {
         RequestParams requestParams = new RequestParams();
         requestParams.put("loginname", acc);
         requestParams.put("password", md5);
+        requestParams.put("ver", Utils.getVersion(context));
 
         SendRequest.getInstance().post(context, RequestType.LOGIN, requestParams,
                 RequestHttpUtil.BASE_URL + LOGIN, requestResultI);
@@ -90,6 +91,7 @@ public final class UserRequest {
         RequestParams requestParams = new RequestParams();
         requestParams.put("loginname", acc);
         requestParams.put("password", md5);
+        requestParams.put("ver", Utils.getVersion(context));
 
         SendRequest.getInstance().post(context, RequestType.LOGIN, requestParams,
                 RequestHttpUtil.BASE_URL + LOGIN, new RequestResultI() {

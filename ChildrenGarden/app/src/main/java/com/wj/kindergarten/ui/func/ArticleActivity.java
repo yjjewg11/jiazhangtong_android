@@ -51,7 +51,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private boolean formStore = false;
     private final static int COMMENT = 1;
-    private boolean isZan = false;
     private TextView tvContent = null;
 
     @Override
@@ -88,9 +87,9 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
         tvContent.setText(Html.fromHtml(article.getData().getMessage(), new URLImageParser(tvContent, mContext), null));
 
         titleTv.setText(article.getData().getTitle());
-        contentTv.setBackgroundColor(0);
-        contentTv.setAlpha(2);
         contentTv.getSettings().setJavaScriptEnabled(true);
+        contentTv.setBackgroundColor(0);
+        contentTv.setAlpha(1);
         contentTv.loadDataWithBaseURL(null, article.getData().getMessage(), "text/html", "utf-8", null);
         nameTv.setText(article.getData().getCreate_user());
         timeTv.setText(article.getData().getCreate_time());
@@ -260,7 +259,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                 dialog.dismiss();
                 Utils.showToast(ArticleActivity.this, "点赞成功");
                 zan1();
-                isZan = true;
             }
 
             @Override
@@ -274,7 +272,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                     Utils.showToast(ArticleActivity.this, message);
                 }
                 dialog.dismiss();
-                isZan = false;
             }
         });
     }

@@ -38,7 +38,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_padding"
                     android:textColor="@color/hint_gray"
-                    android:background="@color/main_bg"
+                    android:background="@color/translate"
+                    android:alpha="1"
                     android:textSize="@dimen/normal_text" />
 
                 <LinearLayout
