@@ -70,4 +70,5 @@ public final class TimeUtil {
         }
         return c.get(Calendar.DAY_OF_WEEK) - 1;
     }
+
 }

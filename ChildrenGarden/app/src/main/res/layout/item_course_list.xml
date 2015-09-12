@@ -133,15 +133,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
+        android:layout_height="wrap_content"
         android:background="@color/white"
+        android:minHeight="@dimen/title_height"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="70dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/title_height"
             android:gravity="center"
             android:text="上午"
+            android:minHeight="@dimen/title_height"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/black" />
 
         <View
@@ -152,10 +155,11 @@
         <TextView
             android:id="@+id/course_morning"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/normal_padding"
             android:gravity="center_vertical"
             android:text="唱歌、跳舞"
+            android:minHeight="@dimen/title_height"
             android:textColor="@color/hint_gray" />
     </LinearLayout>
 
@@ -166,15 +170,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
+        android:layout_height="wrap_content"
         android:background="@color/white"
+        android:minHeight="@dimen/title_height"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="70dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="下午"
+            android:minHeight="@dimen/title_height"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/black" />
 
         <View
@@ -185,9 +192,10 @@
         <TextView
             android:id="@+id/course_afternoon"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/normal_padding"
             android:gravity="center_vertical"
+            android:minHeight="@dimen/title_height"
             android:text="唱歌、跳舞"
             android:textColor="@color/hint_gray" />
     </LinearLayout>
