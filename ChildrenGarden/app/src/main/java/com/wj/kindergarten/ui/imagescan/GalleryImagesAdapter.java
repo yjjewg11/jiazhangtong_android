@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.HashMap;
@@ -82,6 +84,9 @@ public class GalleryImagesAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         final ViewHolder viewHolder;
         final String path = list.get(position);
+
+        CGLog.d("PATH:" + path);
+
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        FuniLog.i("ImageScan", "path:" + path);
         if (convertView == null) {
@@ -134,7 +139,7 @@ public class GalleryImagesAdapter extends BaseAdapter {
         if (position == 0 && isFirstSpecial) {
             viewHolder.mCheckBox.setSelected(false);
             viewHolder.mCheckBox.setVisibility(View.GONE);
-//            viewHolder.mImageView.setImageURI(Uri.parse(path));
+            //viewHolder.mImageView.setImageURI(Uri.parse(path));
             viewHolder.mImageView.setImageResource(R.drawable.photo);
             viewHolder.mImageView.setScaleType(ImageView.ScaleType.CENTER);
         } else {
@@ -154,8 +159,6 @@ public class GalleryImagesAdapter extends BaseAdapter {
 
             if (bitmap != null) {
                 viewHolder.mImageView.setImageBitmap(bitmap);
-            } else {
-                viewHolder.mImageView.setImageResource(R.drawable.friends_sends_pictures_no);
             }
         }
 

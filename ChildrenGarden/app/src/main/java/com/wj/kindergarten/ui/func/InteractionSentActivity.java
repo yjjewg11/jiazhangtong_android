@@ -1,11 +1,16 @@
 package com.wj.kindergarten.ui.func;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -32,6 +37,8 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Emot;
 import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.handler.GlobalHandler;
+import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.net.upload.Result;
@@ -95,6 +102,9 @@ public class InteractionSentActivity extends BaseActivity {
     private int count = 0;
     private String path = "";
     private int time = 0;
+    private IntentFilter filter = null;
+    private NetworkConnectChangedReceiver networkConnectChangedReceiver = null;
+    private boolean isCon = false;
 
     @Override
     protected void setContentLayout() {
@@ -172,7 +182,35 @@ public class InteractionSentActivity extends BaseActivity {
         refreshPhoto();
 
         uploadFile = new UploadFile(mContext, new UploadImageImpl(), 0, 720, 1280);
+
+        filter = new IntentFilter();
+        networkConnectChangedReceiver = new NetworkConnectChangedReceiver();
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkConnectChangedReceiver, filter);
+
+
+        GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
+            @Override
+            public void handleMessage(Message msg) {
+                CGLog.d("AN: " + getRunningActivityName());
+                if (msg.what == 1024) {
+                    if (!isCon && null != images && images.size() > 0) {
+                        isCon = true;
+                        uploadImage(count);
+                    }
+                }
+            }
+        });
     }
+
+    private String getRunningActivityName() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        String runningActivity = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
+        return runningActivity;
+    }
+
 
     //表情分页
     private void page() {
@@ -244,14 +282,6 @@ public class InteractionSentActivity extends BaseActivity {
         pageIndicator.setViewPager(pager);//加上小圆圈
 
         layoutImgs.setVisibility(View.GONE);
-
-//        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-//        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-//        layoutImgs.measure(w, h);
-//        height = layoutImgs.getMeasuredHeight();
-//        ViewGroup.LayoutParams layoutParamsChild = layoutImgs.getLayoutParams();
-//        layoutParamsChild.height = 0;
-//        layoutImgs.setLayoutParams(layoutParamsChild);
     }
 
     /**
@@ -460,16 +490,24 @@ public class InteractionSentActivity extends BaseActivity {
     }
 
     private void uploadImage(int index) {
-        if (null == dialog) {
-            dialog = new HintInfoDialog(InteractionSentActivity.this, "第(" + (index + 1) + "/" + images.size() + ")张图片上传中，请稍后...");
-            dialog.setCancelable(false);
-            dialog.setOnKeyListener(onKeyListener);
-            dialog.show();
-        } else {
-            dialog.setText("第(" + (index + 1) + "/" + images.size() + ")张图片上传中，请稍后...");
+        try {
+            if (null == dialog) {
+                dialog = new HintInfoDialog(InteractionSentActivity.this, "第(" + (index + 1) + "/" + images.size() + ")张图片上传中，请稍后...");
+                dialog.setCancelable(false);
+                dialog.setOnKeyListener(onKeyListener);
+                dialog.show();
+            } else {
+                dialog.setText("第(" + (index + 1) + "/" + images.size() + ")张图片上传中，请稍后...");
+            }
+            uploadFile.upload(images.get(index));
+            CGLog.d("path: " + images.get(index));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Utils.showToast(InteractionSentActivity.this, "上传图片失败");
+            if (null != dialog) {
+                dialog.dismiss();
+            }
         }
-        uploadFile.upload(images.get(index));
-        CGLog.d("path: " + images.get(index));
     }
 
     @Override
@@ -539,6 +577,8 @@ public class InteractionSentActivity extends BaseActivity {
             public void result(BaseModel domain) {
                 dialog.dismiss();
                 Utils.showToast(mContext, domain.getResMsg().getMessage());
+                images.clear();
+                count = 0;
                 setResult(RESULT_OK);
                 finish();
             }
@@ -584,10 +624,19 @@ public class InteractionSentActivity extends BaseActivity {
                 if (null != dialog) {
                     dialog.dismiss();
                 }
+                images.clear();
+                count = 0;
+
                 finish();
                 return true;
             }
             return false;
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onResume();
+        unregisterReceiver(networkConnectChangedReceiver);//关闭广播
+    }
 }

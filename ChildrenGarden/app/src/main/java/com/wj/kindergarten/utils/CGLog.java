@@ -10,7 +10,7 @@ import android.util.Log;
  * @version: v1.0
  */
 public final class CGLog {
-    public static boolean isDebug = true;//is print log
+    public static boolean isDebug = false;//is print log
     public static final String TAG = "CGLog";//log tag
 
     /**

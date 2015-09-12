@@ -299,6 +299,17 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     /**
+     * show title center imageView and bind listener
+     */
+    public void showCenterIcon(int type, Drawable drawable) {
+        if (type == TITLE_CENTER_TYPE_LEFT) {//left
+            titleCenterTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+        } else if (type == TITLE_CENTER_TYPE_RIGHT) {//right
+            titleCenterTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+        }
+    }
+
+    /**
      * set activity's title
      */
     public void clearCenterIcon() {

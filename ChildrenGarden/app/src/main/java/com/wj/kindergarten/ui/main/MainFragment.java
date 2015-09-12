@@ -72,9 +72,9 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(null != chooseTile) {
+        if (null != chooseTile) {
             ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
-        }else{
+        } else {
             ((MainActivity) getActivity()).setTitleText("首页");
         }
         ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
@@ -137,9 +137,14 @@ public class MainFragment extends Fragment {
             CGSharedPreference.saveTitle(chooseTile);
         }
 
-        ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
+        if (null != chooseTile) {
+            ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
+        }
+
         if (titles.size() > 1) {
             ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
+        } else {
+            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, null);
         }
 
         initTitleNames();
@@ -191,13 +196,15 @@ public class MainFragment extends Fragment {
     }
 
     public void changeTitle() {
-        if (!isShow) {
-            isShow = true;
-            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_up);
-            layoutT.setVisibility(View.VISIBLE);
-            Utils.showLayout(layoutTitles, 0, height, 300);
-        } else {
-            hideLayout();
+        if (null != titles && titles.size() > 0) {
+            if (!isShow) {
+                isShow = true;
+                ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_up);
+                layoutT.setVisibility(View.VISIBLE);
+                Utils.showLayout(layoutTitles, 0, height, 300);
+            } else {
+                hideLayout();
+            }
         }
     }
 
@@ -264,10 +271,14 @@ public class MainFragment extends Fragment {
                 startActivity(new Intent(mContext, InteractionListActivity.class));
                 break;
             case Constants.GARDEN_DES://校园相关
-                Intent intent = new Intent(getActivity(), SchoolIntroduceActivity.class);
-                intent.putExtra("type", 1);
-                intent.putExtra("uuid", chooseTile.getUuid());
-                startActivity(intent);
+                if (null != chooseTile) {
+                    Intent intent = new Intent(getActivity(), SchoolIntroduceActivity.class);
+                    intent.putExtra("type", 1);
+                    intent.putExtra("uuid", chooseTile.getUuid());
+                    startActivity(intent);
+                } else {
+                    Utils.showToast(getActivity(), "请选择幼儿园");
+                }
                 break;
             case Constants.GARDEN_NOTICE://公告
                 startActivity(new Intent(mContext, NoticeListActivity.class));

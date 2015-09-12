@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine;
 
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -77,6 +78,7 @@ public class RegisterActivity extends BaseActivity {
         pwdEt = (EditText) findViewById(R.id.register_pwd);
         pwdDEt = (EditText) findViewById(R.id.register_pwd_double);
         smsEt = (EditText) findViewById(R.id.register_sms);
+        smsEt.setInputType(InputType.TYPE_CLASS_NUMBER);
         smsCDB = (CountDownButton) findViewById(R.id.register_count_down);
         actionTv = (TextView) findViewById(R.id.register_action);
         pwdTv = (TextView) findViewById(R.id.register_pwd_text);
