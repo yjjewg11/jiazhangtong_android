@@ -102,7 +102,7 @@ public class StoreFragment extends Fragment {
     }
 
     public void removeItem() {
-        if(null != store) {
+        if (null != store) {
             delete(store.getUuid());
         }
     }
@@ -165,10 +165,10 @@ public class StoreFragment extends Fragment {
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
+                if (!Utils.stringIsNull(message) && null != getActivity()) {
                     Utils.showToast(getActivity(), message);
                 }
-                if (mListView.isRefreshing()) {
+                if (null != mListView && mListView.isRefreshing()) {
                     mListView.onRefreshComplete();
                 }
             }

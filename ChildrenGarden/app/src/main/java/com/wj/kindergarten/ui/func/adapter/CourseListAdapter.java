@@ -59,10 +59,10 @@ public class CourseListAdapter extends BaseAdapter {
         this.courseListFragment = courseListFragment;
 
         int tempWeek = TimeUtil.getWeekOfDayNum(TimeUtil.getNowDate());
-        if (tempWeek > 5) {
+        if (tempWeek == 0 || tempWeek == 6) {
             weekIndex = 0;
         } else {
-            weekIndex = tempWeek - 1;
+            weekIndex = tempWeek-1;
         }
     }
 

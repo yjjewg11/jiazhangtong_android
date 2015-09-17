@@ -98,8 +98,8 @@ public abstract class BaseActivity extends ActionBarActivity {
             setActionBarLayout();
             onCreate();
         }
-
-        PushAgent.getInstance(this).onAppStart();
+        //统计应用启动数据
+        PushAgent.getInstance(this).onAppStart();//消息推送
     }
 
     @Override
