@@ -13,7 +13,6 @@ import android.widget.PopupWindow;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.More;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
-import com.wj.kindergarten.utils.CGLog;
 
 import java.util.ArrayList;
 
