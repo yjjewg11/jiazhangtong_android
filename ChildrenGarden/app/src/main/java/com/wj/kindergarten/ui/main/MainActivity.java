@@ -47,6 +47,9 @@ public class MainActivity extends BaseActivity {
     private int mImageViewArray[] = {R.drawable.main_tab, R.drawable.contact_tab,
             R.drawable.message_tab_2, R.drawable.mine_tab};
 
+    private int mImageViewArray2[] = {R.drawable.main_tab, R.drawable.contact_tab,
+            R.drawable.message_tab, R.drawable.mine_tab};
+
     //Tab选项卡的文字
     private String mTabIdArray[] = {"首页", "通讯录", "消息", "我的"};
     private FragmentTabHost mTabHost;
@@ -162,6 +165,7 @@ public class MainActivity extends BaseActivity {
                 } else if (msg.what == 1088) {
                     if (!mTabIdArray[2].equals(nowTab)) {
                         msgImageView.setImageResource(R.drawable.message_tab_2);
+                        CGSharedPreference.setMessageState(false);
                     }
                 }
             }
@@ -244,6 +248,7 @@ public class MainActivity extends BaseActivity {
                 nowTab = tabId;
                 if (tabId.equals(mTabIdArray[2])) {
                     isClickMessage = true;
+                    CGSharedPreference.setMessageState(true);
                 } else {
                     if (isClickMessage) {
                         msgImageView.setImageResource(R.drawable.message_tab);
@@ -300,7 +305,11 @@ public class MainActivity extends BaseActivity {
         if (index == 2) {
             msgImageView = imageView;
         }
-        imageView.setImageResource(mImageViewArray[index]);
+        if (!CGSharedPreference.getMessageState()) {
+            imageView.setImageResource(mImageViewArray[index]);
+        } else {
+            imageView.setImageResource(mImageViewArray2[index]);
+        }
         TextView textView = (TextView) view.findViewById(R.id.main_tab_item_text);
         textView.setText(mTabIdArray[index]);
         mTabViews[index] = view;

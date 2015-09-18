@@ -141,4 +141,16 @@ public class CGSharedPreference {
         SharedPreferences sharedPreferences = getSharedPreferences();
         return sharedPreferences.getBoolean("isLoginOut", false);
     }
+
+    public static void setMessageState(boolean flag) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("message", flag);
+        editor.commit();
+    }
+
+    public static boolean getMessageState() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getBoolean("message", false);
+    }
 }

@@ -461,8 +461,7 @@ public class Utils {
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) {
-        } else {
+        if (cm != null) {
             NetworkInfo[] info = cm.getAllNetworkInfo();
             if (info != null) {
                 for (int i = 0; i < info.length; i++) {
@@ -472,6 +471,7 @@ public class Utils {
                 }
             }
         }
+        CGLog.d("......................");
         return false;
     }
 
@@ -635,7 +635,7 @@ public class Utils {
     }
 
     public static boolean isLoginIn() {
-        if(!Utils.stringIsNull(CGSharedPreference.getLogin()[0]) && !Utils.stringIsNull(CGSharedPreference.getLogin()[1])){
+        if (!Utils.stringIsNull(CGSharedPreference.getLogin()[0]) && !Utils.stringIsNull(CGSharedPreference.getLogin()[1])) {
             return true;
         }
 
