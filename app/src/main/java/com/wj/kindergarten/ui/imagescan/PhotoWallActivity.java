@@ -1,10 +1,14 @@
 package com.wj.kindergarten.ui.imagescan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -13,9 +17,15 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.SingleMediaScanner;
 import com.wj.kindergarten.utils.Utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -115,7 +125,6 @@ public class PhotoWallActivity extends BaseActivity {
             return;
         }
         showProgressDialog("保存图片中，请稍候...");
-        Log.i("TAG","打印url"+url);
         ImageLoaderUtil.downLoadImageLoader(url, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
@@ -130,9 +139,13 @@ public class PhotoWallActivity extends BaseActivity {
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                MediaStore.Images.Media.insertImage(getContentResolver(), loadedImage, "CG", "CG");
+                String fileName = System.currentTimeMillis() + ".jpg";
+                saveImageToGallery(fileName, PhotoWallActivity.this, loadedImage);
+                CGLog.d("P:" + Environment.getExternalStorageDirectory() + "/CGImage");
                 hideProgressDialog();
                 Utils.showToast(mContext, "图片保存成功");
+                File appDir = new File(Environment.getExternalStorageDirectory() + "/CGImage");
+                FileUtil.deleteFolder(appDir);
             }
 
             @Override
@@ -140,6 +153,41 @@ public class PhotoWallActivity extends BaseActivity {
                 hideProgressDialog();
             }
         });
+    }
+
+
+    public void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "CGImage");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Utils.showToast(context, "图片保存失败");
+            e.printStackTrace();
+        } catch (IOException e) {
+            Utils.showToast(context, "图片保存失败");
+            e.printStackTrace();
+        }
+
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            Utils.showToast(context, "图片保存失败");
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        CGLog.d(Uri.fromFile(new File(file.getPath())) + "");
+//        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
+        new SingleMediaScanner(mContext, new File(file.getPath()), null);
     }
 
     private void refreshPhotoWallTitle() {
