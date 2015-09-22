@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.io.File;
@@ -258,7 +259,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
         final List<PhotoDirModel> dirLN = new ArrayList<>();
         PhotoDirModel allPDM = new PhotoDirModel();
         allPDM.setDirName(getString(R.string.all_photo));
-        allPDM.setPaths(scanList);
+        allPDM.setPaths(getImages(scanList));
         dirLN.add(allPDM);
         for (Map.Entry<String, List<String>> entry : dirMap.entrySet()) {
             List<String> tempL = entry.getValue();
@@ -266,7 +267,9 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                 PhotoDirModel tempPDM = new PhotoDirModel();
                 tempPDM.setDirName(entry.getKey());
                 tempPDM.setPaths((ArrayList) tempL);
-                dirLN.add(tempPDM);
+                if (!entry.getKey().contains("CGImage") || !entry.getKey().equals("CGImage")) {
+                    dirLN.add(tempPDM);
+                }
             }
         }
         photoPopAdapter = new PhotoPopAdapter(this, dirLN);
@@ -332,7 +335,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                     break;
                 case SCAN_PHOTO_COMPLETE://扫描结束
                     galleryList.clear();
-                    galleryList.addAll(scanList);
+                    galleryList.addAll(getImages(scanList));
                     Collections.reverse(galleryList);
                     galleryList.add(0, "");
                     adapter.notifyDataSetChanged();
@@ -341,7 +344,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                 case CHANGE_PHOTO_DIR_S://改变目录 第一个为拍照按钮
                     List<String> showListS = (ArrayList) msg.obj;
                     galleryList.clear();
-                    galleryList.addAll(showListS);
+                    galleryList.addAll(getImages(showListS));
                     Collections.reverse(galleryList);
                     galleryList.add(0, "");
                     adapter.setFirstSpecial(true);
@@ -350,8 +353,8 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                 case CHANGE_PHOTO_DIR://改变目录
                     List<String> showList = (ArrayList) msg.obj;
                     galleryList.clear();
-                    Collections.reverse(showList);
-                    galleryList.addAll(showList);
+                    galleryList.addAll(getImages(showList));
+                    Collections.reverse(galleryList);
                     adapter.setFirstSpecial(false);
                     adapter.notifyDataSetChanged();
                     break;
@@ -359,6 +362,16 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
             super.handleMessage(msg);
         }
     };
+
+    private ArrayList<String> getImages(List<String> list) {
+        ArrayList<String> imgs = new ArrayList<>();
+        for (String path : list) {
+            if (!Utils.stringIsNull(path) && !path.contains("CGImage")) {
+                imgs.add(path);
+            }
+        }
+        return imgs;
+    }
 
     /**
      * 获取当前显示目录名称
@@ -488,5 +501,14 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
                 mHandler.sendEmptyMessage(SCAN_PHOTO_COMPLETE);
             }
         }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        File appDir = new File(Environment.getExternalStorageDirectory() + "/CGImage");
+        if (appDir.exists()) {
+            FileUtil.deleteFolder(appDir);
+        }
     }
 }

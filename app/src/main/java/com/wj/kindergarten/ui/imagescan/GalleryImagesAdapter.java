@@ -103,38 +103,11 @@ public class GalleryImagesAdapter extends BaseAdapter {
                     mPoint.set(width, height);
                 }
             });
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.mImageView.setImageResource(R.drawable.friends_sends_pictures_no);
         }
-        viewHolder.mImageView.setTag(path);
-        viewHolder.mCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked && mSelectMap.size() >= canSelect && !mSelectMap.containsKey(path)) {
-                    viewHolder.mCheckBox.setChecked(false);
-                    Utils.showToast(viewHolder.mCheckBox.getContext(), viewHolder.mCheckBox.getContext()
-                            .getString(R.string.can_select_photo_max, canSelect + ""));
-                    return;
-                }
-
-                //如果是未选中的CheckBox,则添加动画
-                if (!mSelectMap.containsKey(path) || !mSelectMap.get(path)) {
-                    addAnimation(viewHolder.mCheckBox);
-                }
-                if (isChecked) {
-                    mSelectMap.put(path, isChecked);
-                } else {
-                    mSelectMap.remove(path);
-                }
-                ((GalleryImagesActivity) parent.getContext()).selectChange(mSelectMap);
-            }
-        });
-
-        viewHolder.mCheckBox.setChecked(mSelectMap.containsKey(path) ? mSelectMap.get(path) : false);
 
         if (position == 0 && isFirstSpecial) {
             viewHolder.mCheckBox.setSelected(false);
@@ -143,22 +116,51 @@ public class GalleryImagesAdapter extends BaseAdapter {
             viewHolder.mImageView.setImageResource(R.drawable.photo);
             viewHolder.mImageView.setScaleType(ImageView.ScaleType.CENTER);
         } else {
-            viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            viewHolder.mCheckBox.setVisibility(View.VISIBLE);
-            //利用NativeImageLoader类加载本地图片
-            Bitmap bitmap = NativeImageLoader.getInstance().loadNativeImage(path, mPoint, new NativeImageLoader.NativeImageCallBack() {
+            if (!Utils.stringIsNull(path) && !path.contains("CGImage")) {
+                viewHolder.mImageView.setTag(path);
+                viewHolder.mCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-                @Override
-                public void onImageLoader(Bitmap bitmap, String path) {
-                    ImageView mImageView = (ImageView) mGridView.findViewWithTag(path);
-                    if (bitmap != null && mImageView != null) {
-                        mImageView.setImageBitmap(bitmap);
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked && mSelectMap.size() >= canSelect && !mSelectMap.containsKey(path)) {
+                            viewHolder.mCheckBox.setChecked(false);
+                            Utils.showToast(viewHolder.mCheckBox.getContext(), viewHolder.mCheckBox.getContext()
+                                    .getString(R.string.can_select_photo_max, canSelect + ""));
+                            return;
+                        }
+
+                        //如果是未选中的CheckBox,则添加动画
+                        if (!mSelectMap.containsKey(path) || !mSelectMap.get(path)) {
+                            addAnimation(viewHolder.mCheckBox);
+                        }
+                        if (isChecked) {
+                            mSelectMap.put(path, isChecked);
+                        } else {
+                            mSelectMap.remove(path);
+                        }
+                        ((GalleryImagesActivity) parent.getContext()).selectChange(mSelectMap);
                     }
-                }
-            });
+                });
 
-            if (bitmap != null) {
-                viewHolder.mImageView.setImageBitmap(bitmap);
+                viewHolder.mCheckBox.setChecked(mSelectMap.containsKey(path) ? mSelectMap.get(path) : false);
+
+                viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                viewHolder.mCheckBox.setVisibility(View.VISIBLE);
+                //利用NativeImageLoader类加载本地图片
+                Bitmap bitmap = NativeImageLoader.getInstance().loadNativeImage(path, mPoint, new NativeImageLoader.NativeImageCallBack() {
+
+                    @Override
+                    public void onImageLoader(Bitmap bitmap, String path) {
+                        ImageView mImageView = (ImageView) mGridView.findViewWithTag(path);
+                        if (bitmap != null && mImageView != null) {
+                            mImageView.setImageBitmap(bitmap);
+                        }
+                    }
+                });
+
+                if (bitmap != null) {
+                    viewHolder.mImageView.setImageBitmap(bitmap);
+                }
             }
         }
 

@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -54,10 +55,12 @@ import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.viewpager.CirclePageIndicator;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -325,6 +328,8 @@ public class InteractionSentActivity extends BaseActivity {
             photoView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    File appDir = new File(Environment.getExternalStorageDirectory()+"/CGImage");
+//                    FileUtil.deleteFolder(appDir);
                     takePhoto();
                 }
             });

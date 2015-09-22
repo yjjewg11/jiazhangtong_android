@@ -47,6 +47,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,7 +103,7 @@ public class Utils {
      * @param tips     toast to show tips
      */
     public static void showToast(Context mContext, String tips) {
-        Toast.makeText(CGApplication.context, tips, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, tips, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -241,6 +242,16 @@ public class Utils {
             Date d = new Date(time);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             return sdf.format(d);
+        } else {
+            return "";
+        }
+    }
+
+    public static String getDate3(long time) {
+        if (time > 0) {
+            Date d = new Date(time);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            return "IMG_" + sdf.format(d) + "_" + new Random().nextInt(1000000);
         } else {
             return "";
         }
@@ -461,8 +472,7 @@ public class Utils {
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) {
-        } else {
+        if (cm != null) {
             NetworkInfo[] info = cm.getAllNetworkInfo();
             if (info != null) {
                 for (int i = 0; i < info.length; i++) {
@@ -472,6 +482,7 @@ public class Utils {
                 }
             }
         }
+        CGLog.d("......................");
         return false;
     }
 
@@ -635,7 +646,7 @@ public class Utils {
     }
 
     public static boolean isLoginIn() {
-        if(!Utils.stringIsNull(CGSharedPreference.getLogin()[0]) && !Utils.stringIsNull(CGSharedPreference.getLogin()[1])){
+        if (!Utils.stringIsNull(CGSharedPreference.getLogin()[0]) && !Utils.stringIsNull(CGSharedPreference.getLogin()[1])) {
             return true;
         }
 
