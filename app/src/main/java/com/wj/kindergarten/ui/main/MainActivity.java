@@ -46,13 +46,11 @@ public class MainActivity extends BaseActivity {
     //Tab选项卡图片
     private int mImageViewArray[] = {R.drawable.main_tab, R.drawable.contact_tab,
             R.drawable.message_tab_2, R.drawable.mine_tab};
-
     //Tab选项卡的文字
     private String mTabIdArray[] = {"首页", "通讯录", "消息", "我的"};
     private FragmentTabHost mTabHost;
     //message bottom tab item view
     private View[] mTabViews = new View[4];
-
     private String nowTab = mTabIdArray[0];
     private static final int BACK_QUIT = 2000;
     public static final int FIND_TO_MAP = 1;
