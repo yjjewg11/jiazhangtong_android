@@ -158,7 +158,7 @@ public class PhotoWallActivity extends BaseActivity {
 
     public void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
         // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "CGImage");
+        File appDir = new File(Environment.getExternalStorageDirectory(), "问界互动家园");
         if (!appDir.exists()) {
             appDir.mkdir();
         }
@@ -186,8 +186,8 @@ public class PhotoWallActivity extends BaseActivity {
         }
         // 最后通知图库更新
         CGLog.d(Uri.fromFile(new File(file.getPath())) + "");
-//        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
-        new SingleMediaScanner(mContext, new File(file.getPath()), null);
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
+//        new SingleMediaScanner(mContext, new File(file.getPath()), null);
     }
 
     private void refreshPhotoWallTitle() {
