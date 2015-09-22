@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
@@ -58,6 +59,7 @@ public class CourseListAdapter extends BaseAdapter {
         mContext = context;
         this.courseListFragment = courseListFragment;
 
+        Log.i("TAG","打印时间"+date);
         int tempWeek = TimeUtil.getWeekOfDayNum(TimeUtil.getNowDate());
         if (tempWeek > 5) {
             weekIndex = 0;
@@ -101,7 +103,6 @@ public class CourseListAdapter extends BaseAdapter {
                     courseListFragment.hideBottomLayout();
                 }
             });
-
             viewHolder.head = (CircleImage) view.findViewById(R.id.course_head);
             viewHolder.mondayTv = (RelativeLayout) view.findViewById(R.id.course_monday);
             viewHolder.tuesdayTv = (RelativeLayout) view.findViewById(R.id.course_tuesday);
