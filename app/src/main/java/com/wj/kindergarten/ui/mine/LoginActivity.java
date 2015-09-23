@@ -1,9 +1,6 @@
 package com.wj.kindergarten.ui.mine;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -25,7 +22,7 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
-import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -187,7 +184,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void login() {
-        showProgressDialog("登录中，请稍后...");
+        final HintInfoDialog dialog = new HintInfoDialog(LoginActivity.this, "登录中，请稍后...");
+        dialog.show();
         UserRequest.login(mContext, acc, pwd, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
@@ -205,7 +203,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     UserRequest.deviceSave(LoginActivity.this, 2);//注册设备
                 }
                 CGSharedPreference.setLoginOut(false);
-                hideProgressDialog();
+                dialog.dismiss();
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             }
@@ -217,8 +215,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             @Override
             public void failure(String message) {
-                hideProgressDialog();
-                Utils.showToast(mContext, message);
+                dialog.dismiss();
+                if (!Utils.stringIsNull(message)) {
+                    Utils.showToast(mContext, message);
+                }
             }
         });
     }
