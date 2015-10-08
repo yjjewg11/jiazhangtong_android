@@ -36,4 +36,9 @@
     <dimen name="food_pic_hw">96dp</dimen>
 
     <dimen name="fix_detail_photo_height">64dp</dimen>
+
+    <dimen name="course_height">30dp</dimen>
+    <dimen name="course_padding_top">7dp</dimen>
+
+
 </resources>

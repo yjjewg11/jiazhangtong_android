@@ -199,7 +199,6 @@ public class ViewEmot2 extends LinearLayout implements View.OnClickListener {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
             if (msg.what == 1) {
                 Utils.showLayout(layoutImgs, 0, height, Utils.ANIMATION_DURATION);
             } else if (msg.what == 2) {

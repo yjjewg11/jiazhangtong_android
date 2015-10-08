@@ -90,4 +90,18 @@ public class Course extends BaseModel {
     public void setReplyPage(ChildReplyList replyPage) {
         this.replyPage = replyPage;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "afternoon='" + afternoon + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", plandate='" + plandate + '\'' +
+                ", morning='" + morning + '\'' +
+                ", classuuid='" + classuuid + '\'' +
+                ", count=" + count +
+                ", dianzan=" + dianzan +
+                ", replyPage=" + replyPage +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;
@@ -29,7 +30,8 @@ import com.wj.kindergarten.bean.SchoolList;
 import com.wj.kindergarten.bean.SignList;
 import com.wj.kindergarten.bean.StoreList;
 import com.wj.kindergarten.bean.TeacherInfo;
-import com.wj.kindergarten.bean.UserInfo;
+import com.wj.kindergarten.bean.TrainChildInfoList;
+import com.wj.kindergarten.bean.TrainCourse;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -198,8 +200,8 @@ public class SendRequest {
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     super.onSuccess(statusCode, headers, response);
                     try {
+                        Log.i("TAG","打印返回的字符串"+response.toString());
                         CGLog.d("SendRequest：" + requestType + "->" + response.toString());
-
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
                             if (requestType != RequestType.GET_EMOT) {
@@ -253,7 +255,7 @@ public class SendRequest {
     }
 
     /**
-     * 返回结果处理
+     * 返回结果处理json字符串
      *
      * @param requestType
      * @param domain
@@ -343,6 +345,18 @@ public class SendRequest {
                 break;
             case RequestType.KA_INFO:
                 resultI.result(getDomain(domain, Ka.class));
+                break;
+
+            case RequestType.TRAIN_COURSE_LIST:
+                resultI.result(getDomain(domain, TrainCourse.class));
+                break;
+
+            case RequestType.TRAIN_CHLID_INFO:
+                resultI.result(getDomain(domain, TrainChildInfoList.class));
+                break;
+            case RequestType.TRAIN_CLASS:
+//                resultI.result(getDomain(domain, TrainClassList.class));
+
                 break;
             default:
                 break;

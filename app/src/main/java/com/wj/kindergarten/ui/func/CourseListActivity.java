@@ -27,8 +27,6 @@ public class CourseListActivity extends BaseActivity {
 
     private final int MAX_WEEKEND = 21;
     private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
-
     @Override
     protected void setContentLayout() {
         layoutId = R.layout.activity_course_list;

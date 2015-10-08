@@ -1,6 +1,9 @@
 package com.wj.kindergarten.utils;
 
 
+import android.support.annotation.NonNull;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,7 +21,20 @@ public final class TimeUtil {
     //时间格式
     public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    public static SimpleDateFormat formatYMD = new SimpleDateFormat("yyyy-MM-dd");
+
     private TimeUtil() {
+    }
+
+
+    public static String getYMDTimeFromYMDHMS(String time){
+        Date date  = null;
+        try {
+            date = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return getYMDTimeFromDate(date);
     }
 
     /**
@@ -32,6 +48,14 @@ public final class TimeUtil {
     }
 
     public static String getWeekOfDay(String date) {
+        String mWay = getDay(date);
+        return "星期" + mWay;
+    }
+
+
+    //通过yyyy-MM-dd格式的时间得到星期几
+    @NonNull
+    public static String getDay(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         try {
@@ -56,8 +80,10 @@ public final class TimeUtil {
         } else if ("7".equals(mWay)) {
             mWay = "六";
         }
-        return "星期" + mWay;
+        return mWay;
     }
+
+
 
     public static int getWeekOfDayNum(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -69,5 +95,29 @@ public final class TimeUtil {
             e.printStackTrace();
         }
         return c.get(Calendar.DAY_OF_WEEK) - 1;
+    }
+
+    public static String getYMDTimeFromDate(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(date);
+    }
+
+    //通过yyyy-MM-dd格式的时间得到毫秒数
+
+    public static Long getMullions(String date){
+        Date d = null;
+        try {
+            d = format.parse(date);
+        } catch (ParseException e) {
+
+
+        }
+        return d.getTime();
+    }
+    //获取的毫秒数转化为时间
+    public static String getDateToString(Long m){
+        Date c = new Date();
+        c.setTime(m);
+       return formatYMD.format(c);
     }
 }

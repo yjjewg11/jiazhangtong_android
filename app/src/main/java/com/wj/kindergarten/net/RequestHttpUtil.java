@@ -1,7 +1,6 @@
 package com.wj.kindergarten.net;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -12,7 +11,6 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.ResponseHandlerInterface;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
-import com.wj.kindergarten.utils.CGLog;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.cookie.Cookie;
@@ -29,6 +27,13 @@ import java.util.List;
 public class RequestHttpUtil {
     private static AsyncHttpClient client;    //实例话对象
     // public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
+    //测试地址
+
+//    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
+
+//    public static final String BASE_URL = "http://192.168.0.108:8080/px-mobile/";
+
+    //正式地址
     public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {

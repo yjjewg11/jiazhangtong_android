@@ -1,7 +1,6 @@
 package com.wj.kindergarten.net.request;
 
 import android.content.Context;
-import android.telephony.TelephonyManager;
 
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
@@ -65,7 +64,36 @@ public final class UserRequest {
     private static final String KAURL = "rest/studentbind/query.json";//学生卡号信息
     private static final String READ_MESSAGE = "rest/pushMessage/read.json";//阅读消息
 
+    //培训相关的接口
+    private static final String TRAING_CHILD = "rest/pxstudent/listByMy.json";
+    //获取所有孩子的班级
+    private static final String TRAING_CLASSES = "rest/pxclass/listByStudent.json";
+
+    private static final String TRAING_COURSE_OF_CLASS = "rest/pxteachingplan/list.json";
+
     private UserRequest() {
+    }
+
+    public static void getTrainingCourseOfChildren(Context context,String begdateStr,String classuuid,RequestResultI resultI){
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("begDateStr", begdateStr);
+        requestParams.put("classuuid", classuuid);
+        SendRequest.getInstance().get(context,RequestType.TRAIN_COURSE_LIST,requestParams,
+                RequestHttpUtil.BASE_URL+TRAING_COURSE_OF_CLASS,resultI);
+    }
+
+    public static void getChildrenClassInfo(Context context,RequestResultI resultI){
+        RequestParams requestParams = new RequestParams();
+//        requestParams.put("JSESSIONID",CGApplication.getInstance().getLogin().getJSESSIONID());
+        SendRequest.getInstance().get(context,RequestType.TRAIN_CLASS,requestParams,
+                RequestHttpUtil.BASE_URL+TRAING_CHILD,resultI);
+    }
+
+    public static void getTrainChild(Context context,RequestResultI resultI){
+        RequestParams requestParams = new RequestParams();
+//        requestParams.put("JSESSIONID",CGApplication.getInstance().getLogin().getJSESSIONID());
+        SendRequest.getInstance().get(context,RequestType.TRAIN_CHLID_INFO,requestParams,
+                RequestHttpUtil.BASE_URL+TRAING_CHILD,resultI);
     }
 
     public static void getAdDetail(Context context, String adId, RequestResultI requestResultI) {
@@ -162,7 +190,6 @@ public final class UserRequest {
 
     public static void changeChild(Context context, ChildInfo childInfo, RequestResultI requestResultI) {
         String json = GsonUtil.getGson().toJson(childInfo);
-
         SendRequest.getInstance().post(context, RequestType.CHANGE_CHILD, json,
                 RequestHttpUtil.BASE_URL + CHANGE_CHILD, requestResultI);
     }
@@ -253,6 +280,8 @@ public final class UserRequest {
                 RequestHttpUtil.BASE_URL + REPLY, requestResultI);
     }
 
+
+
     public static void getNoticeList(Context context, String groupuuid, int pageNo, RequestResultI requestResultI) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("groupuuid", groupuuid);
@@ -280,6 +309,17 @@ public final class UserRequest {
         requestParams.put("classuuid", classUUID);
         SendRequest.getInstance().get(context, RequestType.COURSE_LIST, requestParams,
                 RequestHttpUtil.BASE_URL + COURSE_LIST, requestResultI);
+    }
+
+    private static String testURL = "http://192.168.0.115:8080/px-mobile/rest/pxteachingplan/list.json";
+    public static void getTrainCourseList(Context context, String beginDay, String endDay, String classUUID, RequestResultI requestResultI){
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("JSESSIONID",CGApplication.getInstance().getLogin().getJSESSIONID());
+        requestParams.put("begDateStr", beginDay);
+        requestParams.put("endDateStr", endDay);
+        requestParams.put("classuuid", classUUID);
+        SendRequest.getInstance().get(context, RequestType.TRAIN_COURSE_LIST, requestParams,
+                testURL, requestResultI);
     }
 
     public static void getFoodList(Context context, String beginDay, String endDay, String groupUUID, RequestResultI requestResultI) {

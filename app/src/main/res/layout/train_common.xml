@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/train_ll"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ff9632"
+            android:layout_gravity="center_horizontal">
+
+            <com.wj.kindergarten.compounets.CircleImage
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_launcher"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/iv_training_head" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="16sp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="晨钟教育中心"
+                    android:id="@+id/tv_edcutation_center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="英语一班"
+                    android:id="@+id/tv_below_school_class_name"
+                    android:layout_below="@+id/tv_edcutation_center"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="#bbbbbb"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                android:id="@+id/textView2" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="2015-09-22"
+                    android:id="@+id/tv_yy_mm_dd_time"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="二"
+                    android:id="@+id/tv_everyday_oneweek"
+                    android:layout_marginLeft="15dp"
+                    android:layout_below="@+id/textView4"
+                    android:layout_toRightOf="@+id/tv_yy_mm_dd_time" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="上课时间"
+                    android:id="@+id/textView4"
+                    android:layout_above="@+id/tv_yy_mm_dd_time"
+                    android:layout_alignLeft="@+id/tv_yy_mm_dd_time" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/iv_train_today_tixing"
+                    android:src="@drawable/jinri2x"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:background="#bbbbbb"
+            android:layout_height="1dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/training_translate_program"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

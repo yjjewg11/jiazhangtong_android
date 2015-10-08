@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
@@ -69,6 +68,8 @@ public class MainFragment extends Fragment {
     private boolean isShow = false;
 
     private ArrayList<More> list = new ArrayList<>();
+
+
 
     @Nullable
     @Override
@@ -139,7 +140,6 @@ public class MainFragment extends Fragment {
         }
 
         if (null != chooseTile) {
-            Log.i("TAG","打印getBrand_name()"+chooseTile.getBrand_name());
             ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
         }
 

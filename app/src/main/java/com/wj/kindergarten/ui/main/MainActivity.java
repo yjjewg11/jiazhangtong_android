@@ -23,6 +23,8 @@ import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.bean.TrainChildInfoList;
+import com.wj.kindergarten.bean.TrainClass;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
@@ -60,7 +62,14 @@ public class MainActivity extends BaseActivity {
     private long pre_back = 0;
     private boolean isClickMessage = false;
     private ImageView msgImageView = null;
+    private List<TrainClass> TC_list ;
+    private static TrainChildInfoList TCI;
+    public static  MainActivity instance;
 
+
+    public TrainChildInfoList getTrainChildInfoList(){
+        return TCI;
+    }
     @Override
     protected void setContentLayout() {
         layoutId = R.layout.activity_main;
@@ -73,18 +82,48 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        instance = this;
         hideLeftButton();
         setTitleText("");
-
         MainFragment.GRID_ITEM_HW = Utils.getWidthByScreenWeight(4);
         ActivityManger.getInstance().addActivity(this);
         handler.sendEmptyMessageAtTime(1, 2000);
         initTab();
         listener();
         checkVersion();
-
         handler.sendEmptyMessageDelayed(2, 500);
+
+
+        getTrainUuid();
+
     }
+
+    //获取培训孩子信息
+    private void getTrainUuid() {
+
+        UserRequest.getTrainChild(mContext, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                TCI= ((TrainChildInfoList) domain);
+                //获取孩子信息成功，通知获取培训班信息
+//                CGLog.i("打印孩子信息" + );
+                handler.sendEmptyMessage(100);
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+
+
+    }
+
 
     private void login() {
         if (getIntent().hasExtra("from") && "splash".equals(getIntent().getStringExtra("from"))) {
@@ -118,19 +157,24 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private Handler handler = new Handler() {
+    private Handler  handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                AddressBookRequest.getEmot(MainActivity.this);//获取表情列表
-            } else if (msg.what == 2) {
-                if (getIntent().hasExtra("from") && "Push".equals(getIntent().getStringExtra("from"))) {
-                    if (!mTabIdArray[2].equals(nowTab)) {
-                        mTabHost.setCurrentTabByTag(mTabIdArray[2]);
+            switch (msg.what){
+                case 1: AddressBookRequest.getEmot(MainActivity.this); break;//获取表情列表
+                case 2:
+                    if (getIntent().hasExtra("from") && "Push".equals(getIntent().getStringExtra("from"))) {
+                        if (!mTabIdArray[2].equals(nowTab)) {
+                            mTabHost.setCurrentTabByTag(mTabIdArray[2]);
+                        }
                     }
-                }
+                    break;
+                case 100:
+
+                    //
+                    break;
             }
-            super.handleMessage(msg);
+
         }
     };
 

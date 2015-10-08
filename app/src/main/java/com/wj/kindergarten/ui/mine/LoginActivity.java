@@ -185,13 +185,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void login() {
         final HintInfoDialog dialog = new HintInfoDialog(LoginActivity.this, "登录中，请稍后...");
+        if(!dialog.isShowing())
         dialog.show();
         UserRequest.login(mContext, acc, pwd, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 Login login = (Login) domain;
                 CGApplication.getInstance().setLogin((Login) domain);
-                CGLog.d("J: " + login.getJSESSIONID());
+                CGLog.d("TAGGG " + login.getJSESSIONID());
                 String imgPath = "";
                 if (null != login && null != login.getUserinfo()) {
                     imgPath = Utils.getText(login.getUserinfo().getImg());

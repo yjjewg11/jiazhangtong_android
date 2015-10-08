@@ -48,4 +48,8 @@ public class RequestType {
     public final static int LOGIN_OUT = 137;//退出
     public final static int KA_INFO = 138;//学生卡号信息
     public final static int READ_MESSAGE = 139;//消息阅读
+    public final static int TRAIN_COURSE_LIST = 140;
+
+    public final static int TRAIN_CHLID_INFO = 141;
+    public final static int TRAIN_CLASS= 142;
 }

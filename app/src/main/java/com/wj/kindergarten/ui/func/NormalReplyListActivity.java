@@ -50,7 +50,7 @@ public class NormalReplyListActivity extends BaseActivity {
     public static final int REPLY_TYPE_HTML = 10;//html类型
     public static final int REPLY_TYPE_TEACHER_XIN = 11;//信件 老师
     public static final int REPLY_TYPE_BOSS_XIN = 12;//信件  园长
-
+    public static final int REPLY_TYPE_TRAIN_CLASS = 14;
     private static final int PAGE_SIZE = 20;
     private int currentPage = 1;
     private String replyId;
