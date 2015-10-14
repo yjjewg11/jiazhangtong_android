@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.func;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -32,6 +33,7 @@ public class SignListActivity extends BaseActivity {
     private SignAdapter signAdapter;
     private List<Sign> datas = new ArrayList<>();
 
+
     @Override
     protected void setContentLayout() {
         layoutId = R.layout.activity_sign_list;
@@ -53,7 +55,7 @@ public class SignListActivity extends BaseActivity {
         setTitleText("签到记录");
 
         mListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
-        mListView.setMode(PullToRefreshBase.Mode.DISABLED);
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         signAdapter = new SignAdapter(mContext, datas);
         mListView.setAdapter(signAdapter);
         contentLayout = (LinearLayout) findViewById(R.id.sign_content);
@@ -66,15 +68,42 @@ public class SignListActivity extends BaseActivity {
             contentLayout.setVisibility(View.VISIBLE);
             noneLayout.setVisibility(View.GONE);
         }
+
+        setListeners();
     }
 
+    private void setListeners() {
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+                page++;
+                getSignList();
+
+            }
+        });
+    }
+
+    int page = 1;
     private void getSignList() {
-        UserRequest.getSignList(mContext, "", new RequestResultI() {
+        UserRequest.getSignList(mContext, "",page, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 SignList signList = (SignList) domain;
+                if(mListView.isRefreshing()){
+                    mListView.onRefreshComplete();
+                }
+
                 if (signList.getList() != null && signList.getList().getData() != null) {
                     datas.addAll((ArrayList) ((SignList) domain).getList().getData());
+                    if(signAdapter!=null) {signAdapter.notifyDataSetChanged();}
                 }
                 loadSuc();
             }
@@ -93,4 +122,6 @@ public class SignListActivity extends BaseActivity {
             }
         });
     }
+
+
 }

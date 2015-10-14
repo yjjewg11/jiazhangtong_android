@@ -22,16 +22,21 @@ import com.wj.kindergarten.bean.InteractionList;
 import com.wj.kindergarten.bean.Ka;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.MoreData;
+import com.wj.kindergarten.bean.MoreDiscussList;
 import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
+import com.wj.kindergarten.bean.OnceSpecialCourseList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolList;
 import com.wj.kindergarten.bean.SignList;
+import com.wj.kindergarten.bean.SpecialCourseInfoList;
+import com.wj.kindergarten.bean.SpecialCourseTypeList;
 import com.wj.kindergarten.bean.StoreList;
 import com.wj.kindergarten.bean.TeacherInfo;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainCourse;
+import com.wj.kindergarten.bean.TrainSchoolInfoListFather;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -356,7 +361,23 @@ public class SendRequest {
                 break;
             case RequestType.TRAIN_CLASS:
 //                resultI.result(getDomain(domain, TrainClassList.class));
+                break;
+            case RequestType.SPECIAL_COURSE_TYPE:
+                resultI.result(getDomain(domain, SpecialCourseTypeList.class));
+                break;
 
+            case RequestType.SPECIAL_COURSE_INFO:
+                resultI.result(getDomain(domain,SpecialCourseInfoList.class));
+                break;
+            case RequestType.ONCE_COURSE_CLICK:
+                resultI.result(getDomain(domain, OnceSpecialCourseList.class));
+                break;
+            case RequestType.ALL_TRAINC_SCHOOL:
+                resultI.result(getDomain(domain, TrainSchoolInfoListFather.class));
+                break;
+
+            case RequestType.MORE_DISCUSS_FROM_UUID:
+                resultI.result(getDomain(domain, MoreDiscussList.class));
                 break;
             default:
                 break;

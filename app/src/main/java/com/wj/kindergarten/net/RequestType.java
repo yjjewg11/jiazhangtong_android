@@ -52,4 +52,11 @@ public class RequestType {
 
     public final static int TRAIN_CHLID_INFO = 141;
     public final static int TRAIN_CLASS= 142;
+
+    //培训机构
+    public static final int SPECIAL_COURSE_TYPE = 143;
+    public static final int SPECIAL_COURSE_INFO = 144;
+    public static final int  ONCE_COURSE_CLICK  = 145;
+    public static final int ALL_TRAINC_SCHOOL = 146;
+    public static final int MORE_DISCUSS_FROM_UUID = 147;
 }

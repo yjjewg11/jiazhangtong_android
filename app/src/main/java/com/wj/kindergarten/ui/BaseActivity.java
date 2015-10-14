@@ -213,10 +213,12 @@ public abstract class BaseActivity extends ActionBarActivity {
      */
     public void setActionBarLayout() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.actionbar);
-        setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
-        initTitle();
-        actionBar.show();
+        if(toolbar!=null) {
+            setSupportActionBar(toolbar);
+            actionBar = getSupportActionBar();
+            initTitle();
+            actionBar.show();
+        }
     }
 
     /**

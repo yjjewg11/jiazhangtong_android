@@ -46,12 +46,34 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/normal_text" />
 
+            <TextView
+
+                android:background="#bbbbbb"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/mine_course"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/condition_height"
+                android:layout_marginLeft="@dimen/normal_padding"
+                android:layout_marginRight="@dimen/normal_padding"
+                android:drawableLeft="@drawable/techangkechen"
+                android:drawablePadding="@dimen/small_padding"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="center_vertical"
+                android:text="我的特长课程"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_text" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/hint_gray"
                 android:visibility="gone" />
         </LinearLayout>
+
+
 
         <LinearLayout
             android:id="@+id/ll_setting"

@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -12,7 +11,6 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
@@ -103,7 +102,6 @@ public class CourseListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.i("TAG","打印集合的数量"+courseList.size());
         return courseList.size();
     }
 
@@ -164,18 +162,11 @@ public class CourseListAdapter extends BaseAdapter {
 
             viewHolder.tv_yy_mm_dd_time = (TextView)view.findViewById(R.id.tv_yy_mm_dd_time);
             viewHolder.tv_everyday_oneweek = (TextView)view.findViewById(R.id.tv_everyday_oneweek);
-            viewHolder.tv_training_dianZancount = (TextView)view.findViewById(R.id.train_notice_zan_count);
+//            viewHolder.tv_training_dianZancount = (TextView)view.findViewById(R.id.train_notice_zan_count);
             viewHolder.tv_training_classname_content = (TextView)view.findViewById(R.id.tv_training_classname_content);
             viewHolder.tv_training_classtime = (TextView)view.findViewById(R.id.tv_training_classtime);
             viewHolder.tv_trainning_adress = (TextView)view.findViewById(R.id.tv_trainning_adress);
             viewHolder.tv_trainning_preparething = (TextView)view.findViewById(R.id.tv_trainning_preparething);
-            viewHolder.tv_trainning_notice_see = (TextView) view.findViewById(R.id.train_notice_see);
-            viewHolder.iv_trainning_notice_zan = (ImageView) view.findViewById(R.id.train_notice_zan);
-            viewHolder.iv_trainning_notice_reply = (ImageView) view.findViewById(R.id.train_notice_reply);
-            viewHolder.tv_training_zan_reply_edit = (TextView) view.findViewById(R.id.train_notice_reply_edit);
-//            viewHolder.iv_train_today_class = (ImageView)view.findViewById(R.id.iv_train_today_class);
-            viewHolder.ll_trainning_notice_reply_content = (LinearLayout) view.findViewById(R.id.train_notice_reply_content);
-//
             viewHolder.iv_train_today_tixing = (ImageView)view.findViewById(R.id.iv_train_today_tixing);
             view.setTag(viewHolder);
         } else {
@@ -191,7 +182,7 @@ public class CourseListAdapter extends BaseAdapter {
              ImageLoaderUtil.displayImage(userCourse.getChildInfo().getHeadimg(), viewHolder.head);
              viewHolder.train_fl.setVisibility(View.GONE);
              viewHolder.course_ll.setVisibility(View.VISIBLE);
-        }else{
+        }else if (courseList.get(i) instanceof TrainCourseContent){
             trainCourseContent = (TrainCourseContent)courseList.get(i);
              viewHolder.train_fl.setVisibility(View.VISIBLE);
              viewHolder.course_ll.setVisibility(View.GONE);
@@ -210,33 +201,17 @@ public class CourseListAdapter extends BaseAdapter {
             course = null;
         }
 
-//        TrainCourseContent trainCourseContent = null;
-//        //如果集合不为空，则取出数据 TODO
-//        if(trainCourseList!=null){
-////            for(int j = 0;j<trainCourseList.size();j++){
-////                TrainCourse trainCourse =  trainCourseList.get(j);
-////                for(int k = 0;k<trainCourse.getList().getData().size();k++){
-////                    Log.i("TAG", "打印课程表学生的uuid" + userCourse.getChildInfo().getUuid());
-////                    Log.i("TAG","打印培训课程学生的uuid"+trainCourse.getList().getData().get(k).getUuid());
-////                    if(userCourse.getChildInfo().getUuid().equals(trainCourse.getList().getData().get(k).getUuid())){
-////                        trainCourseContent = trainCourseList.get(0).getList().getData().get(0);
-////                    }
-////                }
-////            }
-//        }
-
         if (course == null) {
             viewHolder.courseContent.setVisibility(View.GONE);
             viewHolder.noCourseContent.setVisibility(View.VISIBLE);
             viewHolder.morningTv.setText("");
             viewHolder.afternoonTv.setText("");
         } else {
-            viewHolder.courseContent.setVisibility(View.VISIBLE);
             viewHolder.noCourseContent.setVisibility(View.GONE);
-
+            viewHolder.courseContent.setVisibility(View.VISIBLE);
+            Log.i("打印是否显示VISIBLE");
             viewHolder.morningTv.setText(course.getMorning());
             viewHolder.afternoonTv.setText(course.getAfternoon());
-
             viewHolder.viewCountTv.setText("浏览" + course.getCount() + "次");
             if (course.getDianzan() != null) {
                 final CourseListFragment.UserCourse finalUserCourse = userCourse;
@@ -261,23 +236,6 @@ public class CourseListAdapter extends BaseAdapter {
                         mHandler.sendMessageDelayed(message, 300);
                     }
                 });
-                viewHolder.zanIv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (zanLock) {
-                            return;
-                        }
-                        zanLock = true;
-                        Drawable drawable = viewHolder.zanIv.getDrawable();
-                        if (mContext.getResources().getDrawable(R.drawable.interaction_zan_off).getConstantState()
-                                .equals(drawable.getConstantState())) {
-                            setZan(course, viewHolder.zanIv);
-                        } else {
-                            cancelZan(course, viewHolder.zanIv);
-                        }
-                    }
-                });
-
                 viewHolder.replyMoreTv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -288,7 +246,23 @@ public class CourseListAdapter extends BaseAdapter {
                     }
                 });
 
-                DianZan dianZan = course.getDianzan();
+                final DianZan dianZan = course.getDianzan();
+                viewHolder.zanIv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        if (zanLock) {
+//                            return;
+//                        }
+                        zanLock = true;
+//                        Drawable drawable = viewHolder.zanIv.getDrawable();
+                        if (dianZan.isCanDianzan()) {
+                            setZan(course, viewHolder.zanIv);
+                        } else {
+                            cancelZan(course, viewHolder.zanIv);
+                        }
+                    }
+                });
+
                 setCommonDianZan(viewHolder, dianZan);
             } else {
                 viewHolder.zanIv.setImageResource(R.drawable.interaction_zan_off);
@@ -319,10 +293,7 @@ public class CourseListAdapter extends BaseAdapter {
 
 //
 ////
-
-
         if(trainCourseContent!=null) {
-
             String de = TimeUtil.getDateToString(moneyDayDateMullions);
             String getTimeFromHttp = TimeUtil.getYMDTimeFromYMDHMS(trainCourseContent.getPlandate());
             viewHolder.tv_yy_mm_dd_time.setText(""+getTimeFromHttp);
@@ -347,8 +318,8 @@ public class CourseListAdapter extends BaseAdapter {
                 for(int jishu = 0 ; jishu < myList.size();jishu ++){
                     if(myList.get(jishu).getClassuuid().equals(trainCourseContent.getClassuuid())){
                            trainChildInfo = myList.get(jishu);
-                        ImageLoaderUtil.displayImage((trainChildInfo.getHeadimg()),viewHolder.iv_training_head);
-                        viewHolder.tv_edcucation_center.setText(""+trainChildInfo.getGroupuuid());
+                        ImageLoaderUtil.displayImage((trainChildInfo.getHeadimg()), viewHolder.iv_training_head);
+
                     }
                 }
             }
@@ -358,20 +329,20 @@ public class CourseListAdapter extends BaseAdapter {
                 for(int tc = 0 ; tc < trainClassList.size() ; tc ++){
                     if(trainClassList.get(tc).getClass_uuid().equals(trainCourseContent.getClassuuid())){
                         trainClass = trainClassList.get(tc);
+
                     }
                 }
             }
 
 
             viewHolder.tv_below_school_class_name.setText("" + (trainClass == null ? "暂无名称" : trainClass.getClass_name()));
-
             viewHolder.tv_training_classname_content.setText("" + trainCourseContent.getName());
             viewHolder.tv_training_classtime.setText("" + trainCourseContent.getDuration());
             viewHolder.tv_trainning_adress.setText("" + trainCourseContent.getAddress());
             viewHolder.tv_trainning_preparething.setText("" + trainCourseContent.getReadyfor());
 
-            final DianZan dianZan = trainCourseContent.getDianzan();
-            setCommonDianZan(viewHolder,dianZan);
+            final DianZan trainDianZan = trainCourseContent.getDianzan();
+            setCommonDianZan(viewHolder,trainDianZan);
 
 
             if (trainCourseContent.getReplyPage() != null && trainCourseContent.getReplyPage().getData() != null) {
@@ -383,7 +354,7 @@ public class CourseListAdapter extends BaseAdapter {
             viewHolder.zanIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (dianZan.isCanDianzan()) {
+                    if (trainDianZan.isCanDianzan()) {
                         setTrainZan(finalTrainCourseContent, viewHolder.zanIv);
                     } else {
                         cancelTrainZan(finalTrainCourseContent, viewHolder.zanIv);
@@ -422,7 +393,6 @@ public class CourseListAdapter extends BaseAdapter {
             //如果没有数据
             //隐藏回复 TODO
 
-            viewHolder.courseContent.setVisibility(View.GONE);
             viewHolder.iv_train_today_tixing.setVisibility(View.INVISIBLE);
             viewHolder.tv_training_classname_content.setText("");
             viewHolder.tv_training_classtime.setText("" );

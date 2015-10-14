@@ -63,13 +63,21 @@ public final class UserRequest {
     private static final String LOGINOUT = "rest/userinfo/logout.json";//退出登录
     private static final String KAURL = "rest/studentbind/query.json";//学生卡号信息
     private static final String READ_MESSAGE = "rest/pushMessage/read.json";//阅读消息
+    private static final String SPECIAL_COURSE_TYPE = "rest/share/getCourseType.json";
 
     //培训相关的接口
     private static final String TRAING_CHILD = "rest/pxstudent/listByMy.json";
     //获取所有孩子的班级
     private static final String TRAING_CLASSES = "rest/pxclass/listByStudent.json";
 
-    private static final String TRAING_COURSE_OF_CLASS = "rest/pxteachingplan/list.json";
+    private static final String SPECIAL_COURSE_INFO = "rest/pxteachingplan/list.json";
+
+    //获取培训课程信息
+
+    private static final String TRAING_COURSE_OF_CLASS =  "rest/pxCourse/queryByPage.json";
+    private static final String ONCE_COURSE_CLICK = "rest/pxCourse/{uuid}.json";
+    private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
+    private static final String MORE_DISCUSS_FROM_UUID = "rest/appraise/queryByPage.json";
 
     private UserRequest() {
     }
@@ -296,8 +304,9 @@ public final class UserRequest {
                 RequestHttpUtil.BASE_URL + NOTICE + uuid + ".json", requestResultI);
     }
 
-    public static void getSignList(Context context, String uuid, RequestResultI requestResultI) {
+    public static void getSignList(Context context, String uuid,int pageNo, RequestResultI requestResultI) {
         RequestParams requestParams = new RequestParams();
+        requestParams.put("pageNo",String.valueOf(pageNo));
         SendRequest.getInstance().get(context, RequestType.SIGN, requestParams,
                 RequestHttpUtil.BASE_URL + SIGN, requestResultI);
     }
@@ -494,5 +503,43 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("uuid", uuid);
         SendRequest.getInstance().post(context, RequestType.READ_MESSAGE, params, RequestHttpUtil.BASE_URL + READ_MESSAGE, resultI);
+    }
+
+    public static void getSpecialCourseType(Context context,RequestResultI resultI) {
+        //获取特长课程的分类信息
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context, RequestType.SPECIAL_COURSE_TYPE, params, RequestHttpUtil.BASE_URL + SPECIAL_COURSE_TYPE, resultI);
+    }
+
+    //根据不同类型或者不同机构获取列表课程信息
+    public static void getSpecialCourseInfoFormType(Context context,String groupuuid,int pageNo,int type, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("groupuuid",groupuuid);
+        params.put("mappoint",CGApplication.latitude+","+CGApplication.longitude);
+        params.put("pageNo",pageNo);
+        //TODO 暂时先不填类型
+//        params.put("type",type);
+        SendRequest.getInstance().get(context,RequestType.SPECIAL_COURSE_INFO,params,RequestHttpUtil.BASE_URL+TRAING_COURSE_OF_CLASS,resultI);
+    }
+
+    //点击课程之后获取该课程的详细信息
+    public static void getSpecialCourseINfoFromClickItem(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("JSESSIONID",CGApplication.getInstance().getLogin().getUserinfo().getJSESSIONID());
+        params.put("uuid",uuid);
+        SendRequest.getInstance().get(context,RequestType.ONCE_COURSE_CLICK,params,RequestHttpUtil.BASE_URL+ONCE_COURSE_CLICK,resultI);
+    }
+
+    public static void getAllSchool(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.ALL_TRAINC_SCHOOL,params,RequestHttpUtil.BASE_URL+ALL_TRAINC_SCHOOL,resultI);
+    }
+
+    public static void getMoreDiscuss(Context context, String ext_uuid, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("ext_uuid",ext_uuid);
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.MORE_DISCUSS_FROM_UUID,params,RequestHttpUtil.BASE_URL+MORE_DISCUSS_FROM_UUID,resultI);
     }
 }

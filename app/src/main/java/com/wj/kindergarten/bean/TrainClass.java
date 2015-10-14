@@ -9,6 +9,26 @@ public class TrainClass {
     private String student_uuid;
     @Expose
     private String class_uuid;
+    @Expose
+    private String groupuuid;
+    @Expose
+    private String brand_name;
+
+    public String getBrand_name() {
+        return brand_name;
+    }
+
+    public void setBrand_name(String brand_name) {
+        this.brand_name = brand_name;
+    }
+
+    public String getGroupuuid() {
+        return groupuuid;
+    }
+
+    public void setGroupuuid(String groupuuid) {
+        this.groupuuid = groupuuid;
+    }
 
     public String getClass_name() {
         return class_name;
@@ -37,9 +57,11 @@ public class TrainClass {
     @Override
     public String toString() {
         return "TrainClass{" +
-                "class_name='" + class_name + '\'' +
+                "brand_name='" + brand_name + '\'' +
+                ", class_name='" + class_name + '\'' +
                 ", student_uuid='" + student_uuid + '\'' +
                 ", class_uuid='" + class_uuid + '\'' +
+                ", groupuuid='" + groupuuid + '\'' +
                 '}';
     }
 }

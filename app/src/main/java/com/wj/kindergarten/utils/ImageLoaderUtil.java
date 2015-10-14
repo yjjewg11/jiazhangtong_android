@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.wenjie.jiazhangtong.R;
 
 import java.io.File;
 
@@ -26,7 +27,8 @@ import java.io.File;
  */
 public class ImageLoaderUtil {
     private static DisplayImageOptions options = null;
-    private static ImageLoader imageLoader = null;
+    public static ImageLoader imageLoader = null;
+    private static DisplayImageOptions myOptions;
 
 
     private static void initImageLoader(Context context, int loadingResource, int emptyResource, int failResource, String cachePath, int diskCacheSize, int roundeSize) {
@@ -53,7 +55,23 @@ public class ImageLoaderUtil {
                 .cacheOnDisk(true)
                 .displayer(new RoundedBitmapDisplayer(roundeSize)).build();
 
+        int drawable = R.drawable.main_item;
+        myOptions = new DisplayImageOptions.Builder()
+                         .showImageForEmptyUri(drawable)
+                         .showImageOnFail(drawable)
+                         .showImageOnLoading(drawable)
+                         .cacheInMemory(true)
+//                         .bitmapConfig(Bitmap.Config.)
+                         .cacheOnDisk(true)
+                         .build();
+
+
+
         imageLoader = ImageLoader.getInstance();
+    }
+
+    public static void displayMyImage(String uri,ImageView imageView){
+        imageLoader.displayImage(uri,imageView,myOptions);
     }
 
     public static void initImageLoader(Context context, int loadingResource, String cachePath, int diskCacheSize, int roundeSize) {

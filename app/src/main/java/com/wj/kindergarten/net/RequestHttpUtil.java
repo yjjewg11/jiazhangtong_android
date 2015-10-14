@@ -26,15 +26,19 @@ import java.util.List;
  */
 public class RequestHttpUtil {
     private static AsyncHttpClient client;    //实例话对象
-    // public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
+//     public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
     //测试地址
+
+    //专用调试培训机构地址
+    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
+
 
 //    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
 
 //    public static final String BASE_URL = "http://192.168.0.108:8080/px-mobile/";
 
     //正式地址
-    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
+//    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {
         if (client == null) {

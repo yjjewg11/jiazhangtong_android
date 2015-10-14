@@ -15,6 +15,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.compounets.CircleImage;
+import com.wj.kindergarten.ui.func.MineSpecialCourseActivity;
 import com.wj.kindergarten.ui.mine.ChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
@@ -34,6 +35,8 @@ public class MineFragment extends Fragment {
     private LinearLayout llStore;
     private LinearLayout llSetting;
     private Login login;
+    private TextView mine_collect;
+    private TextView mine_course;
 
     @Nullable
     @Override
@@ -54,8 +57,11 @@ public class MineFragment extends Fragment {
     }
 
     private void initViews(View rootView) {
+
+
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
-        llStore = (LinearLayout) rootView.findViewById(R.id.ll_store);
+        mine_collect = (TextView) rootView.findViewById(R.id.mine_collect);
+        mine_course = (TextView)rootView.findViewById(R.id.mine_course);
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
         llSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +70,20 @@ public class MineFragment extends Fragment {
             }
         });
 
-        llStore.setOnClickListener(new View.OnClickListener() {
+        mine_collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().startActivity(new Intent(getActivity(), StoreActivity.class));
+            }
+        });
+        mine_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点击启动我的课程页面
+                Intent intent = new Intent(getActivity(),MineSpecialCourseActivity.class);
+                //TODO 放入显示孩子的uuid
+                intent.putExtra("childuuid","");
+                startActivity(intent);
             }
         });
     }

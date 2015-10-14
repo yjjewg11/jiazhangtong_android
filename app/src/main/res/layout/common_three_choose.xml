@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/special_radio_group"
+        android:checkedButton="@+id/tab_course"
+        android:background="@drawable/radio_shape"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal">
+
+
+
+        <RadioButton
+            android:id="@+id/tab_course"
+            android:textColor="@drawable/radio_font_color"
+            android:background="@drawable/radio_bt_selector"
+            android:layout_weight="1"
+            android:text="课程"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:background="#bbbbbb"
+            android:layout_width="1dp"
+            android:layout_height="30dp" />
+        <RadioButton
+            android:id="@+id/tab_teacher"
+            android:textColor="@drawable/radio_font_color"
+            android:background="@drawable/radio_bt_selector"
+            android:layout_weight="1"
+            android:text="师资"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:background="#bbbbbb"
+            android:layout_width="1dp"
+            android:layout_height="30dp" />
+
+        <RadioButton
+            android:id="@+id/tab_introduce"
+            android:textColor="@drawable/radio_font_color"
+            android:background="@drawable/radio_bt_selector"
+            android:layout_weight="1"
+            android:text="简介"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </RadioGroup>
+
+</LinearLayout>

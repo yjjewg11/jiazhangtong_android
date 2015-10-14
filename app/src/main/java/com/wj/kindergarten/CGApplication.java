@@ -1,7 +1,13 @@
 package com.wj.kindergarten;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
@@ -26,6 +32,8 @@ import java.util.Map;
  */
 public class CGApplication extends Application {
     public static CGApplication context = null;
+    public static double latitude = 0;
+    public static double longitude = 0;
     private Login login = null;
     private Map<String, Group> groupMap = new HashMap<>();
     private Map<String, ChildInfo> childInfoMap = new HashMap<>();
@@ -47,6 +55,8 @@ public class CGApplication extends Application {
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .cacheOnDisk(true)
                 .displayer(new RoundedBitmapDisplayer(0)).build();
+
+//        requestNetworkLocation();
     }
 
     public static CGApplication getInstance() {
@@ -96,4 +106,34 @@ public class CGApplication extends Application {
             cacheDir.mkdir();
         }
     }
+
+    private void requestNetworkLocation() {
+        LocationManager mLocMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mLocMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000 * 60, 100, mLocLis);
+    }
+
+    private LocationListener mLocLis = new LocationListener() {
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.i("TAG", "打印的是少数少数 onStatusChanged, provider = " + provider);
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            Log.i("TAG", "打印的是少数少数 onProviderEnabled, provider = " + provider);
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Log.i("TAG", "打印的是少数少数 onProviderDisabled, provider = " + provider);
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            Log.i("TAG", "latitude: " + latitude + ", longitude: " + longitude);
+        }
+    };
 }

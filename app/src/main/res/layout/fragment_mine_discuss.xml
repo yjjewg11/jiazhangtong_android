@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bao="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:minHeight="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="课程评价"
+                android:id="@+id/textView24"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="21dp" />
+
+            <FrameLayout
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.wj.kindergarten.ui.other.RatingBarView
+                    android:id="@+id/fragment_course_rating_bar"
+                    bao:starImageSize = "22dp"
+                    bao:starCount = "5"
+                    bao:starEmpty = "@drawable/xingback"
+                    bao:starFill = "@drawable/xinglight"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+        <EditText
+            android:layout_margin="10dp"
+            android:hint="请输入内容"
+            android:gravity="top"
+            android:background="@drawable/edittext_freeback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:id="@+id/fragment_mine_discuss_edit_text"
+            android:layout_gravity="center_horizontal" />
+
+        <RelativeLayout
+            android:minHeight="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="学校评价"
+                android:id="@+id/textView27"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="21dp" />
+
+            <FrameLayout
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.wj.kindergarten.ui.other.RatingBarView
+                    android:id="@+id/fragment_school_rating_bar"
+                    bao:starImageSize = "22dp"
+                    bao:starCount = "5"
+                    bao:starEmpty = "@drawable/xingback"
+                    bao:starFill = "@drawable/xinglight"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:minHeight="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="小明老师评价"
+                android:id="@+id/textView28"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="21dp" />
+
+            <FrameLayout
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.wj.kindergarten.ui.other.RatingBarView
+                    android:id="@+id/fragment_teacher_rating_bar"
+                    bao:starImageSize = "22dp"
+                    bao:starCount = "5"
+                    bao:starEmpty = "@drawable/xingback"
+                    bao:starFill = "@drawable/xinglight"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:background="#ff7800"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提交"
+            android:id="@+id/discuss_submit"
+            android:layout_gravity="center_horizontal" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

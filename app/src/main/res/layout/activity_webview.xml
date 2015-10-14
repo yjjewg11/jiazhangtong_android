@@ -7,19 +7,62 @@
 
     <include layout="@layout/title_normal" />
 
-    <LinearLayout
-        android:id="@+id/layout_webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-        <WebView
-            android:id="@+id/webview"
+    <com.baidu.mobads.AdView
+        android:id="@+id/layout_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+
+        <GridView
+            android:layout_marginTop="10dp"
+            android:numColumns="4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/translate" />
+            android:layout_height="wrap_content"
+            android:id="@+id/special_course_grid_view"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
-    <include layout="@layout/view_load" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:text="享乐会  每月只要30元"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="#bbbbbb"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:text="  热门课程"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+        <include layout="@layout/layout_pulltorefresh" />
+    </FrameLayout>
+
 </LinearLayout>
