@@ -223,7 +223,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
         teach_place = (TextView)findViewById(R.id.teach_place);
         course_spend_time = (TextView)findViewById(R.id.course_spend_time);
         nornal_course_price = (TextView)findViewById(R.id.nornal_course_price);
-        coupon_price = (TextView)findViewById(R.id.nornal_course_price);
+        coupon_price = (TextView)findViewById(R.id.coupon_price);
         course_detail_info = (WebView)findViewById(R.id.course_detail_info);
         more_assess_linera = (LinearLayout) findViewById(R.id.more_assess_linera);
         iv_heading = (ImageView)findViewById(R.id.once_iv);
@@ -251,14 +251,14 @@ public class SpecialCourseInfoActivity extends BaseActivity {
         }
         course_detail_info.loadDataWithBaseURL(null,text,"text/html","utf-8",null);
         if(osc.getFees() < 1){
-            rl_price.setVisibility(View.GONE);
-        }else{
-            rl_price.setVisibility(View.VISIBLE);
-        }
-        if(osc.getDiscountfees() < 1){
             rl_free_price.setVisibility(View.GONE);
         }else{
             rl_free_price.setVisibility(View.VISIBLE);
+        }
+        if(osc.getDiscountfees() < 1){
+            rl_price.setVisibility(View.GONE);
+        }else{
+            rl_price.setVisibility(View.VISIBLE);
         }
         nornal_course_price.setText(""+osc.getFees()+" 元");
         coupon_price.setText(""+osc.getDiscountfees()+" 元");

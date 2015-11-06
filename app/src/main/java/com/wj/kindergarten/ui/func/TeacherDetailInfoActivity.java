@@ -30,6 +30,8 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ToastUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,7 +214,10 @@ public class TeacherDetailInfoActivity extends BaseActivity {
                     }else{
                         if(pageNo == 1){
                             noView(all_course_of_teacher);
+                        }else{
+                            ToastUtils.showMessage("没有更多内容了！");
                         }
+                        if(scroll_view.isRefreshing()) scroll_view.onRefreshComplete();
 
                     }
                 }
