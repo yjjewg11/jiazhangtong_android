@@ -44,7 +44,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+<<<<<<< HEAD
     <dimen name="text_size">15sp</dimen>
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 </resources>

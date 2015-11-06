@@ -2,12 +2,19 @@ package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+<<<<<<< HEAD
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+=======
+import android.text.Html;
+import android.view.KeyEvent;
+import android.view.View;
+import android.webkit.WebView;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.widget.TextView;
 
 import com.umeng.socialize.controller.UMSocialService;
@@ -22,6 +29,10 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
+<<<<<<< HEAD
+=======
+import com.wj.kindergarten.utils.URLImageParser;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -39,6 +50,11 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
     private TextView nameTv;
     private TextView timeTv;
 
+<<<<<<< HEAD
+=======
+    private String uuid = "";
+    private ArticleDetail article = null;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     private TextView tvZan = null;
     private TextView tvSHare = null;
@@ -48,10 +64,14 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private boolean formStore = false;
     private final static int COMMENT = 1;
+<<<<<<< HEAD
 
     private WebSettings webSettings;
     private String uuid;
     private ArticleDetail article;
+=======
+    private TextView tvContent = null;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Override
     protected void setContentLayout() {
@@ -65,7 +85,10 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void loadData() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         uuid = getIntent().getStringExtra("uuid");
         formStore = getIntent().getBooleanExtra("fromStore", false);
         getArticle();
@@ -73,14 +96,19 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void onCreate() {
+<<<<<<< HEAD
 
 
         setTitleText("文章详情");
+=======
+        setTitleText("精品文章");
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         init();
         success();
     }
 
     private void init() {
+<<<<<<< HEAD
         contentTv = (WebView) findViewById(R.id.article_content);
         contentTv.getSettings().setJavaScriptEnabled(true);
         contentTv.setBackgroundColor(0);
@@ -107,6 +135,23 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
         contentTv.setWebViewClient(new WebViewClient());
 
         contentTv.loadUrl(article.getShare_url());
+=======
+        titleTv = (TextView) findViewById(R.id.article_title);
+        contentTv = (WebView) findViewById(R.id.article_content);
+        nameTv = (TextView) findViewById(R.id.article_name);
+        timeTv = (TextView) findViewById(R.id.article_time);
+
+        tvContent = (TextView) findViewById(R.id.tv_con);
+        tvContent.setText(Html.fromHtml(article.getData().getMessage(), new URLImageParser(tvContent, mContext), null));
+
+        titleTv.setText(article.getData().getTitle());
+        contentTv.getSettings().setJavaScriptEnabled(true);
+        contentTv.setBackgroundColor(0);
+        contentTv.setAlpha(1);
+        contentTv.loadDataWithBaseURL(null, article.getData().getMessage(), "text/html", "utf-8", null);
+        nameTv.setText(article.getData().getCreate_user());
+        timeTv.setText(article.getData().getCreate_time());
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
         tvZan = (TextView) findViewById(R.id.textview_1);
         tvSHare = (TextView) findViewById(R.id.textview_2);
@@ -148,14 +193,22 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private void success() {
         if (null != article) {
+<<<<<<< HEAD
 //            CGLog.d("isFavour" + article.isFavor());
+=======
+            CGLog.d("isFavour" + article.isFavor());
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             if (!article.isFavor()) {
                 store1();
             } else {
                 store2();
             }
 
+<<<<<<< HEAD
             if (article.getData().getDianzan() != null) {
+=======
+            if (article.getData() != null && article.getData().getDianzan() != null) {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 if (!article.getData().getDianzan().isCanDianzan()) {
                     zan1();
                 } else {
@@ -234,6 +287,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.textview_2://分享
                 CGLog.d("share_url " + article.getShare_url());
+<<<<<<< HEAD
 
 
                 String content = article.getData().getContent();
@@ -244,6 +298,19 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                                 content, "", article.getShare_url(),false);
 
 
+=======
+                if (null != article) {
+                    CGLog.d("c: " + tvContent.getText().toString());
+                    CGLog.d("c:" + tvContent.getText().toString().length());
+                    if (!Utils.stringIsNull(tvContent.getText().toString()) && !article.getData().getMessage().contains("<img")) {
+                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
+                                tvContent.getText().toString(), "", article.getShare_url(),false);
+                    } else {
+                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
+                                titleTv.getText().toString(), "", article.getShare_url(),false);
+                    }
+                }
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 break;
             case R.id.textview_3://收藏
                 if ("收藏".equals(tvStore.getText().toString())) {

@@ -13,8 +13,11 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
+<<<<<<< HEAD
         android:textSize="15sp"
         android:layout_marginTop="5dp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"

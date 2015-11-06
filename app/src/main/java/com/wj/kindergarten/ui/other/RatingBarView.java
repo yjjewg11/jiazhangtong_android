@@ -25,21 +25,27 @@ public class RatingBarView extends LinearLayout {
     private int starCount;
     private Drawable starEmptyDrawable;
     private Drawable starFillDrawable;
+<<<<<<< HEAD
     private Drawable starHalfDrawable;
     private int clickedCount;
 
     public int getClickedCount() {
         return clickedCount;
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public void setStarFillDrawable(Drawable starFillDrawable) {
         this.starFillDrawable = starFillDrawable;
     }
 
+<<<<<<< HEAD
     public void setHalfDrawable (Drawable starHalfDrawable){
         this.starHalfDrawable = starHalfDrawable;
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public void setStarEmptyDrawable(Drawable starEmptyDrawable) {
         this.starEmptyDrawable = starEmptyDrawable;
     }
@@ -71,6 +77,7 @@ public class RatingBarView extends LinearLayout {
         super(context, attrs);
         setOrientation(LinearLayout.HORIZONTAL);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RatingBarView);
+<<<<<<< HEAD
         starImageSize = a.getDimension(R.styleable.RatingBarView_starImageSize, 10);
         starCount = a.getInteger(R.styleable.RatingBarView_starCount, 5);
         starEmptyDrawable = a.getDrawable(R.styleable.RatingBarView_starEmpty);
@@ -79,6 +86,12 @@ public class RatingBarView extends LinearLayout {
 //        starEmptyDrawable.setBounds(0,0,10,10);
 //        starFillDrawable.setBounds(0,0,10,10);
 //        starHalfDrawable.setBounds(0,0,10,10);
+=======
+        starImageSize = a.getDimension(R.styleable.RatingBarView_starImageSize, 20);
+        starCount = a.getInteger(R.styleable.RatingBarView_starCount, 5);
+        starEmptyDrawable = a.getDrawable(R.styleable.RatingBarView_starEmpty);
+        starFillDrawable = a.getDrawable(R.styleable.RatingBarView_starFill);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
         for (int i = 0; i < starCount; ++i) {
             ImageView imageView = getStarImageView(context, attrs);
@@ -91,6 +104,10 @@ public class RatingBarView extends LinearLayout {
                             onRatingListener.onRating(bindObject,indexOfChild(v) + 1);
                         }
                     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 }
             });
             addView(imageView);
@@ -112,8 +129,12 @@ public class RatingBarView extends LinearLayout {
 
     }
     public void setStar(int starCount) {
+<<<<<<< HEAD
         clickedCount = starCount;
         setStar(starCount, true);
+=======
+        setStar(starCount,true);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     public void setStar(int starCount,boolean animation) {
@@ -131,6 +152,7 @@ public class RatingBarView extends LinearLayout {
 
     }
 
+<<<<<<< HEAD
     public void setFloatStar(float starCount,boolean animation){
         if(starCount%10>0){
             int totalStarCount =(int) starCount/10 + 1;
@@ -152,6 +174,8 @@ public class RatingBarView extends LinearLayout {
         }
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
 

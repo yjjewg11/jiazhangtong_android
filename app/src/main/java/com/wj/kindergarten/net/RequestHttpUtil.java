@@ -1,7 +1,10 @@
 package com.wj.kindergarten.net;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.text.TextUtils;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -31,7 +34,11 @@ public class RequestHttpUtil {
     //测试地址
 
     //专用调试培训机构地址
+<<<<<<< HEAD
 //    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
+=======
+    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
 //    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
@@ -39,7 +46,11 @@ public class RequestHttpUtil {
 //    public static final String BASE_URL = "http://192.168.0.108:8080/px-mobile/";
 
     //正式地址
+<<<<<<< HEAD
     public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
+=======
+//    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public synchronized static AsyncHttpClient getClient() {
         if (client == null) {
@@ -52,6 +63,7 @@ public class RequestHttpUtil {
         return client;
     }
 
+<<<<<<< HEAD
 
 //    private void getCookie(AsyncHttpClient httpClient) {
 //        List<Cookie> cookies =  httpClient.getgetCookies();
@@ -83,41 +95,70 @@ public class RequestHttpUtil {
 
     public static void cancel(Context context, boolean isInterrupt) {
 //        getCookie();
+=======
+    public static void initClient() {
+        getClient().setTimeout(Constants.HTTP_TIME_OUT);   //设置链接超时，如果不设置，默认为10s
+        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
+        getClient().setCookieStore(myCookieStore);
+        getClient().addHeader("Accept-Encoding", "gzip");
+        getClient().addHeader("content/type", "application/json;charset=utf-8");
+    }
+
+    public static void cancel(Context context, boolean isInterrupt) {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().cancelRequests(context, isInterrupt);
     }
 
     //用一个完整url获取一个string对象
     protected static void get(Context context, String urlString, AsyncHttpResponseHandler res) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().get(context, urlString, res);
     }
 
     //url里面带参数
     protected static void get(Context context, String urlString, RequestParams params, AsyncHttpResponseHandler res) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().get(context, urlString, params, res);
     }
 
     //不带参数，获取json对象或者数组
     protected static void get(Context context, String urlString, JsonHttpResponseHandler res) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().get(context, urlString, res);
     }
 
     //带参数，获取json对象或者数组
     protected static void get(Context context, String urlString, RequestParams params, JsonHttpResponseHandler res) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().get(context, urlString, params, res);
     }
 
     //下载数据使用，会返回byte数据
     protected static void get(Context context, String uString, BinaryHttpResponseHandler bHandler) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().get(context, uString, bHandler);
     }
 
     protected static void get(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().get(context, urlString, httpEntity, "application/json", responseHandlerInterface);
     }
 
@@ -130,7 +171,10 @@ public class RequestHttpUtil {
     }
 
     protected static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
+<<<<<<< HEAD
 //        getCookie();
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
     }
 }

@@ -231,7 +231,10 @@
     </LinearLayout>
 
     <FrameLayout
+<<<<<<< HEAD
         android:layout_marginTop="20dp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:id="@+id/train_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -239,6 +242,7 @@
         <include layout="@layout/train_common"/>
     </FrameLayout>
 
+<<<<<<< HEAD
     <RelativeLayout
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -260,6 +264,8 @@
 
 
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     <FrameLayout
         android:id="@+id/course_reply"
         android:layout_width="match_parent"

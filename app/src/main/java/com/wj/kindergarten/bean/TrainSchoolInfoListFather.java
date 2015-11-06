@@ -14,6 +14,7 @@ public class TrainSchoolInfoListFather extends BaseModel{
     public void setList(TrainSchoolInfoList list) {
         this.list = list;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -21,4 +22,6 @@ public class TrainSchoolInfoListFather extends BaseModel{
                 "list=" + list +
                 '}';
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

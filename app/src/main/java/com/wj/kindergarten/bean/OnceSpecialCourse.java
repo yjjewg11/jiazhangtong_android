@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 
 public class OnceSpecialCourse extends BaseModel{
     @Expose
+<<<<<<< HEAD
     private String uuid;@Expose
     private String groupuuid;@Expose
     private String title;@Expose
@@ -53,6 +54,20 @@ public class OnceSpecialCourse extends BaseModel{
                 ", address='" + address + '\'' +
                 '}';
     }
+=======
+    private String uuid;
+    @Expose
+    private String groupuuid;
+    @Expose
+    private String title;
+    //返回的是Html的字符串
+    @Expose
+    private String content;
+    @Expose
+    private String type;
+    @Expose
+    private String subtype;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public String getContent() {
         return content;
@@ -62,6 +77,7 @@ public class OnceSpecialCourse extends BaseModel{
         this.content = content;
     }
 
+<<<<<<< HEAD
     public int getCt_stars() {
         return ct_stars;
     }
@@ -94,6 +110,8 @@ public class OnceSpecialCourse extends BaseModel{
         this.fees = fees;
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public String getGroupuuid() {
         return groupuuid;
     }
@@ -102,6 +120,7 @@ public class OnceSpecialCourse extends BaseModel{
         this.groupuuid = groupuuid;
     }
 
+<<<<<<< HEAD
     public String getSchedule() {
         return schedule;
     }
@@ -110,6 +129,8 @@ public class OnceSpecialCourse extends BaseModel{
         this.schedule = schedule;
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public String getSubtype() {
         return subtype;
     }
@@ -141,4 +162,19 @@ public class OnceSpecialCourse extends BaseModel{
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public String toString() {
+        return "OnceSpecialCourse{" +
+                "content='" + content + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", groupuuid='" + groupuuid + '\'' +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", subtype='" + subtype + '\'' +
+                '}';
+    }
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

@@ -4,7 +4,10 @@
     tools:context="com.wj.kindergarten.ui.specialcourse.TeachersSpecialFragment">
 
     <FrameLayout
+<<<<<<< HEAD
         android:id="@+id/no_view_fl"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

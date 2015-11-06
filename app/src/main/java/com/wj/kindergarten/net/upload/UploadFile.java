@@ -76,7 +76,11 @@ public class UploadFile {
             try {
                 RequestParams params = new RequestParams();
                 params.put("file", file);
+<<<<<<< HEAD
 //                params.put("JSESSIONID", CGApplication.getInstance().getLogin().getJSESSIONID());
+=======
+                params.put("JSESSIONID", CGApplication.getInstance().getLogin().getJSESSIONID());
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 params.put("type", type);
                 CGLog.d(URL + "?" + params.toString());
                 RequestHttpUtil.post(context, URL, params, new JsonHttpResponseHandler() {

@@ -32,9 +32,13 @@
                 android:background="@color/hint_gray"
                 android:visibility="gone" />
 
+<<<<<<< HEAD
 
             <TextView
                 android:background="@drawable/setting_item_click_selector"
+=======
+            <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:id="@+id/mine_collect"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
@@ -48,6 +52,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/normal_text" />
 
+<<<<<<< HEAD
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -73,6 +78,8 @@
 
 
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             <TextView
 
                 android:background="#bbbbbb"
@@ -80,7 +87,10 @@
                 android:layout_height="1dp" />
 
             <TextView
+<<<<<<< HEAD
                 android:background="@drawable/setting_item_click_selector"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:id="@+id/mine_course"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
@@ -102,6 +112,10 @@
         </LinearLayout>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         <LinearLayout
             android:id="@+id/ll_setting"
             android:layout_width="match_parent"

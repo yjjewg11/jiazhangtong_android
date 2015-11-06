@@ -11,22 +11,33 @@
     </FrameLayout>
 
     <RadioGroup
+<<<<<<< HEAD
         android:checkedButton="@+id/rb_study"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:minHeight="40dp"
+=======
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:minHeight="25dp"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
         <RadioButton
+<<<<<<< HEAD
             android:id="@+id/rb_study"
             android:gravity="center"
+=======
+            android:padding="10dp"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:layout_weight="1"
             android:button="@null"
             android:text="正在学习"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+<<<<<<< HEAD
         <TextView
             android:background="#bbbbbb"
             android:layout_gravity="center"
@@ -63,6 +74,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+=======
+        <RadioButton
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="完成学习"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RadioGroup>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/xuanzhong2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_marginLeft="116dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
+
+        <ImageView
+            android:src="@drawable/xuanzhong2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageView2" />
+    </RelativeLayout>
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     <LinearLayout
         android:background="#bbbbbb"
@@ -72,9 +114,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+<<<<<<< HEAD
 
         <include layout="@layout/layout_pulltorefresh" />
 
+=======
+        <include layout="@layout/layout_pulltorefresh"/>
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     </FrameLayout>
 
 </LinearLayout>

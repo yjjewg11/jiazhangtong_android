@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wenjie.jiazhangtong" >
 
+<<<<<<< HEAD
     <supports-screens
         android:smallScreens="true"
         android:normalScreens="true"
@@ -10,6 +11,8 @@
         android:anyDensity="true"/>
 
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这个权限用于访问GPS定位 -->
@@ -48,6 +51,7 @@
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+<<<<<<< HEAD
     <!-- 连接网络权限INTERNET ，用于请求广告(必须)，mogo会使用该权限 -->
     <uses-permission android:name="android.permission.INTERNET" />  <!-- 读取手机基本信息权限READ_PHONE_STATE，用于精确统计用户的机型等信息(必须)，mogo 会使用该权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />  <!-- 读取网络信息权限ACCESS_NETWORK_STATE，用于识别gprs网络的接入点的情况(必须)， mogo会使用该权限 -->
@@ -85,6 +89,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
      
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     <application
         android:name="com.wj.kindergarten.CGApplication"
@@ -104,6 +110,7 @@
             </intent-filter>
         </activity>
 
+<<<<<<< HEAD
 
         <activity
             android:name="com.wj.kindergarten.ui.func.PrivilegeDetailActivity"
@@ -133,6 +140,8 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         <activity
             android:name="com.wj.kindergarten.ui.func.MineCourseDetailActivity"
             android:label="@string/app_name"
@@ -474,6 +483,7 @@
 
 
         <!-- baidu guang gao -->
+<<<<<<< HEAD
         <!--<meta-data-->
             <!--android:name="BaiduMobAd_APP_ID"-->
             <!--android:value="f1a880e5" />-->
@@ -484,6 +494,18 @@
         <!--<activity-->
             <!--android:name="com.baidu.mobads.AppActivity"-->
             <!--android:configChanges="keyboard|keyboardHidden|orientation" />-->
+=======
+        <meta-data
+            android:name="BaiduMobAd_APP_ID"
+            android:value="f1a880e5" />
+        <meta-data
+            android:name="BaiduMobAd_APP_SEC"
+            android:value="f1a880e5" />
+
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         <!-- baidu guang gao -->
 
         <receiver android:name="com.wj.kindergarten.ui.func.NetworkConnectChangedReceiver" >
@@ -494,6 +516,7 @@
             </intent-filter>
         </receiver>
 
+<<<<<<< HEAD
         <!--  声明Mogo的Activity com.adsmogo.adview .AdsMogoWebView  -->        
         <activity android:name="com.adsmogo.adview.AdsMogoWebView"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -511,6 +534,8 @@
             android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     </application>
 
 </manifest>

@@ -2,21 +2,30 @@ package com.wj.kindergarten.ui.func.adapter;
 
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.graphics.Color;
 import android.text.Html;
 import android.text.TextUtils;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+<<<<<<< HEAD
 import android.widget.RelativeLayout;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.SpecialCourseInfoObject;
 import com.wj.kindergarten.ui.other.RatingBarView;
+<<<<<<< HEAD
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +46,11 @@ public class SpecialCourseListAdapter extends BaseAdapter{
     public void setSepcialList(List<SpecialCourseInfoObject> list){
         //清空数据
         this.list.clear();
+<<<<<<< HEAD
         if(list!=null){
+=======
+        if(list!=null&&list.size()>0) {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             this.list.addAll(list);
             notifyDataSetChanged();
         }
@@ -65,7 +78,10 @@ public class SpecialCourseListAdapter extends BaseAdapter{
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_special_course_list_view,null);
             viewHolder = new ViewHolder();
+<<<<<<< HEAD
 //            viewHolder.rl_all_content = (RelativeLayout) convertView.findViewById(R.id.rl_all_content);
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.item_special_course_list_view_image_view);
             viewHolder.ratingBar = (RatingBarView) convertView.findViewById(R.id.item_special_course_list_view__rating_bar);
             viewHolder.item_special_course_list_view_tv_adresss = (TextView) convertView.findViewById(R.id.item_special_course_list_view_tv_adresss);
@@ -81,6 +97,7 @@ public class SpecialCourseListAdapter extends BaseAdapter{
 
         SpecialCourseInfoObject object = list.get(position);
         if (object != null) {
+<<<<<<< HEAD
             viewHolder.ratingBar.setFloatStar(object.getCt_stars(),true);
             ImageLoaderUtil.displayMyImage(object.getLogo(), viewHolder.imageView);
             viewHolder.item_class_name.setText("" + object.getTitle());
@@ -98,6 +115,16 @@ public class SpecialCourseListAdapter extends BaseAdapter{
 
             viewHolder.item_special_course_list_view_tv_edcucation.setText(""+object.getGroup_name());
             viewHolder.item_special_course_list_view_tv_study_people.setText(Html.fromHtml(text));
+=======
+            viewHolder.ratingBar.setStar(3);
+            viewHolder.imageView.setImageResource(R.drawable.ic_launcher);
+            viewHolder.item_class_name.setText("" + object.getTitle());
+            viewHolder.item_special_course_list_view_tv_adresss.setText(""+object.getSubtype());
+            //TODO
+            viewHolder.item_special_course_list_view_tv_distance.setText("设置距离：130");
+            viewHolder.item_special_course_list_view_tv_edcucation.setText("设置教育中心");
+            viewHolder.item_special_course_list_view_tv_study_people.setText("学习人数");
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         }
 
         return convertView;

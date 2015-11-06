@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 
 public class SpecialCourseInfoObject extends BaseModel{
     @Expose
+<<<<<<< HEAD
     private int ct_stars;@Expose
     private long ct_study_students;@Expose
     private String group_name;@Expose
@@ -107,6 +108,32 @@ public class SpecialCourseInfoObject extends BaseModel{
 
     public void setLogo(String logo) {
         this.logo = logo;
+=======
+    private String uuid;
+    @Expose
+    private String groupuuid;
+    @Expose
+    private String title;
+    @Expose
+    private String type;
+    @Expose
+    private String subtype;
+
+    public String getGroupuuid() {
+        return groupuuid;
+    }
+
+    public void setGroupuuid(String groupuuid) {
+        this.groupuuid = groupuuid;
+    }
+
+    public String getSubtype() {
+        return subtype;
+    }
+
+    public void setSubtype(String subtype) {
+        this.subtype = subtype;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     public String getTitle() {
@@ -117,6 +144,17 @@ public class SpecialCourseInfoObject extends BaseModel{
         this.title = title;
     }
 
+<<<<<<< HEAD
+=======
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public String getUuid() {
         return uuid;
     }
@@ -126,8 +164,19 @@ public class SpecialCourseInfoObject extends BaseModel{
     }
 
     @Override
+<<<<<<< HEAD
     public boolean equals(Object o) {
 
         return uuid.equals(((SpecialCourseInfoObject)o).getUuid());
+=======
+    public String toString() {
+        return "SpecialCourseInfoObject{" +
+                "groupuuid='" + groupuuid + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", subtype='" + subtype + '\'' +
+                '}';
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 }

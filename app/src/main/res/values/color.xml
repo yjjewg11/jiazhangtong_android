@@ -3,7 +3,10 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
+<<<<<<< HEAD
     <color name="special_gray">#f6f6f6</color>
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     <color name="normal_bg">#ffffff</color>
     <color name="normal_text_gray">#b3b3b3</color>
     <color name="hint_gray">#666666</color>
@@ -29,9 +32,12 @@
 
     <color name="radio_white">#f5f5f5</color>
 
+<<<<<<< HEAD
 
     <color name="course_over">#ffffff</color>
     <color name="course_been_down">#ff7800</color>
     <color name="course_not_do">#49a3ff</color>
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 </resources>

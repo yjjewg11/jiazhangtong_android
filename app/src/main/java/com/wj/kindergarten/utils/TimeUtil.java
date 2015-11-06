@@ -2,7 +2,10 @@ package com.wj.kindergarten.utils;
 
 
 import android.support.annotation.NonNull;
+<<<<<<< HEAD
 import android.text.TextUtils;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,12 +34,16 @@ public final class TimeUtil {
     public static String getYMDTimeFromYMDHMS(String time){
         Date date  = null;
         try {
+<<<<<<< HEAD
             if(TextUtils.isEmpty(time)){
                 date = new Date();
             }else{
                 date = format.parse(time);
             }
 
+=======
+            date = format.parse(time);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -126,6 +133,7 @@ public final class TimeUtil {
         c.setTime(m);
        return formatYMD.format(c);
     }
+<<<<<<< HEAD
 
     public static long compareTime(Date date, String plandate) {
           String th =  formatYMD.format(date);
@@ -140,4 +148,6 @@ public final class TimeUtil {
 
         return date3.getTime()-date2.getTime();
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

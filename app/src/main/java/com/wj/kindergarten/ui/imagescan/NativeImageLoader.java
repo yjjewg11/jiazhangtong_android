@@ -1,6 +1,9 @@
 package com.wj.kindergarten.ui.imagescan;
 
+<<<<<<< HEAD
 import android.content.res.Resources;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;

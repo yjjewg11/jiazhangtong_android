@@ -31,7 +31,10 @@ public abstract class Constants {
     public static final String GARDEN_SPECIAL = "garden_special";
     public static final String GARDEN_TEACHER = "garden_teacher";
     public static final String GARDEN_MORE = "garden_more";
+<<<<<<< HEAD
     public static final String PRIVIAL_ACTIVE = "you_hui_active";
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public static final String ALREADY_SELECT_KEY = "select_list";
 

@@ -4,7 +4,10 @@ import android.content.SharedPreferences;
 
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.VersionInfo;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.utils.Utils;
 
 /**
@@ -154,6 +157,7 @@ public class CGSharedPreference {
         SharedPreferences sharedPreferences = getSharedPreferences();
         return sharedPreferences.getBoolean("message", false);
     }
+<<<<<<< HEAD
 
     public static VersionInfo getVersionInfoReference(){
         SharedPreferences sharedPreferences = getSharedPreferences();
@@ -174,4 +178,6 @@ public class CGSharedPreference {
         editor.putString("city",versionInfo.getCity());
         editor.commit();
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

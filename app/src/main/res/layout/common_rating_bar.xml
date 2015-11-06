@@ -7,11 +7,18 @@
 
     <com.wj.kindergarten.ui.other.RatingBarView
         android:id="@+id/item_special_course_list_view__rating_bar"
+<<<<<<< HEAD
         bao:starImageSize = "16dp"
         bao:starCount = "5"
         bao:starEmpty = "@drawable/xingback"
         bao:starFill = "@drawable/xinglight"
         bao:starHalf = "@drawable/bankexing"
+=======
+        bao:starImageSize = "22dp"
+        bao:starCount = "5"
+        bao:starEmpty = "@drawable/xingback"
+        bao:starFill = "@drawable/xinglight"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

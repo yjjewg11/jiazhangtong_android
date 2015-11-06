@@ -11,16 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+<<<<<<< HEAD
 import android.widget.FrameLayout;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.adsmogo.adview.AdsMogoLayout;
 import com.adsmogo.util.AdsMogoLayoutPosition;
 import com.adsmogo.util.AdsMogoSize;
 import com.adsmogo.util.AdsMogoType;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
@@ -40,7 +46,10 @@ import com.wj.kindergarten.ui.func.FoodListActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NoticeListActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
+<<<<<<< HEAD
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.ui.more.MoreUtil;
 import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
@@ -60,6 +69,10 @@ public class MainFragment extends Fragment {
     public static int GRID_ITEM_HW = 240;
     private View rootView;
     private GridView mainGv = null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private Context mContext = null;
     private List<MainItem> mainItems = new ArrayList();
     private GridViewAdapter mainGridAdapter = null;
@@ -72,8 +85,11 @@ public class MainFragment extends Fragment {
     private int height = 0;
     private boolean isShow = false;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private ArrayList<More> list = new ArrayList<>();
 
 
@@ -89,8 +105,11 @@ public class MainFragment extends Fragment {
         ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
+<<<<<<< HEAD
             ViewGroup viewGroup = (ViewGroup) rootView.findViewById(R.id.other_ads);
             Utils.ads(getActivity(),viewGroup);
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             initViews(rootView);
             success();
             queryMore();
@@ -99,11 +118,18 @@ public class MainFragment extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
+<<<<<<< HEAD
         return rootView;
     }
 
 
 
+=======
+
+        return rootView;
+    }
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private void queryMore() {
         UserRequest.queryMore(getActivity(), new RequestResultI() {
             @Override
@@ -261,7 +287,10 @@ public class MainFragment extends Fragment {
         MainItem gardenFoods = new MainItem(R.drawable.main_item_shipu, "食谱", Constants.GARDEN_FOODS);
         MainItem gardenArticle = new MainItem(R.drawable.main_item_jingpin, "精品文章", Constants.GARDEN_ARTICLE);
         MainItem gardenSpecial = new MainItem(R.drawable.main_item_techang, "特长课程", Constants.GARDEN_SPECIAL);
+<<<<<<< HEAD
         MainItem privilegeActive = new MainItem(R.drawable.youhuihuodong90,"优惠活动",Constants.PRIVIAL_ACTIVE);
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         MainItem gardenTeacher = new MainItem(R.drawable.main_item_pinjia, "评价老师", Constants.GARDEN_TEACHER);
         MainItem gardenMore = new MainItem(R.drawable.main_more_1, "更多", Constants.GARDEN_MORE);
 
@@ -273,7 +302,10 @@ public class MainFragment extends Fragment {
         mainItems.add(gardenFoods);
         mainItems.add(gardenArticle);
         mainItems.add(gardenSpecial);
+<<<<<<< HEAD
         mainItems.add(privilegeActive);
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         mainItems.add(gardenTeacher);
         mainItems.add(gardenMore);
     }
@@ -309,6 +341,7 @@ public class MainFragment extends Fragment {
             case Constants.GARDEN_ARTICLE://精品文章
                 startActivity(new Intent(mContext, ArticleListActivity.class));
                 break;
+<<<<<<< HEAD
             case Constants.GARDEN_SPECIAL://特长课程
                 Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
                 getActivity().startActivity(intent1);
@@ -316,6 +349,14 @@ public class MainFragment extends Fragment {
             case Constants.PRIVIAL_ACTIVE://优惠活动
                 startActivity(new Intent(mContext,PrivilegeActiveActivity.class));
                 break;
+=======
+            case Constants.GARDEN_SPECIAL:
+                Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
+                intent1.putExtra("title", "特长课程");
+                intent1.putExtra("url", "http://jz.wenjienet.com/px-mobile/px/index.html");
+                getActivity().startActivity(intent1);
+                break;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             case Constants.GARDEN_TEACHER://评价老师
                 startActivity(new Intent(mContext, AppraiseTeacherActivity.class));
                 break;

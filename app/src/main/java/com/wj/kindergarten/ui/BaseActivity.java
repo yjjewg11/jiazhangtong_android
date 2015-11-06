@@ -1,23 +1,34 @@
 package com.wj.kindergarten.ui;
 
+<<<<<<< HEAD
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+=======
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+<<<<<<< HEAD
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+=======
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,9 +38,13 @@ import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
+<<<<<<< HEAD
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
+=======
+import com.wj.kindergarten.ui.mine.LoginActivity;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.utils.Utils;
 
 
@@ -495,6 +510,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         public void getConfig();
     }
 
+<<<<<<< HEAD
     //如果没有内容，则显示无内容视图
     public void noView(View view){
         View noView = View.inflate(this,R.layout.nothing_view,null);
@@ -546,5 +562,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     });
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 }

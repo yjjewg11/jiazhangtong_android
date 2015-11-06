@@ -120,6 +120,7 @@ public class Reply extends BaseModel {
     public void setDianzan(DianZan dianzan) {
         this.dianzan = dianzan;
     }
+<<<<<<< HEAD
 
 
     @Override
@@ -138,4 +139,6 @@ public class Reply extends BaseModel {
                 ", create_img='" + create_img + '\'' +
                 '}';
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

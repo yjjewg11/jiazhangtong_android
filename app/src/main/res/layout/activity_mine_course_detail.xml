@@ -81,6 +81,7 @@
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
+<<<<<<< HEAD
         android:layout_weight="1"
         android:id="@+id/mine_course_detail_viewpager"
         android:layout_height="match_parent"
@@ -95,6 +96,14 @@
 
         <include layout="@layout/train_course_common"/>
     </FrameLayout>
+=======
+        android:id="@+id/mine_course_detail_viewpager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+
+    </android.support.v4.view.ViewPager>
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
 

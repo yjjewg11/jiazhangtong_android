@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.webview;
 
+<<<<<<< HEAD
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,6 +30,22 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.umeng.socialize.utils.Log;
+=======
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.SpecialCourseInfoList;
@@ -42,6 +59,7 @@ import com.wj.kindergarten.ui.func.SpecialCourseDetailActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseGrid;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
+<<<<<<< HEAD
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.other.CustomScrollView;
 import com.wj.kindergarten.ui.other.FullGridView;
@@ -51,6 +69,9 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+=======
+import com.wj.kindergarten.utils.ToastUtils;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,6 +86,7 @@ import java.util.List;
  */
 public class WebviewActivity extends BaseActivity implements Serializable{
 
+<<<<<<< HEAD
     private FullGridView courseGrid;
     private LinearLayout special_listView;
 
@@ -81,6 +103,22 @@ public class WebviewActivity extends BaseActivity implements Serializable{
     private HintInfoDialog dialog;
     private TextView tv_hot_course;
 
+=======
+    private WebView webView = null;
+    private String url = "";
+    private LinearLayout layoutWebview = null;
+    private RelativeLayout layoutLoad = null;
+    private ImageView ivLoadFailure = null;
+    private TextView tvLoadInfo = null;
+    private ProgressBar progressBar = null;
+    private GridView courseGrid;
+    private PullToRefreshListView special_listView;
+
+    private List<SpecialCourseType> sctlist = new ArrayList<>();
+    private List<SpecialCourseInfoObject> allCourse = new ArrayList<>();
+    private boolean isFirst;
+    private SpecialCourseListAdapter listAdapter;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public List<SpecialCourseType> getSctList(){
         return sctlist;
@@ -92,6 +130,7 @@ public class WebviewActivity extends BaseActivity implements Serializable{
             switch (msg.what){
                 //获取数据完毕，更新页面
                 case 100 :
+<<<<<<< HEAD
                     type_adapter.setList(sctlist);
                     break;
                 case 200:
@@ -145,6 +184,9 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                 case 10:
 //                    pageNo++;
 //                    getHotCourse();
+=======
+                    loadSuc();
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     break;
             }
         }
@@ -158,14 +200,24 @@ public class WebviewActivity extends BaseActivity implements Serializable{
     @Override
     protected void setNeedLoading() {
 
+<<<<<<< HEAD
 //        isNeedLoading  = true;
+=======
+        isNeedLoading  = true;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     @Override
     protected void onCreate() {
         String title = getIntent().getStringExtra("title");
+<<<<<<< HEAD
 //        setTitleText(title);
         setViews();
+=======
+        setTitleText(title);
+        setViews();
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     @Override
@@ -177,6 +229,7 @@ public class WebviewActivity extends BaseActivity implements Serializable{
     }
 
     int pageNo = 1;
+<<<<<<< HEAD
     int type = -1;
     private void getHotCourse() {
         //TODO 热门课程接口暂定
@@ -193,6 +246,31 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                     scroll_view.onRefreshComplete();
                 }
                 mhandler.sendEmptyMessage(200);
+=======
+    int type = 0;
+    private void getHotCourse() {
+        UserRequest.getSpecialCourseInfoFormType(this,"",pageNo ,type, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                SpecialCourseInfoList list = (SpecialCourseInfoList) domain;
+                //如果为课程分类，加入到course集合中，如果为学校分类，加入到school集合中，如果为全部课程加入到allcourse
+                //暂定英语分类
+                //如果课程获取类别不一样，则清空集合
+                allCourse.clear();
+                allCourse.addAll(list.getList().getData());
+//
+
+                if (!isFirst) {
+                    loadSuc();
+                } else {
+                    if(special_listView.isRefreshing()) {
+                        special_listView.onRefreshComplete();
+                    }
+                    listAdapter.setSepcialList(allCourse);
+                }
+
+                isFirst = true;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             }
 
             @Override
@@ -231,6 +309,7 @@ public class WebviewActivity extends BaseActivity implements Serializable{
         });
     }
 
+<<<<<<< HEAD
     boolean isBottom ;
     boolean isCanLoad = true;
 
@@ -246,10 +325,29 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                 intent.putExtra("list", sctlist);
                 intent.putExtra("key", -1);
                 intent.putExtra("id", 0);
+=======
+
+
+    private void setViews() {
+        courseGrid = (GridView)findViewById(R.id.special_course_grid_view);
+        courseGrid.setAdapter(new SpecialCourseGrid(this,sctlist));
+        special_listView = (PullToRefreshListView)findViewById(R.id.pulltorefresh_list);
+        listAdapter = new SpecialCourseListAdapter(this);
+        special_listView.setAdapter(listAdapter);
+        listAdapter.setSepcialList(allCourse);
+
+        courseGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //点击启动另一个页面
+                Intent intent = new Intent(WebviewActivity.this, SpecialCourseDetailActivity.class);
+                intent.putExtra("position", position);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 startActivity(intent);
             }
         });
 
+<<<<<<< HEAD
         title_webview_normal_back = (ImageView)findViewById(R.id.title_webview_normal_back);
         title_webview_normal_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,4 +399,26 @@ public class WebviewActivity extends BaseActivity implements Serializable{
         intent.putExtra("id", position+1);
         startActivity(intent);
     }
+=======
+        special_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(WebviewActivity.this, SpecialCourseInfoActivity.class);
+                intent.putExtra("position",position);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

@@ -32,10 +32,18 @@ import com.wj.kindergarten.utils.Utils;
 public class MineFragment extends Fragment {
     private View rootView;
     private LinearLayout childContent;
+<<<<<<< HEAD
     private LinearLayout llSetting;
     private Login login;
     private LinearLayout mine_collect;
     private LinearLayout mine_course;
+=======
+    private LinearLayout llStore;
+    private LinearLayout llSetting;
+    private Login login;
+    private TextView mine_collect;
+    private TextView mine_course;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Nullable
     @Override
@@ -59,8 +67,13 @@ public class MineFragment extends Fragment {
 
 
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
+<<<<<<< HEAD
         mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
         mine_course = (LinearLayout)rootView.findViewById(R.id.ll_special_course);
+=======
+        mine_collect = (TextView) rootView.findViewById(R.id.mine_collect);
+        mine_course = (TextView)rootView.findViewById(R.id.mine_course);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
         llSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +93,11 @@ public class MineFragment extends Fragment {
             public void onClick(View v) {
                 //点击启动我的课程页面
                 Intent intent = new Intent(getActivity(),MineSpecialCourseActivity.class);
+<<<<<<< HEAD
+=======
+                //TODO 放入显示孩子的uuid
+                intent.putExtra("childuuid","");
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 startActivity(intent);
             }
         });

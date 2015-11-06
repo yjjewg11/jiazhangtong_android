@@ -18,7 +18,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.adsmogo.adview.AdsMogoLayout;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
@@ -30,7 +33,10 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.func.InteractionFragment;
+<<<<<<< HEAD
 import com.wj.kindergarten.ui.func.InteractionListActivity;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.IntervalUtil;
@@ -78,7 +84,10 @@ public class InteractionAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         if (view == null) {
             viewHolder = new ViewHolder();
             view = View.inflate(mContext, R.layout.item_interaction, null);
@@ -102,17 +111,24 @@ public class InteractionAdapter extends BaseAdapter {
             viewHolder.moreReplyTv = (TextView) view.findViewById(R.id.item_interaction_reply_more);
             viewHolder.iReplyEt = (TextView) view.findViewById(R.id.item_interaction_i_reply);
             viewHolder.sendReply = (TextView) view.findViewById(R.id.item_interaction_i_reply_send);
+<<<<<<< HEAD
             viewHolder.ads_ll = (LinearLayout)view.findViewById(R.id.ll_ads);
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
+<<<<<<< HEAD
         if(i == 0){
             viewHolder.ads_ll.setVisibility(View.VISIBLE);
         }else{
             viewHolder.ads_ll.setVisibility(View.GONE);
         }
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         final Interaction interaction = dataList.get(i);
 
         ImageLoaderUtil.displayImage(interaction.getCreate_img(), viewHolder.headCi);
@@ -120,11 +136,15 @@ public class InteractionAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //点击启动分享页
+<<<<<<< HEAD
                 String content = interaction.getContent();
                 if(Utils.isNull(content) == null || content == null){
                     content = interaction.getTitle();
                 }
                 ShareUtils.showShareDialog(mContext,v,interaction.getTitle(),content,interaction.getCreate_img(),interaction.getShare_url(),true);
+=======
+                ShareUtils.showShareDialog(mContext,v,interaction.getTitle(),"",interaction.getCreate_img(),interaction.getShare_url(),true);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             }
         });
         viewHolder.nameTv.setText(interaction.getCreate_user());
@@ -369,7 +389,10 @@ public class InteractionAdapter extends BaseAdapter {
         TextView iReplyEt;
         TextView sendReply;
         NestedGridView nestedGridView;
+<<<<<<< HEAD
 
         LinearLayout ads_ll;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 }

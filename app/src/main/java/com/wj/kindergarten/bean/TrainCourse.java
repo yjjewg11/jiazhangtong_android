@@ -2,6 +2,7 @@ package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
 
+<<<<<<< HEAD
 import java.util.List;
 
 public class TrainCourse extends BaseModel{
@@ -14,6 +15,18 @@ public class TrainCourse extends BaseModel{
     }
 
     public void setList(List<MyTrainCoures> list) {
+=======
+public class TrainCourse extends BaseModel{
+
+    @Expose
+    private MyTrainCoures list;
+
+    public MyTrainCoures getList() {
+        return list;
+    }
+
+    public void setList(MyTrainCoures list) {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         this.list = list;
     }
 

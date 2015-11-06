@@ -2,12 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     android:orientation="vertical">
 
     <include layout="@layout/title_normal" />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     <FrameLayout
         android:id="@+id/interaciton_list_content"
         android:layout_width="match_parent"

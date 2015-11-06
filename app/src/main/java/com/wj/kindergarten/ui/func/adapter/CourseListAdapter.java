@@ -20,14 +20,26 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+<<<<<<< HEAD
+=======
+import com.umeng.socialize.utils.Log;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Course;
 import com.wj.kindergarten.bean.DianZan;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.MyTrainCoures;
 import com.wj.kindergarten.bean.Reply;
 import com.wj.kindergarten.bean.TrainCourse;
+=======
+import com.wj.kindergarten.bean.Reply;
+import com.wj.kindergarten.bean.TrainChildInfo;
+import com.wj.kindergarten.bean.TrainClass;
+import com.wj.kindergarten.bean.TrainCourse;
+import com.wj.kindergarten.bean.TrainCourseContent;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -63,9 +75,15 @@ public class CourseListAdapter extends BaseAdapter {
     private int weekIndex = 0;
     private int trainWeekIndex = 0;
 
+<<<<<<< HEAD
     public void addTrainCourseList(List<MyTrainCoures> list){
         for(MyTrainCoures myTrainCoures : list){
             courseList.add(myTrainCoures);
+=======
+    public void addTrainCourseList(List<TrainCourseContent> list){
+        for(TrainCourseContent trainCourseContent : list){
+            courseList.add(trainCourseContent);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         }
         notifyDataSetChanged();
     }
@@ -171,7 +189,11 @@ public class CourseListAdapter extends BaseAdapter {
         }
 
         CourseListFragment.UserCourse userCourse = null;
+<<<<<<< HEAD
         MyTrainCoures myTrainCoures = null;
+=======
+        TrainCourseContent trainCourseContent = null;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
         //如果是课程表
         if(courseList.get(i) instanceof CourseListFragment.UserCourse){
@@ -179,8 +201,13 @@ public class CourseListAdapter extends BaseAdapter {
              ImageLoaderUtil.displayImage(userCourse.getChildInfo().getHeadimg(), viewHolder.head);
              viewHolder.train_fl.setVisibility(View.GONE);
              viewHolder.course_ll.setVisibility(View.VISIBLE);
+<<<<<<< HEAD
         }else if (courseList.get(i) instanceof MyTrainCoures){
             myTrainCoures = (MyTrainCoures)courseList.get(i);
+=======
+        }else if (courseList.get(i) instanceof TrainCourseContent){
+            trainCourseContent = (TrainCourseContent)courseList.get(i);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
              viewHolder.train_fl.setVisibility(View.VISIBLE);
              viewHolder.course_ll.setVisibility(View.GONE);
         }
@@ -206,6 +233,10 @@ public class CourseListAdapter extends BaseAdapter {
         } else {
             viewHolder.noCourseContent.setVisibility(View.GONE);
             viewHolder.courseContent.setVisibility(View.VISIBLE);
+<<<<<<< HEAD
+=======
+            Log.i("打印是否显示VISIBLE");
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             viewHolder.morningTv.setText(course.getMorning());
             viewHolder.afternoonTv.setText(course.getAfternoon());
             viewHolder.viewCountTv.setText("浏览" + course.getCount() + "次");
@@ -284,12 +315,25 @@ public class CourseListAdapter extends BaseAdapter {
         }
 
 
+<<<<<<< HEAD
         if(myTrainCoures!=null) {
             String de = TimeUtil.getDateToString(moneyDayDateMullions);
             String getTimeFromHttp = TimeUtil.getYMDTimeFromYMDHMS(myTrainCoures.getPlandate());
             viewHolder.tv_yy_mm_dd_time.setText(""+getTimeFromHttp);
             viewHolder.tv_everyday_oneweek.setText("" +TimeUtil.getDay(getTimeFromHttp));
             ImageLoaderUtil.displayMyImage(myTrainCoures.getStudent_headimg(),viewHolder.iv_training_head);
+=======
+//
+//        //不管有没有数据，都要显示时间
+
+//
+////
+        if(trainCourseContent!=null) {
+            String de = TimeUtil.getDateToString(moneyDayDateMullions);
+            String getTimeFromHttp = TimeUtil.getYMDTimeFromYMDHMS(trainCourseContent.getPlandate());
+            viewHolder.tv_yy_mm_dd_time.setText(""+getTimeFromHttp);
+            viewHolder.tv_everyday_oneweek.setText("" +TimeUtil.getDay(getTimeFromHttp));
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             //判断课程是否是今日的
             viewHolder.courseContent.setVisibility(View.VISIBLE);
             if (de.equals(getTimeFromHttp)){
@@ -302,6 +346,7 @@ public class CourseListAdapter extends BaseAdapter {
             //显示数据
 
             // TODO 教育中心数据
+<<<<<<< HEAD
             viewHolder.tv_below_school_class_name.setText("" + (myTrainCoures.getClass_name()));
             viewHolder.tv_training_classname_content.setText("" + (myTrainCoures.getName() == null ? "" : myTrainCoures.getName()));
             viewHolder.tv_training_classtime.setText("" + (myTrainCoures.getPlandate()== null  ? "" : myTrainCoures.getPlandate()));
@@ -334,6 +379,59 @@ public class CourseListAdapter extends BaseAdapter {
             }
             //点击点赞之后根据该变切换状态
 
+=======
+
+            //得到与这个TrainCourseContent对象相同的TrainChildInfo
+            TrainChildInfo trainChildInfo = null;
+            if(courseListFragment.getTrainChildInfoList()!=null){
+                List<TrainChildInfo> myList = courseListFragment.getTrainChildInfoList();
+                for(int jishu = 0 ; jishu < myList.size();jishu ++){
+                    if(myList.get(jishu).getClassuuid().equals(trainCourseContent.getClassuuid())){
+                           trainChildInfo = myList.get(jishu);
+                        ImageLoaderUtil.displayImage((trainChildInfo.getHeadimg()), viewHolder.iv_training_head);
+
+                    }
+                }
+            }
+            TrainClass trainClass = null;
+            if(courseListFragment.getTrainClass()!=null){
+                List<TrainClass> trainClassList = courseListFragment.getTrainClass();
+                for(int tc = 0 ; tc < trainClassList.size() ; tc ++){
+                    if(trainClassList.get(tc).getClass_uuid().equals(trainCourseContent.getClassuuid())){
+                        trainClass = trainClassList.get(tc);
+
+                    }
+                }
+            }
+
+
+            viewHolder.tv_below_school_class_name.setText("" + (trainClass == null ? "暂无名称" : trainClass.getClass_name()));
+            viewHolder.tv_training_classname_content.setText("" + trainCourseContent.getName());
+            viewHolder.tv_training_classtime.setText("" + trainCourseContent.getDuration());
+            viewHolder.tv_trainning_adress.setText("" + trainCourseContent.getAddress());
+            viewHolder.tv_trainning_preparething.setText("" + trainCourseContent.getReadyfor());
+
+            final DianZan trainDianZan = trainCourseContent.getDianzan();
+            setCommonDianZan(viewHolder,trainDianZan);
+
+
+            if (trainCourseContent.getReplyPage() != null && trainCourseContent.getReplyPage().getData() != null) {
+                List<Reply> replies = trainCourseContent.getReplyPage().getData();
+                addReplyView(viewHolder.replyLayout, replies);
+            }
+            //点击点赞之后根据该变切换状态
+            final TrainCourseContent finalTrainCourseContent = trainCourseContent;
+            viewHolder.zanIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (trainDianZan.isCanDianzan()) {
+                        setTrainZan(finalTrainCourseContent, viewHolder.zanIv);
+                    } else {
+                        cancelTrainZan(finalTrainCourseContent, viewHolder.zanIv);
+                    }
+                }
+            });
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             //点赞旁的回复
             viewHolder.replyIv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -341,7 +439,11 @@ public class CourseListAdapter extends BaseAdapter {
 
                     Message message = new Message();
                     message.what = 10;
+<<<<<<< HEAD
                     message.obj = finalMyTrainCoures;
+=======
+                    message.obj = finalTrainCourseContent;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     message.arg1 = weekIndex;
                     mHandler.sendMessageDelayed(message, 300);
 
@@ -355,7 +457,11 @@ public class CourseListAdapter extends BaseAdapter {
 
                     Message message = new Message();
                     message.what = 10;
+<<<<<<< HEAD
                     message.obj = finalMyTrainCoures;
+=======
+                    message.obj = finalTrainCourseContent;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     message.arg1 = weekIndex;
                     mHandler.sendMessageDelayed(message, 300);
                 }
@@ -493,8 +599,13 @@ public class CourseListAdapter extends BaseAdapter {
                     break;
 
                 case 10:
+<<<<<<< HEAD
                     MyTrainCoures m = (MyTrainCoures) msg.obj;
                     courseListFragment.showTrainReplyLayout(m.getUuid(),m);
+=======
+                    TrainCourseContent trainCourseContent = (TrainCourseContent) msg.obj;
+                    courseListFragment.showTrainReplyLayout(trainCourseContent.getUuid(),trainCourseContent);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     break;
             }
         }
@@ -536,6 +647,7 @@ public class CourseListAdapter extends BaseAdapter {
     }
 
     //取消训练点赞
+<<<<<<< HEAD
     public void cancelTrainZan(final MyTrainCoures mTc,final ImageView imageView){
         UserRequest.zanCancel(mContext, mTc.getUuid(), new RequestResultI() {
             @Override
@@ -555,6 +667,27 @@ public class CourseListAdapter extends BaseAdapter {
                 }
                 mTc.getDianZan().setCount(mTc.getDianZan().getCount() - 1);
                 mTc.getDianZan().setCanDianzan(true);
+=======
+    public void cancelTrainZan(final TrainCourseContent trainCourseContent,final ImageView imageView){
+        UserRequest.zanCancel(mContext, trainCourseContent.getUuid(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                imageView.setImageResource(R.drawable.interaction_zan_off);
+                if (trainCourseContent.getDianzan().getNames().contains("," +
+                        CGApplication.getInstance().getLogin().getUserinfo().getName())) {
+                    trainCourseContent.getDianzan().setNames(trainCourseContent.getDianzan().getNames().replace(","
+                            + CGApplication.getInstance().getLogin().getUserinfo().getName(), ""));
+                } else if (trainCourseContent.getDianzan().getNames().contains(
+                        CGApplication.getInstance().getLogin().getUserinfo().getName() + ",")) {
+                    trainCourseContent.getDianzan().setNames(trainCourseContent.getDianzan().getNames().replace(
+                            CGApplication.getInstance().getLogin().getUserinfo().getName() + ",", ""));
+                } else if (trainCourseContent.getDianzan().getNames().contains(CGApplication.getInstance().getLogin().getUserinfo().getName())) {
+                    trainCourseContent.getDianzan().setNames(trainCourseContent.getDianzan().getNames()
+                            .replace(CGApplication.getInstance().getLogin().getUserinfo().getName(), ""));
+                }
+                trainCourseContent.getDianzan().setCount(trainCourseContent.getDianzan().getCount() - 1);
+                trainCourseContent.getDianzan().setCanDianzan(true);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 notifyDataSetChanged();
 //                zanLock = false;
             }
@@ -572,6 +705,7 @@ public class CourseListAdapter extends BaseAdapter {
         });
     }
     //训练点赞
+<<<<<<< HEAD
     public void setTrainZan(final MyTrainCoures myTrain,final ImageView imageView){
 
         UserRequest.zan(mContext, myTrain.getUuid(), NormalReplyListActivity.REPLY_TYPE_TRAIN_CLASS, new RequestResultI() {
@@ -586,6 +720,22 @@ public class CourseListAdapter extends BaseAdapter {
                 }
                 myTrain.getDianZan().setCount(myTrain.getDianZan().getCount() + 1);
                 myTrain.getDianZan().setCanDianzan(false);
+=======
+    public void setTrainZan(final TrainCourseContent trainCourseContent,final ImageView imageView){
+
+        UserRequest.zan(mContext, trainCourseContent.getUuid(), NormalReplyListActivity.REPLY_TYPE_TRAIN_CLASS, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                imageView.setImageResource(R.drawable.interaction_zan_on);
+                if (Utils.stringIsNull(trainCourseContent.getDianzan().getNames())) {
+                    trainCourseContent.getDianzan().setNames(CGApplication.getInstance().getLogin().getUserinfo().getName());
+                } else {
+                    trainCourseContent.getDianzan().setNames(trainCourseContent.getDianzan().getNames()
+                            + "," + CGApplication.getInstance().getLogin().getUserinfo().getName());
+                }
+                trainCourseContent.getDianzan().setCount(trainCourseContent.getDianzan().getCount() + 1);
+                trainCourseContent.getDianzan().setCanDianzan(false);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 notifyDataSetChanged();
 //                zanLock = false;
             }

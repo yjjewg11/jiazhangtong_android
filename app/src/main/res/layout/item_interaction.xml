@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:adsmogo="http://www.adsmogo.com"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="@dimen/small_padding"
+<<<<<<< HEAD
     android:id="@+id/interaciton_item_ll"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     android:paddingLeft="@dimen/normal_padding"
     android:paddingRight="@dimen/normal_padding"
     android:paddingTop="@dimen/small_padding">
 
+<<<<<<< HEAD
     <LinearLayout
         android:id="@+id/ll_ads"
         android:layout_width="match_parent"
@@ -24,6 +31,8 @@
             adsmogo:appid="b1be6cfbb82542c4ba00f32ef1166884" />
     </LinearLayout>
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

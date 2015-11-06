@@ -3,12 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
     <TextView
         android:background="#cccccc"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="0.5dp" />
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     <TextView
         android:padding="5dp"
@@ -27,6 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
+<<<<<<< HEAD
         android:layout_marginRight="@dimen/margin_10"
         android:id="@+id/more_discuss_time"
         android:layout_below="@+id/more_discuss_content"
@@ -37,6 +41,15 @@
         android:paddingLeft="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="@dimen/margin_5"
+=======
+        android:id="@+id/more_discuss_time"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="11dp" />
+
+    <TextView
+        android:padding="5dp"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -45,6 +58,7 @@
         android:layout_below="@+id/more_discuss_mobile_number"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/more_discuss_time" />
+<<<<<<< HEAD
 
     <FrameLayout
         android:layout_marginTop="5dp"
@@ -56,4 +70,6 @@
         <include layout="@layout/common_rating_bar"/>
     </FrameLayout>
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 </RelativeLayout>

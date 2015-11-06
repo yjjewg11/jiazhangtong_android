@@ -16,6 +16,7 @@
 
         <include layout="@layout/layout_pulltorefresh"/>
 
+<<<<<<< HEAD
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +26,8 @@
             android:id="@+id/no_assess_tv"
             android:layout_gravity="center" />
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     </FrameLayout>
 
     <LinearLayout
@@ -33,5 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></LinearLayout>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 </LinearLayout>

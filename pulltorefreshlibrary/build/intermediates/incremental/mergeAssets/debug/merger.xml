@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\src\main\assets"/></dataSet><dataSet config="debug"><source path="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\src\debug\assets"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="C:\Users\tang\Documents\android_family\jiazhangtong_android-master\ChildrenGarden\pulltorefreshlibrary\src\main\assets"/></dataSet><dataSet config="debug"><source path="C:\Users\tang\Documents\android_family\jiazhangtong_android-master\ChildrenGarden\pulltorefreshlibrary\src\debug\assets"/></dataSet></merger>
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0

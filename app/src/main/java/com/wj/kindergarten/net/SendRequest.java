@@ -8,11 +8,17 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
+<<<<<<< HEAD
 import com.wj.kindergarten.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;
 import com.wj.kindergarten.bean.AddressBookMessage;
 import com.wj.kindergarten.bean.AllTeacherList;
+=======
+import com.wj.kindergarten.bean.AddressBook;
+import com.wj.kindergarten.bean.AddressBookEmot;
+import com.wj.kindergarten.bean.AddressBookMessage;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.bean.AppraiseTeacherList;
 import com.wj.kindergarten.bean.ArticleDetail;
 import com.wj.kindergarten.bean.ArticleList;
@@ -20,32 +26,48 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.GetAssessStateList;
 import com.wj.kindergarten.bean.InteractionList;
 import com.wj.kindergarten.bean.Ka;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.MineAllCourseList;
+=======
+import com.wj.kindergarten.bean.InteractionList;
+import com.wj.kindergarten.bean.Ka;
+import com.wj.kindergarten.bean.Login;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.bean.MoreData;
 import com.wj.kindergarten.bean.MoreDiscussList;
 import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.PrivilegeActiveList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
+=======
+import com.wj.kindergarten.bean.ReplyList;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.bean.SchoolList;
 import com.wj.kindergarten.bean.SignList;
 import com.wj.kindergarten.bean.SpecialCourseInfoList;
 import com.wj.kindergarten.bean.SpecialCourseTypeList;
 import com.wj.kindergarten.bean.StoreList;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.StudyStateObjectList;
 import com.wj.kindergarten.bean.TeacherCountList;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.bean.TeacherInfo;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainCourse;
 import com.wj.kindergarten.bean.TrainSchoolInfoListFather;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.TrainTeacherInfo;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -388,6 +410,7 @@ public class SendRequest {
             case RequestType.MORE_DISCUSS_FROM_UUID:
                 resultI.result(getDomain(domain, MoreDiscussList.class));
                 break;
+<<<<<<< HEAD
             case RequestType.NEXT_CLASS_INFO:
                 resultI.result(getDomain(domain,TrainCourse.class));
                 break;
@@ -415,6 +438,8 @@ public class SendRequest {
             case RequestType.GET_PRIVELEGE_ACTIVE:
                 resultI.result(getDomain(domain, PrivilegeActiveList.class));
                 break;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             default:
                 break;
         }

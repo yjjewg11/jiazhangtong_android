@@ -11,10 +11,13 @@
 
         <include layout="@layout/item_special_course_list_view"/>
     </FrameLayout>
+<<<<<<< HEAD
     <TextView
         android:background="#cccccc"
         android:layout_width="match_parent"
         android:layout_height="0.5dp" />
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,13 +31,20 @@
             android:background="@drawable/radio_shape"
             android:orientation="horizontal"
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="35dp"
+=======
+            android:layout_height="50dp"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:layout_gravity="center_horizontal">
 
 
 
             <RadioButton
+<<<<<<< HEAD
                 android:textSize="17sp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:id="@+id/tab_course"
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
@@ -51,7 +61,10 @@
                 android:layout_width="1dp"
                 android:layout_height="30dp" />
             <RadioButton
+<<<<<<< HEAD
                 android:textSize="17sp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:id="@+id/tab_teacher"
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
@@ -69,7 +82,10 @@
                 android:layout_height="30dp" />
 
             <RadioButton
+<<<<<<< HEAD
                 android:textSize="17sp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:id="@+id/tab_introduce"
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
@@ -97,12 +113,15 @@
             android:layout_above="@+id/frameLayout2">
         </android.support.v4.view.ViewPager>
 
+<<<<<<< HEAD
         <TextView
             android:layout_above="@+id/frameLayout2"
             android:background="#bbbbbb"
             android:layout_width="match_parent"
             android:layout_height="1dp" />
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
        <FrameLayout
            android:layout_alignParentBottom="true"

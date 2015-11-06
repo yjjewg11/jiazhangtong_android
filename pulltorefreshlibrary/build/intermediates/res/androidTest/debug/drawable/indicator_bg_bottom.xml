@@ -15,4 +15,8 @@
         android:topLeftRadius="@dimen/indicator_corner_radius"
         android:topRightRadius="@dimen/indicator_corner_radius" />
 
+<<<<<<< HEAD
 </shape><!-- From: file:/E:/work-wenjie-project/ChildrenGarden/pulltorefreshlibrary/src/main/res/drawable/indicator_bg_bottom.xml --><!-- From: file:/E:/work-wenjie-project/ChildrenGarden/pulltorefreshlibrary/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml -->
+=======
+</shape><!-- From: file:/C:/Users/tang/Documents/android_family/jiazhangtong_android-master/ChildrenGarden/pulltorefreshlibrary/src/main/res/drawable/indicator_bg_bottom.xml --><!-- From: file:/C:/Users/tang/Documents/android_family/jiazhangtong_android-master/ChildrenGarden/pulltorefreshlibrary/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml -->
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0

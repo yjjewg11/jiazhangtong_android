@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func;
 
 
+<<<<<<< HEAD
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -36,6 +37,20 @@ import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
+=======
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.specialcourse.MineCourseFragment;
+import com.wj.kindergarten.ui.specialcourse.MineDiscussFragment;
+import com.wj.kindergarten.ui.specialcourse.SimpleIntroduceFragment;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 public class MineCourseDetailActivity extends BaseActivity{
     private RadioGroup radioGroup;
@@ -45,6 +60,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     private RadioButton[] radio_bts;
     private ViewPager viewPager;
     private Fragment [] fragments = new Fragment[3];
+<<<<<<< HEAD
     private StudyStateObject sso;
     private RelativeLayout[] relativeLayouts;
     private HintInfoDialog dialog;
@@ -81,6 +97,8 @@ public class MineCourseDetailActivity extends BaseActivity{
     public StudyStateObject getSso() {
         return sso;
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Override
     protected void setContentLayout() {
@@ -97,6 +115,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     protected void onCreate() {
 
         titleCenterTextView.setText("我的课程详情");
+<<<<<<< HEAD
         sso = (StudyStateObject) getIntent().getSerializableExtra("object");
         initViews();
         setChooseRl();
@@ -204,6 +223,12 @@ public class MineCourseDetailActivity extends BaseActivity{
         tv_coll = (TextView)findViewById(R.id.textview_1_1);
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
 
+=======
+        initViews();
+    }
+
+    private void initViews() {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
         radioGroup = (RadioGroup) findViewById(R.id.mine_course_detail_radio_group);
         radio_bts = new RadioButton[]{
@@ -233,9 +258,15 @@ public class MineCourseDetailActivity extends BaseActivity{
             public Fragment getItem(int position) {
                 if(fragments[position] == null) {
                     if(position == 0) {
+<<<<<<< HEAD
                         fragments [position] = new MineCourseFragment();
                     }else if(position == 1){
                         fragments [position] = new CourseDetailIntroduceFragment();
+=======
+                        fragments[position] = new MineCourseFragment();
+                    }else if(position == 1){
+                        fragments [position] = new SimpleIntroduceFragment();
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     }else {
                         fragments [position] = new MineDiscussFragment();
                     }
@@ -272,6 +303,7 @@ public class MineCourseDetailActivity extends BaseActivity{
             }
         });
     }
+<<<<<<< HEAD
 
 
     private void store() {
@@ -345,4 +377,6 @@ public class MineCourseDetailActivity extends BaseActivity{
             }
         });
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

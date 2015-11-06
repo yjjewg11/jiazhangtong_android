@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="match_parent"
     xmlns:adsmogo="http://www.adsmogo.com">
+=======
+    android:layout_height="match_parent">
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+<<<<<<< HEAD
          <!--  显示广告的Layout  -->
          
         <!-- <com.adsmogo.adview.AdsMogoLayout-->
@@ -25,6 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></FrameLayout>
          
+=======
+        <com.baidu.mobads.AdView
+            android:id="@+id/layout_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
         <LinearLayout
             android:layout_width="match_parent"

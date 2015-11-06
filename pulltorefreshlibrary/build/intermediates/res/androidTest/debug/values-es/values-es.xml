@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/E:/work-wenjie-project/ChildrenGarden/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-es/values-es.xml -->
+=======
+    <!-- From: file:/C:/Users/tang/Documents/android_family/jiazhangtong_android-master/ChildrenGarden/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-es/values-es.xml -->
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     <eat-comment/>
     <string name="pull_to_refresh_pull_label">Tirar para actualizar…</string>
     <string name="pull_to_refresh_refreshing_label">Cargando…</string>

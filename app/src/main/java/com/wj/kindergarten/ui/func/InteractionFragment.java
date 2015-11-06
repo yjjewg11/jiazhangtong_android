@@ -5,7 +5,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +42,11 @@ import java.util.List;
  * @CreateDate: 2015/7/17 11:34
  */
 public class InteractionFragment extends Fragment {
+<<<<<<< HEAD
 
     String newsuuid = "";
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private View rootView;
     private PullToRefreshListView mListView;
     private LinearLayout bottomLayou;
@@ -51,18 +57,24 @@ public class InteractionFragment extends Fragment {
     private List<Interaction> dataList = new ArrayList<>();
     private int nowPage = 1;
     private String nowReplyUUID = "";
+<<<<<<< HEAD
     private boolean isOnce;
 
 
     public void setNewsuuid(String newsuuid) {
         this.newsuuid = newsuuid;
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             rootView = inflater.inflate(R.layout.fragment_interaction, null, false);
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list);
             interactionAdapter = new InteractionAdapter(getActivity(), this, dataList);
@@ -77,6 +89,10 @@ public class InteractionFragment extends Fragment {
 
                 @Override
                 public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 }
             });
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -142,7 +158,11 @@ public class InteractionFragment extends Fragment {
     }
 
     private void getInteractionList(final int page) {
+<<<<<<< HEAD
         UserRequest.getInteractionList(getActivity(), newsuuid, page, new RequestResultI() {
+=======
+        UserRequest.getInteractionList(getActivity(), "", page, new RequestResultI() {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             @Override
             public void result(BaseModel domain) {
                 if (mListView.isRefreshing()) {

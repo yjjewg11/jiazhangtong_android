@@ -174,6 +174,10 @@ public class ShareUtils {
             TextView cacleview = (TextView) popupView.findViewById(R.id.share_cancel);
             if(isMessage){
                 //如果是公告则修改lltop在布局中的位置为中间
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 cacleview.setVisibility(View.GONE);
 //                mPopupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] - 170);
             }else{

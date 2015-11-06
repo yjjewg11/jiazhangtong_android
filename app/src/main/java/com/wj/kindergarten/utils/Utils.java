@@ -3,15 +3,22 @@ package com.wj.kindergarten.utils;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+<<<<<<< HEAD
 import android.app.Activity;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+<<<<<<< HEAD
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+=======
+import android.graphics.Matrix;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -24,11 +31,16 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+<<<<<<< HEAD
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.adsmogo.adview.AdsMogoLayout;
 import com.adsmogo.util.AdsMogoType;
+=======
+import android.widget.Toast;
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.google.gson.Gson;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
@@ -69,14 +81,18 @@ public class Utils {
     public static final SimpleDateFormat timestampFormatter = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss.sss");
 
+<<<<<<< HEAD
     public static final String MOGO_ID = "b1be6cfbb82542c4ba00f32ef1166884";
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     /**
      * util class, avoid to instantiate
      */
     private Utils() {
     }
 
+<<<<<<< HEAD
     public static String isNull(String thing){
         if(thing == null || thing.equals("null")){
             return "";
@@ -100,6 +116,14 @@ public class Utils {
 
         viewGrop.addView(adsMogoLayoutCode,params);
     }
+=======
+    /**
+     * judge str is null or not
+     *
+     * @param str
+     * @return true:str is not null ,flase:str is null
+     */
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public static boolean stringIsNull(String str) {
         if (str == null || "".equals(str) || "null".equals(str)) {
             return true;
@@ -121,10 +145,13 @@ public class Utils {
         }
     }
 
+<<<<<<< HEAD
     public static Integer getIntegerFromString(String s){
         return Integer.valueOf(s);
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     /**
      * show toast
      *
@@ -757,5 +784,8 @@ public class Utils {
         return vn;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

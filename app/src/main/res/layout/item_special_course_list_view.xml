@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
+<<<<<<< HEAD
 
     android:layout_height="match_parent">
 
@@ -48,6 +49,40 @@
 
         <FrameLayout
             android:layout_marginTop="3dp"
+=======
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:id="@+id/relativeLayout">
+
+
+        <ImageView
+            android:maxHeight="80dp"
+            android:maxWidth="120dp"
+            android:scaleType="fitXY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_special_course_list_view_image_view"
+            android:src="@drawable/logo"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="层中幼儿英语"
+            android:id="@+id/item_class_name"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/item_special_course_list_view_image_view"
+            android:layout_marginLeft="49dp" />
+
+        <FrameLayout
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:layout_alignLeft="@+id/item_class_name"
             android:layout_below="@+id/item_class_name"
             android:id="@+id/rating_fl"
@@ -57,10 +92,13 @@
         </FrameLayout>
 
         <TextView
+<<<<<<< HEAD
             android:ellipsize="end"
             android:singleLine="true"
             android:textSize="14sp"
             android:layout_marginTop="3dp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -70,15 +108,19 @@
             android:layout_alignLeft="@+id/rating_fl" />
 
         <TextView
+<<<<<<< HEAD
             android:ellipsize="middle"
             android:singleLine="true"
             android:textSize="12sp"
             android:layout_marginTop="3dp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="教学点：武侯区"
             android:id="@+id/item_special_course_list_view_tv_adresss"
+<<<<<<< HEAD
             android:layout_below="@+id/item_special_course_list_view_tv_edcucation"
             android:layout_alignLeft="@+id/item_special_course_list_view_tv_edcucation"
             android:layout_toLeftOf="@+id/item_special_course_list_view_tv_distance" />
@@ -96,14 +138,38 @@
 
         <TextView
             android:textSize="14sp"
+=======
+            android:layout_alignBottom="@+id/item_special_course_list_view_tv_distance"
+            android:layout_alignLeft="@+id/item_special_course_list_view_tv_edcucation" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="338人正在学"
+            android:id="@+id/item_special_course_list_view_tv_study_people"
+            android:layout_below="@+id/rating_fl"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="1.2km"
+<<<<<<< HEAD
             android:paddingBottom="@dimen/margin_5"
             android:id="@+id/item_special_course_list_view_tv_distance"
             android:layout_below="@+id/item_special_course_list_view_tv_edcucation"
             android:layout_alignRight="@+id/item_special_course_list_view_tv_study_people" />
     </RelativeLayout>
 
+=======
+            android:id="@+id/item_special_course_list_view_tv_distance"
+            android:layout_alignBottom="@+id/item_special_course_list_view_image_view"
+            android:layout_alignRight="@+id/item_special_course_list_view_tv_study_people" />
+    </RelativeLayout>
+
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 </RelativeLayout>

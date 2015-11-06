@@ -6,6 +6,10 @@
         <attr name="starCount" format="integer" />
         <attr name="starEmpty" format="reference" />
         <attr name="starFill" format="reference" />
+<<<<<<< HEAD
         <attr name="starHalf" format="reference" />
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     </declare-styleable>
 </resources>

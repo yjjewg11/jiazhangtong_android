@@ -5,16 +5,24 @@
 
 
     <TextView
+<<<<<<< HEAD
         android:paddingTop="@dimen/margin_5"
         android:paddingBottom="@dimen/margin_5"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+<<<<<<< HEAD
         android:id="@+id/tv_call"
         android:layout_gravity="center_horizontal" />
     <TextView
         android:background="#cccccc"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
+=======
+        android:id="@+id/tv_spinner"
+        android:layout_gravity="center_horizontal" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 </LinearLayout>

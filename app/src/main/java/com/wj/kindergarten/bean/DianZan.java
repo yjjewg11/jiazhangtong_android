@@ -40,6 +40,7 @@ public class DianZan extends BaseModel {
     public void setCanDianzan(boolean canDianzan) {
         this.canDianzan = canDianzan;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -49,4 +50,6 @@ public class DianZan extends BaseModel {
                 ", names='" + names + '\'' +
                 '}';
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

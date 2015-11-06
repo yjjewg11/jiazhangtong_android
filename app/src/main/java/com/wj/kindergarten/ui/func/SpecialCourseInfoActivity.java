@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func;
 
 
+<<<<<<< HEAD
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -42,12 +43,26 @@ import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+=======
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.OnceSpecialCourse;
+import com.wj.kindergarten.bean.OnceSpecialCourseList;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.BaseActivity;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import java.util.ArrayList;
 import java.util.List;
 
 //特长课程详细信息页面
 public class SpecialCourseInfoActivity extends BaseActivity {
+<<<<<<< HEAD
     private ArrayList<MoreDiscuss> moreList =new ArrayList<>();
     private Button bt_more;
     private RatingBarView rating_bar,assess_rb;
@@ -102,6 +117,12 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private RelativeLayout rl_free_price;
     private PullToRefreshScrollView scrollView;
 
+=======
+    private Button bt;
+
+    private List<OnceSpecialCourse> list = new ArrayList<>();
+    private Button bt_more;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Override
     protected void setContentLayout() {
@@ -113,33 +134,59 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     @Override
     protected void setNeedLoading() {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         isNeedLoading  = true;
     }
 
     @Override
     protected void onCreate() {
+<<<<<<< HEAD
         setViews();
         if(bt_more == null){
             bt_more = (Button)findViewById(R.id.start_more_dicuss_special);
         }
 
         titleCenterTextView.setText("课程详情");
+=======
+
+
+        titleCenterTextView.setText("课程详情");
+        bt_more = (Button)findViewById(R.id.start_more_dicuss);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         bt_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SpecialCourseInfoActivity.this,MoreSpecialDiscussActivity.class);
                 //放入评论对象
                 //TODO
+<<<<<<< HEAD
                 intent.putExtra("uuid",object.getUuid());
                 intent.putExtra("discussList",moreList);
                 startActivity(intent);
             }
         });
+=======
+                intent.putExtra("discuss","");
+                startActivity(intent);
+            }
+        });
+//        bt = (Button)findViewById(R.id.start_more_dicuss);
+//        bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SpecialCourseInfoActivity.this,SpecialCourseMoreDicussActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
     }
 
+<<<<<<< HEAD
     private void setViews() {
 
 
@@ -313,6 +360,18 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                     moreList.addAll(mdl.getList().getData());
                     mhandler.sendEmptyMessage(1);
                 }
+=======
+    @Override
+    protected void loadData() {
+        Intent intent = getIntent();
+        String uuid = intent.getStringExtra("uuid");
+        UserRequest.getSpecialCourseINfoFromClickItem(this,uuid,new RequestResultI(){
+            @Override
+            public void result(BaseModel domain) {
+                OnceSpecialCourseList ocs = (OnceSpecialCourseList) domain;
+                list.add(ocs.getData());
+                loadSuc();
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             }
 
             @Override
@@ -325,6 +384,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
             }
         });
+<<<<<<< HEAD
     }
 
     public void getSchoolInfo(String schooluuid){
@@ -431,5 +491,8 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 }

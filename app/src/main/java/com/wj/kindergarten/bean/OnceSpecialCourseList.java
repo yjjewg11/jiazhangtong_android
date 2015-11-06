@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 
 public class OnceSpecialCourseList extends BaseModel{
     @Expose
+<<<<<<< HEAD
     private OnceSpecialCourse data;@Expose
     private boolean isFavor;@Expose
     private String share_url;@Expose
@@ -32,6 +33,9 @@ public class OnceSpecialCourseList extends BaseModel{
     public void setShare_url(String share_url) {
         this.share_url = share_url;
     }
+=======
+    private OnceSpecialCourse data;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public OnceSpecialCourse getData() {
         return data;
@@ -45,9 +49,12 @@ public class OnceSpecialCourseList extends BaseModel{
     public String toString() {
         return "OnceSpecialCourseList{" +
                 "data=" + data +
+<<<<<<< HEAD
                 ", isFavor=" + isFavor +
                 ", share_url='" + share_url + '\'' +
                 ", link_tel='" + link_tel + '\'' +
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 '}';
     }
 }

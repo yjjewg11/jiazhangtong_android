@@ -64,4 +64,8 @@
         </LinearLayout>
     </FrameLayout>
 
+<<<<<<< HEAD
 </merge><!-- From: file:/E:/work-wenjie-project/ChildrenGarden/pulltorefreshlibrary/src/main/res/layout/pull_to_refresh_header_vertical.xml --><!-- From: file:/E:/work-wenjie-project/ChildrenGarden/pulltorefreshlibrary/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml -->
+=======
+</merge><!-- From: file:/C:/Users/tang/Documents/android_family/jiazhangtong_android-master/ChildrenGarden/pulltorefreshlibrary/src/main/res/layout/pull_to_refresh_header_vertical.xml --><!-- From: file:/C:/Users/tang/Documents/android_family/jiazhangtong_android-master/ChildrenGarden/pulltorefreshlibrary/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml -->
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0

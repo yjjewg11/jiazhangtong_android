@@ -1,6 +1,9 @@
 package com.wj.kindergarten.ui.specialcourse;
 
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,8 +11,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -21,9 +27,13 @@ import com.wj.kindergarten.bean.SpecialCourseInfoObject;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.SchoolDetailInfoActivity;
+<<<<<<< HEAD
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
 import com.wj.kindergarten.utils.ToastUtils;
+=======
+import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +62,14 @@ public class ClassFragment extends Fragment {
                     if(adapter != null)
                     adapter.setSepcialList(list);
                     break;
+<<<<<<< HEAD
                 case 2:
                     //没有数据
                     FrameLayout rl = (FrameLayout) view.findViewById(R.id.class_fllll);
                     ((SchoolDetailInfoActivity) getActivity()).noView(rl);
                     break;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             }
         }
     };
@@ -65,6 +78,7 @@ public class ClassFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+<<<<<<< HEAD
 
         //初始进来初始化数据
     }
@@ -87,6 +101,26 @@ public class ClassFragment extends Fragment {
                         ToastUtils.showMessage("没有更多内容了!");
                     }
 
+=======
+        activity  =(SchoolDetailInfoActivity) getActivity();
+        //初始进来初始化数据
+        if(!isFirst){
+            inidData();
+            isFirst = true;
+        }
+
+    }
+
+    private void inidData() {
+
+        UserRequest.getSpecialCourseInfoFormType(getActivity(), activity.schoolUuid, pageNo, 0, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                SpecialCourseInfoList tsif = (SpecialCourseInfoList)domain;
+                if(tsif != null && tsif.getList() != null){
+                    list.addAll(tsif.getList().getData());
+                    mHandler.sendEmptyMessage(1);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 }
             }
 
@@ -110,6 +144,7 @@ public class ClassFragment extends Fragment {
         if (view == null){
             view = inflater.inflate(R.layout.fragment_class,null);
             mListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
+<<<<<<< HEAD
             mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
             adapter = new SpecialCourseListAdapter(getActivity());
             adapter.setSepcialList(list);
@@ -139,6 +174,19 @@ public class ClassFragment extends Fragment {
                 inidData();
                 isFirst = true;
             }
+=======
+            adapter = new SpecialCourseListAdapter(getActivity());
+            adapter.setSepcialList(list);
+            mListView.setAdapter(adapter);
+            mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+                @Override
+                public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                    pageNo++;
+                    inidData();
+
+                }
+            });
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         }
 
         return view;

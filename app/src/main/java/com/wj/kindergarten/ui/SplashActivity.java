@@ -8,11 +8,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
+<<<<<<< HEAD
 import com.adsmogo.adview.AdsMogoLayout;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengRegistrar;
+<<<<<<< HEAD
 import com.umeng.onlineconfig.OnlineConfigAgent;
 import com.umeng.onlineconfig.OnlineConfigLog;
 import com.umeng.onlineconfig.UmengOnlineConfigureListener;
@@ -20,13 +24,25 @@ import com.wenjie.jiazhangtong.R;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.common.CGSharedPreference;
+=======
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
+import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.common.CGSharedPreference;
+import com.wj.kindergarten.net.RequestResultI;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 
+<<<<<<< HEAD
 import org.json.JSONObject;
+=======
+import java.util.List;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
 /**
@@ -71,6 +87,7 @@ public class SplashActivity extends Activity {
         ActivityManger.getInstance().addActivity(this);
 
         try {
+<<<<<<< HEAD
 
             OnlineConfigAgent.getInstance().updateOnlineConfig(this);
             OnlineConfigAgent.getInstance().setDebugMode(true);
@@ -85,6 +102,8 @@ public class SplashActivity extends Activity {
             OnlineConfigAgent.getInstance().setOnlineConfigListener(configureListener);
 
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             PushAgent mPushAgent = PushAgent.getInstance(this);
             mPushAgent.setDebugMode(true);
             mPushAgent.onAppStart();
@@ -134,6 +153,7 @@ public class SplashActivity extends Activity {
         if (mHandler != null) {
             mHandler.removeMessages(SPLASH_DELAY);
         }
+<<<<<<< HEAD
 
         AdsMogoLayout.clear();
 //        adsMogoLayoutCode.clearThread();
@@ -141,3 +161,8 @@ public class SplashActivity extends Activity {
     }
 }
 
+=======
+        super.onDestroy();
+    }
+}
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0

@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.func;
 
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -9,10 +10,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+=======
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.StudyStateObject;
 import com.wj.kindergarten.bean.StudyStateObjectList;
@@ -24,10 +31,15 @@ import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+=======
+import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.adapter.MineCourseStatusAdapter;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 public class MineSpecialCourseActivity extends BaseActivity{
     private PullToRefreshListView mListView;
     private MineCourseStatusAdapter adapter;
+<<<<<<< HEAD
     private RadioButton rb_study;
     private RadioButton rb_study_over;
     private TextView red_left;
@@ -64,6 +76,8 @@ public class MineSpecialCourseActivity extends BaseActivity{
             mListView.onRefreshComplete();
         }
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Override
     protected void setContentLayout() {
@@ -73,12 +87,17 @@ public class MineSpecialCourseActivity extends BaseActivity{
 
     @Override
     protected void setNeedLoading() {
+<<<<<<< HEAD
+=======
+//               isNeedLoading = true;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     @Override
     protected void onCreate() {
                titleCenterTextView.setText("我的特长课程");
         initViews();
+<<<<<<< HEAD
         loadData();
 
     }
@@ -116,6 +135,16 @@ public class MineSpecialCourseActivity extends BaseActivity{
         adapter = new MineCourseStatusAdapter(this);
         mListView.setAdapter(adapter);
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+=======
+
+    }
+
+    int pageNo = 1;
+    private void initViews() {
+        mListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
+        adapter = new MineCourseStatusAdapter(this);
+        mListView.setAdapter(adapter);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -124,12 +153,16 @@ public class MineSpecialCourseActivity extends BaseActivity{
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+<<<<<<< HEAD
                 if(isStudying == 0){
                     pageStudying++;
                 }else{
                     pageStudyOver++;
                 }
                 loadData();
+=======
+                pageNo++;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
             }
         });
@@ -137,6 +170,7 @@ public class MineSpecialCourseActivity extends BaseActivity{
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+<<<<<<< HEAD
                 StudyStateObject sso = null;
                 if(isStudying == 0){
                     if(!studyint_list.isEmpty())
@@ -148,11 +182,16 @@ public class MineSpecialCourseActivity extends BaseActivity{
                 }
                 Intent intent = new Intent(MineSpecialCourseActivity.this,MineCourseDetailActivity.class);
                 intent.putExtra("object",sso);
+=======
+
+                Intent intent = new Intent(MineSpecialCourseActivity.this,MineCourseDetailActivity.class);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 startActivity(intent);
             }
         });
     }
 
+<<<<<<< HEAD
     private int getPageNo = 1;
     private int isStudying = 0;
     @Override
@@ -189,6 +228,12 @@ public class MineSpecialCourseActivity extends BaseActivity{
 
             }
         });
+=======
+    @Override
+    protected void loadData() {
+
+        //暂无法请求数据，没有接口
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     }
 }

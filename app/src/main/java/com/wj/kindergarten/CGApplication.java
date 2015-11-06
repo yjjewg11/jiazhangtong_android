@@ -2,11 +2,15 @@ package com.wj.kindergarten;
 
 import android.app.Application;
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+=======
+import android.graphics.Bitmap;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +20,7 @@ import android.util.Log;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.wenjie.jiazhangtong.R;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Group;
@@ -33,6 +38,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+=======
+import com.wj.kindergarten.bean.ChildInfo;
+import com.wj.kindergarten.bean.Group;
+import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.net.RequestHttpUtil;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+
+import java.io.File;
+import java.util.HashMap;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import java.util.Map;
 
 /**
@@ -44,18 +60,26 @@ import java.util.Map;
  */
 public class CGApplication extends Application {
     public static CGApplication context = null;
+<<<<<<< HEAD
     public static double latitude = -1;
     public static double longitude = -1;
+=======
+    public static double latitude = 0;
+    public static double longitude = 0;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private Login login = null;
     private Map<String, Group> groupMap = new HashMap<>();
     private Map<String, ChildInfo> childInfoMap = new HashMap<>();
     public static DisplayImageOptions options = null;
+<<<<<<< HEAD
     private List<Address> listAdress ;
     private String latLongString;
 
     public String getLatLongString() {
         return latLongString;
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     @Override
     public void onCreate() {
@@ -74,7 +98,11 @@ public class CGApplication extends Application {
                 .cacheOnDisk(true)
                 .displayer(new RoundedBitmapDisplayer(0)).build();
 
+<<<<<<< HEAD
         requestNetworkLocation();
+=======
+//        requestNetworkLocation();
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     public static CGApplication getInstance() {
@@ -130,7 +158,10 @@ public class CGApplication extends Application {
         mLocMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000 * 60, 100, mLocLis);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private LocationListener mLocLis = new LocationListener() {
 
         @Override
@@ -150,6 +181,7 @@ public class CGApplication extends Application {
 
         @Override
         public void onLocationChanged(Location location) {
+<<<<<<< HEAD
             latitude = (location.getLatitude());
             longitude =( location.getLongitude());
             Log.i("TAG","打印坐标 x : "+ latitude + "   y : "+longitude);
@@ -205,4 +237,11 @@ public class CGApplication extends Application {
             }
         });
     }
+=======
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            Log.i("TAG", "latitude: " + latitude + ", longitude: " + longitude);
+        }
+    };
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

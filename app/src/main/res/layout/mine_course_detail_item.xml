@@ -21,27 +21,46 @@
         android:layout_alignParentLeft="true" />
 
     <TextView
+<<<<<<< HEAD
         android:paddingRight="@dimen/margin_5"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="生物与技术"
         android:id="@+id/mine_item_content"
+<<<<<<< HEAD
         android:layout_marginLeft="15dp"
         android:layout_alignTop="@+id/mine_item_class_sort"
         android:layout_toRightOf="@+id/mine_item_class_sort"
         android:layout_toLeftOf="@+id/mine_item_time" />
 
     <TextView
+=======
+        android:layout_marginLeft="17dp"
+        android:layout_alignTop="@+id/mine_item_class_sort"
+        android:layout_toRightOf="@+id/mine_item_class_sort" />
+
+    <TextView
+        android:layout_centerVertical="true"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="2015-10-12"
         android:id="@+id/mine_item_time"
+<<<<<<< HEAD
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/mine_item_iv_right"
         android:layout_marginRight="13dp" />
+=======
+        android:layout_marginLeft="18dp"
+        android:layout_alignBaseline="@+id/mine_item_class_sort"
+        android:layout_alignBottom="@+id/mine_item_class_sort"
+        android:layout_toRightOf="@+id/mine_item_content" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     <ImageView
         android:layout_centerVertical="true"

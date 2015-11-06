@@ -11,8 +11,11 @@ import com.google.gson.annotations.Expose;
  */
 public class Article extends BaseModel {
     @Expose
+<<<<<<< HEAD
     private String url;
     @Expose
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private String uuid;
     @Expose
     private String create_time;
@@ -37,6 +40,7 @@ public class Article extends BaseModel {
     @Expose
     private int count;
 
+<<<<<<< HEAD
     public String getUrl() {
         return url;
     }
@@ -45,6 +49,8 @@ public class Article extends BaseModel {
         this.url = url;
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public String getUuid() {
         return uuid;
     }
@@ -140,6 +146,7 @@ public class Article extends BaseModel {
     public void setCount(int count) {
         this.count = count;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -159,4 +166,6 @@ public class Article extends BaseModel {
                 ", count=" + count +
                 '}';
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

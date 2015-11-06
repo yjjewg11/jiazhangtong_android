@@ -3,8 +3,11 @@ package com.wj.kindergarten.ui.main;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -17,9 +20,12 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.umeng.onlineconfig.OnlineConfigAgent;
 import com.umeng.onlineconfig.OnlineConfigLog;
 import com.umeng.onlineconfig.UmengOnlineConfigureListener;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -30,7 +36,10 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
+<<<<<<< HEAD
 import com.wj.kindergarten.bean.VersionInfo;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
@@ -44,8 +53,11 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
 
+<<<<<<< HEAD
 import org.json.JSONObject;
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import java.util.List;
 
 
@@ -75,7 +87,10 @@ public class MainActivity extends BaseActivity {
     public static  MainActivity instance;
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public TrainChildInfoList getTrainChildInfoList(){
         return TCI;
     }
@@ -102,9 +117,42 @@ public class MainActivity extends BaseActivity {
         checkVersion();
         handler.sendEmptyMessageDelayed(2, 500);
 
+<<<<<<< HEAD
     }
 
 
+=======
+
+        getTrainUuid();
+
+    }
+
+    //获取培训孩子信息
+    private void getTrainUuid() {
+
+        UserRequest.getTrainChild(mContext, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                TCI= ((TrainChildInfoList) domain);
+                //获取孩子信息成功，通知获取培训班信息
+//                CGLog.i("打印孩子信息" + );
+                handler.sendEmptyMessage(100);
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+
+
+    }
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
     private void login() {
@@ -206,10 +254,16 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
+<<<<<<< HEAD
      * 版本检测,设置统计在线参数
      */
     private void checkVersion() {
 
+=======
+     * 版本检测
+     */
+    private void checkVersion() {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         UmengUpdateAgent.setUpdateOnlyWifi(true);
         UmengUpdateAgent.setUpdateAutoPopup(false);
         UmengUpdateAgent.setUpdateCheckConfig(false);
@@ -277,6 +331,10 @@ public class MainActivity extends BaseActivity {
                 } else {
                     if (isClickMessage) {
                         msgImageView.setImageResource(R.drawable.message_tab);
+<<<<<<< HEAD
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     }
                 }
             }
@@ -335,7 +393,11 @@ public class MainActivity extends BaseActivity {
         } else {
             imageView.setImageResource(mImageViewArray2[index]);
         }
+<<<<<<< HEAD
 //        imageView.setImageResource(mImageViewArray[index]);
+=======
+        imageView.setImageResource(mImageViewArray[index]);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         TextView textView = (TextView) view.findViewById(R.id.main_tab_item_text);
         textView.setText(mTabIdArray[index]);
         mTabViews[index] = view;

@@ -1,11 +1,15 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.graphics.drawable.Drawable;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+<<<<<<< HEAD
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,11 +41,30 @@ import java.util.List;
 
 public class SchoolDetailInfoActivity extends BaseActivity{
     private ViewPager viewPager;
+=======
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.specialcourse.ClassFragment;
+import com.wj.kindergarten.ui.specialcourse.SimpleIntroduceFragment;
+import com.wj.kindergarten.ui.specialcourse.TeachersSpecialFragment;
+import com.wj.kindergarten.utils.ShareUtils;
+
+public class SchoolDetailInfoActivity extends BaseActivity{
+    private ViewPager viewPager;
+
+    public String schoolUuid;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private RelativeLayout[] relatives;
     private RadioGroup radioGroup;
     private RadioButton bt_course,tab_teacher,tab_introduce;
     private RadioButton[] radioButtons;
 
+<<<<<<< HEAD
     private TrainSchoolInfo school;
     private ImageView iv_head;
     private RatingBarView rating_bar;
@@ -56,12 +79,15 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         return schoolDetail;
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     @Override
     protected void setContentLayout() {
 
         layoutId = R.layout.activity_schllo_detail_info;
     }
 
+<<<<<<< HEAD
 
     public TrainSchoolInfo getSchool() {
         return school;
@@ -72,6 +98,11 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         Intent intent = getIntent();
         school = (TrainSchoolInfo) intent.getSerializableExtra("school");
         isNeedLoading = true;
+=======
+    @Override
+    protected void setNeedLoading() {
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     }
 
     private Fragment classInfo,teachers,introduce;
@@ -84,6 +115,11 @@ public class SchoolDetailInfoActivity extends BaseActivity{
 
         titleCenterTextView.setText("学校详情");
         radioGroup = (RadioGroup) findViewById(R.id.special_radio_group);
+<<<<<<< HEAD
+=======
+        Intent intent = getIntent();
+        schoolUuid = intent.getStringExtra("schoolUuid");
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         viewPager = (ViewPager)findViewById(R.id.shcool_detail_viewPager);
         setViews();
 
@@ -115,6 +151,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
             @Override
             public void onPageSelected(int position) {
                 int id = 0;
+<<<<<<< HEAD
                 switch (position) {
                     case 0:
                         id = R.id.tab_course;
@@ -127,6 +164,14 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                         break;
                 }
                 radioGroup.check(id);
+=======
+                switch (position){
+                    case 0: id = R.id.tab_course; break;
+                    case 1: id = R.id.tab_teacher; break;
+                    case 2: id = R.id.tab_introduce; break;
+                }
+                        radioGroup.check(id);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             }
 
             @Override
@@ -136,6 +181,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         });
     }
 
+<<<<<<< HEAD
     @Override
     protected void loadData() {
 
@@ -191,6 +237,9 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         }
 
 
+=======
+    private void setViews() {
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         relatives = new RelativeLayout[]{
                 (RelativeLayout) findViewById(R.id.train_course_tab_shoucang),
                 (RelativeLayout) findViewById(R.id.train_course_tab_share),
@@ -203,6 +252,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                 public void onClick(View v) {
                     switch (v.getId()){
                         case R.id.train_course_tab_shoucang:
+<<<<<<< HEAD
                             if(tv_coll.getText().toString().equals("收藏")){
                                 store();
                             }else{
@@ -221,6 +271,19 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                             break;
                         case R.id.train_course_tab_ask:
                             CallUtils.showCall(SchoolDetailInfoActivity.this,schoolDetail.getLink_tel().split(","),new CallTransfer(school.getUuid(),81));
+=======
+
+                            break;
+                        case R.id.train_course_tab_share:
+                            ShareUtils.showShareDialog(SchoolDetailInfoActivity.this, v, "", "", "", "", false);
+                            break;
+                        case R.id.train_course_tab_interaction:
+
+                            break;
+                        case R.id.train_course_tab_ask:
+                            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "18780475970"));
+                            startActivity(phoneIntent);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                             break;
                     }
                 }
@@ -254,6 +317,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
 
+<<<<<<< HEAD
     private void store() {
         dialog = new HintInfoDialog(SchoolDetailInfoActivity.this, "收藏中，请稍后...");
         dialog.show();
@@ -326,4 +390,6 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         });
     }
 
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 }

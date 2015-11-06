@@ -4,10 +4,13 @@ import com.google.gson.annotations.Expose;
 
 public class TrainSchoolInfo extends BaseModel{
     @Expose
+<<<<<<< HEAD
     private String summary;
     @Expose
     private String distance;
     @Expose
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     private String uuid;
     @Expose
     private String create_time;
@@ -27,6 +30,7 @@ public class TrainSchoolInfo extends BaseModel{
     private String img;
     @Expose
     private String address;
+<<<<<<< HEAD
     @Expose
     private String prov;@Expose
     private String city;@Expose
@@ -80,6 +84,8 @@ public class TrainSchoolInfo extends BaseModel{
     public void setProv(String prov) {
         this.prov = prov;
     }
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public String getAddress() {
         return address;
@@ -137,6 +143,11 @@ public class TrainSchoolInfo extends BaseModel{
         this.brand_name = brand_name;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     public String getLink_tel() {
         return link_tel;
     }
@@ -164,6 +175,7 @@ public class TrainSchoolInfo extends BaseModel{
     @Override
     public String toString() {
         return "TrainSchoolInfo{" +
+<<<<<<< HEAD
                 "summary='" + summary + '\'' +
                 ", distance='" + distance + '\'' +
                 ", uuid='" + uuid + '\'' +
@@ -180,6 +192,13 @@ public class TrainSchoolInfo extends BaseModel{
                 ", city='" + city + '\'' +
                 ", ct_study_students=" + ct_study_students +
                 ", ct_stars=" + ct_stars +
+=======
+                "brand_name='" + brand_name + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", link_tel='" + link_tel + '\'' +
+                ", map_point='" + map_point + '\'' +
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 '}';
     }
 }

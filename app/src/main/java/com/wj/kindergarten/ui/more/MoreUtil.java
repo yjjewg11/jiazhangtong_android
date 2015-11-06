@@ -12,6 +12,10 @@ import android.widget.PopupWindow;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.More;
+<<<<<<< HEAD
+=======
+import com.wj.kindergarten.ui.webview.WebviewActivity;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 import java.util.ArrayList;
 
@@ -56,7 +60,11 @@ public class MoreUtil {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     More more = list.get(position);
                     if (null != more) {
+<<<<<<< HEAD
                         Intent intent = new Intent(context, HtmlActivity.class);
+=======
+                        Intent intent = new Intent(context, WebviewActivity.class);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         intent.putExtra("title", more.getName());
                         intent.putExtra("url", more.getUrl());
                         context.startActivity(intent);

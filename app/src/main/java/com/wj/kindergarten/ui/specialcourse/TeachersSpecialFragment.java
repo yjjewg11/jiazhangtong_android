@@ -1,14 +1,19 @@
 package com.wj.kindergarten.ui.specialcourse;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+=======
+import android.os.Bundle;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -27,11 +32,18 @@ import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+=======
+
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
 
 public class TeachersSpecialFragment extends Fragment {
     private PullToRefreshListView mListView;
     private View view;
+<<<<<<< HEAD
     private TeacherSpecialAdapter tsa;
     private ArrayList<TeacherCount> list = new ArrayList<>();
     private Handler mHandler = new Handler(){
@@ -99,10 +111,14 @@ public class TeachersSpecialFragment extends Fragment {
     }
 
     boolean isFirst ;
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+<<<<<<< HEAD
 
 
         if (view == null){
@@ -138,6 +154,12 @@ public class TeachersSpecialFragment extends Fragment {
                 load();
                 isFirst = true;
             }
+=======
+        if (view == null){
+            view = inflater.inflate(R.layout.fragment_teachers_special,null);
+            mListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
+            mListView.setAdapter(new SpecialCourseListAdapter(getActivity()));
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         }
         return view;
     }

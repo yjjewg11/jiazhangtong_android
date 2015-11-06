@@ -15,7 +15,11 @@
             android:layout_weight="1">
 
             <TextView
+<<<<<<< HEAD
                 android:id="@+id/textview_1_1"
+=======
+                android:id="@+id/textview_1"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="1dp"
@@ -31,7 +35,11 @@
                 android:src="@drawable/shoucang1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:id="@+id/imageView_1_1"
+=======
+                android:id="@+id/imageView"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -43,7 +51,11 @@
             android:layout_weight="1">
 
             <TextView
+<<<<<<< HEAD
                 android:id="@+id/textview_2_2"
+=======
+                android:id="@+id/textview_2"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -93,7 +105,11 @@
                 android:gravity="center"
                 android:background="#ff7800"
                 android:text="咨询"
+<<<<<<< HEAD
                 android:textColor="#ffffff"
+=======
+                android:textColor="@color/color_929292"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:textSize="10dp" />
         </RelativeLayout>
     </LinearLayout>

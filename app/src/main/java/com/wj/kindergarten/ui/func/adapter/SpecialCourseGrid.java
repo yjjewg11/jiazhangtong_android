@@ -3,12 +3,16 @@ package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+<<<<<<< HEAD
 import android.util.DisplayMetrics;
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+<<<<<<< HEAD
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,11 +24,20 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.WindowUtils;
 
 import java.util.ArrayList;
+=======
+import android.widget.TextView;
+
+import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.SpecialCourseType;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 import java.util.List;
 
 public class SpecialCourseGrid extends BaseAdapter{
     private Context mContext;
     private LayoutInflater inflater;
+<<<<<<< HEAD
     private List<SpecialCourseType> list = new ArrayList<>();
     public SpecialCourseGrid(Context context) {
         this.mContext = context;
@@ -37,6 +50,15 @@ public class SpecialCourseGrid extends BaseAdapter{
         notifyDataSetChanged();
     }
 
+=======
+    private List<SpecialCourseType> list;
+    public SpecialCourseGrid(Context context,List<SpecialCourseType> list) {
+        this.mContext = context;
+        this.list = list;
+        inflater = LayoutInflater.from(context);
+    }
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     @Override
     public int getCount() {
         return (list.size() == 0 ? 0 : list.size());
@@ -68,6 +90,7 @@ public class SpecialCourseGrid extends BaseAdapter{
 
         SpecialCourseType specialCourseType = list.get(position);
         if(specialCourseType!=null){
+<<<<<<< HEAD
             String http = specialCourseType.getImg();
             if(TextUtils.isEmpty(http)){
                 viewHolder.iv.setImageResource(R.drawable.main_item);
@@ -77,6 +100,13 @@ public class SpecialCourseGrid extends BaseAdapter{
                 params.height =  (int) (45 * (WindowUtils.getDesnity()));
                 viewHolder.iv.setLayoutParams(params);
                 ImageLoaderUtil.displayMyImage(specialCourseType.getImg(), viewHolder.iv);
+=======
+            String http = specialCourseType.getDescription();
+            if(TextUtils.isEmpty(http)){
+                viewHolder.iv.setImageResource(R.drawable.main_item);
+            }else{
+                ImageLoaderUtil.displayMyImage(specialCourseType.getDescription(), viewHolder.iv);
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             }
 
             viewHolder.tv.setText("" + specialCourseType.getDatavalue());

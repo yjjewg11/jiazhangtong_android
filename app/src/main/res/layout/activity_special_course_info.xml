@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:weightSum="1">
 
     <FrameLayout
+<<<<<<< HEAD
         android:layout_weight="1"
         android:id="@+id/head_title"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <include layout="@layout/title_normal"/>
     </FrameLayout>
 
+<<<<<<< HEAD
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:layout_above="@+id/btom_llll"
         android:layout_below="@+id/head_title"
@@ -23,10 +32,23 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+=======
+    <ImageView
+        android:id="@+id/once_iv"
+        android:src="@drawable/load2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_below="@+id/once_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+<<<<<<< HEAD
             <ImageView
                 android:visibility="gone"
                 android:id="@+id/once_iv"
@@ -34,11 +56,14 @@
                 android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+<<<<<<< HEAD
                     android:layout_marginTop="@dimen/margin_15"
                     android:id="@+id/course_detail_train_class_name"
                     android:layout_marginLeft="10dp"
@@ -69,6 +94,17 @@
                 <RelativeLayout
                     android:visibility="gone"
                     android:paddingLeft="@dimen/margin_10"
+=======
+                    android:layout_marginLeft="10dp"
+                    android:text="晨钟幼儿英语"
+                    android:textSize="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RatingBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     android:layout_width="match_parent"
                     android:minHeight="30dp"
                     android:layout_height="wrap_content">
@@ -87,39 +123,63 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="3-6岁幼儿英语"
+<<<<<<< HEAD
                         android:id="@+id/detail_course"
+=======
+                        android:id="@+id/textView6"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/textView5"
                         android:layout_marginLeft="18dp" />
                 </RelativeLayout>
                 <RelativeLayout
+<<<<<<< HEAD
                     android:paddingLeft="@dimen/margin_10"
                     android:layout_width="match_parent"
                     android:minHeight="20dp"
                     android:layout_height="wrap_content">
                     <TextView
                         android:textSize="14sp"
+=======
+                    android:layout_width="match_parent"
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="上课地点："
                         android:id="@+id/textView7"
+<<<<<<< HEAD
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true" />
 
                     <TextView
                         android:textSize="14sp"
+=======
+                        android:layout_alignTop="@+id/textView8"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp" />
+
+                    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="成都武侯区金太阳幼儿园校园区"
+<<<<<<< HEAD
                         android:id="@+id/teach_place"
+=======
+                        android:id="@+id/textView8"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/textView7"
                         android:layout_marginLeft="18dp" />
                 </RelativeLayout>
                 <RelativeLayout
+<<<<<<< HEAD
                     android:paddingLeft="@dimen/margin_10"
                     android:layout_width="match_parent"
                     android:minHeight="20dp"
@@ -137,16 +197,37 @@
 
                     <TextView
                         android:textSize="14sp"
+=======
+                    android:layout_width="match_parent"
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="课程时长："
+                        android:id="@+id/textView9"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp" />
+
+                    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="总课时40课时，每课时45分钟"
+<<<<<<< HEAD
                         android:id="@+id/course_spend_time"
+=======
+                        android:id="@+id/textView10"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/textView9"
                         android:layout_marginLeft="18dp" />
                 </RelativeLayout>
                 <RelativeLayout
+<<<<<<< HEAD
                     android:paddingLeft="@dimen/margin_10"
                     android:id="@+id/rl_price"
                     android:layout_width="match_parent"
@@ -154,6 +235,12 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:textSize="14sp"
+=======
+                    android:layout_width="match_parent"
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -164,23 +251,36 @@
                         android:layout_marginLeft="9dp" />
 
                     <TextView
+<<<<<<< HEAD
                         android:textSize="14sp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="888.00元"
+<<<<<<< HEAD
                         android:id="@+id/nornal_course_price"
+=======
+                        android:id="@+id/textView12"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/textView11"
                         android:layout_marginLeft="18dp" />
                 </RelativeLayout>
                 <RelativeLayout
+<<<<<<< HEAD
                     android:paddingLeft="@dimen/margin_10"
                     android:id="@+id/rl_free_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         android:textSize="14sp"
+=======
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+                    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -191,13 +291,21 @@
                         android:layout_marginLeft="9dp" />
 
                     <TextView
+<<<<<<< HEAD
                         android:layout_alignParentTop="true"
                         android:textSize="14sp"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="无"
+<<<<<<< HEAD
                         android:id="@+id/coupon_price"
+=======
+                        android:id="@+id/textView14"
+                        android:layout_centerVertical="true"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_toRightOf="@+id/textView13"
                         android:layout_marginLeft="18dp" />
                 </RelativeLayout>
@@ -208,24 +316,36 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+<<<<<<< HEAD
                 <TextView
                     android:layout_marginTop="@dimen/margin_10"
                     android:background="#e6e6e6"
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
+=======
+
+                <TextView
+                    android:background="#efeff4"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
 
                     <TextView
+<<<<<<< HEAD
 
                         android:layout_marginBottom="@dimen/margin_10"
                         android:drawableLeft="@drawable/redline"
                         android:drawablePadding="10dp"
                         android:textSize="17sp"
                         android:layout_marginTop="10dp"
+=======
+                        android:layout_marginTop="5dp"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -235,12 +355,21 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentLeft="true" />
 
+<<<<<<< HEAD
                     <WebView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="   暂时没有课程详情"
                         android:id="@+id/course_detail_info"
+=======
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="     一些繁琐的介绍"
+                        android:id="@+id/textView18"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_below="@+id/textView15"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
@@ -251,7 +380,10 @@
 
 
             <LinearLayout
+<<<<<<< HEAD
                 android:id="@+id/parent_assess_linear"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -263,11 +395,14 @@
 
 
                 <TextView
+<<<<<<< HEAD
                     android:layout_marginBottom="@dimen/margin_10"
                     android:layout_marginTop="@dimen/margin_10"
                     android:textSize="17sp"
                     android:drawablePadding="@dimen/margin_10"
                     android:drawableLeft="@drawable/redline"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                     android:layout_marginLeft="9dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -281,6 +416,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:id="@+id/more_assess_linera">
 
                 </LinearLayout>
@@ -313,6 +449,24 @@
                     android:background="#cccccc"
                     android:layout_width="match_parent"
                     android:layout_height="1dp" />
+=======
+                    android:id="@+id/linearLayout">
+
+
+                </LinearLayout>
+
+                <Button
+                    android:textColor="#ffffff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查看更多"
+                    android:background="@drawable/look_more_discuss"
+                    android:id="@+id/start_more_dicuss"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.08"
+                    android:layout_above="@+id/frameLayout"
+                    android:layout_centerHorizontal="true" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
             </LinearLayout>
 
@@ -332,11 +486,14 @@
 
 
                     <TextView
+<<<<<<< HEAD
                         android:layout_marginTop="@dimen/margin_10"
                         android:layout_marginBottom="@dimen/margin_10"
                         android:drawablePadding="@dimen/margin_10"
                         android:textSize="17sp"
                         android:drawableLeft="@drawable/redline"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -346,12 +503,21 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp" />
 
+<<<<<<< HEAD
                     <WebView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="   暂时没有学校内容介绍"
                         android:id="@+id/tv_school_introduce"
+=======
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="   星星幼儿园是一家国内外非常出名的幼儿园"
+                        android:id="@+id/textView20"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
                         android:layout_below="@+id/textView19"
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
@@ -360,6 +526,7 @@
 
 
         </LinearLayout>
+<<<<<<< HEAD
         </RelativeLayout>
     </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 
@@ -374,8 +541,23 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+=======
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frameLayout">
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         <include layout="@layout/train_course_common"/>
     </FrameLayout>
 
 
+<<<<<<< HEAD
 </RelativeLayout>
+=======
+
+</LinearLayout>
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0

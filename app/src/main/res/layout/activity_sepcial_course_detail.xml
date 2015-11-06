@@ -9,6 +9,7 @@
         android:layout_height="45dp">
 
 
+<<<<<<< HEAD
         <RelativeLayout
             android:id="@+id/iv_top_left_back"
             android:layout_width="50dp"
@@ -24,6 +25,16 @@
         </RelativeLayout>
 
 
+=======
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_top_left_back"
+            android:src="@drawable/title_back"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -55,6 +66,7 @@
 
         </RadioGroup>
 
+<<<<<<< HEAD
         <TextView
             android:id="@+id/spinner_city_special"
             android:textColor="#ffffff"
@@ -68,6 +80,8 @@
             android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     </RelativeLayout>
 
@@ -78,6 +92,7 @@
         android:layout_height="50dp">
 
 
+<<<<<<< HEAD
         <Button
             android:paddingRight="15dp"
             android:drawableRight="@drawable/xiajiantou"
@@ -87,6 +102,14 @@
             android:background="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+=======
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:id="@+id/sp_study_class" />
 
         <TextView
@@ -97,6 +120,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/textView3" />
 
+<<<<<<< HEAD
         <Button
             android:paddingRight="15dp"
             android:drawableRight="@drawable/xiajiantou"
@@ -106,6 +130,14 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+=======
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
             android:id="@+id/sp_sort" />
 
     </LinearLayout>
@@ -119,7 +151,10 @@
         android:layout_gravity="center_horizontal" />
 
     <FrameLayout
+<<<<<<< HEAD
         android:id="@+id/replace_view"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include layout="@layout/layout_pulltorefresh"/>

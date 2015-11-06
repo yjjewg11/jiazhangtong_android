@@ -18,6 +18,7 @@ public class ArticleDetail extends BaseModel {
     private String share_url;
     @Expose
     private boolean isFavor;
+<<<<<<< HEAD
     @Expose
     private String link_tel;
 
@@ -28,6 +29,9 @@ public class ArticleDetail extends BaseModel {
     public void setLink_tel(String link_tel) {
         this.link_tel = link_tel;
     }
+=======
+
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 
     public Article getData() {
         return data;

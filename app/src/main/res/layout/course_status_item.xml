@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<<<<<<< HEAD
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,14 +15,27 @@
         android:layout_alignTop="@+id/course_status_train_school_name"
         android:layout_alignBottom="@+id/course_status_open_time"
         android:layout_width="90dp"
+=======
+
+    <ImageView
+        android:layout_width="wrap_content"
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_height="wrap_content"
         android:id="@+id/course_status_iv"
         android:src="@drawable/ic_launcher"
         android:layout_marginLeft="15dp"
+<<<<<<< HEAD
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:textSize="20sp"
+=======
+        android:layout_marginTop="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -29,10 +43,16 @@
         android:id="@+id/course_status_train_school_name"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/course_status_iv"
+<<<<<<< HEAD
         android:layout_marginLeft="15dp" />
 
     <TextView
         android:textSize="@dimen/text_size"
+=======
+        android:layout_marginLeft="26dp" />
+
+    <TextView
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -42,8 +62,11 @@
         android:layout_alignLeft="@+id/course_status_train_school_name" />
 
     <TextView
+<<<<<<< HEAD
 
         android:textSize="@dimen/text_size"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -53,7 +76,10 @@
         android:layout_alignLeft="@+id/course_status_student" />
 
     <TextView
+<<<<<<< HEAD
         android:textSize="@dimen/text_size"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -63,7 +89,10 @@
         android:layout_alignLeft="@+id/course_status_class" />
 
     <TextView
+<<<<<<< HEAD
         android:textSize="@dimen/text_size"
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ff4966"
@@ -81,6 +110,9 @@
         android:id="@+id/textView22"
         android:layout_below="@+id/course_status_open_time"
         android:layout_alignParentRight="true" />
+<<<<<<< HEAD
 
     </RelativeLayout>
+=======
+>>>>>>> f35649e243b26297a228b1a38efc35455400c0b0
 </RelativeLayout>
