@@ -120,7 +120,11 @@ public class InteractionAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //点击启动分享页
-                ShareUtils.showShareDialog(mContext,v,interaction.getTitle(),"",interaction.getCreate_img(),interaction.getShare_url(),true);
+                String content = interaction.getContent();
+                if(Utils.isNull(content) == null || content == null){
+                    content = interaction.getTitle();
+                }
+                ShareUtils.showShareDialog(mContext,v,interaction.getTitle(),content,interaction.getCreate_img(),interaction.getShare_url(),true);
             }
         });
         viewHolder.nameTv.setText(interaction.getCreate_user());
