@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/course_status_item"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/mine_course_detail_radio_group"
+            android:checkedButton="@+id/mine_course_detail_tab_course"
+            android:background="@drawable/radio_shape"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal">
+
+
+
+            <RadioButton
+                android:id="@+id/mine_course_detail_tab_course"
+                android:textColor="@drawable/radio_font_color"
+                android:background="@drawable/radio_bt_selector"
+                android:layout_weight="1"
+                android:text="课程"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:background="#bbbbbb"
+                android:layout_width="1dp"
+                android:layout_height="30dp" />
+            <RadioButton
+                android:id="@+id/mine_course_detail_tab_introduce"
+                android:textColor="@drawable/radio_font_color"
+                android:background="@drawable/radio_bt_selector"
+                android:layout_weight="1"
+                android:text="简介"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:background="#bbbbbb"
+                android:layout_width="1dp"
+                android:layout_height="30dp" />
+
+            <RadioButton
+                android:id="@+id/mine_course_detail_tab_discuss"
+                android:textColor="@drawable/radio_font_color"
+                android:background="@drawable/radio_bt_selector"
+                android:layout_weight="1"
+                android:text="评价"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_weight="1"
+        android:id="@+id/mine_course_detail_viewpager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+    </android.support.v4.view.ViewPager>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ffffll">
+
+        <include layout="@layout/train_course_common"/>
+    </FrameLayout>
+
+
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/title_normal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edit_bg1"
+            android:padding="@dimen/small_padding">
+
+            <EditText
+                android:id="@+id/interaction_send_edit"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:background="@android:color/transparent"
+                android:gravity="start"
+                android:hint="说点吧..." />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_marginTop="68dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/repairs_photo_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_marginTop="@dimen/big_padding"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/normal_padding"
+            android:paddingRight="@dimen/normal_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="发送到"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_text" />
+
+            <TextView
+                android:id="@+id/interaction_send_class"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/big_padding"
+                android:drawablePadding="@dimen/normal_padding"
+                android:drawableRight="@drawable/arrow_down"
+                android:gravity="center_vertical|right"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_text" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/send_interaction_bq_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/tab_bg"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line" />
+
+        <ImageView
+            android:id="@+id/send_interaction_bq"
+            android:layout_width="@dimen/title_height"
+            android:layout_height="@dimen/title_height"
+            android:scaleType="center"
+            android:src="@drawable/bq" />
+
+        <LinearLayout
+            android:id="@+id/layout_images_1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_images"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_gravity="center" />
+
+            <com.wj.kindergarten.ui.viewpager.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/margin_5" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

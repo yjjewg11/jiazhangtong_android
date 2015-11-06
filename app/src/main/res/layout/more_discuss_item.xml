@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:background="#cccccc"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+
+    <TextView
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/more_discuss_mobile_number"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:layout_marginRight="@dimen/margin_10"
+        android:id="@+id/more_discuss_time"
+        android:layout_below="@+id/more_discuss_content"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:paddingTop="@dimen/margin_5"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="@dimen/margin_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/more_discuss_content"
+        android:layout_below="@+id/more_discuss_mobile_number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/more_discuss_time" />
+
+    <FrameLayout
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/common_rating_bar"/>
+    </FrameLayout>
+
+</RelativeLayout>

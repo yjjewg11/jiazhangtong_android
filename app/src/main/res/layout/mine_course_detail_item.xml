@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/pop_more_class_info"
+        android:minHeight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="第一课"
+        android:id="@+id/mine_item_class_sort"
+        android:layout_marginLeft="16dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:paddingRight="@dimen/margin_5"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="生物与技术"
+        android:id="@+id/mine_item_content"
+        android:layout_marginLeft="15dp"
+        android:layout_alignTop="@+id/mine_item_class_sort"
+        android:layout_toRightOf="@+id/mine_item_class_sort"
+        android:layout_toLeftOf="@+id/mine_item_time" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="2015-10-12"
+        android:id="@+id/mine_item_time"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/mine_item_iv_right"
+        android:layout_marginRight="13dp" />
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mine_item_iv_right"
+        android:src="@drawable/youjiantou"
+        android:layout_alignTop="@+id/mine_item_time"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="6dp" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/show_more_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/training_translate_program"/>
+    </FrameLayout>
+</LinearLayout>
