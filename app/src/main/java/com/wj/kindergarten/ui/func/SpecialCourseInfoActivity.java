@@ -260,8 +260,8 @@ public class SpecialCourseInfoActivity extends BaseActivity {
         }else{
             rl_price.setVisibility(View.VISIBLE);
         }
-        nornal_course_price.setText(""+osc.getFees()+" 元");
-        coupon_price.setText(""+osc.getDiscountfees()+" 元");
+        nornal_course_price.setText(""+osc.getDiscountfees()+" 元");
+        coupon_price.setText(""+osc.getFees()+" 元");
         if(!ocs.isFavor()){
             tv_coll.setText("已收藏");
             iv_coll.setImageResource(R.drawable.store2);
