@@ -3,28 +3,43 @@ package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.SpecialCourseType;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.WindowUtils;
+
+import java.util.ArrayList;
 
 import java.util.List;
 
 public class SpecialCourseGrid extends BaseAdapter{
     private Context mContext;
     private LayoutInflater inflater;
-    private List<SpecialCourseType> list;
-    public SpecialCourseGrid(Context context,List<SpecialCourseType> list) {
+
+    private List<SpecialCourseType> list = new ArrayList<>();
+    public SpecialCourseGrid(Context context) {
         this.mContext = context;
-        this.list = list;
         inflater = LayoutInflater.from(context);
     }
+
+    public void setList(List<SpecialCourseType> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getCount() {
@@ -57,11 +72,16 @@ public class SpecialCourseGrid extends BaseAdapter{
 
         SpecialCourseType specialCourseType = list.get(position);
         if(specialCourseType!=null){
-            String http = specialCourseType.getDescription();
+
+            String http = specialCourseType.getImg();
             if(TextUtils.isEmpty(http)){
                 viewHolder.iv.setImageResource(R.drawable.main_item);
             }else{
-                ImageLoaderUtil.displayMyImage(specialCourseType.getDescription(), viewHolder.iv);
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewHolder.iv.getLayoutParams();
+                params.width = (int) (45*WindowUtils.getDesnity());
+                params.height =  (int) (45 * (WindowUtils.getDesnity()));
+                viewHolder.iv.setLayoutParams(params);
+                ImageLoaderUtil.displayMyImage(specialCourseType.getImg(), viewHolder.iv);
             }
 
             viewHolder.tv.setText("" + specialCourseType.getDatavalue());

@@ -120,4 +120,22 @@ public class Reply extends BaseModel {
     public void setDianzan(DianZan dianzan) {
         this.dianzan = dianzan;
     }
+
+
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "content='" + content + '\'' +
+                ", update_time='" + update_time + '\'' +
+                ", newsuuid='" + newsuuid + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", usertype='" + usertype + '\'' +
+                ", create_user='" + create_user + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", type='" + type + '\'' +
+                ", create_useruuid='" + create_useruuid + '\'' +
+                ", dianzan=" + dianzan +
+                ", create_img='" + create_img + '\'' +
+                '}';
+    }
 }

@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
+import com.wj.kindergarten.bean.VersionInfo;
+
 import com.wj.kindergarten.utils.Utils;
 
 /**
@@ -152,5 +154,25 @@ public class CGSharedPreference {
     public static boolean getMessageState() {
         SharedPreferences sharedPreferences = getSharedPreferences();
         return sharedPreferences.getBoolean("message", false);
+    }
+
+    public static VersionInfo getVersionInfoReference(){
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        String type = sharedPreferences.getString("type", "");
+        String mobileVersion = sharedPreferences.getString("mobileVersion","");
+        String appVersion = sharedPreferences.getString("appVersion","");
+        String city = sharedPreferences.getString("city","");
+        VersionInfo versionInfo = new VersionInfo(type,mobileVersion,appVersion,city);
+        return versionInfo;
+    }
+
+    public static void setVersionInfoReference(VersionInfo versionInfo){
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("type",versionInfo.getType());
+        editor.putString("mobileVersion",versionInfo.getMobileVersion());
+        editor.putString("appVersion",versionInfo.getAppVersion());
+        editor.putString("city",versionInfo.getCity());
+        editor.commit();
     }
 }

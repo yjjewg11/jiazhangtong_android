@@ -4,6 +4,8 @@
     tools:context="com.wj.kindergarten.ui.specialcourse.TeachersSpecialFragment">
 
     <FrameLayout
+        android:id="@+id/no_view_fl"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

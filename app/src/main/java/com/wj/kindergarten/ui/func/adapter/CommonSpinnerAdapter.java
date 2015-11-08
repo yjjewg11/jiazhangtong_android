@@ -44,7 +44,9 @@ public class CommonSpinnerAdapter extends BaseAdapter{
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.one_item,null);
             viewHolder = new ViewHolder();
-            viewHolder.tv_spinner = (TextView) convertView.findViewById(R.id.tv_spinner);
+
+            viewHolder.tv_spinner = (TextView) convertView.findViewById(R.id.tv_call);
+
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();

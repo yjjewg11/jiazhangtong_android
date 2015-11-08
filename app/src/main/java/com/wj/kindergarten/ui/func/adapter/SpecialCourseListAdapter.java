@@ -2,16 +2,25 @@ package com.wj.kindergarten.ui.func.adapter;
 
 
 import android.content.Context;
+
+import android.graphics.Color;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.SpecialCourseInfoObject;
 import com.wj.kindergarten.ui.other.RatingBarView;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +41,8 @@ public class SpecialCourseListAdapter extends BaseAdapter{
     public void setSepcialList(List<SpecialCourseInfoObject> list){
         //清空数据
         this.list.clear();
-        if(list!=null&&list.size()>0) {
+        if(list!=null){
+
             this.list.addAll(list);
             notifyDataSetChanged();
         }
@@ -75,14 +85,24 @@ public class SpecialCourseListAdapter extends BaseAdapter{
 
         SpecialCourseInfoObject object = list.get(position);
         if (object != null) {
-            viewHolder.ratingBar.setStar(3);
-            viewHolder.imageView.setImageResource(R.drawable.ic_launcher);
+            viewHolder.ratingBar.setFloatStar(object.getCt_stars(),true);
+            ImageLoaderUtil.displayMyImage(object.getLogo(), viewHolder.imageView);
             viewHolder.item_class_name.setText("" + object.getTitle());
-            viewHolder.item_special_course_list_view_tv_adresss.setText(""+object.getSubtype());
+//                    .length() > 10 ? (object.getTitle().substring(0,8)+"...") : object.getTitle()));
+            viewHolder.item_special_course_list_view_tv_adresss.setText(""+object.getAddress());
+//                    .length() > 8 ? (object.getAddress().substring(0,8)+"...") : object.getAddress()));
             //TODO
-            viewHolder.item_special_course_list_view_tv_distance.setText("设置距离：130");
-            viewHolder.item_special_course_list_view_tv_edcucation.setText("设置教育中心");
-            viewHolder.item_special_course_list_view_tv_study_people.setText("学习人数");
+            String text = "<font  color='#ff4966'>"+object.getCt_study_students()+"</font>"+"人已学";
+            if(TextUtils.isEmpty(object.getDistance())){
+                viewHolder.item_special_course_list_view_tv_distance.setVisibility(View.INVISIBLE);
+            }else{
+                viewHolder.item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
+                viewHolder.item_special_course_list_view_tv_distance.setText(""+object.getDistance());
+            }
+
+            viewHolder.item_special_course_list_view_tv_edcucation.setText(""+object.getGroup_name());
+            viewHolder.item_special_course_list_view_tv_study_people.setText(Html.fromHtml(text));
+
         }
 
         return convertView;

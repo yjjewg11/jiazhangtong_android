@@ -19,6 +19,17 @@ public class ArticleDetail extends BaseModel {
     @Expose
     private boolean isFavor;
 
+    @Expose
+    private String link_tel;
+
+    public String getLink_tel() {
+        return link_tel;
+    }
+
+    public void setLink_tel(String link_tel) {
+        this.link_tel = link_tel;
+    }
+
 
     public Article getData() {
         return data;

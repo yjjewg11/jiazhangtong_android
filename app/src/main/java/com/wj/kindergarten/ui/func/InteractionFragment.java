@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,9 @@ import java.util.List;
  * @CreateDate: 2015/7/17 11:34
  */
 public class InteractionFragment extends Fragment {
+
+    String newsuuid = "";
+
     private View rootView;
     private PullToRefreshListView mListView;
     private LinearLayout bottomLayou;
@@ -48,6 +52,13 @@ public class InteractionFragment extends Fragment {
     private List<Interaction> dataList = new ArrayList<>();
     private int nowPage = 1;
     private String nowReplyUUID = "";
+    private boolean isOnce;
+
+
+    public void setNewsuuid(String newsuuid) {
+        this.newsuuid = newsuuid;
+    }
+
 
     @Nullable
     @Override
@@ -67,7 +78,6 @@ public class InteractionFragment extends Fragment {
 
                 @Override
                 public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
                 }
             });
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -133,7 +143,8 @@ public class InteractionFragment extends Fragment {
     }
 
     private void getInteractionList(final int page) {
-        UserRequest.getInteractionList(getActivity(), "", page, new RequestResultI() {
+        UserRequest.getInteractionList(getActivity(), newsuuid, page, new RequestResultI() {
+
             @Override
             public void result(BaseModel domain) {
                 if (mListView.isRefreshing()) {

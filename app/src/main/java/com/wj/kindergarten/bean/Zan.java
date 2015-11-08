@@ -9,7 +9,9 @@ import com.google.gson.annotations.Expose;
  * @Author: pengqiang.zou
  * @CreateDate: 2015-08-18 14:51
  */
-public class Zan {
+
+public class Zan extends BaseModel{
+
     @Expose
     private int count;
     @Expose

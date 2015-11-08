@@ -11,6 +11,10 @@
 
         <include layout="@layout/item_special_course_list_view"/>
     </FrameLayout>
+    <TextView
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -24,12 +28,13 @@
             android:background="@drawable/radio_shape"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
             android:layout_gravity="center_horizontal">
 
 
 
             <RadioButton
+                android:textSize="17sp"
                 android:id="@+id/tab_course"
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
@@ -46,6 +51,7 @@
                 android:layout_width="1dp"
                 android:layout_height="30dp" />
             <RadioButton
+                android:textSize="17sp"
                 android:id="@+id/tab_teacher"
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
@@ -63,6 +69,7 @@
                 android:layout_height="30dp" />
 
             <RadioButton
+                android:textSize="17sp"
                 android:id="@+id/tab_introduce"
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
@@ -89,6 +96,12 @@
             android:layout_alignParentTop="true"
             android:layout_above="@+id/frameLayout2">
         </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:layout_above="@+id/frameLayout2"
+            android:background="#bbbbbb"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
 
 
        <FrameLayout

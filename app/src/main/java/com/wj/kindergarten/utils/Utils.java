@@ -3,12 +3,17 @@ package com.wj.kindergarten.utils;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -21,7 +26,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.adsmogo.adview.AdsMogoLayout;
+import com.adsmogo.util.AdsMogoType;
 
 import com.google.gson.Gson;
 import com.wenjie.jiazhangtong.R;
@@ -63,18 +72,40 @@ public class Utils {
     public static final SimpleDateFormat timestampFormatter = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss.sss");
 
+    public static final String MOGO_ID = "b1be6cfbb82542c4ba00f32ef1166884";
+
     /**
      * util class, avoid to instantiate
      */
     private Utils() {
     }
 
-    /**
-     * judge str is null or not
-     *
-     * @param str
-     * @return true:str is not null ,flase:str is null
-     */
+
+    public static String isNull(String thing){
+        if(thing == null || thing.equals("null")){
+            return "";
+        }
+        return thing;
+    }
+
+    public static float MearsureText(String text){
+        Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        return  mTextPaint.measureText(text);
+    }
+
+    public static void ads(Activity activity,ViewGroup viewGrop) {
+        AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity,MOGO_ID,360,150, AdsMogoType.Custom,true);
+        adsMogoLayoutCode.isOtherSizes = true;
+        adsMogoLayoutCode.setBackgroundColor(Color.parseColor("#ffffff"));
+        ViewGroup viewGroup = (ViewGroup)adsMogoLayoutCode.getParent();
+        if(viewGroup!=null)
+            viewGroup.removeView(adsMogoLayoutCode);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.WRAP_CONTENT);
+
+        viewGrop.addView(adsMogoLayoutCode,params);
+    }
+
+
     public static boolean stringIsNull(String str) {
         if (str == null || "".equals(str) || "null".equals(str)) {
             return true;
@@ -94,6 +125,10 @@ public class Utils {
         } else {
             return str;
         }
+    }
+
+    public static Integer getIntegerFromString(String s){
+        return Integer.valueOf(s);
     }
 
     /**

@@ -2,6 +2,8 @@ package com.wj.kindergarten.utils;
 
 import android.util.Log;
 
+import com.wj.kindergarten.utils.Utils;
+
 /**
  * JJGLog for print log message
  *
@@ -9,7 +11,7 @@ import android.util.Log;
  * @data: 2015/5/21
  * @version: v1.0
  */
-public final class CGLog {
+public final class CGLog{
     public static boolean isDebug = true;//is print log
     public static final String TAG = "CGLog";//log tag
 
@@ -89,3 +91,4 @@ public final class CGLog {
         e("", log);
     }
 }
+

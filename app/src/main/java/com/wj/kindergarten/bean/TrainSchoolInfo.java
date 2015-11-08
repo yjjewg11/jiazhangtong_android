@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose;
 
 public class TrainSchoolInfo extends BaseModel{
     @Expose
+    private String summary;
+    @Expose
+    private String distance;
+    @Expose
     private String uuid;
     @Expose
     private String create_time;
@@ -23,6 +27,59 @@ public class TrainSchoolInfo extends BaseModel{
     private String img;
     @Expose
     private String address;
+    @Expose
+    private String prov;@Expose
+    private String city;@Expose
+    private long ct_study_students;@Expose
+    private int ct_stars;
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public int getCt_stars() {
+        return ct_stars;
+    }
+
+    public void setCt_stars(int ct_stars) {
+        this.ct_stars = ct_stars;
+    }
+
+    public long getCt_study_students() {
+        return ct_study_students;
+    }
+
+    public void setCt_study_students(long ct_study_students) {
+        this.ct_study_students = ct_study_students;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProv() {
+        return prov;
+    }
+
+    public void setProv(String prov) {
+        this.prov = prov;
+    }
 
     public String getAddress() {
         return address;
@@ -80,8 +137,6 @@ public class TrainSchoolInfo extends BaseModel{
         this.brand_name = brand_name;
     }
 
-
-
     public String getLink_tel() {
         return link_tel;
     }
@@ -109,10 +164,22 @@ public class TrainSchoolInfo extends BaseModel{
     @Override
     public String toString() {
         return "TrainSchoolInfo{" +
-                "brand_name='" + brand_name + '\'' +
+                "summary='" + summary + '\'' +
+                ", distance='" + distance + '\'' +
                 ", uuid='" + uuid + '\'' +
-                ", link_tel='" + link_tel + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", brand_name='" + brand_name + '\'' +
+                ", company_name='" + company_name + '\'' +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
                 ", map_point='" + map_point + '\'' +
+                ", link_tel='" + link_tel + '\'' +
+                ", img='" + img + '\'' +
+                ", address='" + address + '\'' +
+                ", prov='" + prov + '\'' +
+                ", city='" + city + '\'' +
+                ", ct_study_students=" + ct_study_students +
+                ", ct_stars=" + ct_stars +
 
                 '}';
     }

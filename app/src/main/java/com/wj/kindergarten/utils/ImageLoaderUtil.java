@@ -55,7 +55,8 @@ public class ImageLoaderUtil {
                 .cacheOnDisk(true)
                 .displayer(new RoundedBitmapDisplayer(roundeSize)).build();
 
-        int drawable = R.drawable.main_item;
+        int drawable = R.drawable.zhanweitu;
+
         myOptions = new DisplayImageOptions.Builder()
                          .showImageForEmptyUri(drawable)
                          .showImageOnFail(drawable)

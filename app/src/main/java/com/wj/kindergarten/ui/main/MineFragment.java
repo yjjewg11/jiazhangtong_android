@@ -32,11 +32,10 @@ import com.wj.kindergarten.utils.Utils;
 public class MineFragment extends Fragment {
     private View rootView;
     private LinearLayout childContent;
-    private LinearLayout llStore;
     private LinearLayout llSetting;
     private Login login;
-    private TextView mine_collect;
-    private TextView mine_course;
+    private LinearLayout mine_collect;
+    private LinearLayout mine_course;
 
     @Nullable
     @Override
@@ -60,8 +59,9 @@ public class MineFragment extends Fragment {
 
 
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
-        mine_collect = (TextView) rootView.findViewById(R.id.mine_collect);
-        mine_course = (TextView)rootView.findViewById(R.id.mine_course);
+        mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
+        mine_course = (LinearLayout)rootView.findViewById(R.id.ll_special_course);
+
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
         llSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +81,6 @@ public class MineFragment extends Fragment {
             public void onClick(View v) {
                 //点击启动我的课程页面
                 Intent intent = new Intent(getActivity(),MineSpecialCourseActivity.class);
-                //TODO 放入显示孩子的uuid
-                intent.putExtra("childuuid","");
                 startActivity(intent);
             }
         });

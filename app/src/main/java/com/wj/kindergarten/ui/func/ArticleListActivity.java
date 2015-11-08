@@ -71,7 +71,8 @@ public class ArticleListActivity extends BaseActivity {
                 Intent intent = new Intent(mContext, ArticleActivity.class);
                 article = articles.get(i - 1);
                 if (null != article) {
-                    intent.putExtra("uuid", article.getUuid());
+                    intent.putExtra("uuid",article.getUuid());
+
                     intent.putExtra("fromStore", false);
                     startActivityForResult(intent, ZAN);
                 }

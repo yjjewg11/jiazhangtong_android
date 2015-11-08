@@ -1,6 +1,10 @@
 package com.wj.kindergarten.net.request;
 
+
+import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
+
 
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
@@ -13,12 +17,21 @@ import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
+import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
+import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.func.TeacherDetailInfoActivity;
+import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GsonUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
-
+import org.apache.http.entity.StringEntity;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 import java.util.List;
 
@@ -48,7 +61,7 @@ public final class UserRequest {
     private static final String COURSE_LIST = "rest/teachingplan/list.json";
     private static final String FOOD_LIST = "rest/cookbookplan/list.json";
     private static final String ARTICLE_LIST = "rest/share/articleList.json";
-    private static final String ARTICLE = "rest/share/getArticleJSON.json";
+    private static final String ARTICLE = "rest/share/getArticleUrlJSON.json";
     private static final String APPRAISE_TEACHER_LIST = "rest/teachingjudge/getTeachersAndJudges.json";
     private static final String APPRAISE = "rest/teachingjudge/save.json";
     private static final String UPDATE_PASSWORD = "rest/userinfo/updatepassword.json";
@@ -75,19 +88,36 @@ public final class UserRequest {
     //获取培训课程信息
 
     private static final String TRAING_COURSE_OF_CLASS =  "rest/pxCourse/queryByPage.json";
-    private static final String ONCE_COURSE_CLICK = "rest/pxCourse/{uuid}.json";
+
+    //获取热门课程
+
+    private static final String TRAIN_HOT_CLASS =  "rest/pxCourse/hotByPage.json";
+    private static String groupUuid;
+    private static String ONCE_COURSE_CLICK = "rest/pxCourse/"+groupUuid+".json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
     private static final String MORE_DISCUSS_FROM_UUID = "rest/appraise/queryByPage.json";
+    //查询下一次的课程的接口
+    private static final String NEXT_CLASS_INFO = "rest/pxteachingplan/nextList.json";
+    private static final String SAVE_ASSESS = "rest/appraise/save.json";
+
+    private static final String TEACHER_COUNT = "rest/pxteacher/queryByPage.json";
+    private static final String STUDY_STATE = "rest/pxclass/listMyChildClassByPage.json";
+    private static final String MINE_ALL_COURSE = "rest/pxteachingplan/listAllByclassuuid.json";
+    private static final String ALL_TEACHER = "rest/pxclass/listclassTeacher.json";
+    private static final String GET_ASSESS_STATE = "rest/appraise/queryMyByPage.json";
+    private static final String SEND_VERSION = "rest/userinfo/saveParentData.json";
+    private static final String COURSE_INTERACTION_LIST = "rest/classnews/queryPxClassNewsBy.json";
+    private static final String GET_PRIVELEGE_ACTIVE = "rest/share/pxbenefitList.json";
+    private static final String PRIVELIGE_ACTIVE = "rest/share/getPxbenefitJSON.json";
+    private static final String CALL_MESSAGE_SATTE = "rest/pxTelConsultation/save.json";
 
     private UserRequest() {
     }
 
-    public static void getTrainingCourseOfChildren(Context context,String begdateStr,String classuuid,RequestResultI resultI){
+    public static void getTrainingCourseOfChildren(Context context,RequestResultI resultI){
         RequestParams requestParams = new RequestParams();
-        requestParams.put("begDateStr", begdateStr);
-        requestParams.put("classuuid", classuuid);
-        SendRequest.getInstance().get(context,RequestType.TRAIN_COURSE_LIST,requestParams,
-                RequestHttpUtil.BASE_URL+TRAING_COURSE_OF_CLASS,resultI);
+        SendRequest.getInstance().get(context,RequestType.NEXT_CLASS_INFO,requestParams,
+                RequestHttpUtil.BASE_URL+NEXT_CLASS_INFO,resultI);
     }
 
     public static void getChildrenClassInfo(Context context,RequestResultI resultI){
@@ -209,7 +239,27 @@ public final class UserRequest {
         SendRequest.getInstance().get(context, RequestType.INTERACTION_LIST, requestParams,
                 RequestHttpUtil.BASE_URL + INTERACTION_LIST, requestResultI);
     }
+    public static void getCourseInteractionList(Activity activity, String newsuuid, int page, RequestResultI requestResultI) {
+        String groupuuid111 = null;
+        String courseuuid222 = null;
+        if(activity instanceof CourseInteractionListActivity){
+            CourseInteractionListActivity cis = (CourseInteractionListActivity) activity;
+            int type = cis.getType();
+            if(type == NormalReplyListActivity.TRAIN_SCHOOL){
+                groupuuid111 = newsuuid;
+            }else{
+                courseuuid222 = newsuuid;
+            }
+        }
 
+
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("groupuuid", groupuuid111);
+        requestParams.put("courseuuid", courseuuid222);
+        requestParams.put("pageNo", page);
+        SendRequest.getInstance().get(activity, RequestType.INTERACTION_LIST, requestParams,
+                RequestHttpUtil.BASE_URL + COURSE_INTERACTION_LIST, requestResultI);
+    }
     public static void sendInteraction(Context context, String title, String classuuid, String uuid,
                                        String content, String imgs, RequestResultI requestResultI) {
         JSONObject jsonObject = new JSONObject();
@@ -306,7 +356,8 @@ public final class UserRequest {
 
     public static void getSignList(Context context, String uuid,int pageNo, RequestResultI requestResultI) {
         RequestParams requestParams = new RequestParams();
-        requestParams.put("pageNo",String.valueOf(pageNo));
+        requestParams.put("pageNo",pageNo);
+
         SendRequest.getInstance().get(context, RequestType.SIGN, requestParams,
                 RequestHttpUtil.BASE_URL + SIGN, requestResultI);
     }
@@ -323,7 +374,6 @@ public final class UserRequest {
     private static String testURL = "http://192.168.0.115:8080/px-mobile/rest/pxteachingplan/list.json";
     public static void getTrainCourseList(Context context, String beginDay, String endDay, String classUUID, RequestResultI requestResultI){
         RequestParams requestParams = new RequestParams();
-        requestParams.put("JSESSIONID",CGApplication.getInstance().getLogin().getJSESSIONID());
         requestParams.put("begDateStr", beginDay);
         requestParams.put("endDateStr", endDay);
         requestParams.put("classuuid", classUUID);
@@ -346,12 +396,18 @@ public final class UserRequest {
         SendRequest.getInstance().get(context, RequestType.ARTICLE_LIST, requestParams,
                 RequestHttpUtil.BASE_URL + ARTICLE_LIST, requestResultI);
     }
-
     public static void getArticle(Context context, String uuid, RequestResultI requestResultI) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("uuid", uuid);
         SendRequest.getInstance().get(context, RequestType.ARTICLE, requestParams,
                 RequestHttpUtil.BASE_URL + ARTICLE, requestResultI);
+    }
+
+    public static void getPrivilegeActive(Context context, String uuid, RequestResultI requestResultI) {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("uuid", uuid);
+        SendRequest.getInstance().get(context, RequestType.ARTICLE, requestParams,
+                RequestHttpUtil.BASE_URL + PRIVELIGE_ACTIVE, requestResultI);
     }
 
     public static void getAppraiseTeacherList(Context context, RequestResultI requestResultI) {
@@ -512,27 +568,52 @@ public final class UserRequest {
     }
 
     //根据不同类型或者不同机构获取列表课程信息
-    public static void getSpecialCourseInfoFormType(Context context,String groupuuid,int pageNo,int type, RequestResultI resultI) {
+    public static void getSpecialCourseInfoFormType(Context context,String groupuuid,int pageNo,int type,String sort,String teacheruuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("groupuuid",groupuuid);
-        params.put("mappoint",CGApplication.latitude+","+CGApplication.longitude);
         params.put("pageNo",pageNo);
-        //TODO 暂时先不填类型
-//        params.put("type",type);
+        params.put("teacheruuid",teacheruuid);
+        if(type != -1){params.put("type",type);}
+        if(CGApplication.latitude > 0){
+            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
+        }
+        params.put("sort",sort);
         SendRequest.getInstance().get(context,RequestType.SPECIAL_COURSE_INFO,params,RequestHttpUtil.BASE_URL+TRAING_COURSE_OF_CLASS,resultI);
+    }
+
+    //获取热门课程
+    public static void getHotCourseInfo(Context context,String groupuuid,int pageNo,int type,String sort,String teacheruuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("groupuuid",groupuuid);
+        params.put("pageNo",pageNo);
+        params.put("teacheruuid",teacheruuid);
+        if(type != -1){params.put("type",type);}
+        if(CGApplication.latitude > 0){
+            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
+        }
+        params.put("sort",sort);
+        SendRequest.getInstance().get(context,RequestType.SPECIAL_COURSE_INFO,params,RequestHttpUtil.BASE_URL+TRAIN_HOT_CLASS,resultI);
     }
 
     //点击课程之后获取该课程的详细信息
     public static void getSpecialCourseINfoFromClickItem(Context context, String uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
-        params.put("JSESSIONID",CGApplication.getInstance().getLogin().getUserinfo().getJSESSIONID());
-        params.put("uuid",uuid);
-        SendRequest.getInstance().get(context,RequestType.ONCE_COURSE_CLICK,params,RequestHttpUtil.BASE_URL+ONCE_COURSE_CLICK,resultI);
+//        params.put("JSESSIONID", CGApplication.getInstance().getLogin().getJSESSIONID());
+        String url = RequestHttpUtil.BASE_URL+"rest/pxCourse/"+uuid+".json";
+        SendRequest.getInstance().get(context,RequestType.ONCE_COURSE_CLICK,params,url,resultI);
     }
 
-    public static void getAllSchool(Context context, int pageNo, RequestResultI resultI) {
+    public static void getAllSchool(Context context, int pageNo,String sort, int type,RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
+        if(CGApplication.latitude > 0){
+            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
+        }
+        params.put("sort",sort);
+        if(type != -1){
+            params.put("type",type);
+        }
+
         SendRequest.getInstance().get(context,RequestType.ALL_TRAINC_SCHOOL,params,RequestHttpUtil.BASE_URL+ALL_TRAINC_SCHOOL,resultI);
     }
 
@@ -541,5 +622,94 @@ public final class UserRequest {
         params.put("ext_uuid",ext_uuid);
         params.put("pageNo",pageNo);
         SendRequest.getInstance().get(context,RequestType.MORE_DISCUSS_FROM_UUID,params,RequestHttpUtil.BASE_URL+MORE_DISCUSS_FROM_UUID,resultI);
+    }
+
+    public static void sendSpecialCourseAssess(Context context,String ext_uuid,String class_uuid, int type, int score, String content, RequestResultI resultI) {
+    RequestParams params = new RequestParams();
+        params.put("ext_uuid",ext_uuid);
+        params.put("class_uuid",class_uuid);
+        params.put("type",type);
+        params.put("score",score);
+        params.put("content",content);
+        SendRequest.getInstance().get(context,RequestType.INTERACTION_SEND,params,RequestHttpUtil.BASE_URL+SAVE_ASSESS,resultI);
+    }
+
+    public static void getTeacherFromUuid(Context context, String groupuuid,int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("groupuuid",groupuuid);
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.TEACHER_COUNT,params,RequestHttpUtil.BASE_URL+TEACHER_COUNT,resultI);
+    }
+
+    public static void getStudyStatus(Context context, int pageNo, int isStudying, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        params.put("isdisable", isStudying);
+                SendRequest.getInstance().get(context,RequestType.STUDY_STATE,params,RequestHttpUtil.BASE_URL+STUDY_STATE,resultI);
+    }
+
+    public static void getMineAllCourse(Context context, int pageNo, String classuuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        params.put("classuuid",classuuid);
+                SendRequest.getInstance().get(context,RequestType.MINE_ALL_COURSE,params,RequestHttpUtil.BASE_URL+MINE_ALL_COURSE,resultI);
+
+    }
+
+    public static void getTrainSchoolDetail(Context context,String uuid,RequestResultI resultI){
+        RequestParams params = new RequestParams();
+        params.put("uuid", uuid);
+        String url = RequestHttpUtil.BASE_URL+"/rest/group/"+uuid+".json";
+        SendRequest.getInstance().get(context,RequestType.TRAIN_SCHOOL_DETAIL,params,url,resultI);
+    }
+
+    public static void getAllAssessTeacher(Context context, String courseuuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("classuuid",courseuuid);
+        SendRequest.getInstance().get(context,RequestType.ALL_TEACHER,params,RequestHttpUtil.BASE_URL+ALL_TEACHER,resultI);
+    }
+
+    public static void getAssessState(Context context, String courseuuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("class_uuid",courseuuid);
+        params.put("pageNo",1);
+        SendRequest.getInstance().get(context,RequestType.GET_ASSESS_STATE,params,RequestHttpUtil.BASE_URL+GET_ASSESS_STATE,resultI);
+    }
+
+    public static void getTeacherDetailInfo(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid", uuid);
+        String url = RequestHttpUtil.BASE_URL+"rest/pxteacher/"+uuid+".json";
+        SendRequest.getInstance().get(context,RequestType.TEACHER_DETAIL_INFO,params,url,resultI);
+    }
+
+    public static void sendVersion(Context context, String phone_type, String phone_version, String app_verion, String city, RequestResultI resultI) {
+        JSONObject jSONObject=new JSONObject();
+        try {
+            jSONObject.put("phone_type", phone_type);
+            jSONObject.put("phone_version",phone_version);
+            jSONObject.put("app_verion",app_verion);
+            jSONObject.put("city",city);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SendRequest.getInstance().post(context, RequestType.ZAN, jSONObject.toString(), RequestHttpUtil.BASE_URL + SEND_VERSION, resultI);
+
+    }
+
+    public static void getPrivilegeByPage(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        if(CGApplication.latitude > 0){
+            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
+        }
+        SendRequest.getInstance().get(context, RequestType.GET_PRIVELEGE_ACTIVE, params, RequestHttpUtil.BASE_URL + GET_PRIVELEGE_ACTIVE, resultI);
+    }
+
+    public static void sendCallMessage(Context context, String ext_uuid, int type, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("ext_uuid",ext_uuid);
+        params.put("type",type);
+        SendRequest.getInstance().get(context,RequestType.ZAN,params,CALL_MESSAGE_SATTE,resultI);
     }
 }

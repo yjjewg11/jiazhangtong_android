@@ -131,8 +131,14 @@ public class NoticeActivity extends BaseActivity {
         iv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String content = notice.getData().getMessage();
+                if (Utils.isNull(content) == null || content == null) {
+                    content = notice.getData().getMessage();
+                }
+
                 ShareUtils.showShareDialog(NoticeActivity.this,tv_notice_date,
-                        notice.getData().getTitle(),"","",notice.getShare_url(),true);
+                        notice.getData().getTitle(),content,"",notice.getShare_url(),true);
             }
         });
 

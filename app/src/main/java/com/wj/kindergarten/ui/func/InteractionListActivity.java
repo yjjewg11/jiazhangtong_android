@@ -1,6 +1,8 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
+import android.view.MotionEvent;
+
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -14,6 +16,8 @@ import com.wj.kindergarten.ui.BaseActivity;
  */
 public class InteractionListActivity extends BaseActivity {
     private InteractionFragment interactionFragment = null;
+    public static InteractionListActivity instance;
+
 
     @Override
     protected void setContentLayout() {
@@ -27,8 +31,11 @@ public class InteractionListActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        instance = this;
         setTitleText("互动", R.drawable.interaction_send);
         interactionFragment = new InteractionFragment();
+        interactionFragment.setNewsuuid(getIntent().getStringExtra("newsuuid"));
+
         getSupportFragmentManager().beginTransaction().add(R.id.interaciton_list_content, interactionFragment).commit();
     }
 
@@ -46,4 +53,11 @@ public class InteractionListActivity extends BaseActivity {
             }
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        return super.onTouchEvent(event);
+    }
+
 }

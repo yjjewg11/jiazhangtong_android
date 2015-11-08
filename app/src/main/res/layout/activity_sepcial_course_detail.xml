@@ -8,15 +8,19 @@
         android:layout_width="match_parent"
         android:layout_height="45dp">
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
             android:id="@+id/iv_top_left_back"
-            android:src="@drawable/title_back"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/title_back"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true" />
+        </RelativeLayout>
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -47,7 +51,19 @@
 
 
         </RadioGroup>
-
+        <TextView
+            android:id="@+id/spinner_city_special"
+            android:textColor="#ffffff"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="成都"
+            android:drawableRight="@drawable/xiajiatou"
+            android:drawablePadding="@dimen/margin_10"
+            android:gravity="center_vertical"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
@@ -56,14 +72,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-
-
-        <Spinner
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
+        <Button
+            android:paddingRight="15dp"
+            android:drawableRight="@drawable/xiajiantou"
+            android:textSize="17sp"
+            android:gravity="center"
             android:layout_weight="1"
+            android:background="@null"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/sp_study_class" />
 
         <TextView
@@ -73,13 +90,15 @@
             android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/textView3" />
-
-        <Spinner
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
+        <Button
+            android:paddingRight="15dp"
+            android:drawableRight="@drawable/xiajiantou"
+            android:textSize="17sp"
+            android:background="@null"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/sp_sort" />
 
     </LinearLayout>
@@ -93,6 +112,7 @@
         android:layout_gravity="center_horizontal" />
 
     <FrameLayout
+        android:id="@+id/replace_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include layout="@layout/layout_pulltorefresh"/>

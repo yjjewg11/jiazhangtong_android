@@ -4,6 +4,9 @@
     tools:context="com.wj.kindergarten.ui.specialcourse.ClassFragment">
 
     <FrameLayout
+
+        android:id="@+id/class_fllll"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include layout="@layout/layout_pulltorefresh"/>

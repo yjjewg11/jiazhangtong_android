@@ -52,6 +52,10 @@ public class NormalReplyListActivity extends BaseActivity {
     public static final int REPLY_TYPE_BOSS_XIN = 12;//信件  园长
     public static final int REPLY_TYPE_TRAIN_CLASS = 14;
     private static final int PAGE_SIZE = 20;
+    public static final int TRAIN_SCHOOL = 81;//培训机构
+    public static final int TRAIN_COURSE= 82;//培训课程
+    public static final int PRIVILEGE_ACTIVE= 85;//培训课程
+
     private int currentPage = 1;
     private String replyId;
     private NormalReplyAdapter adapter;

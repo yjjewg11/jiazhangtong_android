@@ -47,3 +47,4 @@ public class SingleMediaScanner implements MediaScannerConnection.MediaScannerCo
         public void scanCompleted();
     }
 }
+

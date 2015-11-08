@@ -1,17 +1,18 @@
 package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
+import java.util.List;
 
 public class TrainCourse extends BaseModel{
 
     @Expose
-    private MyTrainCoures list;
+    private List<MyTrainCoures> list;
 
-    public MyTrainCoures getList() {
+    public List<MyTrainCoures> getList() {
         return list;
     }
 
-    public void setList(MyTrainCoures list) {
+    public void setList(List<MyTrainCoures> list) {
         this.list = list;
     }
 

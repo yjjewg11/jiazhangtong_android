@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
     <include layout="@layout/title_normal" />
-
     <FrameLayout
         android:id="@+id/interaciton_list_content"
         android:layout_width="match_parent"

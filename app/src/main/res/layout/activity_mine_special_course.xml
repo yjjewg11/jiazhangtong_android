@@ -11,49 +11,57 @@
     </FrameLayout>
 
     <RadioGroup
+        android:checkedButton="@+id/rb_study"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:minHeight="25dp"
+        android:layout_width="match_parent"
+        android:minHeight="40dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
         <RadioButton
-            android:padding="10dp"
+            android:id="@+id/rb_study"
+            android:gravity="center"
             android:layout_weight="1"
             android:button="@null"
             android:text="正在学习"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <TextView
+            android:background="#bbbbbb"
+            android:layout_gravity="center"
+            android:layout_width="1dp"
+            android:layout_height="30dp" />
 
         <RadioButton
-            android:padding="10dp"
+            android:id="@+id/rb_study_over"
+            android:gravity="center"
             android:layout_weight="1"
             android:button="@null"
-            android:text="完成学习"
+            android:text="学习完成"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </RadioGroup>
-    <RelativeLayout
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="2dp">
 
-        <ImageView
-            android:src="@drawable/xuanzhong2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:layout_marginLeft="116dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/red_left"
+            android:layout_weight="1"
+            android:background="#ff4966"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <ImageView
-            android:src="@drawable/xuanzhong2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageView2" />
-    </RelativeLayout>
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/red_right"
+            android:layout_weight="1"
+            android:background="#ff4966"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <LinearLayout
         android:background="#bbbbbb"
@@ -63,7 +71,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/layout_pulltorefresh"/>
+
+        <include layout="@layout/layout_pulltorefresh" />
     </FrameLayout>
 
 </LinearLayout>

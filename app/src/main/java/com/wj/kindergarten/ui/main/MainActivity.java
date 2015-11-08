@@ -3,6 +3,10 @@ package com.wj.kindergarten.ui.main;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +19,11 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+
+import com.umeng.onlineconfig.OnlineConfigAgent;
+import com.umeng.onlineconfig.OnlineConfigLog;
+import com.umeng.onlineconfig.UmengOnlineConfigureListener;
+
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -25,6 +34,9 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
+
+import com.wj.kindergarten.bean.VersionInfo;
+
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
@@ -37,6 +49,9 @@ import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
+
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -67,6 +82,7 @@ public class MainActivity extends BaseActivity {
     public static  MainActivity instance;
 
 
+
     public TrainChildInfoList getTrainChildInfoList(){
         return TCI;
     }
@@ -94,35 +110,10 @@ public class MainActivity extends BaseActivity {
         handler.sendEmptyMessageDelayed(2, 500);
 
 
-        getTrainUuid();
-
     }
 
-    //获取培训孩子信息
-    private void getTrainUuid() {
-
-        UserRequest.getTrainChild(mContext, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                TCI= ((TrainChildInfoList) domain);
-                //获取孩子信息成功，通知获取培训班信息
-//                CGLog.i("打印孩子信息" + );
-                handler.sendEmptyMessage(100);
-            }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
 
 
-    }
 
 
     private void login() {
@@ -224,9 +215,11 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 版本检测
+<<<<<<< HEAD
+     * 版本检测,设置统计在线参数
      */
     private void checkVersion() {
+
         UmengUpdateAgent.setUpdateOnlyWifi(true);
         UmengUpdateAgent.setUpdateAutoPopup(false);
         UmengUpdateAgent.setUpdateCheckConfig(false);
@@ -294,7 +287,6 @@ public class MainActivity extends BaseActivity {
                 } else {
                     if (isClickMessage) {
                         msgImageView.setImageResource(R.drawable.message_tab);
-
                     }
                 }
             }
@@ -353,7 +345,8 @@ public class MainActivity extends BaseActivity {
         } else {
             imageView.setImageResource(mImageViewArray2[index]);
         }
-        imageView.setImageResource(mImageViewArray[index]);
+//        imageView.setImageResource(mImageViewArray[index]);
+
         TextView textView = (TextView) view.findViewById(R.id.main_tab_item_text);
         textView.setText(mTabIdArray[index]);
         mTabViews[index] = view;

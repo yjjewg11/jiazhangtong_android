@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.DianZan;
 import com.wj.kindergarten.bean.Interaction;
 import com.wj.kindergarten.bean.Reply;
 import com.wj.kindergarten.compounets.CircleImage;
@@ -114,6 +115,7 @@ public class CourseInteractionAdapter extends BaseAdapter {
         }
 
         final Interaction interaction = dataList.get(i);
+        final DianZan dianZan = interaction.getDianzan();
 
         ImageLoaderUtil.displayImage(interaction.getCreate_img(), viewHolder.headCi);
         viewHolder.iv_hudong_share.setOnClickListener(new View.OnClickListener() {
@@ -152,13 +154,12 @@ public class CourseInteractionAdapter extends BaseAdapter {
         viewHolder.zanIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (zanLock) {
-                    return;
-                }
-                zanLock = true;
-                Drawable drawable = viewHolder.zanIv.getDrawable();
-                if (mContext.getResources().getDrawable(R.drawable.interaction_zan_off).getConstantState()
-                        .equals(drawable.getConstantState())) {
+//                if (zanLock) {
+//                    return;
+//                }
+//                zanLock = true;
+//                Drawable drawable = viewHolder.zanIv.getDrawable();
+                if (dianZan.isCanDianzan()) {
                     setZan(interaction, viewHolder.zanIv);
                 } else {
                     cancelZan(interaction, viewHolder.zanIv);

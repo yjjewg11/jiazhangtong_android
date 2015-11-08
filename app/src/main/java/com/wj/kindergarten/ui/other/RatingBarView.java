@@ -25,9 +25,21 @@ public class RatingBarView extends LinearLayout {
     private int starCount;
     private Drawable starEmptyDrawable;
     private Drawable starFillDrawable;
+    private Drawable starHalfDrawable;
+    private int clickedCount;
+
+    public int getClickedCount() {
+        return clickedCount;
+    }
+
 
     public void setStarFillDrawable(Drawable starFillDrawable) {
         this.starFillDrawable = starFillDrawable;
+    }
+
+
+    public void setHalfDrawable (Drawable starHalfDrawable){
+        this.starHalfDrawable = starHalfDrawable;
     }
 
     public void setStarEmptyDrawable(Drawable starEmptyDrawable) {
@@ -61,10 +73,15 @@ public class RatingBarView extends LinearLayout {
         super(context, attrs);
         setOrientation(LinearLayout.HORIZONTAL);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RatingBarView);
-        starImageSize = a.getDimension(R.styleable.RatingBarView_starImageSize, 20);
+        starImageSize = a.getDimension(R.styleable.RatingBarView_starImageSize, 10);
         starCount = a.getInteger(R.styleable.RatingBarView_starCount, 5);
         starEmptyDrawable = a.getDrawable(R.styleable.RatingBarView_starEmpty);
         starFillDrawable = a.getDrawable(R.styleable.RatingBarView_starFill);
+        starHalfDrawable = a.getDrawable(R.styleable.RatingBarView_starHalf);
+//        starEmptyDrawable.setBounds(0,0,10,10);
+//        starFillDrawable.setBounds(0,0,10,10);
+//        starHalfDrawable.setBounds(0,0,10,10);
+
 
         for (int i = 0; i < starCount; ++i) {
             ImageView imageView = getStarImageView(context, attrs);
@@ -77,7 +94,6 @@ public class RatingBarView extends LinearLayout {
                             onRatingListener.onRating(bindObject,indexOfChild(v) + 1);
                         }
                     }
-
                 }
             });
             addView(imageView);
@@ -99,7 +115,9 @@ public class RatingBarView extends LinearLayout {
 
     }
     public void setStar(int starCount) {
-        setStar(starCount,true);
+        clickedCount = starCount;
+        setStar(starCount, true);
+
     }
 
     public void setStar(int starCount,boolean animation) {
@@ -115,6 +133,27 @@ public class RatingBarView extends LinearLayout {
             ((ImageView) getChildAt(i)).setImageDrawable(starEmptyDrawable);
         }
 
+    }
+
+    public void setFloatStar(float starCount,boolean animation){
+        if(starCount%10>0){
+            int totalStarCount =(int) starCount/10 + 1;
+            totalStarCount = totalStarCount > this.starCount ? this.starCount : totalStarCount;
+            totalStarCount = totalStarCount < 0 ? 0 : totalStarCount;
+
+            for(int j  = 0; j < totalStarCount ; j++){
+                ((ImageView) getChildAt(j)).setImageDrawable(starFillDrawable);
+                if(animation) YoYo.with(Techniques.BounceIn).duration(400).playOn(getChildAt(j));
+                if(j==totalStarCount-1) {
+                    ((ImageView) getChildAt(j)).setImageDrawable(starHalfDrawable);
+                }
+            }
+            for (int i = this.starCount-1 ; i >= totalStarCount; --i) {
+                ((ImageView) getChildAt(i)).setImageDrawable(starEmptyDrawable);
+            }
+        }else{
+            setStar((int)starCount);
+        }
     }
 
 

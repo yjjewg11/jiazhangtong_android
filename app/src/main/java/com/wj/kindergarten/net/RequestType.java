@@ -59,4 +59,13 @@ public class RequestType {
     public static final int  ONCE_COURSE_CLICK  = 145;
     public static final int ALL_TRAINC_SCHOOL = 146;
     public static final int MORE_DISCUSS_FROM_UUID = 147;
+    public static final int NEXT_CLASS_INFO = 148;
+    public static final int TEACHER_COUNT = 149;
+    public static final int STUDY_STATE = 150;
+    public static final int MINE_ALL_COURSE = 151;
+    public static final int TRAIN_SCHOOL_DETAIL = 152;
+    public static final int ALL_TEACHER = 153;
+    public static final int GET_ASSESS_STATE = 154;
+    public static final int TEACHER_DETAIL_INFO = 155;
+    public static final int GET_PRIVELEGE_ACTIVE = 156;
 }

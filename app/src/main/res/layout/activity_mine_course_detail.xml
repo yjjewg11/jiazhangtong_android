@@ -81,17 +81,20 @@
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
+        android:layout_weight="1"
         android:id="@+id/mine_course_detail_viewpager"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-
-
     </android.support.v4.view.ViewPager>
 
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ffffll">
 
-
-
-
+        <include layout="@layout/train_course_common"/>
+    </FrameLayout>
 
 
 </LinearLayout>

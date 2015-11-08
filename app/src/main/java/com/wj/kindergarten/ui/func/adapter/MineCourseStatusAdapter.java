@@ -2,6 +2,9 @@ package com.wj.kindergarten.ui.func.adapter;
 
 
 import android.content.Context;
+
+import android.text.Html;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,29 +14,49 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 
+import com.wj.kindergarten.bean.StudyStateObject;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MineCourseStatusAdapter extends BaseAdapter{
     private Context context;
     private LayoutInflater inflater;
+
+    private List<StudyStateObject> list = new ArrayList<>();
+
 
     public MineCourseStatusAdapter(Context context){
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
+    public void setList(List<StudyStateObject> list){
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getCount() {
-        return 3;
+        return list.size();
+
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+
+        return list.get(position);
+
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+
+        return position;
+
     }
 
     @Override
@@ -53,11 +76,24 @@ public class MineCourseStatusAdapter extends BaseAdapter{
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-//        viewHolder.trainSchoolName.setText("");
-//        viewHolder.student.setText("");
-//        viewHolder.schoolName.setText("");
-//        viewHolder.className.setText("");
-//        viewHolder.openTime.setText("");
+
+
+        StudyStateObject sso = list.get(position);
+        if(sso!=null){
+            viewHolder.trainSchoolName.setText("学校:"+sso.getGroup_name());
+            viewHolder.student.setText("学生:"+sso.getStudent_name());
+            viewHolder.schoolName.setText(""+sso.getCourse_title());
+            viewHolder.className.setText("班级:"+sso.getClass_name());
+            if(sso.getPlandate() != null){
+                String text = "<font color='#ff4966'>"+"近期上课:"+sso.getPlandate()+"</font>";
+                viewHolder.openTime.setText(Html.fromHtml(text));
+            }else{
+                viewHolder.openTime.setText("时间暂定");
+            }
+            ImageLoaderUtil.displayMyImage(sso.getLogo(),viewHolder.iv_school);
+        }
+
+
 
         return convertView;
     }

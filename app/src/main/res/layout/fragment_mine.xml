@@ -32,7 +32,11 @@
                 android:background="@color/hint_gray"
                 android:visibility="gone" />
 
+
+
             <TextView
+                android:background="@drawable/setting_item_click_selector"
+
                 android:id="@+id/mine_collect"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
@@ -46,6 +50,30 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/normal_text" />
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/hint_gray"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_special_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/setting_item_click_selector"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/hint_gray"
+                android:visibility="gone" />
+
             <TextView
 
                 android:background="#bbbbbb"
@@ -53,6 +81,8 @@
                 android:layout_height="1dp" />
 
             <TextView
+                android:background="@drawable/setting_item_click_selector"
+
                 android:id="@+id/mine_course"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
@@ -72,8 +102,6 @@
                 android:background="@color/hint_gray"
                 android:visibility="gone" />
         </LinearLayout>
-
-
 
         <LinearLayout
             android:id="@+id/ll_setting"

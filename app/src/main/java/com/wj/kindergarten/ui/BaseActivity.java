@@ -1,16 +1,25 @@
 package com.wj.kindergarten.ui;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,7 +29,10 @@ import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
+import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.mine.LoginActivity;
+import com.wj.kindergarten.ui.webview.WebviewActivity;
+
 import com.wj.kindergarten.utils.Utils;
 
 
@@ -485,6 +497,55 @@ public abstract class BaseActivity extends ActionBarActivity {
     public interface ReLoginConfig {
         public void getConfig();
     }
+    //如果没有内容，则显示无内容视图
+    public void noView(View view){
+        View noView = View.inflate(this,R.layout.nothing_view,null);
+        if(view != null){
+            if(view instanceof ViewGroup){
+                ((ViewGroup) view).removeAllViews();
+                ((ViewGroup) view).addView(noView);
+            }else{
+                ViewGroup viewGroup = (ViewGroup) view.getParent();
+                viewGroup.removeView(view);
+                viewGroup.addView(noView);
+            }
 
+        }
+
+
+
+    }
+
+
+    public void cityChoose(final TextView tv_view){
+        tv_view.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                //弹出popupwinodw选择城市
+                int [] location = new int[2];
+                v.getLocationOnScreen(location);
+                ListView listView = new ListView(BaseActivity.this);
+                final SpinnerAreaAdapter text_adapter = new SpinnerAreaAdapter(BaseActivity.this);
+                listView.setAdapter(text_adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        tv_view.setText(""+text_adapter.getItem(position-1));
+                    }
+                });
+                PopupWindow popupWindowss = new PopupWindow(listView,tv_view.getWidth()*2, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindowss.setAnimationStyle(R.style.ShareAnimBase);
+                popupWindowss.setFocusable(true);
+                popupWindowss.setTouchable(true);
+                popupWindowss.setOutsideTouchable(true);
+                popupWindowss.getContentView().setFocusableInTouchMode(true);
+                popupWindowss.getContentView().setFocusable(true);
+                popupWindowss.setBackgroundDrawable(new BitmapDrawable());
+                popupWindowss.update();
+                popupWindowss.showAtLocation(tv_view, Gravity.NO_GRAVITY, location[0]-10,location[1]+tv_view.getHeight());
+            }
+    });
+    }
 
 }

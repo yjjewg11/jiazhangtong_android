@@ -15,7 +15,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/textview_1"
+                android:id="@+id/textview_1_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="1dp"
@@ -31,7 +31,7 @@
                 android:src="@drawable/shoucang1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView"
+                android:id="@+id/imageView_1_1"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
@@ -43,7 +43,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/textview_2"
+                android:id="@+id/textview_2_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -93,7 +93,7 @@
                 android:gravity="center"
                 android:background="#ff7800"
                 android:text="咨询"
-                android:textColor="@color/color_929292"
+                android:textColor="#ffffff"
                 android:textSize="10dp" />
         </RelativeLayout>
     </LinearLayout>

@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -60,6 +65,20 @@
             android:id="@+id/fragment_mine_discuss_edit_text"
             android:layout_gravity="center_horizontal" />
 
+            <TextView
+                android:id="@+id/input_content"
+                android:minHeight="80dp"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+        <TextView
+            android:background="#cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <RelativeLayout
             android:minHeight="35dp"
             android:layout_width="match_parent"
@@ -98,43 +117,15 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:minHeight="35dp"
+        <LinearLayout
+            android:id="@+id/all_teacher_linear"
+            android:orientation="vertical"
+            android:minHeight="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="小明老师评价"
-                android:id="@+id/textView28"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="21dp" />
-
-            <FrameLayout
-                android:layout_marginRight="10dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <com.wj.kindergarten.ui.other.RatingBarView
-                    android:id="@+id/fragment_teacher_rating_bar"
-                    bao:starImageSize = "22dp"
-                    bao:starCount = "5"
-                    bao:starEmpty = "@drawable/xingback"
-                    bao:starFill = "@drawable/xinglight"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </FrameLayout>
-
-
-        </RelativeLayout>
 
         <Button
             android:background="#ff7800"
@@ -146,5 +137,7 @@
 
 
     </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

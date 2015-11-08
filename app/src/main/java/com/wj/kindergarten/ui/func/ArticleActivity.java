@@ -2,10 +2,12 @@ package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.umeng.socialize.controller.UMSocialService;
@@ -20,7 +22,7 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
-import com.wj.kindergarten.utils.URLImageParser;
+
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -38,8 +40,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
     private TextView nameTv;
     private TextView timeTv;
 
-    private String uuid = "";
-    private ArticleDetail article = null;
 
     private TextView tvZan = null;
     private TextView tvSHare = null;
@@ -49,7 +49,10 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private boolean formStore = false;
     private final static int COMMENT = 1;
-    private TextView tvContent = null;
+
+    private WebSettings webSettings;
+    private String uuid;
+    private ArticleDetail article;
 
     @Override
     protected void setContentLayout() {
@@ -63,6 +66,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void loadData() {
+
         uuid = getIntent().getStringExtra("uuid");
         formStore = getIntent().getBooleanExtra("fromStore", false);
         getArticle();
@@ -70,28 +74,40 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void onCreate() {
-        setTitleText("精品文章");
+
+
+        setTitleText("文章详情");
         init();
         success();
     }
 
     private void init() {
-        titleTv = (TextView) findViewById(R.id.article_title);
         contentTv = (WebView) findViewById(R.id.article_content);
-        nameTv = (TextView) findViewById(R.id.article_name);
-        timeTv = (TextView) findViewById(R.id.article_time);
-
-        tvContent = (TextView) findViewById(R.id.tv_con);
-        tvContent.setText(Html.fromHtml(article.getData().getMessage(), new URLImageParser(tvContent, mContext), null));
-
-        titleTv.setText(article.getData().getTitle());
         contentTv.getSettings().setJavaScriptEnabled(true);
         contentTv.setBackgroundColor(0);
-        contentTv.setAlpha(1);
-        contentTv.loadDataWithBaseURL(null, article.getData().getMessage(), "text/html", "utf-8", null);
-        nameTv.setText(article.getData().getCreate_user());
-        timeTv.setText(article.getData().getCreate_time());
+        webSettings = contentTv.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        //支持缩放
+        webSettings.setBuiltInZoomControls(true);
+        // 开启 DOM storage API 功能
+        webSettings.setDomStorageEnabled(true);
+        //开启缓存数据库功能set
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setUseWideViewPort(true);
+//        webSettings.setBlockNetworkImage(true);
+        //设置缓存模式
 
+        //设置缓存路径
+//        webSettings.setAppCachePath(appCachePath+"/clear");
+        //允许访问文件
+        webSettings.setAllowFileAccess(true);
+
+        contentTv.setAlpha(1);
+
+        contentTv.setWebChromeClient(new WebChromeClient());
+        contentTv.setWebViewClient(new WebViewClient());
+
+        contentTv.loadUrl(article.getShare_url());
         tvZan = (TextView) findViewById(R.id.textview_1);
         tvSHare = (TextView) findViewById(R.id.textview_2);
         tvStore = (TextView) findViewById(R.id.textview_3);
@@ -132,14 +148,16 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     private void success() {
         if (null != article) {
-            CGLog.d("isFavour" + article.isFavor());
+//            CGLog.d("isFavour" + article.isFavor());
+
             if (!article.isFavor()) {
                 store1();
             } else {
                 store2();
             }
 
-            if (article.getData() != null && article.getData().getDianzan() != null) {
+            if (article.getData().getDianzan() != null) {
+
                 if (!article.getData().getDianzan().isCanDianzan()) {
                     zan1();
                 } else {
@@ -218,17 +236,15 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.textview_2://分享
                 CGLog.d("share_url " + article.getShare_url());
-                if (null != article) {
-                    CGLog.d("c: " + tvContent.getText().toString());
-                    CGLog.d("c:" + tvContent.getText().toString().length());
-                    if (!Utils.stringIsNull(tvContent.getText().toString()) && !article.getData().getMessage().contains("<img")) {
-                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
-                                tvContent.getText().toString(), "", article.getShare_url(),false);
-                    } else {
-                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, titleTv.getText().toString(),
-                                titleTv.getText().toString(), "", article.getShare_url(),false);
-                    }
+
+                String content = article.getData().getContent();
+                if (Utils.isNull(content) == null || content == null) {
+                    content = article.getData().getTitle();
                 }
+                        ShareUtils.showShareDialog(ArticleActivity.this, tvSHare, article.getData().getTitle(),
+                                content, "", article.getShare_url(),false);
+
+
                 break;
             case R.id.textview_3://收藏
                 if ("收藏".equals(tvStore.getText().toString())) {

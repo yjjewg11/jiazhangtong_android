@@ -154,6 +154,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="准备物品"
+            android:textColor="#ff4966"
             android:minHeight="@dimen/course_height"
             style="@style/trainContentStyle"
             android:id="@+id/textView16"
@@ -174,6 +175,8 @@
 
         <TextView
             android:paddingTop="@dimen/course_padding_top"
+            android:textColor="#ff4966"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"

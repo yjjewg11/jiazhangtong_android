@@ -2,6 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wenjie.jiazhangtong" >
 
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:resizeable="true"
+        android:anyDensity="true"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> >
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这个权限用于访问GPS定位 -->
@@ -40,6 +66,42 @@
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 连接网络权限INTERNET ，用于请求广告(必须)，mogo会使用该权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />  <!-- 读取手机基本信息权限READ_PHONE_STATE，用于精确统计用户的机型等信息(必须)，mogo 会使用该权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />  <!-- 读取网络信息权限ACCESS_NETWORK_STATE，用于识别gprs网络的接入点的情况(必须)， mogo会使用该权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  <!-- 获取用户地理信息权限，用于帮助精确统计开发者的程序发布之后的用户分布情况 ，mogo会 使用该权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission  android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />  <!-- 读写sd 卡的权限，用于缓存广告所用到的图片，节省流量，并可获得更好的用户体验 ，mogo 会使用该权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!--MIX(智游汇) -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!--宾谷   --> <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <!-- adchina --> <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <!--拨打电话权限，请谨慎添加-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 微云所需权限 此权限为开机启动，请谨慎添加-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- wooboo  此权限会读取短信和联系人，请谨慎添加-->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 艾德尔 可选权限  写入日程，但不可读取-->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <!--艾德尔 可选权限 允许程序读取用户的日程信息-->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <!--多盟所需权限，无此权限多盟将无法展示广告-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
 
     <application
         android:name="com.wj.kindergarten.CGApplication"
@@ -58,6 +120,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.wj.kindergarten.ui.func.PrivilegeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.PrivilegeActiveActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.func.CourseInteractionListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.func.TeacherDetailInfoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.more.HtmlActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name="com.wj.kindergarten.ui.func.MineCourseDetailActivity"
@@ -400,6 +491,17 @@
 
 
         <!-- baidu guang gao -->
+        <!--<meta-data-->
+            <!--android:name="BaiduMobAd_APP_ID"-->
+            <!--android:value="f1a880e5" />-->
+        <!--<meta-data-->
+            <!--android:name="BaiduMobAd_APP_SEC"-->
+            <!--android:value="f1a880e5" />-->
+
+        <!--<activity-->
+            <!--android:name="com.baidu.mobads.AppActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|orientation" />-->
+
         <meta-data
             android:name="BaiduMobAd_APP_ID"
             android:value="f1a880e5" />
@@ -410,7 +512,7 @@
         <activity
             android:name="com.baidu.mobads.AppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
-        <!-- baidu guang gao -->
+
 
         <receiver android:name="com.wj.kindergarten.ui.func.NetworkConnectChangedReceiver" >
             <intent-filter>
@@ -419,6 +521,38 @@
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <!--  声明Mogo的Activity com.adsmogo.adview .AdsMogoWebView  -->        
+        <activity android:name="com.adsmogo.adview.AdsMogoWebView"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label= "@string/app_name"/>   <!--  注册Service，自主广告与交换广告的应用下载功能所需  -->  
+        <service
+            android:name="com.adsmogo.controller.service.UpdateService"
+            android:exported= "true"
+            android:process= ":remote"/>   <!--  注册Service，安装应用所用  -->  
+        <service
+            android:name= "com.adsmogo.controller.service.CountService"
+            android:exported= "true"
+            android:process= ":remote"/>  
+
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="OsYjK06n1U8Rb2qZvVF7CwiX" />
 
     </application>
 

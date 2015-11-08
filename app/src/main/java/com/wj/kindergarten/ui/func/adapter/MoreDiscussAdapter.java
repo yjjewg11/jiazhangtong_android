@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.MoreDiscuss;
+import com.wj.kindergarten.ui.other.RatingBarView;
+import com.wj.kindergarten.utils.TimeUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,8 @@ public class MoreDiscussAdapter extends BaseAdapter{
     private List<MoreDiscuss> list = new ArrayList<>();
 
     public void setList(List<MoreDiscuss> list){
+        this.list.clear();
+
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -47,6 +52,8 @@ public class MoreDiscussAdapter extends BaseAdapter{
         if(convertView == null){
             convertView = inflater.inflate(R.layout.more_discuss_item,null);
             viewHolder = new ViewHolder();
+            viewHolder.ratingBarView = (RatingBarView)convertView.findViewById(R.id.item_special_course_list_view__rating_bar);
+
             viewHolder.more_discuss_content = (TextView) convertView.findViewById(R.id.more_discuss_content);
             viewHolder.more_discuss_mobile_number = (TextView) convertView.findViewById(R.id.more_discuss_mobile_number);
             viewHolder.more_discuss_time = (TextView) convertView.findViewById(R.id.more_discuss_time);
@@ -57,9 +64,11 @@ public class MoreDiscussAdapter extends BaseAdapter{
 
         MoreDiscuss md = list.get(position);
         if(md != null){
+
+            viewHolder.ratingBarView.setFloatStar(md.getScore(),true);
             viewHolder.more_discuss_content.setText(""+md.getContent());
-            viewHolder.more_discuss_mobile_number.setText(""+md.getScore());
-            viewHolder.more_discuss_time.setText(""+md.getCreate_time());
+            viewHolder.more_discuss_mobile_number.setText(""+md.getCreate_user());
+            viewHolder.more_discuss_time.setText(""+ TimeUtil.getYMDTimeFromYMDHMS(md.getCreate_time()));
         }else{
 
         }
@@ -68,5 +77,8 @@ public class MoreDiscussAdapter extends BaseAdapter{
 
     class ViewHolder{
         TextView more_discuss_mobile_number,more_discuss_time,more_discuss_content;
+
+        RatingBarView ratingBarView;
+
     }
 }

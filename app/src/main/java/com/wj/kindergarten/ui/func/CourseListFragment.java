@@ -26,19 +26,16 @@ import com.wj.kindergarten.bean.Reply;
 import com.wj.kindergarten.bean.TrainChildInfo;
 import com.wj.kindergarten.bean.TrainClass;
 import com.wj.kindergarten.bean.TrainCourse;
-import com.wj.kindergarten.bean.TrainCourseContent;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.emot.SendMessage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.CourseListAdapter;
-import com.wj.kindergarten.ui.main.MainActivity;
-import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Map;
 
@@ -60,8 +57,8 @@ public class CourseListFragment extends Fragment {
     private String date;
     private CourseListAdapter courseListAdapter;
     private List<UserCourse> courseAll = new ArrayList<>();
+    public List<MyTrainCoures> trainCourseContentAll  = new ArrayList<>();
 
-    public List<TrainCourse> trainCourseAll  = new ArrayList<>();
 
     private List<ZanItem> zanItemList = new ArrayList<>();
 
@@ -85,6 +82,8 @@ public class CourseListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         date = getArguments().getString("date");
+        getc();
+
     }
 
     @Nullable
@@ -93,7 +92,8 @@ public class CourseListFragment extends Fragment {
         mContext = getActivity();
         courseAll.clear();
         zanItemList.clear();
-        trainCourseAll.clear();
+        trainCourseContentAll.clear();
+
         View view = View.inflate(getActivity(), R.layout.fragment_food_page, null);
         dateTv = (TextView) view.findViewById(R.id.course_date);
         dateTv.setText(date);
@@ -128,10 +128,12 @@ public class CourseListFragment extends Fragment {
             getCourseOfChildren();
         }
 
+
         //根据班级的个数获取培训课程点赞列表
-        if(CGApplication.getInstance().getLogin()!=null&&
-                CGApplication.getInstance().getLogin().getJSESSIONID()!=null)
-        getTrainingCourseOfChildren();
+//        if(CGApplication.getInstance().getLogin()!=null&&
+//                CGApplication.getInstance().getLogin().getJSESSIONID()!=null)
+//        getTrainingCourseOfChildren();
+
 
         return view;
     }
@@ -147,30 +149,29 @@ public class CourseListFragment extends Fragment {
     public List<TrainClass> getTrainClass(){
         return lists;
     }
+//    //网络获取孩子培训课程信息。
+//    private void getTrainingCourseOfChildren() {
+//        //先实行简单的解析，后期优化  TODO
+//        MainActivity mainActivity  = MainActivity.instance;
+//        trainChildInfoList = mainActivity.getTrainChildInfoList().getList();
+//        lists = mainActivity.getTrainChildInfoList().getClass_list();
+//        for(int chang = 0;chang < lists.size();chang++){
+//            getc(lists.get(chang).getClass_uuid(),chang,lists.size());
+//        }
+//    }
 
-    //网络获取孩子培训课程信息。
-    private void getTrainingCourseOfChildren() {
-        //先实行简单的解析，后期优化  TODO
-        MainActivity mainActivity  = MainActivity.instance;
-        trainChildInfoList = mainActivity.getTrainChildInfoList().getList();
-        lists = mainActivity.getTrainChildInfoList().getClass_list();
-        for(int chang = 0;chang < lists.size();chang++){
-            getc(lists.get(chang).getClass_uuid(),chang,lists.size());
-        }
-    }
+    private void getc() {
+        UserRequest.getTrainingCourseOfChildren(mContext,new RequestResultI() {
 
-    private void getc(String class_uuid, final int chang , final int size) {
-        UserRequest.getTrainingCourseOfChildren(mContext, TimeUtil.getYMDTimeFromDate(new Date()),
-                class_uuid, new RequestResultI() {
                     @Override
                     public void result(BaseModel domain) {
                         TrainCourse trainCourse = (TrainCourse) domain;
                         Log.i("TAG","打印TrainCourse对象"+trainCourse);
                             if(trainCourse!=null) {
-                                MyTrainCoures myTrainCoures = trainCourse.getList();
-                                if(myTrainCoures!=null&&myTrainCoures.getData()!=null) {
-                                    courseListAdapter.addTrainCourseList(myTrainCoures.getData());
-                                }
+                                trainCourseContentAll = (trainCourse.getList());
+                                    courseListAdapter.addTrainCourseList(trainCourseContentAll);
+
+
                             }
                     }
 
@@ -220,8 +221,9 @@ public class CourseListFragment extends Fragment {
         this.userCourse = userCourse;
     }
 
-    private TrainCourseContent send_Train_Course_Content;
-    public void showTrainReplyLayout(String uuid,TrainCourseContent trainCourseContent){
+    private MyTrainCoures send_Train_Course_Content;
+    public void showTrainReplyLayout(String uuid,MyTrainCoures mtc){
+
         bottomLayou.removeAllViews();
         if(myViewEmot2==null) {
             myViewEmot2 = new ViewEmot2(getActivity(), new SendMessage() {
@@ -232,7 +234,8 @@ public class CourseListFragment extends Fragment {
             });
         }
         bottomLayou.addView(myViewEmot2);
-        send_Train_Course_Content = trainCourseContent;
+        send_Train_Course_Content = mtc;
+
         nowReplyUUID = uuid;
         bottomLayou.setVisibility(View.VISIBLE);
         myViewEmot2.showSoftKeyboard();
@@ -278,7 +281,7 @@ public class CourseListFragment extends Fragment {
     }
 
     //添加训练课程内容并且更新
-    private void addTrainReply(TrainCourseContent send_train_course_content, Reply reply) {
+    private void addTrainReply(MyTrainCoures send_train_course_content, Reply reply) {
         if(send_train_course_content.getReplyPage().getData()!=null){
             send_train_course_content.getReplyPage().getData().add(0,reply);
             courseListAdapter.notifyDataSetChanged();

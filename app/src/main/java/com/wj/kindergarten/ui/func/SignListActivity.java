@@ -97,15 +97,19 @@ public class SignListActivity extends BaseActivity {
             @Override
             public void result(BaseModel domain) {
                 SignList signList = (SignList) domain;
-                if(mListView.isRefreshing()){
-                    mListView.onRefreshComplete();
+                if (signList.getList() != null && signList.getList().getData() != null && signList.getList().getData().size() > 0) {
+                    datas.addAll(signList.getList().getData());
+                    if(signAdapter!=null) {signAdapter.notifyDataSetChanged();}
+                    if(page == 1){
+                        loadSuc();
+                    }
+                    if(mListView.isRefreshing()){
+                        mListView.onRefreshComplete();
+                    }
+                }else{
+                   loadEmpty();
                 }
 
-                if (signList.getList() != null && signList.getList().getData() != null) {
-                    datas.addAll((ArrayList) ((SignList) domain).getList().getData());
-                    if(signAdapter!=null) {signAdapter.notifyDataSetChanged();}
-                }
-                loadSuc();
             }
 
             @Override

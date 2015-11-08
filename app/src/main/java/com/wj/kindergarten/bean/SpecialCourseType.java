@@ -10,7 +10,8 @@ public class SpecialCourseType extends BaseModel {
     @Expose
     private String datavalue;
     @Expose
-    private String description;
+    private String img;
+
 
     public int getDatakey() {
         return datakey;
@@ -28,12 +29,13 @@ public class SpecialCourseType extends BaseModel {
         this.datavalue = datavalue;
     }
 
-    public String getDescription() {
-        return description;
+    public String getImg() {
+        return img;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setImg(String img) {
+        this.img = img;
+
     }
 
     @Override
@@ -41,7 +43,8 @@ public class SpecialCourseType extends BaseModel {
         return "SpecialCourseType{" +
                 "datakey=" + datakey +
                 ", datavalue='" + datavalue + '\'' +
-                ", description='" + description + '\'' +
+                ", img='" + img + '\'' +
+
                 '}';
     }
 }

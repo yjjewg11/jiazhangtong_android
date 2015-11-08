@@ -14,4 +14,12 @@ public class TrainSchoolInfoListFather extends BaseModel{
     public void setList(TrainSchoolInfoList list) {
         this.list = list;
     }
+
+    @Override
+    public String toString() {
+        return "TrainSchoolInfoListFather{" +
+                "list=" + list +
+                '}';
+    }
+
 }
