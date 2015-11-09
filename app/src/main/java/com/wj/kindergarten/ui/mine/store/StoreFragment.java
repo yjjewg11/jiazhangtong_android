@@ -25,6 +25,10 @@ import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.ArticleActivity;
+import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.func.PrivilegeDetailActivity;
+import com.wj.kindergarten.ui.func.SchoolDetailInfoActivity;
+import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 
@@ -85,6 +89,18 @@ public class StoreFragment extends Fragment {
                             Intent intent = new Intent(getActivity(), ArticleActivity.class);
                             intent.putExtra("uuid", store.getReluuid());
                             intent.putExtra("fromStore", true);
+                            startActivity(intent);
+                        }else if(store.getType() == NormalReplyListActivity.TRAIN_COURSE){
+                            Intent intent = new Intent(getActivity(), SpecialCourseInfoActivity.class);
+                            intent.putExtra("uuid",store.getReluuid());
+                            startActivity(intent);
+                        }else if(store.getType() == NormalReplyListActivity.TRAIN_SCHOOL){
+                            Intent intent = new Intent(getActivity(), SchoolDetailInfoActivity.class);
+                            intent.putExtra("schooluuid",store.getReluuid());
+                            startActivity(intent);
+                        }else if(store.getType() == NormalReplyListActivity.PRIVILEGE_ACTIVE){
+                            Intent intent = new Intent(getActivity(), PrivilegeDetailActivity.class);
+                            intent.putExtra("pauuid",store.getReluuid());
                             startActivity(intent);
                         }
                     }

@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.MineCourseStatusAdapter;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -43,8 +46,14 @@ public class MineSpecialCourseActivity extends BaseActivity{
                 case 100:
                 if(isStudying == 0){
                     adapter.setList(studyint_list);
+                    judgeIsEmpty(studyint_list);
                 }else{
+                    if(!isFirstLoad){
+                        loadData();
+                        isFirstLoad = true;
+                    }
                     adapter.setList(over_list);
+                    judgeIsEmpty(over_list);
                 }
                     closeFresh();
                     break;
@@ -58,6 +67,22 @@ public class MineSpecialCourseActivity extends BaseActivity{
             }
         }
     };
+    private FrameLayout rl;
+    private HintInfoDialog dialog;
+
+    public void judgeIsEmpty(List<StudyStateObject> list){
+        if(list.size() == 0){
+            rl.removeAllViews();
+            noView(rl);
+        }else{
+            rl.removeAllViews();
+            if(mListView.getParent() != null){
+                ((ViewGroup)mListView.getParent()).removeView(mListView);
+            }
+            rl.addView(mListView);
+        }
+    }
+    public static final String FROM_MINE_COURSE_TO_MINE_DETAIL_COURSE = "mine_course_detail_to";
 
     private void closeFresh() {
         if(mListView.isRefreshing()){
@@ -92,6 +117,10 @@ public class MineSpecialCourseActivity extends BaseActivity{
 
         red_left = (TextView)findViewById(R.id.red_left);
         red_right = (TextView)findViewById(R.id.red_right);
+
+        rl = (FrameLayout)findViewById(R.id.study_state_fl);
+
+
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -148,11 +177,13 @@ public class MineSpecialCourseActivity extends BaseActivity{
                     sso = over_list.get((int)id);
                 }
                 Intent intent = new Intent(MineSpecialCourseActivity.this,MineCourseDetailActivity.class);
-                intent.putExtra("object",sso);
+                intent.putExtra("courseuuid",sso.getCourseuuid());
+                intent.putExtra(FROM_MINE_COURSE_TO_MINE_DETAIL_COURSE,sso);
                 startActivity(intent);
             }
         });
     }
+    boolean isFirstLoad;
     private int getPageNo = 1;
     private int isStudying = 0;
     @Override
@@ -163,9 +194,12 @@ public class MineSpecialCourseActivity extends BaseActivity{
         }else{
             page = pageStudyOver;
         }
+        if(dialog == null){dialog = new HintInfoDialog(this);}
+        dialog.show();
         UserRequest.getStudyStatus(this,page,isStudying, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                dialog.cancel();
               StudyStateObjectList sso = (StudyStateObjectList) domain;
                 if(sso!=null && sso.getList()!=null && sso.getList().getData() != null && sso.getList().getData().size() > 0){
                     if(isStudying == 0){

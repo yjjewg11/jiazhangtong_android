@@ -65,7 +65,7 @@ public class SimpleIntroduceFragment extends Fragment {
 
     private void loadData() {
         SchoolDetailInfoActivity sif = (SchoolDetailInfoActivity)getActivity();
-        UserRequest.getTrainSchoolDetail(sif, sif.getSchool().getUuid(), new RequestResultI() {
+        UserRequest.getTrainSchoolDetail(sif, sif.getSchooluuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 SchoolDetailList sdl = (SchoolDetailList) domain;

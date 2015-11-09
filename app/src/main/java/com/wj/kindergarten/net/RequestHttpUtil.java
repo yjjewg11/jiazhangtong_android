@@ -34,7 +34,7 @@ public class RequestHttpUtil {
 
     //专用调试培训机构地址
 
-//    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
+    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 
 
 
@@ -44,7 +44,7 @@ public class RequestHttpUtil {
 
     //正式地址
 
-    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
+//    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {
         if (client == null) {

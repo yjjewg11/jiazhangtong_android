@@ -94,7 +94,7 @@ public class PrivilegeActiveActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(PrivilegeActiveActivity.this, PrivilegeDetailActivity.class);
-                intent.putExtra("object",adapter.getList().get(position-1));
+                intent.putExtra("pauuid",adapter.getList().get(position-1).getUuid());
                 startActivity(intent);
             }
         });

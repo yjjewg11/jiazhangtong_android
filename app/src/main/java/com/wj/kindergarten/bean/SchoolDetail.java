@@ -13,21 +13,41 @@ public class SchoolDetail extends BaseModel{
     private String description;@Expose
     private String createtime;@Expose
     private int ct_stars;@Expose
-    private long ct_study_students;
+    private long ct_study_students;@Expose
+    private String summary;@Expose
+    private String address;
 
     @Override
     public String toString() {
         return "SchoolDetail{" +
-                "brand_name='" + brand_name + '\'' +
-                ", uuid='" + uuid + '\'' +
+                "uuid='" + uuid + '\'' +
                 ", img='" + img + '\'' +
+                ", brand_name='" + brand_name + '\'' +
                 ", link_tel='" + link_tel + '\'' +
                 ", map_point='" + map_point + '\'' +
                 ", description='" + description + '\'' +
                 ", createtime='" + createtime + '\'' +
                 ", ct_stars=" + ct_stars +
                 ", ct_study_students=" + ct_study_students +
+                ", summary='" + summary + '\'' +
+                ", address='" + address + '\'' +
                 '}';
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getBrand_name() {

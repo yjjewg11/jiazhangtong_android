@@ -17,7 +17,16 @@ public class OnceSpecialCourse extends BaseModel{
     private int ct_stars;@Expose
     private long ct_study_students;@Expose
     private String context;@Expose
-    private String address;
+    private String address;@Expose
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public String getAddress() {
         return address;
@@ -51,6 +60,7 @@ public class OnceSpecialCourse extends BaseModel{
                 ", ct_study_students=" + ct_study_students +
                 ", context='" + context + '\'' +
                 ", address='" + address + '\'' +
+                ", logo='" + logo + '\'' +
                 '}';
     }
 

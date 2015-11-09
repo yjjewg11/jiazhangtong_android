@@ -227,7 +227,7 @@ public class SpecialCourseDetailActivity extends BaseActivity{
                     //启动学校详情页面
                     TrainSchoolInfo school = ( (TrainSchoolInfo) schoolCourseAdapter.getItem((int)id));
                     intent = new Intent(SpecialCourseDetailActivity.this, SchoolDetailInfoActivity.class);
-                    intent.putExtra("school",school);
+                    intent.putExtra("schooluuid",school.getUuid());
                 }
 
                 startActivity(intent);

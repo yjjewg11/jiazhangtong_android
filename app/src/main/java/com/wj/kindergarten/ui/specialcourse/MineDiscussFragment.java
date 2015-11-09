@@ -152,7 +152,7 @@ public class MineDiscussFragment extends Fragment{
     }
 
     private void getAssess() {
-        UserRequest.getAssessState(getActivity(),mcd.getSso().getCourseuuid(), new RequestResultI() {
+        UserRequest.getAssessState(getActivity(),mcd.getCourses().getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 Message message = new Message();
@@ -183,10 +183,9 @@ public class MineDiscussFragment extends Fragment{
 
     private void requestTeacher() {
 
-        UserRequest.getAllAssessTeacher(getActivity(),mcd.getSso().getCourseuuid(), new RequestResultI() {
+        UserRequest.getAllAssessTeacher(getActivity(),mcd.getCourses().getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-
                 AllTeacherList atl = (AllTeacherList) domain;
                 if(atl!=null & atl.getList()!=null){
                     teacher_list.addAll(atl.getList());
@@ -219,11 +218,11 @@ public class MineDiscussFragment extends Fragment{
         for(int  count= 0;count<(2+teacher_list.size());count++){
             String extend_uuid = null;
         if(count == 0){
-            extend_uuid = mcd.getSso().getGroupuuid();
+            extend_uuid = mcd.getCourses().getGroupuuid();
             type = 81;
             score = ratingBars[0].getClickedCount();
         }else if(count == 1){
-            extend_uuid = mcd.getSso().getCourseuuid();
+            extend_uuid = mcd.getCourses().getUuid();
             type = 82;
             score = ratingBars[1].getClickedCount();
         }else{
@@ -234,7 +233,7 @@ public class MineDiscussFragment extends Fragment{
             score = barView.getClickedCount();
         }
         if(count != 0) {content = null;}
-        UserRequest.sendSpecialCourseAssess(getActivity(),extend_uuid,mcd.getSso().getUuid(),type,score,content,new RequestResultI(){
+        UserRequest.sendSpecialCourseAssess(getActivity(),extend_uuid,mcd.getCourses().getUuid(),type,score,content,new RequestResultI(){
             @Override
             public void result(BaseModel domain) {
                     mHandler.sendEmptyMessage(1);

@@ -18,306 +18,52 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e222b90-3926-4f3e-b7dd-1d8f1020f802" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/liblocSDK6a.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/liblocSDK6a.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/libs/locSDK_6.13.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/locSDK_6_13.xml" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\.gradle\2.4\taskArtifacts\cache.properties.lock" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\.idea\libraries\Baidu_MobAds_SDK.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\app-release.apk" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\app\libs\Baidu_MobAds_SDK.jar" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\git push -u origin master" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\git push -u origin master.pub" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\BuildConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\BuildConfig.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\ILoadingLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\IPullToRefresh.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\LoadingLayoutProxy.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\OverscrollHelper.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshAdapterViewBase.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshBase.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshExpandableListView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshGridView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshHorizontalScrollView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshListView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshScrollView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\PullToRefreshWebView.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\R.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\extras\PullToRefreshWebView2.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\extras\SoundPullEventListener.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\EmptyViewMethodAccessor.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\FlipLoadingLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\IndicatorLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\LoadingLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\RotateLoadingLayout.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\Utils.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\classes\debug\com\handmark\pulltorefresh\library\internal\ViewCompat.class" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\incremental\aidl\androidTest\debug\dependency.store" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\incremental\aidl\debug\dependency.store" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\incremental\mergeAssets\androidTest\debug\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\incremental\mergeAssets\debug\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\incremental\mergeResources\androidTest\debug\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\incremental\packageResources\debug\merger.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\manifests\androidTest\debug\AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\manifests\tmp\manifestMerger4644911587387679751.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\manifests\tmp\manifestMerger4714045664129179164.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\manifests\tmp\manifestMerger810044343055373295.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\anim\slide_in_from_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\anim\slide_in_from_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\anim\slide_out_to_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\anim\slide_out_to_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-hdpi\default_ptr_flip.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-hdpi\default_ptr_rotate.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-hdpi\indicator_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-mdpi\default_ptr_flip.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-mdpi\default_ptr_rotate.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-mdpi\indicator_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-xhdpi\default_ptr_flip.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-xhdpi\default_ptr_rotate.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable-xhdpi\indicator_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable\indicator_bg_bottom.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\drawable\indicator_bg_top.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\layout\pull_to_refresh_header_horizontal.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\layout\pull_to_refresh_header_vertical.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-ar\values-ar.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-cs\values-cs.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-de\values-de.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-es\values-es.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-fi\values-fi.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-fr\values-fr.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-he\values-he.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-it\values-it.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-iw\values-iw.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-ja\values-ja.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-ko\values-ko.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-nl\values-nl.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-pl\values-pl.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-pt-rBR\values-pt-rBR.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-pt\values-pt.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-ro\values-ro.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-ru\values-ru.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values-zh\values-zh.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\res\androidTest\debug\values\values.xml" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\resources\resources-debug-androidTest.ap_" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\intermediates\symbols\androidTest\debug\R.txt" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\outputs\aar\pulltorefreshlib-debug.aar" afterPath="" />
-      <change type="DELETED" beforePath="E:\work-wenjie-project\ChildrenGarden\pulltorefreshlibrary\build\tmp\packageDebugJar\MANIFEST.MF" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/internal/FlipLoadingLayout$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/internal/FlipLoadingLayout$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/internal/IndicatorLayout$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/internal/IndicatorLayout$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/internal/LoadingLayout$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/internal/LoadingLayout$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/OverscrollHelper$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/OverscrollHelper$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshAdapterViewBase$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshAdapterViewBase$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$2.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$3.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$4.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$AnimationStyle.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$AnimationStyle.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$Mode.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$Mode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$Orientation.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$Orientation.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$SmoothScrollRunnable.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$SmoothScrollRunnable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$State.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshBase$State.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshExpandableListView$InternalExpandableListView.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshExpandableListView$InternalExpandableListView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshExpandableListView$InternalExpandableListViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshExpandableListView$InternalExpandableListViewSDK9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshGridView$InternalGridView.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshGridView$InternalGridView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshGridView$InternalGridViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshGridView$InternalGridViewSDK9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshHorizontalScrollView$InternalHorizontalScrollViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshHorizontalScrollView$InternalHorizontalScrollViewSDK9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshListView$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshListView$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshListView$InternalListView.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshListView$InternalListView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshListView$InternalListViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshListView$InternalListViewSDK9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshScrollView$InternalScrollViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshScrollView$InternalScrollViewSDK9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$1.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$2.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$InternalWebViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$InternalWebViewSDK9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/extras/PullToRefreshWebView2$JsValueCallback.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/extras/PullToRefreshWebView2$JsValueCallback.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/outputs/aar/pulltorefreshlib-release.aar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/outputs/aar/pulltorefreshlib-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Article.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Article.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ArticleActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ArticleActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/ArticleDetail.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/ArticleDetail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ArticleListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ArticleListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/generated/source/buildConfig/androidTest/debug/com/handmark/pulltorefresh/library/test/BuildConfig.java" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/generated/source/buildConfig/androidTest/debug/com/handmark/pulltorefresh/library/test/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/generated/source/buildConfig/debug/com/handmark/pulltorefresh/library/BuildConfig.java" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/generated/source/buildConfig/debug/com/handmark/pulltorefresh/library/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/CGLog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/CGLog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/CGSharedPreference.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/CGSharedPreference.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/ClassFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/ClassFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CommonSpinnerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CommonSpinnerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseInteractionAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseInteractionAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/DianZan.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/DianZan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionSentActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionSentActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineCourseDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineCourseDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseDetailAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseDetailAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineCourseFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineCourseFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseStatusAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseStatusAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineDiscussFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineDiscussFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineSpecialCourseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineSpecialCourseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MoreDiscuss.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MoreDiscuss.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MoreDiscussAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MoreDiscussAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MoreSpecialDiscussActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MoreSpecialDiscussActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/MoreUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/MoreUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MyTrainCoures.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MyTrainCoures.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/NativeImageLoader.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/NativeImageLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NormalReplyListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NormalReplyListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NoticeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NoticeActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/OnceSpecialCourse.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/OnceSpecialCourse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/OnceSpecialCourseList.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/OnceSpecialCourseList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/PrivilegeActiveActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/PrivilegeActiveActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/PrivilegeDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/PrivilegeDetailActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/generated/source/r/androidTest/debug/com/handmark/pulltorefresh/library/R.java" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/generated/source/r/androidTest/debug/com/handmark/pulltorefresh/library/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/RatingBarView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/RatingBarView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Reply.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Reply.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestHttpUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestHttpUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SchoolCourseAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SchoolCourseAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SchoolDetail.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SchoolDetail.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SignListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SignListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/SimpleIntroduceFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/SimpleIntroduceFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/SingleMediaScanner.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/SingleMediaScanner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseGrid.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseGrid.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SpecialCourseInfoObject.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SpecialCourseInfoObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SpecialCourseType.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SpecialCourseType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/TeachersSpecialFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/TeachersSpecialFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/TimeUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/TimeUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TrainCourse.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TrainCourse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TrainSchoolInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TrainSchoolInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TrainSchoolInfoListFather.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TrainSchoolInfoListFather.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/VersionInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/VersionInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Zan.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Zan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_article.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_article.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_interaction_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_interaction_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_mine_course_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_mine_course_detail.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_mine_special_course.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_mine_special_course.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_more_special_discuss.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_more_special_discuss.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_schllo_detail_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_schllo_detail_info.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sepcial_course_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sepcial_course_detail.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_special_course_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_special_course_info.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_webview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_webview.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/color.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/common_rating_bar.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/common_rating_bar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/course_status_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/course_status_item.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_class.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_class.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_discuss.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_discuss.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_simple_introduce.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_simple_introduce.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_teachers_special.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_teachers_special.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/drawable/indicator_bg_bottom.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/drawable/indicator_bg_bottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/drawable/indicator_bg_top.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/drawable/indicator_bg_top.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/drawable/indicator_bg_top.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/drawable/indicator_bg_top.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_course.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_course.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_course_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_course_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_interaction.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_interaction.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_special_course_list_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_special_course_list_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_special_grid.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_special_grid.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/incremental/mergeAssets/release/merger.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/incremental/mergeAssets/release/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/incremental/packageResources/release/merger.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/incremental/packageResources/release/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/mine_course_detail_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/mine_course_detail_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/more_discuss_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/more_discuss_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/one_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/one_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/layout/pull_to_refresh_header_horizontal.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/layout/pull_to_refresh_header_horizontal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/layout/pull_to_refresh_header_vertical.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/layout/pull_to_refresh_header_vertical.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/setting_item_click_selector.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/setting_item_click_selector.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_in_from_bottom.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_in_from_bottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_in_from_bottom.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_in_from_bottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_in_from_top.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_in_from_top.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_in_from_top.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_in_from_top.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_out_to_bottom.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_out_to_bottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_out_to_top.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/anim/slide_out_to_top.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_out_to_top.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/anim/slide_out_to_top.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/train_course_common.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/train_course_common.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/training_translate_program.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/training_translate_program.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ar/values-ar.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ar/values-ar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ar/values-ar.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ar/values-ar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-cs/values-cs.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-cs/values-cs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-cs/values-cs.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-cs/values-cs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-de/values-de.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-de/values-de.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-de/values-de.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-de/values-de.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-es/values-es.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-es/values-es.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-es/values-es.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-es/values-es.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-fi/values-fi.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-fi/values-fi.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-fi/values-fi.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-fi/values-fi.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-fr/values-fr.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-fr/values-fr.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-fr/values-fr.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-fr/values-fr.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-he/values-he.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-he/values-he.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-he/values-he.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-he/values-he.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-it/values-it.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-it/values-it.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-it/values-it.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-it/values-it.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-iw/values-iw.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-iw/values-iw.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-iw/values-iw.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-iw/values-iw.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ja/values-ja.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ja/values-ja.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ja/values-ja.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ja/values-ja.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ko/values-ko.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ko/values-ko.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ko/values-ko.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ko/values-ko.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-nl/values-nl.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-nl/values-nl.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-nl/values-nl.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-nl/values-nl.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-pl/values-pl.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-pl/values-pl.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-pl/values-pl.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-pl/values-pl.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-pt-rBR/values-pt-rBR.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-pt-rBR/values-pt-rBR.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-pt-rBR/values-pt-rBR.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-pt-rBR/values-pt-rBR.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-pt/values-pt.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-pt/values-pt.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-pt/values-pt.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-pt/values-pt.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ro/values-ro.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ro/values-ro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ro/values-ro.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ro/values-ro.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ru/values-ru.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-ru/values-ru.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ru/values-ru.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-ru/values-ru.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-zh/values-zh.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values-zh/values-zh.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-zh/values-zh.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values-zh/values-zh.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values/values.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/res/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values/values.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/res/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/text_shape.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/text_shape.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/train_common.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/train_common.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ChildrenGarden.iws" />
@@ -416,147 +162,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CGApplication.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.048474">
-              <caret line="221" column="39" selection-start-line="221" selection-start-column="39" selection-end-line="221" selection-end-column="39" />
-              <folding>
-                <element signature="e#2280#2281#0" expanded="true" />
-                <element signature="e#2316#2317#0" expanded="true" />
-                <element signature="e#3162#3163#0" expanded="true" />
-                <element signature="e#3192#3193#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-22/android/location/LocationManager.java">
+      <file leaf-file-name="MineFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="839" column="6" selection-start-line="839" selection-start-column="6" selection-end-line="839" selection-end-column="6" />
+              <caret line="82" column="72" selection-start-line="82" selection-start-column="72" selection-end-line="82" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <file leaf-file-name="MineSpecialCourseActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineSpecialCourseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="549" column="18" selection-start-line="549" selection-start-column="18" selection-end-line="549" selection-end-column="18" />
-              <folding>
-                <element signature="e#6947#6965#0" expanded="true" />
-                <element signature="e#7117#7135#0" expanded="true" />
-                <element signature="e#7595#7613#0" expanded="true" />
-                <element signature="e#7849#7867#0" expanded="true" />
-                <element signature="e#8110#8128#0" expanded="true" />
-                <element signature="e#8367#8385#0" expanded="true" />
-                <element signature="e#8611#8629#0" expanded="true" />
-                <element signature="e#8867#8885#0" expanded="true" />
-                <element signature="e#9124#9142#0" expanded="true" />
-                <element signature="e#9370#9388#0" expanded="true" />
-                <element signature="e#9628#9646#0" expanded="true" />
-                <element signature="e#9891#9909#0" expanded="true" />
-                <element signature="e#10149#10167#0" expanded="true" />
-                <element signature="e#10405#10423#0" expanded="true" />
-                <element signature="e#10660#10678#0" expanded="true" />
-                <element signature="e#10903#10921#0" expanded="true" />
-                <element signature="e#11136#11154#0" expanded="true" />
-                <element signature="e#11383#11401#0" expanded="true" />
-                <element signature="e#11631#11649#0" expanded="true" />
-                <element signature="e#11875#11893#0" expanded="true" />
-                <element signature="e#12121#12139#0" expanded="true" />
-                <element signature="e#12365#12383#0" expanded="true" />
-                <element signature="e#12615#12633#0" expanded="true" />
-                <element signature="e#12863#12881#0" expanded="true" />
-                <element signature="e#13112#13130#0" expanded="true" />
-                <element signature="e#13366#13384#0" expanded="true" />
-                <element signature="e#13627#13645#0" expanded="true" />
-                <element signature="e#13876#13894#0" expanded="true" />
-                <element signature="e#14121#14139#0" expanded="true" />
-                <element signature="e#14368#14386#0" expanded="true" />
-                <element signature="e#14617#14635#0" expanded="true" />
-                <element signature="e#14864#14882#0" expanded="true" />
-                <element signature="e#15158#15176#0" expanded="true" />
-                <element signature="e#15408#15426#0" expanded="true" />
-                <element signature="e#15662#15680#0" expanded="true" />
-                <element signature="e#15941#15959#0" expanded="true" />
-                <element signature="e#16185#16203#0" expanded="true" />
-                <element signature="e#16431#16449#0" expanded="true" />
-                <element signature="e#16690#16708#0" expanded="true" />
-                <element signature="e#16935#16953#0" expanded="true" />
-                <element signature="e#17189#17207#0" expanded="true" />
-                <element signature="e#17450#17468#0" expanded="true" />
-                <element signature="e#17707#17725#0" expanded="true" />
-                <element signature="e#17957#17975#0" expanded="true" />
-                <element signature="e#18206#18224#0" expanded="true" />
-                <element signature="e#18463#18481#0" expanded="true" />
-                <element signature="e#18716#18734#0" expanded="true" />
-                <element signature="e#18954#18972#0" expanded="true" />
-                <element signature="e#19269#19287#0" expanded="true" />
-                <element signature="e#25732#25750#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="64" column="55" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
+              <caret line="178" column="85" selection-start-line="178" selection-start-column="85" selection-end-line="178" selection-end-column="85" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+      <file leaf-file-name="MineCourseDetailActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineCourseDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpecialCourseInfoActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java">
+      <file leaf-file-name="CourseDetailIntroduceFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="187" column="95" selection-start-line="187" selection-start-column="95" selection-end-line="187" selection-end-column="95" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CourseInteractionListActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionListActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CourseInteractionFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="58" selection-start-line="67" selection-start-column="58" selection-end-line="67" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CourseInteractionAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseInteractionAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="161" column="42" selection-start-line="161" selection-start-column="42" selection-end-line="161" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.15904936">
+              <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -568,9 +208,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="valueResourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -2812,50 +2452,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ArticleActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ArticleListActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseListFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionListActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionSentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineCourseDetailActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineSpecialCourseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MoreSpecialDiscussActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NormalReplyListActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NoticeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SignListActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseDetailActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CommonSpinnerAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseDetailAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MoreDiscussAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseStatusAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SchoolCourseAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseGrid.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/NativeImageLoader.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/MoreUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/RatingBarView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/ClassFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineCourseFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineDiscussFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/SimpleIntroduceFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/TeachersSpecialFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/SingleMediaScanner.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/TimeUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java" />
         <option value="$PROJECT_DIR$/local.properties" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseInteractionAdapter.java" />
@@ -2863,6 +2466,43 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/VersionInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/course_status_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseStatusAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/text_shape.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_course_list.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/train_common.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineDiscussFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/RatingBarView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MyTrainCoures.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/OnceSpecialCourse.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_course.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineCourseFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestHttpUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineCourseDetailActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseDetailActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SchoolDetail.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/PrivilegeActiveActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/ClassFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/SimpleIntroduceFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/PrivilegeDetailActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_mine_special_course.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineSpecialCourseActivity.java" />
       </list>
     </option>
   </component>
@@ -2880,10 +2520,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="-7" />
+    <option name="y" value="1" />
     <option name="width" value="1370" />
-    <option name="height" value="744" />
+    <option name="height" value="734" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -2921,7 +2561,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -2933,6 +2573,158 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildrenGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Problems" />
         <subPane subId="Production">
@@ -3026,186 +2818,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jniLibs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="x86" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jniLibs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="armeabi-v7a" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildrenGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3217,10 +2829,10 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="192.168.56.101:5555" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="fb1cd650" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/libs/locSDK_6.13.jar" />
     <property name="ExportApk.ApkPath" value="E:\work-wenjie-project\Apk\family_apk" />
     <property name="ExportApk.Flavors" value="" />
@@ -3526,30 +3138,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="1" width="1370" height="734" extended-state="1" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5177305" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5153584" sideWeight="0.48854962" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5138889" sideWeight="0.48854962" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5153584" sideWeight="0.5114504" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33587787" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59385663" sideWeight="0.49463192" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.9095563" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.9305556" sideWeight="0.49463192" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.9081456" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4215017" sideWeight="0.4969325" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297546" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49317408" sideWeight="0.4984733" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22290076" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900763" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24846625" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24809161" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297546" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49317408" sideWeight="0.5015267" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49305555" sideWeight="0.5015267" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3557,8 +3169,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="93" y="104" width="1176" height="531" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.572695" sideWeight="0.49386504" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3613,387 +3225,334 @@
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java</url>
+          <line>84</line>
+          <properties />
+          <option name="timeStamp" value="217" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java</url>
+          <line>275</line>
+          <properties />
+          <option name="timeStamp" value="218" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java</url>
+          <line>280</line>
+          <properties />
+          <option name="timeStamp" value="219" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java</url>
+          <line>183</line>
+          <properties method="onFailure" />
+          <option name="timeStamp" value="210" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java</url>
+          <line>191</line>
+          <properties method="onFailure" />
+          <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java</url>
+          <line>198</line>
+          <properties method="onFailure" />
+          <option name="timeStamp" value="212" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="195" />
+      <option name="time" value="220" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NoticeActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/VersionInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="132" column="41" selection-start-line="132" selection-start-column="41" selection-end-line="132" selection-end-column="41" />
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NormalReplyListActivity.java">
+    <entry file="jar://$PROJECT_DIR$/app/libs/umeng-analytics-v5.2.4.jar!/u/aly/m.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.928571">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.733333">
+          <caret line="81" column="12" selection-start-line="81" selection-start-column="12" selection-end-line="81" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SignListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.89048475">
-          <caret line="98" column="54" selection-start-line="98" selection-start-column="54" selection-end-line="98" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15260324">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CommonSpinnerAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/course_status_item.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state vertical-scroll-proportion="-10.8">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding>
+            <element signature="e#273#291#0" expanded="true" />
+            <element signature="e#322#340#0" expanded="true" />
+            <element signature="e#1435#1453#0" expanded="true" />
+            <element signature="e#1872#1890#0" expanded="true" />
+            <element signature="e#2289#2307#0" expanded="true" />
+            <element signature="e#2709#2727#0" expanded="true" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="311" column="26" selection-start-line="311" selection-start-column="26" selection-end-line="311" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseDetailAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MoreDiscussAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/MineCourseStatusAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SchoolCourseAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="14" selection-start-line="86" selection-start-column="14" selection-end-line="86" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="90" selection-start-line="83" selection-start-column="90" selection-end-line="83" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SpecialCourseListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/NativeImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="389" column="29" selection-start-line="389" selection-start-column="29" selection-end-line="389" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="90" selection-start-line="82" selection-start-column="90" selection-end-line="82" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/MoreUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/RatingBarView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/ClassFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="114" column="91" selection-start-line="114" selection-start-column="91" selection-end-line="114" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineCourseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineDiscussFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="254" column="0" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/SimpleIntroduceFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/TeachersSpecialFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/SingleMediaScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6606822">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/TimeUtil.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="127" column="5" selection-start-line="127" selection-start-column="5" selection-end-line="127" selection-end-column="5" />
-          <folding />
+          <caret line="58" column="42" selection-start-line="58" selection-start-column="42" selection-end-line="58" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/text_shape.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2908438">
-          <caret line="8" column="52" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7091562">
-          <caret line="766" column="0" selection-start-line="766" selection-start-column="0" selection-end-line="766" selection-end-column="0" />
-          <folding>
-            <element signature="e#4304#4305#0" expanded="false" />
-            <element signature="e#4369#4370#0" expanded="false" />
-            <element signature="e#6231#6232#0" expanded="false" />
-            <element signature="e#6297#6298#0" expanded="false" />
-            <element signature="e#15148#15149#0" expanded="false" />
-            <element signature="e#15195#15196#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GsonUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36983842">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding>
-            <element signature="e#359#360#0" expanded="false" />
-            <element signature="e#398#399#0" expanded="false" />
-            <element signature="e#434#435#0" expanded="false" />
-            <element signature="e#461#462#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="25" selection-start-line="83" selection-start-column="25" selection-end-line="83" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="3" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+          <folding>
+            <element signature="e#1967#1968#0" expanded="false" />
+            <element signature="e#2000#2001#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_course_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.833333">
+          <caret line="238" column="38" selection-start-line="238" selection-start-column="38" selection-end-line="238" selection-end-column="38" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_html.xml">
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionListActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/train_common.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="21" selection-start-line="50" selection-start-column="21" selection-end-line="50" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.117647">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="206" column="0" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+        <state vertical-scroll-proportion="-4.8333335">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding>
-            <element signature="e#5631#5935#0" expanded="false" />
-            <element signature="e#5934#5935#0" expanded="false" />
-            <element signature="e#6394#6910#0" expanded="false" />
-            <element signature="e#6909#6910#0" expanded="false" />
+            <element signature="e#5100#5118#0" expanded="true" />
+            <element signature="e#5153#5171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="42" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/RatingBarView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8756856">
+          <caret line="154" column="39" selection-start-line="154" selection-start-column="39" selection-end-line="154" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MyTrainCoures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/OnceSpecialCourse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.2595978">
+          <caret line="297" column="0" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33272395">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/SchoolCourseAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6032907">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="75" selection-start-line="6" selection-start-column="75" selection-end-line="6" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15904936">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="509" column="18" selection-start-line="509" selection-start-column="18" selection-end-line="509" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_pulltorefresh.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.2">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_course.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.4">
+          <caret line="6" column="42" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineCourseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
+          <folding>
+            <element signature="e#1275#1513#0" expanded="true" />
+            <element signature="e#1512#1513#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_special_course_info.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.233334">
+          <caret line="350" column="60" selection-start-line="350" selection-start-column="41" selection-end-line="350" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestHttpUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48080438">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="316" column="66" selection-start-line="316" selection-start-column="66" selection-end-line="316" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="677" column="0" selection-start-line="677" selection-start-column="0" selection-end-line="677" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine_discuss.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.733333">
+          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/MineDiscussFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="123" column="91" selection-start-line="123" selection-start-column="91" selection-end-line="123" selection-end-column="91" />
-          <folding />
+          <caret line="135" column="57" selection-start-line="135" selection-start-column="57" selection-end-line="135" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/CallUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="187" column="95" selection-start-line="187" selection-start-column="95" selection-end-line="187" selection-end-column="95" />
+          <caret line="28" column="79" selection-start-line="28" selection-start-column="79" selection-end-line="28" selection-end-column="79" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseInteractionFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="58" selection-start-line="67" selection-start-column="58" selection-end-line="67" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/CourseInteractionAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="42" selection-start-line="161" selection-start-column="42" selection-end-line="161" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-22/android/app/ActivityThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.014362657">
-          <caret line="4690" column="46" selection-start-line="4690" selection-start-column="46" selection-end-line="4690" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-22/android/provider/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.238806">
-          <caret line="3160" column="30" selection-start-line="3160" selection-start-column="30" selection-end-line="3160" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-22/android/location/LocationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="839" column="6" selection-start-line="839" selection-start-column="6" selection-end-line="839" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56143665">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="55" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/CallTransfer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
@@ -4001,75 +3560,166 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SchoolDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.178571">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NormalReplyListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="549" column="18" selection-start-line="549" selection-start-column="18" selection-end-line="549" selection-end-column="18" />
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/ClassFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="88" selection-start-line="76" selection-start-column="88" selection-end-line="76" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/specialcourse/SimpleIntroduceFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="65" selection-start-line="67" selection-start-column="65" selection-end-line="67" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="314" column="68" selection-start-line="314" selection-start-column="68" selection-end-line="314" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="294" column="77" selection-start-line="294" selection-start-column="77" selection-end-line="294" selection-end-column="77" />
           <folding>
-            <element signature="e#6947#6965#0" expanded="true" />
-            <element signature="e#7117#7135#0" expanded="true" />
-            <element signature="e#7595#7613#0" expanded="true" />
-            <element signature="e#7849#7867#0" expanded="true" />
-            <element signature="e#8110#8128#0" expanded="true" />
-            <element signature="e#8367#8385#0" expanded="true" />
-            <element signature="e#8611#8629#0" expanded="true" />
-            <element signature="e#8867#8885#0" expanded="true" />
-            <element signature="e#9124#9142#0" expanded="true" />
-            <element signature="e#9370#9388#0" expanded="true" />
-            <element signature="e#9628#9646#0" expanded="true" />
-            <element signature="e#9891#9909#0" expanded="true" />
-            <element signature="e#10149#10167#0" expanded="true" />
-            <element signature="e#10405#10423#0" expanded="true" />
-            <element signature="e#10660#10678#0" expanded="true" />
-            <element signature="e#10903#10921#0" expanded="true" />
-            <element signature="e#11136#11154#0" expanded="true" />
-            <element signature="e#11383#11401#0" expanded="true" />
-            <element signature="e#11631#11649#0" expanded="true" />
-            <element signature="e#11875#11893#0" expanded="true" />
-            <element signature="e#12121#12139#0" expanded="true" />
-            <element signature="e#12365#12383#0" expanded="true" />
-            <element signature="e#12615#12633#0" expanded="true" />
-            <element signature="e#12863#12881#0" expanded="true" />
-            <element signature="e#13112#13130#0" expanded="true" />
-            <element signature="e#13366#13384#0" expanded="true" />
-            <element signature="e#13627#13645#0" expanded="true" />
-            <element signature="e#13876#13894#0" expanded="true" />
-            <element signature="e#14121#14139#0" expanded="true" />
-            <element signature="e#14368#14386#0" expanded="true" />
-            <element signature="e#14617#14635#0" expanded="true" />
-            <element signature="e#14864#14882#0" expanded="true" />
-            <element signature="e#15158#15176#0" expanded="true" />
-            <element signature="e#15408#15426#0" expanded="true" />
-            <element signature="e#15662#15680#0" expanded="true" />
-            <element signature="e#15941#15959#0" expanded="true" />
-            <element signature="e#16185#16203#0" expanded="true" />
-            <element signature="e#16431#16449#0" expanded="true" />
-            <element signature="e#16690#16708#0" expanded="true" />
-            <element signature="e#16935#16953#0" expanded="true" />
-            <element signature="e#17189#17207#0" expanded="true" />
-            <element signature="e#17450#17468#0" expanded="true" />
-            <element signature="e#17707#17725#0" expanded="true" />
-            <element signature="e#17957#17975#0" expanded="true" />
-            <element signature="e#18206#18224#0" expanded="true" />
-            <element signature="e#18463#18481#0" expanded="true" />
-            <element signature="e#18716#18734#0" expanded="true" />
-            <element signature="e#18954#18972#0" expanded="true" />
-            <element signature="e#19269#19287#0" expanded="true" />
-            <element signature="e#25732#25750#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3118#3119#0" expanded="false" />
+            <element signature="e#3148#3149#0" expanded="false" />
+            <element signature="e#7484#7485#0" expanded="false" />
+            <element signature="e#7540#7541#0" expanded="false" />
+            <element signature="e#10386#10387#0" expanded="false" />
+            <element signature="e#10426#10427#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.048474">
-          <caret line="221" column="39" selection-start-line="221" selection-start-column="39" selection-end-line="221" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="229" column="47" selection-start-line="229" selection-start-column="37" selection-end-line="229" selection-end-column="47" />
           <folding>
-            <element signature="e#2280#2281#0" expanded="true" />
-            <element signature="e#2316#2317#0" expanded="true" />
-            <element signature="e#3162#3163#0" expanded="true" />
-            <element signature="e#3192#3193#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#6171#6172#0" expanded="false" />
+            <element signature="e#6211#6212#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/PrivilegeActiveActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.023766">
+          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+          <folding>
+            <element signature="e#7158#8699#0" expanded="true" />
+            <element signature="e#8698#8699#0" expanded="true" />
+            <element signature="e#9052#9519#0" expanded="true" />
+            <element signature="e#9518#9519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/PrivilegeDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="17" selection-start-line="131" selection-start-column="17" selection-end-line="131" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_mine_special_course.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.833333">
+          <caret line="71" column="39" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.665448">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.29616088">
+          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="72" selection-start-line="82" selection-start-column="72" selection-end-line="82" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineSpecialCourseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="178" column="85" selection-start-line="178" selection-start-column="85" selection-end-line="178" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/MineCourseDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15904936">
+          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

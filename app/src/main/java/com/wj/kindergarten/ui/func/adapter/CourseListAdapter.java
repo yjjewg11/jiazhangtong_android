@@ -36,7 +36,9 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.func.CourseListFragment;
+import com.wj.kindergarten.ui.func.MineCourseDetailActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -58,6 +60,7 @@ public class CourseListAdapter extends BaseAdapter {
     private CourseListFragment courseListFragment;
     private List<Object> courseList = new ArrayList<>();
     //承载培训课程内容的集合
+
 
     private List<TrainCourse> trainCourseList  ;
 
@@ -170,6 +173,7 @@ public class CourseListAdapter extends BaseAdapter {
             viewHolder.tv_trainning_adress = (TextView)view.findViewById(R.id.tv_trainning_adress);
             viewHolder.tv_trainning_preparething = (TextView)view.findViewById(R.id.tv_trainning_preparething);
             viewHolder.iv_train_today_tixing = (ImageView)view.findViewById(R.id.iv_train_today_tixing);
+            viewHolder.tv_more_course = (TextView)view.findViewById(R.id.tv_more_course);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -292,6 +296,17 @@ public class CourseListAdapter extends BaseAdapter {
         }
 
         if(myTrainCoures!=null) {
+            final MyTrainCoures finalMyTrainCoures1 = myTrainCoures;
+            viewHolder.tv_more_course.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //点击跳转我的课程详情页面
+                    Intent intent = new Intent(mContext,MineCourseDetailActivity.class);
+                    intent.putExtra("courseuuid", finalMyTrainCoures1.getClassuuid());
+                    intent.putExtra(GloablUtils.FROM_COURSE_TO_MINE_COURSE, finalMyTrainCoures1);
+                    mContext.startActivity(intent);
+                }
+            });
             String de = TimeUtil.getDateToString(moneyDayDateMullions);
             String getTimeFromHttp = TimeUtil.getYMDTimeFromYMDHMS(myTrainCoures.getPlandate());
             viewHolder.tv_yy_mm_dd_time.setText(""+getTimeFromHttp);
@@ -310,7 +325,7 @@ public class CourseListAdapter extends BaseAdapter {
             //显示数据
 
             // TODO 教育中心数据
-            viewHolder.tv_below_school_class_name.setText("" + (myTrainCoures.getClass_name()));
+            viewHolder.tv_below_school_class_name.setText("" + (myTrainCoures.getGroup_name()));
             viewHolder.tv_training_classname_content.setText("" + (myTrainCoures.getName() == null ? "" : myTrainCoures.getName()));
             viewHolder.tv_training_classtime.setText("" + (myTrainCoures.getPlandate()== null  ? "" : myTrainCoures.getPlandate()));
             viewHolder.tv_trainning_adress.setText("" + (myTrainCoures.getAddress()== null  ? "" : myTrainCoures.getAddress()));
@@ -714,7 +729,8 @@ public class CourseListAdapter extends BaseAdapter {
                 tv_everyday_oneweek,tv_training_dianZancount,
                 tv_training_classname_content,tv_training_classtime,
                 tv_trainning_adress,tv_trainning_preparething,
-                tv_trainning_notice_see,tv_training_zan_reply_edit,tv_below_school_class_name;
+                tv_trainning_notice_see,tv_training_zan_reply_edit,tv_below_school_class_name,
+                tv_more_course;
 
         ImageView iv_trainning_notice_zan,iv_trainning_notice_reply,
         iv_train_today_class,iv_train_today_tixing;

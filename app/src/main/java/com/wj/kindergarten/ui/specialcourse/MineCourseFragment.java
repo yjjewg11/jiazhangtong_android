@@ -10,8 +10,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.MineAllCourse;
@@ -20,6 +23,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.MineCourseDetailActivity;
 import com.wj.kindergarten.ui.func.adapter.MineCourseDetailAdapter;
+import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +31,7 @@ import java.util.List;
 
 public class MineCourseFragment extends Fragment{
     View view;
-    private ListView mListView;
+    private PullToRefreshListView mListView;
 
     private int pageNo = 1;
     private MineCourseDetailAdapter adapter;
@@ -42,6 +46,7 @@ public class MineCourseFragment extends Fragment{
             }
         }
     };
+    private FrameLayout fl;
 
 
     @Override
@@ -55,10 +60,17 @@ public class MineCourseFragment extends Fragment{
         UserRequest.getMineAllCourse(getActivity(),pageNo,classuuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                if(mListView.isRefreshing()) {mListView.onRefreshComplete();}
                 MineAllCourseList mac = (MineAllCourseList) domain;
-                if(mac!=null & mac.getList()!=null){
+                if(mac!=null & mac.getList()!=null && mac.getList().getData().size() > 0){
                     list.addAll(mac.getList().getData());
                     mHandler.sendEmptyMessage(100);
+                }else{
+                    if(pageNo == 1){
+                        ((MineCourseDetailActivity) getActivity()).noView(fl);
+                    }else{
+                        ToastUtils.showMessage("没有更多内容了!");
+                    }
                 }
             }
 
@@ -86,12 +98,26 @@ public class MineCourseFragment extends Fragment{
 
         if(view != null) return view;
            MineCourseDetailActivity mcd = (MineCourseDetailActivity) getActivity();
-            classuuid = mcd.getSso().getUuid();
+            classuuid = mcd.getCourseuuid();
             loadData();
             view = inflater.inflate(R.layout.fragment_mine_course,null);
-            mListView = (ListView) view.findViewById(R.id.list_view_common);
+            fl =(FrameLayout) view.findViewById(R.id.mine_course_detail_fl);
+            mListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
             adapter = new MineCourseDetailAdapter(getActivity());
             mListView.setAdapter(adapter);
+            mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+            mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+                @Override
+                public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+                }
+
+                @Override
+                public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                            pageNo++;
+                            loadData();
+                }
+            });
 
 //            mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
 

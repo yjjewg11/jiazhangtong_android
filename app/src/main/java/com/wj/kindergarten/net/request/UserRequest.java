@@ -707,9 +707,13 @@ public final class UserRequest {
     }
 
     public static void sendCallMessage(Context context, String ext_uuid, int type, RequestResultI resultI) {
-        RequestParams params = new RequestParams();
-        params.put("ext_uuid",ext_uuid);
-        params.put("type",type);
-        SendRequest.getInstance().get(context,RequestType.ZAN,params,CALL_MESSAGE_SATTE,resultI);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ext_uuid",ext_uuid);
+            jsonObject.put("type", type);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(),RequestHttpUtil.BASE_URL + CALL_MESSAGE_SATTE, resultI);
     }
 }

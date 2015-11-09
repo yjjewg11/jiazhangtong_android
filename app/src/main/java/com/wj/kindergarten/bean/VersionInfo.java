@@ -51,6 +51,7 @@ public class VersionInfo extends BaseModel {
     @Override
     public boolean equals(Object o) {
         VersionInfo ver = (VersionInfo) o;
+        if(o == null) return false;
         return type.equals(ver.getType()) && mobileVersion.equals(ver.getMobileVersion())
                 && appVersion.equals(ver.getAppVersion()) && city.equals(ver.getCity());
     }

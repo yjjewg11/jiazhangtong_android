@@ -152,7 +152,7 @@ public class RatingBarView extends LinearLayout {
                 ((ImageView) getChildAt(i)).setImageDrawable(starEmptyDrawable);
             }
         }else{
-            setStar((int)starCount);
+            setStar((int)starCount/10);
         }
     }
 

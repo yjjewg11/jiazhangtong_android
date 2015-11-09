@@ -62,7 +62,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private OnceSpecialCourse osc;
     private WebView tv_school_introduce;
     private RelativeLayout[] relativeLayouts;
-    private SpecialCourseInfoObject object;
     private Handler mhandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -101,6 +100,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private RelativeLayout rl_price;
     private RelativeLayout rl_free_price;
     private PullToRefreshScrollView scrollView;
+    private String uuid;
 
     @Override
     protected void setContentLayout() {
@@ -130,7 +130,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                 Intent intent = new Intent(SpecialCourseInfoActivity.this,MoreSpecialDiscussActivity.class);
                 //放入评论对象
                 //TODO
-                intent.putExtra("uuid",object.getUuid());
+                intent.putExtra("uuid",uuid);
                 intent.putExtra("discussList",moreList);
                 startActivity(intent);
             }
@@ -141,8 +141,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     }
 
     private void setViews() {
-
-
 
         try{
             setMoreViews();
@@ -171,16 +169,16 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                         }
                         break;
                     case R.id.train_course_tab_share:
-                        if(object != null){
+
                             String content = osc.getContent();
                             if(Utils.isNull(content) == null || content == null){
                                 content = osc.getTitle();
                             }
                             ShareUtils.showShareDialog(SpecialCourseInfoActivity.this,v,osc.getTitle()
-                            ,content,object.getLogo(),ocs.getShare_url(),false);
-                        }else{
-                            ToastUtils.showMessage("暂无分享内容!");
-                        }
+                            ,content,osc.getLogo(),ocs.getShare_url(),false);
+
+//                            ToastUtils.showMessage("暂无分享内容!");
+
 
                         break;
                     case R.id.train_course_tab_interaction:
@@ -236,17 +234,16 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
 
 
-        ImageLoaderUtil.displayMyImage(object.getLogo(), iv_heading);
+        ImageLoaderUtil.displayMyImage(osc.getLogo(), iv_heading);
         course_detail_train_class_name.setText("" + osc.getTitle());
         rating_bar.setFloatStar(osc.getCt_stars(), true);
-        teach_place.setText("" +object.getAddress());
+        teach_place.setText("" +osc.getAddress());
         detail_course.setText(""+osc.getSubtype());
 
         String text = null;
         if(!TextUtils.isEmpty(osc.getContext())) {
             text = osc.getContext();
         }else{
-
             text = "暂时没有内容介绍!";
         }
         course_detail_info.loadDataWithBaseURL(null,text,"text/html","utf-8",null);
@@ -277,15 +274,15 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     @Override
     protected void loadData() {
         Intent intent = getIntent();
-        object = (SpecialCourseInfoObject) intent.getSerializableExtra("object");
-        UserRequest.getSpecialCourseINfoFromClickItem(this, object.getUuid(), new RequestResultI() {
+        uuid =  intent.getStringExtra("uuid");
+        UserRequest.getSpecialCourseINfoFromClickItem(this, uuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 ocs = (OnceSpecialCourseList) domain;
                 if (ocs != null)
                     osc = ocs.getData();
+                mhandler.sendEmptyMessage(2);
                 loadSuc();
-
             }
 
             @Override
@@ -305,7 +302,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
     private void getAssess() {
         //获取该对象的评价
-        UserRequest.getMoreDiscuss(this, object.getUuid(), 1, new RequestResultI() {
+        UserRequest.getMoreDiscuss(this, uuid, 1, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 MoreDiscussList mdl = (MoreDiscussList) domain;
@@ -364,7 +361,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private void store() {
         dialog = new HintInfoDialog(SpecialCourseInfoActivity.this, "收藏中，请稍后...");
         dialog.show();
-        UserRequest.store(SpecialCourseInfoActivity.this, object.getTitle(), 82, object.getUuid(), "", new RequestResultI() {
+        UserRequest.store(SpecialCourseInfoActivity.this, osc.getTitle(), 82, uuid, "", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();
@@ -410,7 +407,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private void cancelStore() {
         dialog = new HintInfoDialog(SpecialCourseInfoActivity.this, "取消收藏中，请稍后...");
         dialog.show();
-        UserRequest.cancelStore(true, SpecialCourseInfoActivity.this, object.getUuid(), new RequestResultI() {
+        UserRequest.cancelStore(true, SpecialCourseInfoActivity.this, uuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();

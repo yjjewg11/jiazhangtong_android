@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -92,6 +93,8 @@ public abstract class BaseActivity extends ActionBarActivity {
      *
      */
     protected abstract void onCreate();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

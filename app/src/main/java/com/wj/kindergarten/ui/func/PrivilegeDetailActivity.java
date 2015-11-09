@@ -57,7 +57,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
 
     private WebSettings webSettings;
     private String uuid;
-    private PrivilegeActive pa;
+    private String pauuid;
     private ArticleDetail article;
     private RelativeLayout privelege_ask_info;
 
@@ -74,7 +74,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
     @Override
     protected void loadData() {
 
-        pa = (PrivilegeActive) getIntent().getSerializableExtra("object");
+        pauuid =  getIntent().getStringExtra("pauuid");
 //        formStore = getIntent().getBooleanExtra("fromStore", false);
         getArticle();
     }
@@ -130,7 +130,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
     }
 
     private void getArticle() {
-        UserRequest.getPrivilegeActive(mContext, pa.getUuid(), new RequestResultI() {
+        UserRequest.getPrivilegeActive(mContext, pauuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 article = (ArticleDetail) domain;

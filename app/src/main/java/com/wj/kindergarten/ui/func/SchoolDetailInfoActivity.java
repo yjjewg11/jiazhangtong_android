@@ -42,7 +42,6 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     private RadioGroup radioGroup;
     private RadioButton bt_course,tab_teacher,tab_introduce;
     private RadioButton[] radioButtons;
-    private TrainSchoolInfo school;
     private ImageView iv_head;
     private RatingBarView rating_bar;
     private TextView adress,class_name,distance,edcucation,spend_people;
@@ -51,6 +50,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     private HintInfoDialog dialog;
     private SchoolDetailList detailList;
     private SchoolDetail schoolDetail;
+    private String schooluuid;
 
     public SchoolDetail getSchoolDetail() {
         return schoolDetail;
@@ -62,16 +62,15 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         layoutId = R.layout.activity_schllo_detail_info;
     }
 
-    public TrainSchoolInfo getSchool() {
-        return school;
+    public String getSchooluuid() {
+        return schooluuid;
     }
 
     @Override
     protected void setNeedLoading() {
         Intent intent = getIntent();
-        school = (TrainSchoolInfo) intent.getSerializableExtra("school");
+        schooluuid =  intent.getStringExtra("schooluuid");
         isNeedLoading = true;
-
     }
 
     private Fragment classInfo,teachers,introduce;
@@ -140,7 +139,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     protected void loadData() {
 
         //获取学校详情
-        UserRequest.getTrainSchoolDetail(this, school.getUuid(), new RequestResultI() {
+        UserRequest.getTrainSchoolDetail(this, schooluuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                detailList = (SchoolDetailList) domain;
@@ -174,12 +173,12 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
 
         distance.setVisibility(View.GONE);
-        ImageLoaderUtil.displayMyImage(school.getImg(), iv_head);
+        ImageLoaderUtil.displayMyImage(schoolDetail.getImg(), iv_head);
         rating_bar.setFloatStar(schoolDetail.getCt_stars(), true);
-        adress.setText("地点:" + school.getAddress());
-        class_name.setText("" +  school.getBrand_name());
-        edcucation.setText("" + Utils.isNull(school.getSummary()) );
-        String text = "<font color='#ff4966'>"+school.getCt_study_students()+"</font>"+"人感兴趣";
+        adress.setText("地点:" + schoolDetail.getAddress());
+        class_name.setText("" +  schoolDetail.getBrand_name());
+        edcucation.setText("" + Utils.isNull(schoolDetail.getSummary()) );
+        String text = "<font color='#ff4966'>"+schoolDetail.getCt_study_students()+"</font>"+"人感兴趣";
         spend_people.setText(Html.fromHtml(text));
         //TODO
         if(!detailList.isFavor()){
@@ -214,12 +213,12 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                             break;
                         case R.id.train_course_tab_interaction:
                             Intent intent = new Intent(SchoolDetailInfoActivity.this,CourseInteractionListActivity.class);
-                            intent.putExtra("newsuuid",school.getUuid());
+                            intent.putExtra("newsuuid",schooluuid);
                             intent.putExtra("type",NormalReplyListActivity.TRAIN_SCHOOL);
                             startActivity(intent);
                             break;
                         case R.id.train_course_tab_ask:
-                            CallUtils.showCall(SchoolDetailInfoActivity.this,schoolDetail.getLink_tel().split(","),new CallTransfer(school.getUuid(),81));
+                            CallUtils.showCall(SchoolDetailInfoActivity.this,schoolDetail.getLink_tel().split(","),new CallTransfer(schooluuid,81));
                             break;
                     }
                 }
@@ -255,7 +254,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     private void store() {
         dialog = new HintInfoDialog(SchoolDetailInfoActivity.this, "收藏中，请稍后...");
         dialog.show();
-        UserRequest.store(SchoolDetailInfoActivity.this, school.getBrand_name(), 81, school.getUuid(), "", new RequestResultI() {
+        UserRequest.store(SchoolDetailInfoActivity.this, schoolDetail.getBrand_name(), 81, schooluuid, "", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();
@@ -301,7 +300,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     private void cancelStore() {
         dialog = new HintInfoDialog(SchoolDetailInfoActivity.this, "取消收藏中，请稍后...");
         dialog.show();
-        UserRequest.cancelStore(true, SchoolDetailInfoActivity.this, school.getUuid(), new RequestResultI() {
+        UserRequest.cancelStore(true, SchoolDetailInfoActivity.this, schooluuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();

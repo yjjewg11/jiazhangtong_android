@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.CallTransfer;
+import com.wj.kindergarten.bean.MyTrainCoures;
 import com.wj.kindergarten.bean.OnceSpecialCourse;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
 import com.wj.kindergarten.bean.SchoolDetailList;
@@ -27,8 +29,10 @@ import com.wj.kindergarten.bean.StudyStateObject;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.more.CallUtils;
 import com.wj.kindergarten.ui.specialcourse.MineCourseFragment;
 import com.wj.kindergarten.ui.specialcourse.MineDiscussFragment;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -46,7 +50,6 @@ public class MineCourseDetailActivity extends BaseActivity{
     private RadioButton[] radio_bts;
     private ViewPager viewPager;
     private Fragment [] fragments = new Fragment[3];
-    private StudyStateObject sso;
     private RelativeLayout[] relativeLayouts;
     private HintInfoDialog dialog;
     private TextView tv_coll;
@@ -59,9 +62,16 @@ public class MineCourseDetailActivity extends BaseActivity{
     private TextView schoolName;
     private ImageView iv_school;
     private TextView className;
+    private String courseuuid;
+    private StudyStateObject stateObject;
+    private MyTrainCoures myTraincourse;
 
     public OnceSpecialCourse getCourses() {
         return courses;
+    }
+
+    public String getCourseuuid() {
+        return courseuuid;
     }
 
     public OnceSpecialCourseList getOscs() {
@@ -79,13 +89,8 @@ public class MineCourseDetailActivity extends BaseActivity{
         }
     };
 
-    public StudyStateObject getSso() {
-        return sso;
-    }
-
     @Override
     protected void setContentLayout() {
-
         layoutId = R.layout.activity_mine_course_detail;
     }
 
@@ -98,10 +103,12 @@ public class MineCourseDetailActivity extends BaseActivity{
     protected void onCreate() {
 
         titleCenterTextView.setText("我的课程详情");
-        sso = (StudyStateObject) getIntent().getSerializableExtra("object");
+        courseuuid = getIntent().getStringExtra("courseuuid");
+        stateObject = (StudyStateObject)getIntent().getSerializableExtra(MineSpecialCourseActivity.FROM_MINE_COURSE_TO_MINE_DETAIL_COURSE);
+        myTraincourse = (MyTrainCoures)getIntent().getSerializableExtra(GloablUtils.FROM_COURSE_TO_MINE_COURSE);
         initViews();
         setChooseRl();
-        UserRequest.getSpecialCourseINfoFromClickItem(this, sso.getCourseuuid(), new RequestResultI() {
+        UserRequest.getSpecialCourseINfoFromClickItem(this, courseuuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 oscs = (OnceSpecialCourseList) domain;
@@ -110,6 +117,7 @@ public class MineCourseDetailActivity extends BaseActivity{
                     ((CourseDetailIntroduceFragment) fragments[1]).setCourse(courses);
                 }
 
+                ImageLoaderUtil.displayMyImage(courses.getLogo(), iv_school);
                 if(!oscs.isFavor()){
                     tv_coll.setText("已收藏");
                     iv_coll.setImageResource(R.drawable.store2);
@@ -117,6 +125,9 @@ public class MineCourseDetailActivity extends BaseActivity{
                     tv_coll.setText("收藏");
                     iv_coll.setImageResource(R.drawable.store1);
                 }
+
+
+
             }
 
             @Override
@@ -152,9 +163,13 @@ public class MineCourseDetailActivity extends BaseActivity{
                         }
                         break;
                     case R.id.train_course_tab_share:
-                        if(sso != null){
+                        if(courses != null){
+                            String content = courses.getContent();
+                            if(Utils.isNull(courses.getTitle()) == null  || content == null){
+                                content = courses.getTitle();
+                            }
                             ShareUtils.showShareDialog(MineCourseDetailActivity.this, v, Utils.isNull(courses.getTitle())
-                                    , Utils.isNull(courses.getContent()), sso.getLogo(), oscs.getShare_url(), false);
+                                    , Utils.isNull(courses.getContent()), content, oscs.getShare_url(), false);
                         }else{
                             ToastUtils.showMessage("暂无分享内容!");
                         }
@@ -163,13 +178,12 @@ public class MineCourseDetailActivity extends BaseActivity{
                     case R.id.train_course_tab_interaction:
                         //启动互动界面
                         Intent intent = new Intent(MineCourseDetailActivity.this,CourseInteractionListActivity.class);
-                        intent.putExtra("newsuuid",sso.getUuid());
+                        intent.putExtra("newsuuid",courseuuid);
                         intent.putExtra("type",NormalReplyListActivity.TRAIN_COURSE);
                         startActivity(intent);
                         break;
                     case R.id.train_course_tab_ask:
-                        Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "18780475970"));
-                        startActivity(phoneIntent);
+                         CallUtils.showCall(MineCourseDetailActivity.this,oscs.getLink_tel().split(","),new CallTransfer(courseuuid,82));
                         break;
                 }
             }
@@ -188,17 +202,34 @@ public class MineCourseDetailActivity extends BaseActivity{
         openTime = (TextView)findViewById(R.id.course_status_open_time);
         iv_school = (ImageView)findViewById(R.id.course_status_iv);
 
-        trainSchoolName.setText("学校:"+sso.getGroup_name());
-        student.setText("学生:"+sso.getStudent_name());
-        schoolName.setText(""+sso.getCourse_title());
-        className.setText("班级:"+sso.getClass_name());
-        if(sso.getPlandate() != null){
-            String text = "<font color='#ff4966'>"+"近期上课:"+sso.getPlandate()+"</font>";
-            openTime.setText(Html.fromHtml(text));
-        }else{
-            openTime.setText("时间暂定");
+
+        if(myTraincourse !=null){
+            trainSchoolName.setText("学校:"+myTraincourse.getGroup_name());
+            student.setText("学生:"+myTraincourse.getName());
+            schoolName.setText("");
+            className.setText("班级:" + myTraincourse.getClass_name());
+            if(myTraincourse.getPlandate() != null){
+                String text = "<font color='#ff4966'>"+"近期上课:"+myTraincourse.getPlandate()+"</font>";
+                openTime.setText(Html.fromHtml(text));
+            }else{
+                openTime.setText("时间暂定");
+            }
         }
-        ImageLoaderUtil.displayMyImage(sso.getLogo(), iv_school);
+        if(stateObject != null){
+            trainSchoolName.setText("学校:"+stateObject.getGroup_name());
+            student.setText("学生:"+stateObject.getStudent_name());
+            schoolName.setText("");
+            className.setText("班级:" + stateObject.getClass_name());
+            if(stateObject.getPlandate() != null){
+                String text = "<font color='#ff4966'>"+"近期上课:"+stateObject.getPlandate()+"</font>";
+                openTime.setText(Html.fromHtml(text));
+            }else{
+                openTime.setText("时间暂定");
+            }
+        }
+
+
+
 
 
 
@@ -278,7 +309,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     private void store() {
         dialog = new HintInfoDialog(MineCourseDetailActivity.this, "收藏中，请稍后...");
         dialog.show();
-        UserRequest.store(MineCourseDetailActivity.this, sso.getCourse_title(), 82, sso.getUuid(), "", new RequestResultI() {
+        UserRequest.store(MineCourseDetailActivity.this, courses.getTitle(), 82,courseuuid, "", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();
@@ -324,7 +355,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     private void cancelStore() {
         dialog = new HintInfoDialog(MineCourseDetailActivity.this, "取消收藏中，请稍后...");
         dialog.show();
-        UserRequest.cancelStore(true, MineCourseDetailActivity.this, sso.getUuid(), new RequestResultI() {
+        UserRequest.cancelStore(true, MineCourseDetailActivity.this, courseuuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();

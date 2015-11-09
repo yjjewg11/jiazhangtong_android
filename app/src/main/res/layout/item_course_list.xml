@@ -239,24 +239,7 @@
         <include layout="@layout/train_common"/>
     </FrameLayout>
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-
-        <TextView
-            android:textColor="#ff9632"
-            android:background="@drawable/text_shape"
-            android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="更多课程"
-            android:id="@+id/textView20"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
     <FrameLayout
         android:id="@+id/course_reply"
         android:layout_width="match_parent"

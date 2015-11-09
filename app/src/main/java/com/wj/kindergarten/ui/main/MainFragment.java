@@ -105,8 +105,6 @@ public class MainFragment extends Fragment {
     }
 
 
-
-
     private void queryMore() {
         UserRequest.queryMore(getActivity(), new RequestResultI() {
             @Override

@@ -41,7 +41,7 @@ public class CourseInteractionListActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-        startActivityForResult(new Intent(mContext, InteractionSentActivity.class), 1);
+//        startActivityForResult(new Intent(mContext, InteractionSentActivity.class), 1);
     }
 
     @Override

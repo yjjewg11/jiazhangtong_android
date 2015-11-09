@@ -16,6 +16,8 @@ import com.wenjie.jiazhangtong.R;
 
 import com.wj.kindergarten.bean.StudyStateObject;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,12 +82,12 @@ public class MineCourseStatusAdapter extends BaseAdapter{
 
         StudyStateObject sso = list.get(position);
         if(sso!=null){
-            viewHolder.trainSchoolName.setText("学校:"+sso.getGroup_name());
+            viewHolder.trainSchoolName.setText(Utils.isNull(sso.getCourse_title())+"");
             viewHolder.student.setText("学生:"+sso.getStudent_name());
-            viewHolder.schoolName.setText(""+sso.getCourse_title());
+            viewHolder.schoolName.setText("学校:"+sso.getGroup_name());
             viewHolder.className.setText("班级:"+sso.getClass_name());
             if(sso.getPlandate() != null){
-                String text = "<font color='#ff4966'>"+"近期上课:"+sso.getPlandate()+"</font>";
+                String text = "<font color='#ff4966'>"+"近期上课:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getPlandate())+"</font>";
                 viewHolder.openTime.setText(Html.fromHtml(text));
             }else{
                 viewHolder.openTime.setText("时间暂定");

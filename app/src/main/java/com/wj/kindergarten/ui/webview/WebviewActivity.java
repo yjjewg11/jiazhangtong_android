@@ -124,6 +124,7 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                                 Intent intent = new Intent(WebviewActivity.this, SpecialCourseInfoActivity.class);
 //                                intent.putExtra("position",position);
                                 intent.putExtra("object", object);
+                                intent.putExtra("uuid",object.getUuid());
                                 startActivity(intent);
                             }
                         });

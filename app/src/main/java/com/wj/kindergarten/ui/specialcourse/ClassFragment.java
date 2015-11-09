@@ -74,7 +74,7 @@ public class ClassFragment extends Fragment {
 
     private void inidData() {
         activity  =(SchoolDetailInfoActivity) getActivity();
-        UserRequest.getSpecialCourseInfoFormType(getActivity(), activity.getSchool().getUuid(), pageNo, -1,"","", new RequestResultI() {
+        UserRequest.getSpecialCourseInfoFormType(getActivity(), activity.getSchooluuid(), pageNo, -1,"","", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 SpecialCourseInfoList tsif = (SpecialCourseInfoList)domain;

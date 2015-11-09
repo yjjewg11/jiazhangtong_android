@@ -3,7 +3,7 @@ package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
 
-public class MyTrainCoures {
+public class MyTrainCoures extends BaseModel{
     @Expose
     private String uuid;
     @Expose

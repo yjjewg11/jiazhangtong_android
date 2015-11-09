@@ -3,10 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_view_common"
-        android:layout_gravity="center_horizontal" />
+<FrameLayout
+    android:id="@+id/mine_course_detail_fl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_pulltorefresh"/>
+</FrameLayout>
 </LinearLayout>
