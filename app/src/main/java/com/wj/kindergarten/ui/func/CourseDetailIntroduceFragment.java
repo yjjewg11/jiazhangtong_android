@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
 
@@ -53,24 +56,26 @@ public class CourseDetailIntroduceFragment extends Fragment {
 
 	private OnceSpecialCourse course;
 	private PullToRefreshScrollView scroll_view;
+	private RelativeLayout rl_price;
+	private RelativeLayout rl_free_price;
 
 	public void setCourse(OnceSpecialCourse course) {
 		this.course = course;
-		course_detail_train_class_name.setText("" + course.getSubtype());
-		rating_bar.setStar(course.getCt_stars());
+		course_detail_train_class_name.setText("" + (TextUtils.isEmpty(course.getTitle()) == true ? "" : course.getTitle()));
+		rating_bar.setFloatStar(course.getCt_stars(), true);
 		teach_place.setText("" + course.getAddress());
 		course_detail_info.loadDataWithBaseURL(null, course.getContext(), "text/html", "utf-8", null);
 		nornal_course_price.setText("" + course.getFees());
 		coupon_price.setText("" + course.getDiscountfees());
 		if (course.getFees() < 1) {
-			nornal_course_price.setVisibility(View.GONE);
+			rl_price.setVisibility(View.GONE);
 		} else {
-			nornal_course_price.setVisibility(View.VISIBLE);
+			rl_price.setVisibility(View.VISIBLE);
 		}
 		if (course.getDiscountfees() < 1) {
-			coupon_price.setVisibility(View.GONE);
+			rl_free_price.setVisibility(View.GONE);
 		} else {
-			coupon_price.setVisibility(View.VISIBLE);
+			rl_free_price.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -82,13 +87,15 @@ public class CourseDetailIntroduceFragment extends Fragment {
 		if (view != null) return view;
 
 		view = inflater.inflate(R.layout.activity_special_course_info, null);
+		rl_price = (RelativeLayout)view.findViewById(R.id.rl_price);
+		rl_free_price = (RelativeLayout)view.findViewById(R.id.rl_free_price);
 		rating_bar = (RatingBarView) view.findViewById(R.id.item_special_course_list_view__rating_bar);
 		course_detail_train_class_name = (TextView) view.findViewById(R.id.course_detail_train_class_name);
 		detail_course = (TextView) view.findViewById(R.id.detail_course);
 		teach_place = (TextView) view.findViewById(R.id.teach_place);
 		course_spend_time = (TextView) view.findViewById(R.id.course_spend_time);
 		nornal_course_price = (TextView) view.findViewById(R.id.nornal_course_price);
-		coupon_price = (TextView) view.findViewById(R.id.nornal_course_price);
+		coupon_price = (TextView) view.findViewById(R.id.coupon_price);
 		course_detail_info = (WebView) view.findViewById(R.id.course_detail_info);
 		more_assess_linera = (LinearLayout) view.findViewById(R.id.more_assess_linera);
 		iv_heading = (ImageView) view.findViewById(R.id.once_iv);
@@ -126,15 +133,12 @@ public class CourseDetailIntroduceFragment extends Fragment {
 
 	private void loadData() {
 
-
-		String uuid = null;
-		MineCourseDetailActivity msc = (MineCourseDetailActivity) getActivity();
-
-		uuid = msc.getCourses().getGroupuuid();
-		UserRequest.getTrainSchoolDetail(getActivity(), uuid, new RequestResultI() {
+		final MineCourseDetailActivity msc = (MineCourseDetailActivity) getActivity();
+        msc.showDialog();
+		UserRequest.getTrainSchoolDetail(getActivity(), msc.getSchoolUuid(), new RequestResultI() {
 			@Override
 			public void result(BaseModel domain) {
-
+                msc.cancleDialog();
 				SchoolDetailList sdl = (SchoolDetailList) domain;
 				if (sdl != null && sdl.getData() != null) {
 					SchoolDetail sd = sdl.getData();

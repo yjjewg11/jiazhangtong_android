@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bao="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/root_assess_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,10 +12,10 @@
 
 
     <LinearLayout
+        android:paddingTop="@dimen/margin_10"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <RelativeLayout
             android:minHeight="35dp"
@@ -23,6 +24,7 @@
 
 
             <TextView
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -30,7 +32,7 @@
                 android:id="@+id/textView24"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="21dp" />
+                android:layout_marginLeft="10dp" />
 
             <FrameLayout
                 android:layout_marginRight="10dp"
@@ -41,8 +43,10 @@
 
                 <com.wj.kindergarten.ui.other.RatingBarView
                     android:id="@+id/fragment_course_rating_bar"
-                    bao:starImageSize = "22dp"
+                    bao:starImageSize = "30dp"
                     bao:starCount = "5"
+                    android:clickable="true"
+                    bao:starHalf="@drawable/bankexing"
                     bao:starEmpty = "@drawable/xingback"
                     bao:starFill = "@drawable/xinglight"
                     android:layout_centerInParent="true"
@@ -65,27 +69,31 @@
             android:id="@+id/fragment_mine_discuss_edit_text"
             android:layout_gravity="center_horizontal" />
 
-            <TextView
-                android:id="@+id/input_content"
-                android:minHeight="80dp"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
 
 
         <TextView
-            android:background="#cccccc"
+            android:id="@+id/input_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/margin_10"
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:background="#e5e5e5"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+
 
         <RelativeLayout
-            android:minHeight="35dp"
+            android:minHeight="45dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
             <TextView
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -93,7 +101,7 @@
                 android:id="@+id/textView27"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="21dp" />
+                android:layout_marginLeft="10dp" />
 
             <FrameLayout
                 android:layout_marginRight="10dp"
@@ -104,8 +112,10 @@
 
                 <com.wj.kindergarten.ui.other.RatingBarView
                     android:id="@+id/fragment_school_rating_bar"
-                    bao:starImageSize = "22dp"
+                    bao:starImageSize = "30dp"
                     bao:starCount = "5"
+                    android:clickable="true"
+                    bao:starHalf="@drawable/bankexing"
                     bao:starEmpty = "@drawable/xingback"
                     bao:starFill = "@drawable/xinglight"
                     android:layout_centerInParent="true"
@@ -117,23 +127,49 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:background="#cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+
+
+
         <LinearLayout
             android:id="@+id/all_teacher_linear"
             android:orientation="vertical"
-            android:minHeight="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
         </LinearLayout>
 
-
-        <Button
-            android:background="#ff7800"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:layout_gravity="center_horizontal"
             android:text="提交"
-            android:id="@+id/discuss_submit"
-            android:layout_gravity="center_horizontal" />
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:background="@drawable/seclector_submit"
+            android:id="@+id/teacher_submit"
+            android:layout_margin="@dimen/margin_10"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+
+
+
+
+
+
+        <!--<Button-->
+            <!--android:background="#ff7800"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="提交"-->
+            <!--android:id="@+id/discuss_submit"-->
+            <!--android:layout_gravity="center_horizontal" />-->
 
 
     </LinearLayout>

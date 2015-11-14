@@ -182,8 +182,9 @@ protected void setNeedLoading() {
         UserRequest.getHotCourseInfo(this, "", pageNo, type, "", "", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                allCourse.clear();
                 SpecialCourseInfoList list = (SpecialCourseInfoList) domain;
-                if (list != null && list.getList() != null) {
+                if (list != null && list.getList() != null && list.getList().getData().size() > 0) {
                     allCourse.addAll(list.getList().getData());
                 } else {
                     ToastUtils.showMessage("没有更多内容了!");

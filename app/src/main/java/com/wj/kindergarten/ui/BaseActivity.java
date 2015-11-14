@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +36,8 @@ import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 
 import com.wj.kindergarten.utils.Utils;
+
+import java.lang.reflect.InvocationTargetException;
 
 
 /**
@@ -551,4 +554,16 @@ public abstract class BaseActivity extends ActionBarActivity {
     });
     }
 
+
+    public void stopWebview(WebView webView){
+        try {
+            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
 }

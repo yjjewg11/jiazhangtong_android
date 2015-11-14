@@ -30,6 +30,7 @@ import com.wj.kindergarten.ui.func.PrivilegeDetailActivity;
 import com.wj.kindergarten.ui.func.SchoolDetailInfoActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -83,6 +84,10 @@ public class StoreFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (null != dataList && dataList.size() > 0) {
                         store = dataList.get(position - 1);
+                        if(store.getReluuid() == null){
+                            ToastUtils.showMessage("当前内容不存在,看看别的吧!");
+                            return ;
+                        }
                         CGLog.d("title: " + store.getTitle());
                         if (store.getType() == 3) {
                             Constants.isStore = true;

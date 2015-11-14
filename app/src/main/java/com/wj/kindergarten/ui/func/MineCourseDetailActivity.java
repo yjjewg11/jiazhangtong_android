@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -39,6 +40,7 @@ import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -51,7 +53,6 @@ public class MineCourseDetailActivity extends BaseActivity{
     private ViewPager viewPager;
     private Fragment [] fragments = new Fragment[3];
     private RelativeLayout[] relativeLayouts;
-    private HintInfoDialog dialog;
     private TextView tv_coll;
     private ImageView iv_coll;
     private OnceSpecialCourse courses;
@@ -65,6 +66,29 @@ public class MineCourseDetailActivity extends BaseActivity{
     private String courseuuid;
     private StudyStateObject stateObject;
     private MyTrainCoures myTraincourse;
+    private String veryCourseUuid;
+    private String schoolUuid;
+    public HashMap<String,View> viewMap = new HashMap<>();
+    public LinearLayout discuss_assess_soft_state;
+    private HintInfoDialog dialog;
+    public HintInfoDialog allLoadDialog;
+
+    public void showDialog(){
+        allLoadDialog.show();
+    }
+    public void cancleDialog(){
+        if(allLoadDialog.isShowing()){
+            allLoadDialog.cancel();
+        }
+    }
+
+    public String getVeryCourseUuid() {
+        return veryCourseUuid;
+    }
+
+    public String getSchoolUuid() {
+        return schoolUuid;
+    }
 
     public OnceSpecialCourse getCourses() {
         return courses;
@@ -101,19 +125,22 @@ public class MineCourseDetailActivity extends BaseActivity{
 
     @Override
     protected void onCreate() {
-
+        allLoadDialog = new HintInfoDialog(this,"数据加载中，请稍候...");
         titleCenterTextView.setText("我的课程详情");
         courseuuid = getIntent().getStringExtra("courseuuid");
+        discuss_assess_soft_state = (LinearLayout)findViewById(R.id.discuss_assess_soft_state);
         stateObject = (StudyStateObject)getIntent().getSerializableExtra(MineSpecialCourseActivity.FROM_MINE_COURSE_TO_MINE_DETAIL_COURSE);
         myTraincourse = (MyTrainCoures)getIntent().getSerializableExtra(GloablUtils.FROM_COURSE_TO_MINE_COURSE);
+        veryCourseUuid = (stateObject == null ? myTraincourse.getCourseuuid() : stateObject.getCourseuuid());
         initViews();
         setChooseRl();
-        UserRequest.getSpecialCourseINfoFromClickItem(this, courseuuid, new RequestResultI() {
+        UserRequest.getSpecialCourseINfoFromClickItem(this, veryCourseUuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 oscs = (OnceSpecialCourseList) domain;
                 if(oscs != null && oscs.getData() != null){
                     courses =  oscs.getData();
+                    schoolUuid = courses.getGroupuuid();
                     ((CourseDetailIntroduceFragment) fragments[1]).setCourse(courses);
                 }
 
@@ -202,11 +229,10 @@ public class MineCourseDetailActivity extends BaseActivity{
         openTime = (TextView)findViewById(R.id.course_status_open_time);
         iv_school = (ImageView)findViewById(R.id.course_status_iv);
 
-
         if(myTraincourse !=null){
-            trainSchoolName.setText("学校:"+myTraincourse.getGroup_name());
+            trainSchoolName.setText(myTraincourse.getCourse_title());
             student.setText("学生:"+myTraincourse.getName());
-            schoolName.setText("");
+            schoolName.setText("学校:"+myTraincourse.getGroup_name());
             className.setText("班级:" + myTraincourse.getClass_name());
             if(myTraincourse.getPlandate() != null){
                 String text = "<font color='#ff4966'>"+"近期上课:"+myTraincourse.getPlandate()+"</font>";
@@ -216,9 +242,9 @@ public class MineCourseDetailActivity extends BaseActivity{
             }
         }
         if(stateObject != null){
-            trainSchoolName.setText("学校:"+stateObject.getGroup_name());
+            trainSchoolName.setText(stateObject.getCourse_title());
             student.setText("学生:"+stateObject.getStudent_name());
-            schoolName.setText("");
+            schoolName.setText("学校:"+stateObject.getGroup_name());
             className.setText("班级:" + stateObject.getClass_name());
             if(stateObject.getPlandate() != null){
                 String text = "<font color='#ff4966'>"+"近期上课:"+stateObject.getPlandate()+"</font>";

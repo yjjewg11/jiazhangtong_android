@@ -1,13 +1,19 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.umeng.socialize.controller.UMSocialService;
@@ -53,6 +59,11 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
     private WebSettings webSettings;
     private String uuid;
     private ArticleDetail article;
+    private FrameLayout web_fl;
+    private LinearLayout content_ll;
+    private LinearLayout father_ll;
+    private View xCustomView;
+    private WebChromeClient.CustomViewCallback xCustomViewCallback;
 
     @Override
     protected void setContentLayout() {
@@ -66,7 +77,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void loadData() {
-
         uuid = getIntent().getStringExtra("uuid");
         formStore = getIntent().getBooleanExtra("fromStore", false);
         getArticle();
@@ -74,40 +84,94 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void onCreate() {
-
-
         setTitleText("文章详情");
         init();
         success();
     }
 
     private void init() {
+        content_ll = (LinearLayout) findViewById(R.id.content_ll);
+        father_ll = (LinearLayout) findViewById(R.id.father_ll);
+        web_fl = (FrameLayout) findViewById(R.id.web_fl);
         contentTv = (WebView) findViewById(R.id.article_content);
-        contentTv.getSettings().setJavaScriptEnabled(true);
         contentTv.setBackgroundColor(0);
         webSettings = contentTv.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        //支持缩放
+//        webSettings.setJavaScriptEnabled(true);
+//        //支持缩放
+//        webSettings.setBuiltInZoomControls(true);
+//        // 开启 DOM storage API 功能
+//        webSettings.setDomStorageEnabled(true);
+//        //开启缓存数据库功能set
+//        webSettings.setDatabaseEnabled(true);
+//        webSettings.setUseWideViewPort(true);
+////        webSettings.setBlockNetworkImage(true);
+//        //设置缓存模式
+//
+//        //设置缓存路径
+////        webSettings.setAppCachePath(appCachePath+"/clear");
+//        //允许访问文件
+//        webSettings.setAllowFileAccess(true);
+//
+//
+//        webSettings.setPluginState(WebSettings.PluginState.ON);
+//        webSettings.setUseWideViewPort(true);
+//        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+//        contentTv.setAlpha(1);
+
         webSettings.setBuiltInZoomControls(true);
-        // 开启 DOM storage API 功能
-        webSettings.setDomStorageEnabled(true);
-        //开启缓存数据库功能set
-        webSettings.setDatabaseEnabled(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webSettings.setUseWideViewPort(true);
-//        webSettings.setBlockNetworkImage(true);
-        //设置缓存模式
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setSavePassword(true);
+        webSettings.setSaveFormData(true);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setGeolocationEnabled(true);
+//		ws.setGeolocationDatabasePath("/data/data/org.itri.html5webview/databases/");// ���ö�λ�����ݿ�·��
+        webSettings.setDomStorageEnabled(true);
 
-        //设置缓存路径
-//        webSettings.setAppCachePath(appCachePath+"/clear");
-        //允许访问文件
-        webSettings.setAllowFileAccess(true);
+        contentTv.setWebChromeClient(new WebChromeClient() {
+            CustomViewCallback customViewCallback;
 
-        contentTv.setAlpha(1);
+            @Override
+            public void onShowCustomView(View view, CustomViewCallback callback) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                content_ll.setVisibility(View.GONE);
+                if (xCustomView != null) {
+                    callback.onCustomViewHidden();
+                    return;
+                }
+                web_fl.addView(view);
+                xCustomView = view;
+                xCustomViewCallback = callback;
+                web_fl.setVisibility(View.VISIBLE);
+            }
 
-        contentTv.setWebChromeClient(new WebChromeClient());
+            @Override
+            public void onHideCustomView() {
+                if (xCustomView == null)
+                    return;
+                // Hide the custom view.
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                xCustomView.setVisibility(View.GONE);
+                // Remove the custom view from its container.
+                xCustomView = null;
+                    web_fl.setVisibility(View.GONE);
+                xCustomViewCallback.onCustomViewHidden();
+                    content_ll.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public View getVideoLoadingProgressView() {
+                return web_fl;
+            }
+        });
+
         contentTv.setWebViewClient(new WebViewClient());
 
-        contentTv.loadUrl(article.getShare_url());
+        contentTv.loadUrl(
+//                "http://look.appjx.cn/mobile_api.php?mod=news&id=12604"
+                article.getShare_url()
+        );
         tvZan = (TextView) findViewById(R.id.textview_1);
         tvSHare = (TextView) findViewById(R.id.textview_2);
         tvStore = (TextView) findViewById(R.id.textview_3);
@@ -118,6 +182,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
         tvStore.setOnClickListener(this);
         tvComment.setOnClickListener(this);
     }
+
 
     private void getArticle() {
         UserRequest.getArticle(mContext, uuid, new RequestResultI() {
@@ -144,6 +209,12 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopWebview(contentTv);
     }
 
     private void success() {

@@ -2,7 +2,6 @@ package com.wj.kindergarten.net;
 
 import android.content.Context;
 import android.content.Intent;
-
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -97,10 +96,9 @@ public class SendRequest {
         if (Utils.isNetworkAvailable(CGApplication.getInstance())) {
             CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
             RequestHttpUtil.post(context, url, params, new JsonHttpResponseHandler() {
-
                 @Override
-                public void onSuccess(int statusCode, Header[] header, JSONObject response) {
-                    super.onSuccess(statusCode, header, response);
+                public void onSuccess(int statusCode, org.apache.http.Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
                     try {
                         CGLog.i("SendRequest：" + requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
 
@@ -120,7 +118,7 @@ public class SendRequest {
                 @Override
                 public void onFailure(int statusCode, Header[] headers,
                                       String responseBody, Throwable e) {
-                    super.onFailure(statusCode, headers, responseBody, e);
+                    super.onFailure(statusCode,headers,responseBody,e);
                     CGLog.d("SendRequest：" + requestType + "->" + responseBody);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
                 }
@@ -217,7 +215,7 @@ public class SendRequest {
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     super.onSuccess(statusCode, headers, response);
                     try {
-                        Log.i("TAG","打印返回的字符串"+response.toString());
+                        Log.i("TAG","打印  - - >"+requestType+ " 返回的字符串 - - >"+ response.toString());
                         CGLog.d("SendRequest：" + requestType + "->" + response.toString());
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {

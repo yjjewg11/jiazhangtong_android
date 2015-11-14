@@ -26,8 +26,6 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GsonUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -123,15 +121,15 @@ public final class UserRequest {
     public static void getChildrenClassInfo(Context context,RequestResultI resultI){
         RequestParams requestParams = new RequestParams();
 //        requestParams.put("JSESSIONID",CGApplication.getInstance().getLogin().getJSESSIONID());
-        SendRequest.getInstance().get(context,RequestType.TRAIN_CLASS,requestParams,
-                RequestHttpUtil.BASE_URL+TRAING_CHILD,resultI);
+        SendRequest.getInstance().get(context, RequestType.TRAIN_CLASS, requestParams,
+                RequestHttpUtil.BASE_URL + TRAING_CHILD, resultI);
     }
 
     public static void getTrainChild(Context context,RequestResultI resultI){
         RequestParams requestParams = new RequestParams();
 //        requestParams.put("JSESSIONID",CGApplication.getInstance().getLogin().getJSESSIONID());
-        SendRequest.getInstance().get(context,RequestType.TRAIN_CHLID_INFO,requestParams,
-                RequestHttpUtil.BASE_URL+TRAING_CHILD,resultI);
+        SendRequest.getInstance().get(context, RequestType.TRAIN_CHLID_INFO, requestParams,
+                RequestHttpUtil.BASE_URL + TRAING_CHILD, resultI);
     }
 
     public static void getAdDetail(Context context, String adId, RequestResultI requestResultI) {
@@ -625,13 +623,17 @@ public final class UserRequest {
     }
 
     public static void sendSpecialCourseAssess(Context context,String ext_uuid,String class_uuid, int type, int score, String content, RequestResultI resultI) {
-    RequestParams params = new RequestParams();
-        params.put("ext_uuid",ext_uuid);
-        params.put("class_uuid",class_uuid);
-        params.put("type",type);
-        params.put("score",score);
-        params.put("content",content);
-        SendRequest.getInstance().get(context,RequestType.INTERACTION_SEND,params,RequestHttpUtil.BASE_URL+SAVE_ASSESS,resultI);
+    JSONObject object = new JSONObject();
+        try{
+            object.put("ext_uuid",ext_uuid);
+            object.put("class_uuid",class_uuid);
+            object.put("type",type);
+            object.put("score",score*10);
+            object.put("content",content);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SendRequest.getInstance().post(context,RequestType.INTERACTION_SEND,object.toString(),RequestHttpUtil.BASE_URL+SAVE_ASSESS,resultI);
     }
 
     public static void getTeacherFromUuid(Context context, String groupuuid,int pageNo, RequestResultI resultI) {

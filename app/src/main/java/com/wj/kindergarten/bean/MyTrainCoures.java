@@ -5,6 +5,11 @@ import com.google.gson.annotations.Expose;
 
 public class MyTrainCoures extends BaseModel{
     @Expose
+    private String course_title;@Expose
+    private String student_name;@Expose
+    private String groupuuid;@Expose
+    private String courseuuid;
+    @Expose
     private String uuid;
     @Expose
     private String classuuid;
@@ -29,6 +34,46 @@ public class MyTrainCoures extends BaseModel{
     @Expose
     private MyReplyPage replyPage;
 
+    public String getCourse_title() {
+        return course_title;
+    }
+
+    public void setCourse_title(String course_title) {
+        this.course_title = course_title;
+    }
+
+    public String getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
+    public String getGroupuuid() {
+        return groupuuid;
+    }
+
+    public void setGroupuuid(String groupuuid) {
+        this.groupuuid = groupuuid;
+    }
+
+    public String getCourseuuid() {
+        return courseuuid;
+    }
+
+    public void setCourseuuid(String courseuuid) {
+        this.courseuuid = courseuuid;
+    }
+
+    public DianZan getDianzan() {
+        return dianzan;
+    }
+
+    public void setDianzan(DianZan dianzan) {
+        this.dianzan = dianzan;
+    }
+
     public DianZan getDianZan() {
         return dianzan;
     }
@@ -48,7 +93,10 @@ public class MyTrainCoures extends BaseModel{
     @Override
     public String toString() {
         return "MyTrainCoures{" +
-                "address='" + address + '\'' +
+                "course_title='" + course_title + '\'' +
+                ", student_name='" + student_name + '\'' +
+                ", groupuuid='" + groupuuid + '\'' +
+                ", courseuuid='" + courseuuid + '\'' +
                 ", uuid='" + uuid + '\'' +
                 ", classuuid='" + classuuid + '\'' +
                 ", student_headimg='" + student_headimg + '\'' +
@@ -56,6 +104,7 @@ public class MyTrainCoures extends BaseModel{
                 ", class_name='" + class_name + '\'' +
                 ", plandate='" + plandate + '\'' +
                 ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
                 ", readyfor='" + readyfor + '\'' +
                 ", count=" + count +
                 ", dianzan=" + dianzan +

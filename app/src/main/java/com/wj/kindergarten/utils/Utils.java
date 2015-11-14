@@ -80,6 +80,9 @@ public class Utils {
     private Utils() {
     }
 
+    public static Float stringToFloat(String thing){
+        return Float.valueOf(thing);
+    }
 
     public static String isNull(String thing){
         if(thing == null || thing.equals("null")){

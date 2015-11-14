@@ -77,12 +77,16 @@ public class CourseListFragment extends Fragment {
         courseListFragment.setArguments(bundle);
         return courseListFragment;
     }
-
+    boolean isFirst;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         date = getArguments().getString("date");
-        getc();
+        if(!isFirst){
+            isFirst = true;
+            getc();
+        }
+
 
     }
 
@@ -170,8 +174,6 @@ public class CourseListFragment extends Fragment {
                             if(trainCourse!=null) {
                                 trainCourseContentAll = (trainCourse.getList());
                                     courseListAdapter.addTrainCourseList(trainCourseContentAll);
-
-
                             }
                     }
 

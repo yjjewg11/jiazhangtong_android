@@ -7,7 +7,7 @@
     <dimen name="title_shadow_">-3dp</dimen>
 
     <dimen name="course_week_bg_hw">30dp</dimen>
-    <dimen name="condition_height">38dp</dimen>
+    <dimen name="condition_height">48dp</dimen>
     <dimen name="goods_item_height">108dp</dimen>
 
     <dimen name="normal_text">15dp</dimen>

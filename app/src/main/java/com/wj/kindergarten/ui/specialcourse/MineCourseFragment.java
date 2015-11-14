@@ -7,6 +7,7 @@ import android.os.Message;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.MineCourseDetailActivity;
 import com.wj.kindergarten.ui.func.adapter.MineCourseDetailAdapter;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class MineCourseFragment extends Fragment{
         }
     };
     private FrameLayout fl;
+    private MineCourseDetailActivity mcd;
 
 
     @Override
@@ -57,9 +60,12 @@ public class MineCourseFragment extends Fragment{
 
     String classuuid = null;
     private void loadData() {
+        mcd =(MineCourseDetailActivity) getActivity();
+        mcd.showDialog();
         UserRequest.getMineAllCourse(getActivity(),pageNo,classuuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                mcd.cancleDialog();
                 if(mListView.isRefreshing()) {mListView.onRefreshComplete();}
                 MineAllCourseList mac = (MineAllCourseList) domain;
                 if(mac!=null & mac.getList()!=null && mac.getList().getData().size() > 0){
@@ -120,7 +126,13 @@ public class MineCourseFragment extends Fragment{
             });
 
 //            mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-
+//        mcd.viewMap.put(GloablUtils.MINE_COURSE_FRAGMENT,view);
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("TAG","fragment  1111 的销毁已经执行！");
     }
 }

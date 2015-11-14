@@ -19,11 +19,13 @@
         android:layout_gravity="center_horizontal">
 
         <RadioButton
+            android:textColor="#ff4966"
             android:id="@+id/rb_study"
             android:gravity="center"
             android:layout_weight="1"
             android:button="@null"
             android:text="正在学习"
+            android:textSize="17sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
@@ -33,6 +35,7 @@
             android:layout_height="30dp" />
 
         <RadioButton
+            android:textSize="17sp"
             android:id="@+id/rb_study_over"
             android:gravity="center"
             android:layout_weight="1"
@@ -42,29 +45,16 @@
             android:layout_height="match_parent" />
     </RadioGroup>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="2dp">
 
-        <TextView
-            android:id="@+id/red_left"
-            android:layout_weight="1"
-            android:background="#ff4966"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/scroll_linear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:visibility="invisible"
-            android:id="@+id/red_right"
-            android:layout_weight="1"
-            android:background="#ff4966"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="3dp">
+        </LinearLayout>
 
     <LinearLayout
-        android:background="#bbbbbb"
+        android:background="@color/main_bg"
         android:layout_width="match_parent"
         android:layout_height="15dp"/>
 

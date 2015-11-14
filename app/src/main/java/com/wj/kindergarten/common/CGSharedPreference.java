@@ -175,4 +175,16 @@ public class CGSharedPreference {
         editor.putString("city",versionInfo.getCity());
         editor.commit();
     }
+
+    public static void setMineCourseIsSendSContent(){
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isSendContent", true);
+        editor.commit();
+    }
+
+    public static boolean getMineCourseIsSendContent(){
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getBoolean("isSendContent",false);
+    }
 }

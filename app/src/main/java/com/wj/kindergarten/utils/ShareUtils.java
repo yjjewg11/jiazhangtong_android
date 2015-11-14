@@ -152,7 +152,13 @@ public class ShareUtils {
                 public void onClick(View v) {
                     isShow = false;
                     mPopupWindow.dismiss();
-                    shareTo(SHARE_MEDIA.SINA, finalTitle, finalContent, pic, url);
+                    String content = null;
+                    if(finalTitle.equals(finalContent)){
+                        content = "";
+                    }else{
+                        content = finalContent;
+                    }
+                    shareTo(SHARE_MEDIA.SINA, finalTitle, content, pic, url);
                     Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });

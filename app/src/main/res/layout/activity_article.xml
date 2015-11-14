@@ -2,8 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/father_ll"
     android:background="@color/main_bg"
     android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/web_fl"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/content_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <include layout="@layout/title_normal" />
 
@@ -11,8 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_above="@+id/ll_items"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
                 <WebView
+                    android:layout_weight="1"
                     android:id="@+id/article_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -22,6 +40,8 @@
                     android:alpha="1"
                     android:textSize="@dimen/normal_text"
                     android:layout_above="@+id/ll_items" />
+
+               </LinearLayout>
 
 
         <LinearLayout
@@ -43,4 +63,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
+    </LinearLayout>
 </LinearLayout>

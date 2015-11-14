@@ -120,10 +120,10 @@ public class RequestHttpUtil {
         getClient().get(context, uString, bHandler);
     }
 
-    protected static void get(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
-
-        getClient().get(context, urlString, httpEntity, "application/json", responseHandlerInterface);
-    }
+//    protected static void get(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
+//
+//        getClient().get(context, urlString, httpEntity, "application/json", responseHandlerInterface);
+//    }
 
     //带参数 提交数据
     public static void post(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {

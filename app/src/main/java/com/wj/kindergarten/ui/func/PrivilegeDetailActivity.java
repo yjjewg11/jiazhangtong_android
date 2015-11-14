@@ -101,6 +101,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
         //开启缓存数据库功能set
         webSettings.setDatabaseEnabled(true);
         webSettings.setUseWideViewPort(true);
+        webSettings.setPluginState(WebSettings.PluginState.ON);
 //        webSettings.setBlockNetworkImage(true);
         //设置缓存模式
 
@@ -173,6 +174,13 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
             }
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopWebview(contentTv);
+    }
+
 
     //
 

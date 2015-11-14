@@ -1,12 +1,15 @@
 package com.wj.kindergarten.bean;
 
 
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 public class GetAssessStateListSun extends BaseModel{
 
-    private int pageSize;
-    private int pageNo;
+    @Expose
+    private int pageSize;@Expose
+    private int pageNo;@Expose
     private List<GetAssessState> data;
 
     public List<GetAssessState> getData() {

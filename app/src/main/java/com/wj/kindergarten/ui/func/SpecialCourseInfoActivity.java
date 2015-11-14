@@ -81,7 +81,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 //                            mobile.setText(mobiletext.substring(0,3)+"******"+mobiletext.substring(9));
                             mobile.setText(""+mobiletext);
                             time.setText(""+ TimeUtil.getYMDTimeFromYMDHMS(md.getCreate_time()));
-                            content.setText(""+md.getContent());
+                            content.setText(""+(TextUtils.isEmpty(md.getContent()) == true ? "当前家长暂无评价!" : md.getContent()));
                             assess_rb.setFloatStar(md.getScore(),true);
                             more_assess_linera.addView(view);
                         }

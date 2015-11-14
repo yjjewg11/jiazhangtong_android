@@ -2,14 +2,19 @@ package com.wj.kindergarten.ui.func;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -22,6 +27,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.MineCourseStatusAdapter;
+import com.wj.kindergarten.ui.other.ScollTextView;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 
@@ -33,8 +39,6 @@ public class MineSpecialCourseActivity extends BaseActivity{
     private MineCourseStatusAdapter adapter;
     private RadioButton rb_study;
     private RadioButton rb_study_over;
-    private TextView red_left;
-    private TextView red_right;
     private List<StudyStateObject> studyint_list = new ArrayList<>();
     private List<StudyStateObject> over_list = new ArrayList<>();
 
@@ -69,6 +73,11 @@ public class MineSpecialCourseActivity extends BaseActivity{
     };
     private FrameLayout rl;
     private HintInfoDialog dialog;
+    private DisplayMetrics metrics;
+    private int[] location = new int[2];
+    private LinearLayout scroll_ll;
+    private ScollTextView scroll_text;
+    private LinearLayout scroll_linear;
 
     public void judgeIsEmpty(List<StudyStateObject> list){
         if(list.size() == 0){
@@ -111,14 +120,20 @@ public class MineSpecialCourseActivity extends BaseActivity{
     int pageStudying = 1;
     int pageStudyOver = 1;
     private void initViews() {
+        //获取添加的线条在窗口中的位置
+        scroll_linear = (LinearLayout)findViewById(R.id.scroll_linear);
+        scroll_linear.getLocationInWindow(location);
+        scroll_text = new ScollTextView(this);
+        metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        scroll_text.setMyWidth(metrics.widthPixels / 2,location[1]);
+        scroll_linear.addView(scroll_text);
 
         rb_study = (RadioButton)findViewById(R.id.rb_study);
         rb_study_over = (RadioButton)findViewById(R.id.rb_study_over);
-
-        red_left = (TextView)findViewById(R.id.red_left);
-        red_right = (TextView)findViewById(R.id.red_right);
-
         rl = (FrameLayout)findViewById(R.id.study_state_fl);
+
+        //动态添加3个textview以显示完成学习和正在学习的状态
 
 
 
@@ -126,14 +141,15 @@ public class MineSpecialCourseActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 if(v.getId() == R.id.rb_study ){
-
                     isStudying = 0;
-                    red_left.setVisibility(View.VISIBLE);
-                    red_right.setVisibility(View.INVISIBLE);
+                    rb_study.setTextColor(Color.parseColor("#ff4966"));
+                    rb_study_over.setTextColor(Color.parseColor("#333333"));
+                    scroll_text.drawLeft();
                 } else if(v.getId() == R.id.rb_study_over){
-                    red_left.setVisibility(View.INVISIBLE);
-                    red_right.setVisibility(View.VISIBLE);
                     isStudying = 1;
+                    rb_study.setTextColor(Color.parseColor("#333333"));
+                    rb_study_over.setTextColor(Color.parseColor("#ff4966"));
+                    scroll_text.drawRight();
                 }
                 mHandler.sendEmptyMessage(100);
             }
@@ -177,7 +193,7 @@ public class MineSpecialCourseActivity extends BaseActivity{
                     sso = over_list.get((int)id);
                 }
                 Intent intent = new Intent(MineSpecialCourseActivity.this,MineCourseDetailActivity.class);
-                intent.putExtra("courseuuid",sso.getCourseuuid());
+                intent.putExtra("courseuuid",sso.getUuid());
                 intent.putExtra(FROM_MINE_COURSE_TO_MINE_DETAIL_COURSE,sso);
                 startActivity(intent);
             }
@@ -199,7 +215,7 @@ public class MineSpecialCourseActivity extends BaseActivity{
         UserRequest.getStudyStatus(this,page,isStudying, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                dialog.cancel();
+
               StudyStateObjectList sso = (StudyStateObjectList) domain;
                 if(sso!=null && sso.getList()!=null && sso.getList().getData() != null && sso.getList().getData().size() > 0){
                     if(isStudying == 0){
@@ -209,8 +225,17 @@ public class MineSpecialCourseActivity extends BaseActivity{
                     }
                     mHandler.sendEmptyMessage(100);
                 }else{
-                    mHandler.sendEmptyMessage(300);
+                    if(pageStudyOver != 1 ){
+                        mHandler.sendEmptyMessage(300);
+                    }
+
+                    if(pageStudying != 1){
+                        mHandler.sendEmptyMessage(300);
+                    }
+
                 }
+                if(dialog.isShowing())
+                    dialog.cancel();
             }
 
             @Override

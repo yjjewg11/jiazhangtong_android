@@ -135,7 +135,9 @@ public class RatingBarView extends LinearLayout {
 
     }
 
-    public void setFloatStar(float starCount,boolean animation){
+    public synchronized void setFloatStar(float starCount,boolean animation){
+        starCount = (starCount > 50 ? 50 : starCount) ;
+        starCount = (starCount < 0 ? 0 : starCount);
         if(starCount%10>0){
             int totalStarCount =(int) starCount/10 + 1;
             totalStarCount = totalStarCount > this.starCount ? this.starCount : totalStarCount;

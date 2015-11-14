@@ -88,7 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="#bbbbbb"
+        android:background="@color/main_bg"
         android:id="@+id/textView22"
         android:layout_below="@+id/course_status_open_time"
         android:layout_alignParentRight="true" />

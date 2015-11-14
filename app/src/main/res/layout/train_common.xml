@@ -131,7 +131,7 @@
             <TextView
                 android:padding="5dp"
                 android:textColor="#ffffff"
-                android:background="@drawable/text_shape"
+                android:background="@drawable/seclector_back_ground"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

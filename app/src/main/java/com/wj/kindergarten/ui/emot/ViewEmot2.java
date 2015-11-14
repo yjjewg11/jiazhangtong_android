@@ -40,7 +40,7 @@ public class ViewEmot2 extends LinearLayout implements View.OnClickListener {
     private CirclePageIndicator pageIndicator = null;
     private RelativeLayout layoutBQ = null;//点击展开表情
     private EditText etMessage = null;
-    private RelativeLayout layoutSend = null;
+    protected RelativeLayout layoutSend = null;
     private ViewPagerAdapter adapter = null;
 
     private ArrayList<View> pageViews;
@@ -68,7 +68,7 @@ public class ViewEmot2 extends LinearLayout implements View.OnClickListener {
         initData();
     }
 
-    private void init() {
+    protected void init() {
         pager = (ViewPager) findViewById(R.id.vp_images);
         pageIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
         layoutBQ = (RelativeLayout) findViewById(R.id.layout_biao_qing);

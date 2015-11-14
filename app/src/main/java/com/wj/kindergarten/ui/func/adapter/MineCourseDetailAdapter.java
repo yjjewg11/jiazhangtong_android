@@ -80,10 +80,10 @@ public class MineCourseDetailAdapter extends BaseAdapter{
             viewHolder.classSort.setText("第 "+(position+1)+" 课");
             viewHolder.classContent.setText(""+mac.getName());
             viewHolder.time.setText(""+ TimeUtil.getYMDTimeFromYMDHMS(mac.getPlandate()));
-            viewHolder.tv_training_classname_content.setText(""+mac.getName());
-            viewHolder.tv_training_classtime.setText(""+mac.getPlandate());
-            viewHolder.tv_trainning_adress.setText(""+mac.getAddress());
-            viewHolder.tv_trainning_preparething .setText(""+mac.getReadyfor());
+            viewHolder.tv_training_classname_content.setText(""+Utils.isNull(mac.getName()));
+            viewHolder.tv_training_classtime.setText(""+Utils.isNull(mac.getPlandate()));
+            viewHolder.tv_trainning_adress.setText(""+Utils.isNull(mac.getAddress()));
+            viewHolder.tv_trainning_preparething .setText(""+Utils.isNull(mac.getReadyfor()));
         }
 
         //把得到的时间值化成毫秒做对比，小则显示状态1，等于接近显示橙色，大于显示蓝色。

@@ -258,9 +258,6 @@ public class CourseListAdapter extends BaseAdapter {
                 viewHolder.zanIv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        if (zanLock) {
-//                            return;
-//                        }
                         zanLock = true;
 //                        Drawable drawable = viewHolder.zanIv.getDrawable();
                         if (dianZan.isCanDianzan()) {
