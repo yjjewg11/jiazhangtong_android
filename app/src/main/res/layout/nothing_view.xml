@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:textColor="#e7a311"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="暂时没有相关信息"
+            android:id="@+id/textView23"
+            android:layout_marginTop="39dp"
+            android:layout_marginRight="73dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:textColor="#e7a311"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="看看别的内容吧"
+            android:id="@+id/textView25"
+            android:layout_below="@+id/imageView"
+            android:layout_toRightOf="@+id/imageView" />
+
+        <ImageView
+            android:src="@drawable/gantan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_alignTop="@+id/textView23"
+            android:layout_toLeftOf="@+id/textView23"
+            android:layout_marginRight="18dp" />
+    </RelativeLayout>
+
+</LinearLayout>

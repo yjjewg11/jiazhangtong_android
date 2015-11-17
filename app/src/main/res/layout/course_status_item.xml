@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:paddingTop="@dimen/margin_10"
+        android:paddingBottom="@dimen/margin_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:layout_centerInParent="true"
+        android:layout_alignTop="@+id/course_status_train_school_name"
+        android:layout_alignBottom="@+id/course_status_open_time"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/course_status_iv"
+        android:src="@drawable/ic_launcher"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:textColor="#49a3ff"
+        android:textSize="17sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="晨钟英语学校"
+        android:id="@+id/course_status_train_school_name"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/course_status_iv"
+        android:layout_marginLeft="15dp" />
+
+    <TextView
+        android:textSize="@dimen/text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="学生：小明"
+        android:id="@+id/course_status_student"
+        android:layout_below="@+id/course_status_train_school_name"
+        android:layout_alignLeft="@+id/course_status_train_school_name" />
+
+    <TextView
+
+        android:textSize="@dimen/text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="班级：英语一班"
+        android:id="@+id/course_status_class"
+        android:layout_below="@+id/course_status_student"
+        android:layout_alignLeft="@+id/course_status_student" />
+
+    <TextView
+
+        android:textSize="@dimen/text_size"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="学校：城中教育中心"
+        android:id="@+id/course_status_education"
+        android:layout_below="@+id/course_status_class"
+        android:layout_alignLeft="@+id/course_status_class" />
+
+    <TextView
+
+        android:textSize="@dimen/text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff4966"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="近期上课时间：2015-12-12"
+        android:id="@+id/course_status_open_time"
+        android:layout_below="@+id/course_status_education"
+        android:layout_alignLeft="@+id/course_status_education" />
+
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@color/main_bg"
+        android:id="@+id/textView22"
+        android:layout_below="@+id/course_status_open_time"
+        android:layout_alignParentRight="true" />
+
+</LinearLayout>

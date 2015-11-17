@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/framelayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/photo_gallery_shap"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="1dp">
+
+    <com.wj.kindergarten.ui.imagescan.CustomImageView
+        android:id="@+id/child_image"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <CheckBox
+            android:id="@+id/child_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="6dp"
+            android:button="@drawable/pictures_select_icon" />
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:weightSum="1">
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:id="@+id/head_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title_normal"/>
+    </FrameLayout>
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:layout_above="@+id/btom_llll"
+        android:layout_below="@+id/head_title"
+        android:layout_width="match_parent"
+        android:id="@+id/course_detail_scrollview"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/once_iv"
+                android:src="@drawable/load2"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:id="@+id/course_detail_train_class_name"
+                    android:layout_marginLeft="10dp"
+                    android:text="晨钟幼儿英语"
+                    android:textSize="20sp"
+                    android:textColor="#222222"
+                    android:paddingLeft="@dimen/margin_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:paddingLeft="@dimen/margin_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                       <FrameLayout
+                           android:layout_marginLeft="@dimen/margin_10"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content">
+
+                           <include layout="@layout/common_rating_bar"/>
+                       </FrameLayout>
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:paddingLeft="@dimen/margin_10"
+                    android:layout_width="match_parent"
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="具体课程："
+                        android:id="@+id/textView5"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="3-6岁幼儿英语"
+                        android:id="@+id/detail_course"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/textView5"
+                        android:layout_marginLeft="18dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:paddingLeft="@dimen/margin_10"
+                    android:layout_width="match_parent"
+                    android:minHeight="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="上课地点："
+                        android:id="@+id/textView7"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true" />
+
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="成都武侯区金太阳幼儿园校园区"
+                        android:id="@+id/teach_place"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/textView7"
+                        android:layout_marginLeft="18dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:paddingLeft="@dimen/margin_10"
+                    android:layout_width="match_parent"
+                    android:minHeight="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="课程学时："
+                        android:id="@+id/textView9"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp" />
+
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="总课时40课时，每课时45分钟"
+                        android:id="@+id/course_spend_time"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/textView9"
+                        android:layout_marginLeft="18dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:paddingLeft="@dimen/margin_10"
+                    android:id="@+id/rl_price"
+                    android:layout_width="match_parent"
+                    android:minHeight="20dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="收费价格："
+                        android:id="@+id/textView11"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="9dp" />
+
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="888.00元"
+                        android:id="@+id/nornal_course_price"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/textView11"
+                        android:layout_marginLeft="18dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:paddingLeft="@dimen/margin_10"
+                    android:id="@+id/rl_free_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="优惠价格："
+                        android:id="@+id/textView13"
+                        android:layout_alignTop="@+id/textView14"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="9dp" />
+
+                    <TextView
+                        android:layout_alignParentTop="true"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="无"
+                        android:id="@+id/coupon_price"
+                        android:layout_toRightOf="@+id/textView13"
+                        android:layout_marginLeft="18dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="#e6e6e6"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:drawableLeft="@drawable/redline"
+                        android:drawablePadding="10dp"
+                        android:textSize="17sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="课程详细信息"
+                        android:id="@+id/textView15"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true" />
+                    <WebView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="   暂时没有课程详情"
+                        android:id="@+id/course_detail_info"
+                        android:layout_below="@+id/textView15"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:background="#efeff4"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:drawablePadding="@dimen/margin_10"
+                        android:textSize="17sp"
+                        android:drawableLeft="@drawable/redline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="学校介绍"
+                        android:id="@+id/textView19"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp" />
+
+                    <WebView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="   暂时没有学校内容介绍"
+                        android:id="@+id/tv_school_introduce"
+                        android:layout_below="@+id/textView19"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        </RelativeLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+
+    <TextView
+        android:layout_above="@id/btom_llll"
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+</RelativeLayout>
+
