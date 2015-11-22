@@ -8,6 +8,7 @@ import com.umeng.fb.SyncListener;
 import com.umeng.fb.model.Conversation;
 import com.umeng.fb.model.Reply;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.Utils;
@@ -52,7 +53,8 @@ public class FeedBackActivty extends BaseActivity {
     private void advise() {
         FeedbackAgent agent = new FeedbackAgent(FeedBackActivty.this);
         Conversation conversation = agent.getDefaultConversation();
-        conversation.addUserReply(editText.getText().toString());
+        String name = CGApplication.getInstance().getLogin().getUserinfo().getLoginname();
+        conversation.addUserReply(name+"  : "+editText.getText().toString());
         sync(conversation);
     }
 

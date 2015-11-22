@@ -31,8 +31,8 @@
             android:id="@+id/fragment_teacher_rating_bar"
             bao:starImageSize = "30dp"
             bao:starCount = "5"
-            bao:starEmpty = "@drawable/xingback"
-            bao:starFill = "@drawable/xinglight"
+            bao:starEmpty = "@drawable/pingjiaxingblank"
+            bao:starFill = "@drawable/pingjiaxing"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

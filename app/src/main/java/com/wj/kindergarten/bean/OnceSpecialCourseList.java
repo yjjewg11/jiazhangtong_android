@@ -7,7 +7,25 @@ public class OnceSpecialCourseList extends BaseModel{
     private OnceSpecialCourse data;@Expose
     private boolean isFavor;@Expose
     private String share_url;@Expose
-    private String link_tel;
+    private String link_tel;@Expose
+    private String obj_url;@Expose
+    private String age_min_max;
+
+    public String getAge_min_max() {
+        return age_min_max;
+    }
+
+    public void setAge_min_max(String age_min_max) {
+        this.age_min_max = age_min_max;
+    }
+
+    public String getObj_url() {
+        return obj_url;
+    }
+
+    public void setObj_url(String obj_url) {
+        this.obj_url = obj_url;
+    }
 
     public String getLink_tel() {
         return link_tel;
@@ -41,6 +59,7 @@ public class OnceSpecialCourseList extends BaseModel{
         this.data = data;
     }
 
+
     @Override
     public String toString() {
         return "OnceSpecialCourseList{" +
@@ -48,6 +67,8 @@ public class OnceSpecialCourseList extends BaseModel{
                 ", isFavor=" + isFavor +
                 ", share_url='" + share_url + '\'' +
                 ", link_tel='" + link_tel + '\'' +
+                ", obj_url='" + obj_url + '\'' +
+                ", age_min_max='" + age_min_max + '\'' +
                 '}';
     }
 }

@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@+id/assess_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -11,6 +12,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/parent_fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,11 +27,5 @@
             android:id="@+id/no_assess_tv"
             android:layout_gravity="center" />
     </FrameLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/more_discuss_send"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
 
 </LinearLayout>

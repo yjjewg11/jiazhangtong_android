@@ -176,7 +176,6 @@ public class MineSpecialCourseActivity extends BaseActivity{
                     pageStudyOver++;
                 }
                 loadData();
-
             }
         });
 

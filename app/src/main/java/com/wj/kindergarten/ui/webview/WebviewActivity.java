@@ -187,7 +187,9 @@ protected void setNeedLoading() {
                 if (list != null && list.getList() != null && list.getList().getData().size() > 0) {
                     allCourse.addAll(list.getList().getData());
                 } else {
-                    ToastUtils.showMessage("没有更多内容了!");
+
+                    commonClosePullToRefreshScrollView(scroll_view,pageNo);
+
                 }
                 if (scroll_view != null && scroll_view.isRefreshing()) {
                     scroll_view.onRefreshComplete();

@@ -114,6 +114,9 @@ public class PrivilegeActiveActivity extends BaseActivity {
                     if(pageNo == 1){
                         noView(findViewById(R.id.privelige_nocontent_fl));
                     }else{
+                        //关闭请求
+                        listView.onRefreshComplete();
+                        listView.setMode(PullToRefreshBase.Mode.DISABLED);
                         ToastUtils.showMessage("没有更多内容了!");
                     }
 

@@ -52,7 +52,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     private RadioButton radio_introduce;
     private RadioButton[] radio_bts;
     private ViewPager viewPager;
-    private Fragment [] fragments = new Fragment[3];
+    public Fragment [] fragments = new Fragment[3];
     private RelativeLayout[] relativeLayouts;
     private TextView tv_coll;
     private ImageView iv_coll;
@@ -142,7 +142,8 @@ public class MineCourseDetailActivity extends BaseActivity{
                 if(oscs != null && oscs.getData() != null){
                     courses =  oscs.getData();
                     schoolUuid = courses.getGroupuuid();
-                    ((CourseDetailIntroduceFragment) fragments[1]).setCourse(courses);
+                    CourseDetailIntroduceFragment fragment = (CourseDetailIntroduceFragment) fragments[1];
+                    fragment.setOscs(oscs);
                 }
 
                 ImageLoaderUtil.displayMyImage(courses.getLogo(), iv_school);
@@ -197,7 +198,7 @@ public class MineCourseDetailActivity extends BaseActivity{
                                 content = courses.getTitle();
                             }
                             ShareUtils.showShareDialog(MineCourseDetailActivity.this, v, Utils.isNull(courses.getTitle())
-                                    , Utils.isNull(courses.getContent()), content, oscs.getShare_url(), false);
+                                    , Utils.isNull(courses.getContent()), courses.getLogo(), oscs.getShare_url(), false);
                         }else{
                             ToastUtils.showMessage("暂无分享内容!");
                         }
@@ -235,14 +236,14 @@ public class MineCourseDetailActivity extends BaseActivity{
             student.setText("学生:"+myTraincourse.getName());
             schoolName.setText("学校:"+myTraincourse.getGroup_name());
             className.setText("班级:" + myTraincourse.getClass_name());
-            String text = null;
-            if(myTraincourse.getPlandate() != null){
-                text = "<font color='#ff4966'>"+"近期上课:"+myTraincourse.getPlandate()+"</font>";
+            String text3 = null;
+            if(!TextUtils.isEmpty(myTraincourse.getPlandate())){
+                text3 = "<font color='#ff4966'>"+"近期上课:"+myTraincourse.getPlandate()+"</font>";
             }else{
-
+                text3 = "<font color='#ff4966'>"+"时间暂定"+"</font>";
             }
-            text = "时间暂定!";
-            openTime.setText(Html.fromHtml(text));
+
+            openTime.setText(Html.fromHtml(text3));
         }
         if(stateObject != null){
             trainSchoolName.setText(stateObject.getCourse_title());
@@ -250,11 +251,12 @@ public class MineCourseDetailActivity extends BaseActivity{
             schoolName.setText("学校:"+stateObject.getGroup_name());
             className.setText("班级:" + stateObject.getClass_name());
             String text = null;
-            if(stateObject.getPlandate() != null){
+            if(!TextUtils.isEmpty(stateObject.getPlandate())){
                 text = "<font color='#ff4966'>"+"近期上课:"+stateObject.getPlandate()+"</font>";
 
-            }else{
-                text = "<font color='#ff4966'>"+"近期上课:"+stateObject.getDisable_time()+"</font>";
+            }
+            if(!TextUtils.isEmpty(stateObject.getDisable_time())){
+                text = "<font color='#ff4966'>"+"完成时间:"+stateObject.getDisable_time()+"</font>";
             }
             if(TextUtils.isEmpty(text)){
                 text = "时间暂定！";
@@ -308,7 +310,6 @@ public class MineCourseDetailActivity extends BaseActivity{
                 }
                 return fragments[position];
             }
-
             @Override
             public int getCount() {
                 return 3;
@@ -318,7 +319,6 @@ public class MineCourseDetailActivity extends BaseActivity{
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override

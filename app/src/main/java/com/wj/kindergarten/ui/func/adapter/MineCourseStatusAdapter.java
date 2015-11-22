@@ -91,7 +91,7 @@ public class MineCourseStatusAdapter extends BaseAdapter{
             if(sso.getPlandate() != null){
                 text = "<font color='#ff4966'>"+"近期上课:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getPlandate())+"</font>";
             }else{
-                text = sso.getDisable_time();
+                text = "<font color='#ff4966'>"+"完成时间:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getDisable_time())+"</font>";
             }
             if(TextUtils.isEmpty(text)){
                 text = "时间暂定!";

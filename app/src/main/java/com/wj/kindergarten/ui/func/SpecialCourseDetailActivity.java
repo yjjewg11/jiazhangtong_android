@@ -133,6 +133,7 @@ public class SpecialCourseDetailActivity extends BaseActivity{
                         break;
                     case 333:
                         //请求时没有数据进行显示
+                        setNoRequest();
                         ToastUtils.showMessage("没有更多内容了！");
                         closeRefrush();
                         break;
@@ -142,6 +143,17 @@ public class SpecialCourseDetailActivity extends BaseActivity{
                 }
             }
         };
+    }
+
+    private void openRequest(){
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+    }
+    //当无数据时，关闭请求
+    private void setNoRequest() {
+        if(mListView.isRefreshing()){
+            mListView.onRefreshComplete();
+        }
+        mListView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 
     private RelativeLayout ivback;
@@ -263,7 +275,7 @@ public class SpecialCourseDetailActivity extends BaseActivity{
             public void onClick(View v) {
                 CHOOSE_SCHOOL_COURSE_TYPE = 1000;
                 mListView.setAdapter(listViewAdapter);
-
+                openRequest();
             }
         });
 
@@ -272,6 +284,7 @@ public class SpecialCourseDetailActivity extends BaseActivity{
             public void onClick(View v) {
                 CHOOSE_SCHOOL_COURSE_TYPE = 2000;
                 //点击之后不应该请求数据，只是作为显示，下拉才能刷新
+                openRequest();
                 if (schoolCourseAdapter == null) {
                     schoolCourseAdapter = new SchoolCourseAdapter(SpecialCourseDetailActivity.this);
                     mListView.setAdapter(schoolCourseAdapter);
@@ -357,7 +370,7 @@ public class SpecialCourseDetailActivity extends BaseActivity{
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         boolean istrue = true;
-
+                        openRequest();
                         if(replace_view.findViewById(R.id.pulltorefresh_list) == null){
                             replacePrimaryView();
                         }

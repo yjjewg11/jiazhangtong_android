@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.func.adapter;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,11 @@ public class MineCourseDetailAdapter extends BaseAdapter{
     private Context context;
     private LayoutInflater inflater;
     private List<MineAllCourse> list = new ArrayList<>();
+    private boolean noMore;
+
+    public void setNoMore(boolean noMore) {
+        this.noMore = noMore;
+    }
 
     public MineCourseDetailAdapter(Context context){
         this.context = context;
@@ -59,6 +65,7 @@ public class MineCourseDetailAdapter extends BaseAdapter{
         if(convertView == null){
             convertView = inflater.inflate(R.layout.mine_course_detail_item,null);
             viewHolder = new ViewHolder();
+            viewHolder.tv_pull_more = (TextView)convertView.findViewById(R.id.tv_pull_more);
             viewHolder.show_fl = (FrameLayout)convertView.findViewById(R.id.show_more_fl);
             viewHolder.pop_rl = (RelativeLayout)convertView.findViewById(R.id.pop_more_class_info);
             viewHolder.classSort = (TextView) convertView.findViewById(R.id.mine_item_class_sort);
@@ -75,6 +82,20 @@ public class MineCourseDetailAdapter extends BaseAdapter{
         }
 
         MineAllCourse mac = list.get(position);
+        if(list.size() > 9){
+            if(position == list.size() - 1){
+                if(noMore){
+                    viewHolder.tv_pull_more.setVisibility(View.GONE);
+                }else{
+                    viewHolder.tv_pull_more.setVisibility(View.VISIBLE);
+                }
+            }else{
+                viewHolder.tv_pull_more.setVisibility(View.GONE);
+            }
+
+        }else{
+            viewHolder.tv_pull_more.setVisibility(View.GONE);
+        }
 
         if(mac!=null){
             viewHolder.classSort.setText("第 "+(position+1)+" 课");
@@ -91,17 +112,19 @@ public class MineCourseDetailAdapter extends BaseAdapter{
 
         if(state<0){
             viewHolder.pop_rl.setBackgroundResource(R.color.course_over);
+            setTextColor("#000000",viewHolder.classSort,viewHolder.classContent,viewHolder.time);
         }else if(state>=0){
             if(!isSelected){
-                viewHolder.pop_rl.setBackgroundResource(R.color.course_been_down);
                 isSelected = true;
                 positionSeclected = position;
             }
 
             if(positionSeclected != position){
-                viewHolder.pop_rl.setBackgroundResource(R.color.course_not_do);
+                viewHolder.pop_rl.setBackgroundResource(R.color.course_over);
+                setTextColor("#49a3ff",viewHolder.classSort,viewHolder.classContent,viewHolder.time);
             }else{
                 viewHolder.pop_rl.setBackgroundResource(R.color.course_been_down);
+                setTextColor("#ffffff", viewHolder.classSort, viewHolder.classContent, viewHolder.time);
             }
 
         }
@@ -130,7 +153,13 @@ public class MineCourseDetailAdapter extends BaseAdapter{
         ImageView iv_right;
 
         TextView tv_training_classname_content,tv_training_classtime,
-                tv_trainning_adress,tv_trainning_preparething;
+                tv_trainning_adress,tv_trainning_preparething,tv_pull_more;
 
+    }
+
+    public void setTextColor(String color,TextView... textColor){
+        for(TextView textView : textColor){
+            textView.setTextColor(Color.parseColor(color));
+        }
     }
 }

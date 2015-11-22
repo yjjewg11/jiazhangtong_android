@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -58,6 +59,7 @@ public class MineCourseFragment extends Fragment{
 
     }
 
+    public boolean noMore ;
     String classuuid = null;
     private void loadData() {
         mcd =(MineCourseDetailActivity) getActivity();
@@ -75,6 +77,8 @@ public class MineCourseFragment extends Fragment{
                     if(pageNo == 1){
                         ((MineCourseDetailActivity) getActivity()).noView(fl);
                     }else{
+                        adapter.setNoMore(true);
+                        mcd.commonClosePullToRefreshListGridView(mListView);
                         ToastUtils.showMessage("没有更多内容了!");
                     }
                 }
@@ -107,6 +111,7 @@ public class MineCourseFragment extends Fragment{
             classuuid = mcd.getCourseuuid();
             loadData();
             view = inflater.inflate(R.layout.fragment_mine_course,null);
+//            dian_dian_rl = (RelativeLayout)view.findViewById(R.id.dian_dian_rl);
             fl =(FrameLayout) view.findViewById(R.id.mine_course_detail_fl);
             mListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
             adapter = new MineCourseDetailAdapter(getActivity());
@@ -122,6 +127,7 @@ public class MineCourseFragment extends Fragment{
                 public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                             pageNo++;
                             loadData();
+//                            dian_dian_rl.setVisibility(View.GONE);
                 }
             });
 

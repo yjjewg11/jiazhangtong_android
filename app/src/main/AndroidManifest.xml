@@ -123,6 +123,17 @@
         </activity>
 
         <activity
+            android:name="com.wj.kindergarten.ui.func.LoadSchoolHtmlActivity"
+            android:label="@string/app_name"
+            android:configChanges="screenSize|orientation"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name="com.wj.kindergarten.ui.webview.LoadHtmlActivity"
+            android:label="@string/app_name"
+            android:configChanges="screenSize|orientation"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name="com.wj.kindergarten.ui.func.PrivilegeDetailActivity"
             android:label="@string/app_name"
             android:configChanges="screenSize|orientation"
@@ -548,6 +559,20 @@
                 </action>
             </intent-filter>
         </service>
+
+        <!--广点通-->
+
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name="com.qq.e.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent" >
+        </activity>
+
 
 
         <meta-data

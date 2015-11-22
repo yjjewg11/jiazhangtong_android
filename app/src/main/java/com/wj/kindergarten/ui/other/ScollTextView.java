@@ -29,7 +29,7 @@ public class ScollTextView extends View {
 	//width为画的宽度
 	private int width;
 	//动画的执行默认时间
-	private long duration = 300;
+	private long duration = 200;
 
 	private int onWindowHeight ;
 

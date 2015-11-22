@@ -4,9 +4,12 @@
     android:layout_height="match_parent">
 
 <FrameLayout
+    android:layout_weight="1"
     android:id="@+id/mine_course_detail_fl"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/layout_pulltorefresh"/>
 </FrameLayout>
+
+
 </LinearLayout>

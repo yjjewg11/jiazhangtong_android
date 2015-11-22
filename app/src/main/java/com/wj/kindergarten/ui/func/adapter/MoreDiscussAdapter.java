@@ -64,7 +64,6 @@ public class MoreDiscussAdapter extends BaseAdapter{
 
         MoreDiscuss md = list.get(position);
         if(md != null){
-
             viewHolder.ratingBarView.setFloatStar(md.getScore(),true);
             viewHolder.more_discuss_content.setText(""+md.getContent());
             viewHolder.more_discuss_mobile_number.setText(""+md.getCreate_user());

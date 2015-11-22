@@ -118,13 +118,13 @@
     <orderEntry type="library" exported="" name="ormlite-core-4.48" level="project" />
     <orderEntry type="library" exported="" name="umeng-update-v2.6.0.1" level="project" />
     <orderEntry type="library" exported="" name="umeng-onlineconfig_v1.0.0" level="project" />
+    <orderEntry type="library" exported="" name="gdt_mob_release_v4.4.479" level="project" />
     <orderEntry type="library" exported="" name="umeng-analytics-v5.2.4" level="project" />
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.6" level="project" />
     <orderEntry type="library" exported="" name="AndroidViewAnimations-1.1.3" level="project" />
     <orderEntry type="library" exported="" name="AndroidEasingFunctions-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="design-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="Adwo_Android_SDK6.1" level="project" />
     <orderEntry type="module" module-name="pulltorefreshlib" exported="" />
   </component>
 </module>

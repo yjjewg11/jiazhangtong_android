@@ -37,7 +37,7 @@
                 android:textColor="@drawable/radio_font_color"
                 android:background="@drawable/radio_bt_selector"
                 android:layout_weight="1"
-                android:text="课程"
+                android:text="课程表"
                 android:gravity="center"
                 android:button="@null"
                 android:layout_width="wrap_content"

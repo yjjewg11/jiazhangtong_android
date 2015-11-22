@@ -13,30 +13,32 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:minHeight="@dimen/layout_height_40"
             android:layout_width="match_parent"
             android:background="@color/color_e5e5e5"
-            android:layout_height="41dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/layout_send"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/normal_padding">
 
                 <RelativeLayout
+                    android:minHeight="40dp"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/et_message"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="@dimen/layout_height_40"
                         android:layout_toLeftOf="@+id/layout_biao_qing"
                         android:background="@color/translate"
                         android:gravity="center_vertical"
                         android:hint="说点什么吧"
-                        android:singleLine="true"
                         android:textColor="@color/black"
                         android:textColorHint="@color/color_666666"
                         android:textSize="14dp" />
@@ -44,7 +46,7 @@
                     <RelativeLayout
                         android:id="@+id/layout_biao_qing"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp">

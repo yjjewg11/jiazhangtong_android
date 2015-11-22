@@ -72,12 +72,10 @@ public class MineDiscussFragment extends Fragment {
 					et.setVisibility(View.GONE);
 					input_content.setVisibility(View.VISIBLE);
 					//显示状态
-					input_content.setText("" + (TextUtils.isEmpty(stateList.get(0).getContent()) == true ? "暂时还没有评价内容!" : stateList.get(0).getContent()));
 					//设置星星的评价
 					setHavedAssess();
 					break;
 				case NO_ASSESS:
-
 					et.setVisibility(View.VISIBLE);
 					input_content.setVisibility(View.GONE);
 
@@ -99,6 +97,7 @@ public class MineDiscussFragment extends Fragment {
 			if (getAssessState.getType() == NormalReplyListActivity.TRAIN_COURSE) {
 				ratingBars[0].setFloatStar(Integer.valueOf(getAssessState.getScore()), true);
 				ratingBars[0].setmClickable(false);
+				input_content.setText("" + (TextUtils.isEmpty(getAssessState.getContent()) == true ? "" : getAssessState.getContent()));
 			} else if (getAssessState.getType() == NormalReplyListActivity.TRAIN_SCHOOL) {
 				ratingBars[1].setFloatStar((Integer.valueOf(getAssessState.getScore())), true);
 				ratingBars[1].setmClickable(false);
@@ -111,8 +110,6 @@ public class MineDiscussFragment extends Fragment {
                            bean.getValue().setFloatStar(Utils.stringToFloat(getAssessState.getScore()),true);
 					}
 				}
-
-
 
 			}
 		}
@@ -183,13 +180,13 @@ public class MineDiscussFragment extends Fragment {
 					case R.id.teacher_submit:
 						dialog = new HintInfoDialog(getActivity(),"保存评价中!");
 						dialog.show();
-						saveAssess(course.getGroupuuid(), 81, ratingBars[1].getClickedCount(), input_content.getText().toString(), input_content, teacher_submit, ratingBars[1]);
-						saveAssess(course.getUuid(), 82, ratingBars[0].getClickedCount(), input_content.getText().toString(), input_content, teacher_submit, ratingBars[0]);
+						saveAssess(course.getGroupuuid(), 81, ratingBars[1].getClickedCount(), et.getText().toString(), input_content, teacher_submit, ratingBars[1]);
+						saveAssess(course.getUuid(), 82, ratingBars[0].getClickedCount(), et.getText().toString(), input_content, teacher_submit, ratingBars[0]);
 						if (!teacher_list.isEmpty()) {
 							RatingBarView[] array = new RatingBarView[teacher_list.size()];
 							for (AllTeacher allTeacher : teacher_list) {
 								//TODO 查看评价老师的类型
-								saveAssess(allTeacher.getUuid(), 83, map.get(allTeacher.getUuid()).getClickedCount(), input_content.getText().toString()
+								saveAssess(allTeacher.getUuid(), 83, map.get(allTeacher.getUuid()).getClickedCount(), et.getText().toString()
 										, input_content, teacher_submit, map.values().toArray(array));
 							}
 						}
@@ -272,25 +269,20 @@ public class MineDiscussFragment extends Fragment {
 		});
 	}
 
-	private void saveAssess(String extend_uuid, int type, int score, String content, final TextView input_content,
+	private void saveAssess(String extend_uuid, final int type, int score, String content, final TextView input_content,
 							final TextView submit, final RatingBarView... methondRatingBars) {
 
-		if (CGSharedPreference.getMineCourseIsSendContent()) {
-			content = "";
-		} else {
-			if (TextUtils.isEmpty(et.getText().toString())) {
-				ToastUtils.showMessage("内容不能为空!");
-				return;
-			}
-		}
 
 		UserRequest.sendSpecialCourseAssess(getActivity(), extend_uuid, mcd.getCourseuuid(), type, score, content, new RequestResultI() {
 			@Override
 			public void result(BaseModel domain) {
 				CGSharedPreference.setMineCourseIsSendSContent();
-				input_content.setVisibility(View.VISIBLE);
-				input_content.setText("" + et.getText().toString());
-				et.setVisibility(View.GONE);
+				if(type == NormalReplyListActivity.TRAIN_COURSE){
+					input_content.setVisibility(View.VISIBLE);
+					input_content.setText("" + et.getText().toString());
+					et.setVisibility(View.GONE);
+				}
+
 				submit.setClickable(false);
 				submit.setGravity(Gravity.CENTER_HORIZONTAL);
 				submit.setText("已评价");

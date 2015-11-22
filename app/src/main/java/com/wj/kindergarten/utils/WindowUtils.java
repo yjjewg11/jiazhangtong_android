@@ -12,7 +12,7 @@ import com.wj.kindergarten.ui.main.MainActivity;
  * Created by Administrator on 2015/10/30.
  */
 public abstract class WindowUtils{
-    private static  DisplayMetrics dm = new DisplayMetrics();
+    public  static  DisplayMetrics dm = new DisplayMetrics();
     static {
         WindowManager windowManager = (WindowManager) CGApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(dm);

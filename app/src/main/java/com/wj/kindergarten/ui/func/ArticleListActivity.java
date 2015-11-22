@@ -17,6 +17,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.ArticleAdapter;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class ArticleListActivity extends BaseActivity {
         setTitleText("精品文章");
 
         mListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -119,13 +121,22 @@ public class ArticleListActivity extends BaseActivity {
                     mListView.onRefreshComplete();
                 }
                 ArticleList articleList = (ArticleList) domain;
-                if (articleList != null && articleList.getList() != null && articleList.getList().getData() != null) {
+                if (articleList != null && articleList.getList() != null && articleList.getList().getData() != null
+                        &&articleList.getList().getData().size() > 0) {
                     if (page == 1) {
                         articles.clear();
                     }
                     articles.addAll(articleList.getList().getData());
                     articleAdapter.setArticles(articles);
                     currentPage = page;
+                }else{
+                    if(page != 1){
+                        if(mListView.isRefreshing()){
+                            mListView.onRefreshComplete();
+                        }
+                        ToastUtils.noMoreContentShow();
+                        mListView.setMode(PullToRefreshBase.Mode.DISABLED);
+                    }
                 }
             }
 

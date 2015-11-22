@@ -56,8 +56,6 @@ public class MineFragment extends Fragment {
     }
 
     private void initViews(View rootView) {
-
-
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
         mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
         mine_course = (LinearLayout)rootView.findViewById(R.id.ll_special_course);
@@ -106,7 +104,6 @@ public class MineFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
-
                 CircleImage headIv = (CircleImage) view.findViewById(R.id.item_mine_list_head);
                 TextView nameTv = (TextView) view.findViewById(R.id.item_mine_list_name);
                 TextView nickTv = (TextView) view.findViewById(R.id.item_mine_list_nike);

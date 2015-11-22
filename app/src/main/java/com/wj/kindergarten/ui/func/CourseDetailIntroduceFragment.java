@@ -1,18 +1,25 @@
 package com.wj.kindergarten.ui.func;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,15 +28,24 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.MoreDiscussList;
 import com.wj.kindergarten.bean.OnceSpecialCourse;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
 import com.wj.kindergarten.bean.SchoolDetail;
 import com.wj.kindergarten.bean.SchoolDetailList;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.coursefragments.CourseDetailFragmentThree;
+import com.wj.kindergarten.ui.coursefragments.FamilyAssessFragmentThree;
+import com.wj.kindergarten.ui.coursefragments.SchoolFragmentThree;
+import com.wj.kindergarten.ui.other.ManDrawLine;
 import com.wj.kindergarten.ui.other.RatingBarView;
+import com.wj.kindergarten.ui.webview.LoadHtmlActivity;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.utils.WindowUtils;
 
 import java.util.List;
 
@@ -58,100 +74,87 @@ public class CourseDetailIntroduceFragment extends Fragment {
 	private PullToRefreshScrollView scroll_view;
 	private RelativeLayout rl_price;
 	private RelativeLayout rl_free_price;
+	private MineCourseDetailActivity activity;
+	private TextView pull_detail_text;
+	private LinearLayout draw_line_ll;
+	private ManDrawLine line_text;
+	private RadioButton rb_three_corse;
+	private RadioButton rb_three_school;
+	private RadioButton rb_three_assess;
+	private CourseDetailFragmentThree courseFragment;
+	private SchoolFragmentThree schoolFragment;
+	private FamilyAssessFragmentThree familyFragment;
+	private FragmentTransaction transion;
+	private View.OnClickListener listener;
+	private boolean isAgain;
+	private boolean isAssessOne;
+	private TextView[] three;
+	private HintInfoDialog dialog;
+	private OnceSpecialCourseList oscs;
+	private WebView webView;
+	private View school_head;
 
-	public void setCourse(OnceSpecialCourse course) {
-		this.course = course;
-		course_detail_train_class_name.setText("" + (TextUtils.isEmpty(course.getTitle()) == true ? "" : course.getTitle()));
-		rating_bar.setFloatStar(course.getCt_stars(), true);
-		teach_place.setText("" + course.getAddress());
-		course_detail_info.loadDataWithBaseURL(null, course.getContext(), "text/html", "utf-8", null);
-		nornal_course_price.setText("" + course.getFees());
-		coupon_price.setText("" + course.getDiscountfees());
-		if (course.getFees() < 1) {
-			rl_price.setVisibility(View.GONE);
-		} else {
-			rl_price.setVisibility(View.VISIBLE);
-		}
-		if (course.getDiscountfees() < 1) {
-			rl_free_price.setVisibility(View.GONE);
-		} else {
-			rl_free_price.setVisibility(View.VISIBLE);
-		}
+	public void setOscs(OnceSpecialCourseList oscs){
+		this.oscs = oscs;
+//		courseFragment.setText(oscs);
+		webView.loadUrl(oscs.getShare_url());
+	}
+
+	public OnceSpecialCourseList getOscs() {
+		return oscs;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
 		if (view != null) return view;
 
-		view = inflater.inflate(R.layout.activity_special_course_info, null);
-		rl_price = (RelativeLayout)view.findViewById(R.id.rl_price);
-		rl_free_price = (RelativeLayout)view.findViewById(R.id.rl_free_price);
-		rating_bar = (RatingBarView) view.findViewById(R.id.item_special_course_list_view__rating_bar);
-		course_detail_train_class_name = (TextView) view.findViewById(R.id.course_detail_train_class_name);
-		detail_course = (TextView) view.findViewById(R.id.detail_course);
-		teach_place = (TextView) view.findViewById(R.id.teach_place);
-		course_spend_time = (TextView) view.findViewById(R.id.course_spend_time);
-		nornal_course_price = (TextView) view.findViewById(R.id.nornal_course_price);
-		coupon_price = (TextView) view.findViewById(R.id.coupon_price);
-		course_detail_info = (WebView) view.findViewById(R.id.course_detail_info);
-		more_assess_linera = (LinearLayout) view.findViewById(R.id.more_assess_linera);
-		iv_heading = (ImageView) view.findViewById(R.id.once_iv);
-		parent_assess_linear = (LinearLayout) view.findViewById(R.id.parent_assess_linear);
-		parent_assess_linear.setVisibility(View.GONE);
-		tv_school_introduce = (WebView) view.findViewById(R.id.tv_school_introduce);
-		tv_school_introduce.setVisibility(View.GONE);
-		fl_title = (FrameLayout) view.findViewById(R.id.head_title);
-		fl_title.setVisibility(View.GONE);
-		fl_bottom = (FrameLayout) view.findViewById(R.id.btom_llll);
-		fl_bottom.setVisibility(View.GONE);
-		scroll_view = (PullToRefreshScrollView) view.findViewById(R.id.course_detail_scrollview);
-		scroll_view.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-		scroll_view.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+		view = inflater.inflate(R.layout.activity_load_school_html, null);
+		school_head = view.findViewById(R.id.school_head);
+		school_head.setVisibility(View.GONE);
+		webView = (WebView) view.findViewById(R.id.group_webView);
+		webView.setWebChromeClient(new WebChromeClient());
+		webView.setWebViewClient(new WebViewClient() {
 			@Override
-			public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+			public void onPageFinished(WebView view, String url) {
+				super.onPageFinished(view, url);
 
 			}
 
 			@Override
-			public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-				//下拉加载学校数据
-				if (!isFirst) {
-					loadData();
-					isFirst = true;
-				} else {
-					scroll_view.onRefreshComplete();
-				}
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				super.onPageStarted(view, url, favicon);
 			}
 		});
-
+		webView.getSettings().setJavaScriptEnabled(true);
 
 		return view;
 	}
 
-	private void loadData() {
 
-		final MineCourseDetailActivity msc = (MineCourseDetailActivity) getActivity();
-        msc.showDialog();
-		UserRequest.getTrainSchoolDetail(getActivity(), msc.getSchoolUuid(), new RequestResultI() {
+	public void getSchoolInfo(String schooluuid){
+		if(dialog.isShowing()){
+			dialog.cancel();
+		}
+		UserRequest.getTrainSchoolDetail(getActivity(), schooluuid, new RequestResultI() {
 			@Override
 			public void result(BaseModel domain) {
-                msc.cancleDialog();
 				SchoolDetailList sdl = (SchoolDetailList) domain;
-				if (sdl != null && sdl.getData() != null) {
+				if (sdl != null) {
 					SchoolDetail sd = sdl.getData();
 					String text = null;
+					schoolFragment.setUrl(sdl.getObj_url());
 					if (!TextUtils.isEmpty(sd.getDescription())) {
 						text = sd.getDescription();
 					} else {
-						text = "当前暂无学校介绍!";
+						text = "暂时没有学校内容介绍!";
 					}
-					tv_school_introduce.loadDataWithBaseURL(null, text, "text/html", "utf-8", null);
-					tv_school_introduce.setVisibility(View.VISIBLE);
+//                    tv_school_introduce.loadDataWithBaseURL(null, text, "text/html", "utf-8", null);
+//                    tv_school_introduce.setVisibility(View.VISIBLE);
+//                    scrollView.onRefreshComplete();
 				}
-				if (scroll_view.isRefreshing()) scroll_view.onRefreshComplete();
+
 			}
 
 			@Override
@@ -165,4 +168,38 @@ public class CourseDetailIntroduceFragment extends Fragment {
 			}
 		});
 	}
+	public void getAssess(final int page) {
+		//获取该对象的评价
+		dialog.show();
+		UserRequest.getMoreDiscuss(getActivity(), oscs.getData().getUuid(), page, new RequestResultI() {
+			@Override
+			public void result(BaseModel domain) {
+				if (dialog.isShowing()) {
+					dialog.cancel();
+				}
+				MoreDiscussList mdl = (MoreDiscussList) domain;
+				if (mdl.getList() != null && mdl.getList().getData() != null
+						&& mdl.getList().getData().size() > 0) {
+					familyFragment.addList(mdl.getList().getData());
+				} else {
+					if (page == 1) {
+						familyFragment.noData();
+					}
+					familyFragment.setNoRequest();
+					ToastUtils.noMoreContentShow();
+				}
+			}
+
+			@Override
+			public void result(List<BaseModel> domains, int total) {
+
+			}
+
+			@Override
+			public void failure(String message) {
+
+			}
+		});
+	}
+
 }

@@ -10,6 +10,16 @@ public class SchoolDetailList extends BaseModel{
     private boolean isFavor;
     @Expose
     private String share_url;
+    @Expose
+    private String obj_url;
+
+    public String getObj_url() {
+        return obj_url;
+    }
+
+    public void setObj_url(String obj_url) {
+        this.obj_url = obj_url;
+    }
 
     public boolean isFavor() {
         return isFavor;
@@ -33,6 +43,7 @@ public class SchoolDetailList extends BaseModel{
                 "data=" + data +
                 ", isFavor=" + isFavor +
                 ", share_url='" + share_url + '\'' +
+                ", obj_url='" + obj_url + '\'' +
                 '}';
     }
 

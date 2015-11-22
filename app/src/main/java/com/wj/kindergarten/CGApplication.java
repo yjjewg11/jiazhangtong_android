@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
@@ -197,6 +198,11 @@ public class CGApplication extends Application {
             latitude = (bdLocation.getLatitude());
             longitude = (bdLocation.getLongitude());
             Log.i("TAG", "打印坐标 x : " + latitude + "   y : " + longitude);
+            if(latitude > 300 || longitude > 300) {
+                latitude  = -1;
+                longitude = -1;
+                return ;
+            }
             Geocoder ge = new Geocoder(getInstance());
             String city = null;
             try {
@@ -206,10 +212,14 @@ public class CGApplication extends Application {
                         Address ad = listAdress.get(i);
                         latLongString += "n";
                         latLongString += ad.getCountryName() + ";" + ad.getLocality();
-                        city = (ad.getLocality()).substring(0, 2);
+                        if(!TextUtils.isEmpty(ad.getLocality())){
+                            city = (ad.getLocality()).substring(0, 2);
+                        }
+
                     }
 
                 }
+
                 final String type = "android";
                 final String mobileVersion = android.os.Build.VERSION.RELEASE;
                 PackageManager manager = getInstance().getPackageManager();

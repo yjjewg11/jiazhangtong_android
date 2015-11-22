@@ -91,7 +91,7 @@ public final class UserRequest {
 
     private static final String TRAIN_HOT_CLASS =  "rest/pxCourse/hotByPage.json";
     private static String groupUuid;
-    private static String ONCE_COURSE_CLICK = "rest/pxCourse/"+groupUuid+".json";
+    private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
     private static final String MORE_DISCUSS_FROM_UUID = "rest/appraise/queryByPage.json";
     //查询下一次的课程的接口
@@ -108,6 +108,7 @@ public final class UserRequest {
     private static final String GET_PRIVELEGE_ACTIVE = "rest/share/pxbenefitList.json";
     private static final String PRIVELIGE_ACTIVE = "rest/share/getPxbenefitJSON.json";
     private static final String CALL_MESSAGE_SATTE = "rest/pxTelConsultation/save.json";
+    private static final String TRAIN_SCHOOL_DETAIL = "rest/group/get2.json";
 
     private UserRequest() {
     }
@@ -596,9 +597,8 @@ public final class UserRequest {
     //点击课程之后获取该课程的详细信息
     public static void getSpecialCourseINfoFromClickItem(Context context, String uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
-//        params.put("JSESSIONID", CGApplication.getInstance().getLogin().getJSESSIONID());
-        String url = RequestHttpUtil.BASE_URL+"rest/pxCourse/"+uuid+".json";
-        SendRequest.getInstance().get(context,RequestType.ONCE_COURSE_CLICK,params,url,resultI);
+        params.put("uuid",uuid);
+        SendRequest.getInstance().get(context,RequestType.ONCE_COURSE_CLICK,params,RequestHttpUtil.BASE_URL+ONCE_COURSE_CLICK,resultI);
     }
 
     public static void getAllSchool(Context context, int pageNo,String sort, int type,RequestResultI resultI) {
@@ -661,8 +661,7 @@ public final class UserRequest {
     public static void getTrainSchoolDetail(Context context,String uuid,RequestResultI resultI){
         RequestParams params = new RequestParams();
         params.put("uuid", uuid);
-        String url = RequestHttpUtil.BASE_URL+"/rest/group/"+uuid+".json";
-        SendRequest.getInstance().get(context,RequestType.TRAIN_SCHOOL_DETAIL,params,url,resultI);
+        SendRequest.getInstance().get(context,RequestType.TRAIN_SCHOOL_DETAIL,params,RequestHttpUtil.BASE_URL+TRAIN_SCHOOL_DETAIL,resultI);
     }
 
     public static void getAllAssessTeacher(Context context, String courseuuid, RequestResultI resultI) {

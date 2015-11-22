@@ -15,7 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +31,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
@@ -33,8 +42,10 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.mine.LoginActivity;
+import com.wj.kindergarten.ui.more.SystemBarTintManager;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -98,10 +109,28 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected abstract void onCreate();
 
 
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //加载顶部的状态栏颜色，使用于4.4以上版本
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            setTranslucentStatus(true);
+//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+//            tintManager.setStatusBarTintEnabled(true);
+//            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
+//        }
         mContext = this;
         setContentLayout();
         setNeedLoading();
@@ -566,4 +595,43 @@ public abstract class BaseActivity extends ActionBarActivity {
             e.printStackTrace();
         }
     }
+
+
+    public void setWebView(WebView webView){
+//        webView.setWebViewClient(new WebViewClient());
+//        webView.setWebChromeClient(new WebChromeClient());
+        WebSettings webSettings = webView.getSettings();
+////        webSettings.setBuiltInZoomControls(true);
+////        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+//        webSettings.setUseWideViewPort(false);
+//        webSettings.setUseWideViewPort(false);
+//        webSettings.setLoadWithOverviewMode(false);
+//        webSettings.setSavePassword(true);
+//        webSettings.setSaveFormData(true);
+        webSettings.setJavaScriptEnabled(true);
+//        webSettings.setGeolocationEnabled(true);
+////		ws.setGeolocationDatabasePath("/data/data/org.itri.html5webview/databases/");// ���ö�λ�����ݿ�·��
+//        webSettings.setDomStorageEnabled(true);
+    }
+
+
+    //设置关闭下拉刷新菜单
+    public void commonClosePullToRefreshListGridView(PullToRefreshAdapterViewBase pullView){
+        if(pullView.isRefreshing()){
+            ToastUtils.showMessage("没有更多内容了!");
+            pullView.onRefreshComplete();
+        }
+        pullView.setMode(PullToRefreshBase.Mode.DISABLED);
+    }
+    public void commonClosePullToRefreshScrollView(PullToRefreshScrollView pullView, int pageNo){
+        if(pageNo == 1){
+            return ;
+        }
+        if(pullView.isRefreshing()){
+            pullView.onRefreshComplete();
+            ToastUtils.showMessage("没有更多内容了!");
+        }
+        pullView.setMode(PullToRefreshBase.Mode.DISABLED);
+    }
+
 }

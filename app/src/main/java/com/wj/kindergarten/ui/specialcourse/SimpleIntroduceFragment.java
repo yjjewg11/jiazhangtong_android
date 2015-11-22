@@ -71,7 +71,9 @@ public class SimpleIntroduceFragment extends Fragment {
                 SchoolDetailList sdl = (SchoolDetailList) domain;
                 if(sdl!=null && sdl.getData() != null ){
                     sd = sdl.getData();
-                    tv_html.loadDataWithBaseURL(null,sd.getDescription(),"text/html","utf-8",null);
+                    tv_html.getSettings().setJavaScriptEnabled(true);
+                    tv_html.loadUrl(sdl.getObj_url());
+//                    tv_html.loadDataWithBaseURL(null,sd.getDescription(),"text/html","utf-8",null);
                 }else{
 
                     RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.introduce_rllll);
