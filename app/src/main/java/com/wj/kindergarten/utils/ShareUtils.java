@@ -43,6 +43,8 @@ public class ShareUtils {
     private static boolean flag = false;//防止弹窗多次
     private static boolean isShow = false;//分享图标是否显示
     public final static String PIC_SCALE = ".360x240.jpg";//用于提交服务器缩放图片
+    private static String pic;
+
     private ShareUtils() {
 
     }
@@ -60,13 +62,14 @@ public class ShareUtils {
      * @param view
      *
      */
-    public static void showShareDialog(final Context con, final View view, String title1, String content1, final String pic, final String url,boolean isMessage) {
+    public static void showShareDialog(final Context con, final View view, String title1, String content1, final String picurl, final String url,boolean isMessage) {
 //        if (!isShow) {
         String title = null;
         String content = null;
             if(Utils.isNull(title) == null){
                 title = "";
             }else{
+
                 title = title1;
             }
 
@@ -75,6 +78,12 @@ public class ShareUtils {
             }else{
                 content = content1;
             }
+
+        if(picurl!=null && picurl.contains("@")){
+            pic = picurl.substring(0,picurl.indexOf("@"));
+        }else{
+            pic = picurl;
+        }
             isShow = true;
             context = con;
             flag = false;
@@ -263,6 +272,9 @@ public class ShareUtils {
                 localImage = new UMImage(context, R.drawable.ic_launcher);
             }
             if (share_media == SHARE_MEDIA.QQ) {
+                if(title.equals(content)){
+                    content = "";
+                }
                 QQShareContent qqShareContent = new QQShareContent(localImage);
                 qqShareContent.setShareContent(title + content);
                 qqShareContent.setTargetUrl(url);
