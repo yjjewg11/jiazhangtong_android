@@ -1,1 +1,2 @@
 include ':app', ':pulltorefreshlib'
+project(':pulltorefreshlib').projectDir = new File('pulltorefreshlibrary')

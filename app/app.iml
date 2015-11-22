@@ -125,6 +125,7 @@
     <orderEntry type="library" exported="" name="AndroidViewAnimations-1.1.3" level="project" />
     <orderEntry type="library" exported="" name="AndroidEasingFunctions-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="design-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="Adwo_Android_SDK6.1" level="project" />
     <orderEntry type="module" module-name="pulltorefreshlib" exported="" />
   </component>
 </module>
