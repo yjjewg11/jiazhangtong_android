@@ -54,6 +54,13 @@ public class InteractionFragment extends Fragment {
     private String nowReplyUUID = "";
     private boolean isOnce;
 
+    public ViewEmot2 getEmot2() {
+        return emot2;
+    }
+
+    public LinearLayout getBottomLayou() {
+        return bottomLayou;
+    }
 
     public void setNewsuuid(String newsuuid) {
         this.newsuuid = newsuuid;

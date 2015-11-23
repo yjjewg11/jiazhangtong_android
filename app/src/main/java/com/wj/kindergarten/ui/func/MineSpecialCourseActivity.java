@@ -65,8 +65,7 @@ public class MineSpecialCourseActivity extends BaseActivity{
                     loadData();
                     break;
                 case 300:
-                    ToastUtils.showMessage("没有更多内容了！");
-                    closeFresh();
+                    commonClosePullToRefreshListGridView(mListView);
                     break;
             }
         }
@@ -141,11 +140,13 @@ public class MineSpecialCourseActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 if(v.getId() == R.id.rb_study ){
+                    mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
                     isStudying = 0;
                     rb_study.setTextColor(Color.parseColor("#ff4966"));
                     rb_study_over.setTextColor(Color.parseColor("#333333"));
                     scroll_text.drawLeft();
                 } else if(v.getId() == R.id.rb_study_over){
+                    mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
                     isStudying = 1;
                     rb_study.setTextColor(Color.parseColor("#333333"));
                     rb_study_over.setTextColor(Color.parseColor("#ff4966"));
@@ -214,7 +215,7 @@ public class MineSpecialCourseActivity extends BaseActivity{
         UserRequest.getStudyStatus(this,page,isStudying, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-
+                closeFresh();
               StudyStateObjectList sso = (StudyStateObjectList) domain;
                 if(sso!=null && sso.getList()!=null && sso.getList().getData() != null && sso.getList().getData().size() > 0){
                     if(isStudying == 0){

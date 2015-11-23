@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class ShareUtils {
     private static boolean flag = false;//防止弹窗多次
     private static boolean isShow = false;//分享图标是否显示
     public final static String PIC_SCALE = ".360x240.jpg";//用于提交服务器缩放图片
-    private static String pic;
 
     private ShareUtils() {
 
@@ -78,12 +78,12 @@ public class ShareUtils {
             }else{
                 content = content1;
             }
-
-        if(picurl!=null && picurl.contains("@")){
-            pic = picurl.substring(0,picurl.indexOf("@"));
-        }else{
-            pic = picurl;
-        }
+//
+//        if(picurl!=null && picurl.contains("@")){
+//            pic = picurl.substring(0,picurl.indexOf("@"));
+//        }else{
+//            pic = picurl;
+//        }
             isShow = true;
             context = con;
             flag = false;
@@ -137,7 +137,7 @@ public class ShareUtils {
                     mPopupWindow.dismiss();
                     UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
                     wxHandler.addToSocialSDK();
-                    shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, pic, url);
+                    shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, picurl, url);
                     Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -151,7 +151,7 @@ public class ShareUtils {
                     UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
                     wxCircleHandler.setToCircle(true);
                     wxCircleHandler.addToSocialSDK();
-                    shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, pic, url);
+                    shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, picurl, url);
                     Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -167,7 +167,7 @@ public class ShareUtils {
                     }else{
                         content = finalContent;
                     }
-                    shareTo(SHARE_MEDIA.SINA, finalTitle, content, pic, url);
+                    shareTo(SHARE_MEDIA.SINA, finalTitle, content, picurl, url);
                     Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -180,7 +180,7 @@ public class ShareUtils {
                     UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler((Activity) context, "100424468",
                             "SumAAk7jtaUSnZqd");
                     qqSsoHandler.addToSocialSDK();
-                    shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, pic, url);
+                    shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, picurl, url);
                     Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
                 }
             });

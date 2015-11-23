@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
+import android.view.View;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -32,6 +33,8 @@ public class CourseInteractionListActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        titleRightButtonListener();
+        titleRightButton.setVisibility(View.GONE);
         type = getIntent().getIntExtra("type",-1);
         setTitleText("互动", R.drawable.interaction_send);
         courseinteractionFragment = new CourseInteractionFragment();

@@ -13,6 +13,9 @@ import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -20,6 +23,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.CallTransfer;
@@ -73,6 +77,22 @@ public class MineCourseDetailActivity extends BaseActivity{
     public LinearLayout discuss_assess_soft_state;
     private HintInfoDialog dialog;
     public HintInfoDialog allLoadDialog;
+    public FrameLayout frame_top;
+    private int[] location = new int[2];
+    private ObjectAnimator animToTop;
+    private boolean isLocationTop;
+
+    public boolean isLocationTop() {
+        return isLocationTop;
+    }
+
+    public void setIsLocationTop(boolean isLocationTop) {
+        this.isLocationTop = isLocationTop;
+    }
+
+    public ObjectAnimator getAnim() {
+        return animToTop;
+    }
 
     public void showDialog(){
         allLoadDialog.show();
@@ -126,6 +146,11 @@ public class MineCourseDetailActivity extends BaseActivity{
 
     @Override
     protected void onCreate() {
+        frame_top = (FrameLayout)findViewById(R.id.frame_top);
+
+        //创建初始化移除动画
+
+
         allLoadDialog = new HintInfoDialog(this,"数据加载中，请稍候...");
         titleCenterTextView.setText("我的课程详情");
         courseuuid = getIntent().getStringExtra("courseuuid");
@@ -144,6 +169,7 @@ public class MineCourseDetailActivity extends BaseActivity{
                     schoolUuid = courses.getGroupuuid();
                     CourseDetailIntroduceFragment fragment = (CourseDetailIntroduceFragment) fragments[1];
                     fragment.setOscs(oscs);
+                    createAnim();
                 }
 
                 ImageLoaderUtil.displayMyImage(courses.getLogo(), iv_school);
@@ -169,6 +195,13 @@ public class MineCourseDetailActivity extends BaseActivity{
 
             }
         });
+    }
+
+    private void createAnim() {
+        int height =   frame_top.getHeight();
+        animToTop = ObjectAnimator.ofInt(new Wrapper(frame_top),"topMagin",-frame_top.getHeight());
+        animToTop.setDuration(600);
+        animToTop.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
 
@@ -325,9 +358,16 @@ public class MineCourseDetailActivity extends BaseActivity{
             public void onPageSelected(int position) {
                    int id = 0;
                 switch (position){
-                    case 0 : id = R.id.mine_course_detail_tab_course; break;
-                    case 1 : id = R.id.mine_course_detail_tab_introduce; break;
-                    case 2 : id = R.id.mine_course_detail_tab_discuss; break;
+                    case 0 : id = R.id.mine_course_detail_tab_course;
+                        clickDown();
+                        break;
+                    case 1 : id = R.id.mine_course_detail_tab_introduce;
+
+                        break;
+                    case 2 : id = R.id.mine_course_detail_tab_discuss;
+
+                        clickDown();
+                        break;
                 }
                 radioGroup.check(id);
             }
@@ -337,6 +377,13 @@ public class MineCourseDetailActivity extends BaseActivity{
 
             }
         });
+    }
+
+    private void clickDown() {
+        if(isLocationTop){
+            isLocationTop = false;
+            animToTop.reverse();
+        }
     }
 
 
@@ -410,5 +457,23 @@ public class MineCourseDetailActivity extends BaseActivity{
                 dialog.dismiss();
             }
         });
+    }
+
+    class Wrapper{
+        private FrameLayout frameLayout;
+        private int topMagin;
+
+        public Wrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
+
+        public int getTopMagin() {
+            return ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin;
+        }
+
+        public void setTopMagin(int topMagin) {
+            ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin = topMagin;
+            frameLayout.requestLayout();
+        }
     }
 }

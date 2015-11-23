@@ -67,6 +67,18 @@ public class CourseListFragment extends Fragment {
     private int netCount = 0;
     private ViewEmot2 myViewEmot2 = null;
 
+    public LinearLayout getBottomLayou() {
+        return bottomLayou;
+    }
+
+    public ViewEmot2 getEmot2() {
+        return emot2;
+    }
+
+    public ViewEmot2 getMyViewEmot2() {
+        return myViewEmot2;
+    }
+
     private List<TrainChildInfo> trainChildInfoList ;
     private List<TrainClass> lists;
 

@@ -30,6 +30,12 @@ public class InteractionListActivity extends BaseActivity {
     }
 
     @Override
+    protected void titleLeftButtonListener() {
+        super.titleLeftButtonListener();
+        hideSoftKeyBoard(interactionFragment.getEmot2(),interactionFragment.getBottomLayou());
+    }
+    
+    @Override
     protected void onCreate() {
         instance = this;
         setTitleText("互动", R.drawable.interaction_send);

@@ -86,8 +86,7 @@ public class ClassFragment extends Fragment {
                     if(pageNo == 1){
                         mHandler.sendEmptyMessage(2);
                     }else{
-                        if(mListView.isRefreshing()) mListView.onRefreshComplete();
-                        ToastUtils.showMessage("没有更多内容了!");
+                        activity.commonClosePullToRefreshListGridView(mListView);
                     }
 
                 }

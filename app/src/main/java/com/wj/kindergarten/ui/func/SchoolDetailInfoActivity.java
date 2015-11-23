@@ -9,12 +9,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.CallTransfer;
@@ -52,6 +56,22 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     private SchoolDetailList detailList;
     private SchoolDetail schoolDetail;
     private String schooluuid;
+    private boolean isLocationTop;
+    private ObjectAnimator animTop;
+    private FrameLayout school_top_fl;
+    private boolean isOnce;
+
+    public ObjectAnimator getAnimTop() {
+        return animTop;
+    }
+
+    public boolean isLocationTop() {
+        return isLocationTop;
+    }
+
+    public void setIsLocationTop(boolean isLocationTop) {
+        this.isLocationTop = isLocationTop;
+    }
 
     public SchoolDetail getSchoolDetail() {
         return schoolDetail;
@@ -118,9 +138,11 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                 switch (position) {
                     case 0:
                         id = R.id.tab_course;
+                        clickDown();
                         break;
                     case 1:
                         id = R.id.tab_teacher;
+                        clickDown();
                         break;
                     case 2:
                         id = R.id.tab_introduce;
@@ -134,6 +156,28 @@ public class SchoolDetailInfoActivity extends BaseActivity{
 
             }
         });
+    }
+
+    private void clickDown() {
+        if(isLocationTop){
+            isLocationTop = false;
+            animTop.reverse();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!isOnce){
+
+        }
+    }
+
+    public void createAnim() {
+        int height = school_top_fl.getHeight();
+        animTop = ObjectAnimator.ofInt(new Wrapper(school_top_fl), "topMagin", -height);
+        animTop.setDuration(600);
+        animTop.setInterpolator(new DecelerateInterpolator());
     }
 
     @Override
@@ -163,6 +207,9 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
     private void setViews() {
+        school_top_fl = (FrameLayout)findViewById(R.id.school_top_fl);
+
+
         iv_head = (ImageView) findViewById(R.id.item_special_course_list_view_image_view);
         rating_bar = (RatingBarView) findViewById(R.id.item_special_course_list_view__rating_bar);
         adress = (TextView) findViewById(R.id.item_special_course_list_view_tv_adresss);
@@ -250,6 +297,8 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                 }
             });
         }
+
+
     }
 
     private void store() {
@@ -322,5 +371,24 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                 dialog.dismiss();
             }
         });
+    }
+
+    class Wrapper{
+        private FrameLayout frameLayout;
+
+        private int topMagin;
+
+        public int getTopMagin() {
+            return ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin;
+        }
+
+        public void setTopMagin(int topMagin) {
+            ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin  = topMagin;
+            frameLayout.requestLayout();
+        }
+
+        public Wrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
     }
 }

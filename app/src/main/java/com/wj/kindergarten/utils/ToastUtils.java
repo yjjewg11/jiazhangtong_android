@@ -7,10 +7,12 @@ import com.wj.kindergarten.CGApplication;
 
 public class ToastUtils {
     public static void  showMessage(String message){
-        Toast.makeText(CGApplication.context,message,Toast.LENGTH_LONG).show();
+        Toast.makeText(CGApplication.context,message,Toast.LENGTH_SHORT).show();
+
     }
 
     public static void noMoreContentShow(){
-        Toast.makeText(CGApplication.context,"没有更多内容了!",Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(CGApplication.context,"没有更多内容了!",Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

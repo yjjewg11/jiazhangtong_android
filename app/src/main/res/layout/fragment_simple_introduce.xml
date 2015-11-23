@@ -4,7 +4,7 @@
     android:id="@+id/introduce_rllll"
     tools:context="com.wj.kindergarten.ui.specialcourse.SimpleIntroduceFragment">
 
-    <WebView
+    <com.wj.kindergarten.ui.other.TopWebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"

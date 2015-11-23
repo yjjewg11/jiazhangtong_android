@@ -131,12 +131,12 @@ public class MessageFragment extends Fragment {
                             getActivity().startActivity(intent);
                         } else if (dataModel.getType() == 10) {
                             CGLog.d("URL:" + dataModel.getUrl());
-                            if (!Utils.stringIsNull(dataModel.getUrl())) {
-                                Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
-                                intent1.putExtra("title", dataModel.getTitle());
-                                intent1.putExtra("url", dataModel.getUrl());
-                                getActivity().startActivity(intent1);
-                            }
+//                            if (!Utils.stringIsNull(dataModel.getUrl())) {
+//                                Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
+//                                intent1.putExtra("title", dataModel.getTitle());
+//                                intent1.putExtra("url", dataModel.getUrl());
+//                                getActivity().startActivity(intent1);
+//                            }
                         }else if(dataModel.getType() == 13){
                             startActivity(new Intent(getActivity(), SignListActivity.class));
                         }else if(dataModel.getType() == 99){

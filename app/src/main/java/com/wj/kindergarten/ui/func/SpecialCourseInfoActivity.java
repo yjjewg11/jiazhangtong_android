@@ -42,7 +42,9 @@ import com.wj.kindergarten.ui.coursefragments.SchoolFragmentThree;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.more.CallUtils;
+import com.wj.kindergarten.ui.other.AnimHelper;
 import com.wj.kindergarten.ui.other.ManDrawLine;
+import com.wj.kindergarten.ui.other.PulseAnimator;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.other.ScollTextView;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -88,6 +90,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private TextView [] three;
     public  int[] bottomHeight = new int[2];
     private FrameLayout btom_llll;
+    private TextView tv_share;
 
     public FrameLayout getBtom_llll() {
         return btom_llll;
@@ -182,6 +185,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
         tv_coll = (TextView)findViewById(R.id.textview_1_1);
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
+        tv_share = (TextView)findViewById(R.id.textview_2_2);
 
         if(!ocs.isFavor()){
             tv_coll.setText("已收藏");
@@ -295,7 +299,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                         if(Utils.isNull(content) == null || content == null){
                             content = osc.getTitle();
                         }
-                        ShareUtils.showShareDialog(SpecialCourseInfoActivity.this,v,osc.getTitle()
+                        ShareUtils.showShareDialog(SpecialCourseInfoActivity.this,tv_share,osc.getTitle()
                                 ,content,osc.getLogo(),ocs.getShare_url(),false);
 
 //                            ToastUtils.showMessage("暂无分享内容!");
@@ -326,6 +330,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
         if(!ocs.isFavor()){
             tv_coll.setText("已收藏");
             iv_coll.setImageResource(R.drawable.store2);
+//            AnimHelper.with(new PulseAnimator()).duration(1000).playOn(iv_coll);
         }else{
             tv_coll.setText("收藏");
             iv_coll.setImageResource(R.drawable.store1);

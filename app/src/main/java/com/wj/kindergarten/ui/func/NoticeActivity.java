@@ -88,6 +88,12 @@ public class NoticeActivity extends BaseActivity {
         instance = this;
     }
 
+    @Override
+    protected void titleLeftButtonListener() {
+        super.titleLeftButtonListener();
+        hideSoftKeyBoard(emot2,bottomLayou);
+    }
+
     private void initViews() {
         root_ll = (LinearLayout)findViewById(R.id.root_ll);
         rootView = (RelativeLayout) findViewById(R.id.notice_root);
@@ -210,7 +216,9 @@ public class NoticeActivity extends BaseActivity {
             String temp = "<font  color='#ff4966'>" + dianZan.getNames() + "</font>" + "等"
                     + dianZan.getCount() + "人觉得很赞";
             zanCountTv.setText(Html.fromHtml(temp));
+
         } else {
+
             zanCountTv.setText("0人觉得很赞");
         }
     }
@@ -220,7 +228,7 @@ public class NoticeActivity extends BaseActivity {
             List<Reply> replies = notice.getData().getReplyPage().getData();
             addReplyView(replyLayout, replies);
 
-            if (notice.getData().getReplyPage().getTotalCount() > notice.getData().getReplyPage().getPageSize()) {
+            if (notice.getData().getReplyPage().getData().size() > 0) {
                 showMoreReplyTv.setVisibility(View.VISIBLE);
             } else {
                 showMoreReplyTv.setVisibility(View.GONE);

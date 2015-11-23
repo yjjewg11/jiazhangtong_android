@@ -3,6 +3,7 @@ package com.wj.kindergarten.ui.func;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
@@ -13,6 +14,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -26,6 +29,7 @@ public class CourseListActivity extends BaseActivity {
     private ViewPager viewPager;
 
     private final int MAX_WEEKEND = 21;
+    private Map<Integer,String> map = new HashMap<>();
     private final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     protected void setContentLayout() {
@@ -35,6 +39,15 @@ public class CourseListActivity extends BaseActivity {
     @Override
     protected void setNeedLoading() {
         isNeedLoading = false;
+    }
+
+    @Override
+    protected void titleLeftButtonListener() {
+        super.titleLeftButtonListener();
+        String tag =  map.get(viewPager.getCurrentItem());
+        CourseListFragment courseListFragment = (CourseListFragment) getSupportFragmentManager().findFragmentByTag(tag);
+        hideSoftKeyBoard(courseListFragment.getEmot2(), courseListFragment.getBottomLayou());
+        courseListFragment.getMyViewEmot2().hideSoftKeyboard();
     }
 
     @Override
@@ -74,6 +87,8 @@ public class CourseListActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
+            String tag =  (CourseListFragment.buildCourseFragment(calculateCurrentDate(position)).getTag());
+            map.put(position,tag);
             return CourseListFragment.buildCourseFragment(calculateCurrentDate(position));
         }
 
@@ -86,6 +101,12 @@ public class CourseListActivity extends BaseActivity {
         public void destroyItem(ViewGroup container, int position, Object object) {
             super.destroyItem(container, position, object);
 
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+
+            return super.instantiateItem(container, position);
         }
     }
 }

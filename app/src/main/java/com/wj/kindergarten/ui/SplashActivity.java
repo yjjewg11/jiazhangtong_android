@@ -17,6 +17,7 @@ import com.umeng.message.UmengRegistrar;
 import com.umeng.onlineconfig.OnlineConfigAgent;
 import com.umeng.onlineconfig.OnlineConfigLog;
 import com.umeng.onlineconfig.UmengOnlineConfigureListener;
+import com.umeng.update.UmengUpdateAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
 import com.wj.kindergarten.ActivityManger;
@@ -85,6 +86,7 @@ public class SplashActivity extends Activity {
                 }
             };
             OnlineConfigAgent.getInstance().setOnlineConfigListener(configureListener);
+            UmengUpdateAgent.setDeltaUpdate(false);
 
             PushAgent mPushAgent = PushAgent.getInstance(this);
             mPushAgent.setDebugMode(true);

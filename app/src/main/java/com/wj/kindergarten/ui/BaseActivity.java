@@ -40,6 +40,7 @@ import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
+import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.SystemBarTintManager;
@@ -90,7 +91,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     private ProgressBar progressBar;
     private ImageView ivReload;
     private RelativeLayout layoutReload;
-    private RelativeLayout titleRightButton;
+    public RelativeLayout titleRightButton;
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -487,6 +488,13 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    //hide softkeyboard and inputmethond
+
+    public void hideSoftKeyBoard(ViewEmot2 viewEmot2,LinearLayout linearLayout){
+        linearLayout.setVisibility(View.GONE);
+        viewEmot2.hideSoftKeyboard();
+    }
+
     public void setProgressDialogCancelable(boolean isCancel) {
         if (progressDialog != null) {
             progressDialog.setCancelable(isCancel);
@@ -512,6 +520,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void titleLeftButtonListener() {
         finish();
     }
+
 
     /**
      * set right button's click listener to finish this activity
@@ -598,8 +607,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
 
     public void setWebView(WebView webView){
-//        webView.setWebViewClient(new WebViewClient());
-//        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient());
         WebSettings webSettings = webView.getSettings();
 ////        webSettings.setBuiltInZoomControls(true);
 ////        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -618,9 +627,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     //设置关闭下拉刷新菜单
     public void commonClosePullToRefreshListGridView(PullToRefreshAdapterViewBase pullView){
         if(pullView.isRefreshing()){
-            ToastUtils.showMessage("没有更多内容了!");
             pullView.onRefreshComplete();
         }
+        ToastUtils.showMessage("没有更多内容了!");
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
     public void commonClosePullToRefreshScrollView(PullToRefreshScrollView pullView, int pageNo){

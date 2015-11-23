@@ -36,6 +36,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.OnceSpecialCourse;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
+import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.CourseDetailIntroduceFragment;
 import com.wj.kindergarten.ui.func.MineCourseDetailActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
@@ -71,7 +72,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
     private ImageView iv_coll;
     private RelativeLayout rl_price;
     private RelativeLayout rl_free_price;
-    private Activity activity;
+    private BaseActivity activity;
     private OnceSpecialCourse osc;
     private OnceSpecialCourseList ocs;
     private RadioGroup three_rb_all;
@@ -100,6 +101,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
     private ObjectAnimator upScale;
     private float downY;
     private int moveGloal;
+    private int upInstance = 60;
 //    private LeftRunnable lefeRun;
 //    private RightRunnable rightRun;
 
@@ -110,6 +112,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         if (view != null) return view;
         view = inflater.inflate(R.layout.course_detail_fragment_three, null);
 
+        activity = (SpecialCourseInfoActivity)getActivity();
         lllll_1111 = (LinearLayout) view.findViewById(R.id.lllll_1111);
         rl_replace_content = (LinearLayout) view.findViewById(R.id.rl_replace_content);
         top_all_content = (LinearLayout) view.findViewById(R.id.top_all_content);
@@ -127,6 +130,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         rl_price = (RelativeLayout) view.findViewById(R.id.rl_price);
         rl_free_price = (RelativeLayout) view.findViewById(R.id.rl_free_price);
         gd = new GestureDetector(getActivity(), this);
+        activity.setWebView(course_detail_info);
         //TODO
         course_detail_info.setOnTouchListener(this);
         //获取webview在屏幕中的位置
@@ -146,7 +150,6 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         super.onActivityCreated(savedInstanceState);
         if(activity != null) return;
 
-        activity = getActivity();
         if(activity instanceof  SpecialCourseInfoActivity){
             SpecialCourseInfoActivity activitySif = (SpecialCourseInfoActivity) getActivity();
             osc =   activitySif.getOsc();
@@ -199,15 +202,15 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         }
 
         if(event.getAction() == MotionEvent.ACTION_MOVE){
-            if(judgeIsTop() ){
+            if(judgeIsTop() && isLocationTop){
 //                    radio = (float) (2 + 2 * Math.tan(Math.PI / 2 / getMe
 // asuredHeight() * moveDeltaY));
                 moveGloal = (int)(( event.getY()-downY)/2);
                 if(moveGloal < 0){
                     moveGloal = 0;
                 }
-                if(moveGloal >= 100){
-                    moveGloal = 100;
+                if(moveGloal >= upInstance){
+                    moveGloal = upInstance;
                 }
 
                 ((RelativeLayout.LayoutParams)course_detail_info.getLayoutParams()).setMargins(0,moveGloal,0,0);
@@ -216,24 +219,30 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         }
 
         if(event.getAction() == MotionEvent.ACTION_UP){
-            if(((RelativeLayout.LayoutParams)course_detail_info.getLayoutParams()).topMargin >= 100){
+            if(((RelativeLayout.LayoutParams)course_detail_info.getLayoutParams()).topMargin >= upInstance){
                 if (isLocationTop) {
                     isLocationTop = false;
                     upWeb.reverse();
                     upLinear.reverse();
 //                upScale.reverse();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ((RelativeLayout.LayoutParams)course_detail_info.getLayoutParams()).topMargin = 0;
-                            course_detail_info.requestLayout();
-                        }
-                    },1000);
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ((RelativeLayout.LayoutParams)course_detail_info.getLayoutParams()).topMargin = 0;
+//                            course_detail_info.requestLayout();
+//                        }
+//                    },1000);
+
                 }
             }else{
-                ((RelativeLayout.LayoutParams)course_detail_info.getLayoutParams()).topMargin = 0;
-                course_detail_info.requestLayout();
+
+//                ((RelativeLayout.LayoutParams) course_detail_info.getLayoutParams()).topMargin = 0;
+//                course_detail_info.requestLayout();
             }
+
+            ObjectAnimator o1 =  ObjectAnimator.ofInt(wrapper, "topMagin", -moveGloal).setDuration(500);
+            o1.setInterpolator(new DecelerateInterpolator());
+            o1.start();
         }
         return gd.onTouchEvent(event);
     }
@@ -282,7 +291,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
     }
 
     private void setAnimator(ObjectAnimator animator){
-        animator.setDuration(1000);
+        animator.setDuration(600);
         animator.setInterpolator(new DecelerateInterpolator());
     }
 
@@ -324,7 +333,12 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
 
 
         public void setTopMagin(int topMagin) {
-            this.topMagin = topMagin;
+            ((RelativeLayout.LayoutParams)webView.getLayoutParams()).topMargin = topMagin;
+            webView.requestLayout();
+        }
+
+        public int getTopMagin() {
+            return ((RelativeLayout.LayoutParams)webView.getLayoutParams()).topMargin;
         }
 
         public WrapperView(View webView) {
