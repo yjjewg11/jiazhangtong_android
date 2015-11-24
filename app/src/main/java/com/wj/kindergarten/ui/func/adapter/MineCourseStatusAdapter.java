@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 
 import com.wj.kindergarten.bean.StudyStateObject;
+import com.wj.kindergarten.ui.func.MineSpecialCourseActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -29,7 +30,11 @@ public class MineCourseStatusAdapter extends BaseAdapter{
     private LayoutInflater inflater;
 
     private List<StudyStateObject> list = new ArrayList<>();
+    private MineSpecialCourseActivity activity;
 
+    public void setActivity(MineSpecialCourseActivity activity) {
+        this.activity = activity;
+    }
 
     public MineCourseStatusAdapter(Context context){
         this.context = context;
@@ -88,15 +93,20 @@ public class MineCourseStatusAdapter extends BaseAdapter{
             viewHolder.schoolName.setText("学校:"+sso.getGroup_name());
             viewHolder.className.setText("班级:"+sso.getClass_name());
             String text = null;
-            if(sso.getPlandate() != null){
-                text = "<font color='#ff4966'>"+"近期上课:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getPlandate())+"</font>";
-            }else{
-                text = "<font color='#ff4966'>"+"完成时间:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getDisable_time())+"</font>";
+            //显示近期学习时间
+            if(activity.getIsStudying() == 0){
+                if(sso.getPlandate() != null){
+                    text = "<font color='#ff4966'>"+"近期上课:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getPlandate())+"</font>";
+                }else{
+                    text = "<font color='#ff4966'>"+"近期上课:时间暂定"+"</font>";
+                }
+            }else if(activity.getIsStudying() == 1){
+                if(sso.getDisable_time() != null){
+                    text = "<font color='#ff4966'>"+"完成时间:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getDisable_time())+"</font>";
+                }else{
+                    text = "<font color='#ff4966'>"+"完成时间:"+ TimeUtil.getYMDTimeFromYMDHMS(sso.getPlandate())+"</font>";
+                }
             }
-            if(TextUtils.isEmpty(text)){
-                text = "时间暂定!";
-            }
-
             viewHolder.openTime.setText(Html.fromHtml(text));
             ImageLoaderUtil.displayMyImage(sso.getLogo(),viewHolder.iv_school);
         }

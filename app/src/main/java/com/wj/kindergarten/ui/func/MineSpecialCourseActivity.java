@@ -160,6 +160,7 @@ public class MineSpecialCourseActivity extends BaseActivity{
         rb_study_over.setOnClickListener(listener);
         mListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
         adapter = new MineCourseStatusAdapter(this);
+        adapter.setActivity(this);
         mListView.setAdapter(adapter);
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
 
@@ -202,6 +203,11 @@ public class MineSpecialCourseActivity extends BaseActivity{
     boolean isFirstLoad;
     private int getPageNo = 1;
     private int isStudying = 0;
+
+    public int getIsStudying() {
+        return isStudying;
+    }
+
     @Override
     protected void loadData() {
         int page = -1;

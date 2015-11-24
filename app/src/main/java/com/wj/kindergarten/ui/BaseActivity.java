@@ -638,8 +638,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
         if(pullView.isRefreshing()){
             pullView.onRefreshComplete();
-            ToastUtils.showMessage("没有更多内容了!");
+
         }
+        ToastUtils.showMessage("没有更多内容了!");
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 

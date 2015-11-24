@@ -96,6 +96,7 @@ public class TeacherDetailInfoActivity extends BaseActivity {
                                 Intent intent = new Intent(TeacherDetailInfoActivity.this, SpecialCourseInfoActivity.class);
 //                                intent.putExtra("position",position);
                                 intent.putExtra("object", object);
+                                intent.putExtra("uuid",object.getUuid());
                                 startActivity(intent);
                             }
                         });
@@ -215,7 +216,7 @@ public class TeacherDetailInfoActivity extends BaseActivity {
                         if(pageNo == 1){
                             noView(all_course_of_teacher);
                         }else{
-                            ToastUtils.showMessage("没有更多内容了！");
+                            commonClosePullToRefreshScrollView(scroll_view,-1);
                         }
                         if(scroll_view.isRefreshing()) scroll_view.onRefreshComplete();
 

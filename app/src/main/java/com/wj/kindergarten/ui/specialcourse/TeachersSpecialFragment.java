@@ -79,7 +79,7 @@ public class TeachersSpecialFragment extends Fragment {
                             viewGroup.addView(no);
                         }
                     }else{
-                        ToastUtils.showMessage("没有更多内容了!");
+                        ((SchoolDetailInfoActivity)getActivity()).commonClosePullToRefreshListGridView(mListView);
                     }
                 }
                 if(mListView.isRefreshing()){

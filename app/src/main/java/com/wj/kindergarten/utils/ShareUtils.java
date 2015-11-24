@@ -101,8 +101,13 @@ public class ShareUtils {
             if(isMessage){
                 //如果是班级互动
                 int [] location = new int[2];
-                view.getLocationOnScreen(location);
-                layoutParams.topMargin = location[1] - 160;
+                view.getLocationInWindow(location);
+                int w = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+                int h = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+                popupView.measure(w, h);
+                int height =popupView.getMeasuredHeight();
+                int margin = location[1] > popupView.getHeight() ? (location[1]-height+(55*(int)WindowUtils.getDesnity())) : (55*(int)WindowUtils.getDesnity());
+                layoutParams.topMargin = margin;
                 lltop.setLayoutParams(layoutParams);
             }else{
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
