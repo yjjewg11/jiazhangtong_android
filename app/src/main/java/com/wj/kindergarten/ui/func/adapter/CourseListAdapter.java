@@ -167,13 +167,13 @@ public class CourseListAdapter extends BaseAdapter {
 
             viewHolder.tv_yy_mm_dd_time = (TextView)view.findViewById(R.id.tv_yy_mm_dd_time);
             viewHolder.tv_everyday_oneweek = (TextView)view.findViewById(R.id.tv_everyday_oneweek);
-//            viewHolder.tv_training_dianZancount = (TextView)view.findViewById(R.id.train_notice_zan_count);
             viewHolder.tv_training_classname_content = (TextView)view.findViewById(R.id.tv_training_classname_content);
             viewHolder.tv_training_classtime = (TextView)view.findViewById(R.id.tv_training_classtime);
             viewHolder.tv_trainning_adress = (TextView)view.findViewById(R.id.tv_trainning_adress);
             viewHolder.tv_trainning_preparething = (TextView)view.findViewById(R.id.tv_trainning_preparething);
             viewHolder.iv_train_today_tixing = (ImageView)view.findViewById(R.id.iv_train_today_tixing);
             viewHolder.tv_more_course = (TextView)view.findViewById(R.id.tv_more_course);
+            viewHolder.train_course_iv_share = (ImageView)view.findViewById(R.id.iv_share);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -293,6 +293,8 @@ public class CourseListAdapter extends BaseAdapter {
         }
 
         if(myTrainCoures!=null) {
+
+            viewHolder.train_course_iv_share.setVisibility(View.GONE);
             final MyTrainCoures finalMyTrainCoures1 = myTrainCoures;
             viewHolder.tv_more_course.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -730,7 +732,7 @@ public class CourseListAdapter extends BaseAdapter {
                 tv_more_course;
 
         ImageView iv_trainning_notice_zan,iv_trainning_notice_reply,
-        iv_train_today_class,iv_train_today_tixing;
+        iv_train_today_class,iv_train_today_tixing,train_course_iv_share;
 
         LinearLayout ll_trainning_notice_reply_content;
         CircleImage iv_training_head;

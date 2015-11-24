@@ -3,6 +3,7 @@
     android:id="@+id/layout_common_reply"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/margin_5"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -96,6 +97,7 @@
         android:layout_marginTop="@dimen/small_padding">
 
         <TextView
+            android:layout_marginBottom="@dimen/margin_5"
             android:id="@+id/notice_reply_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -390,7 +390,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     private void store() {
         dialog = new HintInfoDialog(MineCourseDetailActivity.this, "收藏中，请稍后...");
         dialog.show();
-        UserRequest.store(MineCourseDetailActivity.this, courses.getTitle(), 82,courseuuid, "", new RequestResultI() {
+        UserRequest.store(MineCourseDetailActivity.this, courses.getTitle(), 82,veryCourseUuid, "", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();
@@ -416,7 +416,6 @@ public class MineCourseDetailActivity extends BaseActivity{
     private void store1() {
         Drawable drawable = getResources().getDrawable(R.drawable.store2);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
-//        tvStore.setCompoundDrawables(null, drawable, null, null);
         iv_coll.setImageDrawable(drawable);
         tv_coll.setText("已收藏");
         tv_coll.setTextColor(getResources().getColor(R.color.title_bg));
@@ -436,7 +435,7 @@ public class MineCourseDetailActivity extends BaseActivity{
     private void cancelStore() {
         dialog = new HintInfoDialog(MineCourseDetailActivity.this, "取消收藏中，请稍后...");
         dialog.show();
-        UserRequest.cancelStore(true, MineCourseDetailActivity.this, courseuuid, new RequestResultI() {
+        UserRequest.cancelStore(true, MineCourseDetailActivity.this, veryCourseUuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();

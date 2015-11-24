@@ -63,6 +63,7 @@ public class NoticeActivity extends BaseActivity {
     private ImageView iv_share;
     private TextView tv_notice_date;
     public LinearLayout root_ll;
+    private boolean isFirst;
 
 
     @Override
@@ -143,29 +144,14 @@ public class NoticeActivity extends BaseActivity {
                     content = notice.getData().getMessage();
                 }
 
-                ShareUtils.showShareDialog(NoticeActivity.this,tv_notice_date,
-                        notice.getData().getTitle(),content,"",notice.getShare_url(),true);
+                ShareUtils.showShareDialog(NoticeActivity.this, v,
+                        notice.getData().getTitle(), content, "", notice.getShare_url(), true);
             }
         });
 
         seeTv.setText("浏览" + notice.getCount() + "次");
 
-        zanIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (zanLock) {
-                    return;
-                }
-                zanLock = true;
-                Drawable drawable = zanIv.getDrawable();
-                if (mContext.getResources().getDrawable(R.drawable.interaction_zan_off).getConstantState()
-                        .equals(drawable.getConstantState())) {
-                    zan();
-                } else {
-                    cancelZan();
-                }
-            }
-        });
+
 
         showMoreReplyTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,12 +187,14 @@ public class NoticeActivity extends BaseActivity {
             }
         });
 
+
         setZanData();
         setReplyData();
     }
 
     private void setZanData() {
-        DianZan dianZan = notice.getData().getDianzan();
+
+        final DianZan dianZan = notice.getData().getDianzan();
         if (dianZan.isCanDianzan()) {
             zanIv.setImageResource(R.drawable.interaction_zan_off);
         } else {
@@ -221,6 +209,23 @@ public class NoticeActivity extends BaseActivity {
 
             zanCountTv.setText("0人觉得很赞");
         }
+
+        if(!isFirst){
+            isFirst  = true;
+
+            zanIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (dianZan.isCanDianzan()) {
+                        zan();
+                    } else {
+                        cancelZan();
+                    }
+                }
+            });
+        }
+
     }
 
     private void setReplyData() {

@@ -158,20 +158,12 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        setViews();
+        try{
+            setViews();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         titleCenterTextView.setText("课程详情");
-
-//        bt_more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(SpecialCourseInfoActivity.this,MoreSpecialDiscussActivity.class);
-//                //放入评论对象
-//                //TODO
-//                intent.putExtra("uuid",uuid);
-//                intent.putExtra("discussList",moreList);
-//                startActivity(intent);
-//            }
-//        });
         //画线
 
         three = new TextView[]{
@@ -179,7 +171,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                 (TextView)findViewById(R.id.three_2),
                 (TextView)findViewById(R.id.three_3)
         };
-
         three[1].setVisibility(View.INVISIBLE);
         three[2].setVisibility(View.INVISIBLE);
 
@@ -267,14 +258,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
     private void setViews() {
 
-        try{
-            setMoreViews();
-        }catch (Exception e){
-
-            System.out.println(e);
-        }
-
-
         relativeLayouts = new RelativeLayout[]{
                 (RelativeLayout)findViewById(R.id.train_course_tab_shoucang),
                 (RelativeLayout)findViewById(R.id.train_course_tab_share),
@@ -323,20 +306,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
         for(RelativeLayout relativeLayout:relativeLayouts){
             relativeLayout.setOnClickListener(listenersss);
         }
-    }
-
-    private void setMoreViews() {
-        if(ocs==null) return;
-        if(!ocs.isFavor()){
-            tv_coll.setText("已收藏");
-            iv_coll.setImageResource(R.drawable.store2);
-//            AnimHelper.with(new PulseAnimator()).duration(1000).playOn(iv_coll);
-        }else{
-            tv_coll.setText("收藏");
-            iv_coll.setImageResource(R.drawable.store1);
-        }
-
-//        getAssess();
     }
 
     private int pageNo = 1;

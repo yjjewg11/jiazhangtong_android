@@ -102,6 +102,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
     private float downY;
     private int moveGloal;
     private int upInstance = 60;
+    private boolean isOnce;
 //    private LeftRunnable lefeRun;
 //    private RightRunnable rightRun;
 
@@ -111,7 +112,6 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) return view;
         view = inflater.inflate(R.layout.course_detail_fragment_three, null);
-
         activity = (SpecialCourseInfoActivity)getActivity();
         lllll_1111 = (LinearLayout) view.findViewById(R.id.lllll_1111);
         rl_replace_content = (LinearLayout) view.findViewById(R.id.rl_replace_content);
@@ -148,8 +148,11 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(activity != null) return;
-
+        if(!isOnce){
+            isOnce = true;
+        } else {
+            return;
+        }
         if(activity instanceof  SpecialCourseInfoActivity){
             SpecialCourseInfoActivity activitySif = (SpecialCourseInfoActivity) getActivity();
             osc =   activitySif.getOsc();

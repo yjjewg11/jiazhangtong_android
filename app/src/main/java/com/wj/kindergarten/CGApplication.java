@@ -198,11 +198,11 @@ public class CGApplication extends Application {
             latitude = (bdLocation.getLatitude());
             longitude = (bdLocation.getLongitude());
             Log.i("TAG", "打印坐标 x : " + latitude + "   y : " + longitude);
-            if(latitude > 300 || longitude > 300) {
-                latitude  = -1;
-                longitude = -1;
-                return ;
-            }
+//            if(latitude > 300 || longitude > 300) {
+//                latitude  = -1;
+//                longitude = -1;
+//                return ;
+//            }
             Geocoder ge = new Geocoder(getInstance());
             String city = null;
             try {
@@ -225,6 +225,11 @@ public class CGApplication extends Application {
                 PackageManager manager = getInstance().getPackageManager();
                 PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
                 final String appVersion = info.versionName;
+                if(TextUtils.isEmpty(city)){
+                    latitude = -1;
+                    longitude = -1;
+                    return ;
+                }
                 VersionInfo versionInfo = new VersionInfo(type, mobileVersion, appVersion, city);
                 if (!versionInfo.equals(CGSharedPreference.getVersionInfoReference())) {
                     sendVersionInfo(type, mobileVersion, appVersion, city);

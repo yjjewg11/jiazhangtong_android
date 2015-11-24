@@ -41,14 +41,14 @@ public class CourseListActivity extends BaseActivity {
         isNeedLoading = false;
     }
 
-    @Override
-    protected void titleLeftButtonListener() {
-        super.titleLeftButtonListener();
-        String tag =  map.get(viewPager.getCurrentItem());
-        CourseListFragment courseListFragment = (CourseListFragment) getSupportFragmentManager().findFragmentByTag(tag);
-        hideSoftKeyBoard(courseListFragment.getEmot2(), courseListFragment.getBottomLayou());
-        courseListFragment.getMyViewEmot2().hideSoftKeyboard();
-    }
+//    @Override
+//    protected void titleLeftButtonListener() {
+//        super.titleLeftButtonListener();
+//        String tag =  map.get(viewPager.getCurrentItem());
+//        CourseListFragment courseListFragment = (CourseListFragment) getSupportFragmentManager().findFragmentByTag(tag);
+//        hideSoftKeyBoard(courseListFragment.getEmot2(), courseListFragment.getBottomLayou());
+//        courseListFragment.getMyViewEmot2().hideSoftKeyboard();
+//    }
 
     @Override
     protected void onCreate() {
