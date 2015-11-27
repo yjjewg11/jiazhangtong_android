@@ -29,7 +29,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.adsmogo.adapters.AdsMogoCustomEventPlatformEnum;
 import com.adsmogo.adview.AdsMogoLayout;
+import com.adsmogo.controller.listener.AdsMogoListener;
 import com.adsmogo.util.AdsMogoType;
 
 import com.google.gson.Gson;
@@ -100,6 +102,56 @@ public class Utils {
         AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity,MOGO_ID,360,150, AdsMogoType.Custom,true);
         adsMogoLayoutCode.isOtherSizes = true;
         adsMogoLayoutCode.setBackgroundColor(Color.parseColor("#ffffff"));
+        AdsMogoListener listener = new AdsMogoListener() {
+            @Override
+            public void onInitFinish() {
+
+            }
+
+            @Override
+            public void onRequestAd(String s) {
+
+            }
+
+            @Override
+            public void onRealClickAd() {
+
+            }
+
+            @Override
+
+            public void onReceiveAd(ViewGroup viewGroup, String s) {
+
+            }
+
+            @Override
+            public void onFailedReceiveAd() {
+
+            }
+
+            @Override
+            public void onClickAd(String s) {
+
+            }
+
+            @Override
+            public boolean onCloseAd() {
+                return false;
+            }
+
+            @Override
+            public void onCloseMogoDialog() {
+
+            }
+
+            @Override
+            public Class getCustomEvemtPlatformAdapterClass(AdsMogoCustomEventPlatformEnum adsMogoCustomEventPlatformEnum) {
+                return null;
+            }
+        };
+
+        adsMogoLayoutCode.setAdsMogoListener(listener);
+
         ViewGroup viewGroup = (ViewGroup)adsMogoLayoutCode.getParent();
         if(viewGroup!=null)
             viewGroup.removeView(adsMogoLayoutCode);

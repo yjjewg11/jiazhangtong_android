@@ -8,6 +8,7 @@
     app:contentInsetStart="0dp">
 
     <RelativeLayout
+        android:id="@+id/title_rl_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/title_bg_shap">

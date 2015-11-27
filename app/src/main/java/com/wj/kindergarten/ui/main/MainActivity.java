@@ -220,6 +220,7 @@ public class MainActivity extends BaseActivity {
      */
     private void checkVersion() {
 
+        UmengUpdateAgent.setDeltaUpdate(false);
         UmengUpdateAgent.setUpdateOnlyWifi(true);
         UmengUpdateAgent.setUpdateAutoPopup(false);
         UmengUpdateAgent.setUpdateCheckConfig(false);

@@ -70,7 +70,6 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //  AnalyticsConfig.enableEncrypt(true);//
         ActivityManger.getInstance().addActivity(this);
 
         try {
@@ -86,7 +85,6 @@ public class SplashActivity extends Activity {
                 }
             };
             OnlineConfigAgent.getInstance().setOnlineConfigListener(configureListener);
-            UmengUpdateAgent.setDeltaUpdate(false);
 
             PushAgent mPushAgent = PushAgent.getInstance(this);
             mPushAgent.setDebugMode(true);
