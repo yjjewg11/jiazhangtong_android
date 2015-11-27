@@ -198,11 +198,6 @@ public class CGApplication extends Application {
             latitude = (bdLocation.getLatitude());
             longitude = (bdLocation.getLongitude());
             Log.i("TAG", "打印坐标 x : " + latitude + "   y : " + longitude);
-//            if(latitude > 300 || longitude > 300) {
-//                latitude  = -1;
-//                longitude = -1;
-//                return ;
-//            }
             Geocoder ge = new Geocoder(getInstance());
             String city = null;
             try {

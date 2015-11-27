@@ -1,50 +1,48 @@
 package com.wj.kindergarten.ui.webview;
 
-import android.os.Build;
+import android.content.Intent;
+import android.graphics.Color;
+
+import android.graphics.drawable.Drawable;
+import android.support.design.widget.TabLayout;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.bean.BaseModel;
-import com.wj.kindergarten.bean.Introduce;
-import com.wj.kindergarten.net.RequestHttpUtil;
-import com.wj.kindergarten.net.RequestResultI;
-import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
-import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
+import com.wj.kindergarten.ui.func.adapter.AboutSchoolAdatper;
+import com.wj.kindergarten.utils.HintInfoDialog;
+
 
 import java.util.List;
+
+import static android.support.design.widget.TabLayout.*;
 
 /**
  * SchoolIntroduceActivity
  *
  * @Description:xxx
- * @Author: pengqiang.zou
+ * @Author: tang
  * @CreateDate: 2015-08-17 21:58
  */
-public class SchoolIntroduceActivity extends BaseActivity implements View.OnClickListener {
-    private WebView webView;
-    private LinearLayout layout_sd_type;
-    private LinearLayout ll_sd_type;
-    private ImageView ivSD1;
-    private ImageView ivSD2;
-    private TextView tvSD1;
-    private TextView tvSD2;
+public class SchoolIntroduceActivity extends BaseActivity {
 
-    private String htmlSD1 = "";
-    private String htmlSD2 = "";
-    private int height = 0;
-    private String uuid = "";
-    private String url1 = "";
-    private String url2 = "";
-    private static final String QUERY_SCHOOL_INTRODUCE1 = RequestHttpUtil.BASE_URL + "rest/share/getKDInfo.html";//校园介绍
-    private static final String QUERY_SCHOOL_INTRODUCE2 = RequestHttpUtil.BASE_URL + "rest/share/getRecruitBygroupuuid.html";//招生计划
-    private int type = 0;
+    private TabLayout tab_layout;
+    private PullToRefreshListView listView;
+    private AboutSchoolAdatper adapter;
+    private HintInfoDialog dialog;
+    private LinearLayout normal_title_left_layout;
+
+    private TextView title_webview_normal_text;
+    private TextView title_webview_normal_spinner;
+    private TextView normal_title_right_text;
 
     @Override
     protected void setContentLayout() {
@@ -53,140 +51,63 @@ public class SchoolIntroduceActivity extends BaseActivity implements View.OnClic
 
     @Override
     protected void setNeedLoading() {
-        isNeedLoading = false;
+
+        dialog = new HintInfoDialog(this);
+//        isNeedLoading = true;
     }
+
+
+
 
     @Override
     protected void onCreate() {
-        type = getIntent().getIntExtra("type",0);
-        if(type == 1) {
-            setTitleText("校园相关");
-        }else{
-            setTitleText("招生计划");
-        }
-        showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
 
-        init();
-        uuid = getIntent().getStringExtra("uuid");
-        url1 = QUERY_SCHOOL_INTRODUCE1 + "?uuid=" + uuid;
-        url2 = QUERY_SCHOOL_INTRODUCE2 + "?uuid=" + uuid;
-        loadData1();
-    }
-
-    private void init() {
-        webView = (WebView) findViewById(R.id.school_webview);
-        layout_sd_type = (LinearLayout) findViewById(R.id.layout_sd_type);
-        ll_sd_type = (LinearLayout) findViewById(R.id.ll_sd_type);
-        ivSD1 = (ImageView) findViewById(R.id.iv_sd1);
-        ivSD2 = (ImageView) findViewById(R.id.iv_sd2);
-        tvSD1 = (TextView) findViewById(R.id.tv_sd_1);
-        tvSD2 = (TextView) findViewById(R.id.tv_sd_2);
-
-        tvSD1.setOnClickListener(this);
-        tvSD2.setOnClickListener(this);
-        layout_sd_type.setOnClickListener(this);
-
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        ll_sd_type.measure(w, h);
-        height = ll_sd_type.getMeasuredHeight();
-        ViewGroup.LayoutParams layoutParamsChild = ll_sd_type.getLayoutParams();
-        layoutParamsChild.height = 0;
-        ll_sd_type.setLayoutParams(layoutParamsChild);
-
-        if(type == 1){
-            ivSD1.setVisibility(View.VISIBLE);
-            ivSD2.setVisibility(View.GONE);
-        }else{
-            ivSD2.setVisibility(View.VISIBLE);
-            ivSD1.setVisibility(View.GONE);
-        }
-    }
-
-    private void loadData1() {
-        webView.getSettings().setJavaScriptEnabled(true);
-        if (Build.VERSION.SDK_INT >= 19) {//先不加载图片，等文字加载完成后才加载图片，在4.4以上的系统如果image的url只会加载一个，所以先加载
-            webView.getSettings().setLoadsImagesAutomatically(true);
-        } else {
-            webView.getSettings().setLoadsImagesAutomatically(false);
-        }
-
-        if(type == 1) {
-            webView.loadUrl(url1);
-        }else{
-            webView.loadUrl(url2);
-        }
-        webView.setWebViewClient(new WebViewClient() {
+        normal_title_left_layout = (LinearLayout)findViewById(R.id.normal_title_left_layout);
+        normal_title_left_layout.setOnClickListener(new OnClickListener() {
             @Override
-            public void onPageFinished(WebView view, String url) {
-                webView.getSettings().setLoadsImagesAutomatically(true);
-                super.onPageFinished(view, url);
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        title_webview_normal_text = (TextView)findViewById(R.id.title_webview_normal_text);
+        title_webview_normal_text.setText("招生中心");
+        title_webview_normal_spinner = (TextView)findViewById(R.id.title_webview_normal_spinner);
+        title_webview_normal_spinner.setText("成都市");
+        title_webview_normal_spinner.setTextSize(14);
+
+        tab_layout = (TabLayout)findViewById(R.id.common_tab_layout);
+        tab_layout.addTab(tab_layout.newTab().setText("智能排序"));
+        tab_layout.addTab(tab_layout.newTab().setText("评价最高"));
+        tab_layout.addTab(tab_layout.newTab().setText("离我最近"));
+        listView = (PullToRefreshListView)findViewById(R.id.pulltorefresh_listview);
+        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        listView.setBackgroundColor(Color.parseColor("#f6f6f6"));
+        listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+
             }
 
             @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                super.onReceivedError(view, errorCode, description, failingUrl);
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                //下拉加载刷新
             }
-
+        });
+        adapter = new AboutSchoolAdatper(this);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if(type == 1) {
-                    webView.loadUrl(url1);
-                }else{
-                    webView.loadUrl(url2);
-                }
-                return true;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //点击跳转详情页面
+
+                Intent intent = new Intent(SchoolIntroduceActivity.this, SchoolHtmlActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_sd_1:
-                webView.loadUrl(url1);
-                ivSD1.setVisibility(View.VISIBLE);
-                ivSD2.setVisibility(View.GONE);
-                setTitleText("校园介绍");
-                hideLayout();
-                break;
-            case R.id.tv_sd_2:
-                webView.loadUrl(url2);
-                ivSD2.setVisibility(View.VISIBLE);
-                ivSD1.setVisibility(View.GONE);
-                setTitleText("招生计划");
-                hideLayout();
-                break;
-            case R.id.layout_sd_type:
-                hideLayout();
-                break;
-            default:
-                break;
-        }
-    }
+    protected void loadData() {
 
-    @Override
-    protected void titleCenterButtonListener() {
-        super.titleCenterButtonListener();
-        changeTitle();
-    }
-
-    private boolean isShow = false;
-
-    public void changeTitle() {
-        if (!isShow) {
-            isShow = true;
-            showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_up);
-            layout_sd_type.setVisibility(View.VISIBLE);
-            Utils.showLayout(ll_sd_type, 0, height, 300);
-        } else {
-            hideLayout();
-        }
-    }
-
-    private void hideLayout() {
-        isShow = false;
-        showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
-        Utils.showLayout(ll_sd_type, height, 0, 300, layout_sd_type);
     }
 }

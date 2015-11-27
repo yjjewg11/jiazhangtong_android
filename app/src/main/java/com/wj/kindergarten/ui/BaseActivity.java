@@ -92,6 +92,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     private ImageView ivReload;
     private RelativeLayout layoutReload;
     public RelativeLayout titleRightButton;
+    private RelativeLayout title_rl_top;
+    private SystemBarTintManager.SystemBarConfig config;
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -129,8 +131,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //            setTranslucentStatus(true);
 //            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//            tintManager.setStatusBarTintEnabled(true);
+//            tintManager.setStatusBarTintEnabled(false);
 //            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
+//            config = tintManager.getConfig();
 //        }
         mContext = this;
         setContentLayout();
@@ -146,6 +149,8 @@ public abstract class BaseActivity extends ActionBarActivity {
             setActionBarLayout();
             onCreate();
         }
+
+
 
         PushAgent.getInstance(this).onAppStart();
     }
@@ -287,6 +292,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         titleRightTextView = (TextView) findViewById(R.id.normal_title_right_text);
         titleRightImageView = (ImageView) findViewById(R.id.normal_title_right_icon);
         titleLine = findViewById(R.id.normal_title_line);
+        title_rl_top = (RelativeLayout)findViewById(R.id.title_rl_top);
     }
 
     protected void showTitleLine() {
@@ -608,7 +614,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     public void setWebView(WebView webView){
         webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebChromeClient(new WebChromeClient(){
+
+        });
         WebSettings webSettings = webView.getSettings();
 ////        webSettings.setBuiltInZoomControls(true);
 ////        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);

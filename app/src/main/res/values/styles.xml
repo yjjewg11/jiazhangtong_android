@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="BaseStyle" parent="Theme.AppCompat.Light.NoActionBar" />
 
@@ -18,7 +18,6 @@
         <item name="android:windowContentOverlay">@android:color/transparent</item>
         <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
         <item name="android:windowAnimationStyle">@style/ActivityNormalAnimation</item>
-        <item name="android:windowIsTranslucent">false</item>
     </style>
 
     <style name="CustomWindowTitleBackground">
@@ -115,4 +114,11 @@
     </style>
     <style name="AppStyle.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppStyle.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="schooltextstyle" >
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/hint_gray</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
 </resources>
