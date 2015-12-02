@@ -19,6 +19,7 @@ import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
 import com.wj.kindergarten.ui.func.TeacherDetailInfoActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
@@ -109,6 +110,8 @@ public final class UserRequest {
     private static final String PRIVELIGE_ACTIVE = "rest/share/getPxbenefitJSON.json";
     private static final String CALL_MESSAGE_SATTE = "rest/pxTelConsultation/save.json";
     private static final String TRAIN_SCHOOL_DETAIL = "rest/group/get2.json";
+    private static final String OTHER_ALL_TRAINC_SCHOOL = "rest/group/kdlistByPage.json";
+    private static final String  TRAIN_SCHOOL_DETAIL_FROM_RECRUIT = "rest/group/getKD.json";
 
     private UserRequest() {
     }
@@ -633,14 +636,14 @@ public final class UserRequest {
         }catch (JSONException e) {
             e.printStackTrace();
         }
-        SendRequest.getInstance().post(context,RequestType.INTERACTION_SEND,object.toString(),RequestHttpUtil.BASE_URL+SAVE_ASSESS,resultI);
+        SendRequest.getInstance().post(context, RequestType.INTERACTION_SEND, object.toString(), RequestHttpUtil.BASE_URL + SAVE_ASSESS, resultI);
     }
 
     public static void getTeacherFromUuid(Context context, String groupuuid,int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("groupuuid",groupuuid);
         params.put("pageNo",pageNo);
-        SendRequest.getInstance().get(context,RequestType.TEACHER_COUNT,params,RequestHttpUtil.BASE_URL+TEACHER_COUNT,resultI);
+        SendRequest.getInstance().get(context, RequestType.TEACHER_COUNT, params, RequestHttpUtil.BASE_URL + TEACHER_COUNT, resultI);
     }
 
     public static void getStudyStatus(Context context, int pageNo, int isStudying, RequestResultI resultI) {
@@ -715,6 +718,25 @@ public final class UserRequest {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(),RequestHttpUtil.BASE_URL + CALL_MESSAGE_SATTE, resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(), RequestHttpUtil.BASE_URL + CALL_MESSAGE_SATTE, resultI);
+    }
+
+    public static void getSchoolAbout(Context context,String s, int pageNo, String sort,RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        if(CGApplication.latitude > 0){
+            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
+        }
+        params.put("sort",sort);
+        //学校相关获取的学校与培训机构获取的学校内容完全相同,只是地址不一样
+        SendRequest.getInstance().get(context, RequestType.ALL_TRAINC_SCHOOL, params, RequestHttpUtil.BASE_URL + OTHER_ALL_TRAINC_SCHOOL, resultI);
+
+
+    }
+
+    public static void getTrainSchoolDetailFromRecruit(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid", uuid);
+        SendRequest.getInstance().get(context,RequestType.TRAIN_SCHOOL_DETAIL,params,RequestHttpUtil.BASE_URL+TRAIN_SCHOOL_DETAIL_FROM_RECRUIT,resultI);
     }
 }

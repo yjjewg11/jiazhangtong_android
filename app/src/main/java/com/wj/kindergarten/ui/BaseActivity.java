@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -46,6 +47,7 @@ import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.SystemBarTintManager;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 
+import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -617,6 +619,8 @@ public abstract class BaseActivity extends ActionBarActivity {
         webView.setWebChromeClient(new WebChromeClient(){
 
         });
+        //给所有的webview添加接口
+        webView.addJavascriptInterface(new WebJavaScript(webView),"familyJavascript");
         WebSettings webSettings = webView.getSettings();
 ////        webSettings.setBuiltInZoomControls(true);
 ////        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -652,4 +656,19 @@ public abstract class BaseActivity extends ActionBarActivity {
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 
+
+    class WebJavaScript{
+        public WebJavaScript(View view) {
+            this.view = view;
+        }
+        private View view;
+        @JavascriptInterface
+        public void shareFromWeb(String title,String content,String picUrl,String httpUrl){
+            ShareUtils.showShareDialog(CGApplication.context,view, title, content, picUrl, httpUrl, false);
+        }
+        @JavascriptInterface
+        public void selectPicFromWeb(){
+            //启动选择图片程序并且上传
+        }
+    }
 }

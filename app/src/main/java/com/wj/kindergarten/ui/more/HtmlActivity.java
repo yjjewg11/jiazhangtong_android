@@ -3,12 +3,15 @@ package com.wj.kindergarten.ui.more;
 
 import android.content.Intent;
 import android.view.KeyEvent;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.ui.BaseActivity;
 
 public class HtmlActivity extends BaseActivity{
@@ -35,38 +38,28 @@ public class HtmlActivity extends BaseActivity{
         intent.getStringExtra("title");
         url =  intent.getStringExtra("url");
         webView = (WebView) findViewById(R.id.web_html);
-
         setWebs(webView);
 
     }
 
-    private void setWebs(WebView webView) {
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setBackgroundColor(0);
-        webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        //支持缩放
-        webSettings.setBuiltInZoomControls(true);
-        // 开启 DOM storage API 功能
-        webSettings.setDomStorageEnabled(true);
-        //开启缓存数据库功能set
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setUseWideViewPort(true);
-//        webSettings.setBlockNetworkImage(true);
-        //设置缓存模式
+    private void setWebs(WebView myWebView) {
+        myWebView.getSettings().setAllowFileAccess(true);
+        //如果访问的页面中有Javascript，则webview必须设置支持Javascript
+        myWebView.getSettings().setJavaScriptEnabled(true);
+//        myWebView.getSettings().setUserAgentString("");
+        myWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        myWebView.getSettings().setAllowFileAccess(true);
+        myWebView.getSettings().setAppCacheEnabled(true);
+        myWebView.getSettings().setDomStorageEnabled(true);
+        myWebView.getSettings().setDatabaseEnabled(true);
 
-        //设置缓存路径
-//        webSettings.setAppCachePath(appCachePath+"/clear");
-        //允许访问文件
-        webSettings.setAllowFileAccess(true);
-
-        webView.setAlpha(1);
-
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
+//        webView.setWebChromeClient(new WebChromeClient());
+//        webView.setWebViewClient(new WebViewClient());
+        syncCookie(httpUrl);
+        webView.loadUrl(httpUrl);
     }
 
+    String httpUrl = "http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK & webView.canGoBack()){
@@ -76,6 +69,27 @@ public class HtmlActivity extends BaseActivity{
 
             finish();
             return false;
+    }
 
+    private void syncCookie(String url) {
+        try {
+
+            CookieSyncManager.createInstance(this);
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setAcceptCookie(true);
+            cookieManager.removeSessionCookie();// 移除
+            cookieManager.removeAllCookie();
+            StringBuilder sbCookie = new StringBuilder();
+            sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
+            sbCookie.append(String.format(";domain=%s", ".wenjienet.com"));
+            sbCookie.append(String.format(";path=%s", "/"));
+
+            String cookieValue = sbCookie.toString();
+            cookieManager.setCookie(url, cookieValue);
+            CookieSyncManager.getInstance().sync();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

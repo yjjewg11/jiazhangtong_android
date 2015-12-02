@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bao="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/zhanweitu"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:id="@+id/iv_school_head"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:paddingTop="9dp"
+        android:text="评分"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tv_pingfen"
+        android:layout_alignTop="@+id/iv_school_head"
+        android:layout_toRightOf="@+id/iv_school_head"
+        android:layout_toEndOf="@+id/iv_school_head"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="24dp" />
+
+    <FrameLayout
+        android:paddingBottom="9dp"
+        android:layout_alignBottom="@+id/iv_school_head"
+        android:layout_alignLeft="@+id/tv_pingfen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/frameLayout4">
+
+        <com.wj.kindergarten.ui.other.RatingBarView
+            android:id="@+id/mime_school_rating_bar"
+            bao:starImageSize = "25dp"
+            bao:starCount = "5"
+            bao:starEmpty = "@drawable/pingjiaxingbigwhite"
+            bao:starFill = "@drawable/pingjiaxingred"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <EditText
+        android:padding="@dimen/margin_5"
+        android:gravity="top"
+        android:textSize="12sp"
+        android:hint="随便说两句"
+        android:background="@drawable/edit_mine_school"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/et_mine_school"
+        android:layout_marginRight="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_below="@+id/iv_school_head"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_15"
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView20"
+        android:layout_below="@+id/et_mine_school" />
+
+    <ImageView
+        android:src="@drawable/niming1red"
+        android:layout_margin="@dimen/margin_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_niming"
+        android:layout_below="@+id/textView20"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:textColor="#ff4966"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="匿名评论"
+        android:id="@+id/tv_other_name"
+        android:layout_alignBottom="@+id/iv_niming"
+        android:layout_toRightOf="@+id/iv_niming"
+        android:layout_toEndOf="@+id/iv_niming" />
+
+    <Button
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="提交"
+        android:id="@+id/tv_mine_submit"
+        android:background="@drawable/submit_mine"
+        android:layout_marginRight="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

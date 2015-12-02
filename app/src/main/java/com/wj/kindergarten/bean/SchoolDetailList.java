@@ -12,6 +12,16 @@ public class SchoolDetailList extends BaseModel{
     private String share_url;
     @Expose
     private String obj_url;
+    @Expose
+    private String recruit_url;
+
+    public String getRecruit_url() {
+        return recruit_url;
+    }
+
+    public void setRecruit_url(String recruit_url) {
+        this.recruit_url = recruit_url;
+    }
 
     public String getObj_url() {
         return obj_url;
@@ -44,6 +54,7 @@ public class SchoolDetailList extends BaseModel{
                 ", isFavor=" + isFavor +
                 ", share_url='" + share_url + '\'' +
                 ", obj_url='" + obj_url + '\'' +
+                ", recruit_url='" + recruit_url + '\'' +
                 '}';
     }
 

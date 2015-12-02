@@ -26,12 +26,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.adsmogo.adapters.AdsMogoCustomEventPlatformEnum;
 import com.adsmogo.adview.AdsMogoLayout;
 import com.adsmogo.controller.listener.AdsMogoListener;
+import com.adsmogo.natives.AdsMogoNative;
+import com.adsmogo.natives.AdsMogoNativeAdInfo;
+import com.adsmogo.natives.AdsMogoNativeKey;
+import com.adsmogo.natives.adapters.AdsMogoNativeCustomEventPlatformAdapter;
+import com.adsmogo.natives.listener.AdsMogoNativeListener;
 import com.adsmogo.util.AdsMogoType;
 
 import com.google.gson.Gson;
@@ -58,6 +65,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,7 +82,7 @@ public class Utils {
     public static final SimpleDateFormat timestampFormatter = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss.sss");
 
-    public static final String MOGO_ID = "b1be6cfbb82542c4ba00f32ef1166884";
+
 
     /**
      * util class, avoid to instantiate
@@ -99,58 +107,35 @@ public class Utils {
     }
 
     public static void ads(Activity activity,ViewGroup viewGrop) {
-        AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity,MOGO_ID,360,150, AdsMogoType.Custom,true);
+        AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity,GloablUtils.MOGO_ID,360,150, AdsMogoType.Custom,true);
         adsMogoLayoutCode.isOtherSizes = true;
         adsMogoLayoutCode.setBackgroundColor(Color.parseColor("#ffffff"));
-        AdsMogoListener listener = new AdsMogoListener() {
+
+//        AdsMogoListener
+
+
+        AdsMogoNativeListener nativeListener = new AdsMogoNativeListener() {
             @Override
-            public void onInitFinish() {
+            public void onRequestNativeAdSuccess(List<AdsMogoNativeAdInfo> list) {
+
+                if(list.size() > 0){
+                    list.get(0).getContent().get(AdsMogoNativeKey.LINK);
+                }
+            }
+
+            @Override
+            public void onRequestNativeAdFail(int i) {
 
             }
 
             @Override
-            public void onRequestAd(String s) {
-
-            }
-
-            @Override
-            public void onRealClickAd() {
-
-            }
-
-            @Override
-
-            public void onReceiveAd(ViewGroup viewGroup, String s) {
-
-            }
-
-            @Override
-            public void onFailedReceiveAd() {
-
-            }
-
-            @Override
-            public void onClickAd(String s) {
-
-            }
-
-            @Override
-            public boolean onCloseAd() {
-                return false;
-            }
-
-            @Override
-            public void onCloseMogoDialog() {
-
-            }
-
-            @Override
-            public Class getCustomEvemtPlatformAdapterClass(AdsMogoCustomEventPlatformEnum adsMogoCustomEventPlatformEnum) {
+            public Class<? extends AdsMogoNativeCustomEventPlatformAdapter> getCustomEvemtPlatformAdapterClass(com.adsmogo.natives.adapters.AdsMogoCustomEventPlatformEnum adsMogoCustomEventPlatformEnum) {
                 return null;
             }
         };
-
-        adsMogoLayoutCode.setAdsMogoListener(listener);
+        //设置信息流广告
+        AdsMogoNative adsMogoNative  = new AdsMogoNative(activity,GloablUtils.MOGO_ID,nativeListener);
+        adsMogoNative.loadAd();
 
         ViewGroup viewGroup = (ViewGroup)adsMogoLayoutCode.getParent();
         if(viewGroup!=null)
@@ -166,6 +151,26 @@ public class Utils {
             return true;
         }
         return false;
+    }
+
+    public static void syncCookie(String url){
+        try{
+        CookieSyncManager.createInstance(CGApplication.getInstance());
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.removeSessionCookie();// 移除
+        cookieManager.removeAllCookie();
+        StringBuilder sbCookie = new StringBuilder();
+        sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
+        sbCookie.append(String.format(";domain=%s", ".wenjienet.com"));
+        sbCookie.append(String.format(";path=%s", "/"));
+
+        String cookieValue = sbCookie.toString();
+        cookieManager.setCookie(url, cookieValue);
+        CookieSyncManager.getInstance().sync();
+        } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
 
     /**

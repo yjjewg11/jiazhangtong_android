@@ -255,7 +255,7 @@ public class MainFragment extends Fragment {
         mainItems.clear();
 
         MainItem gardenInteraction = new MainItem(R.drawable.main_hudong, "互动", Constants.GARDEN_INTERACTION);
-        MainItem gardenDes = new MainItem(R.drawable.main_item_xiaoyuan, "校园相关", Constants.GARDEN_DES);
+        MainItem gardenDes = new MainItem(R.drawable.main_item_xiaoyuan, "宝宝入学", Constants.GARDEN_DES);
         MainItem gardenNotice = new MainItem(R.drawable.main_item_gonggao, "公告", Constants.GARDEN_NOTICE);
         MainItem gardenSign = new MainItem(R.drawable.main_item_qiandao, "签到记录", Constants.GARDEN_SIGN);
         MainItem gardenCourse = new MainItem(R.drawable.main_item_kebiao, "课程表", Constants.GARDEN_COURSE);
