@@ -15,6 +15,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.compounets.CircleImage;
+import com.wj.kindergarten.ui.func.MineSchoolActivity;
 import com.wj.kindergarten.ui.func.MineSpecialCourseActivity;
 import com.wj.kindergarten.ui.mine.ChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
@@ -36,6 +37,7 @@ public class MineFragment extends Fragment {
     private Login login;
     private LinearLayout mine_collect;
     private LinearLayout mine_course;
+    private LinearLayout recruit_school;
 
     @Nullable
     @Override
@@ -59,6 +61,7 @@ public class MineFragment extends Fragment {
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
         mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
         mine_course = (LinearLayout)rootView.findViewById(R.id.ll_special_course);
+        recruit_school = (LinearLayout)rootView.findViewById(R.id.ll_mine_school);
 
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
         llSetting.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +82,14 @@ public class MineFragment extends Fragment {
             public void onClick(View v) {
                 //点击启动我的课程页面
                 Intent intent = new Intent(getActivity(),MineSpecialCourseActivity.class);
+                startActivity(intent);
+            }
+        });
+        recruit_school.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //启动招生学校界面.
+                Intent intent = new Intent(getActivity(),MineSchoolActivity.class);
                 startActivity(intent);
             }
         });

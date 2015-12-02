@@ -6,12 +6,13 @@ android {
     defaultConfig {
         applicationId 'com.wenjie.jiazhangtong'
         minSdkVersion 14
-        versionCode 21
+        targetSdkVersion 22
+        versionCode 22
         versionName "0.2.9.1"
         multiDexEnabled true
     }
     buildTypes {
-        release {
+            release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

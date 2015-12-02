@@ -111,7 +111,7 @@ public class NoticeListActivity extends BaseActivity {
                 }
                 NoticeList noticeList = (NoticeList) domain;
                 if (noticeList != null && noticeList.getList() != null &&
-                        noticeList.getList().getData() != null) {
+                        noticeList.getList().getData() != null && noticeList.getList().getData().size() > 0) {
                     if (page == 1) {
                         notices.clear();
                     }
@@ -119,7 +119,9 @@ public class NoticeListActivity extends BaseActivity {
                     noticeAdapter.notifyDataSetChanged();
                     nowPage = page;
                 } else {
-                    Utils.showToast(mContext, "获取数据失败");
+                    if(page != 1){
+                        commonClosePullToRefreshListGridView(mListView);
+                    }
                 }
             }
 

@@ -15,27 +15,26 @@
 
 
         <ImageView
-            android:layout_marginLeft="7dp"
+            android:padding="0dp"
+            android:layout_marginLeft="@dimen/margin_10"
             android:layout_alignBottom="@+id/tv_one_line"
             android:layout_alignTop="@+id/item_class_name"
-            android:layout_centerInParent="true"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:id="@+id/item_special_course_list_view_image_view"
             android:src="@drawable/zhanweitu"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
         <TextView
             android:paddingRight="@dimen/margin_5"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_alignParentRight="true"
             android:ellipsize="end"
             android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#49a3ff"
+            android:textColor="#000000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="层中幼儿英语"
             android:id="@+id/item_class_name"
@@ -76,11 +75,11 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="1.2km"
-            android:paddingBottom="@dimen/margin_5"
             android:id="@+id/item_special_course_list_view_tv_distance"
-            android:layout_alignTop="@+id/rating_fl"
-            android:layout_alignRight="@+id/item_class_name"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:layout_above="@+id/ll_school_medal_one"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:layout_marginTop="5dp"
@@ -107,13 +106,24 @@
 
         <ImageView
             android:layout_marginTop="@dimen/margin_5"
-            android:paddingRight="@dimen/margin_5"
             android:src="@drawable/jiangbei"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/iv_madle"
             android:layout_alignTop="@+id/ll_school_medal_one"
             android:layout_alignRight="@+id/item_special_course_list_view_image_view" />
+
+        <TextView
+            android:textColor="#ff4966"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="100人就读"
+            android:id="@+id/tv_study_people"
+            android:layout_above="@+id/item_special_course_list_view_tv_adresss"
+            android:layout_alignRight="@+id/item_special_course_list_view_tv_distance"
+            android:layout_alignEnd="@+id/item_special_course_list_view_tv_distance" />
 
     </RelativeLayout>
 

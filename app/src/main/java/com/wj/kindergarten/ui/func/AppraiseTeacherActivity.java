@@ -217,7 +217,7 @@ public class AppraiseTeacherActivity extends BaseActivity {
 
                     loadSuc();
                 } else {
-                    loadFailed();
+                    loadEmpty();
                 }
             }
 

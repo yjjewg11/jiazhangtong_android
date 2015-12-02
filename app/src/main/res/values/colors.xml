@@ -9,4 +9,7 @@
     <color name="color_cccccc">#cccccc</color>
     <color name="color_333333">#333333</color>
     <color name="translate">#00000000</color>
+    <color name="gray_red">#ff4966</color>
+    <color name="all_black">#000000</color>
+    <color name="colorPrimaryDark">#ff4966</color>
 </resources>

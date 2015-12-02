@@ -7,5 +7,6 @@
         <attr name="starEmpty" format="reference" />
         <attr name="starFill" format="reference" />
         <attr name="starHalf" format="reference" />
+
     </declare-styleable>
 </resources>
