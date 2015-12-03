@@ -27,8 +27,10 @@
                 android:layout_centerHorizontal="true" />
 
             <ImageView
-                android:paddingBottom="5dp"
-                android:src="@drawable/shoucang1"
+                android:layout_marginTop="2dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:src="@drawable/shoucangnewwhtire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView_1_1"
@@ -49,7 +51,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:drawablePadding="1dp"
-                android:drawableTop="@drawable/share1"
+                android:drawableTop="@drawable/fenxiangnew"
                 android:gravity="center"
                 android:text="分享"
                 android:textColor="@color/color_929292"
@@ -69,7 +71,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:drawablePadding="1dp"
-                android:drawableTop="@drawable/hudong"
+                android:drawableTop="@drawable/hudongnew"
                 android:gravity="center"
                 android:text="互动"
                 android:textColor="@color/color_929292"
@@ -84,16 +86,15 @@
 
             <TextView
                 android:id="@+id/textview_4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:drawablePadding="1dp"
-                android:drawableTop="@drawable/zixun"
+                android:drawableTop="@drawable/zixunnew"
                 android:gravity="center"
-                android:background="#ff7800"
-                android:text="咨询"
-                android:textColor="#ffffff"
+                android:text="互动"
+                android:textColor="@color/color_929292"
                 android:textSize="10dp" />
         </RelativeLayout>
     </LinearLayout>

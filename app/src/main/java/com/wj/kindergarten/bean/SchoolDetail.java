@@ -15,7 +15,16 @@ public class SchoolDetail extends BaseModel{
     private int ct_stars;@Expose
     private long ct_study_students;@Expose
     private String summary;@Expose
-    private String address;
+    private String address;@Expose
+    private String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 
     @Override
     public String toString() {
@@ -31,6 +40,7 @@ public class SchoolDetail extends BaseModel{
                 ", ct_study_students=" + ct_study_students +
                 ", summary='" + summary + '\'' +
                 ", address='" + address + '\'' +
+                ", distance='" + distance + '\'' +
                 '}';
     }
 

@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,11 @@ public class AboutSchoolAdatper extends BaseAdapter {
 
         if(schoolInfo != null){
 
+            if(TextUtils.isEmpty(schoolInfo.getDistance())){
+                viewHolder.item_special_course_list_view_tv_distance.setVisibility(View.INVISIBLE);
+            }else{
+                viewHolder.item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
+            }
             ImageLoaderUtil.displayMyImage(schoolInfo.getImg(), viewHolder.item_special_course_list_view_image_view);
             viewHolder.item_class_name.setText(schoolInfo.getBrand_name());
             viewHolder.item_special_course_list_view_tv_adresss.setText(schoolInfo.getAddress());

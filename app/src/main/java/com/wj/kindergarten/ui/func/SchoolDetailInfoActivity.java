@@ -231,10 +231,10 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         //TODO
         if(!detailList.isFavor()){
             tv_coll.setText("已收藏");
-            iv_coll.setImageResource(R.drawable.store2);
+            iv_coll.setImageResource(R.drawable.shoucangnewred);
         }else{
             tv_coll.setText("收藏");
-            iv_coll.setImageResource(R.drawable.store1);
+            iv_coll.setImageResource(R.drawable.shoucangnewwhtire);
         }
 
         relatives = new RelativeLayout[]{
@@ -328,7 +328,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
     private void store1() {
-        Drawable drawable = getResources().getDrawable(R.drawable.store2);
+        Drawable drawable = getResources().getDrawable(R.drawable.shoucangnewred);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
 //        tvStore.setCompoundDrawables(null, drawable, null, null);
         iv_coll.setImageDrawable(drawable);
@@ -338,7 +338,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
     private void store2() {
-        Drawable drawable = getResources().getDrawable(R.drawable.store1);
+        Drawable drawable = getResources().getDrawable(R.drawable.shoucangnewwhtire);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
 //        tvStore.setCompoundDrawables(null, drawable, null, null);
         iv_coll.setImageDrawable(drawable);

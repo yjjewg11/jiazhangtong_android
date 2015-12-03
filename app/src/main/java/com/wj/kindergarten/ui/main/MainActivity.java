@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.main;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -31,7 +32,9 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.bean.MainTopic;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
 
@@ -80,7 +83,7 @@ public class MainActivity extends BaseActivity {
     private List<TrainClass> TC_list ;
     private static TrainChildInfoList TCI;
     public static  MainActivity instance;
-
+    private MainTopic topic;
 
 
     public TrainChildInfoList getTrainChildInfoList(){
@@ -109,11 +112,57 @@ public class MainActivity extends BaseActivity {
         checkVersion();
         handler.sendEmptyMessageDelayed(2, 500);
 
+        //获取系统参数
+        if(CGSharedPreference.getEnoughOneDay()){
+            getTopicConfig();
+        }
+
+        //每次应用启动获取话题
+        getMainTopic();
+
 
     }
 
+    private void getMainTopic() {
+        UserRequest.getMainTopic(this, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                topic = (MainTopic) domain;
+            }
 
+            @Override
+            public void result(List<BaseModel> domains, int total) {
 
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
+    private void getTopicConfig() {
+        UserRequest.getTopicConfig(this,CGSharedPreference.getConfigMD5(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                ConfigObject object = (ConfigObject) domain;
+                if(object != null){
+                    CGSharedPreference.setConfigMD5(object.getMd5(), object.getData().getSns_url());
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
 
 
     private void login() {

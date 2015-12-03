@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Login;
@@ -17,6 +18,7 @@ import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
+import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
@@ -112,6 +114,10 @@ public final class UserRequest {
     private static final String TRAIN_SCHOOL_DETAIL = "rest/group/get2.json";
     private static final String OTHER_ALL_TRAINC_SCHOOL = "rest/group/kdlistByPage.json";
     private static final String  TRAIN_SCHOOL_DETAIL_FROM_RECRUIT = "rest/group/getKD.json";
+    private static final String GET_USER_INFO = "rest/userinfo/getUserinfo.json";
+    private static final String GET_TOPIC_CONFIG = "rest/share/getConfig.json";
+    private static final String  GET_MAIN_TOPIC = "rest/userinfo/getMainTopic.json";
+    private static final String CLICKANDREFRESHTOPIC = "rest/userinfo/getMainTopic_cb.json";
 
     private UserRequest() {
     }
@@ -738,5 +744,51 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("uuid", uuid);
         SendRequest.getInstance().get(context,RequestType.TRAIN_SCHOOL_DETAIL,params,RequestHttpUtil.BASE_URL+TRAIN_SCHOOL_DETAIL_FROM_RECRUIT,resultI);
+    }
+
+    public static void getUserInfo(Context context, String storeJESSIONID, String jessionid_md5) {
+        RequestParams params = new RequestParams();
+        params.put("JSESSIONID",storeJESSIONID);
+        params.put("md5",jessionid_md5);
+        SendRequest.getInstance().get(context, RequestType.GET_USER_INFO, params, RequestHttpUtil.BASE_URL + GET_USER_INFO, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                Login login = (Login) domain;
+                if(login != null){
+                    //把获取到的用户信息存入到磁盘中
+                    CGSharedPreference.setJESSIONID_MD5(login.getMd5());
+                    StoreDataInSerialize.storeUserInfo(login);
+                    CGApplication.getInstance().setLogin((Login) domain);
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+
+
+    }
+
+    public static void getTopicConfig(Context context, String configMD5, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("md5",configMD5);
+        SendRequest.getInstance().get(context,RequestType.GET_TOPIC_CONFIG,params,RequestHttpUtil.BASE_URL+GET_TOPIC_CONFIG,resultI);
+    }
+
+    public static void getMainTopic(Context context, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context,RequestType.GET_MAIN_TOPIC,params,RequestHttpUtil.BASE_URL+GET_MAIN_TOPIC,resultI);
+    }
+
+    public static void clickAndRefreshTopic(Context context,RequestResultI resultI){
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+CLICKANDREFRESHTOPIC,resultI);
     }
 }
