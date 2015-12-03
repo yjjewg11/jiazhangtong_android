@@ -68,4 +68,7 @@ public interface RequestType {
      int GET_ASSESS_STATE = 154;
      int TEACHER_DETAIL_INFO = 155;
      int GET_PRIVELEGE_ACTIVE = 156;
+     int GET_USER_INFO = 157;//获取用户信息
+     int GET_TOPIC_CONFIG = 158;
+     int GET_MAIN_TOPIC = 159;
 }

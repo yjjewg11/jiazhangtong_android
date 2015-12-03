@@ -7,6 +7,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;
@@ -17,12 +18,14 @@ import com.wj.kindergarten.bean.ArticleDetail;
 import com.wj.kindergarten.bean.ArticleList;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BaseResponse;
+import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
 import com.wj.kindergarten.bean.GetAssessStateList;
 import com.wj.kindergarten.bean.InteractionList;
 import com.wj.kindergarten.bean.Ka;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.bean.MainTopic;
 import com.wj.kindergarten.bean.MineAllCourseList;
 import com.wj.kindergarten.bean.MoreData;
 import com.wj.kindergarten.bean.MoreDiscussList;
@@ -218,6 +221,23 @@ public class SendRequest {
                         CGLog.d("SendRequest：" + requestType + "->" + response.toString());
                         BaseResponse baseResponse = new BaseResponse(response);
                         if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
+
+                            if("unchanged".equals(baseResponse.getResMsg().getStatus())){
+                                //如果状态是未改变，则从磁盘获取数据用户信息
+                                if(requestType == RequestType.GET_USER_INFO){
+                                    Log.i("TAG","打印用户信息"+StoreDataInSerialize.getUserInfo());
+                                    CGApplication.getInstance().setLogin(StoreDataInSerialize.getUserInfo());
+                                    return;
+                                }
+
+                                if(requestType == RequestType.GET_TOPIC_CONFIG){
+                                    return;
+                                }
+
+                            }
+
+
+
                             if (requestType != RequestType.GET_EMOT) {
                                 result(requestType, response.toString(), resultI);
                             } else {
@@ -414,6 +434,15 @@ public class SendRequest {
                 break;
             case RequestType.GET_PRIVELEGE_ACTIVE:
                 resultI.result(getDomain(domain, PrivilegeActiveList.class));
+                break;
+            case RequestType.GET_TOPIC_CONFIG:
+                resultI.result(getDomain(domain, ConfigObject.class));
+                break;
+            case RequestType.GET_MAIN_TOPIC:
+                resultI.result(getDomain(domain, MainTopic.class));
+                break;
+            case RequestType.GET_USER_INFO:
+                resultI.result(getDomain(domain,Login.class));
                 break;
             default:
                 break;

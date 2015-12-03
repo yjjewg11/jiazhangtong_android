@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -90,13 +91,18 @@ public class SchoolHtmlActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case SUCCESS_GET_DATA:
+                    if(TextUtils.isEmpty(sdl.getDistance())){
+                        item_special_course_list_view_tv_distance.setVisibility(View.INVISIBLE);
+                    }else{
+                        item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
+                    }
                     item_class_name.setText(schoolDetail.getBrand_name());
                     tv_study_people.setText(schoolDetail.getCt_study_students()+"人就读");
                     tv_study_people.setTextColor(Color.parseColor("#ff4966"));
                     item_special_course_list_view__rating_bar.setFloatStar(schoolDetail.getCt_stars(), true);
                     ImageLoaderUtil.displayMyImage(schoolDetail.getImg(),item_special_course_list_view_image_view);
                     item_special_course_list_view_tv_adresss.setText(schoolDetail.getAddress());
-                    item_special_course_list_view_tv_distance.setText("");
+                    item_special_course_list_view_tv_distance.setText(sdl.getDistance());
                     if(schoolDetail.getSummary() != null && schoolDetail.getSummary().split(",") != null){
                         for(String s : schoolDetail.getSummary().split(",")){
                             TextView textView = new TextView(SchoolHtmlActivity.this);
@@ -112,10 +118,10 @@ public class SchoolHtmlActivity extends BaseActivity {
                     }
                     if(!sdl.isFavor()){
                         tv_coll.setText("已收藏");
-                        iv_coll.setImageResource(R.drawable.store2);
+                        iv_coll.setImageResource(R.drawable.shoucangnewred);
                     }else{
                         tv_coll.setText("收藏");
-                        iv_coll.setImageResource(R.drawable.store1);
+                        iv_coll.setImageResource(R.drawable.shoucangnewwhtire);
                     }
                     schoolFragment.setUrl(sdl.getObj_url());
                     tab_layout.getLocationInWindow(fl_location);
@@ -291,7 +297,7 @@ public class SchoolHtmlActivity extends BaseActivity {
     }
 
     private void store1() {
-        Drawable drawable = getResources().getDrawable(R.drawable.store2);
+        Drawable drawable = getResources().getDrawable(R.drawable.shoucangnewred);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
 //        tvStore.setCompoundDrawables(null, drawable, null, null);
         iv_coll.setImageDrawable(drawable);
@@ -301,7 +307,7 @@ public class SchoolHtmlActivity extends BaseActivity {
     }
 
     private void store2() {
-        Drawable drawable = getResources().getDrawable(R.drawable.store1);
+        Drawable drawable = getResources().getDrawable(R.drawable.shoucangnewwhtire);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
 //        tvStore.setCompoundDrawables(null, drawable, null, null);
         iv_coll.setImageDrawable(drawable);

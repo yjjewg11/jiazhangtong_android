@@ -1,12 +1,15 @@
 package com.wj.kindergarten.common;
 
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.bean.VersionInfo;
 
 import com.wj.kindergarten.utils.Utils;
+
+import java.util.Date;
 
 /**
  * JJGSharedPrefrence
@@ -200,5 +203,63 @@ public class CGSharedPreference {
         editor.putBoolean(IS_NEED_SHOW,false);
         editor.commit();
 
+    }
+
+    public static String  getStoreJESSIONID() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("JESSIONID", "");
+    }
+
+    //在获取用户信息时保存的md5
+    public static String getJESSIONID_MD5() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("JESSIONID_MD5", "");
+    }
+
+    public static void setStoreJESSIONID(String JESSIONID) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("JESSIONID",JESSIONID);
+        editor.commit();
+    }
+
+    //在获取用户信息时保存的md5
+    public static void setJESSIONID_MD5(String JESSIONID_MD5) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("JESSIONID_MD5",JESSIONID_MD5);
+        editor.commit();
+    }
+
+    public static String getConfigMD5() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        String text =  sharedPreferences.getString("config_md5", "");
+        return text;
+    }
+
+    public static void setConfigMD5(String isShow,String md5) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("isShow",isShow);
+        editor.putString("config_md5",md5);
+        editor.commit();
+    }
+    public static String getIsShow(){
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        String text =  sharedPreferences.getString("isShow", "");
+        return text;
+    }
+
+    public static boolean getEnoughOneDay() {
+        Date date = new Date();
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        long priousTime =  sharedPreferences.getLong("isEnoughOneDay",-1);
+        if(date.getTime() - priousTime > 1000 * 60 * 60  * 24 ){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putLong("isEnoughOneDay",date.getTime());
+            editor.commit();
+            return true;
+        }
+        return false;
     }
 }
