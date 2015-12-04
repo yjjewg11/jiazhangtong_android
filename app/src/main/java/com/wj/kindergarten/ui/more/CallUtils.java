@@ -26,7 +26,7 @@ import java.util.List;
  */
 public abstract class CallUtils {
 
-    public static void showCall(final Context context,String [] arrays,CallTransfer callTransfer){
+    public static void showCall(final Context context,String [] arrays, final CallTransfer callTransfer){
         View view = ViewGroup.inflate(context,R.layout.call_layout,null);
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.call_count_ll);
         for(final String array : arrays){
@@ -40,6 +40,7 @@ public abstract class CallUtils {
             oneView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    sendCallState(context,callTransfer);
                     Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + array));
                     context.startActivity(phoneIntent);
                 }
@@ -47,7 +48,7 @@ public abstract class CallUtils {
         }
 
         TextView tv_call = (TextView) view.findViewById(R.id.special_call_cancel);
-        final PopupWindow mPopupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        final PopupWindow mPopupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         mPopupWindow.setAnimationStyle(R.style.ShareAnimBase);
         mPopupWindow.setFocusable(true);
         mPopupWindow.setTouchable(true);
@@ -68,7 +69,7 @@ public abstract class CallUtils {
 
 
         mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-        sendCallState(context,callTransfer);
+
 
     }
 

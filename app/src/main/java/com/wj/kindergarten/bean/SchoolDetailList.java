@@ -14,6 +14,16 @@ public class SchoolDetailList extends BaseModel{
     private String obj_url;
     @Expose
     private String recruit_url;
+    @Expose
+    private String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 
     public String getRecruit_url() {
         return recruit_url;
@@ -55,6 +65,7 @@ public class SchoolDetailList extends BaseModel{
                 ", share_url='" + share_url + '\'' +
                 ", obj_url='" + obj_url + '\'' +
                 ", recruit_url='" + recruit_url + '\'' +
+                ", distance='" + distance + '\'' +
                 '}';
     }
 

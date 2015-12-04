@@ -641,7 +641,7 @@ public class InteractionSentActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onResume();
+        super.onDestroy();
         unregisterReceiver(networkConnectChangedReceiver);//关闭广播
     }
 }

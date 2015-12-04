@@ -28,7 +28,7 @@
 
         <TextView
             android:paddingRight="@dimen/margin_5"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:layout_alignParentRight="true"
             android:ellipsize="end"
             android:singleLine="true"
@@ -68,6 +68,7 @@
 
 
         <TextView
+            android:layout_below="@+id/tv_study_people"
             android:drawablePadding="@dimen/margin_5"
             android:drawableLeft="@drawable/juli"
             android:textSize="14sp"
@@ -77,7 +78,6 @@
             android:text="1.2km"
             android:id="@+id/item_special_course_list_view_tv_distance"
             android:layout_marginRight="10dp"
-            android:layout_above="@+id/ll_school_medal_one"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 

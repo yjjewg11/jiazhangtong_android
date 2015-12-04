@@ -272,8 +272,7 @@ public class MineDiscussFragment extends Fragment {
 	private void saveAssess(String extend_uuid, final int type, int score, String content, final TextView input_content,
 							final TextView submit, final RatingBarView... methondRatingBars) {
 
-
-		UserRequest.sendSpecialCourseAssess(getActivity(), extend_uuid, mcd.getCourseuuid(), type, score, content, new RequestResultI() {
+		UserRequest.sendSpecialCourseAssess(getActivity(),"", extend_uuid, mcd.getCourseuuid(), type, score, content, 0,new RequestResultI() {
 			@Override
 			public void result(BaseModel domain) {
 				CGSharedPreference.setMineCourseIsSendSContent();

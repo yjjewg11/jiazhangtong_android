@@ -80,16 +80,35 @@
                 android:background="#cccccc"
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
-            <TextView
+
+            <RelativeLayout
                 android:background="@drawable/setting_item_click_selector"
                 android:id="@+id/tv_hot_course"
-            android:textSize="20sp"
-            android:drawablePadding="@dimen/margin_10"
-            android:drawableLeft="@drawable/redline"
-            android:text="  热门课程"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    android:textSize="20sp"
+                    android:drawablePadding="@dimen/margin_10"
+                    android:drawableLeft="@drawable/redline"
+                    android:text="  热门课程"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:drawableRight="@drawable/btn_more_train"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/course_been_down"
+                    android:text="更多"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout

@@ -192,7 +192,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void result(BaseModel domain) {
                 Login login = (Login) domain;
                 CGApplication.getInstance().setLogin((Login) domain);
-                CGLog.d("TAGGG " + login.getJSESSIONID());
+                CGSharedPreference.setStoreJESSIONID(login.getJSESSIONID());
+                UserRequest.getUserInfo(LoginActivity.this, CGSharedPreference.getStoreJESSIONID(),login.getMd5());
+
                 String imgPath = "";
                 if (null != login && null != login.getUserinfo()) {
                     imgPath = Utils.getText(login.getUserinfo().getImg());

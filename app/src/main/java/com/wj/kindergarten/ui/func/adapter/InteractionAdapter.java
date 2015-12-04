@@ -9,6 +9,7 @@ import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,7 +131,7 @@ public class InteractionAdapter extends BaseAdapter {
                 //点击启动分享页
 
                 String content = interaction.getContent();
-                if (Utils.isNull(content) == null || content == null) {
+                if (TextUtils.isEmpty(content)) {
                     content = interaction.getTitle();
                 }
                 ShareUtils.showShareDialog(mContext, v, interaction.getTitle(), content, interaction.getCreate_img(), interaction.getShare_url(), true);

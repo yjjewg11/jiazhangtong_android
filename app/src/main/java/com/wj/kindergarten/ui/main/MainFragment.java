@@ -23,6 +23,7 @@ import com.adsmogo.util.AdsMogoLayoutPosition;
 import com.adsmogo.util.AdsMogoSize;
 import com.adsmogo.util.AdsMogoType;
 
+import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
@@ -50,6 +51,7 @@ import com.wj.kindergarten.ui.webview.WebviewActivity;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -76,6 +78,7 @@ public class MainFragment extends Fragment {
     private int height = 0;
     private boolean isShow = false;
     private ArrayList<More> list = new ArrayList<>();
+    private HashMap<String ,String> map = new HashMap<>();
 
 
 
@@ -282,6 +285,8 @@ public class MainFragment extends Fragment {
 
     private void mainItemsClick(MainItem mainItem) {
         //  Utils.showToast(mContext, mainItem.getText());
+        map.put(mainItem.getText(),String.valueOf(map.get(mainItem.getText()) == null ? 1 : map.get(mainItem.getText()) + 1));
+        MobclickAgent.onEvent(mContext, "wenjie", map);
         switch (mainItem.getTag()) {
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));
