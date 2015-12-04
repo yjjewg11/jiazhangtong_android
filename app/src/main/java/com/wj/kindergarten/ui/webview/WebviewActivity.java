@@ -78,7 +78,7 @@ public class WebviewActivity extends BaseActivity implements Serializable{
     private TextView tv_center;
     private SpecialCourseGrid type_adapter;
     private HintInfoDialog dialog;
-    private TextView tv_hot_course;
+    private RelativeLayout tv_hot_course;
 
     public List<SpecialCourseType> getSctList(){
         return sctlist;
@@ -239,7 +239,7 @@ protected void setNeedLoading() {
         dialog = new HintInfoDialog(this);
         dialog.show();
 
-        tv_hot_course = (TextView)findViewById(R.id.tv_hot_course);
+        tv_hot_course = (RelativeLayout)findViewById(R.id.tv_hot_course);
         tv_hot_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -56,25 +56,25 @@ public class MineSchoolIntroduceFragment extends Fragment {
         moveWeb = new MoveWeb(webView);
         moveWeb.setDoOwnThing(new MyDothing());
         webView.setOnTouchListener(moveWeb);
-        webView.loadUrl("http://www.baidu.com");
+
 
 
         return view;
     }
 
     public void setUrl(String url){
-
+        webView.loadUrl(url);
     }
 
     class MyDothing implements DoOwnThing {
             @Override
             public void pullFromTop() {
-
+                 activity.getAnimtor().reverse();
             }
 
             @Override
             public void pullFromEnd() {
-
+                activity.getAnimtor().start();
             }
     }
 }

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bao="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
     <ImageView
+        android:visibility="gone"
         android:scaleType="fitXY"
         android:src="@drawable/zhanweitu"
         android:layout_width="65dp"
@@ -37,6 +46,8 @@
         android:layout_marginStart="24dp" />
 
     <FrameLayout
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_below="@+id/tv_pingfen"
         android:paddingBottom="9dp"
         android:layout_alignBottom="@+id/iv_school_head"
         android:layout_alignLeft="@+id/tv_pingfen"
@@ -48,6 +59,7 @@
             android:id="@+id/mime_school_rating_bar"
             bao:starImageSize = "25dp"
             bao:starCount = "5"
+            bao:starHalf="@drawable/pingjiaxingbigwhite"
             bao:starEmpty = "@drawable/pingjiaxingbigwhite"
             bao:starFill = "@drawable/pingjiaxingred"
             android:layout_centerInParent="true"
@@ -56,13 +68,15 @@
 
     </FrameLayout>
 
+    </RelativeLayout>
+
     <EditText
+        android:layout_weight="1"
         android:padding="@dimen/margin_5"
         android:gravity="top"
         android:textSize="12sp"
         android:hint="随便说两句"
         android:background="@drawable/edit_mine_school"
-        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/et_mine_school"
@@ -81,13 +95,17 @@
         android:id="@+id/textView20"
         android:layout_below="@+id/et_mine_school" />
 
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ImageView
         android:src="@drawable/niming1red"
         android:layout_margin="@dimen/margin_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/iv_niming"
-        android:layout_below="@+id/textView20"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -102,19 +120,33 @@
         android:layout_toRightOf="@+id/iv_niming"
         android:layout_toEndOf="@+id/iv_niming" />
 
-    <Button
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:text="提交"
-        android:id="@+id/tv_mine_submit"
-        android:background="@drawable/submit_mine"
-        android:layout_marginRight="9dp"
-        android:layout_marginLeft="9dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="45dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
     </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="提交"
+                android:layout_marginRight="9dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginBottom="45dp"
+                android:id="@+id/tv_mine_submit"
+                android:background="@drawable/submit_mine"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>

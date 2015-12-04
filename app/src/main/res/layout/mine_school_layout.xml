@@ -6,7 +6,7 @@
     <include layout="@layout/title_normal"/>
 
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,9 +18,10 @@
             <include layout="@layout/about_school_item"/>
         </FrameLayout>
 
-    </FrameLayout>
+    </RelativeLayout>
 
     <FrameLayout
+        android:id="@+id/tab_layout_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

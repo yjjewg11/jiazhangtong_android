@@ -66,15 +66,14 @@ public class ShareUtils {
 //        if (!isShow) {
         String title = null;
         String content = null;
-            if(Utils.isNull(title) == null){
-                title = "";
+            if(TextUtils.isEmpty(title1)){
+                title = "问界互动家园";
             }else{
-
                 title = title1;
             }
 
-            if(Utils.isNull(content) == null){
-                content = "";
+            if(TextUtils.isEmpty(content1)){
+                content = title;
             }else{
                 content = content1;
             }
@@ -100,15 +99,22 @@ public class ShareUtils {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) lltop.getLayoutParams();
             if(isMessage){
                 //如果是班级互动
-                int [] location = new int[2];
-                view.getLocationInWindow(location);
-                int w = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
-                int h = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
-                popupView.measure(w, h);
-                int height =popupView.getMeasuredHeight();
-                int margin = location[1] > popupView.getHeight() ? (location[1]-height+(55*(int)WindowUtils.getDesnity())) : (55*(int)WindowUtils.getDesnity());
-                layoutParams.topMargin = margin;
-                lltop.setLayoutParams(layoutParams);
+                try{
+                    int [] location = new int[2];
+                    view.getLocationInWindow(location);
+                    int w = View.MeasureSpec.makeMeasureSpec(0,
+                            View.MeasureSpec.UNSPECIFIED);
+                    int h = View.MeasureSpec.makeMeasureSpec(0,
+                            View.MeasureSpec.UNSPECIFIED);
+                    lltop.measure(w, h);
+                    int height = lltop.getMeasuredHeight();
+                    int margin = location[1] > height ? (location[1]-height+30) : (55*(int)WindowUtils.getDesnity());
+                    layoutParams.topMargin = margin;
+                    lltop.setLayoutParams(layoutParams);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
             }else{
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 lltop.setLayoutParams(layoutParams);
@@ -209,17 +215,13 @@ public class ShareUtils {
             TextView cacleview = (TextView) popupView.findViewById(R.id.share_cancel);
             if(isMessage){
                 //如果是公告则修改lltop在布局中的位置为中间
-
                 cacleview.setVisibility(View.GONE);
-//                mPopupWindow.showAtLocation(view, Gravity.NO_GRAVITY, location[0], location[1] - 170);
             }else{
                 cacleview.setVisibility(View.VISIBLE);
 
             }
         mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
-
-//        }
     }
 
     /**

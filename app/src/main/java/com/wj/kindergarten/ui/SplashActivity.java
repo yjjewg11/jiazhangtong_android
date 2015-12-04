@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 
 import com.adsmogo.adview.AdsMogoLayout;
@@ -23,6 +24,7 @@ import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.common.CGSharedPreference;
 
+import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -50,9 +52,18 @@ public class SplashActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SPLASH_DELAY:
-                    if (Utils.isLoginIn() && !CGSharedPreference.getLoginOut()) {
+                    //判断是否存有JESSIONID
+                    if (!TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID())) {
                         String[] str = CGSharedPreference.getLogin();
-                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
+//                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
+                        //有在调到主页面的同时获取用户信息
+                        if (CGSharedPreference.getNoticeState(1)) {
+                            UserRequest.deviceSave(SplashActivity.this, 0);//注册设备
+                        } else {
+                            UserRequest.deviceSave(SplashActivity.this, 2);//注册设备
+                        }
+                        GlobalHandler.getHandler().sendEmptyMessage(1011);
+                        UserRequest.getUserInfo(SplashActivity.this,CGSharedPreference.getStoreJESSIONID(),CGSharedPreference.getJESSIONID_MD5());
                         Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                         mainIntent.putExtra("from", "splash");
                         startActivity(mainIntent);

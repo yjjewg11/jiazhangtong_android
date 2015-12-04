@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.more;
 
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
@@ -55,11 +56,11 @@ public class HtmlActivity extends BaseActivity{
 
 //        webView.setWebChromeClient(new WebChromeClient());
 //        webView.setWebViewClient(new WebViewClient());
-        syncCookie(httpUrl);
-        webView.loadUrl(httpUrl);
+//        syncCookie(url);
+        webView.loadUrl(url);
     }
 
-    String httpUrl = "http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
+//    String httpUrl = "http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK & webView.canGoBack()){
@@ -77,7 +78,7 @@ public class HtmlActivity extends BaseActivity{
             CookieSyncManager.createInstance(this);
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setAcceptCookie(true);
-            cookieManager.removeSessionCookie();// 移除
+//            cookieManager.removeSessionCookie();// 移除
             cookieManager.removeAllCookie();
             StringBuilder sbCookie = new StringBuilder();
             sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
@@ -85,6 +86,8 @@ public class HtmlActivity extends BaseActivity{
             sbCookie.append(String.format(";path=%s", "/"));
 
             String cookieValue = sbCookie.toString();
+
+            Log.i("TAG","打印cookie ： "+cookieValue);
             cookieManager.setCookie(url, cookieValue);
             CookieSyncManager.getInstance().sync();
 

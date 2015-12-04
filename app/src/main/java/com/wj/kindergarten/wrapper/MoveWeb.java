@@ -15,7 +15,7 @@ import com.wj.kindergarten.ui.other.TopWebView;
 public class MoveWeb implements View.OnTouchListener{
     private TopWebView common_topWeb;
     private int moveGloal;
-    private int upInstance = 60;
+    private int upInstance = 50;
     private WrapperWeb wrapper;
     private DoOwnThing OwnThing;
 

@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.mine;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.MineSchoolActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
@@ -250,7 +252,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
         sexBirthTv.setText((sex == 0 ? "男" : "女") + "     " + birth);
     }
 
-    private void bindSchool(String sid, String cid) {
+    private void bindSchool(final String sid, String cid) {
         TextView titleTv = (TextView) schoolView.findViewById(R.id.item_child_title);
         TextView nameTv = (TextView) schoolView.findViewById(R.id.item_child_name);
         TextView telTv = (TextView) schoolView.findViewById(R.id.item_child_tel);
@@ -259,8 +261,16 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
 
         nameTv.setText("关联学校:" + getSchool(sid));
         telTv.setText("关联班级:" + getClass(cid));
-        nameTv.setCompoundDrawables(null, null, null, null);
-        telTv.setCompoundDrawables(null, null, null, null);
+        nameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //启动相关联的学校
+                Intent intent = new Intent(ChildActivity.this, MineSchoolActivity.class);
+                intent.putExtra("groupuuid", sid);
+                startActivity(intent);
+            }
+        });
+        telTv.setCompoundDrawables(null,null,null,null);
     }
 
     private String getSchool(String id) {

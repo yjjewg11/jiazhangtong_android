@@ -41,17 +41,22 @@ import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
+import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
+import com.wj.kindergarten.ui.imagescan.GalleryImagesActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.SystemBarTintManager;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -96,6 +101,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     public RelativeLayout titleRightButton;
     private RelativeLayout title_rl_top;
     private SystemBarTintManager.SystemBarConfig config;
+    public static final int WEB_SECLECT_PIC = 150;
+    private HintInfoDialog upLoadImageDialog;
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -669,6 +676,22 @@ public abstract class BaseActivity extends ActionBarActivity {
         @JavascriptInterface
         public void selectPicFromWeb(){
             //启动选择图片程序并且上传
+            Intent intent = new Intent(BaseActivity.this, GalleryImagesActivity.class);
+            startActivityForResult(intent,WEB_SECLECT_PIC,null);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == WEB_SECLECT_PIC && resultCode == GalleryImagesActivity.RESULT_OK){
+            ArrayList<String> list =  data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
+            int count = 1;
+            String text = "第"+count+"/"+list.size()+"张上传";
+            upLoadImageDialog = new HintInfoDialog(this,text);
+            upLoadImageDialog.show();
+            UploadFile
+        }
+
     }
 }

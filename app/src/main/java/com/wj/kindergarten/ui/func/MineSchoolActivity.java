@@ -1,8 +1,10 @@
 package com.wj.kindergarten.ui.func;
 
         import android.content.Intent;
+        import android.graphics.Color;
         import android.graphics.drawable.Drawable;
         import android.os.Handler;
+        import android.os.Message;
         import android.support.design.widget.TabLayout;
         import android.view.View;
         import android.view.animation.AccelerateDecelerateInterpolator;
@@ -15,8 +17,13 @@ package com.wj.kindergarten.ui.func;
 
         import com.nineoldandroids.animation.ObjectAnimator;
         import com.wenjie.jiazhangtong.R;
+        import com.wj.kindergarten.CGApplication;
         import com.wj.kindergarten.bean.BaseModel;
         import com.wj.kindergarten.bean.CallTransfer;
+        import com.wj.kindergarten.bean.ChildInfo;
+        import com.wj.kindergarten.bean.Group;
+        import com.wj.kindergarten.bean.SchoolDetail;
+        import com.wj.kindergarten.bean.SchoolDetailList;
         import com.wj.kindergarten.net.RequestResultI;
         import com.wj.kindergarten.net.request.UserRequest;
         import com.wj.kindergarten.ui.BaseActivity;
@@ -26,10 +33,12 @@ package com.wj.kindergarten.ui.func;
         import com.wj.kindergarten.ui.recuitstudents.fragments.MineSchoolIntroduceFragment;
         import com.wj.kindergarten.utils.GloablUtils;
         import com.wj.kindergarten.utils.HintInfoDialog;
+        import com.wj.kindergarten.utils.ImageLoaderUtil;
         import com.wj.kindergarten.utils.ShareUtils;
         import com.wj.kindergarten.utils.Utils;
         import com.wj.kindergarten.wrapper.WrapperFl;
 
+        import java.util.ArrayList;
         import java.util.List;
 
 /**
@@ -52,6 +61,72 @@ public class MineSchoolActivity extends BaseActivity{
     private RelativeLayout[] relativeLayouts;
     private TextView tv_coll;
     private ImageView iv_coll;
+    private SchoolDetailList sdl;
+    private FrameLayout tab_layout_fl;
+    private int[] location = new int[2];
+    private SchoolDetail schoolDatil;
+    private TextView tv_study_people;
+    private ImageView iv_madle;
+    private String groupuuid;
+    private RelativeLayout rl_all_content;
+
+    public String getGroupuuid() {
+        return groupuuid;
+    }
+
+    public SchoolDetailList getSdl() {
+        return sdl;
+    }
+
+    private static final int GET_DATA_SUCCESS = 1001;
+    private ObjectAnimator animtor;
+
+    public ObjectAnimator getAnimtor() {
+        return animtor;
+    }
+
+    private Wrapper wrapper;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what){
+                case GET_DATA_SUCCESS:
+
+                    titleCenterTextView.setText(schoolDatil.getBrand_name());
+                    mineSchoolFragment.setUrl(sdl.getObj_url());
+                    ll_school_medal_one = (LinearLayout)findViewById(R.id.ll_school_medal_one);
+                    if(schoolDatil.getSummary() != null){
+                        for(String s : schoolDatil.getSummary().split(",")){
+                            TextView textView = new TextView(MineSchoolActivity.this);
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                            textView.setText(s);
+                            textView.setTextSize(11);
+                            ll_school_medal_one.addView(textView,params);
+                        };
+                    }else{
+                        iv_madle.setVisibility(View.GONE);
+                        ll_school_medal_one.setVisibility(View.GONE);
+                    }
+                    tv_study_people.setTextColor(Color.parseColor("#ff4966"));
+                    tv_study_people.setText(schoolDatil.getCt_study_students()+"人就读");
+                    item_class_name.setText(sdl.getData().getBrand_name());
+                    item_special_course_list_view_tv_adresss.setText(schoolDatil.getAddress());
+                    if(schoolDatil.getDistance() == null){
+                        item_special_course_list_view_tv_distance.setVisibility(View.INVISIBLE);
+                    }
+                    item_special_course_list_view_tv_distance.setText(schoolDatil.getDistance());
+                    item_special_course_list_view__rating_bar.setFloatStar(schoolDatil.getCt_stars(), true);
+                    ImageLoaderUtil.displayMyImage(sdl.getData().getImg(), item_special_course_list_view_image_view);
+
+                    //创建动画
+                    tab_layout_fl.getLocationInWindow(location);
+                    wrapper = new Wrapper(anim_mine_fl);
+                    animtor = ObjectAnimator.ofInt(wrapper,"topMargin",-location[1]).setDuration(1000);
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -65,15 +140,34 @@ public class MineSchoolActivity extends BaseActivity{
     }
 
     @Override
-    protected void onCreate() {
-        //TODO 开启一个假动画
+    protected void titleRightButtonListener() {
+        String shareUrl = null;
+        if(tab_layout.getSelectedTabPosition() == 0){
+            shareUrl = sdl.getShare_url();
+        }else if(tab_layout.getSelectedTabPosition() == 1){
+            shareUrl = sdl.getRecruit_url();
+        }
+        ShareUtils.showShareDialog(this, titleRightImageView, schoolDatil.getBrand_name(),
+                schoolDatil.getBrand_name(), schoolDatil.getImg(), shareUrl, false);
+    }
 
+
+    @Override
+    protected void onCreate() {
+
+
+        groupuuid = getIntent().getStringExtra("groupuuid");
 
         tv_coll = (TextView)findViewById(R.id.textview_1_1);
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
-
+        setTitleText("问界互动家园",R.drawable.school_share);
+        rl_all_content = (RelativeLayout)findViewById(R.id.rl_all_content);
+        rl_all_content.setBackground(null);
+        iv_madle = (ImageView)findViewById(R.id.iv_madle);
+        tab_layout_fl = (FrameLayout)findViewById(R.id.tab_layout_fl);
         ll_school_medal_one = (LinearLayout)findViewById(R.id.ll_school_medal_one);
         item_class_name = (TextView) findViewById(R.id.item_class_name);
+        tv_study_people = (TextView)findViewById(R.id.tv_study_people);
         item_special_course_list_view_tv_adresss = (TextView) findViewById(R.id.item_special_course_list_view_tv_adresss);
         item_special_course_list_view_tv_distance = (TextView) findViewById(R.id.item_special_course_list_view_tv_distance);
         item_special_course_list_view__rating_bar = (RatingBarView)findViewById(R.id.item_special_course_list_view__rating_bar);
@@ -93,6 +187,10 @@ public class MineSchoolActivity extends BaseActivity{
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+
+                if(wrapper.getTopMargin() < 0){
+                    animtor.reverse();
+                }
                 switch (tab.getPosition()){
                     case 0:
                         getSupportFragmentManager().beginTransaction().show(mineSchoolFragment).hide(recruitFragment).hide(assessSchoolFragment).commit();
@@ -100,13 +198,14 @@ public class MineSchoolActivity extends BaseActivity{
                     case 1:
                         if(!isFirst){
                             isFirst = true;
-                            recruitFragment.setUrl("http://www.baidu.com");
+                            recruitFragment.setUrl(sdl.getRecruit_url());
                         }
                         getSupportFragmentManager().beginTransaction().show(recruitFragment).hide(mineSchoolFragment).hide(assessSchoolFragment).commit();
                         break;
                     case 2:
                         if(!isOnce){
                             isOnce = true;
+                            assessSchoolFragment.queryAssess();
                         }
                         getSupportFragmentManager().beginTransaction().show(assessSchoolFragment).hide(recruitFragment).hide(mineSchoolFragment).commit();
                         break;
@@ -121,6 +220,28 @@ public class MineSchoolActivity extends BaseActivity{
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        //获取学校详情
+        UserRequest.getTrainSchoolDetailFromRecruit(this, getGroupuuid(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                sdl = (SchoolDetailList) domain;
+                if(sdl != null && sdl.getData() != null){
+                    schoolDatil =  sdl.getData();
+                    handler.sendEmptyMessage(GET_DATA_SUCCESS);
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
 
             }
         });
@@ -256,4 +377,22 @@ public class MineSchoolActivity extends BaseActivity{
 //            }
 //        });
 //    }
+
+    class Wrapper{
+        FrameLayout frameLayout;
+        private int topMargin;
+
+        public Wrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
+
+        public int getTopMargin() {
+            return ((RelativeLayout.LayoutParams) frameLayout.getLayoutParams()).topMargin;
+        }
+
+        public void setTopMargin(int topMargin) {
+            ((RelativeLayout.LayoutParams) frameLayout.getLayoutParams()).topMargin = topMargin;
+            frameLayout.requestLayout();
+        }
+    }
 }

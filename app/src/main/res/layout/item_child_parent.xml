@@ -32,6 +32,7 @@
             android:layout_marginRight="@dimen/normal_padding"
             android:drawableRight="@drawable/arrow_right"
             android:ellipsize="end"
+            android:background="@drawable/seclector_back_ground_white"
             android:gravity="center_vertical"
             android:singleLine="true" />
 
