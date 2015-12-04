@@ -690,7 +690,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             String text = "第"+count+"/"+list.size()+"张上传";
             upLoadImageDialog = new HintInfoDialog(this,text);
             upLoadImageDialog.show();
-            UploadFile
+//            UploadFile
         }
 
     }
