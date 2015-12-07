@@ -43,7 +43,6 @@ public class MineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).clearCenterIcon();
-        ((MainActivity) getActivity()).setTitleText("我的");
         login = ((CGApplication) CGApplication.getInstance()).getLogin();
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_mine, null, false);
@@ -100,11 +99,11 @@ public class MineFragment extends Fragment {
         if (login != null && login.getList() != null) {
             int i = 0;
             for (final ChildInfo childInfo : login.getList()) {
-                View view = View.inflate(getActivity(), R.layout.item_mine_list, null);
+                View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
                 if (i != login.getList().size() - 1) {
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
-                            LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.big_padding);
+                            LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams.weight = 1;
                     view.setLayoutParams(layoutParams);
                 }
                 view.setOnClickListener(new View.OnClickListener() {
@@ -115,10 +114,9 @@ public class MineFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
-                CircleImage headIv = (CircleImage) view.findViewById(R.id.item_mine_list_head);
-                TextView nameTv = (TextView) view.findViewById(R.id.item_mine_list_name);
-                TextView nickTv = (TextView) view.findViewById(R.id.item_mine_list_nike);
-                TextView sexBTv = (TextView) view.findViewById(R.id.item_mine_list_sexb);
+                CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
+                TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
+
 
                 if (!Utils.stringIsNull(childInfo.getHeadimg())) {
                     ImageLoaderUtil.displayImage(childInfo.getHeadimg(), headIv);
@@ -126,8 +124,6 @@ public class MineFragment extends Fragment {
                     headIv.setImageResource(R.drawable.touxiang);
                 }
                 nameTv.setText(childInfo.getName());
-                nickTv.setText("昵称:" + childInfo.getNickname());
-                sexBTv.setText((childInfo.getSex() == 0 ? "男" : "女") + "        " + childInfo.getBirthday());
 
                 childContent.addView(view);
                 i++;

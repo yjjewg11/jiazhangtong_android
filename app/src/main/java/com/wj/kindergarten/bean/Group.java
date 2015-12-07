@@ -21,6 +21,17 @@ public class Group extends BaseModel {
     @Expose
     private String address;
 
+    @Override
+    public String toString() {
+        return "Group{" +
+                "uuid='" + uuid + '\'' +
+                ", brand_name='" + brand_name + '\'' +
+                ", img='" + img + '\'' +
+                ", link_tel='" + link_tel + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
     public String getUuid() {
         return uuid;
     }

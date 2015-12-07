@@ -62,4 +62,15 @@ public class Login extends BaseModel {
     public void setClass_list(List<Class> class_list) {
         this.class_list = class_list;
     }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "userinfo=" + userinfo +
+                ", list=" + list +
+                ", group_list=" + group_list +
+                ", class_list=" + class_list +
+                ", md5='" + md5 + '\'' +
+                '}';
+    }
 }

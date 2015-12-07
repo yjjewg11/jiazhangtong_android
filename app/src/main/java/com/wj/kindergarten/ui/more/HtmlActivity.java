@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -54,13 +56,15 @@ public class HtmlActivity extends BaseActivity{
         myWebView.getSettings().setDomStorageEnabled(true);
         myWebView.getSettings().setDatabaseEnabled(true);
 
-//        webView.setWebChromeClient(new WebChromeClient());
-//        webView.setWebViewClient(new WebViewClient());
-//        syncCookie(url);
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
+//        WebStorage storage = WebStorage.getInstance();
+//        storage.deleteAllData();
+        syncCookie(url);
         webView.loadUrl(url);
     }
 
-//    String httpUrl = "http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
+    String httpUrl = "http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KeyEvent.KEYCODE_BACK & webView.canGoBack()){
@@ -78,8 +82,14 @@ public class HtmlActivity extends BaseActivity{
             CookieSyncManager.createInstance(this);
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setAcceptCookie(true);
-//            cookieManager.removeSessionCookie();// 移除
-            cookieManager.removeAllCookie();
+            ValueCallback callback = new ValueCallback<Boolean>() {
+                @Override
+                public void onReceiveValue(Boolean value) {
+                         Log.i("TAG","打印callback");
+                }
+            };
+//            cookieManager.removeSessionCookies(callback);// 移除
+//            cookieManager.removeAllCookies(callback);
             StringBuilder sbCookie = new StringBuilder();
             sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
             sbCookie.append(String.format(";domain=%s", ".wenjienet.com"));
@@ -87,9 +97,9 @@ public class HtmlActivity extends BaseActivity{
 
             String cookieValue = sbCookie.toString();
 
-            Log.i("TAG","打印cookie ： "+cookieValue);
-            cookieManager.setCookie(url, cookieValue);
-            CookieSyncManager.getInstance().sync();
+                Log.i("TAG","打印cool ： "+cookieManager.getCookie(url));
+                cookieManager.setCookie(url, cookieValue);
+                CookieSyncManager.getInstance().sync();
 
         } catch (Exception e) {
             e.printStackTrace();

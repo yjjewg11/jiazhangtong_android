@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <com.wj.kindergarten.compounets.CircleImage
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:id="@+id/circle_mine_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="周星星"
+        android:id="@+id/tv_children_name"
+        android:layout_below="@+id/circle_mine_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

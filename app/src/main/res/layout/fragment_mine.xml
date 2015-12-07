@@ -9,14 +9,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/mine_content"
+        <HorizontalScrollView
+            android:background="#ff4966"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/big_padding"
-            android:orientation="vertical">
+            android:layout_height="200dp">
+            <LinearLayout
+                android:id="@+id/mine_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/big_padding"
+                android:orientation="horizontal">
+            </LinearLayout>
 
-        </LinearLayout>
+        </HorizontalScrollView>
+
+
 
         <LinearLayout
             android:id="@+id/ll_store"
@@ -36,7 +43,6 @@
 
             <TextView
                 android:background="@drawable/setting_item_click_selector"
-
                 android:id="@+id/mine_collect"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
