@@ -35,6 +35,7 @@ import java.util.List;
  * @CreateDate: 2015/7/2 17:40
  */
 public class NormalReplyListActivity extends BaseActivity {
+    public static int RECRUIT_STUDENT = 4;
     private PullToRefreshListView mListView = null;
     private LinearLayout layout = null;
 

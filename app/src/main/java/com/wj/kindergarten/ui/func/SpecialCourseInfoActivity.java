@@ -240,7 +240,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
                         three[1].setVisibility(View.INVISIBLE);
                         three[0].setVisibility(View.INVISIBLE);
                         if(!isAssessOne){
-                            getAssess(1);
+                            familyFragment.getAssess(1);
                             isAssessOne = true;
                         }
                         getSupportFragmentManager().beginTransaction().hide(schoolFragment).hide(courseFragment).show(familyFragment).commit();
@@ -341,40 +341,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
 
 
-    }
-
-    public void getAssess(final int page) {
-        //获取该对象的评价
-        dialog.show();
-        UserRequest.getMoreDiscuss(this, uuid, page, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                if (dialog.isShowing()){
-                    dialog.cancel();
-                }
-                MoreDiscussList mdl = (MoreDiscussList) domain;
-                if (mdl.getList() != null && mdl.getList().getData() != null
-                        && mdl.getList().getData().size() > 0) {
-                    familyFragment.addList(mdl.getList().getData());
-                }else{
-                    if(page == 1){
-                        familyFragment.noData();
-                    }
-                    familyFragment.setNoRequest();
-                    ToastUtils.noMoreContentShow();
-                }
-            }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
     }
 
     public void getSchoolInfo(String schooluuid){

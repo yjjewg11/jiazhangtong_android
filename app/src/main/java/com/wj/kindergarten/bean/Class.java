@@ -17,6 +17,15 @@ public class Class extends BaseModel {
     @Expose
     private String groupuuid;
 
+    @Override
+    public String toString() {
+        return "Class{" +
+                "uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", groupuuid='" + groupuuid + '\'' +
+                '}';
+    }
+
     public String getUuid() {
         return uuid;
     }

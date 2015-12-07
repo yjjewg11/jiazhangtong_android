@@ -22,6 +22,7 @@ import com.umeng.update.UmengUpdateAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
 import com.wj.kindergarten.ActivityManger;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.CGSharedPreference;
 
 import com.wj.kindergarten.handler.GlobalHandler;
@@ -53,7 +54,7 @@ public class SplashActivity extends Activity {
             switch (msg.what) {
                 case SPLASH_DELAY:
                     //判断是否存有JESSIONID
-                    if (!TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID())) {
+                    if (!TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID()) && !CGSharedPreference.getLoginOut()) {
                         String[] str = CGSharedPreference.getLogin();
 //                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
                         //有在调到主页面的同时获取用户信息
@@ -108,8 +109,10 @@ public class SplashActivity extends Activity {
             e.printStackTrace();
         }
         com.umeng.socialize.utils.Log.LOG = true;
+
         mHandler.sendEmptyMessageDelayed(SPLASH_DELAY, SLASH_DELAY_TIME);
     }
+
 
     public IUmengRegisterCallback mRegisterCallback = new IUmengRegisterCallback() {
 

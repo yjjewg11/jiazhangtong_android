@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -35,16 +37,11 @@ public class FamilyAssessFragmentThree extends Fragment {
     private PullToRefreshListView mListView;
     private MoreDiscussAdapter adapter;
     private List<MoreDiscuss> moreList = new ArrayList<>();
-    private FrameLayout assess_head;
     private Activity activity;
     private int pageNo = 1;
-    private FrameLayout parent_fl;
     private HintInfoDialog dialog;
+    private RelativeLayout container_ll;
 
-    public void addList(List<MoreDiscuss> list){
-        moreList.addAll(list);
-        adapter.notifyDataSetChanged();
-    }
 
     public PullToRefreshListView getmListView() {
         return mListView;
@@ -62,10 +59,8 @@ public class FamilyAssessFragmentThree extends Fragment {
 
         if(view != null) return view;
         activity =  getActivity();
-        view = inflater.inflate(R.layout.activity_more_special_discuss,null);
-        parent_fl = (FrameLayout)view.findViewById(R.id.parent_fl);
-        assess_head = (FrameLayout)view.findViewById(R.id.assess_head);
-        assess_head.setVisibility(View.GONE);
+        view = View.inflate(getActivity(),R.layout.full_layout_list, null);
+        container_ll = (RelativeLayout)view.findViewById(R.id.course_detail_rl);
         mListView =(PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -81,12 +76,11 @@ public class FamilyAssessFragmentThree extends Fragment {
         });
         adapter =  new MoreDiscussAdapter(getActivity());
         mListView.setAdapter(adapter);
-        adapter.setList(moreList);
         return view;
     }
 
     public void noData(){
-        ((BaseActivity)activity).noView(parent_fl);
+        ((BaseActivity)activity).noView(container_ll);
     }
 
     public void getAssess(final int page) {
@@ -101,16 +95,19 @@ public class FamilyAssessFragmentThree extends Fragment {
                 MoreDiscussList mdl = (MoreDiscussList) domain;
                 if (mdl.getList() != null && mdl.getList().getData() != null
                         && mdl.getList().getData().size() > 0) {
-                    addList(mdl.getList().getData());
+                    moreList.addAll(mdl.getList().getData());
+                    adapter.setList(moreList);
                 } else {
                     if (page == 1) {
                         if(activity instanceof SpecialCourseInfoActivity){
                             ((SpecialCourseInfoActivity)activity).familyFragment.noData();
                         }
 
+                    }else{
+                        ((SpecialCourseInfoActivity)activity).familyFragment.setNoRequest();
+                        ToastUtils.noMoreContentShow();
                     }
-                    ((SpecialCourseInfoActivity)activity).familyFragment.setNoRequest();
-                    ToastUtils.noMoreContentShow();
+
                 }
             }
 

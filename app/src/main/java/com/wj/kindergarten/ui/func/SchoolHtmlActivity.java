@@ -62,7 +62,6 @@ public class SchoolHtmlActivity extends BaseActivity {
     private WebFragment recuritFragment;
     private WebFragment2 schoolFragment;
     private SchoolAssessFragment schoolAssessFragment;
-    private TrainSchoolInfo schoolInfo;
     private HintInfoDialog hintDialog;
     private SchoolDetailList sdl;
     private SchoolDetail schoolDetail;
@@ -73,6 +72,7 @@ public class SchoolHtmlActivity extends BaseActivity {
     private int upInstance = 100;
     private ImageView iv_madle;
     private TextView tv_study_people;
+    private String schoolUuid;
 
 
     public HintInfoDialog getHintDialog() {
@@ -96,6 +96,7 @@ public class SchoolHtmlActivity extends BaseActivity {
                     }else{
                         item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
                     }
+                    titleCenterTextView.setText(schoolDetail.getBrand_name());
                     item_class_name.setText(schoolDetail.getBrand_name());
                     tv_study_people.setText(schoolDetail.getCt_study_students()+"人就读");
                     tv_study_people.setTextColor(Color.parseColor("#ff4966"));
@@ -168,7 +169,7 @@ public class SchoolHtmlActivity extends BaseActivity {
         hintDialog = new HintInfoDialog(this);
         hintDialog.show();
         Intent intent = getIntent();
-        schoolInfo = (TrainSchoolInfo)intent.getSerializableExtra("object");
+        schoolUuid = intent.getStringExtra("uuid");
         //获取学校详情
         getSchoolTrainInfo();
 
@@ -182,7 +183,7 @@ public class SchoolHtmlActivity extends BaseActivity {
         item_special_course_list_view__rating_bar = (RatingBarView)findViewById(R.id.item_special_course_list_view__rating_bar);
         item_special_course_list_view_image_view = (ImageView)findViewById(R.id.item_special_course_list_view_image_view);
 
-        titleCenterTextView.setText(schoolInfo.getBrand_name());
+
         tv_coll = (TextView)findViewById(R.id.textview_1_1);
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
         tab_layout = (TabLayout)findViewById(R.id.common_tab_layout);
@@ -247,7 +248,7 @@ public class SchoolHtmlActivity extends BaseActivity {
 
     //根据学校uuid获取学校详情
     private void getSchoolTrainInfo() {
-        UserRequest.getTrainSchoolDetailFromRecruit(this, schoolInfo.getUuid(), new RequestResultI() {
+        UserRequest.getTrainSchoolDetailFromRecruit(this, schoolUuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 sdl = (SchoolDetailList) domain;
@@ -273,7 +274,7 @@ public class SchoolHtmlActivity extends BaseActivity {
     private void store() {
         dialog = new HintInfoDialog(this, "收藏中，请稍后...");
         dialog.show();
-        UserRequest.store(this, schoolDetail.getBrand_name(), 82, schoolDetail.getUuid(), "", new RequestResultI() {
+        UserRequest.store(this, schoolDetail.getBrand_name(), 4, schoolDetail.getUuid(), "", new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();

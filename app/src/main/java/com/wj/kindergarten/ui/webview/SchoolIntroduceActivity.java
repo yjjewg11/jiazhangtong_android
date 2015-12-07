@@ -198,7 +198,7 @@ public class SchoolIntroduceActivity extends BaseActivity {
 
                 Intent intent = new Intent(SchoolIntroduceActivity.this, SchoolHtmlActivity.class);
                 //点击带入对象，因为那边要显示信息
-                intent.putExtra("object",(TrainSchoolInfo)adapter.getItem(position-1));
+                intent.putExtra("uuid",((TrainSchoolInfo)adapter.getItem(position-1)).getUuid());
                 startActivity(intent);
             }
         });

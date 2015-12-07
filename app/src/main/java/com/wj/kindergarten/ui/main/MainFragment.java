@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -94,10 +95,16 @@ public class MainFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
             ViewGroup viewGroup = (ViewGroup) rootView.findViewById(R.id.other_ads);
-            Utils.ads(getActivity(),viewGroup);
+            Utils.ads(getActivity(), viewGroup);
 
             initViews(rootView);
-            success();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    success();
+                }
+            },2000);
+
             queryMore();
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();

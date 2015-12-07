@@ -195,7 +195,7 @@ public class CourseDetailIntroduceFragment extends Fragment implements View.OnTo
 				MoreDiscussList mdl = (MoreDiscussList) domain;
 				if (mdl.getList() != null && mdl.getList().getData() != null
 						&& mdl.getList().getData().size() > 0) {
-					familyFragment.addList(mdl.getList().getData());
+//					familyFragment.addList(mdl.getList().getData());
 				} else {
 					if (page == 1) {
 						familyFragment.noData();

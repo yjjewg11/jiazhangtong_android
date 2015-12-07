@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,20 +33,20 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
+import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
+import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.imagescan.GalleryImagesActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.SystemBarTintManager;
-import com.wj.kindergarten.ui.webview.WebviewActivity;
 
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -56,7 +55,6 @@ import com.wj.kindergarten.utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -681,16 +679,43 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    int count = 0;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == WEB_SECLECT_PIC && resultCode == GalleryImagesActivity.RESULT_OK){
-            ArrayList<String> list =  data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
-            int count = 1;
-            String text = "第"+count+"/"+list.size()+"张上传";
-            upLoadImageDialog = new HintInfoDialog(this,text);
+            final ArrayList<String> list =  data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
+            if(data == null && list.size() <= 0) return ;
+            int haoma = 0;
+            count = haoma;
+            upLoadImageDialog = new HintInfoDialog(this,"第1张上传");
             upLoadImageDialog.show();
-//            UploadFile
+            UploadFile uploadFile = new UploadFile(CGApplication.context, new UploadImage() {
+                @Override
+                public void success(Result result) {
+                    count++;
+                    if(count > list.size()){
+                        //回调网页接口，上传完成
+                        upLoadImageDialog.cancel();
+
+                    }else{
+                        list.add(result.getImgUrl());
+                        upLoadImageDialog.setText("第"+count+"/"+list.size()+"张上传");
+                    }
+
+                }
+
+                @Override
+                public void failure(String message) {
+
+                }
+            }, 0, 720, 1280);
+
+            for(String path : list){
+                uploadFile.upload(path);
+            }
+
+
         }
 
     }

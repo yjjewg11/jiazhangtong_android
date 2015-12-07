@@ -65,6 +65,39 @@ public class ChildInfo extends BaseModel {
     @Expose
     private String uuid;
 
+    @Override
+    public String toString() {
+        return "ChildInfo{" +
+                "birthday='" + birthday + '\'' +
+                ", sex=" + sex +
+                ", other_tel='" + other_tel + '\'' +
+                ", ma_work='" + ma_work + '\'' +
+                ", ye_tel='" + ye_tel + '\'' +
+                ", groupuuid='" + groupuuid + '\'' +
+                ", waigong_tel='" + waigong_tel + '\'' +
+                ", password='" + password + '\'' +
+                ", loginname='" + loginname + '\'' +
+                ", ba_name='" + ba_name + '\'' +
+                ", ma_name='" + ma_name + '\'' +
+                ", classuuid='" + classuuid + '\'' +
+                ", login_time='" + login_time + '\'' +
+                ", waipo_tel='" + waipo_tel + '\'' +
+                ", name='" + name + '\'' +
+                ", note='" + note + '\'' +
+                ", ma_tel='" + ma_tel + '\'' +
+                ", last_login_time='" + last_login_time + '\'' +
+                ", ba_tel='" + ba_tel + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", headimg='" + headimg + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", ba_work='" + ba_work + '\'' +
+                ", address='" + address + '\'' +
+                ", nai_tel='" + nai_tel + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", uuid='" + uuid + '\'' +
+                '}';
+    }
+
     public String getBirthday() {
         return birthday;
     }

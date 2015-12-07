@@ -161,4 +161,25 @@ public class UserInfo extends BaseModel {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "office='" + office + '\'' +
+                ", sex='" + sex + '\'' +
+                ", last_login_time='" + last_login_time + '\'' +
+                ", tel='" + tel + '\'' +
+                ", img='" + img + '\'' +
+                ", tel_verify=" + tel_verify +
+                ", type=" + type +
+                ", password='" + password + '\'' +
+                ", loginname='" + loginname + '\'' +
+                ", login_time='" + login_time + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", create_time='" + create_time + '\'' +
+                ", disable=" + disable +
+                ", uuid='" + uuid + '\'' +
+                '}';
+    }
 }

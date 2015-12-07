@@ -53,6 +53,7 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
             switch (msg.what) {
                 case HAVE_ASSESS:
                     float star = Float.valueOf(schoolState.getScore());
+                    et_mine_school.setText(schoolState.getContent());
                     modifaFiled(new ModificationFiled(star,false,schoolState.getContent(), R.color.white,"已评价(点击修改)",R.drawable.submit_mine_white,R.color.gray_red,null,"匿名评论"));
                     break;
                 case NO_ASSESS:
@@ -65,6 +66,8 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
 
 
     int niming = 1;
+    private boolean isFirst;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -159,11 +162,16 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
                     public void result(BaseModel domain) {
                         if(dialog.isShowing()){dialog.cancel();}
                         String text = null;
+                        String content = null;
                         if(niming == 1){
                             text = "匿名";
                         }else{
                             text = "匿名评论";
                         }
+//                        if(!isFirst){
+//                            isFirst = true;
+//                            et_mine_school.setText(schoolState.getContent());
+//                        }
                         modifaFiled(new ModificationFiled(mime_school_rating_bar.getClickedCount(), false, schoolState.getContent(),
                                 R.color.white, "已评价(点击修改)", R.drawable.submit_mine_white,R.color.white,null,text));
                     }
@@ -183,7 +191,6 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
     private void modifaFiled(ModificationFiled modificationFiled) {
         mime_school_rating_bar.setFloatStar(Float.valueOf(modificationFiled.getStar() * 10), true);
         mime_school_rating_bar.setmClickable(modificationFiled.isClicked);
-        et_mine_school.setText(modificationFiled.getEtText());
         et_mine_school.setClickable(modificationFiled.isClicked);
         et_mine_school.setFocusable(false);
         et_mine_school.setFocusableInTouchMode(modificationFiled.isClicked);

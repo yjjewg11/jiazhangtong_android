@@ -23,7 +23,6 @@ public class MoreDiscussAdapter extends BaseAdapter{
 
     public void setList(List<MoreDiscuss> list){
         this.list.clear();
-
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -62,14 +61,18 @@ public class MoreDiscussAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        MoreDiscuss md = list.get(position);
+        MoreDiscuss md = null;
+        md = list.get(position);
         if(md != null){
             viewHolder.ratingBarView.setFloatStar(md.getScore(),true);
             viewHolder.more_discuss_content.setText(""+md.getContent());
             viewHolder.more_discuss_mobile_number.setText(""+md.getCreate_user());
             viewHolder.more_discuss_time.setText(""+ TimeUtil.getYMDTimeFromYMDHMS(md.getCreate_time()));
         }else{
-
+            viewHolder.ratingBarView.setFloatStar(30,true);
+            viewHolder.more_discuss_content.setText("sssss");
+            viewHolder.more_discuss_mobile_number.setText("fffff");
+            viewHolder.more_discuss_time.setText("aaaaa");
         }
         return convertView;
     }
