@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+
+    <ImageView
+        android:src="@drawable/touxiang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_found_grid_item"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:textColor="#313131"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="列表"
+        android:id="@+id/tv_found_grid_name"
+        android:layout_below="@+id/iv_found_grid_item"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp" />
+
+    <TextView
+        android:textSize="@dimen/margin_10"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:minWidth="22dp"
+        android:background="@drawable/found_count_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="28"
+        android:id="@+id/tv_found_grid_count"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/iv_found_grid_item" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -22,6 +22,7 @@ import com.wj.kindergarten.ui.mine.SettingActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.utils.WindowUtils;
 
 /**
  * MainFragment
@@ -43,6 +44,7 @@ public class MineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).clearCenterIcon();
+        ((MainActivity) getActivity()).setText("");
         login = ((CGApplication) CGApplication.getInstance()).getLogin();
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_mine, null, false);
@@ -88,10 +90,15 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //启动招生学校界面.
-                Intent intent = new Intent(getActivity(),MineSchoolActivity.class);
+                Intent intent = new Intent(getActivity(), MineSchoolActivity.class);
                 startActivity(intent);
             }
         });
+    }
+    private void setMargin(LinearLayout.LayoutParams params,int margin){
+        params.leftMargin = margin;
+
+//        params.rightMargin = margin;
     }
 
     public void addChildren() {
@@ -100,12 +107,27 @@ public class MineFragment extends Fragment {
             int i = 0;
             for (final ChildInfo childInfo : login.getList()) {
                 View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
-                if (i != login.getList().size() - 1) {
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
                             LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    layoutParams.weight = 1;
-                    view.setLayoutParams(layoutParams);
-                }
+                //动态设置判断添加
+                int size = login.getList().size();
+                    if(size == 1){
+                        setMargin(layoutParams, WindowUtils.dm.widthPixels/2);
+                    }else if(size == 2){
+                        setMargin(layoutParams, WindowUtils.dm.widthPixels/4);
+                    }else if(size == 3){
+                        setMargin(layoutParams, WindowUtils.dm.widthPixels/6);
+                    }else{
+                        setMargin(layoutParams, WindowUtils.dm.widthPixels/7);
+                        if(i == 0){
+                            layoutParams.leftMargin = WindowUtils.dm.widthPixels/7/2;
+                        }
+                        if(i == login.getList().size()-1){
+                            layoutParams.rightMargin = WindowUtils.dm.widthPixels/7/2;
+                        }
+                    }
+
+
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -125,7 +147,7 @@ public class MineFragment extends Fragment {
                 }
                 nameTv.setText(childInfo.getName());
 
-                childContent.addView(view);
+                childContent.addView(view,layoutParams);
                 i++;
             }
         }

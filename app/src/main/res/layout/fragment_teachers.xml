@@ -5,6 +5,8 @@
     android:background="@color/main_bg"
     android:orientation="vertical">
 
+    <include layout="@layout/title_normal"/>
+
     <ScrollView
         android:id="@+id/sv_address_book"
         android:layout_width="match_parent"

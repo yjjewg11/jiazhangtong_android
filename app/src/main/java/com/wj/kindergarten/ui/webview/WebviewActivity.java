@@ -105,13 +105,9 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                         TextView item_special_course_list_view_tv_study_people = (TextView) view.findViewById(R.id.item_special_course_list_view_tv_study_people);
                         ratingBar.setFloatStar(object.getCt_stars(), true);
                         ImageLoaderUtil.displayMyImage(object.getLogo(), imageView);
-//                        if(Utils.MearsureText(object.getTitle())> (item_class_name.getWidth() - 10)){
-//
-//                        }
+
                         item_class_name.setText("" + object.getTitle());
-//                                .length() > 15 ? (object.getTitle().substring(0,8)+"...") : object.getTitle()));
                         item_special_course_list_view_tv_adresss.setText(""+object.getAddress());
-//                                .length() > 8 ? (object.getAddress().substring(0,8)+"...") : object.getAddress()));
                         //TODO
                         String text = "<font  color='#ff4966'>"+object.getCt_study_students()+"</font>"+"人已学";
                         item_special_course_list_view_tv_distance.setText(""+object.getDistance());
@@ -162,8 +158,6 @@ protected void setNeedLoading() {
 
     @Override
     protected void onCreate() {
-        String title = getIntent().getStringExtra("title");
-//        setTitleText(title);
         setViews();
     }
 

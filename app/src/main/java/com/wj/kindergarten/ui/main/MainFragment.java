@@ -12,17 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import com.adsmogo.adview.AdsMogoLayout;
-import com.adsmogo.util.AdsMogoLayoutPosition;
-import com.adsmogo.util.AdsMogoSize;
-import com.adsmogo.util.AdsMogoType;
 
 import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
@@ -44,6 +38,7 @@ import com.wj.kindergarten.ui.func.FoodListActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NoticeListActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
+import com.wj.kindergarten.ui.func.TeachersActivity;
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
 
 import com.wj.kindergarten.ui.more.MoreUtil;
@@ -264,30 +259,36 @@ public class MainFragment extends Fragment {
     private void initMainItem() {
         mainItems.clear();
 
-        MainItem gardenInteraction = new MainItem(R.drawable.main_hudong, "互动", Constants.GARDEN_INTERACTION);
-        MainItem gardenDes = new MainItem(R.drawable.main_item_xiaoyuan, "宝宝入学", Constants.GARDEN_DES);
-        MainItem gardenNotice = new MainItem(R.drawable.main_item_gonggao, "公告", Constants.GARDEN_NOTICE);
-        MainItem gardenSign = new MainItem(R.drawable.main_item_qiandao, "签到记录", Constants.GARDEN_SIGN);
-        MainItem gardenCourse = new MainItem(R.drawable.main_item_kebiao, "课程表", Constants.GARDEN_COURSE);
-        MainItem gardenFoods = new MainItem(R.drawable.main_item_shipu, "食谱", Constants.GARDEN_FOODS);
-        MainItem gardenArticle = new MainItem(R.drawable.main_item_jingpin, "精品文章", Constants.GARDEN_ARTICLE);
-        MainItem gardenSpecial = new MainItem(R.drawable.main_item_techang, "特长课程", Constants.GARDEN_SPECIAL);
-        MainItem privilegeActive = new MainItem(R.drawable.youhuihuodong90,"优惠活动",Constants.PRIVIAL_ACTIVE);
+        MainItem gardenInteraction = new MainItem(R.drawable.banjihudong, "班级互动", Constants.GARDEN_INTERACTION);
+        MainItem gardenDes = new MainItem(R.drawable.baobaoruxue, "宝宝入学", Constants.GARDEN_DES);
+        MainItem gardenNotice = new MainItem(R.drawable.gonggao, "校园公告", Constants.GARDEN_NOTICE);
+        MainItem gardenSign = new MainItem(R.drawable.qiandao, "签到记录", Constants.GARDEN_SIGN);
+        MainItem gardenCourse = new MainItem(R.drawable.kechenbiao, "课程表", Constants.GARDEN_COURSE);
+        MainItem gardenFoods = new MainItem(R.drawable.shipu, "每日食谱", Constants.GARDEN_FOODS);
+//        MainItem gardenArticle = new MainItem(R.drawable.main_item_jingpin, "精品文章", Constants.GARDEN_ARTICLE);
+//        MainItem gardenSpecial = new MainItem(R.drawable.main_item_techang, "特长课程", Constants.GARDEN_SPECIAL);
+//        MainItem privilegeActive = new MainItem(R.drawable.youhuihuodong90,"优惠活动",Constants.PRIVIAL_ACTIVE);
 
-        MainItem gardenTeacher = new MainItem(R.drawable.main_item_pinjia, "评价老师", Constants.GARDEN_TEACHER);
-        MainItem gardenMore = new MainItem(R.drawable.main_more_1, "更多", Constants.GARDEN_MORE);
+        MainItem gardenTeacher = new MainItem(R.drawable.pingjialaoshi, "评价老师", Constants.GARDEN_TEACHER);
+        MainItem gardenMore = new MainItem(R.drawable.gengduo, "更多", Constants.GARDEN_MORE);
+        MainItem gradenList = new MainItem(R.drawable.tongxunlu,"通讯录",Constants.GARDEN_ADDRESS_LIST);
 
-        mainItems.add(gardenInteraction);
-        mainItems.add(gardenDes);
-        mainItems.add(gardenNotice);
-        mainItems.add(gardenSign);
-        mainItems.add(gardenCourse);
-        mainItems.add(gardenFoods);
-        mainItems.add(gardenArticle);
-        mainItems.add(gardenSpecial);
-        mainItems.add(privilegeActive);
-        mainItems.add(gardenTeacher);
-        mainItems.add(gardenMore);
+        mainItems.add(gardenInteraction);//互动
+        mainItems.add(gardenCourse);//课程表
+        mainItems.add(gardenFoods);//食谱
+        mainItems.add(gardenNotice);//校园公告
+        mainItems.add(gardenSign);//签到记录
+        mainItems.add(gardenTeacher);//评价老师
+        mainItems.add(gardenDes);//宝宝入学
+        mainItems.add(gradenList);//通讯录
+        mainItems.add(gardenMore);//更多
+
+
+//        mainItems.add(gardenArticle);
+//        mainItems.add(gardenSpecial);
+//        mainItems.add(privilegeActive);
+
+
     }
 
     private void mainItemsClick(MainItem mainItem) {
@@ -339,6 +340,9 @@ public class MainFragment extends Fragment {
                 if (list.size() > 0) {
                     MoreUtil.more(getActivity(), list, mainGv);
                 }
+                break;
+            case Constants.GARDEN_ADDRESS_LIST:
+                startActivity(new Intent(getActivity(),TeachersActivity.class));
                 break;
             default:
                 break;
