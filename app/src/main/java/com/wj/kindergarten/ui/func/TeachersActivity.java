@@ -1,13 +1,9 @@
-package com.wj.kindergarten.ui.main;
+package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -39,8 +35,7 @@ import java.util.List;
  * @Author: Wave
  * @CreateDate: 2015/7/17 11:34
  */
-public class TeachersFragment extends Fragment {
-    private View rootView;
+public class TeachersActivity extends BaseActivity {
     private LinearLayout layoutTeachers = null;
 
     private RelativeLayout layoutLoad = null;
@@ -49,40 +44,41 @@ public class TeachersFragment extends Fragment {
     private ProgressBar progressBar = null;
     private ScrollView scrollView = null;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ((BaseActivity) getActivity()).clearCenterIcon();
-        ((BaseActivity) getActivity()).setTitleText("通讯录");
-        if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_teachers, null, false);
-            initViews(rootView);
-        }
-        ViewGroup parent = (ViewGroup) rootView.getParent();
-        if (parent != null) {
-            parent.removeView(rootView);
-        }
+    protected void setContentLayout() {
 
-        return rootView;
+        layoutId = R.layout.fragment_teachers;
     }
 
-    private void initViews(View rootView) {
-        layoutTeachers = (LinearLayout) rootView.findViewById(R.id.layout_teachers);
-        scrollView = (ScrollView) rootView.findViewById(R.id.sv_address_book);
+    @Override
+    protected void setNeedLoading() {
+
+    }
+
+    @Override
+    protected void onCreate() {
+        setTitleText("通讯录");
+        initViews();
+    }
+
+
+    private void initViews() {
+        layoutTeachers = (LinearLayout) findViewById(R.id.layout_teachers);
+        scrollView = (ScrollView) findViewById(R.id.sv_address_book);
         scrollView.setVisibility(View.GONE);
-        ivLoadFailure = (ImageView) rootView.findViewById(R.id.iv_load_failure);
-        progressBar = (ProgressBar) rootView.findViewById(R.id.info_loading_progress);
-        tvLoadInfo = (TextView) rootView.findViewById(R.id.info_loading_load);
-        layoutLoad = (RelativeLayout) rootView.findViewById(R.id.layout_reload_2);
+        ivLoadFailure = (ImageView) findViewById(R.id.iv_load_failure);
+        progressBar = (ProgressBar) findViewById(R.id.info_loading_progress);
+        tvLoadInfo = (TextView) findViewById(R.id.info_loading_load);
+        layoutLoad = (RelativeLayout) findViewById(R.id.layout_reload_2);
         queryTeachers();
 
         if (EmotManager.getEmots().size() == 0) {
-            AddressBookRequest.getEmot(getActivity());
+            AddressBookRequest.getEmot(this);
         }
     }
 
     private void queryTeachers() {
-        AddressBookRequest.getTeachers(getActivity(), new RequestResultI() {
+        AddressBookRequest.getTeachers(this, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 AddressBook addressBook = (AddressBook) domain;
@@ -103,7 +99,7 @@ public class TeachersFragment extends Fragment {
             @Override
             public void failure(String message) {
                 if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(getActivity(), message);
+                    Utils.showToast(TeachersActivity.this, message);
                 }
 
                 loadFailure();
@@ -120,7 +116,7 @@ public class TeachersFragment extends Fragment {
                 addLeader(i, t1.get(i), count);
             }
 
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_teacher_item_2, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.fragment_teacher_item_2, null);
             layoutTeachers.addView(view);
         }
 
@@ -135,7 +131,7 @@ public class TeachersFragment extends Fragment {
 
     private void addLeader(int i, final Teacher teacher, int count) {
         if (null != teacher) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_teacher_item, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.fragment_teacher_item, null);
             CircleImage head = (CircleImage) view.findViewById(R.id.iv_head);
             if (!Utils.stringIsNull(teacher.getImg())) {
                 ImageLoaderUtil.displayImage(teacher.getImg(), head);
@@ -150,9 +146,9 @@ public class TeachersFragment extends Fragment {
             message.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), LeaderMessageActivty.class);
+                    Intent intent = new Intent(TeachersActivity.this, LeaderMessageActivty.class);
                     intent.putExtra("teacher", teacher);
-                    getActivity().startActivity(intent);
+                    startActivity(intent);
                 }
             });
             LinearLayout line = (LinearLayout) view.findViewById(R.id.layout_line);
@@ -166,7 +162,7 @@ public class TeachersFragment extends Fragment {
 
     private void addTeacher(int i, final Teacher teacher, int count) {
         if (null != teacher) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_teacher_item, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.fragment_teacher_item, null);
             CircleImage head = (CircleImage) view.findViewById(R.id.iv_head);
             ImageLoaderUtil.displayImage(teacher.getImg(), head);
             TextView name = (TextView) view.findViewById(R.id.tv_name);
@@ -188,9 +184,9 @@ public class TeachersFragment extends Fragment {
             message.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), TeacherMessageActivty.class);
+                    Intent intent = new Intent(TeachersActivity.this, TeacherMessageActivty.class);
                     intent.putExtra("teacher", teacher);
-                    getActivity().startActivity(intent);
+                    startActivity(intent);
                 }
             });
             LinearLayout line = (LinearLayout) view.findViewById(R.id.layout_line);
@@ -206,21 +202,23 @@ public class TeachersFragment extends Fragment {
     private void empty() {
         progressBar.setVisibility(View.GONE);
         ivLoadFailure.setVisibility(View.GONE);
-        tvLoadInfo.setText(getActivity().getString(R.string.loading_empty));
+        tvLoadInfo.setText(getString(R.string.loading_empty));
     }
 
     private void loadFailure() {
         progressBar.setVisibility(View.GONE);
         ivLoadFailure.setVisibility(View.VISIBLE);
-        tvLoadInfo.setText(getActivity().getString(R.string.loading_failed));
+        tvLoadInfo.setText(getString(R.string.loading_failed));
         layoutLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 ivLoadFailure.setVisibility(View.GONE);
-                tvLoadInfo.setText(getActivity().getString(R.string.loading_content));
+                tvLoadInfo.setText(getString(R.string.loading_content));
                 queryTeachers();
             }
         });
     }
+
+
 }

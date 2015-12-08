@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -54,6 +55,7 @@ public class MessageFragment extends Fragment {
     private MessageAdapter adapter;
     private ArrayList<MsgDataModel> dataList = new ArrayList<MsgDataModel>();
     private int nowPage = 1;
+    private RelativeLayout message_list_rl;
 
     @Nullable
     @Override
@@ -63,6 +65,7 @@ public class MessageFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null, false);
 
+            message_list_rl = (RelativeLayout)rootView.findViewById(R.id.message_list_rl);
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list);
             adapter = new MessageAdapter(getActivity(), dataList);
             mListView.setDividerDrawable(getResources().getDrawable(R.color.line));
@@ -208,7 +211,7 @@ public class MessageFragment extends Fragment {
                     mListView.onRefreshComplete();
                 }
                 Msg msg = (Msg) domain;
-                if (msg != null && msg.getList() != null) {
+                if (msg != null && msg.getList() != null ) {
                     if (page == 1) {
                         dataList.clear();
                     }
@@ -220,6 +223,7 @@ public class MessageFragment extends Fragment {
                         mListView.onRefreshComplete();
                     }
                     Utils.showToast(CGApplication.getInstance(), "消息列表为空");
+                    ((MainActivity)getActivity()).commonClosePullToRefreshListGridView(mListView);
                 }
             }
 

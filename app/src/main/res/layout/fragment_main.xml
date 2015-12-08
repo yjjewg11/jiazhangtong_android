@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:descendantFocusability="afterDescendants"
                 android:listSelector="@android:color/transparent"
-                android:numColumns="4" />
+                android:numColumns="3" />
         </LinearLayout>
     </LinearLayout>
 

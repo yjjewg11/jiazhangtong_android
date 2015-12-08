@@ -1,12 +1,8 @@
 package com.wj.kindergarten.ui.main;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 
 import android.net.Uri;
 import android.os.Handler;
@@ -21,10 +17,6 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 
-import com.umeng.onlineconfig.OnlineConfigAgent;
-import com.umeng.onlineconfig.OnlineConfigLog;
-import com.umeng.onlineconfig.UmengOnlineConfigureListener;
-
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -38,8 +30,6 @@ import com.wj.kindergarten.bean.MainTopic;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
 
-import com.wj.kindergarten.bean.VersionInfo;
-
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
@@ -48,32 +38,31 @@ import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
+import com.wj.kindergarten.ui.func.TeachersActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
 
 
-import org.json.JSONObject;
-
 import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
     //Fragment界面数组
-    private Class fragmentArray[] = {MainFragment.class, TeachersFragment.class, MessageFragment.class,
-            MineFragment.class};
+    private Class fragmentArray[] = {MainFragment.class, FoundFragment.class, MessageFragment.class,
+            SpecialCourseFragment.class,MineFragment.class};
     //Tab选项卡图片
-    private int mImageViewArray[] = {R.drawable.main_tab, R.drawable.contact_tab,
-            R.drawable.message_tab_2, R.drawable.mine_tab};
+    private int mImageViewArray[] = {R.drawable.school_tab, R.drawable.found_tab,
+            R.drawable.message_tab_2, R.drawable.special_tab,R.drawable.mine_tab};
 
-    private int mImageViewArray2[] = {R.drawable.main_tab, R.drawable.contact_tab,
-            R.drawable.message_tab, R.drawable.mine_tab};
+    private int mImageViewArray2[] = {R.drawable.school_tab, R.drawable.found_tab,
+            R.drawable.message_tab, R.drawable.special_tab,R.drawable.mine_tab};
     //Tab选项卡的文字
-    private String mTabIdArray[] = {"首页", "通讯录", "消息", "我的"};
+    private String mTabIdArray[] = {"学校", "发现", "消息", "特长课程","我的"};
     private FragmentTabHost mTabHost;
     //message bottom tab item view
-    private View[] mTabViews = new View[4];
+    private View[] mTabViews = new View[5];
     private String nowTab = mTabIdArray[0];
     private static final int BACK_QUIT = 2000;
     public static final int FIND_TO_MAP = 1;
@@ -98,6 +87,10 @@ public class MainActivity extends BaseActivity {
     protected void setNeedLoading() {
     }
 
+
+    public void setText(String text){
+        titleCenterTextView.setText(text);
+    }
 
     @Override
     protected void onCreate() {
@@ -258,7 +251,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (mTabIdArray[3].equals(nowTab)) {
-            MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+            MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
             mineFragment.addChildren();
         }
     }
