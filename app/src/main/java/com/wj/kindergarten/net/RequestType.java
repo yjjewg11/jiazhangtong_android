@@ -71,4 +71,6 @@ public interface RequestType {
      int GET_USER_INFO = 157;//获取用户信息
      int GET_TOPIC_CONFIG = 158;
      int GET_MAIN_TOPIC = 159;
+     int FOUND_TYPE_COUNT = 160;
+     int FOUND_HOT_SELECTION = 161;
 }

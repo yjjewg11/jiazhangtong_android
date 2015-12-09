@@ -3,6 +3,7 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
 
@@ -117,8 +118,10 @@ public final class UserRequest {
     private static final String GET_USER_INFO = "rest/userinfo/getUserinfo.json";
     private static final String GET_TOPIC_CONFIG = "rest/share/getConfig.json";
     private static final String  GET_MAIN_TOPIC = "rest/userinfo/getMainTopic.json";
-    private static final String CLICKANDREFRESHTOPIC = "rest/userinfo/getMainTopic_cb.json";
+    private static final String CLICK_AND_REFRESH_TOPIC = "rest/userinfo/getMainTopic_cb.json";
     private static final String GET_SCHOOL_ASSESS_STATE = "rest/appraise/queryMyKDByPage.json";
+    private static final String FOUND_TYPE_COUNT = "rest/userinfo/getNewMsgNumber.json";
+    private static final String FOUND_HOT_SELECTION = "rest/snsTopic/hotByPage.json";
 
     private UserRequest() {
     }
@@ -797,8 +800,34 @@ public final class UserRequest {
         SendRequest.getInstance().get(context,RequestType.GET_MAIN_TOPIC,params,RequestHttpUtil.BASE_URL+GET_MAIN_TOPIC,resultI);
     }
 
-    public static void clickAndRefreshTopic(Context context,RequestResultI resultI){
+    public static void clickAndRefreshTopic(Context context){
         RequestParams params = new RequestParams();
-        SendRequest.getInstance().get(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+CLICKANDREFRESHTOPIC,resultI);
+        SendRequest.getInstance().get(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL + CLICK_AND_REFRESH_TOPIC, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
+    public static void getTypeCount(Context context, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context,RequestType.FOUND_TYPE_COUNT,params,RequestHttpUtil.BASE_URL+FOUND_TYPE_COUNT,resultI);
+    }
+
+    public static void getFoundHotSeclection(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.FOUND_HOT_SELECTION,params,RequestHttpUtil.BASE_URL+FOUND_HOT_SELECTION,resultI);
     }
 }

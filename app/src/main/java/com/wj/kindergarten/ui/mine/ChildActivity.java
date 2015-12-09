@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.mine;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -265,6 +266,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 //启动相关联的学校
+                if(TextUtils.isEmpty(sid)) return;
                 Intent intent = new Intent(ChildActivity.this, MineSchoolActivity.class);
                 intent.putExtra("groupuuid", sid);
                 startActivity(intent);

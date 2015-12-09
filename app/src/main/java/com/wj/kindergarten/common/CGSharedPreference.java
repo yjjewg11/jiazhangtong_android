@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
+import com.wj.kindergarten.bean.MainTopic;
 import com.wj.kindergarten.bean.VersionInfo;
 
 import com.wj.kindergarten.utils.Utils;
@@ -240,13 +241,13 @@ public class CGSharedPreference {
     public static void setConfigMD5(String isShow,String md5) {
         SharedPreferences sharedPreferences = getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("isShow",isShow);
+        editor.putString("found_topic_isShow",isShow);
         editor.putString("config_md5",md5);
         editor.commit();
     }
     public static String getIsShow(){
         SharedPreferences sharedPreferences = getSharedPreferences();
-        String text =  sharedPreferences.getString("isShow", "");
+        String text =  sharedPreferences.getString("found_topic_isShow", "");
         return text;
     }
 
@@ -273,5 +274,23 @@ public class CGSharedPreference {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("mine_school_assess_uuid",uuid);
         editor.commit();
+    }
+
+    public static void setMainTopic(MainTopic topic) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("topic_img",topic.getImg());
+        editor.putString("topic_title",topic.getTitle());
+        editor.putString("topic_link_url",topic.getUrl());
+        editor.commit();
+    }
+
+    public static MainTopic getMainTopic(){
+        MainTopic topic = new MainTopic();
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        topic.setImg(sharedPreferences.getString("topic_img",""));
+        topic.setTitle(sharedPreferences.getString("topic_title", ""));
+        topic.setUrl(sharedPreferences.getString("topic_link_url",""));
+        return topic;
     }
 }

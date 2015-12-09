@@ -18,6 +18,7 @@
         <item name="android:windowContentOverlay">@android:color/transparent</item>
         <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
         <item name="android:windowAnimationStyle">@style/ActivityNormalAnimation</item>
+
         <!--<item name="colorPrimary">@color/white</item>-->
         <!--<item name="colorPrimaryDark">@color/white</item>-->
         <!--<item name="colorAccent">@color/white</item>-->

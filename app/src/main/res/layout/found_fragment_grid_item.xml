@@ -4,12 +4,10 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:background="@drawable/seclector_back_ground_white"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-
 
 
     <ImageView

@@ -4,6 +4,8 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/found_hot_selection_rl"
+        android:background="@drawable/seclector_back_ground_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -21,6 +23,7 @@
         android:layout_marginLeft="9dp" />
 
     <TextView
+        android:layout_marginBottom="@dimen/margin_15"
         android:gravity="center"
         android:textSize="@dimen/margin_10"
         android:textColor="@color/white"
