@@ -38,9 +38,9 @@ import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
-import com.wj.kindergarten.ui.func.TeachersActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -69,10 +69,10 @@ public class MainActivity extends BaseActivity {
     private long pre_back = 0;
     private boolean isClickMessage = false;
     private ImageView msgImageView = null;
+    private HintInfoDialog dialog ;
     private List<TrainClass> TC_list ;
     private static TrainChildInfoList TCI;
     public static  MainActivity instance;
-    private MainTopic topic;
 
 
     public TrainChildInfoList getTrainChildInfoList(){
@@ -87,6 +87,9 @@ public class MainActivity extends BaseActivity {
     protected void setNeedLoading() {
     }
 
+    public HintInfoDialog getDialog() {
+        return dialog;
+    }
 
     public void setText(String text){
         titleCenterTextView.setText(text);
@@ -94,8 +97,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+
+        getSupportActionBar().setElevation(0);
         instance = this;
         hideLeftButton();
+        dialog= new HintInfoDialog(this);
         setTitleText("");
         MainFragment.GRID_ITEM_HW = Utils.getWidthByScreenWeight(4);
         ActivityManger.getInstance().addActivity(this);
@@ -104,6 +110,7 @@ public class MainActivity extends BaseActivity {
         listener();
         checkVersion();
         handler.sendEmptyMessageDelayed(2, 500);
+
 
         //获取系统参数
         if(CGSharedPreference.getEnoughOneDay()){
@@ -120,7 +127,8 @@ public class MainActivity extends BaseActivity {
         UserRequest.getMainTopic(this, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                topic = (MainTopic) domain;
+                MainTopic topic = (MainTopic) domain;
+                CGSharedPreference.setMainTopic(topic);
             }
 
             @Override
@@ -136,11 +144,11 @@ public class MainActivity extends BaseActivity {
     }
 
     private void getTopicConfig() {
-        UserRequest.getTopicConfig(this,CGSharedPreference.getConfigMD5(), new RequestResultI() {
+        UserRequest.getTopicConfig(this, CGSharedPreference.getConfigMD5(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 ConfigObject object = (ConfigObject) domain;
-                if(object != null){
+                if (object != null) {
                     CGSharedPreference.setConfigMD5(object.getMd5(), object.getData().getSns_url());
                 }
             }
@@ -254,6 +262,8 @@ public class MainActivity extends BaseActivity {
             MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
             mineFragment.addChildren();
         }
+
+
     }
 
     /**
@@ -332,9 +342,28 @@ public class MainActivity extends BaseActivity {
                         msgImageView.setImageResource(R.drawable.message_tab);
                     }
                 }
+
+                if (mTabIdArray[4].equals(nowTab)) {
+                    getSupportActionBar().hide();
+                } else {
+                    getSupportActionBar().show();
+                }
+
+
             }
         });
+
         loadTab();
+    }
+
+    private void reagain(String tabId) {
+        if (mTabIdArray[1].equals(tabId)) {
+            //如果topicFragment还显示，就隐藏掉
+            FoundFragment fragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
+            if(fragment.webIsShow()){
+                fragment.cancleWeb();
+            }
+        }
     }
 
     public String[] getTabIds() {
@@ -369,7 +398,16 @@ public class MainActivity extends BaseActivity {
             tabSpec = mTabHost.newTabSpec(mTabIdArray[i]).setIndicator(getTabItemView(i));
             //将Tab按钮添加进Tab选项卡中
             mTabHost.addTab(tabSpec, fragmentArray[i], null);
+
+            //给tabSpec添加监听事件
         }
+        mTabHost.getTabWidget().getChildTabViewAt(1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               reagain(nowTab);
+               mTabHost.setCurrentTab(1);
+            }
+        });
     }
 
 

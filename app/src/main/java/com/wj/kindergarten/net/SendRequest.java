@@ -21,6 +21,9 @@ import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
+import com.wj.kindergarten.bean.FoundHotSelection;
+import com.wj.kindergarten.bean.FoundHotSelectionFather;
+import com.wj.kindergarten.bean.FoundTypeCount;
 import com.wj.kindergarten.bean.GetAssessStateList;
 import com.wj.kindergarten.bean.InteractionList;
 import com.wj.kindergarten.bean.Ka;
@@ -442,6 +445,12 @@ public class SendRequest {
                 break;
             case RequestType.GET_USER_INFO:
                 resultI.result(getDomain(domain,Login.class));
+                break;
+            case RequestType.FOUND_TYPE_COUNT:
+                resultI.result(getDomain(domain,FoundTypeCount.class));
+                break;
+            case RequestType.FOUND_HOT_SELECTION:
+                resultI.result(getDomain(domain,FoundHotSelectionFather.class));
                 break;
             default:
                 break;

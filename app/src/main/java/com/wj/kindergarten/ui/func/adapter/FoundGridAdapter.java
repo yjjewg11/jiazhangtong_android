@@ -22,13 +22,17 @@ public class FoundGridAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private Context context;
     private List<FoundGridItem> list = Arrays.asList(new FoundGridItem[]{
-            new FoundGridItem("精品文章",R.drawable.jingpinwenzhang_big,38),
-            new FoundGridItem("话题",R.drawable.huati_big,12),
-            new FoundGridItem("优惠活动",R.drawable.youhuihuodong_bg,69),
+            new FoundGridItem("精品文章",R.drawable.jingpinwenzhang_big,0),
+            new FoundGridItem("话题",R.drawable.huati_big,0),
+            new FoundGridItem("优惠活动",R.drawable.youhuihuodong_bg,0),
     });
     public FoundGridAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+    }
+
+    public List<FoundGridItem> getList() {
+        return list;
     }
 
     public void setList(List<FoundGridItem> list){
@@ -72,8 +76,11 @@ public class FoundGridAdapter extends BaseAdapter{
             viewHolder.iv_found_grid_item.setImageResource(item.getIv());
             viewHolder.tv_found_grid_name.setText(item.getName());
             viewHolder.tv_found_grid_count.setText(item.getCount()+"");
-        }else{
-
+            if(item.getCount() > 0){
+                viewHolder.tv_found_grid_count.setVisibility(View.VISIBLE);
+            }else{
+                viewHolder.tv_found_grid_count.setVisibility(View.INVISIBLE);
+            }
         }
         return convertView;
     }

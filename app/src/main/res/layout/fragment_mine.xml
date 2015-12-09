@@ -11,14 +11,14 @@
 
         <HorizontalScrollView
             android:scrollbars="none"
-            android:background="#ff5a50"
+            android:background="#ff6666"
             android:layout_width="match_parent"
             android:layout_height="150dp">
             <LinearLayout
+                android:layout_gravity="center_vertical"
                 android:id="@+id/mine_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
             </LinearLayout>
 

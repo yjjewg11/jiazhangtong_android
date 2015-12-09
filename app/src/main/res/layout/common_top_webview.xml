@@ -5,6 +5,5 @@
     <com.wj.kindergarten.ui.other.TopWebView
         android:id="@+id/common_topWeb"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.wj.kindergarten.ui.other.TopWebView>
-
+        android:layout_height="match_parent"/>
 </LinearLayout>

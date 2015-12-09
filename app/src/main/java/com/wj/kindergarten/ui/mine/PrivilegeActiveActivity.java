@@ -63,7 +63,7 @@ public class PrivilegeActiveActivity extends BaseActivity {
     protected void onCreate() {
         privelige_nocontent_fl = (FrameLayout)findViewById(R.id.privelige_nocontent_fl);
         titleCenterTextView.setText("优惠活动");
-        listView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
+        listView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list_privilege_head_page);
         adapter = new PrivilegeActiveAdapter(this);
         listView.setAdapter(adapter);
         listView.setMode(PullToRefreshBase.Mode.BOTH);
@@ -78,8 +78,6 @@ public class PrivilegeActiveActivity extends BaseActivity {
                 } else {
                     handler.sendEmptyMessageDelayed(1,300);
                 }
-
-
             }
 
             @Override
