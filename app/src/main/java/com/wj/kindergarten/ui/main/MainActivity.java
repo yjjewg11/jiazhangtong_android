@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.main;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -324,6 +325,7 @@ public class MainActivity extends BaseActivity {
     /**
      * init tab
      */
+    boolean isSecondOnce;
     private void initTab() {
         //实例化TabHost对象，得到TabHost
         mTabHost = (FragmentTabHost) findViewById(R.id.main_tab_host);
@@ -343,15 +345,28 @@ public class MainActivity extends BaseActivity {
                     }
                 }
 
+
                 if (mTabIdArray[4].equals(nowTab)) {
                     getSupportActionBar().hide();
                 } else {
                     getSupportActionBar().show();
                 }
 
+                //如果是发现，判断是不是webFragment
+                if (mTabIdArray[1].equals(nowTab)) {
+                    FoundFragment foundFragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
+                    if (foundFragment != null) {
+                        if (foundFragment.webIsShow()) {
+                            getSupportActionBar().hide();
+                        } else {
+                            getSupportActionBar().show();
+                        }
+                    }
 
             }
-        });
+
+        }
+    });
 
         loadTab();
     }
