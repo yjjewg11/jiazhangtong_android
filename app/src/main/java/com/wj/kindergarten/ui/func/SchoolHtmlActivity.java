@@ -187,8 +187,8 @@ public class SchoolHtmlActivity extends BaseActivity {
         tv_coll = (TextView)findViewById(R.id.textview_1_1);
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
         tab_layout = (TabLayout)findViewById(R.id.common_tab_layout);
-        tab_layout.addTab(tab_layout.newTab().setText("学校简介"));
         tab_layout.addTab(tab_layout.newTab().setText("招生计划"));
+        tab_layout.addTab(tab_layout.newTab().setText("学校简介"));
         tab_layout.addTab(tab_layout.newTab().setText("家长评论"));
 
         //添加底部选择框按钮
@@ -212,11 +212,11 @@ public class SchoolHtmlActivity extends BaseActivity {
 
 
                     //判断是否进行动画
-                    case 0:
+                    case 1:
 
                         getSupportFragmentManager().beginTransaction().show(schoolFragment).hide(recuritFragment).hide(schoolAssessFragment).commit();
                         break;
-                    case 1:
+                    case 0:
                         if(!isFirst){
                             isFirst = true;
                             recuritFragment.setUrl(sdl.getRecruit_url());

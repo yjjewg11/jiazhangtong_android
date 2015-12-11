@@ -125,7 +125,7 @@ public class EditParentsActivity extends BaseActivity {
                 childInfo.setMa_work(workEt.getText().toString().trim());
             }
 
-            UserRequest.changeChild(mContext, childInfo, new RequestResultI() {
+            UserRequest.changeChild(mContext, childInfo,"save", new RequestResultI() {
                 @Override
                 public void result(BaseModel domain) {
                     dialog.dismiss();

@@ -627,17 +627,17 @@ public abstract class BaseActivity extends ActionBarActivity {
         //给所有的webview添加接口
         webView.addJavascriptInterface(new WebJavaScript(webView),"familyJavascript");
         WebSettings webSettings = webView.getSettings();
-////        webSettings.setBuiltInZoomControls(true);
-////        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-//        webSettings.setUseWideViewPort(false);
-//        webSettings.setUseWideViewPort(false);
-//        webSettings.setLoadWithOverviewMode(false);
-//        webSettings.setSavePassword(true);
-//        webSettings.setSaveFormData(true);
+        webSettings.setBuiltInZoomControls(true);
+//        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setUseWideViewPort(false);
+        webSettings.setUseWideViewPort(false);
+        webSettings.setLoadWithOverviewMode(false);
+        webSettings.setSavePassword(true);
+        webSettings.setSaveFormData(true);
         webSettings.setJavaScriptEnabled(true);
-//        webSettings.setGeolocationEnabled(true);
+        webSettings.setGeolocationEnabled(true);
 ////		ws.setGeolocationDatabasePath("/data/data/org.itri.html5webview/databases/");// ���ö�λ�����ݿ�·��
-//        webSettings.setDomStorageEnabled(true);
+        webSettings.setDomStorageEnabled(true);
     }
 
 
@@ -655,7 +655,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
         if(pullView.isRefreshing()){
             pullView.onRefreshComplete();
-
         }
         ToastUtils.showMessage("没有更多内容了!");
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);

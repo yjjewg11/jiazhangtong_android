@@ -299,7 +299,7 @@ public class MainFragment extends Fragment {
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));
                 break;
-            case Constants.GARDEN_DES://校园相关
+            case Constants.GARDEN_DES://宝宝入学
                 if (null != chooseTile) {
                     Intent intent = new Intent(getActivity(), SchoolIntroduceActivity.class);
                     intent.putExtra("type", 1);
@@ -366,15 +366,7 @@ public class MainFragment extends Fragment {
 
             MainItem mainItem = mainItems.get(position);
             textView.setText(mainItem.getText());
-            if(position == 7){
-                if(CGSharedPreference.getIsNeedShow()){
-                    imageView.setImageResource(R.drawable.new_techangkechen);
-                }else{
-                    imageView.setImageResource(mainItem.getImageResource());
-                }
-            }else{
-                imageView.setImageResource(mainItem.getImageResource());
-            }
+            imageView.setImageResource(mainItem.getImageResource());
 
 
             return view; // 返回ImageView

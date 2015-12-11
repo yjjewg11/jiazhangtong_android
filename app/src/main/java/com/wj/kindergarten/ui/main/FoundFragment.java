@@ -19,10 +19,16 @@ public class FoundFragment extends Fragment {
     private TopicWebFragment topicWebFragment;
     private FoundSunFragment foundFragment;
     public static FoundFragment instance;
+    private boolean webIsShow;
+
+    public boolean webIsShow() {
+        return webIsShow;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).setText("发现");
         if(view != null) return view;
         instance = this;
         view = inflater.inflate(R.layout.found_fragment,null);
@@ -34,17 +40,18 @@ public class FoundFragment extends Fragment {
     }
 
     public TopicWebFragment showWeb(){
+        webIsShow = true;
+        ((MainActivity)getActivity()).getSupportActionBar().hide();
         getFragmentManager().beginTransaction().show(topicWebFragment).hide(foundFragment).commit();
         return topicWebFragment;
     }
 
     public void cancleWeb(){
+        webIsShow = false;
+        ((MainActivity)getActivity()).getSupportActionBar().show();
         getFragmentManager().beginTransaction().show(foundFragment).hide(topicWebFragment).commit();
     }
 
-    public boolean webIsShow(){
-        return topicWebFragment.isVisible();
-    }
 
     public FoundSunFragment getFoundFragment() {
         return foundFragment;

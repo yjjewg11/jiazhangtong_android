@@ -238,10 +238,10 @@ public final class UserRequest {
                 RequestHttpUtil.BASE_URL + SMS_CODE, requestResultI);
     }
 
-    public static void changeChild(Context context, ChildInfo childInfo, RequestResultI requestResultI) {
+    public static void changeChild(Context context, ChildInfo childInfo,String addressName, RequestResultI requestResultI) {
         String json = GsonUtil.getGson().toJson(childInfo);
         SendRequest.getInstance().post(context, RequestType.CHANGE_CHILD, json,
-                RequestHttpUtil.BASE_URL + CHANGE_CHILD, requestResultI);
+                RequestHttpUtil.BASE_URL + "rest/student/"+addressName+".json", requestResultI);
     }
 
     public static void getInteractionList(Context context, String newsuuid, int page, RequestResultI requestResultI) {

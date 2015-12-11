@@ -34,6 +34,7 @@ import com.wj.kindergarten.ui.func.ArticleListActivity;
 import com.wj.kindergarten.ui.func.adapter.FoundGridAdapter;
 import com.wj.kindergarten.ui.func.adapter.NstGridPicAdapter;
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -70,10 +71,10 @@ public class FoundSunFragment extends Fragment {
 
                         view.setOnClickListener(new PublicCommonClick(){
                             @Override
-                            public void onClick(View v) {
-                                //切换话题Fragment
-                                super.onClick(v);
-                                FoundFragment.instance.showWeb().getWebView().loadUrl(selectionSun.getWebview_url());
+                            public void openUrl() {
+                                if(!TextUtils.isEmpty(selectionSun.getWebview_url())){
+                                    FoundFragment.instance.showWeb().setWebUrl(selectionSun.getWebview_url());
+                                }
                             }
                         });
 
@@ -84,7 +85,8 @@ public class FoundSunFragment extends Fragment {
 
                             tv_found_hot_theme.setText(Utils.isNull(selectionSun.getTitle()));
                             tv_found_hot_count.setText(""+selectionSun.getYes_count());
-                            tv_found_content.setText(""+Utils.isNull(selectionSun.getSummary()));
+                            tv_found_content.setText(""+(TextUtils.isEmpty(Utils.isNull(selectionSun.getSummary())) == true ?
+                                    "暂无内容!" :Utils.isNull(selectionSun.getSummary())));
 
 
                         NestedGridView item_found_hot_pic = (NestedGridView) view.findViewById(R.id.item_found_hot_pic);
@@ -95,8 +97,12 @@ public class FoundSunFragment extends Fragment {
                             item_found_hot_pic.setVisibility(View.VISIBLE);
                         }else{
 
-                            item_found_hot_pic.setVisibility(View.GONE);
+                            item_found_hot_pic.setVisibility(View.INVISIBLE);
+                            LinearLayout.LayoutParams paramsGrid = (LinearLayout.LayoutParams)item_found_hot_pic.getLayoutParams();
+                            paramsGrid.bottomMargin = 0;
+                            item_found_hot_pic.setLayoutParams(paramsGrid);
                         }
+
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                LinearLayout.LayoutParams.WRAP_CONTENT);
                         contain_hot_list.addView(view,params);
@@ -119,7 +125,6 @@ public class FoundSunFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).setTitleText("发现");
         if(view != null) return view;
 
         view = inflater.inflate(R.layout.found_sun_fragment,null);
@@ -132,15 +137,16 @@ public class FoundSunFragment extends Fragment {
 
         tv_everyday_topic = (TextView)view.findViewById(R.id.tv_everyday_topic);
         final MainTopic t = CGSharedPreference.getMainTopic();
-        tv_everyday_topic.setText("" + t.getTitle());
+        tv_everyday_topic.setText("" + (TextUtils.isEmpty(t.getTitle()) == true ? "暂无推荐" : t.getTitle()));
         tv_everyday_topic.setOnClickListener(new PublicCommonClick() {
             @Override
-            public void onClick(View v) {
-                //切换话题WebviewFragment
-                super.onClick(v);
-                FoundFragment.instance.showWeb().getWebView().loadUrl(t.getUrl());
-                //发送点击次数
-                UserRequest.clickAndRefreshTopic(getActivity());
+            public void openUrl() {
+                if(!TextUtils.isEmpty(t.getUrl())){
+                    FoundFragment.instance.showWeb().setWebUrl(t.getUrl());
+                    //发送点击次数
+                    UserRequest.clickAndRefreshTopic(getActivity());
+                }
+
             }
         });
         contain_hot_list = (LinearLayout)view.findViewById(R.id.contain_hot_list);
@@ -155,8 +161,11 @@ public class FoundSunFragment extends Fragment {
                         break;
                     case 1:
                         //切换话题WebviewFragment
-                        if(TextUtils.isEmpty(CGSharedPreference.getIsShow())) return;
-                        FoundFragment.instance.showWeb().getWebView().loadUrl("http://www.baidu.com");
+                        if(!TextUtils.isEmpty(CGSharedPreference.getMainTopicUrl())){
+                        FoundFragment.instance.showWeb().setWebUrl(CGSharedPreference.getMainTopicUrl());
+                            return;
+                        }
+
                         break;
                     case 2:
                         startActivity(new Intent(getActivity(), PrivilegeActiveActivity.class));
@@ -177,7 +186,6 @@ public class FoundSunFragment extends Fragment {
                 pageNo++;
                 getHotSeclection();
                 scrollView.onRefreshComplete();
-
             }
         });
         loadData();
@@ -194,23 +202,23 @@ public class FoundSunFragment extends Fragment {
     //获取热门精选列表
     private void getHotSeclection() {
          show();
-         UserRequest.getFoundHotSeclection(getActivity(),pageNo, new RequestResultI() {
+         UserRequest.getFoundHotSeclection(getActivity(), pageNo, new RequestResultI() {
              @Override
              public void result(BaseModel domain) {
                  handler.sendEmptyMessage(LOAD_DATA_FINISH);
                  FoundHotSelectionFather selection = (FoundHotSelectionFather) domain;
-                 if(selection != null && selection.getList() != null &&
-                         selection.getList().getData() != null && selection.getList().getData().size() > 0){
+                 if (selection != null && selection.getList() != null &&
+                         selection.getList().getData() != null && selection.getList().getData().size() > 0) {
                      list.clear();
                      list.addAll(selection.getList().getData());
                      handler.sendEmptyMessage(ADD_MORE_DATA);
-                 }else{
-                     if(pageNo == 1){
+                 } else {
+                     if (pageNo == 1) {
                          TextView textView = new TextView(getActivity());
                          textView.setText("当前热门暂无数据,看看别的吧！");
                          contain_hot_list.addView(textView);
-                     }else{
-                         ((MainActivity)getActivity()).commonClosePullToRefreshScrollView(scrollView,2);
+                     } else {
+                         ((MainActivity) getActivity()).commonClosePullToRefreshScrollView(scrollView, 2);
                      }
                  }
              }
@@ -265,10 +273,14 @@ public class FoundSunFragment extends Fragment {
         });
     }
 
-    class PublicCommonClick implements View.OnClickListener{
+    abstract class PublicCommonClick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            if(TextUtils.isEmpty(CGSharedPreference.getIsShow())) return;
+
+                openUrl();
+
         }
+
+        public abstract void openUrl();
     }
 }

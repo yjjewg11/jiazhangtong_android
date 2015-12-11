@@ -39,6 +39,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
     private View kaView;
     private TextView remarkTv;
     private ImageView remarkIv;
+    public static ChildActivity instance;
 
     private final int OWN = 1;
     private final int BA = 2;
@@ -48,6 +49,10 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
     private final int REMARK = 9;
 
     private ChildInfo childInfo;
+
+    public ChildInfo getChildInfo() {
+        return childInfo;
+    }
 
     @Override
     protected void setContentLayout() {
@@ -62,6 +67,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate() {
         setTitleText("详细信息");
+        instance = this;
         childInfo = getChildInfoByUUID(getIntent().getStringExtra("uuid"));
 
         initViews();
@@ -150,6 +156,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
                     childInfo.setSex(data.getIntExtra("sex", 0));
                     childInfo.setBirthday(data.getStringExtra("birth"));
                     childInfo.setIdcard(data.getStringExtra("idCard"));
+//                    childInfo.set
                     break;
                 case BA:
                     childInfo.setBa_name(data.getStringExtra("name"));

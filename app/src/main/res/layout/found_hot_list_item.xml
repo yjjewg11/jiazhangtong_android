@@ -40,6 +40,7 @@
         android:layout_alignParentLeft="true" />
 
     <TextView
+        android:layout_marginBottom="@dimen/margin_15"
         android:textColor="@color/textcolor_8e8e8e"
         android:textSize="12sp"
         android:paddingRight="9dp"
@@ -61,12 +62,13 @@
         android:layout_marginRight="@dimen/normal_padding"
         android:layout_marginTop="@dimen/normal_padding"
         android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_15"
         android:horizontalSpacing="@dimen/small_padding"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:verticalSpacing="@dimen/small_padding"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
     <TextView
         android:background="@color/unit_line_division"

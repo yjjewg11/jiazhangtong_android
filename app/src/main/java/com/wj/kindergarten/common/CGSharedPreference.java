@@ -238,16 +238,16 @@ public class CGSharedPreference {
         return text;
     }
 
-    public static void setConfigMD5(String isShow,String md5) {
+    public static void setConfigMD5(String md5,String mainTopicUrl) {
         SharedPreferences sharedPreferences = getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("found_topic_isShow",isShow);
+        editor.putString("mainTopicUrl",mainTopicUrl);
         editor.putString("config_md5",md5);
         editor.commit();
     }
-    public static String getIsShow(){
+    public static String getMainTopicUrl(){
         SharedPreferences sharedPreferences = getSharedPreferences();
-        String text =  sharedPreferences.getString("found_topic_isShow", "");
+        String text =  sharedPreferences.getString("mainTopicUrl", "");
         return text;
     }
 
