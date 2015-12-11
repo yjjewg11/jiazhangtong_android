@@ -2,18 +2,31 @@ package com.wj.kindergarten.ui.mine;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.compounets.CircleImage;
@@ -23,16 +36,22 @@ import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.SpecialCourseDetailActivity;
+import com.wj.kindergarten.ui.func.adapter.OwnAdapter;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.DateTimePickDialogUtil;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
 import com.wj.kindergarten.utils.FileUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.UserHeadImageUtil;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.utils.WindowUtils;
 
 import java.io.File;
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -45,29 +64,26 @@ import java.util.List;
 public class EditChildActivity extends BaseActivity implements View.OnClickListener {
     private CircleImage circleImage;
     private TextView headTv;
-    private EditText nameEt;
-    private EditText nickEt;
-    private TextView birthEt;
-    private EditText idEt;
     private ChildInfo childInfo = null;
+    private boolean isAdded;
 
-    private RelativeLayout layout1 = null;
-    private RelativeLayout layout2 = null;
-    private RelativeLayout layout4 = null;
-    private ImageView imageView1 = null;
-    private ImageView imageView2 = null;
-    private ImageView imageView4 = null;
-    private LinearLayout layoutMan = null;
-    private LinearLayout layoutWeman = null;
-    private ImageView imgMan = null;
-    private ImageView imgWoman = null;
-    private int sex = 0;
 
     private static final String IMAGE_FILE_NAME = "avatarImage.jpg";// 头像文件名称
     private static final int REQUESTCODE_PICK = 0;        // 相册选图标记
     private static final int REQUESTCODE_TAKE = 1;        // 相机拍照标记
     private static final int REQUESTCODE_CUTTING = 2;    // 图片裁切标记
     private String urlpath = "";//裁剪后图片的路径
+
+    private EditText et_name, et_small_name, et_sex,
+            et_birthday, et_ID_card, et_family;
+    private String relationShip;
+    private String nowName;
+    private String oldTel;
+    private String newTel;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
 
     @Override
     protected void setContentLayout() {
@@ -81,103 +97,181 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void onCreate() {
-        setTitleText("详细信息", "保存");
-
+        setTitleText("详细信息", "完成");
         initView();
 
         childInfo = (ChildInfo) getIntent().getSerializableExtra("childInfo");
-        ImageLoaderUtil.displayImage(childInfo.getHeadimg(), circleImage);
-        nameEt.setText(childInfo.getName());
-        nickEt.setText(childInfo.getNickname());
-        birthEt.setText(childInfo.getBirthday());
-        idEt.setText(childInfo.getIdcard());
-        sex = childInfo.getSex();
-        if (childInfo.getSex() == 0) {
-            imgMan.setImageDrawable(getResources().getDrawable(R.drawable.man));
-            imgWoman.setImageDrawable(getResources().getDrawable(R.drawable.woman2));
-        } else {
-            imgMan.setImageDrawable(getResources().getDrawable(R.drawable.man1));
-            imgWoman.setImageDrawable(getResources().getDrawable(R.drawable.woman));
+        if (childInfo == null) {
+            isAdded = true;
+            childInfo = new ChildInfo();
+            childInfo.setBa_tel(CGApplication.getInstance().getLogin().getUserinfo().getLoginname());
+            headTv.setText("添加宝宝头像");
+            circleImage.setImageResource(R.drawable.touxiang);
+            return;
         }
+        childInfo = ChildActivity.instance.getChildInfo();
+
+        et_name.setText("" + childInfo.getName());
+        et_small_name.setText("" + childInfo.getNickname());
+        et_sex.setText("" + (childInfo.getSex() == 0 ? "男" : "女"));
+        et_birthday.setText("" + childInfo.getBirthday());
+        et_ID_card.setText("" + childInfo.getIdcard());
+        //获取当前登录号码作比较
+        String loginName = CGApplication.getInstance().getLogin().getUserinfo().getLoginname();
+        if (!judgeIsNull(childInfo.getBa_tel()) && loginName.equals(childInfo.getBa_tel())) {
+            relationShip = "爸爸";
+        } else if (!judgeIsNull(childInfo.getMa_tel()) && loginName.equals(childInfo.getMa_tel())) {
+            relationShip = "妈妈";
+        } else if (!judgeIsNull(childInfo.getYe_tel()) && loginName.equals(childInfo.getYe_tel())) {
+            relationShip = "爷爷";
+        } else if (!judgeIsNull(childInfo.getNai_tel()) && loginName.equals(childInfo.getNai_tel())) {
+            relationShip = "奶奶";
+        } else if (!judgeIsNull(childInfo.getWaigong_tel()) && loginName.equals(childInfo.getWaigong_tel())) {
+            relationShip = "外公";
+        } else if (!judgeIsNull(childInfo.getWaipo_tel()) && loginName.equals(childInfo.getWaigong_tel())) {
+            relationShip = "外婆";
+        } else if (!judgeIsNull(childInfo.getOther_tel()) && loginName.equals(childInfo.getOther_tel())) {
+            relationShip = "其他";
+        }
+        et_family.setText(relationShip);
+
+        ImageLoaderUtil.displayImage(childInfo.getHeadimg(), circleImage);
+
+    }
+
+    private boolean judgeIsNull(String s) {
+        return TextUtils.isEmpty(s);
     }
 
     private void initView() {
         circleImage = (CircleImage) findViewById(R.id.child_edit_head);
         headTv = (TextView) findViewById(R.id.child_edit_head_tv);
-        nameEt = (EditText) findViewById(R.id.child_edit_name);
-        nickEt = (EditText) findViewById(R.id.child_edit_nick);
-        birthEt = (TextView) findViewById(R.id.child_edit_birth);
-        idEt = (EditText) findViewById(R.id.child_edit_id);
+
+        et_name = (EditText) findViewById(R.id.et_name);
+        et_small_name = (EditText) findViewById(R.id.et_small_name);
+        et_sex = (EditText) findViewById(R.id.et_sex);
+        et_birthday = (EditText) findViewById(R.id.et_birthday);
+        et_ID_card = (EditText) findViewById(R.id.et_ID_card);
+        et_family = (EditText) findViewById(R.id.et_family);
+
+        et_sex.setFocusableInTouchMode(false);
+        et_family.setFocusableInTouchMode(false);
+        et_sex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = View.inflate(getApplicationContext(), R.layout.window_list, null);
+
+                ListView listView_choose = (ListView) view.findViewById(R.id.window_lsit);
+
+                final OwnAdapter ownAdapter = new OwnAdapter(EditChildActivity.this);
+                ownAdapter.setList(Arrays.asList(new String[]{"男", "女"}));
+                listView_choose.setAdapter(ownAdapter);
+
+
+                final PopupWindow popupWindowss = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                popupWindowss.setAnimationStyle(R.style.ShareAnimBase);
+                popupWindowss.setFocusable(true);
+                popupWindowss.setTouchable(true);
+                popupWindowss.setOutsideTouchable(true);
+                popupWindowss.getContentView().setFocusableInTouchMode(true);
+                popupWindowss.getContentView().setFocusable(true);
+                popupWindowss.setBackgroundDrawable(new BitmapDrawable());
+                popupWindowss.update();
+                listView_choose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        et_sex.setText("" + ownAdapter.getItem(position));
+                        popupWindowss.dismiss();
+                    }
+                });
+                popupWindowss.showAsDropDown(v, 0, 0);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        popupWindowss.dismiss();
+                    }
+                });
+            }
+        });
+
+        et_family.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = View.inflate(getApplicationContext(), R.layout.window_list, null);
+
+                ListView listView_choose = (ListView) view.findViewById(R.id.window_lsit);
+
+                final OwnAdapter ownAdapter = new OwnAdapter(EditChildActivity.this);
+                ownAdapter.setList(Arrays.asList(new String[]{"爸爸", "妈妈", "爷爷", "奶奶", "外公", "外婆"}));
+                listView_choose.setAdapter(ownAdapter);
+
+
+
+                final PopupWindow popupWindowss = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+
+                popupWindowss.setAnimationStyle(R.style.ShareAnimBase);
+                popupWindowss.setFocusable(true);
+                popupWindowss.setTouchable(true);
+                popupWindowss.setOutsideTouchable(true);
+                popupWindowss.getContentView().setFocusableInTouchMode(true);
+                popupWindowss.getContentView().setFocusable(true);
+                popupWindowss.setBackgroundDrawable(new BitmapDrawable());
+                popupWindowss.update();
+
+                listView_choose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        et_family.setText("" + ownAdapter.getItem(position));
+                        popupWindowss.dismiss();
+                    }
+                });
+
+                int[] location = new int[2];
+                v.getLocationInWindow(location);
+
+                View view1 =  ownAdapter.getView(0, null, listView_choose);
+
+                int w = View.MeasureSpec.makeMeasureSpec(0,
+                        View.MeasureSpec.UNSPECIFIED);
+                int h = View.MeasureSpec.makeMeasureSpec(0,
+                        View.MeasureSpec.UNSPECIFIED);
+                view1.measure(w, h);
+                int heignt1 = view1.getMeasuredHeight();
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) listView_choose.getLayoutParams();
+                params.bottomMargin = WindowUtils.dm.heightPixels-location[1];
+                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                listView_choose.setLayoutParams(params);
+                popupWindowss.showAtLocation(v,Gravity.BOTTOM,0,0);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        popupWindowss.dismiss();
+                    }
+                });
+            }
+
+        });
+
         circleImage.setOnClickListener(this);
         headTv.setOnClickListener(this);
-
-        layout1 = (RelativeLayout) findViewById(R.id.ll_clean_1);
-        layout2 = (RelativeLayout) findViewById(R.id.ll_clean_2);
-        layout4 = (RelativeLayout) findViewById(R.id.ll_clean_4);
-        imageView1 = (ImageView) findViewById(R.id.iv_clean_1);
-        imageView2 = (ImageView) findViewById(R.id.iv_clean_2);
-        imageView4 = (ImageView) findViewById(R.id.iv_clean_4);
-        nameEt.addTextChangedListener(new EditTextCleanWatcher(imageView1, nameEt));
-        nickEt.addTextChangedListener(new EditTextCleanWatcher(imageView2, nickEt));
-        idEt.addTextChangedListener(new EditTextCleanWatcher(imageView4, idEt));
-
-        birthEt.setOnClickListener(new View.OnClickListener() {
+        et_birthday.setFocusableInTouchMode(false);
+        et_birthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DateTimePickDialogUtil dialogUtil = new DateTimePickDialogUtil(EditChildActivity.this,
-                        birthEt.getText().toString(), new DateTimePickDialogUtil.ChooseTime() {
+                        et_birthday.getText().toString(), new DateTimePickDialogUtil.ChooseTime() {
                     @Override
                     public void choose(String time) {
-                        birthEt.setText(time);
+                        et_birthday.setText(time);
                     }
                 });
                 dialogUtil.dateTimePicKDialog();
             }
         });
 
-        layout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nameEt.setText("");
-            }
-        });
-
-        layout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nickEt.setText("");
-            }
-        });
-
-        layout4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                idEt.setText("");
-            }
-        });
-
-        layoutMan = (LinearLayout) findViewById(R.id.layout_man);
-        layoutWeman = (LinearLayout) findViewById(R.id.layout_woman);
-        imgMan = (ImageView) findViewById(R.id.iv_man);
-        imgWoman = (ImageView) findViewById(R.id.iv_woman);
-
-        layoutMan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imgMan.setImageDrawable(getResources().getDrawable(R.drawable.man));
-                imgWoman.setImageDrawable(getResources().getDrawable(R.drawable.woman2));
-                sex = 0;
-            }
-        });
-
-        layoutWeman.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imgMan.setImageDrawable(getResources().getDrawable(R.drawable.man1));
-                imgWoman.setImageDrawable(getResources().getDrawable(R.drawable.woman));
-                sex = 1;
-            }
-        });
     }
 
     @Override
@@ -189,6 +283,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
+
 
     private class ChooseImageImpl implements ChooseImage {
 
@@ -256,16 +351,17 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
 
     /**
      * 取得裁剪图片后调用
-     *
+     * <p/>
      * 保存裁剪之后的图片数据
      *
-     * @param picdata */
+     * @param picdata
+     */
     private void setPicToView(Intent picdata) {
 
         if (picdata != null) {
             // 取得SDCard图片路径做显示
             Bitmap photo = picdata.getParcelableExtra("data");
-            Log.i("TAG","拿到bitmap图片对象的引用"+photo);
+            Log.i("TAG", "拿到bitmap图片对象的引用" + photo);
             // Drawable drawable = new BitmapDrawable(null, photo);
             File file = new File(urlpath);
             if (file.exists()) {
@@ -312,29 +408,95 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+
     private void saveInfo(final String imgPath) {
         final HintInfoDialog dialog = new HintInfoDialog(EditChildActivity.this, "信息保存中，请稍后...");
         dialog.show();
-        childInfo.setName(nameEt.getText().toString().trim());
-        childInfo.setNickname(nickEt.getText().toString().trim());
-        childInfo.setSex(sex);
-        childInfo.setBirthday(birthEt.getText().toString().trim());
-        childInfo.setIdcard(idEt.getText().toString().trim());
+        childInfo.setName(et_name.getText().toString().trim());
+        childInfo.setNickname(et_small_name.getText().toString().trim());
+        childInfo.setSex(et_sex.getText().toString().equals("男") == true ? 0 : 1);
+        childInfo.setBirthday(et_birthday.getText().toString().trim());
+        childInfo.setIdcard(et_ID_card.getText().toString().trim());
+        //更改用户绑定关系
+        nowName = et_family.getText().toString();
+        oldTel = null;
+        newTel = null;
+
+        if(!TextUtils.isEmpty(relationShip) && !nowName.equals(relationShip)){
+            if (relationShip.equals("爸爸")) {
+                childInfo.setBa_tel("");
+                oldTel = "ba_tel";
+            } else if (relationShip.equals("妈妈")) {
+                childInfo.setMa_tel("");
+                oldTel = "ma_tel";
+            } else if (relationShip.equals("爷爷")) {
+                childInfo.setYe_tel("");
+                oldTel = "ye_tel";
+            } else if (relationShip.equals("奶奶")) {
+                childInfo.setNai_tel("");
+                oldTel = "nai_tel";
+            } else if (relationShip.equals("外公")) {
+                childInfo.setWaigong_tel("");
+                oldTel = "waigong_tel";
+            } else if (relationShip.equals("外婆")) {
+                childInfo.setWaipo_tel("");
+                oldTel = "waipo_tel";
+            }
+        }
+
+
+        String loginName = CGApplication.getInstance().getLogin().getUserinfo().getLoginname();
+        if (nowName.equals("爸爸")) {
+            childInfo.setBa_tel(loginName);
+            newTel = "ba_tel";
+        } else if (nowName.equals("妈妈")) {
+            childInfo.setMa_tel(loginName);
+            newTel = "ma_tel";
+        } else if (nowName.equals("爷爷")) {
+            childInfo.setYe_tel(loginName);
+            newTel = "ye_tel";
+        } else if (nowName.equals("奶奶")) {
+            childInfo.setNai_tel(loginName);
+            newTel = "nai_tel";
+        } else if (nowName.equals("外公")) {
+            childInfo.setWaigong_tel(loginName);
+            newTel = "waigong_tel";
+        } else if (nowName.equals("外婆")) {
+            childInfo.setWaipo_tel(loginName);
+            newTel = "waipo_tel";
+        }
         if (!Utils.stringIsNull(imgPath)) {
             childInfo.setHeadimg(imgPath);
         }
-        UserRequest.changeChild(mContext, childInfo, new RequestResultI() {
+        String addressName = null;
+        if(isAdded){
+            addressName = "add";
+        }else{
+            addressName = "save";
+        }
+        UserRequest.changeChild(mContext, childInfo,addressName, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();
+                if(isAdded){
+                    //如果是添加新的小孩，直接返回主页面
+                    CGApplication.getInstance().getLogin().getList().add(childInfo);
+                    storeData();
+                    finish();
+                    return;
+                }
+
                 Intent ownIntent = new Intent();
                 ownIntent.putExtra("head", childInfo.getHeadimg());
-                ownIntent.putExtra("name", nameEt.getText().toString());
-                ownIntent.putExtra("nick", nickEt.getText().toString());
-                ownIntent.putExtra("sex", sex);
-                ownIntent.putExtra("birth", birthEt.getText().toString());
-                ownIntent.putExtra("idCard", idEt.getText().toString());
+                ownIntent.putExtra("name", et_name.getText().toString());
+                ownIntent.putExtra("nick", et_small_name.getText().toString());
+                ownIntent.putExtra("sex", (et_sex.getText().toString().equals("男") == true ? 0 : 1));
+                ownIntent.putExtra("birth", et_birthday.getText().toString());
+                ownIntent.putExtra("idCard", et_ID_card.getText().toString());
+                ownIntent.putExtra("oldTel", oldTel);
+                ownIntent.putExtra("newTel", newTel);
                 setResult(RESULT_OK, ownIntent);
+                storeData();
                 finish();
             }
 
@@ -353,8 +515,14 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    private void storeData() {
+        StoreDataInSerialize.storeUserInfo(CGApplication.getInstance().getLogin());
+        Intent intent = new Intent(GloablUtils.MINE_ADD_CHILD_FINISH);
+        sendBroadcast(intent);
+    }
+
     private boolean check() {
-        if (Utils.stringIsNull(nameEt.getText().toString())) {
+        if (Utils.stringIsNull(et_name.getText().toString())) {
             Utils.showToast(EditChildActivity.this, "姓名不能为空");
             return false;
         }
@@ -368,5 +536,6 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
 //        }
         return true;
     }
+
 
 }

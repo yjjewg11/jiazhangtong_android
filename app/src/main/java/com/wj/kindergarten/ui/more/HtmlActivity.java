@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.utils.Utils;
 
 public class HtmlActivity extends BaseActivity{
     private String url;
@@ -58,9 +59,8 @@ public class HtmlActivity extends BaseActivity{
 
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());
-//        WebStorage storage = WebStorage.getInstance();
-//        storage.deleteAllData();
-        syncCookie(url);
+
+        Utils.syncCookie(url);
         webView.loadUrl(url);
     }
 
@@ -76,33 +76,5 @@ public class HtmlActivity extends BaseActivity{
             return false;
     }
 
-    private void syncCookie(String url) {
-        try {
 
-            CookieSyncManager.createInstance(this);
-            CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.setAcceptCookie(true);
-            ValueCallback callback = new ValueCallback<Boolean>() {
-                @Override
-                public void onReceiveValue(Boolean value) {
-                         Log.i("TAG","打印callback");
-                }
-            };
-//            cookieManager.removeSessionCookies(callback);// 移除
-//            cookieManager.removeAllCookies(callback);
-            StringBuilder sbCookie = new StringBuilder();
-            sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
-            sbCookie.append(String.format(";domain=%s", ".wenjienet.com"));
-            sbCookie.append(String.format(";path=%s", "/"));
-
-            String cookieValue = sbCookie.toString();
-
-                Log.i("TAG","打印cool ： "+cookieManager.getCookie(url));
-                cookieManager.setCookie(url, cookieValue);
-                CookieSyncManager.getInstance().sync();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

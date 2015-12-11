@@ -1,12 +1,18 @@
 package com.wj.kindergarten.ui.main;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,8 +24,10 @@ import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.ui.func.MineSchoolActivity;
 import com.wj.kindergarten.ui.func.MineSpecialCourseActivity;
 import com.wj.kindergarten.ui.mine.ChildActivity;
+import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
@@ -39,6 +47,10 @@ public class MineFragment extends Fragment {
     private LinearLayout mine_collect;
     private LinearLayout mine_course;
     private LinearLayout recruit_school;
+    private ImageView mine_add_child;
+    private View.OnClickListener addListeners;
+    private HorizontalScrollView mine_head_horizontal_scroll;
+    private MyReceiver receive;
 
     @Nullable
     @Override
@@ -49,6 +61,8 @@ public class MineFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_mine, null, false);
             initViews(rootView);
+            //注册广播
+
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
@@ -59,10 +73,21 @@ public class MineFragment extends Fragment {
     }
 
     private void initViews(View rootView) {
+        addListeners = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转添加页面
+                startActivity(new Intent(getActivity(), EditChildActivity.class));
+            }
+        };
+        mine_head_horizontal_scroll = (HorizontalScrollView)rootView.findViewById(R.id.mine_head_horizontal_scroll);
+        mine_head_horizontal_scroll.setOnTouchListener(null);
+        mine_add_child = (ImageView) rootView.findViewById(R.id.mine_add_child);
+        mine_add_child.setOnClickListener(addListeners);
         childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
         mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
-        mine_course = (LinearLayout)rootView.findViewById(R.id.ll_special_course);
-        recruit_school = (LinearLayout)rootView.findViewById(R.id.ll_mine_school);
+        mine_course = (LinearLayout) rootView.findViewById(R.id.ll_special_course);
+        recruit_school = (LinearLayout) rootView.findViewById(R.id.ll_mine_school);
 
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
         llSetting.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +107,7 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //点击启动我的课程页面
-                Intent intent = new Intent(getActivity(),MineSpecialCourseActivity.class);
+                Intent intent = new Intent(getActivity(), MineSpecialCourseActivity.class);
                 startActivity(intent);
             }
         });
@@ -95,10 +120,10 @@ public class MineFragment extends Fragment {
             }
         });
     }
-    private void setMargin(LinearLayout.LayoutParams params,int margin){
+
+    private void setMargin(LinearLayout.LayoutParams params, int margin) {
         params.leftMargin = margin;
 
-//        params.rightMargin = margin;
     }
 
     public void addChildren() {
@@ -107,26 +132,25 @@ public class MineFragment extends Fragment {
             int i = 0;
             for (final ChildInfo childInfo : login.getList()) {
                 View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
-                            LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
+                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 //动态设置判断添加
                 int size = login.getList().size();
-                    if(size == 1){
-                        setMargin(layoutParams, WindowUtils.dm.widthPixels/2);
-                    }else if(size == 2){
-                        setMargin(layoutParams, WindowUtils.dm.widthPixels/4);
-                    }else if(size == 3){
-                        setMargin(layoutParams, WindowUtils.dm.widthPixels/6);
-                    }else{
-                        setMargin(layoutParams, WindowUtils.dm.widthPixels/7);
-                        if(i == 0){
-                            layoutParams.leftMargin = WindowUtils.dm.widthPixels/7/2;
-                        }
-                        if(i == login.getList().size()-1){
-                            layoutParams.rightMargin = WindowUtils.dm.widthPixels/7/2;
-                        }
+                if (size == 1) {
+                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
+                } else if (size == 2) {
+                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 4);
+                } else if (size == 3) {
+                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 6);
+                } else if (size > 3) {
+                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 7);
+                    if (i == 0) {
+                        layoutParams.leftMargin = WindowUtils.dm.widthPixels / 7 / 2;
                     }
-
+                    if (i == login.getList().size() - 1) {
+                        layoutParams.rightMargin = WindowUtils.dm.widthPixels / 7 / 2;
+                    }
+                }
 
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -147,9 +171,32 @@ public class MineFragment extends Fragment {
                 }
                 nameTv.setText(childInfo.getName());
 
-                childContent.addView(view,layoutParams);
+                childContent.addView(view, layoutParams);
                 i++;
             }
+
+            if (login.getList().size() == 0) {
+                View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
+                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
+                TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
+                headIv.setImageResource(R.drawable.tianjiaxiaohai);
+                nameTv.setText("添加宝宝");
+                setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
+                view.setOnClickListener(addListeners);
+                childContent.addView(view, layoutParams);
+            }
+        }
+    }
+
+
+    class MyReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //添加小孩
+            addChildren();
         }
     }
 }

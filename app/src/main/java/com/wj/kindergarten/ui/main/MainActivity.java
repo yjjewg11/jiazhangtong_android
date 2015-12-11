@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -41,6 +42,7 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -120,6 +122,11 @@ public class MainActivity extends BaseActivity {
 
         //每次应用启动获取话题
         getMainTopic();
+
+        //注册广播
+//        IntentFilter intentFilter = new IntentFilter(GloablUtils.MINE_ADD_CHILD_FINISH);
+//        receive = new MyReceiver();
+//        getActivity().registerReceiver(receive, intentFilter);
 
 
     }
@@ -513,5 +520,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        unregisterReceiver(receive);
     }
 }

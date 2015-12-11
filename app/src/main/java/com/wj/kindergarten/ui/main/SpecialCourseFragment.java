@@ -144,7 +144,7 @@ public class SpecialCourseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ((MainActivity) getActivity()).setTitleText("特称课程");
+        ((MainActivity) getActivity()).setTitleText("特长课程");
         if(view != null) return view;
 
         view = inflater.inflate(R.layout.activity_webview,null);

@@ -57,7 +57,7 @@ public class EditRemarkActivity extends BaseActivity {
             final HintInfoDialog dialog = new HintInfoDialog(EditRemarkActivity.this, "信息保存中，请稍后...");
             dialog.show();
             childInfo.setNote(remarkEt.getText().toString().trim());
-            UserRequest.changeChild(mContext, childInfo, new RequestResultI() {
+            UserRequest.changeChild(mContext, childInfo,"save", new RequestResultI() {
                 @Override
                 public void result(BaseModel domain) {
                     dialog.dismiss();

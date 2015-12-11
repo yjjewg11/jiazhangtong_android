@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,23 +155,33 @@ public class Utils {
     }
 
     public static void syncCookie(String url){
-        try{
-        CookieSyncManager.createInstance(CGApplication.getInstance());
-        CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.setAcceptCookie(true);
-        cookieManager.removeSessionCookie();// 移除
-        cookieManager.removeAllCookie();
-        StringBuilder sbCookie = new StringBuilder();
-        sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
-        sbCookie.append(String.format(";domain=%s", ".wenjienet.com"));
-        sbCookie.append(String.format(";path=%s", "/"));
+        if(TextUtils.isEmpty(url)) return ;
 
-        String cookieValue = sbCookie.toString();
-        cookieManager.setCookie(url, cookieValue);
-        CookieSyncManager.getInstance().sync();
+       String myUrl =  url.split("//")[1];
+       String secondUrl =  myUrl.split("/")[0];
+        String firstUrl = null;
+        if(secondUrl.contains(":")){
+            firstUrl = secondUrl.split(":")[0];
+        }else{
+            firstUrl = secondUrl;
+        }
+
+        try{
+            CookieSyncManager.createInstance(CGApplication.getInstance());
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setAcceptCookie(true);
+            StringBuilder sbCookie = new StringBuilder();
+            sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
+            //顶级域名：    .wenjienet.com
+            sbCookie.append(String.format(";domain=%s", firstUrl));
+            sbCookie.append(String.format(";path=%s", "/"));
+
+            String cookieValue = sbCookie.toString();
+            cookieManager.setCookie(url, cookieValue);
+            CookieSyncManager.getInstance().sync();
         } catch (Exception e) {
-        e.printStackTrace();
-      }
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -821,6 +832,14 @@ public class Utils {
             e.printStackTrace();
         }
         return vn;
+    }
+
+    public static void setWindowAlpha(Activity activity,float f){
+
+            WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+            lp.alpha = f; //0.0-1.0
+            activity.getWindow().setAttributes(lp);
+
     }
 
 }
