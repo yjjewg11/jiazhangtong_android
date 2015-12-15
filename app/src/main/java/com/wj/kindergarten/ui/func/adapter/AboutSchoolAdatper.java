@@ -60,7 +60,7 @@ public class AboutSchoolAdatper extends BaseAdapter {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.about_school_item,null);
             viewHolder = new ViewHolder();
-            viewHolder.ll_school_medal_one = (LinearLayout)convertView.findViewById(R.id.ll_school_medal_one);
+            viewHolder.ll_school_medal_one = (LinearLayout)convertView.findViewById(R.id.contain_include_medal);
             viewHolder.item_class_name = (TextView) convertView.findViewById(R.id.item_class_name);
             viewHolder.item_special_course_list_view_tv_adresss = (TextView) convertView.findViewById(R.id.item_special_course_list_view_tv_adresss);
             viewHolder.item_special_course_list_view_tv_distance = (TextView) convertView.findViewById(R.id.item_special_course_list_view_tv_distance);
@@ -94,7 +94,7 @@ public class AboutSchoolAdatper extends BaseAdapter {
                 text = "<font  color='#ff4966'>"+schoolInfo.getCt_study_students()+"人就读"+"</font>";
 
             }else{
-                text = "<font  color='#ff4966'>"+"0人就读"+"</font>";
+                text = "<font  color='#ff4966'>"+"0"+"</font>";
             }
             viewHolder.tv_study_people.setText(Html.fromHtml(text));
 
@@ -111,6 +111,7 @@ public class AboutSchoolAdatper extends BaseAdapter {
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                             textView.setText(schoolInfo.getSummary().split(",")[i]);
                             textView.setTextSize(11);
+                            textView.setTextColor(context.getResources().getColor(R.color.text_green));
                             viewHolder.ll_school_medal_one.addView(textView,params);
                         }
                     }

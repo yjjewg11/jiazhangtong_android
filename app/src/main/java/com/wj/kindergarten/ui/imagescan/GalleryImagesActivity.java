@@ -87,6 +87,8 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
     private ArrayList<String> chooseList = null;
     private boolean isCut = false;
 
+    private static  int SIGN_BOARD ;
+
     /**
      * 被选中的图片列表 key
      */
@@ -105,6 +107,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onCreate() {
         initSelectPic((ArrayList) getIntent().getSerializableExtra(Constants.ALREADY_SELECT_KEY));
+        SIGN_BOARD = (getIntent().getIntExtra("signBoard",0));
 
         initWidget();
 

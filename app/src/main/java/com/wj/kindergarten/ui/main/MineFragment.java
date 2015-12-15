@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -32,6 +33,7 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
 
+
 /**
  * MainFragment
  *
@@ -50,19 +52,20 @@ public class MineFragment extends Fragment {
     private ImageView mine_add_child;
     private View.OnClickListener addListeners;
     private HorizontalScrollView mine_head_horizontal_scroll;
-    private MyReceiver receive;
+    public static MineFragment instance;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).clearCenterIcon();
         ((MainActivity) getActivity()).setText("");
+
         login = ((CGApplication) CGApplication.getInstance()).getLogin();
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_mine, null, false);
             initViews(rootView);
-            //注册广播
-
+            instance = this;
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
@@ -77,7 +80,9 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //跳转添加页面
-                startActivity(new Intent(getActivity(), EditChildActivity.class));
+                Intent intent = new Intent(getActivity(), EditChildActivity.class);
+//                intent.putExtra("handler",handler);
+                startActivity(intent);
             }
         };
         mine_head_horizontal_scroll = (HorizontalScrollView)rootView.findViewById(R.id.mine_head_horizontal_scroll);
@@ -127,15 +132,16 @@ public class MineFragment extends Fragment {
     }
 
     public void addChildren() {
+        Login loginNew = CGApplication.getInstance().getLogin();
         childContent.removeAllViews();
-        if (login != null && login.getList() != null) {
+        if (loginNew != null && loginNew.getList() != null) {
             int i = 0;
-            for (final ChildInfo childInfo : login.getList()) {
+            for (final ChildInfo childInfo : loginNew.getList()) {
                 View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
                         LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 //动态设置判断添加
-                int size = login.getList().size();
+                int size = loginNew.getList().size();
                 if (size == 1) {
                     setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
                 } else if (size == 2) {
@@ -147,7 +153,7 @@ public class MineFragment extends Fragment {
                     if (i == 0) {
                         layoutParams.leftMargin = WindowUtils.dm.widthPixels / 7 / 2;
                     }
-                    if (i == login.getList().size() - 1) {
+                    if (i == loginNew.getList().size() - 1) {
                         layoutParams.rightMargin = WindowUtils.dm.widthPixels / 7 / 2;
                     }
                 }
@@ -156,7 +162,7 @@ public class MineFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getActivity(), ChildActivity.class);
-                        intent.putExtra("uuid", childInfo.getUuid());
+                        intent.putExtra("childInfo", childInfo);
                         startActivity(intent);
                     }
                 });
@@ -175,7 +181,7 @@ public class MineFragment extends Fragment {
                 i++;
             }
 
-            if (login.getList().size() == 0) {
+            if (loginNew.getList().size() == 0) {
                 View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
                         LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -190,13 +196,4 @@ public class MineFragment extends Fragment {
         }
     }
 
-
-    class MyReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //添加小孩
-            addChildren();
-        }
-    }
 }

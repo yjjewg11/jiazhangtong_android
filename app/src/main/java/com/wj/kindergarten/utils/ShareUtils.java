@@ -97,6 +97,7 @@ public class ShareUtils {
             View popupView = View.inflate(con, R.layout.share_layout, null);
             LinearLayout lltop = (LinearLayout) popupView.findViewById(R.id.lltop);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) lltop.getLayoutParams();
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             if(isMessage){
                 //如果是班级互动
                 try{
@@ -107,16 +108,13 @@ public class ShareUtils {
                     int h = View.MeasureSpec.makeMeasureSpec(0,
                             View.MeasureSpec.UNSPECIFIED);
                     lltop.measure(w, h);
-                    int height = lltop.getMeasuredHeight();
-                    int margin = location[1] > height ? (location[1]-height+30) : (55*(int)WindowUtils.getDesnity());
-                    layoutParams.topMargin = margin;
+                    layoutParams.bottomMargin = WindowUtils.dm.heightPixels - location[1];
                     lltop.setLayoutParams(layoutParams);
                 }catch (NullPointerException e){
                     e.printStackTrace();
                 }
 
             }else{
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 lltop.setLayoutParams(layoutParams);
             }
 

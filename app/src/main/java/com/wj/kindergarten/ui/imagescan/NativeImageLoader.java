@@ -95,6 +95,8 @@ public class NativeImageLoader {
 
                     //将图片加入到内存缓存
                     addBitmapToMemoryCache(path, mBitmap);
+                    //将图片加入到回调监听
+//                    mCallBack.onImageLoader(mBitmap,path)/
                 }
             });
         }

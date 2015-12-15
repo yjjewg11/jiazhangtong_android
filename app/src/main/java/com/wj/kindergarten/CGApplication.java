@@ -226,7 +226,7 @@ public class CGApplication extends Application {
                     return ;
                 }
                 VersionInfo versionInfo = new VersionInfo(type, mobileVersion, appVersion, city);
-                if (!versionInfo.equals(CGSharedPreference.getVersionInfoReference())) {
+                if (!versionInfo.equals(CGSharedPreference.getVersionInfoReference()) && !TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID()) ) {
                     sendVersionInfo(type, mobileVersion, appVersion, city);
                 }
                 mLocationClient.stop();

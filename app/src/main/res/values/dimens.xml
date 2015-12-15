@@ -45,5 +45,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_size">13sp</dimen>
     <dimen name="margin_9dp">9dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
 
 </resources>

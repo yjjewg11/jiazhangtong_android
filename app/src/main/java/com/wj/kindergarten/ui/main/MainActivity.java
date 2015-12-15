@@ -63,6 +63,11 @@ public class MainActivity extends BaseActivity {
             R.drawable.message_tab, R.drawable.special_tab,R.drawable.mine_tab};
     //Tab选项卡的文字
     private String mTabIdArray[] = {"学校", "发现", "消息", "特长课程","我的"};
+
+    public String[] getmTabIdArray() {
+        return mTabIdArray;
+    }
+
     private FragmentTabHost mTabHost;
     //message bottom tab item view
     private View[] mTabViews = new View[5];
@@ -100,6 +105,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+
 
         getSupportActionBar().setElevation(0);
         instance = this;
@@ -206,7 +212,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private Handler  handler = new Handler() {
+    public Handler  handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
@@ -266,7 +272,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mTabIdArray[3].equals(nowTab)) {
+        if (mTabIdArray[4].equals(nowTab)) {
             MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
             mineFragment.addChildren();
         }
@@ -381,10 +387,14 @@ public class MainActivity extends BaseActivity {
     private void reagain(String tabId) {
         if (mTabIdArray[1].equals(tabId)) {
             //如果topicFragment还显示，就隐藏掉
-            FoundFragment fragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
-            if(fragment.webIsShow()){
-                fragment.cancleWeb();
-            }
+            cancleMainWeb();
+        }
+    }
+
+    public void cancleMainWeb() {
+        FoundFragment fragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
+        if(fragment.webIsShow()){
+            fragment.cancleWeb();
         }
     }
 
@@ -420,6 +430,7 @@ public class MainActivity extends BaseActivity {
             tabSpec = mTabHost.newTabSpec(mTabIdArray[i]).setIndicator(getTabItemView(i));
             //将Tab按钮添加进Tab选项卡中
             mTabHost.addTab(tabSpec, fragmentArray[i], null);
+
 
             //给tabSpec添加监听事件
         }
@@ -498,14 +509,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            quitApp();
+        if(mTabHost.getCurrentTab() == 1){
+            super.onKeyDown(keyCode,event);
+        }else{
+            if (keyCode == KeyEvent.KEYCODE_BACK ) {
+                quitApp();
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+
+        }
+
+
+        return true;
     }
 
-    private void quitApp() {
+    public void quitApp() {
         long now_back = System.currentTimeMillis();
         if (now_back - pre_back <= BACK_QUIT) {
             ShareUtils.clear();

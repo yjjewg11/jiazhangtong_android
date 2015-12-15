@@ -165,7 +165,6 @@ public class FoundSunFragment extends Fragment {
                         FoundFragment.instance.showWeb().setWebUrl(CGSharedPreference.getMainTopicUrl());
                             return;
                         }
-
                         break;
                     case 2:
                         startActivity(new Intent(getActivity(), PrivilegeActiveActivity.class));

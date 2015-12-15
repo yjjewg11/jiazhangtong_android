@@ -176,7 +176,7 @@ public class SchoolHtmlActivity extends BaseActivity {
         tv_study_people = (TextView)findViewById(R.id.tv_study_people);
         anim_fl = (FrameLayout)findViewById(R.id.anim_fl);
         iv_madle = (ImageView)findViewById(R.id.iv_madle);
-        ll_school_medal_one = (LinearLayout)findViewById(R.id.ll_school_medal_one);
+        ll_school_medal_one = (LinearLayout)findViewById(R.id.contain_include_medal);
         item_class_name = (TextView) findViewById(R.id.item_class_name);
         item_special_course_list_view_tv_adresss = (TextView) findViewById(R.id.item_special_course_list_view_tv_adresss);
         item_special_course_list_view_tv_distance = (TextView) findViewById(R.id.item_special_course_list_view_tv_distance);
