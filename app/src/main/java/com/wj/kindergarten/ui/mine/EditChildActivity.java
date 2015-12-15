@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -38,6 +40,7 @@ import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseDetailActivity;
 import com.wj.kindergarten.ui.func.adapter.OwnAdapter;
+import com.wj.kindergarten.ui.main.MineFragment;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.DateTimePickDialogUtil;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
@@ -71,7 +74,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
     private static final String IMAGE_FILE_NAME = "avatarImage.jpg";// 头像文件名称
     private static final int REQUESTCODE_PICK = 0;        // 相册选图标记
     private static final int REQUESTCODE_TAKE = 1;        // 相机拍照标记
-    private static final int REQUESTCODE_CUTTING = 2;    // 图片裁切标记
+    public static final int REQUESTCODE_CUTTING = 2;    // 图片裁切标记
     private String urlpath = "";//裁剪后图片的路径
 
     private EditText et_name, et_small_name, et_sex,
@@ -80,6 +83,12 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
     private String nowName;
     private String oldTel;
     private String newTel;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -208,8 +217,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 listView_choose.setAdapter(ownAdapter);
 
 
-
-                final PopupWindow popupWindowss = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+                final PopupWindow popupWindowss = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
                 popupWindowss.setAnimationStyle(R.style.ShareAnimBase);
                 popupWindowss.setFocusable(true);
@@ -231,7 +239,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 int[] location = new int[2];
                 v.getLocationInWindow(location);
 
-                View view1 =  ownAdapter.getView(0, null, listView_choose);
+                View view1 = ownAdapter.getView(0, null, listView_choose);
 
                 int w = View.MeasureSpec.makeMeasureSpec(0,
                         View.MeasureSpec.UNSPECIFIED);
@@ -240,10 +248,10 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 view1.measure(w, h);
                 int heignt1 = view1.getMeasuredHeight();
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) listView_choose.getLayoutParams();
-                params.bottomMargin = WindowUtils.dm.heightPixels-location[1];
+                params.bottomMargin = WindowUtils.dm.heightPixels - location[1];
                 params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                 listView_choose.setLayoutParams(params);
-                popupWindowss.showAtLocation(v,Gravity.BOTTOM,0,0);
+                popupWindowss.showAtLocation(v, Gravity.BOTTOM, 0, 0);
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -345,13 +353,13 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         intent.putExtra("outputX", 198);
         intent.putExtra("outputY", 198);
         intent.putExtra("return-data", true);
-        startActivityForResult(intent, REQUESTCODE_CUTTING);
+        startActivityForResult(intent, EditChildActivity.REQUESTCODE_CUTTING);
     }
 
 
     /**
      * 取得裁剪图片后调用
-     * <p/>
+     * <p>
      * 保存裁剪之后的图片数据
      *
      * @param picdata
@@ -422,7 +430,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         oldTel = null;
         newTel = null;
 
-        if(!TextUtils.isEmpty(relationShip) && !nowName.equals(relationShip)){
+        if (!TextUtils.isEmpty(relationShip) && !nowName.equals(relationShip)) {
             if (relationShip.equals("爸爸")) {
                 childInfo.setBa_tel("");
                 oldTel = "ba_tel";
@@ -469,16 +477,16 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
             childInfo.setHeadimg(imgPath);
         }
         String addressName = null;
-        if(isAdded){
+        if (isAdded) {
             addressName = "add";
-        }else{
+        } else {
             addressName = "save";
         }
-        UserRequest.changeChild(mContext, childInfo,addressName, new RequestResultI() {
+        UserRequest.changeChild(mContext, childInfo, addressName, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();
-                if(isAdded){
+                if (isAdded) {
                     //如果是添加新的小孩，直接返回主页面
                     CGApplication.getInstance().getLogin().getList().add(childInfo);
                     storeData();
@@ -497,6 +505,8 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 ownIntent.putExtra("newTel", newTel);
                 setResult(RESULT_OK, ownIntent);
                 storeData();
+                //将内存中的修改的childInfo替换掉
+                replaceLogin(childInfo.getUuid());
                 finish();
             }
 
@@ -515,10 +525,28 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    private void replaceLogin(String uuid) {
+
+        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getList() != null) {
+            for (int i = 0; i< CGApplication.getInstance().getLogin().getList().size() ; i++ ) {
+                if (null != childInfo && CGApplication.getInstance().getLogin().getList().get(i).getUuid().equals(uuid)) {
+                    CGApplication.getInstance().getLogin().getList().remove(i);
+                    CGApplication.getInstance().getLogin().getList().add(i, childInfo);
+                }
+            }
+        }
+
+
+    }
+
     private void storeData() {
+
         StoreDataInSerialize.storeUserInfo(CGApplication.getInstance().getLogin());
-        Intent intent = new Intent(GloablUtils.MINE_ADD_CHILD_FINISH);
-        sendBroadcast(intent);
+//        Intent intent = new Intent(GloablUtils.MINE_ADD_CHILD_FINISH);
+//        sendBroadcast(intent);
+        MineFragment.instance.addChildren();
+
+
     }
 
     private boolean check() {

@@ -18,24 +18,25 @@ import java.io.ObjectOutputStream;
 public abstract class StoreDataInSerialize {
    static File file = new File(CGApplication.context.getFilesDir().toString()+File.separator+GloablUtils.CACHE_DATA);
     public static boolean storeUserInfo(Login login) {
-
-        if(!file.exists()){
-            file.mkdirs();
-        }
-        File wenjian = new File(file,GloablUtils.CACHE_USER_INFO);
-        if(!wenjian.exists()){
+        synchronized (StoreDataInSerialize.class){
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            File wenjian = new File(file,GloablUtils.CACHE_USER_INFO);
+            if(!wenjian.exists()){
+                try {
+                    wenjian.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             try {
-                wenjian.createNewFile();
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(wenjian));
+                out.writeObject(login);
+                out.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        try {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(wenjian));
-            out.writeObject(login);
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return true;
@@ -43,17 +44,19 @@ public abstract class StoreDataInSerialize {
 
     public static Login getUserInfo(){
         Login login = null;
-        try {
-            File wenjian = new File(file, GloablUtils.CACHE_USER_INFO);
-            ObjectInputStream input = new ObjectInputStream(new FileInputStream(wenjian));
-            login = (Login)input.readObject();
-            input.close();
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        synchronized (StoreDataInSerialize.class){
+            try {
+                File wenjian = new File(file, GloablUtils.CACHE_USER_INFO);
+                ObjectInputStream input = new ObjectInputStream(new FileInputStream(wenjian));
+                login = (Login)input.readObject();
+                input.close();
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return login;
     }

@@ -53,16 +53,26 @@
                 android:text="小龙龙"
                 android:textColor="@color/black"
                 android:textSize="@dimen/big_text" />
+            <TextView
+                android:layout_marginTop="7dp"
+                android:id="@+id/item_interaction_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="十分钟前"
+                android:textColor="@color/color_b9b9b9"
+                android:textSize="@dimen/small_text" />
 
             <TextView
                 android:id="@+id/item_interaction_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/small_padding"
-                android:layout_marginTop="@dimen/small_padding"
+                android:layout_marginTop="@dimen/margin_15"
                 android:text="孩子们玩得多开心"
                 android:textColor="@color/black"
                 android:textSize="@dimen/normal_text" />
+
 
             <ImageView
                 android:id="@+id/item_interaction_img"
@@ -93,14 +103,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_padding">
 
-        <TextView
-            android:id="@+id/item_interaction_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="十分钟前"
-            android:textColor="@color/hint_gray"
-            android:textSize="@dimen/small_text" />
 
         <ImageView
             android:id="@+id/item_interaction_zan"
@@ -109,7 +111,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/normal_padding"
             android:layout_toLeftOf="@+id/item_interaction_reply"
-            android:src="@drawable/interaction_zan_off" />
+            android:src="@drawable/anzan_hudong_new" />
 
         <ImageView
             android:id="@+id/item_interaction_reply"
@@ -117,13 +119,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/interaction_reply" />
+            android:src="@drawable/pinglun_big" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/iv_hudong_share"
-            android:src="@drawable/fenxiangmy"
+            android:src="@drawable/fenxiang_big"
             android:layout_marginLeft="33dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/item_interaction_date" />
@@ -134,10 +136,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_padding"
-        android:drawableLeft="@drawable/interaction_mine_zan"
+        android:drawableLeft="@drawable/wodehuizan_big"
         android:drawablePadding="@dimen/small_padding"
-        android:ellipsize="end"
-        android:singleLine="true"
         android:text="0人觉得很赞"
         android:textColor="@color/black"
         android:textSize="@dimen/small_text" />

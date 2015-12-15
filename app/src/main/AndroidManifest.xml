@@ -550,6 +550,12 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name="com.wj.kindergarten.ui.main.MineFragment$MyReceiver">
+            <intent-filter>
+                <action android:name="add_child_finish"/>
+            </intent-filter>
+        </receiver>
+
         <!--  声明Mogo的Activity com.adsmogo.adview .AdsMogoWebView  -->        
         <activity android:name="com.adsmogo.adview.AdsMogoWebView"
             android:configChanges="orientation|keyboardHidden|screenSize"

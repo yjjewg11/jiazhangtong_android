@@ -34,19 +34,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/normal_padding"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="15dp"
                 android:text="更换头像"
                 android:textColor="@color/black"
                 android:textSize="@dimen/normal_text" />
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/l"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_10"
-                android:orientation="vertical" />
+            <!--<LinearLayout-->
+                <!--android:id="@+id/l"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/margin_10"-->
+                <!--android:orientation="vertical" />-->
 
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -59,7 +61,6 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true" />
                 <EditText
-                    android:drawableRight="@drawable/youjiantou"
                     style="@style/edit_child_info"
                     android:hint="请输入宝宝姓名"
                     android:background="@null"
@@ -70,8 +71,14 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView21"
                     android:layout_marginLeft="59dp" />
+                <TextView
+                android:layout_alignParentBottom="true"
+                android:background="@color/background_division"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -84,7 +91,6 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true" />
                 <EditText
-                    android:drawableRight="@drawable/youjiantou"
                     style="@style/edit_child_info"
                     android:hint="请输入宝宝昵称"
                     android:background="@null"
@@ -95,8 +101,14 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView22"
                     android:layout_marginLeft="59dp" />
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/background_division"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -122,8 +134,14 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView23"
                     android:layout_marginLeft="59dp" />
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/background_division"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -147,8 +165,14 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView24"
                     android:layout_marginLeft="59dp" />
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/background_division"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -162,7 +186,6 @@
                     android:layout_alignParentLeft="true" />
                 <EditText
                     android:phoneNumber="true"
-                    android:drawableRight="@drawable/youjiantou"
                     style="@style/edit_child_info"
                     android:hint="请输入宝宝身份证号码"
                     android:background="@null"
@@ -171,10 +194,15 @@
                     android:layout_height="match_parent"
                     android:id="@+id/et_ID_card"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/textView25"
-                    />
+                    android:layout_toRightOf="@+id/textView25" />
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/background_division"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
                 <TextView
@@ -201,6 +229,11 @@
                     android:id="@+id/et_family"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/textView26" />
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/background_division"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

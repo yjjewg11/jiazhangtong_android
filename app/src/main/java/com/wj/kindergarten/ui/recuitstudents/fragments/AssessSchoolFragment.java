@@ -93,9 +93,11 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
                 if(niming == 1){
                     niming = 0;
                     iv_niming.setImageResource(R.drawable.nimingwhite);
+                    tv_other_name.setTextColor(Color.parseColor("#8e8e8e"));
                 }else{
                     niming = 1;
                     iv_niming.setImageResource(R.drawable.niming1red);
+                    tv_other_name.setTextColor(Color.parseColor("#ff4966"));
                 }
 
             }
@@ -194,7 +196,7 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
         et_mine_school.setClickable(modificationFiled.isClicked);
         et_mine_school.setFocusable(false);
         et_mine_school.setFocusableInTouchMode(modificationFiled.isClicked);
-        tv_other_name.setTextColor(modificationFiled.getTextColor());
+//        tv_other_name.setTextColor(modificationFiled.getTextColor());
         tv_mine_submit.setTextColor(modificationFiled.getTextColor());
         tv_mine_submit.setText(modificationFiled.getTv_submit());
         tv_mine_submit.setBackgroundResource(modificationFiled.getSubmit_drawable());

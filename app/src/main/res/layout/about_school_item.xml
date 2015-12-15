@@ -15,10 +15,10 @@
 
 
         <ImageView
+            android:layout_alignBottom="@+id/tv_division_line"
+            android:layout_alignTop="@+id/item_class_name"
             android:padding="0dp"
             android:layout_marginLeft="@dimen/margin_10"
-            android:layout_alignBottom="@+id/tv_one_line"
-            android:layout_alignTop="@+id/item_class_name"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:id="@+id/item_special_course_list_view_image_view"
@@ -42,88 +42,99 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/item_special_course_list_view_image_view" />
 
+        <TextView
+            android:ellipsize="middle"
+            android:singleLine="true"
+            style="@style/schooltextstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="教学点：武侯区"
+            android:id="@+id/item_special_course_list_view_tv_adresss"
+            android:layout_below="@+id/item_class_name"
+            android:layout_alignLeft="@+id/item_class_name"
+            android:layout_alignParentRight="true" />
         <FrameLayout
             android:layout_marginTop="2dp"
             android:layout_alignLeft="@+id/item_class_name"
             android:layout_below="@+id/item_class_name"
             android:id="@+id/rating_fl"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <include layout="@layout/common_rating_bar"/>
-        </FrameLayout>
-
-        <TextView
-            android:ellipsize="middle"
-            android:singleLine="true"
-            style="@style/schooltextstyle"
-            android:layout_marginTop="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="教学点：武侯区"
-            android:id="@+id/item_special_course_list_view_tv_adresss"
-            android:layout_toLeftOf="@+id/item_special_course_list_view_tv_distance"
-            android:layout_below="@+id/rating_fl"
-            android:layout_alignLeft="@+id/rating_fl" />
+            android:layout_height="wrap_content"></FrameLayout>
 
 
-        <TextView
-            android:layout_below="@+id/tv_study_people"
-            android:drawablePadding="@dimen/margin_5"
-            android:drawableLeft="@drawable/juli"
-            android:textSize="14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="1.2km"
-            android:id="@+id/item_special_course_list_view_tv_distance"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:layout_alignParentRight="@+id/item_special_course_list_view_tv_distance"
-            android:background="#e0e0e0"
-            android:layout_marginRight="@dimen/margin_10"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/tv_one_line"
-            android:layout_below="@+id/item_special_course_list_view_tv_adresss"
-            android:layout_alignLeft="@+id/item_special_course_list_view_tv_adresss" />
-
-        <LinearLayout
+        <RelativeLayout
             style="@style/schooltextstyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="有一个优秀幼儿园"
             android:id="@+id/ll_school_medal_one"
-            android:layout_alignTop="@+id/tv_one_line"
-            android:layout_alignLeft="@+id/tv_one_line"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:layout_below="@+id/item_special_course_list_view_tv_adresss"
+            android:layout_alignLeft="@+id/item_special_course_list_view_tv_adresss">
+
+            <include layout="@layout/common_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/include" />
+
+            <TextView
+                android:textColor="@color/color_blue"
+                android:drawablePadding="@dimen/margin_5"
+                android:drawableLeft="@drawable/juli_blue"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="1.2km"
+                android:id="@+id/item_special_course_list_view_tv_distance"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" />
+
+            <TextView
+                android:layout_marginRight="@dimen/margin_20"
+                android:textColor="#ff4966"
+                android:textSize="12sp"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/renshu_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="100"
+                android:id="@+id/tv_study_people"
+                android:layout_alignBaseline="@+id/item_special_course_list_view_tv_distance"
+                android:layout_alignBottom="@+id/item_special_course_list_view_tv_distance"
+                android:layout_toLeftOf="@+id/item_special_course_list_view_tv_distance" />
+        </RelativeLayout>
 
         <ImageView
-            android:layout_marginTop="@dimen/margin_5"
-            android:src="@drawable/jiangbei"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/jiangbei_green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/iv_madle"
-            android:layout_alignTop="@+id/ll_school_medal_one"
+            android:layout_below="@+id/ll_school_medal_one"
             android:layout_alignRight="@+id/item_special_course_list_view_image_view" />
 
         <TextView
-            android:textColor="#ff4966"
-            android:textSize="12sp"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@color/color_e0e0e0"
+            android:id="@+id/tv_division_line"
+            android:layout_below="@+id/ll_school_medal_one"
+            android:layout_alignLeft="@+id/ll_school_medal_one"
+            android:layout_alignRight="@+id/ll_school_medal_one" />
+
+        <LinearLayout
+            android:id="@+id/contain_include_medal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="100人就读"
-            android:id="@+id/tv_study_people"
-            android:layout_above="@+id/item_special_course_list_view_tv_adresss"
-            android:layout_alignRight="@+id/item_special_course_list_view_tv_distance"
-            android:layout_alignEnd="@+id/item_special_course_list_view_tv_distance" />
+            android:layout_below="@+id/tv_division_line"
+            android:layout_alignLeft="@+id/tv_division_line"/>
 
     </RelativeLayout>
 

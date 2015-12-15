@@ -8,10 +8,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.net.Uri;
 import android.os.Environment;
+import android.util.Base64;
+
+import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.mine.EditChildActivity;
 
 public class FileUtil {
 
@@ -95,5 +102,40 @@ public class FileUtil {
             file.delete();
         }
     }
+
+
+//    此方法得到一个bitmap对象，返回一个base64字符串
+    public static String getBase64FromBitmap( Bitmap thePic){
+        String  pictureBytes = null;
+        ByteArrayOutputStream out = null;
+        byte[] bytes = null;
+        try {
+            int quality = 80;
+
+            out = new ByteArrayOutputStream();
+            do {
+                thePic.compress(Bitmap.CompressFormat.JPEG, quality, out);
+                bytes = out.toByteArray();
+                quality-=10;
+                if(quality==0) break;
+                out.reset();
+            }while (bytes.length / 1024 > 100);
+            try {
+                if(out!=null)
+                    out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            pictureBytes = Base64.encodeToString(bytes, Base64.NO_WRAP);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return pictureBytes;
+    }
+
+
 
 }

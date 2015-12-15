@@ -68,23 +68,24 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate() {
         setTitleText("详细信息");
         instance = this;
-        childInfo = getChildInfoByUUID(getIntent().getStringExtra("uuid"));
+        childInfo = (ChildInfo)getIntent().getSerializableExtra("childInfo");
 
         initViews();
 
         bindData();
     }
 
-    private ChildInfo getChildInfoByUUID(String uuid) {
-        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getList() != null) {
-            for (ChildInfo childInfo : CGApplication.getInstance().getLogin().getList()) {
-                if (null != childInfo && childInfo.getUuid().equals(uuid)) {
-                    return childInfo;
-                }
-            }
-        }
-        return new ChildInfo();
-    }
+    //传输对象不用传输查找
+//    private ChildInfo getChildInfoByUUID(String uuid) {
+//        if (CGApplication.getInstance().getLogin() != null && CGApplication.getInstance().getLogin().getList() != null) {
+//            for (ChildInfo childInfo : CGApplication.getInstance().getLogin().getList()) {
+//                if (null != childInfo && childInfo.getUuid().equals(uuid)) {
+//                    return childInfo;
+//                }
+//            }
+//        }
+//        return new ChildInfo();
+//    }
 
     private void initViews() {
         childView = findViewById(R.id.child_own);
@@ -156,7 +157,6 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
                     childInfo.setSex(data.getIntExtra("sex", 0));
                     childInfo.setBirthday(data.getStringExtra("birth"));
                     childInfo.setIdcard(data.getStringExtra("idCard"));
-//                    childInfo.set
                     break;
                 case BA:
                     childInfo.setBa_name(data.getStringExtra("name"));
@@ -185,17 +185,22 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void bindData() {
-        bindOwn(childInfo.getHeadimg(), childInfo.getName(), childInfo.getNickname(), childInfo.getSex(),
-                childInfo.getBirthday());
+        bindOwn(checkIsNull(childInfo.getHeadimg()), checkIsNull(childInfo.getName()),
+                checkIsNull(childInfo.getNickname()), childInfo.getSex(),
+                checkIsNull(childInfo.getBirthday()));
 
         bindSchool(childInfo.getGroupuuid(), childInfo.getClassuuid());
 
-        bindFather(childInfo.getBa_name(), childInfo.getBa_tel(), childInfo.getBa_work());
+        bindFather(checkIsNull(childInfo.getBa_name()), checkIsNull(childInfo.getBa_tel()),checkIsNull( childInfo.getBa_work()));
 
-        bindMother(childInfo.getMa_name(), childInfo.getMa_tel(), childInfo.getMa_work());
-        bindOther(childInfo.getYe_tel(), childInfo.getNai_tel(), childInfo.getWaigong_tel(), childInfo.getWaipo_tel());
+        bindMother(checkIsNull(childInfo.getMa_name()), checkIsNull(childInfo.getMa_tel()),checkIsNull( childInfo.getMa_work()));
+        bindOther(checkIsNull(childInfo.getYe_tel()), checkIsNull(childInfo.getNai_tel()),checkIsNull(childInfo.getWaigong_tel()), checkIsNull(childInfo.getWaipo_tel()));
         bindRemark(childInfo.getNote());
         queryKaInfo();
+    }
+
+    private String checkIsNull(String str){
+       return Utils.isNull(str);
     }
 
     private void queryKaInfo() {
@@ -273,7 +278,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 //启动相关联的学校
-                if(TextUtils.isEmpty(sid)) return;
+                if(TextUtils.isEmpty(sid) ||sid.equals("0")) return;
                 Intent intent = new Intent(ChildActivity.this, MineSchoolActivity.class);
                 intent.putExtra("groupuuid", sid);
                 startActivity(intent);

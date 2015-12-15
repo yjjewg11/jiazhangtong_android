@@ -3,19 +3,28 @@ package com.wj.kindergarten.ui;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -45,14 +54,22 @@ import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.imagescan.GalleryImagesActivity;
+import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
+import com.wj.kindergarten.ui.main.FoundFragment;
+import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.ui.mine.ChooseImage;
+import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.SystemBarTintManager;
 
+import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
+import com.wj.kindergarten.utils.UserHeadImageUtil;
 import com.wj.kindergarten.utils.Utils;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
@@ -100,7 +117,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     private RelativeLayout title_rl_top;
     private SystemBarTintManager.SystemBarConfig config;
     public static final int WEB_SECLECT_PIC = 150;
+    public static final int RECEIVER_PIC_TO_WEB = 5;
     private HintInfoDialog upLoadImageDialog;
+    private String registerWeb;
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -143,6 +162,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 //            config = tintManager.getConfig();
 //        }
         mContext = this;
+        //新开界面将webview置空
+        webView = null;
+        registerWeb = null;
         setContentLayout();
         setNeedLoading();
 
@@ -618,14 +640,52 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    private WebView webView;
+
+    //适用于所有页面的webview的回退操作
+
+
+    //返回值判断是否需要子类做处理
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(webView != null && !TextUtils.isEmpty(registerWeb)){
+            webView.loadUrl(registerWeb);
+            return false;
+        }else{
+            if(BaseActivity.this instanceof MainActivity){
+                ((MainActivity)BaseActivity.this).quitApp();
+            }
+        }
+        return super.onKeyDown(keyCode,event);
+    }
 
     public void setWebView(WebView webView){
+        this.webView = webView;
+        if(webView == null) return;
         webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient(){
-
+//            @Override
+//            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+//                String message = consoleMessage.message();
+//                int lineNumber = consoleMessage.lineNumber();
+//                String sourceID = consoleMessage.sourceId();
+//                String messageLevel = consoleMessage.message();
+//
+//                Log.i("[WebView]", String.format("[%s] sourceID: %s lineNumber: %n message: %s",
+//                        messageLevel, sourceID, lineNumber, message));
+//
+//                return super.onConsoleMessage(consoleMessage);
+//            }
+//
+//            @Override
+//            public void onConsoleMessage(String message, int lineNumber, String sourceID) {
+//                Log.i("[WebView]", String.format("sourceID: %s lineNumber: %n message: %s", sourceID,
+//                        lineNumber, message));
+//                super.onConsoleMessage(message, lineNumber, sourceID);
+//            }
         });
         //给所有的webview添加接口
-        webView.addJavascriptInterface(new WebJavaScript(webView),"familyJavascript");
+        webView.addJavascriptInterface(new WebJavaScript(webView),"JavaScriptCall");
         WebSettings webSettings = webView.getSettings();
         webSettings.setBuiltInZoomControls(true);
 //        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -660,21 +720,80 @@ public abstract class BaseActivity extends ActionBarActivity {
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 
-
+    private static final String IMAGE_FILE_NAME = "avatarImage.jpg";
+    private static final int REQUESTCODE_PICK_WEB = 100101;        // 相册选图标记
+    private static final int REQUESTCODE_TAKE_WEB = 100102;        // 相机拍照标记
+    private static final int REQUESTCODE_CUTTING_WEB = 2;
+    protected static final int UPLOAD_PIC_TO_WEB = 100103;
+    public boolean isTure;
     class WebJavaScript{
         public WebJavaScript(View view) {
             this.view = view;
         }
         private View view;
+        //回调注册web回退事件
         @JavascriptInterface
-        public void shareFromWeb(String title,String content,String picUrl,String httpUrl){
-            ShareUtils.showShareDialog(CGApplication.context,view, title, content, picUrl, httpUrl, false);
+        public void setDoBackFN(String str){
+            registerWeb = str;
         }
+
+
         @JavascriptInterface
-        public void selectPicFromWeb(){
-            //启动选择图片程序并且上传
+        public void finishProject(){
+            if(BaseActivity.this instanceof MainActivity){
+                try{
+                    final MainActivity activity = (MainActivity)BaseActivity.this;
+                    if(!isTure){
+                        isTure = true;
+                        activity.handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                activity.cancleMainWeb();
+                            }
+                        });
+
+                    }else{
+                        activity.quitApp();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+            }
+
+        }
+
+        @JavascriptInterface
+        public void setShareContent(String title,String content,String picUrl,String httpUrl){
+            ShareUtils.showShareDialog(CGApplication.context, view, title, content, picUrl, httpUrl, false);
+        }
+        //启动选择图片程序并且上传
+        @JavascriptInterface
+        public void selectImgPic(){
             Intent intent = new Intent(BaseActivity.this, GalleryImagesActivity.class);
-            startActivityForResult(intent,WEB_SECLECT_PIC,null);
+            startActivityForResult(intent, RECEIVER_PIC_TO_WEB, null);
+        }
+        //选择头像图片
+        @JavascriptInterface
+        public void selectHeadPic(){
+            UserHeadImageUtil.showChooseImageDialog(CGApplication.context, webView, new ChooseImage() {
+                @Override
+                public void chooseImage(int type) {
+                    if (type == UserHeadImageUtil.TAKE_PHOTO) {
+                        Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        //下面这句指定调用相机拍照后的照片存储的路径
+                        takeIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                                Uri.fromFile(new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME)));
+                        startActivityForResult(takeIntent, REQUESTCODE_TAKE_WEB);
+                    } else if (type == UserHeadImageUtil.CHOOSE_IMAGE_FROM_PICTURES) {
+                        Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
+                        // 如果朋友们要限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
+                        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
+                        startActivityForResult(pickIntent, REQUESTCODE_PICK_WEB);
+                    }
+                }
+            });
         }
     }
 
@@ -682,40 +801,80 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == WEB_SECLECT_PIC && resultCode == GalleryImagesActivity.RESULT_OK){
-            final ArrayList<String> list =  data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
-            if(data == null && list.size() <= 0) return ;
-            int haoma = 0;
-            count = haoma;
-            upLoadImageDialog = new HintInfoDialog(this,"第1张上传");
-            upLoadImageDialog.show();
-            UploadFile uploadFile = new UploadFile(CGApplication.context, new UploadImage() {
-                @Override
-                public void success(Result result) {
-                    count++;
-                    if(count > list.size()){
-                        //回调网页接口，上传完成
-                        upLoadImageDialog.cancel();
+        //选择单张图片进行裁剪
 
-                    }else{
-                        list.add(result.getImgUrl());
-                        upLoadImageDialog.setText("第"+count+"/"+list.size()+"张上传");
-                    }
-
+        if(resultCode != RESULT_OK) return;
+        switch (requestCode) {
+            case REQUESTCODE_PICK_WEB:// 直接从相册获取
+                try {
+                    startPhotoZoom(data.getData());
+                } catch (NullPointerException e) {
+                    e.printStackTrace();// 用户点击取消操作
                 }
-
-                @Override
-                public void failure(String message) {
-
+                return;
+            case REQUESTCODE_TAKE_WEB:// 调用相机拍照
+                File temp = new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME);
+                startPhotoZoom(Uri.fromFile(temp));
+                return;
+            case WEB_SECLECT_PIC:// 取得裁剪后的图片
+                if (data != null) {
+//                    setPicToView(data);
+                    String base =  getCompleteBase((Bitmap)data.getParcelableExtra("data"));
+                    webView.loadUrl("javascript:G_jsCallBack.selectHeadPic_callback('" + base + "')");
                 }
-            }, 0, 720, 1280);
-
-            for(String path : list){
-                uploadFile.upload(path);
-            }
-
-
+                return;
         }
 
+
+        if(requestCode == RECEIVER_PIC_TO_WEB){
+                ArrayList<String> images = data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
+                for(String image : images){
+                    upLoadBaseImage(image);
+                }
+        }
+
+    }
+
+    private void upLoadBaseImage(String image) {
+       Bitmap bitmap =  NativeImageLoader.getInstance().loadNativeImage(image, new NativeImageLoader.NativeImageCallBack() {
+            @Override
+            public void onImageLoader(Bitmap bitmap, String path) {
+                upBitmap(bitmap);
+            }
+        });
+        if(bitmap != null){
+            upBitmap(bitmap);
+        }
+    }
+
+    private void upBitmap(Bitmap bitmap) {
+        String base = getCompleteBase(bitmap);
+//        webView.loadUrl("http://www.baidu.com");
+        webView.loadUrl("javascript:G_jsCallBack.selectPic_callback('" + base + "')");
+    }
+
+    @NonNull
+    private String getCompleteBase(Bitmap bitmap) {
+        return "data:image/png;base64,"+ FileUtil.getBase64FromBitmap(bitmap);
+    }
+
+    /**
+     * 裁剪图片方法实现
+     *
+     * @param uri
+     */
+    public void startPhotoZoom(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        // crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 198);
+        intent.putExtra("outputY", 198);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, WEB_SECLECT_PIC);
     }
 }

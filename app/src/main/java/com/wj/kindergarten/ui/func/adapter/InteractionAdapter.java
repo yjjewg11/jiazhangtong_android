@@ -192,12 +192,12 @@ public class InteractionAdapter extends BaseAdapter {
                 viewHolder.mineZanTv.setText(Html.fromHtml(temp));
             }
             if (interaction.getDianzan().isCanDianzan()) {
-                viewHolder.zanIv.setImageResource(R.drawable.interaction_zan_off);
+                viewHolder.zanIv.setImageResource(R.drawable.anzan_hudong_new);
             } else {
-                viewHolder.zanIv.setImageResource(R.drawable.interaction_zan_on);
+                viewHolder.zanIv.setImageResource(R.drawable.hongzan_big);
             }
         } else {
-            viewHolder.zanIv.setImageResource(R.drawable.interaction_zan_off);
+            viewHolder.zanIv.setImageResource(R.drawable.anzan_hudong_new);
             viewHolder.mineZanTv.setText("0人觉得很赞");
         }
 
@@ -298,7 +298,7 @@ public class InteractionAdapter extends BaseAdapter {
         UserRequest.zan(mContext, interaction.getUuid(), NormalReplyListActivity.REPLY_TYPE_INTERACTION, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                imageView.setImageResource(R.drawable.interaction_zan_on);
+                imageView.setImageResource(R.drawable.hongzan_big);
                 if (Utils.stringIsNull(interaction.getDianzan().getNames())) {
                     interaction.getDianzan().setNames(CGApplication.getInstance().getLogin().getUserinfo().getName());
                 } else {
@@ -328,7 +328,7 @@ public class InteractionAdapter extends BaseAdapter {
         UserRequest.zanCancel(mContext, interaction.getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                imageView.setImageResource(R.drawable.interaction_zan_off);
+                imageView.setImageResource(R.drawable.anzan_hudong_new);
                 if (interaction.getDianzan().getNames().contains("," +
                         CGApplication.getInstance().getLogin().getUserinfo().getName())) {
                     interaction.getDianzan().setNames(interaction.getDianzan().getNames().replace(","

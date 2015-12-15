@@ -34,13 +34,14 @@ public class FoundFragment extends Fragment {
         view = inflater.inflate(R.layout.found_fragment,null);
         foundFragment = new FoundSunFragment();
         topicWebFragment = new TopicWebFragment();
-        getFragmentManager().beginTransaction().add(R.id.found_two_fragment_ll,foundFragment)
+        getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).add(R.id.found_two_fragment_ll,foundFragment)
                 .add(R.id.found_two_fragment_ll,topicWebFragment).show(foundFragment).hide(topicWebFragment).commit();
         return view;
     }
 
     public TopicWebFragment showWeb(){
         webIsShow = true;
+        ((MainActivity)getActivity()).isTure = false;
         ((MainActivity)getActivity()).getSupportActionBar().hide();
         getFragmentManager().beginTransaction().show(topicWebFragment).hide(foundFragment).commit();
         return topicWebFragment;
