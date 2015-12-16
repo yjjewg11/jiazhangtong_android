@@ -63,7 +63,7 @@ public class AboutSchoolAdatper extends BaseAdapter {
             viewHolder.ll_school_medal_one = (LinearLayout)convertView.findViewById(R.id.contain_include_medal);
             viewHolder.item_class_name = (TextView) convertView.findViewById(R.id.item_class_name);
             viewHolder.item_special_course_list_view_tv_adresss = (TextView) convertView.findViewById(R.id.item_special_course_list_view_tv_adresss);
-            viewHolder.item_special_course_list_view_tv_distance = (TextView) convertView.findViewById(R.id.item_special_course_list_view_tv_distance);
+            viewHolder.item_special_course_list_view_tv_distance = (TextView) convertView.findViewById(R.id.recruit_student_tv_distance);
             viewHolder.item_special_course_list_view__rating_bar = (RatingBarView)convertView.findViewById(R.id.item_special_course_list_view__rating_bar);
             viewHolder.item_special_course_list_view_image_view = (ImageView)convertView.findViewById(R.id.item_special_course_list_view_image_view);
             viewHolder.tv_study_people = (TextView)convertView.findViewById(R.id.tv_study_people);
@@ -106,7 +106,7 @@ public class AboutSchoolAdatper extends BaseAdapter {
                     viewHolder.ll_school_medal_one.setVisibility(View.VISIBLE);
                     int size =  schoolInfo.getSummary().split(",").length;
                     if(size > 0){
-                        for(int i = 0;i< size;i++){
+                        for(int i = 0;i < (size > 3 ? 3 : size);i++){
                             TextView textView = new TextView(context);
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                             textView.setText(schoolInfo.getSummary().split(",")[i]);

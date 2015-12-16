@@ -654,6 +654,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         }else{
             if(BaseActivity.this instanceof MainActivity){
                 ((MainActivity)BaseActivity.this).quitApp();
+                return true;
             }
         }
         return super.onKeyDown(keyCode,event);
@@ -663,39 +664,13 @@ public abstract class BaseActivity extends ActionBarActivity {
         this.webView = webView;
         if(webView == null) return;
         webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient(){
-//            @Override
-//            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-//                String message = consoleMessage.message();
-//                int lineNumber = consoleMessage.lineNumber();
-//                String sourceID = consoleMessage.sourceId();
-//                String messageLevel = consoleMessage.message();
-//
-//                Log.i("[WebView]", String.format("[%s] sourceID: %s lineNumber: %n message: %s",
-//                        messageLevel, sourceID, lineNumber, message));
-//
-//                return super.onConsoleMessage(consoleMessage);
-//            }
-//
-//            @Override
-//            public void onConsoleMessage(String message, int lineNumber, String sourceID) {
-//                Log.i("[WebView]", String.format("sourceID: %s lineNumber: %n message: %s", sourceID,
-//                        lineNumber, message));
-//                super.onConsoleMessage(message, lineNumber, sourceID);
-//            }
-        });
+        webView.setWebChromeClient(new WebChromeClient(){});
         //给所有的webview添加接口
         webView.addJavascriptInterface(new WebJavaScript(webView),"JavaScriptCall");
         WebSettings webSettings = webView.getSettings();
-        webSettings.setBuiltInZoomControls(true);
 //        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setUseWideViewPort(false);
-        webSettings.setUseWideViewPort(false);
-        webSettings.setLoadWithOverviewMode(false);
-        webSettings.setSavePassword(true);
-        webSettings.setSaveFormData(true);
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setGeolocationEnabled(true);
 ////		ws.setGeolocationDatabasePath("/data/data/org.itri.html5webview/databases/");// ���ö�λ�����ݿ�·��
         webSettings.setDomStorageEnabled(true);
     }

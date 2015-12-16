@@ -223,7 +223,7 @@ public class MessageFragment extends Fragment {
                         mListView.onRefreshComplete();
                     }
                     Utils.showToast(CGApplication.getInstance(), "消息列表为空");
-                    ((MainActivity)getActivity()).commonClosePullToRefreshListGridView(mListView);
+                    ((MainActivity)getActivity()).noView(message_list_rl);
                 }
             }
 

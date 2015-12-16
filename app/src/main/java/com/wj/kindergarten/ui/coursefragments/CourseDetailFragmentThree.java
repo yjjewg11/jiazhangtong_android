@@ -130,7 +130,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         rl_price = (RelativeLayout) view.findViewById(R.id.rl_price);
         rl_free_price = (RelativeLayout) view.findViewById(R.id.rl_free_price);
         gd = new GestureDetector(getActivity(), this);
-        activity.setWebView(course_detail_info);
+//        activity.setWebView(course_detail_info);
         //TODO
         course_detail_info.setOnTouchListener(this);
         //获取webview在屏幕中的位置

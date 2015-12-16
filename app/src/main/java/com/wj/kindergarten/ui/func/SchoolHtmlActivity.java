@@ -91,19 +91,20 @@ public class SchoolHtmlActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case SUCCESS_GET_DATA:
-                    if(TextUtils.isEmpty(sdl.getDistance())){
-                        item_special_course_list_view_tv_distance.setVisibility(View.INVISIBLE);
-                    }else{
-                        item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
-                    }
+                    recuritFragment.setUrl(sdl.getRecruit_url());
                     titleCenterTextView.setText(schoolDetail.getBrand_name());
                     item_class_name.setText(schoolDetail.getBrand_name());
-                    tv_study_people.setText(schoolDetail.getCt_study_students()+"人就读");
+                    tv_study_people.setText(schoolDetail.getCt_study_students()+"");
                     tv_study_people.setTextColor(Color.parseColor("#ff4966"));
                     item_special_course_list_view__rating_bar.setFloatStar(schoolDetail.getCt_stars(), true);
                     ImageLoaderUtil.displayMyImage(schoolDetail.getImg(),item_special_course_list_view_image_view);
                     item_special_course_list_view_tv_adresss.setText(schoolDetail.getAddress());
                     item_special_course_list_view_tv_distance.setText(sdl.getDistance());
+                    if(TextUtils.isEmpty(sdl.getDistance())){
+                        item_special_course_list_view_tv_distance.setVisibility(View.INVISIBLE);
+                    }else{
+                        item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
+                    }
                     if(schoolDetail.getSummary() != null && schoolDetail.getSummary().split(",") != null){
                         for(String s : schoolDetail.getSummary().split(",")){
                             TextView textView = new TextView(SchoolHtmlActivity.this);
@@ -124,7 +125,6 @@ public class SchoolHtmlActivity extends BaseActivity {
                         tv_coll.setText("收藏");
                         iv_coll.setImageResource(R.drawable.shoucangnewwhtire);
                     }
-                    schoolFragment.setUrl(sdl.getObj_url());
                     tab_layout.getLocationInWindow(fl_location);
                     //创建移除动画
                     wrapper =new WrapperFl(anim_fl);
@@ -179,7 +179,7 @@ public class SchoolHtmlActivity extends BaseActivity {
         ll_school_medal_one = (LinearLayout)findViewById(R.id.contain_include_medal);
         item_class_name = (TextView) findViewById(R.id.item_class_name);
         item_special_course_list_view_tv_adresss = (TextView) findViewById(R.id.item_special_course_list_view_tv_adresss);
-        item_special_course_list_view_tv_distance = (TextView) findViewById(R.id.item_special_course_list_view_tv_distance);
+        item_special_course_list_view_tv_distance = (TextView) findViewById(R.id.recruit_student_tv_distance);
         item_special_course_list_view__rating_bar = (RatingBarView)findViewById(R.id.item_special_course_list_view__rating_bar);
         item_special_course_list_view_image_view = (ImageView)findViewById(R.id.item_special_course_list_view_image_view);
 
@@ -199,7 +199,7 @@ public class SchoolHtmlActivity extends BaseActivity {
         recuritFragment = new WebFragment();
         schoolAssessFragment = new SchoolAssessFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.common_rl,schoolFragment).add(R.id.common_rl,recuritFragment).
-                add(R.id.common_rl,schoolAssessFragment).hide(recuritFragment).hide(schoolAssessFragment).show(schoolFragment).commit();
+                add(R.id.common_rl,schoolAssessFragment).hide(schoolFragment).hide(schoolAssessFragment).show(recuritFragment).commit();
 
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -212,16 +212,18 @@ public class SchoolHtmlActivity extends BaseActivity {
 
 
                     //判断是否进行动画
-                    case 1:
-
-                        getSupportFragmentManager().beginTransaction().show(schoolFragment).hide(recuritFragment).hide(schoolAssessFragment).commit();
-                        break;
                     case 0:
+
+                        getSupportFragmentManager().beginTransaction().show(recuritFragment).hide(schoolFragment).hide(schoolAssessFragment).commit();
+
+                        break;
+                    case 1:
                         if(!isFirst){
                             isFirst = true;
-                            recuritFragment.setUrl(sdl.getRecruit_url());
+                            schoolFragment.setUrl(sdl.getObj_url());
                         }
-                        getSupportFragmentManager().beginTransaction().show(recuritFragment).hide(schoolFragment).hide(schoolAssessFragment).commit();
+                        getSupportFragmentManager().beginTransaction().show(schoolFragment).hide(recuritFragment).hide(schoolAssessFragment).commit();
+
                         break;
                     case 2:
                         if(!isOnce){

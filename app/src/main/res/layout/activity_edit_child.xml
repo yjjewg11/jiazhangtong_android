@@ -185,6 +185,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true" />
                 <EditText
+                    android:layout_marginLeft="47dp"
                     android:phoneNumber="true"
                     style="@style/edit_child_info"
                     android:hint="请输入宝宝身份证号码"
@@ -217,7 +218,7 @@
                 <EditText
                     android:textColorHint="@color/color_313131"
                     android:layout_alignLeft="@+id/et_name"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="23dp"
                     android:drawableRight="@drawable/youjiantou"
                     style="@style/edit_child_info"
                     android:textColor="@color/color_313131"

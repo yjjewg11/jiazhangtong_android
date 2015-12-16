@@ -9,11 +9,39 @@
 
     <include layout="@layout/title_webview_normal" />
 
-    <FrameLayout
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/common_tab_layout"/>
-    </FrameLayout>
+        android:layout_height="50dp">
+
+        <RadioButton
+            android:id="@+id/child_go_choose_school"
+            style="@style/child_go_to_school"
+            android:text="成都市"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            style="@style/image_child_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:background="@color/color_e0e0e0"
+            android:layout_width="1dp"
+            android:layout_height="30dp" />
+        <RadioButton
+            android:id="@+id/child_go_choose_sort"
+            style="@style/child_go_to_school"
+            android:text="智能排序"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            style="@style/image_child_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:background="#f6f6f6"
@@ -29,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:cacheColorHint="#00000000"
-            android:divider="#f6f6f6"
+            android:divider="@color/background_division"
             android:dividerHeight="10dp"
             ptr:ptrAnimationStyle="flip"
             ptr:ptrDrawable="@drawable/default_ptr_flip" />

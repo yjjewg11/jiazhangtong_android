@@ -24,6 +24,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:id="@+id/hs_container_mine"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <HorizontalScrollView
                 android:layout_centerVertical="true"
                 android:id="@+id/mine_head_horizontal_scroll"
@@ -39,6 +46,7 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
+            </LinearLayout>
 
         </RelativeLayout>
 
