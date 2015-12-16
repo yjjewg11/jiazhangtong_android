@@ -34,9 +34,8 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
-import com.wj.kindergarten.bean.BaseModel;
-import com.wj.kindergarten.bean.ChildInfo;
-import com.wj.kindergarten.bean.Emot;
+import com.wj.kindergarten.bean.*;
+import com.wj.kindergarten.bean.Class;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
@@ -88,11 +87,8 @@ public class InteractionSentActivity extends BaseActivity {
     public ArrayList<ArrayList<Emot>> emojiLists = new ArrayList<ArrayList<Emot>>();
     private boolean isJianPan = true;//是否是
     private LinearLayout bottomLayout;
-    private String nowClassUUID = "";
-    private String nowClassName = "";
     private PopupWindow mPopupWindow = null;
     private PopAdapter popAdapter = null;
-    private List<ChildInfo> childInfos = new ArrayList<>();
 
     private LinearLayout photoContent = null;
     private final int REQUEST_TAKE_PHOTO = 0;
@@ -101,6 +97,8 @@ public class InteractionSentActivity extends BaseActivity {
     private UploadFile uploadFile;
     private ArrayList<String> images = new ArrayList<>();
     private HintInfoDialog dialog = null;
+    //发表互动的班级集合
+    private List<Class> class_list = CGApplication.getInstance().getLogin().getClass_list();
 
     private int count = 0;
     private String path = "";
@@ -108,6 +106,7 @@ public class InteractionSentActivity extends BaseActivity {
     private IntentFilter filter = null;
     private NetworkConnectChangedReceiver networkConnectChangedReceiver = null;
     private boolean isCon = false;
+    private String newClassUUid;
 
     @Override
     protected void setContentLayout() {
@@ -136,6 +135,13 @@ public class InteractionSentActivity extends BaseActivity {
         initViews();
         initData();
 
+        classTv = (TextView) findViewById(R.id.interaction_send_class);
+
+        if (class_list != null && class_list.size() > 0) {
+            newClassUUid = class_list.get(0).getUuid();
+            classTv.setText(class_list.get(0).getName());
+        }
+
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -156,25 +162,21 @@ public class InteractionSentActivity extends BaseActivity {
             }
         });
 
-        classTv = (TextView) findViewById(R.id.interaction_send_class);
-        CGApplication cgApplication = CGApplication.getInstance();
-        if (cgApplication.getLogin() != null && cgApplication.getLogin().getList() != null &&
-                cgApplication.getLogin().getList().size() > 0) {
-            Map<String, ChildInfo> tempMap = new HashMap<>();
-            for (int i = 0; i < cgApplication.getLogin().getList().size(); i++) {
-                ChildInfo childInfoTemp = cgApplication.getLogin().getList().get(i);
-                tempMap.put(childInfoTemp.getClassuuid(), childInfoTemp);
-            }
-            for (Map.Entry entry : tempMap.entrySet()) {
-                childInfos.add((ChildInfo) entry.getValue());
-            }
-        }
 
-        if (childInfos != null && childInfos.size() > 0) {
-            nowClassUUID = childInfos.get(0).getClassuuid();
-            nowClassName = Utils.getClassNameFromId(nowClassUUID);
-            classTv.setText(nowClassName);
-        }
+//        CGApplication cgApplication = CGApplication.getInstance();
+//        if (cgApplication.getLogin() != null && cgApplication.getLogin().getList() != null &&
+//                cgApplication.getLogin().getList().size() > 0) {
+//            Map<String, ChildInfo> tempMap = new HashMap<>();
+//            for (int i = 0; i < cgApplication.getLogin().getList().size(); i++) {
+//                ChildInfo childInfoTemp = cgApplication.getLogin().getList().get(i);
+//                tempMap.put(childInfoTemp.getClassuuid(), childInfoTemp);
+//            }
+//            for (Map.Entry entry : tempMap.entrySet()) {
+//                childInfos.add((ChildInfo) entry.getValue());
+//            }
+//        }
+
+
         classTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -422,9 +424,8 @@ public class InteractionSentActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                nowClassUUID = childInfos.get(i).getClassuuid();
-                nowClassName = Utils.getClassNameFromId(nowClassUUID);
-                classTv.setText(nowClassName);
+                newClassUUid = class_list.get(i).getUuid();
+                classTv.setText(class_list.get(i).getName());
                 mPopupWindow.dismiss();
             }
         });
@@ -465,12 +466,12 @@ public class InteractionSentActivity extends BaseActivity {
     class PopAdapter extends BaseAdapter {
         @Override
         public int getCount() {
-            return childInfos.size();
+            return class_list.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return childInfos.get(i);
+            return class_list.get(i);
         }
 
         @Override
@@ -482,9 +483,9 @@ public class InteractionSentActivity extends BaseActivity {
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = View.inflate(mContext, R.layout.item_send_interaction_class, null);
             TextView textView = (TextView) view.findViewById(R.id.item_send_interaction_class);
-            ChildInfo childInfo = childInfos.get(i);
-            textView.setText(Utils.getClassNameFromId(childInfo.getClassuuid()));
-            if (nowClassUUID != null && nowClassUUID.equals(childInfo.getClassuuid())) {
+            Class aClass = class_list.get(i);
+            textView.setText(aClass.getName());
+            if (newClassUUid != null && newClassUUid.equals(aClass.getUuid())) {
                 Drawable drawable = getResources().getDrawable(R.drawable.select_right);
                 textView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
             } else {
@@ -525,7 +526,7 @@ public class InteractionSentActivity extends BaseActivity {
             return;
         }
 
-        if (Utils.stringIsNull(nowClassUUID)) {
+        if (Utils.stringIsNull(newClassUUid)) {
             Utils.showToast(mContext, "请选择关联班级");
             return;
         }
@@ -533,7 +534,7 @@ public class InteractionSentActivity extends BaseActivity {
         if (images.size() > 0) {
             uploadImage(0);
         } else {
-            sendInteraction(nowClassUUID, editText.getText().toString(), path);
+            sendInteraction(newClassUUid, editText.getText().toString(), path);
         }
     }
 
@@ -552,7 +553,7 @@ public class InteractionSentActivity extends BaseActivity {
             if (count < images.size()) {
                 uploadImage(count);
             } else {
-                sendInteraction(nowClassUUID, editText.getText().toString(), path);
+                sendInteraction(newClassUUid, editText.getText().toString(), path);
             }
         }
 

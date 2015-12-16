@@ -43,7 +43,8 @@ public class WebFragment extends Fragment implements View.OnTouchListener{
         activity.getHintDialog().show();
         view = inflater.inflate(R.layout.common_top_webview,null);
         webview = (TopWebView)view.findViewById(R.id.common_topWeb);
-        activity.setWebView(webview);
+        webview.getSettings().setJavaScriptEnabled(true);
+//        activity.setWebView(webview);
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -57,6 +58,7 @@ public class WebFragment extends Fragment implements View.OnTouchListener{
             }
         });
         wrapper = new WrapperWeb(webview);
+        webview.setOnTouchListener(this);
         return view;
     }
 

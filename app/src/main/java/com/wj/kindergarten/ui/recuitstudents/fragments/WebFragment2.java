@@ -41,7 +41,8 @@ public class WebFragment2 extends Fragment implements View.OnTouchListener{
         activity = (SchoolHtmlActivity)getActivity();
         view = inflater.inflate(R.layout.common_top_webview,null);
         common_topWeb = (TopWebView)view.findViewById(R.id.common_topWeb);
-        activity.setWebView(common_topWeb);
+//        activity.setWebView(common_topWeb);
+        common_topWeb.getSettings().setJavaScriptEnabled(true);
         common_topWeb.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {

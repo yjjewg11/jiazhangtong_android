@@ -9,7 +9,6 @@
         android:paddingTop="@dimen/margin_10"
         android:paddingBottom="@dimen/margin_10"
         android:id="@+id/rl_all_content"
-        android:background="@drawable/item_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -88,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="1.2km"
-                android:id="@+id/item_special_course_list_view_tv_distance"
+                android:id="@+id/recruit_student_tv_distance"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true" />
 
@@ -103,9 +102,9 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="100"
                 android:id="@+id/tv_study_people"
-                android:layout_alignBaseline="@+id/item_special_course_list_view_tv_distance"
-                android:layout_alignBottom="@+id/item_special_course_list_view_tv_distance"
-                android:layout_toLeftOf="@+id/item_special_course_list_view_tv_distance" />
+                android:layout_alignBaseline="@+id/recruit_student_tv_distance"
+                android:layout_alignBottom="@+id/recruit_student_tv_distance"
+                android:layout_toLeftOf="@+id/recruit_student_tv_distance" />
         </RelativeLayout>
 
         <ImageView
@@ -133,7 +132,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_division_line"
+            android:layout_alignTop="@+id/iv_madle"
             android:layout_alignLeft="@+id/tv_division_line"/>
 
     </RelativeLayout>

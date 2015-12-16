@@ -23,6 +23,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Group;
+import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.MainItem;
 import com.wj.kindergarten.bean.More;
 import com.wj.kindergarten.bean.MoreData;
@@ -143,9 +144,13 @@ public class MainFragment extends Fragment {
 
     //获取title列表
     private void success() {
-        if (CGApplication.getInstance().getLogin() == null) {
+
+        Login login = CGApplication.getInstance().getLogin();
+        if (login == null) {
             return;
         }
+        List<Group> groupList = login.getGroup_list();
+
         titles.clear();
         titles.addAll(CGApplication.getInstance().getLogin().getGroup_list());
         String uuid = CGSharedPreference.getTitleUUID();

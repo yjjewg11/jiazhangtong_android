@@ -42,6 +42,7 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.IntervalUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.utils.WindowUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +141,11 @@ public class InteractionAdapter extends BaseAdapter {
         });
         viewHolder.nameTv.setText(interaction.getCreate_user());
         viewHolder.textTv.setText(EmotUtil.getEmotionContent(mContext, interaction.getContent()));
+        if(TextUtils.isEmpty(EmotUtil.getEmotionContent(mContext, interaction.getContent()))){
+            viewHolder.textTv.setVisibility(View.GONE);
+        }else{
+            viewHolder.textTv.setVisibility(View.VISIBLE);
+        }
         viewHolder.imageIv.setVisibility(View.GONE);
         viewHolder.dateTv.setText(IntervalUtil.getInterval(interaction.getCreate_time()));
         viewHolder.replyIv.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +224,8 @@ public class InteractionAdapter extends BaseAdapter {
         if (interaction.getImgsList() != null && interaction.getImgsList().size() > 0) {
             nGAdapter = new NstGridPicAdapter(interaction.getImgsList(), mContext);
             viewHolder.nestedGridView.setVisibility(View.VISIBLE);
+            viewHolder.nestedGridView.setVerticalSpacing((4*(int)WindowUtils.getDesnity()));
+            viewHolder.nestedGridView.setHorizontalSpacing((4*(int)WindowUtils.getDesnity()));
         } else {
             nGAdapter = new NstGridPicAdapter(new ArrayList<String>(), mContext);
             viewHolder.nestedGridView.setVisibility(View.GONE);

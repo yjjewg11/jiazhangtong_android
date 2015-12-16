@@ -60,7 +60,7 @@ public class StoreFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_interaction, null, false);
+            rootView = inflater.inflate(R.layout.layout_pulltorefresh, null, false);
 
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list);
             adapter = new StoreAdapter(getActivity(), dataList);

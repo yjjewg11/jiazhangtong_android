@@ -53,6 +53,7 @@ public class MineFragment extends Fragment {
     private View.OnClickListener addListeners;
     private HorizontalScrollView mine_head_horizontal_scroll;
     public static MineFragment instance;
+    private LinearLayout hs_container_mine;
 
 
     @Nullable
@@ -85,6 +86,7 @@ public class MineFragment extends Fragment {
                 startActivity(intent);
             }
         };
+        hs_container_mine = (LinearLayout)rootView.findViewById(R.id.hs_container_mine);
         mine_head_horizontal_scroll = (HorizontalScrollView)rootView.findViewById(R.id.mine_head_horizontal_scroll);
         mine_head_horizontal_scroll.setOnTouchListener(null);
         mine_add_child = (ImageView) rootView.findViewById(R.id.mine_add_child);
@@ -135,51 +137,21 @@ public class MineFragment extends Fragment {
         Login loginNew = CGApplication.getInstance().getLogin();
         childContent.removeAllViews();
         if (loginNew != null && loginNew.getList() != null) {
-            int i = 0;
-            for (final ChildInfo childInfo : loginNew.getList()) {
-                View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
+            //如果小于等于3，均分
+            if(loginNew.getList().size() <= 3 && loginNew.getList().size() != 0){
+                hs_container_mine.removeAllViews();
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
                         LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                //动态设置判断添加
-                int size = loginNew.getList().size();
-                if (size == 1) {
-                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
-                } else if (size == 2) {
-                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 4);
-                } else if (size == 3) {
-                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 6);
-                } else if (size > 3) {
-                    setMargin(layoutParams, WindowUtils.dm.widthPixels / 7);
-                    if (i == 0) {
-                        layoutParams.leftMargin = WindowUtils.dm.widthPixels / 7 / 2;
-                    }
-                    if (i == loginNew.getList().size() - 1) {
-                        layoutParams.rightMargin = WindowUtils.dm.widthPixels / 7 / 2;
-                    }
-                }
-
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), ChildActivity.class);
-                        intent.putExtra("childInfo", childInfo);
-                        startActivity(intent);
-                    }
-                });
-                CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
-                TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
-
-
-                if (!Utils.stringIsNull(childInfo.getHeadimg())) {
-                    ImageLoaderUtil.displayImage(childInfo.getHeadimg(), headIv);
-                } else {
-                    headIv.setImageResource(R.drawable.touxiang);
-                }
-                nameTv.setText(childInfo.getName());
-
-                childContent.addView(view, layoutParams);
-                i++;
+                layoutParams.weight = 1;
+                addSmallChild(loginNew,hs_container_mine,layoutParams);
+            }else if(loginNew.getList().size() > 3){
+                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.
+                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams2.leftMargin = 40;
+                addSmallChild(loginNew,childContent,layoutParams2);
             }
+
+
 
             if (loginNew.getList().size() == 0) {
                 View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
@@ -193,6 +165,31 @@ public class MineFragment extends Fragment {
                 view.setOnClickListener(addListeners);
                 childContent.addView(view, layoutParams);
             }
+        }
+    }
+
+    private void addSmallChild(Login loginNew, LinearLayout contain,LinearLayout.LayoutParams layoutParams) {
+        for (final ChildInfo childInfo : loginNew.getList()) {
+            View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), ChildActivity.class);
+                    intent.putExtra("childInfo", childInfo);
+                    startActivity(intent);
+                }
+            });
+            CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
+            TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
+
+
+            if (!Utils.stringIsNull(childInfo.getHeadimg())) {
+                ImageLoaderUtil.displayImage(childInfo.getHeadimg(), headIv);
+            } else {
+                headIv.setImageResource(R.drawable.touxiang);
+            }
+            nameTv.setText(childInfo.getName());
+            contain.addView(view, layoutParams);
         }
     }
 

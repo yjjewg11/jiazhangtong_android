@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.BaseActivity;
 
 /**
  * Created by tangt on 2015/12/9.
@@ -29,6 +30,7 @@ public class FoundFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setText("发现");
+        ((BaseActivity) getActivity()).clearCenterIcon();
         if(view != null) return view;
         instance = this;
         view = inflater.inflate(R.layout.found_fragment,null);
@@ -42,14 +44,24 @@ public class FoundFragment extends Fragment {
     public TopicWebFragment showWeb(){
         webIsShow = true;
         ((MainActivity)getActivity()).isTure = false;
-        ((MainActivity)getActivity()).getSupportActionBar().hide();
+        ((MainActivity)getActivity()).handler.post(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity) getActivity()).getSupportActionBar().hide();
+            }
+        });
         getFragmentManager().beginTransaction().show(topicWebFragment).hide(foundFragment).commit();
         return topicWebFragment;
     }
 
     public void cancleWeb(){
         webIsShow = false;
-        ((MainActivity)getActivity()).getSupportActionBar().show();
+        ((MainActivity)getActivity()).handler.post(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity)getActivity()).getSupportActionBar().show();
+            }
+        });
         getFragmentManager().beginTransaction().show(foundFragment).hide(topicWebFragment).commit();
     }
 

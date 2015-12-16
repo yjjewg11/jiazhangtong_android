@@ -3,6 +3,7 @@ package com.wj.kindergarten.ui.webview;
 import android.content.Intent;
 import android.graphics.Color;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,10 +30,12 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
 import com.wj.kindergarten.ui.func.adapter.AboutSchoolAdatper;
+import com.wj.kindergarten.ui.func.adapter.OwnAdapter;
 import com.wj.kindergarten.utils.HintInfoDialog;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static android.support.design.widget.TabLayout.*;
@@ -44,7 +49,6 @@ import static android.support.design.widget.TabLayout.*;
  */
 public class SchoolIntroduceActivity extends BaseActivity {
 
-    private TabLayout tab_layout;
     private PullToRefreshListView listView;
     private AboutSchoolAdatper adapter;
     private HintInfoDialog dialog;
@@ -67,6 +71,9 @@ public class SchoolIntroduceActivity extends BaseActivity {
     private boolean isFirstAssess;
     private boolean isFirstDistance;
     private FrameLayout pulllist_fl;
+    private RadioButton child_go_choose_sort;
+    private ListView listView_choose;
+    private OwnAdapter ownAdapter;
 
     @Override
     protected void setContentLayout() {
@@ -82,6 +89,7 @@ public class SchoolIntroduceActivity extends BaseActivity {
 
 
 
+    private List<String> listString = Arrays.asList(new String[]{"智能排序", "评价最高", "离我最近"});
     @Override
     protected void onCreate() {
 
@@ -96,67 +104,82 @@ public class SchoolIntroduceActivity extends BaseActivity {
         title_webview_normal_text = (TextView)findViewById(R.id.title_webview_normal_text);
         title_webview_normal_text.setText("招生中心");
         title_webview_normal_spinner = (TextView)findViewById(R.id.title_webview_normal_spinner);
-        title_webview_normal_spinner.setText("成都市");
-        title_webview_normal_spinner.setTextSize(14);
-
-        tab_layout = (TabLayout)findViewById(R.id.common_tab_layout);
-        tab_layout.addTab(tab_layout.newTab().setText("智能排序"));
-        tab_layout.addTab(tab_layout.newTab().setText("评价最高"));
-        tab_layout.addTab(tab_layout.newTab().setText("离我最近"));
-
-        tab_layout.setOnTabSelectedListener(new OnTabSelectedListener() {
+        title_webview_normal_spinner.setVisibility(View.GONE);
+        child_go_choose_sort = (RadioButton)findViewById(R.id.child_go_choose_sort);
+        child_go_choose_sort.setOnClickListener(new OnClickListener() {
             @Override
-            public void onTabSelected(Tab tab) {
-                //判断容器内是否是listview
-                if(pulllist_fl.findViewById(R.id.pulltorefresh_listview) == null){
-                    pulllist_fl.removeAllViews();
-                    if(listView.getParent() != null){
-                        ((ViewGroup)(listView.getParent())).removeView(listView);
+            public void onClick(View v) {
+                View view = View.inflate(getApplicationContext(), R.layout.window_list, null);
+
+                listView_choose = (ListView) view.findViewById(R.id.window_lsit);
+                ownAdapter = new OwnAdapter(SchoolIntroduceActivity.this);
+                ownAdapter.setList(listString);
+                listView_choose.setAdapter(ownAdapter);
+                final PopupWindow popupWindowss = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                popupWindowss.setAnimationStyle(R.style.ShareAnimBase);
+                popupWindowss.setFocusable(true);
+                popupWindowss.setTouchable(true);
+                popupWindowss.setOutsideTouchable(true);
+                popupWindowss.getContentView().setFocusableInTouchMode(true);
+                popupWindowss.getContentView().setFocusable(true);
+                popupWindowss.setBackgroundDrawable(new BitmapDrawable());
+                popupWindowss.update();
+                popupWindowss.showAsDropDown(v, 0, 0);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        popupWindowss.dismiss();
                     }
-                    pulllist_fl.addView(listView);
-                }
-                listView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-                switch (tab.getPosition()) {
-                    case 0:
-                        sort = srots[0];
-                        break;
-                    case 1:
-                        sort = srots[1];
-                        //判断是否是第一次点击，如果是加载数据，不是则刷新集合.
-                        if(!isFirstAssess){
-                            isFirstAssess = true;
+                });
 
-                            loadData(assessPage);
-                        }else{
-                            adapter.setList(assessList);
+                listView_choose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        popupWindowss.dismiss();
+                        if (pulllist_fl.findViewById(R.id.pulltorefresh_listview) == null) {
+                            pulllist_fl.removeAllViews();
+                            if (listView.getParent() != null) {
+                                ((ViewGroup) (listView.getParent())).removeView(listView);
+                            }
+                            pulllist_fl.addView(listView);
                         }
+                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
 
-                        break;
-                    case 2:
-                        sort = srots[2];
-                        //判断是否是第一次点击，如果是加载数据，不是则刷新集合.
-                        if(!isFirstDistance){
-                            isFirstDistance = true;
+                        sort = srots[position];
+                        child_go_choose_sort.setText(listString.get(position));
+                        switch (position) {
+                            case 0:
 
-                            loadData(distancePage);
-                        }else{
-                            adapter.setList(distanceList);
+                                break;
+                            case 1:
+                                //判断是否是第一次点击，如果是加载数据，不是则刷新集合.
+                                if (!isFirstAssess) {
+                                    isFirstAssess = true;
+
+                                    loadData(assessPage);
+                                } else {
+                                    adapter.setList(assessList);
+                                }
+
+                                break;
+                            case 2:
+                                //判断是否是第一次点击，如果是加载数据，不是则刷新集合.
+                                if (!isFirstDistance) {
+                                    isFirstDistance = true;
+                                    loadData(distancePage);
+                                } else {
+                                    adapter.setList(distanceList);
+                                }
+                                break;
                         }
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onTabUnselected(Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(Tab tab) {
-
+                    }
+                });
             }
         });
+
+
         listView = (PullToRefreshListView)findViewById(R.id.pulltorefresh_listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         listView.setBackgroundColor(Color.parseColor("#f6f6f6"));
@@ -171,21 +194,18 @@ public class SchoolIntroduceActivity extends BaseActivity {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 //下拉加载刷新
 
-                switch (tab_layout.getSelectedTabPosition()){
-                    case 0:
-                        paiXuPage++;
-                        loadData(paiXuPage);
-                        break;
-                    case 1:
-                        assessPage++;
-                        loadData(assessPage);
-                        break;
-                    case 2:
-                        distancePage++;
-                        loadData(distancePage);
-                        break;
-                }
+                String text = child_go_choose_sort.getText().toString();
 
+                if(text.equals(listString.get(0))){
+                    paiXuPage++;
+                    loadData(paiXuPage);
+                }else if(text.equals(listString.get(1))){
+                    assessPage++;
+                    loadData(assessPage);
+                }else if(text.equals(listString.get(2))){
+                    distancePage++;
+                    loadData(distancePage);
+                }
 
             }
         });

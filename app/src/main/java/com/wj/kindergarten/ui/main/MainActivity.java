@@ -254,9 +254,9 @@ public class MainActivity extends BaseActivity {
                     finish();
                 } else if (msg.what == 1011) {
                     if (mTabIdArray[0].equals(nowTab)) {
-                        MainFragment mineFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[0]);
-                        if (mineFragment != null) {
-                            mineFragment.loadData();
+                        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[0]);
+                        if (mainFragment != null) {
+                            mainFragment.loadData();
                         }
                     }
                 } else if (msg.what == 1088) {

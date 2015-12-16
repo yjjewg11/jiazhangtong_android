@@ -356,16 +356,16 @@ public class SpecialCourseDetailActivity extends BaseActivity{
                     popupWindowss.setOutsideTouchable(true);
                     popupWindowss.getContentView().setFocusableInTouchMode(true);
                     popupWindowss.getContentView().setFocusable(true);
-                    popupWindowss.setBackgroundDrawable(new BitmapDrawable());
-                    popupWindowss.update();
-                    popupWindowss.showAsDropDown(v, 0, 0);
-                    view.setOnClickListener(new View.OnClickListener() {
+                popupWindowss.setBackgroundDrawable(new BitmapDrawable());
+                popupWindowss.update();
+                popupWindowss.showAsDropDown(v, 0, 0);
+                view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         popupWindowss.dismiss();
                     }
-                     });
+                });
                     listView_choose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

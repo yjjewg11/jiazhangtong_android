@@ -39,7 +39,8 @@ public class MineSchoolIntroduceFragment extends Fragment {
         activity = (MineSchoolActivity) getActivity();
         view = inflater.inflate(R.layout.common_top_webview,null);
         webView = (TopWebView)view.findViewById(R.id.common_topWeb);
-        activity.setWebView(webView);
+//        activity.setWebView(webView);
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
