@@ -72,7 +72,6 @@ public class AboutSchoolAdatper extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-          convertView.setBackgroundColor(context.getResources().getColor(R.color.special_gray));
 
         TrainSchoolInfo schoolInfo = list.get(position);
 
@@ -91,7 +90,7 @@ public class AboutSchoolAdatper extends BaseAdapter {
             String text ;
             if(schoolInfo.getCt_study_students() != 0){
 //                String text = "<font  color='#ff4966'>"+object.getCt_study_students()+"</font>"+"人已学";
-                text = "<font  color='#ff4966'>"+schoolInfo.getCt_study_students()+"人就读"+"</font>";
+                text = "<font  color='#ff4966'>"+schoolInfo.getCt_study_students()+"</font>";
 
             }else{
                 text = "<font  color='#ff4966'>"+"0"+"</font>";

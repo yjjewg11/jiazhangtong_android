@@ -175,10 +175,10 @@ public class MineCourseDetailActivity extends BaseActivity{
                 ImageLoaderUtil.displayMyImage(courses.getLogo(), iv_school);
                 if(!oscs.isFavor()){
                     tv_coll.setText("已收藏");
-                    iv_coll.setImageResource(R.drawable.store2);
+                    iv_coll.setImageResource(R.drawable.shoucangnewred);
                 }else{
                     tv_coll.setText("收藏");
-                    iv_coll.setImageResource(R.drawable.store1);
+                    iv_coll.setImageResource(R.drawable.shoucangnewwhtire);
                 }
 
 

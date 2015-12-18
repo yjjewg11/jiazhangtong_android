@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.FoundGridItem;
+import com.wj.kindergarten.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,9 +23,9 @@ public class FoundGridAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private Context context;
     private List<FoundGridItem> list = Arrays.asList(new FoundGridItem[]{
-            new FoundGridItem("精品文章",R.drawable.jingpinwenzhang_big,0),
-            new FoundGridItem("话题",R.drawable.huati_big,0),
-            new FoundGridItem("优惠活动",R.drawable.youhuihuodong_bg,0),
+            new FoundGridItem("精品文章",R.drawable.jingpinwenzhang_120),
+            new FoundGridItem("话题",R.drawable.huati_120),
+            new FoundGridItem("优惠活动",R.drawable.youhuihuodong_120),
     });
     public FoundGridAdapter(Context context) {
         this.context = context;
@@ -72,19 +73,30 @@ public class FoundGridAdapter extends BaseAdapter{
         }
 
         FoundGridItem item = list.get(position);
-        if(item != null){
+
             viewHolder.iv_found_grid_item.setImageResource(item.getIv());
             viewHolder.tv_found_grid_name.setText(item.getName());
-            viewHolder.tv_found_grid_count.setText(item.getCount()+"");
-            if(item.getCount() > 0){
-                viewHolder.tv_found_grid_count.setVisibility(View.VISIBLE);
-            }else{
-                viewHolder.tv_found_grid_count.setVisibility(View.INVISIBLE);
+
+            int [] count = MainActivity.instance.getTypeCount();
+            if(position == 0){
+                setCount(viewHolder,count[0]);
+            }else if(position == 1){
+                setCount(viewHolder,count[1]);
+            }else if(position == 2){
+                setCount(viewHolder,count[2]);
             }
-        }
+
         return convertView;
     }
 
+    public void  setCount(ViewHolder viewHolder,int count){
+        viewHolder.tv_found_grid_count.setText(count+"");
+        if(count > 0){
+            viewHolder.tv_found_grid_count.setVisibility(View.VISIBLE);
+        }else{
+            viewHolder.tv_found_grid_count.setVisibility(View.INVISIBLE);
+        }
+    }
     class ViewHolder{
         ImageView iv_found_grid_item;
         TextView tv_found_grid_name,tv_found_grid_count;

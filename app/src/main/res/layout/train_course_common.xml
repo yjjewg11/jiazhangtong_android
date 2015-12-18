@@ -93,7 +93,7 @@
                 android:drawablePadding="1dp"
                 android:drawableTop="@drawable/zixunnew"
                 android:gravity="center"
-                android:text="互动"
+                android:text="咨询"
                 android:textColor="@color/color_929292"
                 android:textSize="10dp" />
         </RelativeLayout>

@@ -175,6 +175,7 @@ public class SchoolHtmlActivity extends BaseActivity {
 
         tv_study_people = (TextView)findViewById(R.id.tv_study_people);
         anim_fl = (FrameLayout)findViewById(R.id.anim_fl);
+        anim_fl.setBackgroundColor(getResources().getColor(R.color.white));
         iv_madle = (ImageView)findViewById(R.id.iv_madle);
         ll_school_medal_one = (LinearLayout)findViewById(R.id.contain_include_medal);
         item_class_name = (TextView) findViewById(R.id.item_class_name);
@@ -187,6 +188,7 @@ public class SchoolHtmlActivity extends BaseActivity {
         tv_coll = (TextView)findViewById(R.id.textview_1_1);
         iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
         tab_layout = (TabLayout)findViewById(R.id.common_tab_layout);
+        tab_layout.setBackgroundColor(getResources().getColor(R.color.white));
         tab_layout.addTab(tab_layout.newTab().setText("招生计划"));
         tab_layout.addTab(tab_layout.newTab().setText("学校简介"));
         tab_layout.addTab(tab_layout.newTab().setText("家长评论"));
@@ -209,7 +211,6 @@ public class SchoolHtmlActivity extends BaseActivity {
                 }
 
                 switch (tab.getPosition()) {
-
 
                     //判断是否进行动画
                     case 0:
@@ -389,8 +390,8 @@ public class SchoolHtmlActivity extends BaseActivity {
                     case R.id.train_course_tab_interaction:
                         //启动互动界面
                         Intent intent = new Intent(SchoolHtmlActivity.this,CourseInteractionListActivity.class);
-                        intent.putExtra("newsuuid",schoolDetail.getUuid());
-                        intent.putExtra("type", NormalReplyListActivity.TRAIN_COURSE);
+                        intent.putExtra("newsuuid",schoolUuid);
+                        intent.putExtra("type", NormalReplyListActivity.TRAIN_SCHOOL);
                         startActivity(intent);
                         break;
                     case R.id.train_course_tab_ask:

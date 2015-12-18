@@ -143,7 +143,7 @@ public class SpecialCourseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        ((BaseActivity) getActivity()).clearCenterIcon();
         ((MainActivity) getActivity()).setTitleText("特长课程");
         if(view != null) return view;
 

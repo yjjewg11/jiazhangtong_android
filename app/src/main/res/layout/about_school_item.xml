@@ -27,7 +27,7 @@
 
         <TextView
             android:paddingRight="@dimen/margin_5"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:layout_alignParentRight="true"
             android:ellipsize="end"
             android:singleLine="true"
@@ -92,7 +92,9 @@
                 android:layout_alignParentRight="true" />
 
             <TextView
-                android:layout_marginRight="@dimen/margin_20"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="20dp"
                 android:textColor="#ff4966"
                 android:textSize="12sp"
                 android:drawablePadding="5dp"

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoreDiscussAdapter extends BaseAdapter{
-    private Context context;
-    private LayoutInflater inflater;
-    private List<MoreDiscuss> list = new ArrayList<>();
+    protected Context context;
+    protected LayoutInflater inflater;
+    protected List<MoreDiscuss> list = new ArrayList<>();
 
     public void setList(List<MoreDiscuss> list){
         this.list.clear();

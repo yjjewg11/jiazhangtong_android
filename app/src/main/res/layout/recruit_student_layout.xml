@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/recruit_student_contain_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/recruit_student_pullList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/line"
+        android:dividerHeight="@dimen/line_width"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrDrawable="@drawable/default_ptr_flip" />
+
+</FrameLayout>

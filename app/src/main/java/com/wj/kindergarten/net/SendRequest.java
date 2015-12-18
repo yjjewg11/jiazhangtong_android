@@ -9,6 +9,7 @@ import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.TeacherDetailInfo;
+import com.wj.kindergarten.bean.AddChild;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;
 import com.wj.kindergarten.bean.AddressBookMessage;
@@ -301,7 +302,6 @@ public class SendRequest {
         switch (requestType) {
             case RequestType.REGISTER:
             case RequestType.FORGET_PWD:
-            case RequestType.CHANGE_CHILD:
             case RequestType.ZAN:
             case RequestType.ZAN_CANCEL:
             case RequestType.STORE:
@@ -312,6 +312,9 @@ public class SendRequest {
             case RequestType.LOGIN_OUT:
             case RequestType.READ_MESSAGE:
                 resultI.result(getDomain(domain, BaseModel.class));
+                break;
+            case RequestType.CHANGE_CHILD:
+                 resultI.result(getDomain(domain, AddChild.class));
                 break;
             case RequestType.ZAN_LIST:
                 resultI.result(getDomain(domain, ZanItem.class));

@@ -191,7 +191,7 @@ public class AssessSchoolFragment extends Fragment implements View.OnClickListen
     }
 
     private void modifaFiled(ModificationFiled modificationFiled) {
-        mime_school_rating_bar.setFloatStar(Float.valueOf(modificationFiled.getStar() * 10), true);
+        mime_school_rating_bar.setFloatStar(modificationFiled.getStar(), true);
         mime_school_rating_bar.setmClickable(modificationFiled.isClicked);
         et_mine_school.setClickable(modificationFiled.isClicked);
         et_mine_school.setFocusable(false);

@@ -95,7 +95,6 @@ public class MineSchoolActivity extends BaseActivity{
 
                     titleCenterTextView.setText(schoolDatil.getBrand_name());
                     mineSchoolFragment.setUrl(sdl.getObj_url());
-                    ll_school_medal_one = (LinearLayout)findViewById(R.id.ll_school_medal_one);
                     if(schoolDatil.getSummary() != null){
                         for(String s : schoolDatil.getSummary().split(",")){
                             TextView textView = new TextView(MineSchoolActivity.this);
@@ -165,11 +164,11 @@ public class MineSchoolActivity extends BaseActivity{
         rl_all_content.setBackground(null);
         iv_madle = (ImageView)findViewById(R.id.iv_madle);
         tab_layout_fl = (FrameLayout)findViewById(R.id.tab_layout_fl);
-        ll_school_medal_one = (LinearLayout)findViewById(R.id.ll_school_medal_one);
+        ll_school_medal_one = (LinearLayout)findViewById(R.id.contain_include_medal);
         item_class_name = (TextView) findViewById(R.id.item_class_name);
         tv_study_people = (TextView)findViewById(R.id.tv_study_people);
         item_special_course_list_view_tv_adresss = (TextView) findViewById(R.id.item_special_course_list_view_tv_adresss);
-        item_special_course_list_view_tv_distance = (TextView) findViewById(R.id.item_special_course_list_view_tv_distance);
+        item_special_course_list_view_tv_distance = (TextView) findViewById(R.id.recruit_student_tv_distance);
         item_special_course_list_view__rating_bar = (RatingBarView)findViewById(R.id.item_special_course_list_view__rating_bar);
         item_special_course_list_view_image_view = (ImageView)findViewById(R.id.item_special_course_list_view_image_view);
         item_special_course_list_view__rating_bar.setFloatStar(50,true);
