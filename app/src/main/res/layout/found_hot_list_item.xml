@@ -5,7 +5,7 @@
 
     <TextView
         android:textColor="#313131"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
