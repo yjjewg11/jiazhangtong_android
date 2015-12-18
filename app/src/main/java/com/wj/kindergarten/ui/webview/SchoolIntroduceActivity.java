@@ -182,7 +182,7 @@ public class SchoolIntroduceActivity extends BaseActivity {
 
         listView = (PullToRefreshListView)findViewById(R.id.pulltorefresh_listview);
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-        listView.setBackgroundColor(Color.parseColor("#f6f6f6"));
+        listView.setBackgroundColor(Color.parseColor("#ffffff"));
 
         listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override

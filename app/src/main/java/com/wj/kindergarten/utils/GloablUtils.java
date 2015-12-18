@@ -22,6 +22,5 @@ public interface GloablUtils {
      String MINE_ADD_CHILD_FINISH = "add_child_finish";
 
 
-
-
+     String SET_PULL_LAOUT_LIST_BACKGROUND_COLOR = "#ffffff";
 }

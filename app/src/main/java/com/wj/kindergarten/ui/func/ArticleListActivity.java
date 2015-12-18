@@ -17,6 +17,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.ArticleAdapter;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -52,9 +53,8 @@ public class ArticleListActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         setTitleText("精品文章");
-
         mListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
-        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

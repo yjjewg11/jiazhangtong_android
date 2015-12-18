@@ -13,6 +13,11 @@ public class FoundGridItem {
     String name;
     int iv,count;
 
+    public FoundGridItem( String name,int iv) {
+        this.iv = iv;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

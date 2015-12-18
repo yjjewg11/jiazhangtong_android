@@ -56,6 +56,8 @@ public class MessageFragment extends Fragment {
     private ArrayList<MsgDataModel> dataList = new ArrayList<MsgDataModel>();
     private int nowPage = 1;
     private RelativeLayout message_list_rl;
+    private static final int SET_REFRESH = 10010;
+
 
     @Nullable
     @Override
@@ -63,28 +65,29 @@ public class MessageFragment extends Fragment {
         ((BaseActivity) getActivity()).clearCenterIcon();
         ((BaseActivity) getActivity()).setTitleText("消息");
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.fragment_interaction, null, false);
+            rootView = inflater.inflate(R.layout.fragment_interaction, null);
 
             message_list_rl = (RelativeLayout)rootView.findViewById(R.id.message_list_rl);
-            mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list);
-            adapter = new MessageAdapter(getActivity(), dataList);
-            mListView.setDividerDrawable(getResources().getDrawable(R.color.line));
-            mListView.setAdapter(adapter);
-            mListView.setMode(PullToRefreshBase.Mode.BOTH);
-
+            mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list_interation);
+            mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+            mListView.setDividerPadding(0);
+            mListView.setDividerDrawable(null);
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    nowPage = 1;
-                    queryMessage(nowPage);
+//                    nowPage = 1;
+//                    queryMessage(nowPage);
                 }
 
                 @Override
                 public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    queryMessage(nowPage + 1);
+                    queryMessage(nowPage++);
                 }
             });
 
+            adapter = new MessageAdapter(getActivity(), dataList);
+            mListView.setDividerDrawable(getResources().getDrawable(R.color.line));
+            mListView.setAdapter(adapter);
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -140,20 +143,15 @@ public class MessageFragment extends Fragment {
 //                                intent1.putExtra("url", dataModel.getUrl());
 //                                getActivity().startActivity(intent1);
 //                            }
-                        }else if(dataModel.getType() == 13){
+                        } else if (dataModel.getType() == 13) {
                             startActivity(new Intent(getActivity(), SignListActivity.class));
-                        }else if(dataModel.getType() == 99){
+                        } else if (dataModel.getType() == 99) {
                             startActivity(new Intent(getActivity(), InteractionListActivity.class));
                         }
                     }
                 }
             });
-
-            mHandler.sendEmptyMessageDelayed(0, 300);
-        }
-        ViewGroup parent = (ViewGroup) rootView.getParent();
-        if (parent != null) {
-            parent.removeView(rootView);
+            mHandler.sendEmptyMessageDelayed(SET_REFRESH,0);
         }
 
         return rootView;
@@ -186,32 +184,35 @@ public class MessageFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case 0:
-                    if (!mListView.isRefreshing()) {
-                        mListView.setRefreshing();
-                    }
+                case SET_REFRESH:
+                    queryMessage(1);
                     break;
-                case 1:
-                    break;
+
             }
         }
     };
 
     public void loadMessage() {
-        nowPage = 1;
-        mHandler.sendEmptyMessageDelayed(0, 100);
-        // queryMessage(nowPage);
+//        nowPage = 1;
+//        mHandler.sendEmptyMessageDelayed(0, 100);
+//         queryMessage(nowPage);
     }
 
     private void queryMessage(final int page) {
+        ((MainActivity)getActivity()).getDialog().show();
+
         UserRequest.queryMessage(getActivity(), page, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                if(((MainActivity)getActivity()).getDialog().isShowing()){
+                ((MainActivity)getActivity()).getDialog().cancel();
+                }
                 if (mListView.isRefreshing()) {
                     mListView.onRefreshComplete();
                 }
                 Msg msg = (Msg) domain;
-                if (msg != null && msg.getList() != null ) {
+                if (msg != null && msg.getList() != null && msg.getList().getData()!= null &&
+                        msg.getList().getData().size() > 0) {
                     if (page == 1) {
                         dataList.clear();
                     }
@@ -219,11 +220,10 @@ public class MessageFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     nowPage = page;
                 } else {
-                    if (mListView.isRefreshing()) {
-                        mListView.onRefreshComplete();
+                    if(page == 1){
+                        ((BaseActivity)getActivity()).noView(message_list_rl);
                     }
                     Utils.showToast(CGApplication.getInstance(), "消息列表为空");
-                    ((MainActivity)getActivity()).noView(message_list_rl);
                 }
             }
 

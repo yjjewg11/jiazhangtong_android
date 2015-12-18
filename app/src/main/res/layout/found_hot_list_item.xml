@@ -3,12 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/found_hot_selection_rl"
-        android:background="@drawable/seclector_back_ground_white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
     <TextView
         android:textColor="#313131"
         android:textSize="15sp"
@@ -21,6 +15,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="9dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:layout_marginBottom="@dimen/margin_15"
@@ -39,36 +38,42 @@
         android:layout_below="@+id/tv_found_hot_theme"
         android:layout_alignParentLeft="true" />
 
-    <TextView
-        android:layout_marginBottom="@dimen/margin_15"
-        android:textColor="@color/textcolor_8e8e8e"
-        android:textSize="12sp"
-        android:paddingRight="9dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="14dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="每到秋冬季季天气装量，总会有互粉多的孩子感冒生病转，那么责骂么减少这种影响."
-        android:id="@+id/tv_found_content"
-        android:layout_below="@+id/tv_found_hot_theme"
-        android:layout_toRightOf="@+id/tv_found_hot_count" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_alignTop="@+id/tv_found_hot_count"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_found_hot_count">
+            <TextView
+                android:textColor="@color/textcolor_8e8e8e"
+                android:textSize="14sp"
+                android:paddingRight="9dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="每到秋冬季季天气装量，总会有互粉多的孩子感冒生病转，那么责骂么减少这种影响."
+                android:id="@+id/tv_found_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" />
+
+            <com.wj.kindergarten.compounets.NestedGridView
+                android:id="@+id/item_found_hot_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_padding"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/margin_15"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="3"
+                android:columnWidth="8dp"
+                android:verticalSpacing="@dimen/small_padding"
+                android:visibility="visible" />
+        </LinearLayout>
+
     </RelativeLayout>
-    <com.wj.kindergarten.compounets.NestedGridView
-        android:id="@+id/item_found_hot_pic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="63dp"
-        android:layout_marginRight="@dimen/normal_padding"
-        android:layout_marginTop="@dimen/normal_padding"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/margin_15"
-        android:horizontalSpacing="@dimen/small_padding"
-        android:listSelector="@android:color/transparent"
-        android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/small_padding"
-        android:visibility="invisible" />
+
+
 
     <TextView
         android:background="@color/unit_line_division"

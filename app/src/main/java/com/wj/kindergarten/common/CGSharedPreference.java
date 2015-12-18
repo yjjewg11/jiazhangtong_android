@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.bean.MainTopic;
+import com.wj.kindergarten.bean.MainTopicSun;
 import com.wj.kindergarten.bean.VersionInfo;
 
 import com.wj.kindergarten.utils.Utils;
@@ -276,19 +277,17 @@ public class CGSharedPreference {
         editor.commit();
     }
 
-    public static void setMainTopic(MainTopic topic) {
+    public static void setMainTopicSun(MainTopicSun sun) {
         SharedPreferences sharedPreferences = getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("topic_img",topic.getImg());
-        editor.putString("topic_title",topic.getTitle());
-        editor.putString("topic_link_url",topic.getUrl());
+        editor.putString("topic_title",sun.getTitle());
+        editor.putString("topic_link_url",sun.getUrl());
         editor.commit();
     }
 
-    public static MainTopic getMainTopic(){
-        MainTopic topic = new MainTopic();
+    public static MainTopicSun getMainTopicSun(){
+        MainTopicSun topic = new MainTopicSun();
         SharedPreferences sharedPreferences = getSharedPreferences();
-        topic.setImg(sharedPreferences.getString("topic_img",""));
         topic.setTitle(sharedPreferences.getString("topic_title", ""));
         topic.setUrl(sharedPreferences.getString("topic_link_url",""));
         return topic;

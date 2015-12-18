@@ -711,7 +711,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         public void setDoBackFN(String str){
             registerWeb = str;
         }
-
+        @JavascriptInterface
+        public String getJsessionid(){
+            return CGApplication.getInstance().getLogin().getUserinfo().getJSESSIONID();
+        }
 
         @JavascriptInterface
         public void finishProject(){

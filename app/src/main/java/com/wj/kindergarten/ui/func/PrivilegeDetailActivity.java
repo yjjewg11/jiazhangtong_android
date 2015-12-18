@@ -261,7 +261,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
                 }
 
                 ShareUtils.showShareDialog(PrivilegeDetailActivity.this, tvSHare, article.getData().getTitle(),
-                        content, "", article.getShare_url(),false);
+                content, article.getData().getUrl(), article.getShare_url(),false);
 
 
                 break;

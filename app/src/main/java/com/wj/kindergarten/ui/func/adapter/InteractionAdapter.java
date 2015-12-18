@@ -193,7 +193,7 @@ public class InteractionAdapter extends BaseAdapter {
                 viewHolder.mineZanTv.setText("0人觉得很赞");
             } else {
                 String temp = "<font  color='#ff4966'>"
-                        + interaction.getDianzan().getNames() + "</font>" + "等"
+                        + interaction.getDianzan().getNames() + "</font>"
                         + interaction.getDianzan().getCount() + "人觉得很赞";
                 viewHolder.mineZanTv.setText(Html.fromHtml(temp));
             }
@@ -224,8 +224,9 @@ public class InteractionAdapter extends BaseAdapter {
         if (interaction.getImgsList() != null && interaction.getImgsList().size() > 0) {
             nGAdapter = new NstGridPicAdapter(interaction.getImgsList(), mContext);
             viewHolder.nestedGridView.setVisibility(View.VISIBLE);
-            viewHolder.nestedGridView.setVerticalSpacing((4*(int)WindowUtils.getDesnity()));
-            viewHolder.nestedGridView.setHorizontalSpacing((4*(int)WindowUtils.getDesnity()));
+            int width = (int) Math.floor(WindowUtils.getDesnity());
+//            viewHolder.nestedGridView.setVerticalSpacing(10/width);
+//            viewHolder.nestedGridView.setHorizontalSpacing(5);
         } else {
             nGAdapter = new NstGridPicAdapter(new ArrayList<String>(), mContext);
             viewHolder.nestedGridView.setVisibility(View.GONE);

@@ -82,11 +82,9 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (null != chooseTile) {
-            ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
-        } else {
-            ((MainActivity) getActivity()).setTitleText("首页");
-        }
+        ((BaseActivity) getActivity()).clearCenterIcon();
+        ((MainActivity) getActivity()).setTitleText("首页");
+
         ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
@@ -161,7 +159,7 @@ public class MainFragment extends Fragment {
         }
 
         if (null != chooseTile) {
-            ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
+//            ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
         }
 
         if (titles.size() > 1) {

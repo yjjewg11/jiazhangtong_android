@@ -64,7 +64,7 @@ public class CourseInteractionFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null, false);
-            mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list);
+            mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list_interation);
             courseInteractionAdapter = new CourseInteractionAdapter(getActivity(), this, dataList);
             mListView.setDividerDrawable(getResources().getDrawable(R.color.line));
             mListView.setAdapter(courseInteractionAdapter);

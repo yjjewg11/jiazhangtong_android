@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ConfigObject;
+import com.wj.kindergarten.bean.FoundTypeCount;
+import com.wj.kindergarten.bean.FoundTypeCountSun;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.MainTopic;
 import com.wj.kindergarten.bean.TrainChildInfoList;
@@ -61,6 +64,12 @@ public class MainActivity extends BaseActivity {
 
     private int mImageViewArray2[] = {R.drawable.school_tab, R.drawable.found_tab,
             R.drawable.message_tab, R.drawable.special_tab,R.drawable.mine_tab};
+    private int [] typeCount = new int[3];
+
+    public int[] getTypeCount() {
+        return typeCount;
+    }
+
     //Tab选项卡的文字
     private String mTabIdArray[] = {"学校", "发现", "消息", "特长课程","我的"};
 
@@ -108,6 +117,7 @@ public class MainActivity extends BaseActivity {
 
 
         getSupportActionBar().setElevation(0);
+        getCount();
         instance = this;
         hideLeftButton();
         dialog= new HintInfoDialog(this);
@@ -127,7 +137,6 @@ public class MainActivity extends BaseActivity {
         }
 
         //每次应用启动获取话题
-        getMainTopic();
 
         //注册广播
 //        IntentFilter intentFilter = new IntentFilter(GloablUtils.MINE_ADD_CHILD_FINISH);
@@ -137,25 +146,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private void getMainTopic() {
-        UserRequest.getMainTopic(this, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                MainTopic topic = (MainTopic) domain;
-                CGSharedPreference.setMainTopic(topic);
-            }
 
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
-    }
 
     private void getTopicConfig() {
         UserRequest.getTopicConfig(this, CGSharedPreference.getConfigMD5(), new RequestResultI() {
@@ -335,6 +326,31 @@ public class MainActivity extends BaseActivity {
             updateAlertDialog.show();
     }
 
+
+    public void getCount() {
+        UserRequest.getTypeCount(this, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                //获取成功，
+                FoundTypeCount foundTypeCount = (FoundTypeCount) domain;
+                if(foundTypeCount != null && foundTypeCount.getData() != null)
+                typeCount[0] = foundTypeCount.getData().getToday_goodArticle();
+                typeCount[1] = foundTypeCount.getData().getToday_snsTopic();
+                typeCount[2] = foundTypeCount.getData().getToday_pxbenefit();
+
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
     /**
      * init tab
      */
@@ -368,16 +384,16 @@ public class MainActivity extends BaseActivity {
                 //如果是发现，判断是不是webFragment
                 if (mTabIdArray[1].equals(nowTab)) {
                     FoundFragment foundFragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
+
                     if (foundFragment != null) {
+                        getCount();
                         if (foundFragment.webIsShow()) {
                             getSupportActionBar().hide();
                         } else {
                             getSupportActionBar().show();
                         }
                     }
-
             }
-
         }
     });
 
@@ -493,19 +509,20 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void titleCenterButtonListener() {
-        super.titleCenterButtonListener();
-        if (nowTab.equals(mTabIdArray[0])) {
-            MainFragment mainFragment = (MainFragment) getSupportFragmentManager()
-                    .findFragmentByTag(mTabIdArray[0]);
-            if (mainFragment != null) {
-                mainFragment.loadData();
-                mainFragment.changeTitle();
-            }
-        }
-
-    }
+    //屏蔽切换学校
+//    @Override
+//    protected void titleCenterButtonListener() {
+//        super.titleCenterButtonListener();
+//        if (nowTab.equals(mTabIdArray[0])) {
+//            MainFragment mainFragment = (MainFragment) getSupportFragmentManager()
+//                    .findFragmentByTag(mTabIdArray[0]);
+//            if (mainFragment != null) {
+//                mainFragment.loadData();
+//                mainFragment.changeTitle();
+//            }
+//        }
+//
+//    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

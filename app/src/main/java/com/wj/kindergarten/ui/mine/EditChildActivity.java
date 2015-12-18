@@ -28,6 +28,8 @@ import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
+import com.wj.kindergarten.bean.AddChild;
+import com.wj.kindergarten.bean.AddChildSun;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.common.CGSharedPreference;
@@ -396,7 +398,9 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 UploadFile uploadFile = new UploadFile(EditChildActivity.this, new UploadImage() {
                     @Override
                     public void success(Result result) {
-                        dialog.dismiss();
+                        if(dialog.isShowing()){
+                            dialog.dismiss();
+                        }
                         if (null != result) {
                             saveInfo(result.getImgUrl());
                         }
@@ -485,9 +489,17 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         UserRequest.changeChild(mContext, childInfo, addressName, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                dialog.dismiss();
+                if(dialog.isShowing()){
+                    dialog.dismiss();
+                }
+                AddChild addChild = (AddChild) domain;
+                AddChildSun sun = null;
+                if(addChild != null){
+                   sun =  addChild.getData();
+                }
                 if (isAdded) {
                     //如果是添加新的小孩，直接返回主页面
+                    childInfo.setUuid(sun.getUuid());
                     CGApplication.getInstance().getLogin().getList().add(childInfo);
                     storeData();
                     finish();
