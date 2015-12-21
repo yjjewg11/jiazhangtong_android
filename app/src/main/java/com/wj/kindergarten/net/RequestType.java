@@ -73,4 +73,5 @@ public interface RequestType {
      int GET_MAIN_TOPIC = 159;
      int FOUND_TYPE_COUNT = 160;
      int FOUND_HOT_SELECTION = 161;
+     int GET_INTERACTION_LINK = 162;
 }

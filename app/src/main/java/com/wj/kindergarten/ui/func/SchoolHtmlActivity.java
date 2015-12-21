@@ -111,6 +111,7 @@ public class SchoolHtmlActivity extends BaseActivity {
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
                             textView.setText(s);
                             textView.setTextSize(11);
+                            textView.setTextColor(getResources().getColor(R.color.text_green));
                             ll_school_medal_one.addView(textView,params);
                         }
                     }else{

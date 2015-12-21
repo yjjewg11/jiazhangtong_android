@@ -26,6 +26,7 @@ import com.wj.kindergarten.bean.FoundHotSelection;
 import com.wj.kindergarten.bean.FoundHotSelectionFather;
 import com.wj.kindergarten.bean.FoundTypeCount;
 import com.wj.kindergarten.bean.GetAssessStateList;
+import com.wj.kindergarten.bean.HtmlTitle;
 import com.wj.kindergarten.bean.InteractionList;
 import com.wj.kindergarten.bean.Ka;
 import com.wj.kindergarten.bean.Login;
@@ -454,6 +455,9 @@ public class SendRequest {
                 break;
             case RequestType.FOUND_HOT_SELECTION:
                 resultI.result(getDomain(domain,FoundHotSelectionFather.class));
+                break;
+            case RequestType.GET_INTERACTION_LINK:
+                resultI.result(getDomain(domain, HtmlTitle.class));
                 break;
             default:
                 break;

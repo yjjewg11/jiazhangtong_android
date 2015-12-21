@@ -9,6 +9,7 @@ import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.func.CourseInteractionFragment;
 import com.wj.kindergarten.ui.func.InteractionFragment;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.more.HtmlActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.IntervalUtil;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -87,6 +89,9 @@ public class CourseInteractionAdapter extends BaseAdapter {
                     courseInteractionFragment.hideBottomLayout();
                 }
             });
+            viewHolder.iv_interaction_link = (ImageView)view.findViewById(R.id.iv_interaction_link);
+            viewHolder.tv_show_link_title = (TextView)view.findViewById(R.id.tv_show_link_title);
+            viewHolder.interation_link_video_ll = (LinearLayout)view.findViewById(R.id.interation_link_video_ll);
             viewHolder.iv_hudong_share = (ImageView) view.findViewById(R.id.iv_hudong_share);
             viewHolder.headCi = (CircleImage) view.findViewById(R.id.item_interaction_head);
             viewHolder.nameTv = (TextView) view.findViewById(R.id.item_interaction_name);
@@ -117,6 +122,28 @@ public class CourseInteractionAdapter extends BaseAdapter {
         final Interaction interaction = dataList.get(i);
         final DianZan dianZan = interaction.getDianzan();
 
+        viewHolder.tv_show_link_title.setText(interaction.getContent());
+        if(TextUtils.isEmpty(interaction.getUrl())){
+            viewHolder.iv_interaction_link.setVisibility(View.GONE);
+        }else{
+            viewHolder.iv_interaction_link.setVisibility(View.VISIBLE);
+            viewHolder.tv_show_link_title.setText(interaction.getContent());
+            viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, HtmlActivity.class);
+                    intent.putExtra("url",interaction.getUrl());
+                    intent.putExtra("center_title","互动视频");
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+
+        if(TextUtils.isEmpty(interaction.getContent())){
+            viewHolder.interation_link_video_ll.setVisibility(View.GONE);
+        }else{
+            viewHolder.interation_link_video_ll.setVisibility(View.VISIBLE);
+        }
         ImageLoaderUtil.displayImage(interaction.getCreate_img(), viewHolder.headCi);
         viewHolder.iv_hudong_share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -372,5 +399,9 @@ public class CourseInteractionAdapter extends BaseAdapter {
         NestedGridView nestedGridView;
 
         LinearLayout ads_ll;
+
+        TextView tv_show_link_title;
+        LinearLayout interation_link_video_ll;
+        ImageView iv_interaction_link;
     }
 }

@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.more;
 
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.CookieManager;
@@ -23,6 +24,7 @@ public class HtmlActivity extends BaseActivity{
     private WebView webView;
     private WebSettings webSettings;
 
+
     @Override
     protected void setContentLayout() {
 
@@ -39,6 +41,10 @@ public class HtmlActivity extends BaseActivity{
 
         titleCenterTextView.setText("校园咨询");
         Intent intent =  getIntent();
+        String center_title = intent.getStringExtra("center_title");
+        if(!TextUtils.isEmpty(center_title)){
+            titleCenterTextView.setText(center_title);
+        }
         intent.getStringExtra("title");
         url =  intent.getStringExtra("url");
         webView = (WebView) findViewById(R.id.web_html);

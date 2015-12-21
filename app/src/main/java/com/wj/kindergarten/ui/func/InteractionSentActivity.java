@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,9 +15,12 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -107,6 +111,10 @@ public class InteractionSentActivity extends BaseActivity {
     private NetworkConnectChangedReceiver networkConnectChangedReceiver = null;
     private boolean isCon = false;
     private String newClassUUid;
+    private TextView send_interaction_link;
+    private String link_title;
+    private String link_url;
+
 
     @Override
     protected void setContentLayout() {
@@ -118,10 +126,47 @@ public class InteractionSentActivity extends BaseActivity {
 
     }
 
+    boolean isResult = true;
+    AlertDialog alertDialog;
     @Override
     protected void onCreate() {
         setTitleText("发表互动", "发表");
 
+
+        send_interaction_link = (TextView)findViewById(R.id.send_interaction_link);
+        send_interaction_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                send_interaction_link.setText("");
+                //弹出对话框
+                if(alertDialog != null) {
+                    alertDialog.show();
+                    return;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(InteractionSentActivity.this);
+                View view = View.inflate(InteractionSentActivity.this,R.layout.custom_title,null);
+                final EditText et_dialog = (EditText) view.findViewById(R.id.et_dialog);
+                alertDialog = builder.setView(view)
+                        .setTitle("编辑分享地址")
+                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                getLinkTitle(et_dialog.getText().toString());
+                                link_url = et_dialog.getText().toString();
+                            }
+                        }).create();
+                alertDialog.show();
+
+            }
+        });
+        send_interaction_link.setFocusableInTouchMode(false);
         editText = (EditText) findViewById(R.id.interaction_send_edit);
         photoContent = (LinearLayout) findViewById(R.id.repairs_photo_content);
         bqIv = (ImageView) findViewById(R.id.send_interaction_bq);
@@ -206,6 +251,30 @@ public class InteractionSentActivity extends BaseActivity {
                         uploadImage(count);
                     }
                 }
+            }
+        });
+    }
+
+    private void getLinkTitle(String url) {
+        //调用获取title方法
+        UserRequest.getInteractionLinkTitle(InteractionSentActivity.this, url, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                HtmlTitle ht = (HtmlTitle) domain;
+                if (ht != null) {
+                    link_title = "" + Utils.isNull(ht.getData());
+                    send_interaction_link.append("" + ht.getData());
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
             }
         });
     }
@@ -578,7 +647,7 @@ public class InteractionSentActivity extends BaseActivity {
             dialog = new HintInfoDialog(InteractionSentActivity.this, "发表互动中，请稍后...");
             dialog.show();
         }
-        UserRequest.sendInteraction(mContext, "标题", uuid, "", content, urls, new RequestResultI() {
+        UserRequest.sendInteraction(mContext, link_title, uuid, "", content, urls,link_url,new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 dialog.dismiss();

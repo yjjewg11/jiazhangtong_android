@@ -45,7 +45,16 @@ public class Interaction extends BaseModel {
     private List<String> imgsList;
     @Expose
     private String create_img;
+    @Expose
+    private String url;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getCreate_img() {
         return create_img;

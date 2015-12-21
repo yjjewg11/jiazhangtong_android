@@ -21,6 +21,7 @@ import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
+import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
 import com.wj.kindergarten.ui.func.TeacherDetailInfoActivity;
@@ -122,6 +123,7 @@ public final class UserRequest {
     private static final String GET_SCHOOL_ASSESS_STATE = "rest/appraise/queryMyKDByPage.json";
     private static final String FOUND_TYPE_COUNT = "rest/userinfo/getNewMsgNumber.json";
     private static final String FOUND_HOT_SELECTION = "rest/snsTopic/hotByPage.json";
+    private static final String GET_INTERACTION_LINK = "rest/share/getHtmlTitle.json";
 
     private UserRequest() {
     }
@@ -241,7 +243,7 @@ public final class UserRequest {
     public static void changeChild(Context context, ChildInfo childInfo,String addressName, RequestResultI requestResultI) {
         String json = GsonUtil.getGson().toJson(childInfo);
         SendRequest.getInstance().post(context, RequestType.CHANGE_CHILD, json,
-                RequestHttpUtil.BASE_URL + "rest/student/"+addressName+".json", requestResultI);
+                RequestHttpUtil.BASE_URL + "rest/student/" + addressName + ".json", requestResultI);
     }
 
     public static void getInteractionList(Context context, String newsuuid, int page, RequestResultI requestResultI) {
@@ -273,14 +275,16 @@ public final class UserRequest {
                 RequestHttpUtil.BASE_URL + COURSE_INTERACTION_LIST, requestResultI);
     }
     public static void sendInteraction(Context context, String title, String classuuid, String uuid,
-                                       String content, String imgs, RequestResultI requestResultI) {
+                                       String content, String imgs, String url,RequestResultI requestResultI) {
         JSONObject jsonObject = new JSONObject();
+        content = content + title;
         try {
             jsonObject.put("title", title);
             jsonObject.put("classuuid", classuuid);
             jsonObject.put("uuid", uuid);
             jsonObject.put("content", content);
             jsonObject.put("imgs", imgs);
+            jsonObject.put("url",url);
             SendRequest.getInstance().post(context, RequestType.INTERACTION_SEND, jsonObject.toString(),
                     RequestHttpUtil.BASE_URL + INTERACTION_SEND, requestResultI);
         } catch (Exception e) {
@@ -829,5 +833,11 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
         SendRequest.getInstance().get(context,RequestType.FOUND_HOT_SELECTION,params,RequestHttpUtil.BASE_URL+FOUND_HOT_SELECTION,resultI);
+    }
+
+    public static void getInteractionLinkTitle(Context context, String s, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("url",s);
+        SendRequest.getInstance().get(context,RequestType.GET_INTERACTION_LINK,params,RequestHttpUtil.BASE_URL+GET_INTERACTION_LINK,resultI);
     }
 }

@@ -156,6 +156,7 @@ public class Utils {
 
     public static void syncCookie(String url){
         if(TextUtils.isEmpty(url)) return ;
+        if(!url.contains("http:")|| !url.contains("https://")) return;
 
        String myUrl =  url.split("//")[1];
        String secondUrl =  myUrl.split("/")[0];
