@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -137,7 +138,6 @@ public abstract class BaseActivity extends ActionBarActivity {
      */
     protected abstract void onCreate();
 
-
     private void setTranslucentStatus(boolean on) {
         Window win = getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -161,6 +161,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 //            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
 //            config = tintManager.getConfig();
 //        }
+        getWindow().setStatusBarColor(Color.parseColor("#ff4966"));
         mContext = this;
         //新开界面将webview置空
         webView = null;
@@ -744,7 +745,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         @JavascriptInterface
         public void setShareContent(String title,String content,String picUrl,String httpUrl){
-            ShareUtils.showShareDialog(CGApplication.context, view, title, content, picUrl, httpUrl, false);
+            ShareUtils.showShareDialog(BaseActivity.this, view, title, content, picUrl, httpUrl, false);
         }
         //启动选择图片程序并且上传
         @JavascriptInterface

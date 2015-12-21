@@ -41,7 +41,6 @@ public class InteractionListActivity extends BaseActivity {
         setTitleText("互动", R.drawable.interaction_send);
         interactionFragment = new InteractionFragment();
         interactionFragment.setNewsuuid(getIntent().getStringExtra("newsuuid"));
-
         getSupportFragmentManager().beginTransaction().add(R.id.interaciton_list_content, interactionFragment).commit();
     }
 

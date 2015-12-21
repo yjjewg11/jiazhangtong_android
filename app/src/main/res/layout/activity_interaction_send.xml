@@ -27,6 +27,7 @@
                 android:hint="说点吧..." />
 
             <HorizontalScrollView
+                android:id="@+id/hs_interaction_hs"
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:layout_marginTop="68dp"
@@ -39,6 +40,19 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal" />
             </HorizontalScrollView>
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_below="@+id/hs_interaction_hs"
+                android:layout_alignLeft="@+id/interaction_send_edit"
+                android:id="@+id/send_interaction_link"
+                android:drawablePadding="@dimen/margin_10"
+                android:hint="粘贴需要分享的视频地址"
+                android:background="@drawable/link_edit"
+                android:drawableLeft="@drawable/lianjie_hudong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
         <LinearLayout

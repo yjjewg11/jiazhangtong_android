@@ -38,6 +38,7 @@ import com.wj.kindergarten.ui.func.InteractionFragment;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
 
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.more.HtmlActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.IntervalUtil;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -95,6 +96,8 @@ public class InteractionAdapter extends BaseAdapter {
                     interactionFragment.hideBottomLayout();
                 }
             });
+            viewHolder.tv_show_link_title = (TextView)view.findViewById(R.id.tv_show_link_title);
+            viewHolder.interation_link_video_ll = (LinearLayout)view.findViewById(R.id.interation_link_video_ll);
             viewHolder.iv_hudong_share = (ImageView) view.findViewById(R.id.iv_hudong_share);
             viewHolder.headCi = (CircleImage) view.findViewById(R.id.item_interaction_head);
             viewHolder.nameTv = (TextView) view.findViewById(R.id.item_interaction_name);
@@ -110,6 +113,7 @@ public class InteractionAdapter extends BaseAdapter {
             viewHolder.iReplyEt = (TextView) view.findViewById(R.id.item_interaction_i_reply);
             viewHolder.sendReply = (TextView) view.findViewById(R.id.item_interaction_i_reply_send);
             viewHolder.ads_ll = (LinearLayout)view.findViewById(R.id.ll_ads);
+            viewHolder.iv_interaction_link = (ImageView)view.findViewById(R.id.iv_interaction_link);
 
 
             view.setTag(viewHolder);
@@ -126,26 +130,46 @@ public class InteractionAdapter extends BaseAdapter {
         final Interaction interaction = dataList.get(i);
 
         ImageLoaderUtil.displayImage(interaction.getCreate_img(), viewHolder.headCi);
+        viewHolder.tv_show_link_title.setText(interaction.getContent());
+        if(TextUtils.isEmpty(interaction.getUrl())){
+            viewHolder.iv_interaction_link.setVisibility(View.GONE);
+        }else{
+            viewHolder.iv_interaction_link.setVisibility(View.VISIBLE);
+            viewHolder.tv_show_link_title.setText(interaction.getContent());
+            viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(TextUtils.isEmpty(interaction.getUrl())) return;
+                    Intent intent = new Intent(mContext, HtmlActivity.class);
+                    intent.putExtra("url",interaction.getUrl());
+                    intent.putExtra("center_title","互动视频");
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+
+        if(TextUtils.isEmpty(interaction.getContent())){
+            viewHolder.interation_link_video_ll.setVisibility(View.GONE);
+        }else{
+            viewHolder.interation_link_video_ll.setVisibility(View.VISIBLE);
+        }
         viewHolder.iv_hudong_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //点击启动分享页
-
                 String content = interaction.getContent();
-                if (TextUtils.isEmpty(content)) {
-                    content = interaction.getTitle();
-                }
+
                 ShareUtils.showShareDialog(mContext, v, interaction.getTitle(), content, interaction.getCreate_img(), interaction.getShare_url(), true);
 
             }
         });
         viewHolder.nameTv.setText(interaction.getCreate_user());
         viewHolder.textTv.setText(EmotUtil.getEmotionContent(mContext, interaction.getContent()));
-        if(TextUtils.isEmpty(EmotUtil.getEmotionContent(mContext, interaction.getContent()))){
-            viewHolder.textTv.setVisibility(View.GONE);
-        }else{
-            viewHolder.textTv.setVisibility(View.VISIBLE);
-        }
+//        if(TextUtils.isEmpty(EmotUtil.getEmotionContent(mContext, interaction.getContent()))){
+//            viewHolder.textTv.setVisibility(View.GONE);
+//        }else{
+//            viewHolder.textTv.setVisibility(View.VISIBLE);
+//        }
         viewHolder.imageIv.setVisibility(View.GONE);
         viewHolder.dateTv.setText(IntervalUtil.getInterval(interaction.getCreate_time()));
         viewHolder.replyIv.setOnClickListener(new View.OnClickListener() {
@@ -385,6 +409,9 @@ public class InteractionAdapter extends BaseAdapter {
         TextView sendReply;
         NestedGridView nestedGridView;
         LinearLayout ads_ll;
+        LinearLayout interation_link_video_ll;
 
+        TextView tv_show_link_title;
+        ImageView iv_interaction_link;
     }
 }
