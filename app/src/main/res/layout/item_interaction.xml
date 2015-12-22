@@ -83,6 +83,7 @@
                 android:visibility="gone" />
             
             <LinearLayout
+                android:background="@color/color_e0e0e0"
                 android:layout_marginTop="7dp"
                 android:id="@+id/interation_link_video_ll"
                 android:layout_width="match_parent"

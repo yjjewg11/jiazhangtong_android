@@ -9,8 +9,8 @@
 
         <RelativeLayout
             android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
         <TextView
@@ -20,10 +20,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="暂时没有相关信息"
             android:id="@+id/textView23"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="73dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignTop="@+id/imageView"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:textColor="#e7a311"
@@ -33,16 +31,16 @@
             android:text="看看别的内容吧"
             android:id="@+id/textView25"
             android:layout_below="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView" />
+            android:layout_alignLeft="@+id/textView23" />
 
         <ImageView
             android:src="@drawable/gantan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:layout_alignTop="@+id/textView23"
-            android:layout_toLeftOf="@+id/textView23"
-            android:layout_marginRight="18dp" />
+            android:layout_marginRight="23dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView23" />
         </RelativeLayout>
     </RelativeLayout>
 

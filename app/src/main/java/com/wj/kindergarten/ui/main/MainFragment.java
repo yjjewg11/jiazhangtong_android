@@ -82,10 +82,9 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         ((BaseActivity) getActivity()).clearCenterIcon();
         ((MainActivity) getActivity()).setTitleText("首页");
-
-        ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
             ViewGroup viewGroup = (ViewGroup) rootView.findViewById(R.id.other_ads);
@@ -253,7 +252,7 @@ public class MainFragment extends Fragment {
         mainGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainItemsClick(mainItems.get(position));
+                mainItemsClick(mainItems.get(position),position);
             }
         });
     }
@@ -294,10 +293,13 @@ public class MainFragment extends Fragment {
 
     }
 
-    private void mainItemsClick(MainItem mainItem) {
+    private String [] clickEvent = new String[]{
+            "interaction","course","food","message","sign","assess","recruit","address","more"
+    };
+    private void mainItemsClick(MainItem mainItem,int position) {
         //  Utils.showToast(mContext, mainItem.getText());
-        map.put(mainItem.getText(),String.valueOf(map.get(mainItem.getText()) == null ? 1 : map.get(mainItem.getText()) + 1));
-        MobclickAgent.onEvent(mContext, "wenjie", map);
+//        map.put(mainItem.getText(),String.valueOf(map.get(mainItem.getText()) == null ? 1 : map.get(mainItem.getText()) + 1));
+        MobclickAgent.onEvent(mContext, clickEvent[position]);
         switch (mainItem.getTag()) {
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));

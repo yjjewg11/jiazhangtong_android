@@ -139,11 +139,14 @@ public class InteractionAdapter extends BaseAdapter {
             viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(TextUtils.isEmpty(interaction.getUrl())) return;
+                    boolean iscontain = true;
+                    iscontain = interaction.getUrl().contains("http://") || interaction.getUrl().contains("https://");
+                    if(!TextUtils.isEmpty(interaction.getUrl()) && iscontain) {
                     Intent intent = new Intent(mContext, HtmlActivity.class);
                     intent.putExtra("url",interaction.getUrl());
                     intent.putExtra("center_title","互动视频");
                     mContext.startActivity(intent);
+                    }
                 }
             });
         }

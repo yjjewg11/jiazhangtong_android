@@ -160,6 +160,8 @@ public class InteractionSentActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 getLinkTitle(et_dialog.getText().toString());
                                 link_url = et_dialog.getText().toString();
+                                send_interaction_link.setText(""+link_url);
+
                             }
                         }).create();
                 alertDialog.show();
@@ -263,7 +265,7 @@ public class InteractionSentActivity extends BaseActivity {
                 HtmlTitle ht = (HtmlTitle) domain;
                 if (ht != null) {
                     link_title = "" + Utils.isNull(ht.getData());
-                    send_interaction_link.append("" + ht.getData());
+                    editText.append("" + ht.getData());
                 }
             }
 
