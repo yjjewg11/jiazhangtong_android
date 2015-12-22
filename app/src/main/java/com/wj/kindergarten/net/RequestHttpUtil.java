@@ -32,7 +32,7 @@ public class RequestHttpUtil {
 //     public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
     //测试地址
 
-    //专用调试培训机构地址
+    //专用调试培训机构地址j
 
 //    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 

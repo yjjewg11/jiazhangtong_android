@@ -38,7 +38,7 @@ public class InteractionListActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         instance = this;
-        setTitleText("互动", R.drawable.interaction_send);
+        setTitleText("班级互动", R.drawable.interaction_send);
         interactionFragment = new InteractionFragment();
         interactionFragment.setNewsuuid(getIntent().getStringExtra("newsuuid"));
         getSupportFragmentManager().beginTransaction().add(R.id.interaciton_list_content, interactionFragment).commit();

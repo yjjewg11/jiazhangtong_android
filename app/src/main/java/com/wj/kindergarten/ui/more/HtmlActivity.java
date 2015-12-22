@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.more;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,6 +18,7 @@ import android.webkit.WebViewClient;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.Utils;
 
 public class HtmlActivity extends BaseActivity{
@@ -39,6 +41,7 @@ public class HtmlActivity extends BaseActivity{
     @Override
     protected void onCreate() {
 
+        commonDialog = new HintInfoDialog(this);
         titleCenterTextView.setText("校园咨询");
         Intent intent =  getIntent();
         String center_title = intent.getStringExtra("center_title");
@@ -64,7 +67,19 @@ public class HtmlActivity extends BaseActivity{
         myWebView.getSettings().setDatabaseEnabled(true);
 
         webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                commonDialog.show();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                if(commonDialog.isShowing()){
+                    commonDialog.cancel();
+                }
+            }
+        });
 
         Utils.syncCookie(url);
         webView.loadUrl(url);
@@ -82,5 +97,9 @@ public class HtmlActivity extends BaseActivity{
             return false;
     }
 
-
+    @Override
+    protected void onStop() {
+        stopWebview(webView);
+        super.onStop();
+    }
 }

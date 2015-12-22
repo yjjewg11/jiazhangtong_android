@@ -12,4 +12,8 @@
     <color name="gray_red">#ff4966</color>
     <color name="all_black">#000000</color>
     <color name="colorPrimaryDark">#ff4966</color>
+    <color name="ml_white">#ffffffff</color>
+    <color name="ml_gray">#ff9e9e9e</color>
+    <color name="ml_blue">#ff239efe</color>
+    <color name="ml_red">#ffff0000</color>
 </resources>

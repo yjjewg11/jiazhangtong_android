@@ -48,7 +48,7 @@
                 android:layout_alignLeft="@+id/interaction_send_edit"
                 android:id="@+id/send_interaction_link"
                 android:drawablePadding="@dimen/margin_10"
-                android:hint="粘贴需要分享的视频地址"
+                android:hint="粘贴需要分享的地址"
                 android:background="@drawable/link_edit"
                 android:drawableLeft="@drawable/lianjie_hudong"
                 android:layout_width="match_parent"

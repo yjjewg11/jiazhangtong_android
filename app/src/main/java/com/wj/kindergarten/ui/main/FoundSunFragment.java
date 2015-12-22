@@ -79,16 +79,15 @@ public class FoundSunFragment extends Fragment {
                                     }
                                 }
                             });
-
                             TextView tv_found_hot_theme = (TextView) view.findViewById(R.id.tv_found_hot_theme);
                             tv_found_hot_theme.getPaint().setFakeBoldText(true);
                             TextView tv_found_hot_count = (TextView) view.findViewById(R.id.tv_found_hot_count);
                             TextView tv_found_content = (TextView) view.findViewById(R.id.tv_found_content);
 
-                            tv_found_hot_theme.setText(Utils.isNull(selectionSun.getTitle()));
+                            tv_found_hot_theme.setText(Utils.isNull(selectionSun.getTitle()).trim());
                             tv_found_hot_count.setText("" + selectionSun.getYes_count());
                             tv_found_content.setText("" + (TextUtils.isEmpty(Utils.isNull(selectionSun.getSummary())) == true ?
-                                    "" : Utils.isNull(selectionSun.getSummary())));
+                                    "" : Utils.isNull(selectionSun.getSummary())).trim());
 
 
 
@@ -99,23 +98,11 @@ public class FoundSunFragment extends Fragment {
                                 item_found_hot_pic.setAdapter(nGAdapter);
                                 item_found_hot_pic.setVisibility(View.VISIBLE);
                             } else {
-
                                 item_found_hot_pic.setVisibility(View.GONE);
-                                if(TextUtils.isEmpty(Utils.isNull(selectionSun.getSummary()))){
-                                    item_found_hot_pic.setVisibility(View.INVISIBLE);
-                                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)item_found_hot_pic.getLayoutParams();
-                                    params.topMargin = 0;
-                                    item_found_hot_pic.setLayoutParams(params);
-                                }
-
                             }
 
                             if(TextUtils.isEmpty(Utils.isNull(selectionSun.getSummary()))){
                                 tv_found_content.setVisibility(View.GONE);
-                                //摘要为空时，图片与数量齐平
-                                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)item_found_hot_pic.getLayoutParams();
-                                params.topMargin = 0;
-                                item_found_hot_pic.setLayoutParams(params);
                             }else{
                                 tv_found_content.setVisibility(View.VISIBLE);
                             }

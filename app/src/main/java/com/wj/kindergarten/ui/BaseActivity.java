@@ -121,6 +121,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     public static final int RECEIVER_PIC_TO_WEB = 5;
     private HintInfoDialog upLoadImageDialog;
     private String registerWeb;
+    protected HintInfoDialog commonDialog;
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -161,7 +162,6 @@ public abstract class BaseActivity extends ActionBarActivity {
 //            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
 //            config = tintManager.getConfig();
 //        }
-        getWindow().setStatusBarColor(Color.parseColor("#ff4966"));
         mContext = this;
         //新开界面将webview置空
         webView = null;
@@ -373,7 +373,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         if (type == TITLE_CENTER_TYPE_LEFT) {//left
             titleCenterTextView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         } else if (type == TITLE_CENTER_TYPE_RIGHT) {//right
-            titleCenterTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+            titleCenterTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         }
         titleCenterTextView.setCompoundDrawablePadding(10);
         titleCenterTextView.setOnClickListener(new View.OnClickListener() {
@@ -630,6 +630,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
 
     public void stopWebview(WebView webView){
+        if(webView == null ) return ;
         try {
             webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
         } catch (IllegalAccessException e) {

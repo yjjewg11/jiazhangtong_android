@@ -277,7 +277,6 @@ public final class UserRequest {
     public static void sendInteraction(Context context, String title, String classuuid, String uuid,
                                        String content, String imgs, String url,RequestResultI requestResultI) {
         JSONObject jsonObject = new JSONObject();
-        content = content + title;
         try {
             jsonObject.put("title", title);
             jsonObject.put("classuuid", classuuid);

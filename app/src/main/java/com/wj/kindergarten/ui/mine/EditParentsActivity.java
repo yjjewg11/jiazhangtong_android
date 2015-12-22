@@ -112,7 +112,7 @@ public class EditParentsActivity extends BaseActivity {
     }
 
     private void saveInfo() {
-        if (check()) {
+//        if (check()) {
             final HintInfoDialog dialog = new HintInfoDialog(EditParentsActivity.this, "信息保存中，请稍后...");
             dialog.show();
             if (isFather) {
@@ -150,7 +150,7 @@ public class EditParentsActivity extends BaseActivity {
                     }
                 }
             });
-        }
+//        }
     }
 
     private boolean check() {

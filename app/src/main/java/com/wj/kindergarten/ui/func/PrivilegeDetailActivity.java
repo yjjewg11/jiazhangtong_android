@@ -150,7 +150,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void failure(String message) {
-                loadFailed();
+                loadEmpty();
                 if (!Utils.stringIsNull(message)) {
                     Utils.showToast(PrivilegeDetailActivity.this, message);
                 }

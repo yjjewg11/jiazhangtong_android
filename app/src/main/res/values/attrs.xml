@@ -9,4 +9,32 @@
         <attr name="starHalf" format="reference" />
 
     </declare-styleable>
+
+    <!--自定义MLImageView的属性-->
+    <declare-styleable name="MLImageView">
+        <attr name="press_alpha" format="integer" />
+        <attr name="press_color" format="color" />
+        <attr name="radius_image" format="dimension"/>
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color"/>
+        <attr name="shape_type" format="enum">
+            <enum name="round" value="0"/>
+            <enum name="rectangle" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <attr name="roundAsCircle" format="boolean" />
+    <attr name="roundedCornerRadius" format="dimension" />
+    <attr name="roundTopLeft" format="boolean" />
+    <attr name="roundTopRight" format="boolean" />
+    <attr name="roundBottomRight" format="boolean" />
+    <attr name="roundBottomLeft" format="boolean" />
+    <declare-styleable name="CircleImageView">
+        <attr name="roundAsCircle" />
+        <attr name="roundedCornerRadius" />
+        <attr name="roundTopLeft" />
+        <attr name="roundTopRight" />
+        <attr name="roundBottomRight" />
+        <attr name="roundBottomLeft" />
+    </declare-styleable>
 </resources>
