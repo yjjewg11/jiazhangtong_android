@@ -12,6 +12,7 @@ import android.os.Build;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -122,6 +123,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     private HintInfoDialog upLoadImageDialog;
     private String registerWeb;
     protected HintInfoDialog commonDialog;
+    private Handler fatherHanle = new Handler();
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -745,8 +747,14 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
 
         @JavascriptInterface
-        public void setShareContent(String title,String content,String picUrl,String httpUrl){
-            ShareUtils.showShareDialog(BaseActivity.this, view, title, content, picUrl, httpUrl, false);
+        public void setShareContent(final String title, final String content, final String picUrl, final String httpUrl){
+
+            fatherHanle.post(new Runnable() {
+                @Override
+                public void run() {
+                    ShareUtils.showShareDialog(BaseActivity.this, view, title, content, picUrl, httpUrl, false);
+                }
+            });
         }
         //启动选择图片程序并且上传
         @JavascriptInterface

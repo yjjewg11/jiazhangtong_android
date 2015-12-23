@@ -121,7 +121,7 @@ public class FoundSunFragment extends Fragment {
                     if (((MainActivity) getActivity()).getDialog().isShowing()) {
                         ((MainActivity) getActivity()).getDialog().cancel();
                     }
-                    break;
+                break;
                 case GET_MAIN_TOPIC_SUCCESS:
                     final MainTopicSun t = CGSharedPreference.getMainTopicSun();
                     tv_everyday_topic.setText("" + (TextUtils.isEmpty(t.getTitle()) == true ? "" : t.getTitle()));

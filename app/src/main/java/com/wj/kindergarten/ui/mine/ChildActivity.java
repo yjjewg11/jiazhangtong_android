@@ -230,6 +230,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
 
     private void bindKa(Ka ka) {
         LinearLayout layout = (LinearLayout) kaView.findViewById(R.id.layout_ka);
+        layout.removeAllViews();
         ArrayList<KaInfo> infos = ka.getList();
         for (int i = 0; i < infos.size(); i++) {
             KaInfo info = infos.get(i);
@@ -237,7 +238,7 @@ public class ChildActivity extends BaseActivity implements View.OnClickListener 
                 View view = LayoutInflater.from(ChildActivity.this).inflate(R.layout.item_child_ka_info_1, null);
                 TextView textView = (TextView) view.findViewById(R.id.item_ka);
                 LinearLayout line = (LinearLayout) view.findViewById(R.id.view_ka);
-                textView.setText(info.getName() + ":" + info.getCardid());
+                textView.setText(info.getName() + ":" + Utils.isNull(info.getCardid()));
                 if (i + 1 == infos.size()) {
                     line.setVisibility(View.GONE);
                 } else {
