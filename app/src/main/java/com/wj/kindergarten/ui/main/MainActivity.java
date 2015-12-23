@@ -526,8 +526,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(mTabHost.getCurrentTab() == 1){
-            super.onKeyDown(keyCode,event);
+        if(mTabHost.getCurrentTab() == 1 && keyCode == KeyEvent.KEYCODE_BACK){
+           return super.onKeyDown(keyCode,event);
         }else{
             if (keyCode == KeyEvent.KEYCODE_BACK ) {
                 quitApp();

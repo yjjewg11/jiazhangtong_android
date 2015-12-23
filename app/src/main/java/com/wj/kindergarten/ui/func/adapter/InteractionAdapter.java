@@ -130,26 +130,18 @@ public class InteractionAdapter extends BaseAdapter {
         final Interaction interaction = dataList.get(i);
 
         ImageLoaderUtil.displayImage(interaction.getCreate_img(), viewHolder.headCi);
-        viewHolder.tv_show_link_title.setText(interaction.getContent());
+        viewHolder.tv_show_link_title.setText(EmotUtil.getEmotionContent(mContext, interaction.getContent()));
         if(TextUtils.isEmpty(interaction.getUrl())){
             viewHolder.iv_interaction_link.setVisibility(View.GONE);
+            viewHolder.interation_link_video_ll.setBackgroundColor(Color.parseColor("#ffffff"));
         }else{
+            viewHolder.interation_link_video_ll.setBackgroundColor(Color.parseColor("#e0e0e0"));
             viewHolder.iv_interaction_link.setVisibility(View.VISIBLE);
-            viewHolder.tv_show_link_title.setText(interaction.getContent());
-            viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean iscontain = true;
-                    iscontain = interaction.getUrl().contains("http://") || interaction.getUrl().contains("https://");
-                    if(!TextUtils.isEmpty(interaction.getUrl()) && iscontain) {
-                    Intent intent = new Intent(mContext, HtmlActivity.class);
-                    intent.putExtra("url",interaction.getUrl());
-                    intent.putExtra("center_title","互动视频");
-                    mContext.startActivity(intent);
-                    }
-                }
-            });
         }
+
+
+
+        click(viewHolder, interaction);
 
         if(TextUtils.isEmpty(interaction.getContent())){
             viewHolder.interation_link_video_ll.setVisibility(View.GONE);
@@ -167,7 +159,7 @@ public class InteractionAdapter extends BaseAdapter {
             }
         });
         viewHolder.nameTv.setText(interaction.getCreate_user());
-        viewHolder.textTv.setText(EmotUtil.getEmotionContent(mContext, interaction.getContent()));
+//        viewHolder.textTv.setText();
 //        if(TextUtils.isEmpty(EmotUtil.getEmotionContent(mContext, interaction.getContent()))){
 //            viewHolder.textTv.setVisibility(View.GONE);
 //        }else{
@@ -267,6 +259,24 @@ public class InteractionAdapter extends BaseAdapter {
         });
 
         return view;
+    }
+
+    private void click(ViewHolder viewHolder, final Interaction myinteraction) {
+        viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean iscontain = true;
+                String url = myinteraction.getUrl();
+                if(TextUtils.isEmpty(url) || url.equals("null")) return;
+                iscontain = myinteraction.getUrl().contains("http://") || myinteraction.getUrl().contains("https://");
+                if(iscontain) {
+                Intent intent = new Intent(mContext, HtmlActivity.class);
+                intent.putExtra("url",myinteraction.getUrl());
+                intent.putExtra("center_title","互动视频");
+                mContext.startActivity(intent);
+                }
+            }
+        });
     }
 
     private Handler mHandler = new Handler() {

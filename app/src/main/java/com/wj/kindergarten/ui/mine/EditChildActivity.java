@@ -139,7 +139,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
             relationShip = "奶奶";
         } else if (!judgeIsNull(childInfo.getWaigong_tel()) && loginName.equals(childInfo.getWaigong_tel())) {
             relationShip = "外公";
-        } else if (!judgeIsNull(childInfo.getWaipo_tel()) && loginName.equals(childInfo.getWaigong_tel())) {
+        } else if (!judgeIsNull(childInfo.getWaipo_tel()) && loginName.equals(childInfo.getWaipo_tel())) {
             relationShip = "外婆";
         } else if (!judgeIsNull(childInfo.getOther_tel()) && loginName.equals(childInfo.getOther_tel())) {
             relationShip = "其他";

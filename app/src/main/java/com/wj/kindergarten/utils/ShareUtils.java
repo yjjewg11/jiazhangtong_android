@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,12 +173,14 @@ public class ShareUtils {
                     mPopupWindow.dismiss();
                     String content = null;
                     if(finalTitle.equals(finalContent)){
-                        content = "";
+                        content = ".";
                     }else{
                         content = finalContent;
                     }
-                    shareTo(SHARE_MEDIA.SINA, finalTitle, content, picurl, url);
-                    Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
+                        shareTo(SHARE_MEDIA.SINA, finalTitle, content, picurl, url);
+                        ToastUtils.showMessage("分享中...请稍候!");
+
+
                 }
             });
 
@@ -272,7 +275,9 @@ public class ShareUtils {
         try {
             UMImage localImage = null;
             if (!Utils.stringIsNull(pic)) {
-                localImage = new UMImage(context, pic + PIC_SCALE);
+                localImage = new UMImage(context, pic
+//                        + PIC_SCALE
+                );
             } else {
                 localImage = new UMImage(context, R.drawable.ic_launcher);
             }

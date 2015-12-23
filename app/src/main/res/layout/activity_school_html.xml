@@ -53,6 +53,13 @@
         </RelativeLayout>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_shadow"
+            android:layout_above="@+id/frameLayout"
+            android:layout_marginTop="@dimen/title_shadow_"
+            android:background="@drawable/fix_detail_shadow_down"
+            android:contentDescription="下部阴影" />
         <FrameLayout
             android:background="@color/white"
             android:layout_alignParentBottom="true"
