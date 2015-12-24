@@ -147,7 +147,7 @@ public class MineFragment extends Fragment {
             }else if(loginNew.getList().size() > 3){
                 LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.
                         LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams2.leftMargin = 40;
+                layoutParams2.leftMargin = 80;
                 addSmallChild(loginNew,childContent,layoutParams2);
             }
 

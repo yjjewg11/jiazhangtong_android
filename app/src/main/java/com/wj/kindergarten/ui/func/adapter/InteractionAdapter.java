@@ -272,7 +272,7 @@ public class InteractionAdapter extends BaseAdapter {
                 if(iscontain) {
                 Intent intent = new Intent(mContext, HtmlActivity.class);
                 intent.putExtra("url",myinteraction.getUrl());
-                intent.putExtra("center_title","互动视频");
+                intent.putExtra("center_title","链接详情");
                 mContext.startActivity(intent);
                 }
             }

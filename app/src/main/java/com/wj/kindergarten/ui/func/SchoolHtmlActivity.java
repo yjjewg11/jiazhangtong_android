@@ -376,16 +376,13 @@ public class SchoolHtmlActivity extends BaseActivity {
 //                            content = osc.getTitle();
                         }
                         String shareUrl = "";
-                        if(tab_layout.getSelectedTabPosition() == 1){
+                        if(tab_layout.getSelectedTabPosition() == 0){
                             shareUrl = sdl.getRecruit_url();
                         }else{
                             shareUrl = sdl.getShare_url();
                         }
                         ShareUtils.showShareDialog(SchoolHtmlActivity.this, v, content
                                 , "", schoolDetail.getImg(), shareUrl, false);
-
-//                            ToastUtils.showMessage("暂无分享内容!");
-
 
                         break;
                     case R.id.train_course_tab_interaction:
