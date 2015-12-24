@@ -122,22 +122,16 @@ public class CourseInteractionAdapter extends BaseAdapter {
         final Interaction interaction = dataList.get(i);
         final DianZan dianZan = interaction.getDianzan();
 
-        viewHolder.tv_show_link_title.setText(interaction.getContent());
+        viewHolder.tv_show_link_title.setText(EmotUtil.getEmotionContent(mContext, interaction.getContent()));
         if(TextUtils.isEmpty(interaction.getUrl())){
             viewHolder.iv_interaction_link.setVisibility(View.GONE);
+            viewHolder.interation_link_video_ll.setBackgroundColor(Color.parseColor("#ffffff"));
         }else{
+            viewHolder.interation_link_video_ll.setBackgroundColor(Color.parseColor("#e0e0e0"));
             viewHolder.iv_interaction_link.setVisibility(View.VISIBLE);
-            viewHolder.tv_show_link_title.setText(interaction.getContent());
-            viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, HtmlActivity.class);
-                    intent.putExtra("url",interaction.getUrl());
-                    intent.putExtra("center_title","互动视频");
-                    mContext.startActivity(intent);
-                }
-            });
         }
+
+        click(viewHolder, interaction);
 
         if(TextUtils.isEmpty(interaction.getContent())){
             viewHolder.interation_link_video_ll.setVisibility(View.GONE);
@@ -382,6 +376,23 @@ public class CourseInteractionAdapter extends BaseAdapter {
         });
     }
 
+    private void click(ViewHolder viewHolder, final Interaction myinteraction) {
+        viewHolder.interation_link_video_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean iscontain = true;
+                String url = myinteraction.getUrl();
+                if (TextUtils.isEmpty(url) || url.equals("null")) return;
+                iscontain = myinteraction.getUrl().contains("http://") || myinteraction.getUrl().contains("https://");
+                if (iscontain) {
+                    Intent intent = new Intent(mContext, HtmlActivity.class);
+                    intent.putExtra("url", myinteraction.getUrl());
+                    intent.putExtra("center_title", "链接详情");
+                    mContext.startActivity(intent);
+                }
+            }
+        });
+    }
     class ViewHolder {
         ImageView iv_hudong_share;
         CircleImage headCi;
