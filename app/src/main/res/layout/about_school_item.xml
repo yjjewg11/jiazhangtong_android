@@ -13,17 +13,19 @@
         android:id="@+id/rl_all_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <!--app:roundAsCircle="false"-->
+        <!--app:roundedCornerRadius="@dimen/margin_5"-->
 
         <com.wj.kindergarten.ui.other.CircleImageView
-            android:layout_alignBottom="@+id/tv_division_line"
             android:layout_alignTop="@+id/item_class_name"
             android:padding="0dp"
             app:roundAsCircle="false"
             app:roundedCornerRadius="@dimen/margin_5"
+            android:scaleType="fitXY"
             android:layout_marginLeft="@dimen/margin_10"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="75dp"
+            android:adjustViewBounds="true"
+            android:layout_height="75dp"
             android:id="@+id/item_special_course_list_view_image_view"
             android:src="@drawable/zhanweitu"
             android:layout_alignParentLeft="true"

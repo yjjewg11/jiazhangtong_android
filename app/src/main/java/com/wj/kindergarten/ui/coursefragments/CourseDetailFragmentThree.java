@@ -107,6 +107,10 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
 //    private RightRunnable rightRun;
 
 
+    public TopWebView getCourse_detail_info() {
+        return course_detail_info;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
