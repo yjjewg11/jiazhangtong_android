@@ -26,6 +26,9 @@ public class SchoolFragmentThree extends Fragment {
     private FrameLayout fl;
     private HintInfoDialog diaLog;
 
+    public WebView getWebView() {
+        return webView;
+    }
 
     @Nullable
     @Override

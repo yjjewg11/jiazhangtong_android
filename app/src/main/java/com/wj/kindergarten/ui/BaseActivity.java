@@ -124,6 +124,26 @@ public abstract class BaseActivity extends ActionBarActivity {
     private String registerWeb;
     protected HintInfoDialog commonDialog;
     private Handler fatherHanle = new Handler();
+    //用于每个单独的activity注册并对webview执行系列操作
+    public ArrayList<WebView> webList = new ArrayList<>();
+
+    public void addWeb(WebView webView){
+        webList.add(webView);
+    }
+
+    public ArrayList<WebView> getWebList() {
+        return webList;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(webList.size() > 0){
+            for(WebView webView : webList){
+                stopWebview(webView);
+            }
+        }
+    }
 
     /**
      * set content view id ,it must be: layout = the layout id;such as,layout = R.layout.activity_main;
@@ -210,6 +230,9 @@ public abstract class BaseActivity extends ActionBarActivity {
         MobclickAgent.onPause(this);
     }
 
+    public void onPause(WebView webView){
+
+    }
     private void initLoadView() {
         loadText = (TextView) findViewById(R.id.loading_text);
         progressBar = (ProgressBar) findViewById(R.id.loading_bar);
@@ -502,6 +525,18 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    public void stopWebview(WebView webView){
+        if(webView == null ) return ;
+        try {
+            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 显示菊花对话框
      */
@@ -631,18 +666,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
 
-    public void stopWebview(WebView webView){
-        if(webView == null ) return ;
-        try {
-            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     private WebView webView;
 

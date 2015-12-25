@@ -69,6 +69,7 @@ public class SimpleIntroduceFragment extends Fragment implements View.OnTouchLis
         activity = (SchoolDetailInfoActivity) getActivity();
         view = inflater.inflate(R.layout.fragment_simple_introduce, null);
         tv_html = (TopWebView) view.findViewById(R.id.tv_html);
+        activity.addWeb(tv_html);
         tv_html.setOnTouchListener(this);
 //        activity.setWebView(tv_html);
         tv_html.getSettings().setJavaScriptEnabled(true);

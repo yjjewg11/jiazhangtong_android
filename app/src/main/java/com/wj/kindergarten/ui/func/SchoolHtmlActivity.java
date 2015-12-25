@@ -105,7 +105,8 @@ public class SchoolHtmlActivity extends BaseActivity {
                     }else{
                         item_special_course_list_view_tv_distance.setVisibility(View.VISIBLE);
                     }
-                    if(schoolDetail.getSummary() != null && schoolDetail.getSummary().split(",") != null){
+                    if(!TextUtils.isEmpty(schoolDetail.getSummary()) && schoolDetail.getSummary() != null && schoolDetail.getSummary().split(",") != null
+                            && schoolDetail.getSummary().split(",").length > 0){
                         for(String s : schoolDetail.getSummary().split(",")){
                             TextView textView = new TextView(SchoolHtmlActivity.this);
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);

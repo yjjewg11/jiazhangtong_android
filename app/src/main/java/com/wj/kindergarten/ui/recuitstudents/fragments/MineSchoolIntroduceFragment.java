@@ -31,6 +31,10 @@ public class MineSchoolIntroduceFragment extends Fragment {
     private HintInfoDialog dialog;
     private Handler handler = new Handler();
 
+    public TopWebView getWebView() {
+        return webView;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MineSchoolIntroduceFragment extends Fragment {
         activity = (MineSchoolActivity) getActivity();
         view = inflater.inflate(R.layout.common_top_webview,null);
         webView = (TopWebView)view.findViewById(R.id.common_topWeb);
-//        activity.setWebView(webView);
+        activity.addWeb(webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override

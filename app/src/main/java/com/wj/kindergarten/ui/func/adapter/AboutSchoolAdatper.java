@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.annotations.Expose;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.TrainSchoolInfo;
 import com.wj.kindergarten.ui.other.RatingBarView;
@@ -95,16 +96,16 @@ public class AboutSchoolAdatper extends BaseAdapter {
             }else{
                 text = "<font  color='#ff4966'>"+"0"+"</font>";
             }
-            viewHolder.tv_study_people.setText(Html.fromHtml(text));
 
 
-
-            if(viewHolder.ll_school_medal_one.getChildCount() <= 0 ) {
-                if(schoolInfo.getSummary() != null && schoolInfo.getSummary().split(",") != null){
+            try{
+                viewHolder.tv_study_people.setText(Html.fromHtml(text));
+            if(viewHolder.ll_school_medal_one.getChildCount() <= 0 && !TextUtils.isEmpty(schoolInfo.getSummary())) {
+                if(schoolInfo.getSummary() != null && schoolInfo.getSummary().split(",") != null
+                        && schoolInfo.getSummary().split(",").length > 0){
                     viewHolder.iv_madle.setVisibility(View.VISIBLE);
                     viewHolder.ll_school_medal_one.setVisibility(View.VISIBLE);
                     int size =  schoolInfo.getSummary().split(",").length;
-                    if(size > 0){
                         for(int i = 0;i < (size > 3 ? 3 : size);i++){
                             TextView textView = new TextView(context);
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -113,13 +114,15 @@ public class AboutSchoolAdatper extends BaseAdapter {
                             textView.setTextColor(context.getResources().getColor(R.color.text_green));
                             viewHolder.ll_school_medal_one.addView(textView,params);
                         }
-                    }
+
                 }else{
-                    viewHolder.iv_madle.setVisibility(View.GONE);
-                    viewHolder.ll_school_medal_one.setVisibility(View.GONE);
+                    dimissModal(viewHolder);
                 }
-
-
+            }else{
+                dimissModal(viewHolder);
+            }
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
 
@@ -128,6 +131,11 @@ public class AboutSchoolAdatper extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    private void dimissModal(ViewHolder viewHolder) {
+        viewHolder.iv_madle.setVisibility(View.GONE);
+        viewHolder.ll_school_medal_one.setVisibility(View.GONE);
     }
 
     class ViewHolder{

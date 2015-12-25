@@ -157,6 +157,13 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        stopWebview(courseFragment.getCourse_detail_info());
+        stopWebview(schoolFragment.getWebView());
+    }
+
+    @Override
     protected void onCreate() {
         try{
             setViews();

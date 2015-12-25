@@ -307,8 +307,6 @@ public class MainFragment extends Fragment {
             case Constants.GARDEN_DES://宝宝入学
                 if (null != chooseTile) {
                     Intent intent = new Intent(getActivity(), SchoolIntroduceActivity.class);
-                    intent.putExtra("type", 1);
-                    intent.putExtra("uuid", chooseTile.getUuid());
                     startActivity(intent);
                 } else {
                     Utils.showToast(getActivity(), "请选择幼儿园");

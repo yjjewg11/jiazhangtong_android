@@ -127,6 +127,12 @@ public class MineSchoolActivity extends BaseActivity{
         }
     };
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopWebview(recruitFragment.getWebView());
+        stopWebview(mineSchoolFragment.getWebView());
+    }
 
     @Override
     protected void setContentLayout() {

@@ -88,6 +88,12 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
     protected void setNeedLoading() {
         Intent intent = getIntent();
         schooluuid =  intent.getStringExtra("schooluuid");
