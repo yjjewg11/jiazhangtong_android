@@ -37,6 +37,7 @@ import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -371,6 +372,9 @@ public class SchoolDetailInfoActivity extends BaseActivity{
 
             @Override
             public void failure(String message) {
+                if (!Utils.stringIsNull(message)) {
+                    ToastUtils.showMessage(message);
+                }
                 dialog.dismiss();
             }
         });

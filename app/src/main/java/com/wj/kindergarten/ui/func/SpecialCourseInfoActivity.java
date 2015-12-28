@@ -452,6 +452,9 @@ public class SpecialCourseInfoActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
+                if (!Utils.stringIsNull(message)) {
+                    ToastUtils.showMessage(message);
+                }
                 dialog.dismiss();
             }
         });

@@ -238,7 +238,6 @@ public class SendRequest {
                                 }
                             }
                         } else if ("failed".equals(baseResponse.getResMsg().getStatus())) {
-                            ToastUtils.showMessage(baseResponse.getResMsg().getMessage());
                             resultI.failure(baseResponse.getResMsg().getMessage());
                         } else if ("sessionTimeout".equals(baseResponse.getResMsg().getStatus())) {
                             Utils.showToast(context, baseResponse.getResMsg().getMessage());
@@ -259,8 +258,6 @@ public class SendRequest {
                                 return;
                             }
 
-                        }else{
-                            ToastUtils.showMessage(baseResponse.getResMsg().getMessage());
                         }
                         return;
                     } catch (Exception e) {

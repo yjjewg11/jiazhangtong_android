@@ -150,7 +150,7 @@ public class ArticleListActivity extends BaseActivity {
                 if (mListView != null && mListView.isRefreshing()) {
                     mListView.onRefreshComplete();
                 }
-//                Utils.showToast(mContext, message);
+                Utils.showToast(mContext, message);
             }
         });
     }
