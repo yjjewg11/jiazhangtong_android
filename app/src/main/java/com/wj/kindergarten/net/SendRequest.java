@@ -62,6 +62,7 @@ import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GsonUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;
@@ -237,6 +238,7 @@ public class SendRequest {
                                 }
                             }
                         } else if ("failed".equals(baseResponse.getResMsg().getStatus())) {
+                            ToastUtils.showMessage(baseResponse.getResMsg().getMessage());
                             resultI.failure(baseResponse.getResMsg().getMessage());
                         } else if ("sessionTimeout".equals(baseResponse.getResMsg().getStatus())) {
                             Utils.showToast(context, baseResponse.getResMsg().getMessage());
@@ -257,11 +259,14 @@ public class SendRequest {
                                 return;
                             }
 
+                        }else{
+                            ToastUtils.showMessage(baseResponse.getResMsg().getMessage());
                         }
                         return;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                     resultI.failure("获取数据失败");
                 }
 

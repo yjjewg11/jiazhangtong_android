@@ -23,6 +23,14 @@ public class TopicWebFragment extends Fragment {
     private WebView webView;
     private HintInfoDialog dialog;
     private String url;
+    private Bundle bundle;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        webView.restoreState(bundle);
+    }
+
 
     @Nullable
     @Override
@@ -32,7 +40,7 @@ public class TopicWebFragment extends Fragment {
         view = inflater.inflate(R.layout.common_top_webview,null);
         webView =(WebView) view.findViewById(R.id.common_topWeb);
         ((MainActivity)getActivity()).setWebView(webView);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 dialog.show();
@@ -40,7 +48,7 @@ public class TopicWebFragment extends Fragment {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                if(dialog.isShowing()){
+                if (dialog.isShowing()) {
                     dialog.cancel();
                 }
             }
@@ -59,5 +67,12 @@ public class TopicWebFragment extends Fragment {
         this.url = url;
         Utils.syncCookie(url);
         webView.loadUrl(url);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        bundle = new Bundle();
+        webView.saveState(bundle);
     }
 }

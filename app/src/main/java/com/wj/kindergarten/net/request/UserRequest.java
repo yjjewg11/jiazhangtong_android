@@ -589,9 +589,7 @@ public final class UserRequest {
         params.put("pageNo",pageNo);
         params.put("teacheruuid",teacheruuid);
         if(type != -1){params.put("type",type);}
-        if(CGApplication.latitude > 0){
-            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
-        }
+        putCoordinate(params);
         params.put("sort",sort);
         SendRequest.getInstance().get(context,RequestType.SPECIAL_COURSE_INFO,params,RequestHttpUtil.BASE_URL+TRAING_COURSE_OF_CLASS,resultI);
     }
@@ -603,9 +601,7 @@ public final class UserRequest {
         params.put("pageNo",pageNo);
         params.put("teacheruuid",teacheruuid);
         if(type != -1){params.put("type",type);}
-        if(CGApplication.latitude > 0){
-            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
-        }
+        putCoordinate(params);
         params.put("sort",sort);
         SendRequest.getInstance().get(context,RequestType.SPECIAL_COURSE_INFO,params,RequestHttpUtil.BASE_URL+TRAIN_HOT_CLASS,resultI);
     }
@@ -620,9 +616,7 @@ public final class UserRequest {
     public static void getAllSchool(Context context, int pageNo,String sort, int type,RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
-        if(CGApplication.latitude > 0){
-            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
-        }
+        putCoordinate(params);
         params.put("sort",sort);
         if(type != -1){
             params.put("type",type);
@@ -635,7 +629,7 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("ext_uuid",ext_uuid);
         params.put("pageNo",pageNo);
-        SendRequest.getInstance().get(context,RequestType.MORE_DISCUSS_FROM_UUID,params,RequestHttpUtil.BASE_URL+MORE_DISCUSS_FROM_UUID,resultI);
+        SendRequest.getInstance().get(context, RequestType.MORE_DISCUSS_FROM_UUID, params, RequestHttpUtil.BASE_URL + MORE_DISCUSS_FROM_UUID, resultI);
     }
 
     public static void sendSpecialCourseAssess(Context context,String uuid,String ext_uuid,String class_uuid, int type, int score, String content, int niming,RequestResultI resultI) {
@@ -706,7 +700,7 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("uuid", uuid);
         String url = RequestHttpUtil.BASE_URL+"rest/pxteacher/"+uuid+".json";
-        SendRequest.getInstance().get(context,RequestType.TEACHER_DETAIL_INFO,params,url,resultI);
+        SendRequest.getInstance().get(context, RequestType.TEACHER_DETAIL_INFO, params, url, resultI);
     }
 
     public static void sendVersion(Context context, String phone_type, String phone_version, String app_verion, String city, RequestResultI resultI) {
@@ -726,9 +720,7 @@ public final class UserRequest {
     public static void getPrivilegeByPage(Context context, int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
-        if(CGApplication.latitude > 0){
-            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
-        }
+        putCoordinate(params);
         SendRequest.getInstance().get(context, RequestType.GET_PRIVELEGE_ACTIVE, params, RequestHttpUtil.BASE_URL + GET_PRIVELEGE_ACTIVE, resultI);
     }
 
@@ -746,19 +738,23 @@ public final class UserRequest {
     public static void getSchoolAbout(Context context,String s, int pageNo, String sort,RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
-        if(CGApplication.latitude > 0){
-            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
-        }
+        putCoordinate(params);
         params.put("sort",sort);
         //学校相关获取的学校与培训机构获取的学校内容完全相同,只是地址不一样
         SendRequest.getInstance().get(context, RequestType.ALL_TRAINC_SCHOOL, params, RequestHttpUtil.BASE_URL + OTHER_ALL_TRAINC_SCHOOL, resultI);
 
+    }
 
+    private static void putCoordinate(RequestParams params) {
+        if(CGApplication.latitude > 0){
+            params.put("map_point",CGApplication.longitude+","+CGApplication.latitude);
+        }
     }
 
     public static void getTrainSchoolDetailFromRecruit(Context context, String uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("uuid", uuid);
+        putCoordinate(params);
         SendRequest.getInstance().get(context,RequestType.TRAIN_SCHOOL_DETAIL,params,RequestHttpUtil.BASE_URL+TRAIN_SCHOOL_DETAIL_FROM_RECRUIT,resultI);
     }
 

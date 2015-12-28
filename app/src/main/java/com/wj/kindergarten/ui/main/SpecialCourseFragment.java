@@ -215,7 +215,7 @@ public class SpecialCourseFragment extends Fragment {
                 @Override
                 public void failure(String message) {
 
-                    ToastUtils.showMessage(message);
+//                    ToastUtils.showMessage(message);/
                 }
             });
         }

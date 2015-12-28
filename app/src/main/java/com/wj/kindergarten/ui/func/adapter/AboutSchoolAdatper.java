@@ -100,7 +100,8 @@ public class AboutSchoolAdatper extends BaseAdapter {
 
             try{
                 viewHolder.tv_study_people.setText(Html.fromHtml(text));
-            if(viewHolder.ll_school_medal_one.getChildCount() <= 0 && !TextUtils.isEmpty(schoolInfo.getSummary())) {
+                viewHolder.ll_school_medal_one.removeAllViews();
+            if( !TextUtils.isEmpty(schoolInfo.getSummary())) {
                 if(schoolInfo.getSummary() != null && schoolInfo.getSummary().split(",") != null
                         && schoolInfo.getSummary().split(",").length > 0){
                     viewHolder.iv_madle.setVisibility(View.VISIBLE);

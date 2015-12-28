@@ -527,15 +527,16 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     public void stopWebview(WebView webView){
         if(webView == null ) return ;
-        try {
-            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        webView.destroy();
+//        try {
+//            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
     }
     /**
      * 显示菊花对话框

@@ -249,7 +249,7 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void failure(String message) {
                         hideProgressDialog();
-                        Utils.showToast(mContext, message);
+//                        Utils.showToast(mContext, message);
                     }
                 });
     }

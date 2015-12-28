@@ -371,9 +371,6 @@ public class SchoolDetailInfoActivity extends BaseActivity{
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(SchoolDetailInfoActivity.this, message);
-                }
                 dialog.dismiss();
             }
         });

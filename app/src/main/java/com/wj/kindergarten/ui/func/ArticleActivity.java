@@ -118,12 +118,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 //        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 //        contentTv.setAlpha(1);
 
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setSavePassword(true);
-        webSettings.setSaveFormData(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setGeolocationEnabled(true);
 //		ws.setGeolocationDatabasePath("/data/data/org.itri.html5webview/databases/");// ���ö�λ�����ݿ�·��
@@ -379,9 +373,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(ArticleActivity.this, message);
-                }
                 dialog.dismiss();
             }
         });
@@ -431,9 +422,6 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(ArticleActivity.this, message);
-                }
                 dialog.dismiss();
             }
         });
