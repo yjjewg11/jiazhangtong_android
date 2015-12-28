@@ -198,7 +198,7 @@ protected void setNeedLoading() {
 
             @Override
             public void failure(String message) {
-
+                ToastUtils.showMessage(message);
             }
         });
 
@@ -221,7 +221,7 @@ protected void setNeedLoading() {
 
             @Override
             public void failure(String message) {
-
+                ToastUtils.showMessage(message);
             }
         });
     }

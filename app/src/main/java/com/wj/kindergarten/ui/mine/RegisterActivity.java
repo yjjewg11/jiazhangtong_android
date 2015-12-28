@@ -16,6 +16,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -249,7 +250,7 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void failure(String message) {
                         hideProgressDialog();
-//                        Utils.showToast(mContext, message);
+                        ToastUtils.showMessage(message);
                     }
                 });
     }

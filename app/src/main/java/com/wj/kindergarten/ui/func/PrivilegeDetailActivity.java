@@ -28,6 +28,7 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -380,7 +381,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
             @Override
             public void failure(String message) {
                 if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(context, message);
+                    ToastUtils.showMessage(message);
                 }
                 dialog.dismiss();
             }

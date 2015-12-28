@@ -340,6 +340,9 @@ public class SchoolHtmlActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
+                if (!Utils.stringIsNull(message)) {
+                    Utils.showToast(SchoolHtmlActivity.this, message);
+                }
                 dialog.dismiss();
             }
         });

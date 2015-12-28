@@ -29,6 +29,7 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.List;
@@ -422,6 +423,9 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void failure(String message) {
+                if (!Utils.stringIsNull(message)) {
+                    ToastUtils.showMessage(message);
+                }
                 dialog.dismiss();
             }
         });
