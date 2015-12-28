@@ -305,12 +305,8 @@ public class MainFragment extends Fragment {
                 startActivity(new Intent(mContext, InteractionListActivity.class));
                 break;
             case Constants.GARDEN_DES://宝宝入学
-                if (null != chooseTile) {
                     Intent intent = new Intent(getActivity(), SchoolIntroduceActivity.class);
                     startActivity(intent);
-                } else {
-                    Utils.showToast(getActivity(), "请选择幼儿园");
-                }
                 break;
             case Constants.GARDEN_NOTICE://公告
                 startActivity(new Intent(mContext, NoticeListActivity.class));

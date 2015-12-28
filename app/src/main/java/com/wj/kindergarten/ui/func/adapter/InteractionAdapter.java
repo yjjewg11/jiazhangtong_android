@@ -401,7 +401,7 @@ public class InteractionAdapter extends BaseAdapter {
             @Override
             public void failure(String message) {
                 zanLock = false;
-                Utils.showToast(mContext, "取消点赞失败");
+//                Utils.showToast(mContext, "取消点赞失败");
             }
         });
     }

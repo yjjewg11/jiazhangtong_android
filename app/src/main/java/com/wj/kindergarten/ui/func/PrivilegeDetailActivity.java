@@ -330,9 +330,6 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(context, message);
-                }
                 dialog.dismiss();
             }
         });

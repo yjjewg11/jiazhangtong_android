@@ -173,9 +173,6 @@ public class NormalReplyAdapter extends BaseAdapter {
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(context, message);
-                }
                 dialog.dismiss();
             }
         });

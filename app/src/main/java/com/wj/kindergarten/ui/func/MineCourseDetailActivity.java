@@ -450,9 +450,6 @@ public class MineCourseDetailActivity extends BaseActivity{
 
             @Override
             public void failure(String message) {
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(MineCourseDetailActivity.this, message);
-                }
                 dialog.dismiss();
             }
         });
