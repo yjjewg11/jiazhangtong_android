@@ -64,6 +64,7 @@ import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.SystemBarTintManager;
 
+import com.wj.kindergarten.ui.webview.WebClickListeners;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -689,6 +690,11 @@ public abstract class BaseActivity extends ActionBarActivity {
         return super.onKeyDown(keyCode,event);
     }
 
+    public void setCommonWeb(WebView webView){
+        webView.setOnLongClickListener(new WebClickListeners(this));
+    }
+
+    //这个设置只针对话题，因为在设置下列事件后，webveiw的滑动没有起效果，所以单独针对话题来回调
     public void setWebView(WebView webView){
         this.webView = webView;
         if(webView == null) return;

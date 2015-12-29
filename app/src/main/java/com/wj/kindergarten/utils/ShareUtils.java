@@ -1,6 +1,7 @@
 package com.wj.kindergarten.utils;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -61,168 +62,187 @@ public class ShareUtils {
      *
      * @param con
      * @param view
-     *
      */
-    public static void showShareDialog(final Context con, final View view, String title1, String content1, final String picurl, final String url,boolean isMessage) {
+    public static void showShareDialog(final Context con, final View view, String title1, String content1, final String picurl, final String url, boolean isMessage) {
 //        if (!isShow) {
         String title = null;
         String content = null;
-            if(TextUtils.isEmpty(title1)){
-                title = "问界互动家园";
-            }else{
-                title = title1;
-            }
+        if (TextUtils.isEmpty(title1)) {
+            title = "问界互动家园";
+        } else {
+            title = title1;
+        }
 
-            if(TextUtils.isEmpty(content1)){
-                content = title;
-            }else{
-                content = content1;
-            }
+        if (TextUtils.isEmpty(content1)) {
+            content = title;
+        } else {
+            content = content1;
+        }
 //
 //        if(picurl!=null && picurl.contains("@")){
 //            pic = picurl.substring(0,picurl.indexOf("@"));
 //        }else{
 //            pic = picurl;
 //        }
-            isShow = true;
-            context = con;
-            flag = false;
-            if (mController == null) {
-                mController = UMServiceFactory.getUMSocialService("com.umeng.share", RequestType.SOCIAL);
-                // 添加新浪微博SSO授权支持
-                //   mController.getConfig().setSsoHandler(new SinaSsoHandler());
-                //关闭自带的toast
-                mController.getConfig().closeToast();
-            }
+        isShow = true;
+        context = con;
+        flag = false;
+        if (mController == null) {
+            mController = UMServiceFactory.getUMSocialService("com.umeng.share", RequestType.SOCIAL);
+            // 添加新浪微博SSO授权支持
+            //   mController.getConfig().setSsoHandler(new SinaSsoHandler());
+            //关闭自带的toast
+            mController.getConfig().closeToast();
+        }
 
-            View popupView = View.inflate(con, R.layout.share_layout, null);
-            LinearLayout lltop = (LinearLayout) popupView.findViewById(R.id.lltop);
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) lltop.getLayoutParams();
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            if(isMessage){
-                //如果是班级互动
-                try{
-                    int [] location = new int[2];
-                    view.getLocationInWindow(location);
-                    int w = View.MeasureSpec.makeMeasureSpec(0,
-                            View.MeasureSpec.UNSPECIFIED);
-                    int h = View.MeasureSpec.makeMeasureSpec(0,
-                            View.MeasureSpec.UNSPECIFIED);
-                    lltop.measure(w, h);
-                    layoutParams.bottomMargin = WindowUtils.dm.heightPixels - location[1];
-                    lltop.setLayoutParams(layoutParams);
-                }catch (NullPointerException e){
-                    e.printStackTrace();
-                }
-
-            }else{
+        View popupView = View.inflate(con, R.layout.share_layout, null);
+        LinearLayout lltop = (LinearLayout) popupView.findViewById(R.id.lltop);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) lltop.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        if (isMessage) {
+            //如果是班级互动
+            try {
+                int[] location = new int[2];
+                view.getLocationInWindow(location);
+                int w = View.MeasureSpec.makeMeasureSpec(0,
+                        View.MeasureSpec.UNSPECIFIED);
+                int h = View.MeasureSpec.makeMeasureSpec(0,
+                        View.MeasureSpec.UNSPECIFIED);
+                lltop.measure(w, h);
+                layoutParams.bottomMargin = WindowUtils.dm.heightPixels - location[1];
                 lltop.setLayoutParams(layoutParams);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
             }
 
-            final PopupWindow mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-            popupView.findViewById(R.id.share_cancel).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mPopupWindow.dismiss();
-                    isShow = false;
-                }
-            });
+        } else {
+            lltop.setLayoutParams(layoutParams);
+        }
+
+        final PopupWindow mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupView.findViewById(R.id.share_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupWindow.dismiss();
+                isShow = false;
+            }
+        });
 
 
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                //弹出框取消时还原背景
 
-            mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    //弹出框取消时还原背景
-
-                }
-            });
-            //微信
+            }
+        });
+        //微信
         final String finalTitle = title;
         final String finalContent = content;
+        popupView.findViewById(R.id.share_copy_address).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                copyAddress(url);
+            }
+        });
+
+
         popupView.findViewById(R.id.share_wx_f).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isShow = false;
-                    mPopupWindow.dismiss();
-                    UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
-                    wxHandler.addToSocialSDK();
-                    shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, picurl, url);
-                    Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
+                wxHandler.addToSocialSDK();
+                shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, picurl, url);
+                Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //微信朋友圈
+        popupView.findViewById(R.id.share_wx_c).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
+                wxCircleHandler.setToCircle(true);
+                wxCircleHandler.addToSocialSDK();
+                shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, picurl, url);
+                Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        popupView.findViewById(R.id.share_sina).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                String content = null;
+                if (finalTitle.equals(finalContent)) {
+                    content = ".";
+                } else {
+                    content = finalContent;
                 }
-            });
+                shareTo(SHARE_MEDIA.SINA, finalTitle, content, picurl, url);
+                ToastUtils.showMessage("分享中...请稍候!");
 
-            //微信朋友圈
-            popupView.findViewById(R.id.share_wx_c).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isShow = false;
-                    mPopupWindow.dismiss();
-                    UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
-                    wxCircleHandler.setToCircle(true);
-                    wxCircleHandler.addToSocialSDK();
-                    shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, picurl, url);
-                    Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            popupView.findViewById(R.id.share_sina).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isShow = false;
-                    mPopupWindow.dismiss();
-                    String content = null;
-                    if(finalTitle.equals(finalContent)){
-                        content = ".";
-                    }else{
-                        content = finalContent;
-                    }
-                        shareTo(SHARE_MEDIA.SINA, finalTitle, content, picurl, url);
-                        ToastUtils.showMessage("分享中...请稍候!");
-
-
-                }
-            });
-
-            popupView.findViewById(R.id.share_tencent).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isShow = false;
-                    mPopupWindow.dismiss();
-                    UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler((Activity) context, "100424468",
-                            "SumAAk7jtaUSnZqd");
-                    qqSsoHandler.addToSocialSDK();
-                    shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, picurl, url);
-                    Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            mPopupWindow.getContentView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isShow = false;
-                    mPopupWindow.dismiss();
-                }
-            });
-            mPopupWindow.setAnimationStyle(R.style.ShareAnimBase);
-            mPopupWindow.setFocusable(true);
-            mPopupWindow.setTouchable(true);
-            mPopupWindow.setOutsideTouchable(true);
-            mPopupWindow.getContentView().setFocusableInTouchMode(true);
-            mPopupWindow.getContentView().setFocusable(true);
-            mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-            mPopupWindow.update();
-            //判断是否是公告还是精品文章，如果是公告，隐藏取消按钮
-            TextView cacleview = (TextView) popupView.findViewById(R.id.share_cancel);
-            if(isMessage){
-                //如果是公告则修改lltop在布局中的位置为中间
-                cacleview.setVisibility(View.GONE);
-            }else{
-                cacleview.setVisibility(View.VISIBLE);
 
             }
+        });
+
+        popupView.findViewById(R.id.share_tencent).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler((Activity) context, "100424468",
+                        "SumAAk7jtaUSnZqd");
+                qqSsoHandler.addToSocialSDK();
+                shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, picurl, url);
+                Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mPopupWindow.getContentView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+            }
+        });
+        setPopWindow(mPopupWindow);
+        //判断是否是公告还是精品文章，如果是公告，隐藏取消按钮
+        TextView cacleview = (TextView) popupView.findViewById(R.id.share_cancel);
+        if (isMessage) {
+            //如果是公告则修改lltop在布局中的位置为中间
+            cacleview.setVisibility(View.GONE);
+        } else {
+            cacleview.setVisibility(View.VISIBLE);
+
+        }
         mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
+    }
+
+    public static void setPopWindow(PopupWindow mPopupWindow) {
+        mPopupWindow.setAnimationStyle(R.style.ShareAnimBase);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.getContentView().setFocusableInTouchMode(true);
+        mPopupWindow.getContentView().setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.update();
+    }
+
+    private static void copyAddress(String url) {
+// 得到剪贴板管理器
+        ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setText(url.trim());
+        ToastUtils.showMessage("内容已粘贴到剪切板!");
     }
 
     /**
@@ -282,7 +302,7 @@ public class ShareUtils {
                 localImage = new UMImage(context, R.drawable.ic_launcher);
             }
             if (share_media == SHARE_MEDIA.QQ) {
-                if(title.equals(content)){
+                if (title.equals(content)) {
                     content = "";
                 }
                 QQShareContent qqShareContent = new QQShareContent(localImage);

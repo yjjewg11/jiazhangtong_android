@@ -40,6 +40,7 @@ public class TopicWebFragment extends Fragment {
         view = inflater.inflate(R.layout.common_top_webview,null);
         webView =(WebView) view.findViewById(R.id.common_topWeb);
         ((MainActivity)getActivity()).setWebView(webView);
+        ((MainActivity)getActivity()).setCommonWeb(webView);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {

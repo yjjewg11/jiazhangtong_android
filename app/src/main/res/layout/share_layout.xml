@@ -127,6 +127,31 @@
                             android:textSize="12dp" />
                     </RelativeLayout>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:gravity="center_horizontal"
+                        android:id="@+id/share_copy_address"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:drawablePadding="@dimen/margin_5"
+                            android:drawableTop="@drawable/fuzhilianjie_share"
+                            android:text="@string/share_copy_address"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

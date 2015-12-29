@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wenjie.jiazhangtong" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wenjie.jiazhangtong">
 
     <supports-screens
         android:smallScreens="true"
@@ -104,6 +105,7 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
 
     <application
+        tools:replace="android:theme"
         android:hardwareAccelerated="true"
         android:name="com.wj.kindergarten.CGApplication"
         android:allowBackup="true"
@@ -598,6 +600,11 @@
             android:theme="@android:style/Theme.Translucent" >
         </activity>
 
+        <receiver android:name="com.wj.kindergarten.receiver.ReceiverTwoCodeURl">
+            <intent-filter>
+                <action android:name="receiver_two_code_url"/>
+            </intent-filter>
+        </receiver>
 
 
         <meta-data
