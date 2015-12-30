@@ -58,7 +58,7 @@ public final class DecodeHandler extends Handler {
 	//只用于解析二维码
 	public void decodeFromPic(byte[] data , int width ,int height){
 		//取消横屏换竖屏，因为照相机默认取得横屏的照片，传输来的数据默认为竖屏，不用切换。
-		byte[] rotatedData = new byte[data.length];
+//		byte[] rotatedData = new byte[data.length];
 //		for (int y = 0; y < height; y++) {
 //			for (int x = 0; x < width; x++)
 //				rotatedData[x * height + height - y - 1] = data[x + y * width];
@@ -68,7 +68,7 @@ public final class DecodeHandler extends Handler {
 //		height = tmp;
 
 		ZbarManager manager = new ZbarManager();
-		String result = manager.decode(rotatedData, width, height, false, width, height, 0,
+		String result = manager.decode(data, width, height, false, width, height, 0,
 				0);
 		if(result != null){
 			Intent intent = new Intent("receiver_two_code_url");

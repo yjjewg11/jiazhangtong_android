@@ -133,6 +133,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         iv_heading = (ImageView) view.findViewById(R.id.once_iv);
         rl_price = (RelativeLayout) view.findViewById(R.id.rl_price);
         rl_free_price = (RelativeLayout) view.findViewById(R.id.rl_free_price);
+        activity.setCommonWeb(course_detail_info);
         gd = new GestureDetector(getActivity(), this);
 //        activity.setWebView(course_detail_info);
         //TODO
