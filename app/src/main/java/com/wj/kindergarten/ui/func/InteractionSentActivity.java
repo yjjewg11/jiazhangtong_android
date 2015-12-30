@@ -131,8 +131,6 @@ public class InteractionSentActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         setTitleText("发表互动", "发表");
-
-
         send_interaction_link = (TextView)findViewById(R.id.send_interaction_link);
         send_interaction_link.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,10 +246,11 @@ public class InteractionSentActivity extends BaseActivity {
             public void handleMessage(Message msg) {
                 CGLog.d("AN: " + getRunningActivityName());
                 if (msg.what == 1024) {
-                    if (!isCon && null != images && images.size() > 0) {
-                        isCon = true;
-                        uploadImage(count);
-                    }
+                    //这个消息是网络状态改变，不是用来上图片的
+//                    if (!isCon && null != images && images.size() > 0) {
+//                        isCon = true;
+//                        uploadImage(count);
+//                    }
                 }
             }
         });

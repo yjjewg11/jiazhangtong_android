@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
 import com.wj.kindergarten.utils.HintInfoDialog;
 
@@ -38,6 +39,7 @@ public class SchoolFragmentThree extends Fragment {
         fl = (FrameLayout) view.findViewById(R.id.school_head);
         fl.setVisibility(View.GONE);
         webView = (WebView) view.findViewById(R.id.group_webView);
+        ((BaseActivity)getActivity()).setCommonWeb(webView);
         webView.setWebViewClient(new WebViewClient(){
 
             @Override

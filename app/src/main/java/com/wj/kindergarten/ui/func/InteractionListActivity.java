@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.utils.GloablUtils;
 
 /**
  * InteractionListActivity
@@ -46,23 +47,16 @@ public class InteractionListActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-        startActivityForResult(new Intent(mContext, InteractionSentActivity.class), 1);
+        startActivityForResult(new Intent(mContext, InteractionSentActivity.class), GloablUtils.INTERRACTION_REFRESH_LIST);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == GloablUtils.INTERRACTION_REFRESH_LIST) {
                 interactionFragment.refreshList();
             }
         }
     }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        return super.onTouchEvent(event);
-    }
-
 }

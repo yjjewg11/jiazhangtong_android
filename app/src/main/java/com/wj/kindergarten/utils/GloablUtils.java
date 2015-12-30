@@ -27,5 +27,7 @@ public interface GloablUtils {
     //接受二维码链接的广播action
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
 
+    int INTERRACTION_REFRESH_LIST = 136;
+
 
 }

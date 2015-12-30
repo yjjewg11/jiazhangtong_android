@@ -23,6 +23,7 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.WindowUtils;
+import com.zbar.lib.CaptureActivity;
 import com.zbar.lib.decode.DecodeHandler;
 
 import java.io.ByteArrayOutputStream;
@@ -58,9 +59,13 @@ public class WebClickListeners implements View.OnLongClickListener {
         View view = View.inflate(context, R.layout.save_or_pasre, null);
         TextView tv_save = (TextView) view.findViewById(R.id.save_pic_to_dicretory);
         TextView tv_parse = (TextView) view.findViewById(R.id.pasre_two_code);
+        TextView tv_scan_two_code = (TextView)view.findViewById(R.id.scan_two_code);
+
         final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ShareUtils.setPopWindow(popupWindow);
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        //保存图片
         tv_save.setOnClickListener(new DownListeners() {
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
@@ -75,6 +80,7 @@ public class WebClickListeners implements View.OnLongClickListener {
 
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
+                popupWindow.dismiss();
                 outputStream = new ByteArrayOutputStream();
                 loadedImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 byte[] bytes = outputStream.toByteArray();
@@ -85,6 +91,14 @@ public class WebClickListeners implements View.OnLongClickListener {
                 message.arg1 = WindowUtils.dm.heightPixels;
                 message.arg2 = WindowUtils.dm.widthPixels;
                 decodeHandler.sendMessage(message);
+            }
+        });
+        //启动扫描二维码
+        tv_scan_two_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                context.startActivity(new Intent(context, CaptureActivity.class));
             }
         });
 

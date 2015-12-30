@@ -528,16 +528,16 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     public void stopWebview(WebView webView){
         if(webView == null ) return ;
-        webView.destroy();
-//        try {
-//            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//        }
+//        webView.destroy();
+        try {
+            webView.getClass().getMethod("onPause").invoke(webView,(Object[])null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
     /**
      * 显示菊花对话框
@@ -691,6 +691,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     public void setCommonWeb(WebView webView){
+        if(webView == null ) return ;
         webView.setOnLongClickListener(new WebClickListeners(this));
     }
 
@@ -821,7 +822,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //选择单张图片进行裁剪
-
         if(resultCode != RESULT_OK) return;
         switch (requestCode) {
             case REQUESTCODE_PICK_WEB:// 直接从相册获取

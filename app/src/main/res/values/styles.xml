@@ -161,4 +161,11 @@
         <item name="android:src">@drawable/xiajiantou_child_go</item>
 
     </style>
+
+    <style name="click_pic">
+        <item name="android:textSize">17sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/seclector_back_ground_white</item>
+    </style>
 </resources>
