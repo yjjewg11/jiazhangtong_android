@@ -50,6 +50,7 @@ public class HtmlActivity extends BaseActivity{
         }
         intent.getStringExtra("title");
         url =  intent.getStringExtra("url");
+        Log.i("TAG","打印扫码地址 ： "+url);
         webView = (WebView) findViewById(R.id.web_html);
         setWebs(webView);
 

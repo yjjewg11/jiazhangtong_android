@@ -17,3 +17,9 @@ android {
         }
     }
 }
+
+dependencies {
+    compile files('libs/zxing.jar')
+}
+
+

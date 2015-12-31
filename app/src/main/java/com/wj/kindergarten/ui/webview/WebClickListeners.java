@@ -13,18 +13,23 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.zxing.WriterException;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.map.MapActivity;
+import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.WindowUtils;
 import com.zbar.lib.CaptureActivity;
 import com.zbar.lib.decode.DecodeHandler;
+import com.zbar.lib.encode.EncodingHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,7 +65,9 @@ public class WebClickListeners implements View.OnLongClickListener {
         TextView tv_save = (TextView) view.findViewById(R.id.save_pic_to_dicretory);
         TextView tv_parse = (TextView) view.findViewById(R.id.pasre_two_code);
         TextView tv_scan_two_code = (TextView)view.findViewById(R.id.scan_two_code);
-
+        TextView create_two_code = (TextView) view.findViewById(R.id.create_two_code);
+        final ImageView image_create_two_code = (ImageView)view.findViewById(R.id.image_create_two_code);
+        TextView look_for_map = (TextView)view.findViewById(R.id.look_for_map);
         final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ShareUtils.setPopWindow(popupWindow);
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
@@ -71,25 +78,22 @@ public class WebClickListeners implements View.OnLongClickListener {
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
                 popupWindow.dismiss();
                 String fileName = System.currentTimeMillis() + ".jpg";
-                saveImageToGallery(fileName, context, loadedImage);
+                FileUtil.saveImageToGallery(fileName, context, loadedImage);
             }
         });
         //将图片转换成数组，解析二维码
         tv_parse.setOnClickListener(new DownListeners() {
-            ByteArrayOutputStream outputStream;
-
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
+                if (loadedImage == null) {
+                    ToastUtils.showMessage("图片下载失败!");
+                    return;
+                }
                 popupWindow.dismiss();
-                outputStream = new ByteArrayOutputStream();
-                loadedImage.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-                byte[] bytes = outputStream.toByteArray();
                 DecodeHandler decodeHandler = new DecodeHandler(context);
                 Message message = new Message();
-                message.what = DecodeHandler.DECODE_FROM_PIC;
-                message.obj = bytes;
-                message.arg1 = WindowUtils.dm.heightPixels;
-                message.arg2 = WindowUtils.dm.widthPixels;
+                message.what = DecodeHandler.DECODE_FROM_PIC_URL;
+                message.obj = loadedImage;
                 decodeHandler.sendMessage(message);
             }
         });
@@ -102,46 +106,37 @@ public class WebClickListeners implements View.OnLongClickListener {
             }
         });
 
+        //生成二维码
+        create_two_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //默认生成百度网址的二维码
+                try {
+                    String path = System.currentTimeMillis() +".jpg";
+                    Bitmap bitmap =  EncodingHandler.createQRCode("大家好，这是问界家园二维码扫描中心，" +
+                            "恭喜你获得1000万大奖，请在节前领取，过期不候！", 200);
+                    FileUtil.saveImageToGallery(path, context,bitmap);
+                    image_create_two_code.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //查看地图
+        look_for_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MapActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
         return false;
     }
 
 
-    public void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
-        // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "问界互动家园");
-        if (!appDir.exists()) {
-            appDir.mkdir();
 
-        }
-        File file = new File(appDir, fileName);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            ToastUtils.showMessage("图片保存失败");
-            e.printStackTrace();
-        } catch (IOException e) {
-            ToastUtils.showMessage("图片保存失败");
-            e.printStackTrace();
-        }
-
-        // 其次把文件插入到系统图库
-        try {
-            MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                    file.getAbsolutePath(), fileName, null);
-        } catch (FileNotFoundException e) {
-            ToastUtils.showMessage("图片保存失败");
-            e.printStackTrace();
-        }
-        // 最后通知图库更新
-//                                                CGLog.d(Uri.fromFile(new File(file.getPath())) + "");
-        Intent intent = new Intent();
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
-//        new SingleMediaScanner(mContext, new File(file.getPath()), null);
-        ToastUtils.showMessage("图片保存成功");
-    }
 
     abstract class DownListeners implements View.OnClickListener {
 
