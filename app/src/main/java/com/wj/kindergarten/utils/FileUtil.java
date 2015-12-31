@@ -2,6 +2,7 @@ package com.wj.kindergarten.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Base64;
 
 import com.wj.kindergarten.ui.BaseActivity;
@@ -136,6 +138,41 @@ public class FileUtil {
         return pictureBytes;
     }
 
+    //把图片保存到图库中，并且通知更新
+    public static void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "问界互动家园");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            ToastUtils.showMessage("图片保存失败");
+            e.printStackTrace();
+        } catch (IOException e) {
+            ToastUtils.showMessage("图片保存失败");
+            e.printStackTrace();
+        }
 
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            ToastUtils.showMessage("图片保存失败");
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+//                                                CGLog.d(Uri.fromFile(new File(file.getPath())) + "");
+        Intent intent = new Intent();
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
+//        new SingleMediaScanner(mContext, new File(file.getPath()), null);
+        ToastUtils.showMessage("图片保存成功");
+    }
 
 }

@@ -115,28 +115,28 @@ public class Utils {
 //        AdsMogoListener
 
 
-        AdsMogoNativeListener nativeListener = new AdsMogoNativeListener() {
-            @Override
-            public void onRequestNativeAdSuccess(List<AdsMogoNativeAdInfo> list) {
-
-                if(list.size() > 0){
-                    list.get(0).getContent().get(AdsMogoNativeKey.LINK);
-                }
-            }
-
-            @Override
-            public void onRequestNativeAdFail(int i) {
-
-            }
-
-            @Override
-            public Class<? extends AdsMogoNativeCustomEventPlatformAdapter> getCustomEvemtPlatformAdapterClass(com.adsmogo.natives.adapters.AdsMogoCustomEventPlatformEnum adsMogoCustomEventPlatformEnum) {
-                return null;
-            }
-        };
+//        AdsMogoNativeListener nativeListener = new AdsMogoNativeListener() {
+//            @Override
+//            public void onRequestNativeAdSuccess(List<AdsMogoNativeAdInfo> list) {
+//
+//                if(list.size() > 0){
+//                    list.get(0).getContent().get(AdsMogoNativeKey.LINK);
+//                }
+//            }
+//
+//            @Override
+//            public void onRequestNativeAdFail(int i) {
+//
+//            }
+//
+//            @Override
+//            public Class<? extends AdsMogoNativeCustomEventPlatformAdapter> getCustomEvemtPlatformAdapterClass(com.adsmogo.natives.adapters.AdsMogoCustomEventPlatformEnum adsMogoCustomEventPlatformEnum) {
+//                return null;
+//            }
+//        };
         //设置信息流广告
-        AdsMogoNative adsMogoNative  = new AdsMogoNative(activity,GloablUtils.MOGO_ID,nativeListener);
-        adsMogoNative.loadAd();
+//        AdsMogoNative adsMogoNative  = new AdsMogoNative(activity,GloablUtils.MOGO_ID,nativeListener);
+//        adsMogoNative.loadAd();
 
         ViewGroup viewGroup = (ViewGroup)adsMogoLayoutCode.getParent();
         if(viewGroup!=null)
