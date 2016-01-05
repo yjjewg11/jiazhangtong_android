@@ -3,6 +3,7 @@ package com.wj.kindergarten.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
 /**
  * JsonUtil
  *
@@ -10,14 +11,17 @@ import com.google.gson.GsonBuilder;
  * @Author: Wave
  * @CreateDate: 2015/5/21 14:32
  */
-public abstract class GsonUtil {
-    static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+public class GsonKdUtil {
+//    static Gson gson =
+//
+
 
     public static String toJson(Object obj) {
-        return gson.toJson(obj);
+        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(obj);
+//                gson.toJson(obj);
     }
 
     public static Gson getGson() {
-        return gson;
+        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
 }
