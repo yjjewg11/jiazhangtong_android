@@ -1,10 +1,8 @@
 package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
-import com.wj.kindergarten.utils.GsonUtil;
-
+import com.wj.kindergarten.utils.GsonKdUtil;
 import org.json.JSONObject;
-
 import java.io.Serializable;
 
 /**
@@ -28,7 +26,7 @@ public class BaseResponse implements Serializable {
         if (response.has("ResMsg")) {
             JSONObject temp = response.getJSONObject("ResMsg");
             if (temp != null) {
-                ResMsg = GsonUtil.getGson().fromJson(temp.toString(), BaseResMsg.class);
+                ResMsg = GsonKdUtil.getGson().fromJson(temp.toString(), BaseResMsg.class);
             }
         }
     }

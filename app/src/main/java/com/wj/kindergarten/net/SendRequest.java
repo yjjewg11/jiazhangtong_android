@@ -61,7 +61,7 @@ import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GsonUtil;
+import com.wj.kindergarten.utils.GsonKdUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -475,21 +475,21 @@ public class SendRequest {
      */
     private List<BaseModel> getDomains(String responseBaseDomain, Class<? extends BaseModel> className) {
 
-        List<?> list = GsonUtil.getGson().fromJson(responseBaseDomain, new TypeToken<List<?>>() {
+        List<?> list = GsonKdUtil.getGson().fromJson(responseBaseDomain, new TypeToken<List<?>>() {
         }.getType());
         String jsonStr = null;
         List<BaseModel> baseDomains = new ArrayList<BaseModel>();
         BaseModel baseDomain = null;
         for (int i = 0; i < list.size(); i++) {
-            jsonStr = GsonUtil.toJson(list.get(i));
-            baseDomain = GsonUtil.getGson().fromJson(jsonStr, className);
+            jsonStr = GsonKdUtil.toJson(list.get(i));
+            baseDomain = GsonKdUtil.getGson().fromJson(jsonStr, className);
             baseDomains.add(baseDomain);
         }
         return baseDomains;
     }
 
     private BaseModel getDomain(String domain, Class<? extends BaseModel> className) {
-        BaseModel baseDomain = GsonUtil.getGson().fromJson(domain, className);
+        BaseModel baseDomain = GsonKdUtil.getGson().fromJson(domain, className);
         return baseDomain;
     }
 }

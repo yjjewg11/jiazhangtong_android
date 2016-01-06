@@ -95,6 +95,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
         father_ll = (LinearLayout) findViewById(R.id.father_ll);
         web_fl = (FrameLayout) findViewById(R.id.web_fl);
         contentTv = (WebView) findViewById(R.id.article_content);
+        setCommonWeb(contentTv);
         contentTv.setBackgroundColor(0);
         webSettings = contentTv.getSettings();
 //        webSettings.setJavaScriptEnabled(true);

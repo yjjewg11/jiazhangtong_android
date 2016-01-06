@@ -3,10 +3,8 @@ package com.wj.kindergarten.utils;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -213,7 +211,7 @@ public class ShareUtils {
                 mPopupWindow.dismiss();
             }
         });
-        setPopWindow(mPopupWindow);
+        Utils.setPopWindow(mPopupWindow);
         //判断是否是公告还是精品文章，如果是公告，隐藏取消按钮
         TextView cacleview = (TextView) popupView.findViewById(R.id.share_cancel);
         if (isMessage) {
@@ -225,17 +223,6 @@ public class ShareUtils {
         }
         mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
-    }
-
-    public static void setPopWindow(PopupWindow mPopupWindow) {
-        mPopupWindow.setAnimationStyle(R.style.ShareAnimBase);
-        mPopupWindow.setFocusable(true);
-        mPopupWindow.setTouchable(true);
-        mPopupWindow.setOutsideTouchable(true);
-        mPopupWindow.getContentView().setFocusableInTouchMode(true);
-        mPopupWindow.getContentView().setFocusable(true);
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        mPopupWindow.update();
     }
 
     private static void copyAddress(String url) {

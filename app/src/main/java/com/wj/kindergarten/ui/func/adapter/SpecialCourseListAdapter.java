@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.SpecialCourseInfoObject;
+import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
@@ -85,6 +87,9 @@ public class SpecialCourseListAdapter extends BaseAdapter{
 
         SpecialCourseInfoObject object = list.get(position);
         if (object != null) {
+            MapTransportObject mapTransportObject = new MapTransportObject();
+            mapTransportObject.setMap_point(object.getMap_point());
+            viewHolder.item_special_course_list_view_tv_distance.setOnClickListener(new ClickStartMap(context,mapTransportObject));
             viewHolder.ratingBar.setFloatStar(object.getCt_stars(),true);
             ImageLoaderUtil.displayMyImage(object.getLogo(), viewHolder.imageView);
             viewHolder.item_class_name.setText("" + object.getTitle());

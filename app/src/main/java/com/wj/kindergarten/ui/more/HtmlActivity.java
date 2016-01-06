@@ -76,6 +76,11 @@ public class HtmlActivity extends BaseActivity{
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                String title = view.getTitle();
+                if(TextUtils.isEmpty(title) || TextUtils.isEmpty(Utils.isNull(title))){
+                    title = "链接详情";
+                }
+                titleCenterTextView.setText(title);
                 if(commonDialog.isShowing()){
                     commonDialog.cancel();
                 }

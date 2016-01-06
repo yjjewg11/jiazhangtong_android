@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -23,31 +23,26 @@ import com.zbar.lib.decode.DecodeHandler;
 import com.zbar.lib.encode.EncodingHandler;
 
 /**
- * Created by tangt on 2015/12/29.
+ * Created by tangt on 2016/1/6.
  */
-public class WebClickListeners implements View.OnLongClickListener {
+public class ChooseTwoCode {
+    private final View view;
     private Context context;
-    private String imgurl;
+    private String imgUrl;
+    public TextView tv_save;
 
-    public WebClickListeners(Context context) {
+    public ChooseTwoCode(Context context,String imgUrl) {
         this.context = context;
+        this.imgUrl = imgUrl;
+        view = View.inflate(context, R.layout.save_or_pasre, null);
+        tv_save = (TextView) view.findViewById(R.id.save_pic_to_dicretory);
     }
 
-
-    @Override
-    public boolean onLongClick(View v) {
-        WebView.HitTestResult result = ((WebView) v).getHitTestResult();
-        if (result != null) {
-            int type = result.getType();
-            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-                imgurl = result.getExtra();
-            } else {
-                return false;
-            }
+    public void choose(View v){
+        if(TextUtils.isEmpty(imgUrl) || TextUtils.isEmpty(Utils.isNull(imgUrl))){
+            return;
         }
 
-        View view = View.inflate(context, R.layout.save_or_pasre, null);
-        TextView tv_save = (TextView) view.findViewById(R.id.save_pic_to_dicretory);
         TextView tv_parse = (TextView) view.findViewById(R.id.pasre_two_code);
         TextView tv_scan_two_code = (TextView)view.findViewById(R.id.scan_two_code);
         TextView create_two_code = (TextView) view.findViewById(R.id.create_two_code);
@@ -63,7 +58,7 @@ public class WebClickListeners implements View.OnLongClickListener {
                 popupWindow.dismiss();
             }
         });
-        tv_save.setOnClickListener(new DownListeners(imgurl) {
+        tv_save.setOnClickListener(new DownListeners(imgUrl) {
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
                 popupWindow.dismiss();
@@ -72,7 +67,7 @@ public class WebClickListeners implements View.OnLongClickListener {
             }
         });
         //将图片转换成数组，解析二维码
-        tv_parse.setOnClickListener(new DownListeners(imgurl) {
+        tv_parse.setOnClickListener(new DownListeners(imgUrl) {
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
                 if (loadedImage == null) {
@@ -122,7 +117,5 @@ public class WebClickListeners implements View.OnLongClickListener {
                 context.startActivity(intent);
             }
         });
-        return false;
     }
-
 }

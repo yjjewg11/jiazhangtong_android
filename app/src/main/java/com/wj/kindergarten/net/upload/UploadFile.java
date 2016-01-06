@@ -12,7 +12,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GsonUtil;
+import com.wj.kindergarten.utils.GsonKdUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;
@@ -86,7 +86,7 @@ public class UploadFile {
                         try {
                             BaseResponse baseResponse = new BaseResponse(response);
                             if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
-                                uploadImage.success(GsonUtil.getGson().fromJson(response.toString(), Result.class));
+                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
                             } else {
                                 uploadImage.failure("上传图片失败");
                             }

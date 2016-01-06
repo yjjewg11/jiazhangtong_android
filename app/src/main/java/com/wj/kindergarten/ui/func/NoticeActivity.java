@@ -100,6 +100,7 @@ public class NoticeActivity extends BaseActivity {
         rootView = (RelativeLayout) findViewById(R.id.notice_root);
         titleTv = (TextView) findViewById(R.id.notice_title);
         contentTv = (WebView) findViewById(R.id.notice_content);
+        setCommonWeb(contentTv);
         orgTv = (TextView) findViewById(R.id.notice_org);
         dateTv = (TextView) findViewById(R.id.notice_date);
         rootView.setOnClickListener(new View.OnClickListener() {

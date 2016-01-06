@@ -12,16 +12,14 @@ import com.google.gson.GsonBuilder;
  * @CreateDate: 2015/5/21 14:32
  */
 public class GsonKdUtil {
-//    static Gson gson =
-//
 
+    static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     public static String toJson(Object obj) {
-        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(obj);
-//                gson.toJson(obj);
+        return gson.toJson(obj);
     }
 
     public static Gson getGson() {
-        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        return gson;
     }
 }

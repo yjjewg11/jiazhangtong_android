@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -29,7 +30,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.webkit.ValueCallback;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.adsmogo.adapters.AdsMogoCustomEventPlatformEnum;
@@ -166,16 +169,20 @@ public class Utils {
             firstUrl = secondUrl;
         }
 
+
         try{
             CookieSyncManager.createInstance(CGApplication.getInstance());
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setAcceptCookie(true);
+            cookieManager.removeSessionCookie();
             StringBuilder sbCookie = new StringBuilder();
-            sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
-            //顶级域名：    .wenjienet.com
-            sbCookie.append(String.format(";domain=%s", firstUrl));
+            sbCookie.append(String.format("JSESSIONID=%s", CGSharedPreference.getStoreJESSIONID()));
+            //顶级域名：
+            sbCookie.append(String.format(";domain=%s",
+                    firstUrl
+//                    ".wenjienet.com"
+            ));
             sbCookie.append(String.format(";path=%s", "/"));
-
             String cookieValue = sbCookie.toString();
             cookieManager.setCookie(url, cookieValue);
             CookieSyncManager.getInstance().sync();
@@ -842,4 +849,14 @@ public class Utils {
 
     }
 
+    public static void setPopWindow(PopupWindow mPopupWindow) {
+        mPopupWindow.setAnimationStyle(R.style.ShareAnimBase);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.getContentView().setFocusableInTouchMode(true);
+        mPopupWindow.getContentView().setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.update();
+    }
 }
