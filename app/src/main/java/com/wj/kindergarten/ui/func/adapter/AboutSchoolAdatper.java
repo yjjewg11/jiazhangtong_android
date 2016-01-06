@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.google.gson.annotations.Expose;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.TrainSchoolInfo;
+import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
@@ -97,6 +99,9 @@ public class AboutSchoolAdatper extends BaseAdapter {
                 text = "<font  color='#ff4966'>"+"0"+"</font>";
             }
 
+            MapTransportObject mapTransportObject = new MapTransportObject();
+            mapTransportObject.setMap_point(schoolInfo.getMap_point());
+            viewHolder.item_special_course_list_view_tv_distance.setOnClickListener(new ClickStartMap(context,mapTransportObject));
 
             try{
                 viewHolder.tv_study_people.setText(Html.fromHtml(text));

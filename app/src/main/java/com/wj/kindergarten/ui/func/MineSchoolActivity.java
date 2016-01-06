@@ -1,14 +1,10 @@
 package com.wj.kindergarten.ui.func;
 
-        import android.content.Intent;
         import android.graphics.Color;
-        import android.graphics.drawable.Drawable;
         import android.os.Handler;
         import android.os.Message;
         import android.support.design.widget.TabLayout;
         import android.view.View;
-        import android.view.animation.AccelerateDecelerateInterpolator;
-        import android.view.animation.DecelerateInterpolator;
         import android.widget.FrameLayout;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
@@ -17,28 +13,19 @@ package com.wj.kindergarten.ui.func;
 
         import com.nineoldandroids.animation.ObjectAnimator;
         import com.wenjie.jiazhangtong.R;
-        import com.wj.kindergarten.CGApplication;
         import com.wj.kindergarten.bean.BaseModel;
-        import com.wj.kindergarten.bean.CallTransfer;
-        import com.wj.kindergarten.bean.ChildInfo;
-        import com.wj.kindergarten.bean.Group;
         import com.wj.kindergarten.bean.SchoolDetail;
         import com.wj.kindergarten.bean.SchoolDetailList;
         import com.wj.kindergarten.net.RequestResultI;
         import com.wj.kindergarten.net.request.UserRequest;
         import com.wj.kindergarten.ui.BaseActivity;
-        import com.wj.kindergarten.ui.more.CallUtils;
         import com.wj.kindergarten.ui.other.RatingBarView;
         import com.wj.kindergarten.ui.recuitstudents.fragments.AssessSchoolFragment;
-        import com.wj.kindergarten.ui.recuitstudents.fragments.MineSchoolIntroduceFragment;
-        import com.wj.kindergarten.utils.GloablUtils;
-        import com.wj.kindergarten.utils.HintInfoDialog;
+        import com.wj.kindergarten.ui.webview.ScrollWebFragment;
         import com.wj.kindergarten.utils.ImageLoaderUtil;
         import com.wj.kindergarten.utils.ShareUtils;
-        import com.wj.kindergarten.utils.Utils;
-        import com.wj.kindergarten.wrapper.WrapperFl;
+        import com.wj.kindergarten.wrapper.DoOwnThing;
 
-        import java.util.ArrayList;
         import java.util.List;
 
 /**
@@ -47,10 +34,10 @@ package com.wj.kindergarten.ui.func;
 public class MineSchoolActivity extends BaseActivity{
     private TabLayout tab_layout;
     private AssessSchoolFragment assessSchoolFragment;
-    private MineSchoolIntroduceFragment recruitFragment;
+    private ScrollWebFragment recruitFragment;
     private boolean isFirst;
     private boolean isOnce;
-    private MineSchoolIntroduceFragment mineSchoolFragment;
+    private ScrollWebFragment mineSchoolFragment;
     private LinearLayout ll_school_medal_one;
     private TextView item_class_name;
     private TextView item_special_course_list_view_tv_adresss;
@@ -157,6 +144,7 @@ public class MineSchoolActivity extends BaseActivity{
     }
 
 
+    private DoOwnThing doOwnThing;
     @Override
     protected void onCreate() {
 
@@ -184,8 +172,21 @@ public class MineSchoolActivity extends BaseActivity{
         tab_layout.addTab(tab_layout.newTab().setText("评价学校"));
         anim_mine_fl = (FrameLayout)findViewById(R.id.anim_mine_fl);
 
-        mineSchoolFragment = new MineSchoolIntroduceFragment();
-        recruitFragment = new MineSchoolIntroduceFragment();
+        mineSchoolFragment = new ScrollWebFragment();
+        recruitFragment = new ScrollWebFragment();
+
+        doOwnThing = new DoOwnThing() {
+            @Override
+            public void pullFromTop() {
+                animtor.reverse();
+            }
+            @Override
+            public void pullFromEnd() {
+                animtor.start();
+            }
+        };
+        mineSchoolFragment.setDoOwnThing(doOwnThing);
+        recruitFragment.setDoOwnThing(doOwnThing);
         assessSchoolFragment = new AssessSchoolFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.mine_fragment_container,mineSchoolFragment).add(R.id.mine_fragment_container,assessSchoolFragment).
                 add(R.id.mine_fragment_container,recruitFragment).hide(recruitFragment).hide(assessSchoolFragment).show(mineSchoolFragment).commit();

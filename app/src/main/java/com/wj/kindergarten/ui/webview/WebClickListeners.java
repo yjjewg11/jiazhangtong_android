@@ -1,14 +1,9 @@
 package com.wj.kindergarten.ui.webview;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Environment;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +13,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.zxing.WriterException;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ui.map.MapActivity;
 import com.wj.kindergarten.utils.FileUtil;
-import com.wj.kindergarten.utils.ImageLoaderUtil;
-import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
-import com.wj.kindergarten.utils.WindowUtils;
+import com.wj.kindergarten.utils.Utils;
 import com.zbar.lib.CaptureActivity;
 import com.zbar.lib.decode.DecodeHandler;
 import com.zbar.lib.encode.EncodingHandler;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * Created by tangt on 2015/12/29.
@@ -48,6 +32,7 @@ public class WebClickListeners implements View.OnLongClickListener {
     public WebClickListeners(Context context) {
         this.context = context;
     }
+
 
     @Override
     public boolean onLongClick(View v) {
@@ -68,12 +53,17 @@ public class WebClickListeners implements View.OnLongClickListener {
         TextView create_two_code = (TextView) view.findViewById(R.id.create_two_code);
         final ImageView image_create_two_code = (ImageView)view.findViewById(R.id.image_create_two_code);
         TextView look_for_map = (TextView)view.findViewById(R.id.look_for_map);
-        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        ShareUtils.setPopWindow(popupWindow);
+        final PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        Utils.setPopWindow(popupWindow);
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
         //保存图片
-        tv_save.setOnClickListener(new DownListeners() {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        tv_save.setOnClickListener(new DownListeners(imgurl) {
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
                 popupWindow.dismiss();
@@ -82,7 +72,7 @@ public class WebClickListeners implements View.OnLongClickListener {
             }
         });
         //将图片转换成数组，解析二维码
-        tv_parse.setOnClickListener(new DownListeners() {
+        tv_parse.setOnClickListener(new DownListeners(imgurl) {
             @Override
             public void doOwnThing(String imageUri, Bitmap loadedImage) {
                 if (loadedImage == null) {
@@ -135,49 +125,4 @@ public class WebClickListeners implements View.OnLongClickListener {
         return false;
     }
 
-
-
-
-    abstract class DownListeners implements View.OnClickListener {
-
-        public abstract void doOwnThing(String imageUri, Bitmap loadedImage);
-
-        @Override
-        public void onClick(View v) {
-            downPic();
-        }
-
-        private void downPic() {
-            ImageLoaderUtil.downLoadImageLoader(imgurl,
-                    new ImageLoadingListener() {
-                        @Override
-                        public void onLoadingStarted(String imageUri, View view) {
-
-                        }
-
-                        @Override
-                        public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                        }
-
-                        @Override
-                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//
-                            doOwnThing(imageUri, loadedImage);
-
-//
-//                                                ToastUtils.showMessage("图片保存成功");
-//                                                MainActivity.instance.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File("/sdcard/Boohee/image.png"))));
-
-
-                        }
-
-                        @Override
-                        public void onLoadingCancelled(String imageUri, View view) {
-
-                        }
-
-                    });
-        }
-    }
 }

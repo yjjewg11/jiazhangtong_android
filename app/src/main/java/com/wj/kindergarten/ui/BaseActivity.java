@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
+import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -49,6 +50,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.NormalProgressDialog;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
@@ -690,6 +692,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         return super.onKeyDown(keyCode,event);
     }
 
+    //添加长按扫描二维码等功能。
     public void setCommonWeb(WebView webView){
         if(webView == null ) return ;
         webView.setOnLongClickListener(new WebClickListeners(this));
@@ -699,8 +702,19 @@ public abstract class BaseActivity extends ActionBarActivity {
     public void setWebView(WebView webView){
         this.webView = webView;
         if(webView == null) return;
-        webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient(){});
+//        webView.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//
+//                super.onPageFinished(view, url);
+//            }
+//        });
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+                return super.onConsoleMessage(consoleMessage);
+            }
+        });
         //给所有的webview添加接口
         webView.addJavascriptInterface(new WebJavaScript(webView),"JavaScriptCall");
         WebSettings webSettings = webView.getSettings();
@@ -749,7 +763,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
         @JavascriptInterface
         public String getJsessionid(){
-            return CGApplication.getInstance().getLogin().getUserinfo().getJSESSIONID();
+            return CGSharedPreference.getStoreJESSIONID();
         }
 
         @JavascriptInterface

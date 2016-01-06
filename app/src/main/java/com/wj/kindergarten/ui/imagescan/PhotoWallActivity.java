@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -19,8 +24,8 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
-import com.wj.kindergarten.utils.SingleMediaScanner;
 import com.wj.kindergarten.utils.Utils;
+import com.zbar.lib.decode.DecodeHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,6 +62,8 @@ public class PhotoWallActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        titleRightButton.setVisibility(View.VISIBLE);
+
         int position = getIntent().getIntExtra(KEY_POSITION, 0);
         list = getIntent().getStringArrayListExtra(KEY_LIST);
         titleRightT = getIntent().getStringExtra(KEY_TYPE);
@@ -87,7 +94,7 @@ public class PhotoWallActivity extends BaseActivity {
 
             }
         });
-        photoWallAdapter = new PhotoWallAdapter(list);
+        photoWallAdapter = new PhotoWallAdapter(list,this);
         mPager.setAdapter(photoWallAdapter);
         mPager.setCurrentItem(position, false);
     }
@@ -97,7 +104,7 @@ public class PhotoWallActivity extends BaseActivity {
         if ("删除".equals(titleRightT)) {
             int now = mPager.getCurrentItem();
             list.remove(now);
-            photoWallAdapter = new PhotoWallAdapter(list);
+            photoWallAdapter = new PhotoWallAdapter(list,this);
             mPager.setAdapter(photoWallAdapter);
             if (list.size() <= 0) {
                 clickBack();
@@ -116,6 +123,7 @@ public class PhotoWallActivity extends BaseActivity {
                 url = url.substring(0, url.indexOf("@"));
             }
             CGLog.d("photo wall title right->" + url);
+            //弹出选择框
             savePhoto2Gallery(url);
         }
     }

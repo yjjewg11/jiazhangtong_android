@@ -14,6 +14,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.Utils;
 
 public class AllWebActivity extends BaseActivity{
     private String url;
@@ -47,29 +48,11 @@ public class AllWebActivity extends BaseActivity{
         String CookieStr = CookieManager.getInstance().getCookie(url);
         CGLog.d("cookie: " + CookieStr);//浏览器中设置的cookie照到设置就ok了
         init();
-        syncCookie(url);
+        Utils.syncCookie(url);
         load();
     }
 
-    private void syncCookie(String url) {
-        try {
-            CookieSyncManager.createInstance(CGApplication.getInstance());
-            CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.setAcceptCookie(true);
-            cookieManager.removeSessionCookie();// 移除
-            cookieManager.removeAllCookie();
-            StringBuilder sbCookie = new StringBuilder();
-            sbCookie.append(String.format("JSESSIONID=%s", CGApplication.getInstance().getLogin().getJSESSIONID()));
-            sbCookie.append(String.format(";domain=%s", "jz.wenjienet.com"));
-            sbCookie.append(String.format(";path=%s", "/px-mobile"));
 
-            String cookieValue = sbCookie.toString();
-            cookieManager.setCookie(url, cookieValue);
-            CookieSyncManager.getInstance().sync();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     private void init() {

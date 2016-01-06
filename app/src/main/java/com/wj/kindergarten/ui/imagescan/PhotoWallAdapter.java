@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.imagescan;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.webview.ChooseTwoCode;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -25,10 +27,15 @@ import uk.co.senab.photoview.PhotoView;
  * @version: v1.0
  */
 public class PhotoWallAdapter extends PagerAdapter {
+    private Context context;
+
+
+
     private ArrayList<String> photoList = new ArrayList<String>();
 
-    public PhotoWallAdapter(ArrayList<String> photoArrayList) {
+    public PhotoWallAdapter(ArrayList<String> photoArrayList,Context context) {
         this.photoList = photoArrayList;
+        this.context = context;
     }
 
     @Override
@@ -50,6 +57,17 @@ public class PhotoWallAdapter extends PagerAdapter {
             }
         }
         CGLog.d("photo wall->" + uri);
+        //增加二维码识别
+        final String finalUri = uri;
+        photoView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ChooseTwoCode chooseTwoCode = new ChooseTwoCode(context, finalUri);
+                chooseTwoCode.tv_save.setVisibility(View.GONE);
+                chooseTwoCode.choose(v);
+                return false;
+            }
+        });
         photoView.setImageResource(R.drawable.friends_sends_pictures_no);
         ImageLoaderUtil.downLoadImageLoader(uri, new ImageLoadingListener() {
             @Override

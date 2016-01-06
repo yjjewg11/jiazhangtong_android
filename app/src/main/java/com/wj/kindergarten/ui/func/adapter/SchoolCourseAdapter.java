@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.TrainSchoolInfo;
+import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -76,6 +78,9 @@ public class SchoolCourseAdapter extends BaseAdapter{
         TrainSchoolInfo info = list.get(position);
 
         if (info != null){
+            MapTransportObject mapTransportObject = new MapTransportObject();
+            mapTransportObject.setMap_point(info.getMap_point());
+            viewHolder.item_special_course_list_view_tv_distance.setOnClickListener(new ClickStartMap(context,mapTransportObject));
             ImageLoaderUtil.displayMyImage(info.getImg(), viewHolder.imageView);
             viewHolder.ratingBar.setFloatStar(info.getCt_stars(), true);
             viewHolder.item_class_name.setText("" + info.getBrand_name());

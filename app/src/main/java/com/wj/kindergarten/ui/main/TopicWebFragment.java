@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -24,13 +26,6 @@ public class TopicWebFragment extends Fragment {
     private HintInfoDialog dialog;
     private String url;
     private Bundle bundle;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        webView.restoreState(bundle);
-    }
-
 
     @Nullable
     @Override
@@ -52,12 +47,16 @@ public class TopicWebFragment extends Fragment {
                 if (dialog.isShowing()) {
                     dialog.cancel();
                 }
+                CookieManager cookieManager = CookieManager.getInstance();
+                String CookieStr = cookieManager.getCookie(url);
+                Log.e("sunzn", "Cookies = " + CookieStr);
             }
         });
 
         return view;
     }
 
+    String myhttp = "http://kd.wenjienet.com/px-rest/sns/index.html?v=1229";
     String tpurl = "http://192.168.0.116:8080/px-rest/sns/index.html?v=1";
     public void setWebUrl(String url) {
         if(TextUtils.isEmpty(url)) {
@@ -70,10 +69,4 @@ public class TopicWebFragment extends Fragment {
         webView.loadUrl(url);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        bundle = new Bundle();
-        webView.saveState(bundle);
-    }
 }

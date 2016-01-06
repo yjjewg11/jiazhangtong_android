@@ -43,6 +43,8 @@ import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseGrid;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
+import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.CustomScrollView;
 import com.wj.kindergarten.ui.other.FullGridView;
 import com.wj.kindergarten.ui.other.RatingBarView;
@@ -107,10 +109,12 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                         ImageLoaderUtil.displayMyImage(object.getLogo(), imageView);
 
                         item_class_name.setText("" + object.getTitle());
-                        item_special_course_list_view_tv_adresss.setText(""+object.getAddress());
+                        item_special_course_list_view_tv_adresss.setText("" + object.getAddress());
                         //TODO
                         String text = "<font  color='#ff4966'>"+object.getCt_study_students()+"</font>"+"人已学";
-                        item_special_course_list_view_tv_distance.setText(""+object.getDistance());
+                        item_special_course_list_view_tv_distance.setText("" + object.getDistance());
+                        MapTransportObject mapTransportObject = new MapTransportObject(object.getMap_point());
+                        item_special_course_list_view_tv_distance.setOnClickListener(new ClickStartMap(WebviewActivity.this,mapTransportObject));
                         item_special_course_list_view_tv_edcucation.setText("" + object.getGroup_name());
                         item_special_course_list_view_tv_study_people.setText(Html.fromHtml(text));
                         view.setBackgroundResource(R.drawable.setting_item_click_selector);

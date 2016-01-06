@@ -28,7 +28,7 @@ import com.wj.kindergarten.ui.func.TeacherDetailInfoActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GsonUtil;
+import com.wj.kindergarten.utils.GsonKdUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
 import org.json.JSONException;
@@ -241,7 +241,7 @@ public final class UserRequest {
     }
 
     public static void changeChild(Context context, ChildInfo childInfo,String addressName, RequestResultI requestResultI) {
-        String json = GsonUtil.getGson().toJson(childInfo);
+        String json = GsonKdUtil.getGson().toJson(childInfo);
         SendRequest.getInstance().post(context, RequestType.CHANGE_CHILD, json,
                 RequestHttpUtil.BASE_URL + "rest/student/" + addressName + ".json", requestResultI);
     }

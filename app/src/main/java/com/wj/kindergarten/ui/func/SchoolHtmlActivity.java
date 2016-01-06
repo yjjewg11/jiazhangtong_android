@@ -1,52 +1,41 @@
 package com.wj.kindergarten.ui.func;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.CallTransfer;
 import com.wj.kindergarten.bean.SchoolDetail;
 import com.wj.kindergarten.bean.SchoolDetailList;
-import com.wj.kindergarten.bean.TrainSchoolInfo;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.more.CallUtils;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.recuitstudents.fragments.SchoolAssessFragment;
-import com.wj.kindergarten.ui.recuitstudents.fragments.WebFragment;
-import com.wj.kindergarten.ui.recuitstudents.fragments.WebFragment2;
+import com.wj.kindergarten.ui.webview.ScrollWebFragment;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.wrapper.DoOwnThing;
 import com.wj.kindergarten.wrapper.WrapperFl;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -59,10 +48,9 @@ public class SchoolHtmlActivity extends BaseActivity {
     private TextView tv_coll;
     private ImageView iv_coll;
     private HintInfoDialog dialog;
-    private WebFragment recuritFragment;
-    private WebFragment2 schoolFragment;
+    private ScrollWebFragment recuritFragment;
+    private ScrollWebFragment schoolFragment;
     private SchoolAssessFragment schoolAssessFragment;
-    private HintInfoDialog hintDialog;
     private SchoolDetailList sdl;
     private SchoolDetail schoolDetail;
     public static final int SUCCESS_GET_DATA = 101;
@@ -74,10 +62,6 @@ public class SchoolHtmlActivity extends BaseActivity {
     private TextView tv_study_people;
     private String schoolUuid;
 
-
-    public HintInfoDialog getHintDialog() {
-        return hintDialog;
-    }
 
     private ObjectAnimator animtor;
 
@@ -165,11 +149,10 @@ public class SchoolHtmlActivity extends BaseActivity {
         //不调用isneeding方法，加载会让tablayout失效，原因不明
     }
 
+    private DoOwnThing d;
     @Override
     protected void onCreate() {
         //TODO传递数据
-        hintDialog = new HintInfoDialog(this);
-        hintDialog.show();
         Intent intent = getIntent();
         schoolUuid = intent.getStringExtra("uuid");
         //获取学校详情
@@ -199,8 +182,25 @@ public class SchoolHtmlActivity extends BaseActivity {
         setViews();
 
         common_rl = (RelativeLayout)findViewById(R.id.common_rl);
-        schoolFragment = new WebFragment2();
-        recuritFragment = new WebFragment();
+        schoolFragment = new ScrollWebFragment();
+        recuritFragment = new ScrollWebFragment();
+
+        d = new DoOwnThing() {
+            @Override
+            public void pullFromTop() {
+                animtor.reverse();
+            }
+
+            @Override
+            public void pullFromEnd() {
+                animtor.start();
+            }
+        };
+
+        schoolFragment.setDoOwnThing(d);
+        recuritFragment.setDoOwnThing(d);
+
+
         schoolAssessFragment = new SchoolAssessFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.common_rl,schoolFragment).add(R.id.common_rl,recuritFragment).
                 add(R.id.common_rl,schoolAssessFragment).hide(schoolFragment).hide(schoolAssessFragment).show(recuritFragment).commit();

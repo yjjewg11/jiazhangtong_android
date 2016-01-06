@@ -45,6 +45,7 @@
                 android:id="@+id/normal_title_center_text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:maxWidth="180dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxEms="8"

@@ -1,7 +1,9 @@
 package com.wj.kindergarten.ui.main;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -132,9 +134,9 @@ public class MainActivity extends BaseActivity {
 
 
         //获取系统参数
-        if(CGSharedPreference.getEnoughOneDay()){
+//        if(CGSharedPreference.getEnoughOneDay()){
             getTopicConfig();
-        }
+//        }
 
         //每次应用启动获取话题
 
@@ -554,6 +556,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        Log.i("TAG", "页面被销毁!");
+        ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+//        Log.i("TAG","添加运行任务 ： "+activityManager.getAppTasks().size());
+        Log.i("TAG","添加任务栈  ： "+activityManager.getRunningTasks(10).size());
         super.onDestroy();
 //        unregisterReceiver(receive);
     }

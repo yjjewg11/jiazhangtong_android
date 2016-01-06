@@ -47,6 +47,7 @@ import com.wj.kindergarten.ui.other.ManDrawLine;
 import com.wj.kindergarten.ui.other.PulseAnimator;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.other.ScollTextView;
+import com.wj.kindergarten.ui.webview.BasicWebFragment;
 import com.wj.kindergarten.utils.GloablUtils;
         import com.wj.kindergarten.utils.HintInfoDialog;
         import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -80,7 +81,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private View.OnClickListener listener;
     public  CourseDetailFragmentThree courseFragment;
     public FamilyAssessFragmentThree familyFragment;
-    public SchoolFragmentThree schoolFragment;
+    public BasicWebFragment schoolFragment;
     private FragmentTransaction transion;
     private boolean isAgain;
     private LinearLayout draw_line_ll;
@@ -207,7 +208,7 @@ public class SpecialCourseInfoActivity extends BaseActivity {
         rb_three_school = (RadioButton)findViewById(R.id.rb_three_school);
         rb_three_assess = (RadioButton)findViewById(R.id.rb_three_assess);
         courseFragment = new CourseDetailFragmentThree();
-        schoolFragment = new SchoolFragmentThree();
+        schoolFragment = new BasicWebFragment();
         familyFragment = new FamilyAssessFragmentThree();
         transion =  getSupportFragmentManager().beginTransaction();
                         transion.add(R.id.container_ll_three, courseFragment,tag[0]).

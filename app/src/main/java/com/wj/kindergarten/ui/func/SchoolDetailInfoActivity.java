@@ -3,7 +3,6 @@ package com.wj.kindergarten.ui.func;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,33 +23,34 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.CallTransfer;
 import com.wj.kindergarten.bean.SchoolDetail;
 import com.wj.kindergarten.bean.SchoolDetailList;
-import com.wj.kindergarten.bean.TrainSchoolInfo;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.more.CallUtils;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.specialcourse.ClassFragment;
-import com.wj.kindergarten.ui.specialcourse.SimpleIntroduceFragment;
 import com.wj.kindergarten.ui.specialcourse.TeachersSpecialFragment;
+import com.wj.kindergarten.ui.webview.SchoolFragment;
+import com.wj.kindergarten.ui.webview.ScrollWebFragment;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.wrapper.DoOwnThing;
 
 import java.util.List;
 
-public class SchoolDetailInfoActivity extends BaseActivity{
+public class SchoolDetailInfoActivity extends BaseActivity {
     private ViewPager viewPager;
     private RelativeLayout[] relatives;
     private RadioGroup radioGroup;
-    private RadioButton bt_course,tab_teacher,tab_introduce;
+    private RadioButton bt_course, tab_teacher, tab_introduce;
     private RadioButton[] radioButtons;
     private ImageView iv_head;
     private RatingBarView rating_bar;
-    private TextView adress,class_name,distance,edcucation,spend_people;
+    private TextView adress, class_name, distance, edcucation, spend_people;
     private TextView tv_coll;
     private ImageView iv_coll;
     private HintInfoDialog dialog;
@@ -61,6 +61,10 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     private ObjectAnimator animTop;
     private FrameLayout school_top_fl;
     private boolean isOnce;
+
+    public SchoolDetailList getDetailList() {
+        return detailList;
+    }
 
     public ObjectAnimator getAnimTop() {
         return animTop;
@@ -97,33 +101,33 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     @Override
     protected void setNeedLoading() {
         Intent intent = getIntent();
-        schooluuid =  intent.getStringExtra("schooluuid");
+        schooluuid = intent.getStringExtra("schooluuid");
         isNeedLoading = true;
     }
 
-    private Fragment classInfo,teachers,introduce;
+    private Fragment[] fragments = new Fragment[3];
 
-    private Fragment [] fragments = new Fragment[]{
-         classInfo,teachers,introduce
-    };
     @Override
     protected void onCreate() {
 
         titleCenterTextView.setText("学校详情");
         radioGroup = (RadioGroup) findViewById(R.id.special_radio_group);
-        viewPager = (ViewPager)findViewById(R.id.shcool_detail_viewPager);
+        viewPager = (ViewPager) findViewById(R.id.shcool_detail_viewPager);
         setViews();
-
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
 
-                if(fragments[position]==null){
-                    switch (position){
-                        case 0: fragments[position] =  new ClassFragment(); break;
-                        case 1: fragments[position] =  new TeachersSpecialFragment(); break;
-                        case 2: fragments[position] =  new SimpleIntroduceFragment(); break;
-                    }
+                if (fragments[position] != null) {
+                    return fragments[position];
+                }
+                if (position == 0) {
+                    fragments[position] = new ClassFragment();
+                } else if (position == 1) {
+                    fragments[position] = new TeachersSpecialFragment();
+                } else if (position == 2) {
+                    createAnim();
+                    fragments[position] = new SchoolFragment();
                 }
                 return fragments[position];
             }
@@ -133,6 +137,8 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                 return 3;
             }
         });
+
+
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -166,7 +172,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
     private void clickDown() {
-        if(isLocationTop){
+        if (isLocationTop) {
             isLocationTop = false;
             animTop.reverse();
         }
@@ -175,7 +181,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        if(!isOnce){
+        if (!isOnce) {
 
         }
     }
@@ -194,9 +200,9 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         UserRequest.getTrainSchoolDetail(this, schooluuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-               detailList = (SchoolDetailList) domain;
-                if(detailList != null){
-                   schoolDetail =  detailList.getData();
+                detailList = (SchoolDetailList) domain;
+                if (detailList != null) {
+                    schoolDetail = detailList.getData();
                 }
                 loadSuc();
             }
@@ -214,8 +220,7 @@ public class SchoolDetailInfoActivity extends BaseActivity{
     }
 
     private void setViews() {
-        school_top_fl = (FrameLayout)findViewById(R.id.school_top_fl);
-
+        school_top_fl = (FrameLayout) findViewById(R.id.school_top_fl);
 
         iv_head = (ImageView) findViewById(R.id.item_special_course_list_view_image_view);
         rating_bar = (RatingBarView) findViewById(R.id.item_special_course_list_view__rating_bar);
@@ -224,22 +229,22 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         distance = (TextView) findViewById(R.id.item_special_course_list_view_tv_distance);
         edcucation = (TextView) findViewById(R.id.item_special_course_list_view_tv_edcucation);
         spend_people = (TextView) findViewById(R.id.item_special_course_list_view_tv_study_people);
-        tv_coll = (TextView)findViewById(R.id.textview_1_1);
-        iv_coll = (ImageView)findViewById(R.id.imageView_1_1);
+        tv_coll = (TextView) findViewById(R.id.textview_1_1);
+        iv_coll = (ImageView) findViewById(R.id.imageView_1_1);
 
         distance.setVisibility(View.GONE);
         ImageLoaderUtil.displayMyImage(schoolDetail.getImg(), iv_head);
         rating_bar.setFloatStar(schoolDetail.getCt_stars(), true);
         adress.setText("地点:" + schoolDetail.getAddress());
-        class_name.setText("" +  schoolDetail.getBrand_name());
-        edcucation.setText("" + Utils.isNull(schoolDetail.getSummary()) );
-        String text = "<font color='#ff4966'>"+schoolDetail.getCt_study_students()+"</font>"+"人感兴趣";
+        class_name.setText("" + schoolDetail.getBrand_name());
+        edcucation.setText("" + Utils.isNull(schoolDetail.getSummary()));
+        String text = "<font color='#ff4966'>" + schoolDetail.getCt_study_students() + "</font>" + "人感兴趣";
         spend_people.setText(Html.fromHtml(text));
         //TODO
-        if(!detailList.isFavor()){
+        if (!detailList.isFavor()) {
             tv_coll.setText("已收藏");
             iv_coll.setImageResource(R.drawable.shoucangnewred);
-        }else{
+        } else {
             tv_coll.setText("收藏");
             iv_coll.setImageResource(R.drawable.shoucangnewwhtire);
         }
@@ -250,30 +255,30 @@ public class SchoolDetailInfoActivity extends BaseActivity{
                 (RelativeLayout) findViewById(R.id.train_course_tab_interaction),
                 (RelativeLayout) findViewById(R.id.train_course_tab_ask),
         };
-        for(RelativeLayout rl : relatives){
+        for (RelativeLayout rl : relatives) {
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switch (v.getId()){
+                    switch (v.getId()) {
                         case R.id.train_course_tab_shoucang:
-                            if(tv_coll.getText().toString().equals("收藏")){
+                            if (tv_coll.getText().toString().equals("收藏")) {
                                 store();
-                            }else{
+                            } else {
                                 cancelStore();
                             }
                             break;
                         case R.id.train_course_tab_share:
                             String content = schoolDetail.getBrand_name();
-                            ShareUtils.showShareDialog(SchoolDetailInfoActivity.this, v, schoolDetail.getBrand_name(),content, schoolDetail.getImg(),detailList.getShare_url(), false);
+                            ShareUtils.showShareDialog(SchoolDetailInfoActivity.this, v, schoolDetail.getBrand_name(), content, schoolDetail.getImg(), detailList.getShare_url(), false);
                             break;
                         case R.id.train_course_tab_interaction:
-                            Intent intent = new Intent(SchoolDetailInfoActivity.this,CourseInteractionListActivity.class);
-                            intent.putExtra("newsuuid",schooluuid);
-                            intent.putExtra("type",NormalReplyListActivity.TRAIN_SCHOOL);
+                            Intent intent = new Intent(SchoolDetailInfoActivity.this, CourseInteractionListActivity.class);
+                            intent.putExtra("newsuuid", schooluuid);
+                            intent.putExtra("type", NormalReplyListActivity.TRAIN_SCHOOL);
                             startActivity(intent);
                             break;
                         case R.id.train_course_tab_ask:
-                            CallUtils.showCall(SchoolDetailInfoActivity.this,schoolDetail.getLink_tel().split(GloablUtils.SPLIT_STIRNG_MOBILE_NUMBER),new CallTransfer(schooluuid,81));
+                            CallUtils.showCall(SchoolDetailInfoActivity.this, schoolDetail.getLink_tel().split(GloablUtils.SPLIT_STIRNG_MOBILE_NUMBER), new CallTransfer(schooluuid, 81));
                             break;
                     }
                 }
@@ -281,23 +286,28 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         }
 
 
-
-        radioButtons  = new RadioButton[]{
+        radioButtons = new RadioButton[]{
                 (RadioButton) findViewById(R.id.tab_course),
                 (RadioButton) findViewById(R.id.tab_teacher),
                 (RadioButton) findViewById(R.id.tab_introduce)
         };
 
-        for(RadioButton radioButton : radioButtons){
+        for (RadioButton radioButton : radioButtons) {
             radioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int vp = 100;
-                    switch (v.getId()){
+                    switch (v.getId()) {
 
-                        case R.id.tab_course: vp = 0; break;
-                        case R.id.tab_teacher: vp = 1; break;
-                        case R.id.tab_introduce: vp = 2; break;
+                        case R.id.tab_course:
+                            vp = 0;
+                            break;
+                        case R.id.tab_teacher:
+                            vp = 1;
+                            break;
+                        case R.id.tab_introduce:
+                            vp = 2;
+                            break;
                     }
 
                     viewPager.setCurrentItem(vp);
@@ -380,17 +390,17 @@ public class SchoolDetailInfoActivity extends BaseActivity{
         });
     }
 
-    class Wrapper{
+    class Wrapper {
         private FrameLayout frameLayout;
 
         private int topMagin;
 
         public int getTopMagin() {
-            return ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin;
+            return ((LinearLayout.LayoutParams) frameLayout.getLayoutParams()).topMargin;
         }
 
         public void setTopMagin(int topMagin) {
-            ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin  = topMagin;
+            ((LinearLayout.LayoutParams) frameLayout.getLayoutParams()).topMargin = topMagin;
             frameLayout.requestLayout();
         }
 

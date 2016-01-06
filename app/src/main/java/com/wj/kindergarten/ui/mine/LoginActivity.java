@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.common.CGSharedPreference;
@@ -193,6 +194,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 Login login = (Login) domain;
                 CGApplication.getInstance().setLogin((Login) domain);
                 CGSharedPreference.setStoreJESSIONID(login.getJSESSIONID());
+                StoreDataInSerialize.storeUserInfo(login);
                 UserRequest.getUserInfo(LoginActivity.this, CGSharedPreference.getStoreJESSIONID(),login.getMd5());
 
                 String imgPath = "";

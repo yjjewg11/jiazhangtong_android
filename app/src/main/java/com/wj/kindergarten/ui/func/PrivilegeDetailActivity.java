@@ -94,6 +94,7 @@ public class PrivilegeDetailActivity extends BaseActivity implements View.OnClic
         contentTv = (WebView) findViewById(R.id.article_content);
         contentTv.getSettings().setJavaScriptEnabled(true);
         contentTv.setBackgroundColor(0);
+        setCommonWeb(contentTv);
         webSettings = contentTv.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //支持缩放
