@@ -29,10 +29,6 @@ public class BasicWebFragment extends Fragment {
         return webView;
     }
     public void setUrl(String url){
-        if(TextUtils.isEmpty(url)){
-            ToastUtils.showMessage("输入地址不合法!");
-            return;
-        }
         if(webView == null) {
             throw new NullPointerException("webview can't be null !");
         }

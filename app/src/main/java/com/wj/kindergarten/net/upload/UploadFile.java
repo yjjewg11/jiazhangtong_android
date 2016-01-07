@@ -8,11 +8,10 @@ import android.os.Build;
 import android.os.Environment;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GsonKdUtil;
+import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;

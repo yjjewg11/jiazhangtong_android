@@ -3,8 +3,6 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
 
 
 import com.loopj.android.http.RequestParams;
@@ -19,22 +17,14 @@ import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
-import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
-import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
-import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
-import com.wj.kindergarten.ui.func.TeacherDetailInfoActivity;
-import com.wj.kindergarten.ui.main.MainActivity;
-import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GsonKdUtil;
+import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 import java.util.List;
 

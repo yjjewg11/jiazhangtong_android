@@ -42,6 +42,8 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -201,24 +203,13 @@ public class CGApplication extends Application {
         public void onReceiveLocation(BDLocation bdLocation) {
             latitude = (bdLocation.getLatitude());
             longitude = (bdLocation.getLongitude());
+            Log.i("TAG", "打印城市： " + bdLocation.getCity());
             Log.i("TAG", "打印坐标 x : " + latitude + "   y : " + longitude);
-            Geocoder ge = new Geocoder(getInstance());
-            String city = null;
-            try {
-                listAdress = ge.getFromLocation(latitude, longitude, 1);
-                if (listAdress != null && listAdress.size() > 0) {
-                    for (int i = 0; i < listAdress.size(); i++) {
-                        Address ad = listAdress.get(i);
-                        latLongString += "n";
-                        latLongString += ad.getCountryName() + ";" + ad.getLocality();
-                        if(!TextUtils.isEmpty(ad.getLocality())){
-                            city = (ad.getLocality()).substring(0, 2);
-                        }
-
-                    }
-
+            String city = bdLocation.getCity();
+            try{
+                if(!TextUtils.isEmpty(city) && city.contains("市")){
+                   city =  city.replace("市","");
                 }
-
                 final String type = "android";
                 final String mobileVersion = android.os.Build.VERSION.RELEASE;
                 PackageManager manager = getInstance().getPackageManager();
@@ -235,8 +226,6 @@ public class CGApplication extends Application {
                 }
                 mLocationClient.stop();
             } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
