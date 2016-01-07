@@ -22,9 +22,14 @@ import com.wj.kindergarten.wrapper.MoveWeb;
 public class ScrollWebFragment extends BasicWebFragment {
     private MoveWeb moveWeb;
     private DoOwnThing doOwnThing;
-    private boolean isFirst;
+    private String httpUrl;
 
+    public ScrollWebFragment(String httpUrl) {
+        this.httpUrl = httpUrl;
+    }
 
+    public ScrollWebFragment() {
+    }
 
     public void setDoOwnThing(DoOwnThing doOwnThing) {
         this.doOwnThing = doOwnThing;
@@ -40,6 +45,7 @@ public class ScrollWebFragment extends BasicWebFragment {
         moveWeb = new MoveWeb(webView);
         moveWeb.setDoOwnThing(doOwnThing);
         webView.setOnTouchListener(moveWeb);
+        setUrl(httpUrl);
 
         return view;
     }

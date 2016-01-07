@@ -30,7 +30,6 @@ import com.wj.kindergarten.ui.more.CallUtils;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.specialcourse.ClassFragment;
 import com.wj.kindergarten.ui.specialcourse.TeachersSpecialFragment;
-import com.wj.kindergarten.ui.webview.SchoolFragment;
 import com.wj.kindergarten.ui.webview.ScrollWebFragment;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
@@ -127,7 +126,18 @@ public class SchoolDetailInfoActivity extends BaseActivity {
                     fragments[position] = new TeachersSpecialFragment();
                 } else if (position == 2) {
                     createAnim();
-                    fragments[position] = new SchoolFragment();
+                    fragments[position] = new ScrollWebFragment(detailList.getObj_url());
+                    ( (ScrollWebFragment)fragments[position]).setDoOwnThing(new DoOwnThing() {
+                        @Override
+                        public void pullFromTop() {
+                            animTop.reverse();
+                        }
+
+                        @Override
+                        public void pullFromEnd() {
+                            animTop.start();
+                        }
+                    });
                 }
                 return fragments[position];
             }

@@ -22,7 +22,6 @@ import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
-import com.wj.kindergarten.bean.FoundHotSelection;
 import com.wj.kindergarten.bean.FoundHotSelectionFather;
 import com.wj.kindergarten.bean.FoundTypeCount;
 import com.wj.kindergarten.bean.GetAssessStateList;
@@ -54,15 +53,13 @@ import com.wj.kindergarten.bean.TeacherInfo;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainCourse;
 import com.wj.kindergarten.bean.TrainSchoolInfoListFather;
-import com.wj.kindergarten.bean.TrainTeacherInfo;
 
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GsonKdUtil;
-import com.wj.kindergarten.utils.ToastUtils;
+import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;

@@ -1,4 +1,4 @@
-package com.wj.kindergarten.utils;
+package com.wj.kindergarten.bean;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

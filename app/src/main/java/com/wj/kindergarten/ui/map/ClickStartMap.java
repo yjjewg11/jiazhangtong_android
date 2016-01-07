@@ -21,6 +21,6 @@ public final class ClickStartMap implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(context, MapActivity.class);
         intent.putExtra("map_transport_object", mapTransportObject);
-//        context.startActivity(intent);
+        context.startActivity(intent);
     }
 }
