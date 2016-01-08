@@ -28,6 +28,7 @@ import com.wj.kindergarten.ui.mine.ChildActivity;
 import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
+import com.wj.kindergarten.utils.Constant.MessageConstant;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -100,6 +101,7 @@ public class MineFragment extends Fragment {
         llSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.registerUmengClickEvent(MessageConstant.SETTING);
                 getActivity().startActivity(new Intent(getActivity(), SettingActivity.class));
             }
         });
@@ -107,6 +109,7 @@ public class MineFragment extends Fragment {
         mine_collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Utils.registerUmengClickEvent(MessageConstant.STORE_CLICK);
                 getActivity().startActivity(new Intent(getActivity(), StoreActivity.class));
             }
         });
@@ -114,6 +117,7 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //点击启动我的课程页面
+                Utils.registerUmengClickEvent(MessageConstant.MINE_COURSE);
                 Intent intent = new Intent(getActivity(), MineSpecialCourseActivity.class);
                 startActivity(intent);
             }

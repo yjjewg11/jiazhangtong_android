@@ -46,6 +46,7 @@ import com.adsmogo.natives.listener.AdsMogoNativeListener;
 import com.adsmogo.util.AdsMogoType;
 
 import com.google.gson.Gson;
+import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
@@ -85,6 +86,11 @@ public class Utils {
     public static final int ANIMATION_DURATION = 200;//动画执行时间
     public static final SimpleDateFormat timestampFormatter = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss.sss");
+
+
+    public static void registerUmengClickEvent(String s1) {
+        MobclickAgent.onEvent(CGApplication.getInstance(), s1);
+    }
 
 
 
