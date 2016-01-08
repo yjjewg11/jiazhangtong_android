@@ -299,7 +299,7 @@ public class MainFragment extends Fragment {
     private void mainItemsClick(MainItem mainItem,int position) {
         //  Utils.showToast(mContext, mainItem.getText());
 //        map.put(mainItem.getText(),String.valueOf(map.get(mainItem.getText()) == null ? 1 : map.get(mainItem.getText()) + 1));
-        MobclickAgent.onEvent(mContext, clickEvent[position]);
+        Utils.registerUmengClickEvent(clickEvent[position]);
         switch (mainItem.getTag()) {
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));
@@ -347,6 +347,8 @@ public class MainFragment extends Fragment {
                 break;
         }
     }
+
+
 
     @Override
     public void onAttach(Activity activity) {

@@ -36,6 +36,7 @@ import com.wj.kindergarten.ui.func.ArticleListActivity;
 import com.wj.kindergarten.ui.func.adapter.FoundGridAdapter;
 import com.wj.kindergarten.ui.func.adapter.NstGridPicAdapter;
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
+import com.wj.kindergarten.utils.Constant.MessageConstant;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -75,6 +76,7 @@ public class FoundSunFragment extends Fragment {
                                 @Override
                                 public void openUrl() {
                                     if (!TextUtils.isEmpty(selectionSun.getWebview_url())) {
+                                        Utils.registerUmengClickEvent(MessageConstant.HOT_CHOOSE);
                                         FoundFragment.instance.showWeb().setWebUrl(selectionSun.getWebview_url());
                                     }
                                 }
@@ -132,6 +134,7 @@ public class FoundSunFragment extends Fragment {
                                 FoundFragment.instance.showWeb().setWebUrl(t.getUrl());
                                 //发送点击次数
                                 UserRequest.clickAndRefreshTopic(getActivity());
+                                Utils.registerUmengClickEvent(MessageConstant.RECOMMEND);
                             }
 
                         }
@@ -165,6 +168,7 @@ public class FoundSunFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        Utils.registerUmengClickEvent(MessageConstant.ARTICLE_CLICK);
                         startActivity(new Intent(getActivity(), ArticleListActivity.class));
                         break;
                     case 1:
@@ -176,6 +180,7 @@ public class FoundSunFragment extends Fragment {
                         }
                         break;
                     case 2:
+                        Utils.registerUmengClickEvent(MessageConstant.PRIVILEGE);
                         startActivity(new Intent(getActivity(), PrivilegeActiveActivity.class));
                         break;
                 }

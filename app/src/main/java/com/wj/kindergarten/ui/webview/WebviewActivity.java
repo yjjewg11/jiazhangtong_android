@@ -48,6 +48,7 @@ import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.CustomScrollView;
 import com.wj.kindergarten.ui.other.FullGridView;
 import com.wj.kindergarten.ui.other.RatingBarView;
+import com.wj.kindergarten.utils.Constant.MessageConstant;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -81,6 +82,15 @@ public class WebviewActivity extends BaseActivity implements Serializable{
     private SpecialCourseGrid type_adapter;
     private HintInfoDialog dialog;
     private RelativeLayout tv_hot_course;
+    private String [] click_events = new String[]{
+            MessageConstant.ENGLISH,
+            MessageConstant.PAINT,
+            MessageConstant.MUSIC,
+            MessageConstant.SPORTS,
+            MessageConstant.LANGUAGE_ALL,
+            MessageConstant.DANCE,
+            MessageConstant.INTELLIGENCE,
+    };
 
     public List<SpecialCourseType> getSctList(){
         return sctlist;
@@ -283,6 +293,7 @@ protected void setNeedLoading() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //点击启动另一个页面
+                Utils.registerUmengClickEvent(click_events[position]);
                 startActivity(position);
             }
         });

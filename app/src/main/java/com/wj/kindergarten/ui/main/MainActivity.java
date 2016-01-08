@@ -47,6 +47,7 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.Constant.MessageConstant;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -367,7 +368,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabChanged(String tabId) {
                 nowTab = tabId;
+                if(tabId.equals(mTabIdArray[3])){
+                    Utils.registerUmengClickEvent(MessageConstant.SPECIAL_COURSE);
+                }
                 if (tabId.equals(mTabIdArray[2])) {
+                    Utils.registerUmengClickEvent(MessageConstant.MINE_MSG);
                     isClickMessage = true;
                     CGSharedPreference.setMessageState(true);
                 } else {
@@ -385,6 +390,7 @@ public class MainActivity extends BaseActivity {
 
                 //如果是发现，判断是不是webFragment
                 if (mTabIdArray[1].equals(nowTab)) {
+                    Utils.registerUmengClickEvent(MessageConstant.FOUND);
                     FoundFragment foundFragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
 
                     if (foundFragment != null) {
