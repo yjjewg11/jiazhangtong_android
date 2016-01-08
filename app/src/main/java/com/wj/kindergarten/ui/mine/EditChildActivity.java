@@ -21,9 +21,6 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
@@ -85,11 +82,6 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
     private String nowName;
     private String oldTel;
     private String newTel;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

@@ -61,7 +61,6 @@ dependencies {
     compile files('libs/Baidu_MobAds_SDK_Agg_v3.0.jar')
     compile files('libs/android-async-http-1.4.6.jar')
     compile files('libs/gdt_mob_release_v4.4.479.jar')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile project(':QrCodeScan')
     compile 'com.google.code.gson:gson:2.4'
     compile files('libs/locSDK_6.13.jar')
@@ -71,4 +70,6 @@ dependencies {
     compile files('libs/baidumapapi_util_v3_6_1.jar')
     compile files('libs/baidumapapi_map_v3_6_1.jar')
     compile files('libs/baidumapapi_base_v3_6_1.jar')
+
+//    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
