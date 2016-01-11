@@ -101,7 +101,8 @@ public class AboutSchoolAdatper extends BaseAdapter {
             }
 
             viewHolder.item_special_course_list_view_tv_distance.setOnClickListener(
-                    new ClickStartMap(context, MapTransportFactory.createMapTransport(schoolInfo.getMap_point(),schoolInfo.getImg())));
+                    new ClickStartMap(context, MapTransportFactory.createMapTransport(schoolInfo.getMap_point(),schoolInfo.getImg()
+                    ,schoolInfo.getBrand_name(),schoolInfo.getAddress())));
 
             try{
                 viewHolder.tv_study_people.setText(Html.fromHtml(text));

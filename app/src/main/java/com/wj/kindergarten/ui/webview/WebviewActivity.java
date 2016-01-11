@@ -44,6 +44,7 @@ import com.wj.kindergarten.ui.func.adapter.SpecialCourseGrid;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportFactory;
 import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.CustomScrollView;
 import com.wj.kindergarten.ui.other.FullGridView;
@@ -118,6 +119,8 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                         ratingBar.setFloatStar(object.getCt_stars(), true);
                         ImageLoaderUtil.displayMyImage(object.getLogo(), imageView);
 
+                        item_special_course_list_view_tv_adresss.setOnClickListener(new ClickStartMap(WebviewActivity.this, MapTransportFactory.createMapTransport(object.getMap_point(), object.getLogo()
+                                , object.getGroup_name(), object.getAddress())));
                         item_class_name.setText("" + object.getTitle());
                         item_special_course_list_view_tv_adresss.setText("" + object.getAddress());
                         //TODO

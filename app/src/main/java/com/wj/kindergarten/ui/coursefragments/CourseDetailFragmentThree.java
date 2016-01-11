@@ -40,6 +40,8 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.CourseDetailIntroduceFragment;
 import com.wj.kindergarten.ui.func.MineCourseDetailActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
+import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportFactory;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.other.TopWebView;
 import com.wj.kindergarten.ui.webview.LoadHtmlActivity;
@@ -134,6 +136,7 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         rl_price = (RelativeLayout) view.findViewById(R.id.rl_price);
         rl_free_price = (RelativeLayout) view.findViewById(R.id.rl_free_price);
         activity.setCommonWeb(course_detail_info);
+
         gd = new GestureDetector(getActivity(), this);
 //        activity.setWebView(course_detail_info);
         //TODO
@@ -176,8 +179,12 @@ public class CourseDetailFragmentThree extends Fragment implements View.OnTouchL
         fit_age.setText(ocs.getAge_min_max());
         course_detail_train_class_name.setText("" + osc.getTitle());
         rating_bar.setFloatStar(osc.getCt_stars(), true);
-        teach_place.setText("" +osc.getAddress());
+        teach_place.setText("" + osc.getAddress());
         detail_course.setText("" + osc.getSubtype());
+//        teach_place.setOnClickListener(new ClickStartMap(getActivity(), MapTransportFactory.createMapTransport(
+//                ocs.get(), schoolInfo.getImg()
+//                , schoolInfo.getBrand_name(), schoolInfo.getAddress())
+//        )));
         try{
             course_detail_info.loadUrl(ocs.getObj_url());
         }catch (Exception e){

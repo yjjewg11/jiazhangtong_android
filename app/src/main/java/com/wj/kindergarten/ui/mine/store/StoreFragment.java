@@ -30,6 +30,7 @@ import com.wj.kindergarten.ui.func.PrivilegeDetailActivity;
 import com.wj.kindergarten.ui.func.SchoolDetailInfoActivity;
 import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseInfoActivity;
+import com.wj.kindergarten.ui.more.HtmlActivity;
 import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.ToastUtils;
