@@ -6,8 +6,8 @@ android {
     defaultConfig {
         applicationId 'com.wenjie.jiazhangtong'
         minSdkVersion 14
-        versionCode 24
-        versionName "0.3.1.0"
+        versionCode 25
+        versionName "0.3.3"
         multiDexEnabled true
     }
     buildTypes {

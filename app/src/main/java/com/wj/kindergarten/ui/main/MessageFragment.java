@@ -30,9 +30,11 @@ import com.wj.kindergarten.ui.func.ArticleActivity;
 import com.wj.kindergarten.ui.func.CourseListActivity;
 import com.wj.kindergarten.ui.func.FoodListActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
+import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.func.NoticeActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
 import com.wj.kindergarten.ui.message.MessageAdapter;
+import com.wj.kindergarten.ui.more.HtmlActivity;
 import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 import com.wj.kindergarten.utils.CGLog;
@@ -137,12 +139,9 @@ public class MessageFragment extends Fragment {
                             getActivity().startActivity(intent);
                         } else if (dataModel.getType() == 10) {
                             CGLog.d("URL:" + dataModel.getUrl());
-//                            if (!Utils.stringIsNull(dataModel.getUrl())) {
-//                                Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
-//                                intent1.putExtra("title", dataModel.getTitle());
-//                                intent1.putExtra("url", dataModel.getUrl());
-//                                getActivity().startActivity(intent1);
-//                            }
+                                Intent intent = new Intent(getActivity(), HtmlActivity.class);
+                                intent.putExtra("url",dataModel.getUrl());
+                                startActivity(intent);
                         } else if (dataModel.getType() == 13) {
                             startActivity(new Intent(getActivity(), SignListActivity.class));
                         } else if (dataModel.getType() == 99) {

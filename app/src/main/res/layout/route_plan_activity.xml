@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal"/>
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="我的位置"
+        android:id="@+id/tv_myLocation"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="目的地"
+        android:id="@+id/tv_perpuse"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:background="@color/color_e0e0e0"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <RadioGroup
+            android:checkedButton="@+id/check_car"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:gravity="center"
+                android:button="@null"
+                android:layout_weight="1"
+                android:id="@+id/check_car"
+                android:drawableBottom="@drawable/map_select_car"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <View
+                android:background="@color/color_cccccc"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"/>
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/check_bus"
+                android:background="@drawable/map_select_bug"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <View
+                android:background="@color/color_cccccc"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"/>
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/check_walk"
+                android:background="@drawable/map_select_man"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+</LinearLayout>
