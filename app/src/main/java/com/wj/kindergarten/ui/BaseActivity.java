@@ -187,6 +187,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 //            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
 //            config = tintManager.getConfig();
 //        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.parseColor("#ff4966"));
+        }
         mContext = this;
         //新开界面将webview置空
         webView = null;
