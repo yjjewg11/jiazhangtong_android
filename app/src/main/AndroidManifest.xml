@@ -615,9 +615,11 @@
         </receiver>
 
 
+        <!--正式的百度密匙  2XkKIEgts2VVXv1jrpAsxmpI -->
+        <!--  调试版本的密匙   OsYjK06n1U8Rb2qZvVF7CwiX -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="2XkKIEgts2VVXv1jrpAsxmpI" />
+            android:value="OsYjK06n1U8Rb2qZvVF7CwiX" />
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <!--<meta-data-->

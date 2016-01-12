@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.annotations.Expose;
+//import com.google.gson.annotations.Expose;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.TrainSchoolInfo;
 import com.wj.kindergarten.ui.map.ClickStartMap;
