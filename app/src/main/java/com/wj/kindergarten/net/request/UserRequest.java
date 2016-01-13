@@ -3,6 +3,7 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 
 
 import com.loopj.android.http.RequestParams;
@@ -19,6 +20,7 @@ import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.PhotoFamilyActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -114,6 +116,8 @@ public final class UserRequest {
     private static final String FOUND_TYPE_COUNT = "rest/userinfo/getNewMsgNumber.json";
     private static final String FOUND_HOT_SELECTION = "rest/snsTopic/hotByPage.json";
     private static final String GET_INTERACTION_LINK = "rest/share/getHtmlTitle.json";
+    private static final String GET_PF_ALBUM_LIST = "rest/fpFamilyPhotoCollection/queryMy.json";
+    private static final String LOOK_FOR_ALL_PF = "rest/fPPhotoItem/queryMy.json";
 
     private UserRequest() {
     }
@@ -617,7 +621,7 @@ public final class UserRequest {
 
     public static void getMoreDiscuss(Context context, String ext_uuid, int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
-        params.put("ext_uuid",ext_uuid);
+        params.put("ext_uuid", ext_uuid);
         params.put("pageNo",pageNo);
         SendRequest.getInstance().get(context, RequestType.MORE_DISCUSS_FROM_UUID, params, RequestHttpUtil.BASE_URL + MORE_DISCUSS_FROM_UUID, resultI);
     }
@@ -751,7 +755,7 @@ public final class UserRequest {
     public static void getUserInfo(Context context, String storeJESSIONID, String jessionid_md5) {
         RequestParams params = new RequestParams();
         params.put("JSESSIONID",storeJESSIONID);
-        params.put("md5",jessionid_md5);
+        params.put("md5", jessionid_md5);
         SendRequest.getInstance().get(context, RequestType.GET_USER_INFO, params, RequestHttpUtil.BASE_URL + GET_USER_INFO, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
@@ -824,5 +828,17 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("url",s);
         SendRequest.getInstance().get(context,RequestType.GET_INTERACTION_LINK,params,RequestHttpUtil.BASE_URL+GET_INTERACTION_LINK,resultI);
+    }
+
+    public static void getPfFusionPic(Context context, int pageNo,String family_uuid,RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        params.put("family_uuid",family_uuid);
+        SendRequest.getInstance().get(context,RequestType.LOOK_FOR_ALL_PF,params,RequestHttpUtil.BASE_URL+LOOK_FOR_ALL_PF,resultI);
+    }
+
+    public static void getPfAlbumList(Context context, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context,RequestType.GET_PF_ALBUM_LIST,params,RequestHttpUtil.BASE_URL+GET_PF_ALBUM_LIST,resultI);
     }
 }

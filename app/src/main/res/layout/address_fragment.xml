@@ -5,52 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="途径 哪里"
-        android:id="@+id/tv_by_way_where"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="20dp" />
-
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:padding="@dimen/margin_5"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_by_way_where"
-        android:layout_alignLeft="@+id/tv_by_way_where"
-        android:layout_marginTop="10dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="几分钟"
-            android:id="@+id/map_tv_time" />
-
-        <TextView
-            android:layout_marginRight="@dimen/margin_15"
-            android:layout_marginLeft="@dimen/margin_15"
-            android:background="@color/color_cccccc"
-            android:layout_width="1dp"
-            android:layout_height="15dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/textView32" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="1111米"
-            android:id="@+id/tv_map_distance" />
-    </LinearLayout>
+    <include layout="@layout/layout_pulltorefresh"/>
 
 </RelativeLayout>

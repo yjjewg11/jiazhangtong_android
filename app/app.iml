@@ -127,5 +127,6 @@
     <orderEntry type="library" exported="" name="Adwo_Android_SDK6.1" level="project" />
     <orderEntry type="module" module-name="QrCodeScan" exported="" />
     <orderEntry type="module" module-name="pulltorefreshlib" exported="" />
+    <orderEntry type="module" module-name="pinterest_library" exported="" />
   </component>
 </module>

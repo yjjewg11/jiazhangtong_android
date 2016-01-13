@@ -28,6 +28,7 @@ public interface GloablUtils {
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
 
     int INTERRACTION_REFRESH_LIST = 136;
+    int GET_PF_ALBUM_LIST_SUCCESS = 3000;
 
 
 }

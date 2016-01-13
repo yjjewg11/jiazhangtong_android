@@ -3,6 +3,7 @@ package com.wj.kindergarten.ui.map;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -68,8 +69,6 @@ public class RoutePlanActivity extends BaseActivity {
         enNode = PlanNode.withLocation(new LatLng(en.getLat(), en.getLon()));
 //        mSearch.drivingSearch((new DrivingRoutePlanOption())
 //                .from(stNode).to(enNode));
-        mSearch.walkingSearch((new WalkingRoutePlanOption())
-                .from(stNode).to(enNode));
 //        mSearch.transitSearch((new TransitRoutePlanOption())
 //                .from(stNode).to(enNode));
     }
@@ -93,8 +92,9 @@ public class RoutePlanActivity extends BaseActivity {
 //                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
                     CGLog.v("打印推荐路线： " + result.getSuggestAddrInfo());
                     CGLog.v("打印全部路线 : " + result.getRouteLines());
-                    CGLog.v("打印信息 : "+result.getTaxiInfo());
+                    CGLog.v("打印信息 : " + result.getTaxiInfo());
                     result.getTaxiInfo();
+                    walk.setRouteList(result.getRouteLines());
                 }
             }
 
@@ -139,6 +139,14 @@ public class RoutePlanActivity extends BaseActivity {
                         if (walk == null) {
                             walk = new AddressFragment();
                         }
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mSearch.walkingSearch((new WalkingRoutePlanOption())
+                                        .from(stNode).to(enNode));
+                            }
+                        },500);
                         return walk;
                 }
                 return null;
