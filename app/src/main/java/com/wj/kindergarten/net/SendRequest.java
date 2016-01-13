@@ -13,6 +13,7 @@ import com.wj.kindergarten.bean.AddChild;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;
 import com.wj.kindergarten.bean.AddressBookMessage;
+import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllTeacherList;
 import com.wj.kindergarten.bean.AppraiseTeacherList;
 import com.wj.kindergarten.bean.ArticleDetail;
@@ -37,6 +38,7 @@ import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
+import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PrivilegeActiveList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
@@ -457,6 +459,12 @@ public class SendRequest {
                 break;
             case RequestType.GET_INTERACTION_LINK:
                 resultI.result(getDomain(domain, HtmlTitle.class));
+                break;
+            case RequestType.GET_PF_ALBUM_LIST :
+                resultI.result(getDomain(domain, PfAlbumList.class));
+                break;
+            case RequestType.LOOK_FOR_ALL_PF :
+                resultI.result(getDomain(domain, AllPfAlbum.class));
                 break;
             default:
                 break;

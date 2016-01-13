@@ -123,6 +123,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PhotoFamilyActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name="com.wj.kindergarten.ui.map.RoutePlanActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

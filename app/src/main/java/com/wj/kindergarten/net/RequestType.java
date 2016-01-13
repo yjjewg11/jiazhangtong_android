@@ -1,5 +1,7 @@
 package com.wj.kindergarten.net;
 
+import android.content.Context;
+
 /**
  * RequestType
  *
@@ -74,4 +76,6 @@ public interface RequestType {
      int FOUND_TYPE_COUNT = 160;
      int FOUND_HOT_SELECTION = 161;
      int GET_INTERACTION_LINK = 162;
+     int GET_PF_ALBUM_LIST = 163;
+     int LOOK_FOR_ALL_PF = 164;
 }
