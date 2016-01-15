@@ -41,7 +41,13 @@ public class PfFusionFragment extends Fragment {
     private List<List<AllPfAlbumSunObject>> lists = new ArrayList<>();
     //将按照日期分类的图片地址单独提取出来
     private boolean isFirst;
+    public void banScroll(){
+        listView.setEnabled(false);
+    }
 
+    public void allowScroll(){
+        listView.setEnabled(true);
+    }
 
     @Nullable
     @Override

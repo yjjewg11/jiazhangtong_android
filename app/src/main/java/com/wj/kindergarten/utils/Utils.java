@@ -19,6 +19,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -60,6 +62,7 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -92,6 +95,40 @@ public class Utils {
         MobclickAgent.onEvent(CGApplication.getInstance(), s1);
     }
 
+
+    public static void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "问界互动家园");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            Utils.showToast(context, "图片保存失败");
+            e.printStackTrace();
+        } catch (IOException e) {
+            Utils.showToast(context, "图片保存失败");
+            e.printStackTrace();
+        }
+
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            Utils.showToast(context, "图片保存失败");
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        CGLog.d(Uri.fromFile(new File(file.getPath())) + "");
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
+//        new SingleMediaScanner(mContext, new File(file.getPath()), null);
+    }
 
 
     /**

@@ -88,9 +88,9 @@ import java.util.ArrayList;
  */
 public abstract class BaseActivity extends ActionBarActivity {
     //标题栏左边点击控件
-    protected LinearLayout titleLeftButton = null;
+    public LinearLayout titleLeftButton = null;
     //标题栏左边图标
-    protected ImageView titleLeftImageView = null;
+    public ImageView titleLeftImageView = null;
     //标题栏中间标题
     protected TextView titleCenterTextView = null;
     //标题栏右边点击控件
@@ -146,6 +146,10 @@ public abstract class BaseActivity extends ActionBarActivity {
                 stopWebview(webView);
             }
         }
+    }
+
+    public void clearLeftIcon(){
+        titleLeftImageView.setImageResource(0);
     }
 
     /**
