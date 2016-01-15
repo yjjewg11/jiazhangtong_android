@@ -268,7 +268,7 @@ public class MainFragment extends Fragment {
         MainItem gardenCourse = new MainItem(R.drawable.kechenbiao, "课程表", Constants.GARDEN_COURSE);
         MainItem gardenFoods = new MainItem(R.drawable.shipu, "每日食谱", Constants.GARDEN_FOODS);
 //        MainItem gardenArticle = new MainItem(R.drawable.main_item_jingpin, "精品文章", Constants.GARDEN_ARTICLE);
-//        MainItem gardenSpecial = new MainItem(R.drawable.main_item_techang, "特长课程", Constants.GARDEN_SPECIAL);
+        MainItem gardenSpecial = new MainItem(R.drawable.techangkechen_school, "特长课程", Constants.GARDEN_SPECIAL);
 //        MainItem privilegeActive = new MainItem(R.drawable.youhuihuodong90,"优惠活动",Constants.PRIVIAL_ACTIVE);
 
         MainItem gardenTeacher = new MainItem(R.drawable.pingjialaoshi, "评价老师", Constants.GARDEN_TEACHER);
@@ -276,18 +276,18 @@ public class MainFragment extends Fragment {
         MainItem gradenList = new MainItem(R.drawable.tongxunlu,"通讯录",Constants.GARDEN_ADDRESS_LIST);
 
         mainItems.add(gardenInteraction);//互动
+        mainItems.add(gardenDes);//宝宝入学
+        mainItems.add(gardenSpecial);
         mainItems.add(gardenCourse);//课程表
         mainItems.add(gardenFoods);//食谱
         mainItems.add(gardenNotice);//校园公告
         mainItems.add(gardenSign);//签到记录
         mainItems.add(gardenTeacher);//评价老师
-        mainItems.add(gardenDes);//宝宝入学
         mainItems.add(gradenList);//通讯录
         mainItems.add(gardenMore);//更多
 
 
 //        mainItems.add(gardenArticle);
-//        mainItems.add(gardenSpecial);
 //        mainItems.add(privilegeActive);
 
 

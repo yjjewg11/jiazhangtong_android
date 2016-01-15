@@ -1,14 +1,9 @@
 package com.wj.kindergarten.ui.main;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +22,8 @@ import com.wj.kindergarten.ui.func.MineSpecialCourseActivity;
 import com.wj.kindergarten.ui.mine.ChildActivity;
 import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.PhotoFamilyActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
 import com.wj.kindergarten.utils.Constant.MessageConstant;
-import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
@@ -56,7 +49,6 @@ public class MineFragment extends Fragment {
     private HorizontalScrollView mine_head_horizontal_scroll;
     public static MineFragment instance;
     private LinearLayout hs_container_mine;
-    private LinearLayout mine_album;
 
 
     @Nullable
@@ -98,14 +90,6 @@ public class MineFragment extends Fragment {
         mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
         mine_course = (LinearLayout) rootView.findViewById(R.id.ll_special_course);
         recruit_school = (LinearLayout) rootView.findViewById(R.id.ll_mine_school);
-        mine_album = (LinearLayout) rootView.findViewById(R.id.ll_album);
-
-        mine_album.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),PhotoFamilyActivity.class));
-            }
-        });
 
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
         llSetting.setOnClickListener(new View.OnClickListener() {

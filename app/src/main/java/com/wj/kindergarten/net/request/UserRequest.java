@@ -3,7 +3,6 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 
 
 import com.loopj.android.http.RequestParams;
@@ -20,7 +19,6 @@ import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.PhotoFamilyActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.TimeUtil;

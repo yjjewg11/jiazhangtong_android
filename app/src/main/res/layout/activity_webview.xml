@@ -6,6 +6,12 @@
     xmlns:adsmogo="http://www.adsmogo.com"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/title_normal"/>
+    </FrameLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshScrollView
         android:id="@+id/scroll_view"

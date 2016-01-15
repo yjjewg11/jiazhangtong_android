@@ -137,43 +137,6 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_album"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/setting_item_click_selector"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/hint_gray"
-                android:visibility="gone" />
-
-
-
-            <TextView
-                android:background="@drawable/setting_item_click_selector"
-                android:id="@+id/mine_album"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/condition_height"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginRight="@dimen/normal_padding"
-                android:drawableLeft="@drawable/shoucang_mine"
-                android:drawablePadding="@dimen/small_padding"
-                android:drawableRight="@drawable/arrow_right"
-                android:gravity="center_vertical"
-                android:text="家庭相册"
-                android:textColor="@color/black"
-                android:textSize="@dimen/normal_text" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/hint_gray"
-                android:visibility="gone" />
-        </LinearLayout>
 
 
 

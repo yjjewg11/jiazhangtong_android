@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+
+        <TextView
+            android:padding="@dimen/margin_10"
+            android:drawablePadding="@dimen/margin_15"
+            android:drawableLeft="@drawable/redline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="2015 - 11 1000 "
+            android:id="@+id/pf_tv_date_time"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:padding="@dimen/margin_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="共10000张"
+            android:id="@+id/pf_pic_count"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+        <com.wj.kindergarten.compounets.NestedGridView
+            android:layout_width="match_parent"
+            android:numColumns="3"
+            android:columnWidth="@dimen/margin_10"
+            android:id="@+id/pf_fusion_grid"
+            android:layout_below="@+id/pf_pic_count"
+            android:layout_height="wrap_content">
+
+
+        </com.wj.kindergarten.compounets.NestedGridView>
+    </RelativeLayout>
+
+
+</LinearLayout>

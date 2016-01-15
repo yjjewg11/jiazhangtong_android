@@ -123,7 +123,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PhotoFamilyActivity"
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
