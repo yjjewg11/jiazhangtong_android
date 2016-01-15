@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/rectangle"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <FrameLayout
+            android:layout_marginTop="15dp"
+            android:id="@+id/pic_back_fl"
+            android:background="@drawable/album_pf_background"
+            android:layout_centerHorizontal="true"
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:background="@drawable/album_pf_background"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/imageView2" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:layout_below="@+id/pic_back_fl"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="我的家庭相册"
+            android:id="@+id/textView29"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:textColor="@color/white"
+            style="@style/back_pf_text_style"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="234"
+            android:id="@+id/textView31"
+            android:layout_below="@+id/textView29"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/textView29" />
+
+        <TextView
+            style="@style/back_pf_text_style"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="相册照片"
+            android:id="@+id/textView33"
+            android:layout_below="@+id/textView31"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView31" />
+
+        <TextView
+            android:textColor="@color/white"
+            style="@style/back_pf_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="4"
+            android:id="@+id/textView34"
+            android:layout_above="@+id/textView33"
+            android:layout_toRightOf="@+id/textView29"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            style="@style/back_pf_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="相册关注人数"
+            android:id="@+id/textView35"
+            android:layout_alignTop="@+id/textView33"
+            android:layout_alignParentRight="true"
+            android:layout_alignLeft="@+id/textView34" />
+    </RelativeLayout>
+
+</LinearLayout>

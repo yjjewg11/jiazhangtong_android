@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.imagescan.AutoDownLoadListener;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
@@ -23,9 +24,12 @@ import java.util.List;
 /**
  * Created by tangt on 2016/1/14.
  */
-public class PfGalleryActivity extends BaseActivity{
+public class PfGalleryActivity extends BaseActivity {
     private List<AllPfAlbumSunObject> list;
     private ViewPager viewPager;
+    private AllPfAlbumSunObject sunObject;
+
+    private TextView[] textViews;
 
     @Override
     protected void setContentLayout() {
@@ -39,18 +43,58 @@ public class PfGalleryActivity extends BaseActivity{
 
     @Override
     protected void titleRightButtonListener() {
-        Intent intent = new Intent(this,PfEditInfoActivity.class);
+        Intent intent = new Intent(this, PfEditInfoActivity.class);
         startActivity(intent);
     }
 
     @Override
     protected void onCreate() {
 
-       Intent intent =   getIntent();
-       list = (ArrayList) intent.getSerializableExtra("list");
-       setTitleRightImage(R.drawable.modification_pf,0);
-       initViews();
+        Intent intent = getIntent();
+        list = (ArrayList) intent.getSerializableExtra("list");
+        setTitleRightImage(R.drawable.modification_pf, 0);
+        initViews();
         changeTitle();
+        initBottomBt();
+    }
+
+    private void initBottomBt() {
+        textViews = new TextView[]{
+                (TextView) findViewById(R.id.pf_bottom_collect),
+                (TextView) findViewById(R.id.pf_bottom_assess),
+                (TextView) findViewById(R.id.pf_bottom_share),
+                (TextView) findViewById(R.id.pf_bottom_download),
+                (TextView) findViewById(R.id.pf_bottom_delete),
+        };
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sunObject == null) return;
+                switch (v.getId()) {
+                    case R.id.pf_bottom_collect:
+
+                        break;
+                    case R.id.pf_bottom_assess:
+
+                        break;
+                    case R.id.pf_bottom_share:
+
+                        break;
+                    case R.id.pf_bottom_download:
+
+                        ImageLoaderUtil.downLoadImageLoader(sunObject.getPath(),new AutoDownLoadListener(PfGalleryActivity.this));
+                        break;
+                    case R.id.pf_bottom_delete:
+
+                        break;
+                }
+            }
+        };
+
+        for (TextView textView : textViews) {
+            textView.setOnClickListener(listener);
+        }
     }
 
     private void changeTitle() {
@@ -62,7 +106,7 @@ public class PfGalleryActivity extends BaseActivity{
 
             @Override
             public void onPageSelected(int position) {
-
+                sunObject = list.get(position);
             }
 
             @Override
@@ -73,37 +117,37 @@ public class PfGalleryActivity extends BaseActivity{
     }
 
     private void initViews() {
-        viewPager = (ViewPager)findViewById(R.id.pf_edit_viewPager);
+        viewPager = (ViewPager) findViewById(R.id.pf_edit_viewPager);
         viewPager.setAdapter(new PagerAdapter() {
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
-                View view = View.inflate(PfGalleryActivity.this,R.layout.pf_gallery_fragment,null);
+                View view = View.inflate(PfGalleryActivity.this, R.layout.pf_gallery_fragment, null);
                 ImageView pf_gallery_image = (ImageView) view.findViewById(R.id.pf_gallery_image);
                 TextView pf_gallery_annotation = (TextView) view.findViewById(R.id.pf_gallery_annotation);
                 TextView pf_gallery_location = (TextView) view.findViewById(R.id.pf_gallery_location);
                 TextView pf_gallery_people = (TextView) view.findViewById(R.id.pf_gallery_people);
                 AllPfAlbumSunObject object = null;
-                if(object != null){
-                    ImageLoaderUtil.displayMyImage(object.getPath(),pf_gallery_image);
+                if (object != null) {
+                    ImageLoaderUtil.displayMyImage(object.getPath(), pf_gallery_image);
                     pf_gallery_annotation.setText("" + Utils.isNull(object.getNote()));
-                    pf_gallery_location.setText(""+ Utils.isNull(object.getAddress()));
-                    pf_gallery_people.setText(""+ Utils.isNull(object.getPhoto_time()));
-                }else{
+                    pf_gallery_location.setText("" + Utils.isNull(object.getAddress()));
+                    pf_gallery_people.setText("" + Utils.isNull(object.getPhoto_time()));
+                } else {
                     pf_gallery_image.setImageResource(R.drawable.load1);
                 }
-                container.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                container.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 return view;
             }
 
             @Override
             public int getCount() {
-                return 30;
+                return list.size();
             }
 
             @Override
             public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView((View)object);
+                container.removeView((View) object);
             }
 
             @Override

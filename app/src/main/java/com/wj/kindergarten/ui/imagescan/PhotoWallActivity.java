@@ -148,7 +148,7 @@ public class PhotoWallActivity extends BaseActivity {
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 String fileName = System.currentTimeMillis() + ".jpg";
-                saveImageToGallery(fileName, PhotoWallActivity.this, loadedImage);
+                Utils.saveImageToGallery(fileName, PhotoWallActivity.this, loadedImage);
                 CGLog.d("P:" + Environment.getExternalStorageDirectory() + "/CGImage");
                 hideProgressDialog();
                 Utils.showToast(mContext, "图片保存成功");
@@ -164,39 +164,7 @@ public class PhotoWallActivity extends BaseActivity {
     }
 
 
-    public void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
-        // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "问界互动家园");
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        File file = new File(appDir, fileName);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            Utils.showToast(context, "图片保存失败");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Utils.showToast(context, "图片保存失败");
-            e.printStackTrace();
-        }
 
-        // 其次把文件插入到系统图库
-        try {
-            MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                    file.getAbsolutePath(), fileName, null);
-        } catch (FileNotFoundException e) {
-            Utils.showToast(context, "图片保存失败");
-            e.printStackTrace();
-        }
-        // 最后通知图库更新
-        CGLog.d(Uri.fromFile(new File(file.getPath())) + "");
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(file.getPath()))));
-//        new SingleMediaScanner(mContext, new File(file.getPath()), null);
-    }
 
     private void refreshPhotoWallTitle() {
         int now = mPager.getCurrentItem();

@@ -363,9 +363,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabChanged(String tabId) {
                 nowTab = tabId;
-//                if(tabId.equals(mTabIdArray[3])){
-//                    Utils.registerUmengClickEvent(MessageConstant.SPECIAL_COURSE);
-//                }
+                if(tabId.equals(mTabIdArray[3])){
+                    titleLeftImageView.setImageResource(R.drawable.xiajiatou);
+                }else{
+                    titleLeftImageView.setImageResource(0);
+                }
                 if (tabId.equals(mTabIdArray[2])) {
                     Utils.registerUmengClickEvent(MessageConstant.MINE_MSG);
                     isClickMessage = true;
@@ -510,6 +512,11 @@ public class MainActivity extends BaseActivity {
             Intent intent = new Intent(mContext, InteractionSentActivity.class);
             mContext.startActivity(intent);
         }
+    }
+
+    @Override
+    protected void titleLeftButtonListener() {
+        super.titleLeftButtonListener();
     }
 
     //屏蔽切换学校
