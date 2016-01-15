@@ -2,12 +2,10 @@ package com.wj.kindergarten.ui.main;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -31,9 +29,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.FoundTypeCount;
-import com.wj.kindergarten.bean.FoundTypeCountSun;
 import com.wj.kindergarten.bean.Login;
-import com.wj.kindergarten.bean.MainTopic;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
 
@@ -48,7 +44,6 @@ import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Constant.MessageConstant;
-import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -60,13 +55,13 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
     //Fragment界面数组
     private Class fragmentArray[] = {MainFragment.class, FoundFragment.class, MessageFragment.class,
-            SpecialCourseFragment.class,MineFragment.class};
+            PhotoFamilyFragment.class,MineFragment.class};
     //Tab选项卡图片
     private int mImageViewArray[] = {R.drawable.school_tab, R.drawable.found_tab,
-            R.drawable.message_tab_2, R.drawable.special_tab,R.drawable.mine_tab};
+            R.drawable.message_tab_2, R.drawable.pf_album,R.drawable.mine_tab};
 
     private int mImageViewArray2[] = {R.drawable.school_tab, R.drawable.found_tab,
-            R.drawable.message_tab, R.drawable.special_tab,R.drawable.mine_tab};
+            R.drawable.message_tab, R.drawable.pf_album,R.drawable.mine_tab};
     private int [] typeCount = new int[3];
 
     public int[] getTypeCount() {
@@ -74,7 +69,7 @@ public class MainActivity extends BaseActivity {
     }
 
     //Tab选项卡的文字
-    private String mTabIdArray[] = {"学校", "发现", "消息", "特长课程","我的"};
+    private String mTabIdArray[] = {"学校", "发现", "消息", "家庭相册","我的"};
 
     public String[] getmTabIdArray() {
         return mTabIdArray;
@@ -368,9 +363,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabChanged(String tabId) {
                 nowTab = tabId;
-                if(tabId.equals(mTabIdArray[3])){
-                    Utils.registerUmengClickEvent(MessageConstant.SPECIAL_COURSE);
-                }
+//                if(tabId.equals(mTabIdArray[3])){
+//                    Utils.registerUmengClickEvent(MessageConstant.SPECIAL_COURSE);
+//                }
                 if (tabId.equals(mTabIdArray[2])) {
                     Utils.registerUmengClickEvent(MessageConstant.MINE_MSG);
                     isClickMessage = true;

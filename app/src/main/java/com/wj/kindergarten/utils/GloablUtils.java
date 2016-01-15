@@ -29,6 +29,7 @@ public interface GloablUtils {
 
     int INTERRACTION_REFRESH_LIST = 136;
     int GET_PF_ALBUM_LIST_SUCCESS = 3000;
+    int CLASSFIY_PF_BY_DATE = 3001;
 
 
 }
