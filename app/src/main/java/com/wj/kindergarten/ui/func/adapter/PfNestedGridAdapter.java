@@ -2,12 +2,18 @@ package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
+import com.etsy.android.grid.util.DynamicHeightImageView;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
@@ -23,14 +29,15 @@ import java.util.List;
  * Created by tangt on 2016/1/14.
  */
 public class PfNestedGridAdapter extends BaseAdapter {
-    private List<AllPfAlbumSunObject> list;
+    private List<AllPfAlbumSunObject> list = new ArrayList<>();
     private Context context;
     private LayoutInflater inflater;
 
     public PfNestedGridAdapter(Context context, List<AllPfAlbumSunObject> list) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.list = list;
+        this.list.clear();
+        this.list.addAll(list);
     }
 
     @Override
@@ -50,10 +57,40 @@ public class PfNestedGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ScaleImageView imageView = new ScaleImageView(context);
+        if (convertView == null){
+            convertView = new DynamicHeightImageView(context);
+            convertView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+        final DynamicHeightImageView imageView = (DynamicHeightImageView) convertView;
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        final AbsListView.LayoutParams params  = (AbsListView.LayoutParams) imageView.getLayoutParams();
+
         AllPfAlbumSunObject object = list.get(position);
         if(object != null){
-            ImageLoaderUtil.displayMyImage(object.getPath(),imageView);
+            ImageLoaderUtil.downLoadImageLoader(object.getPath(), new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    double scale = params.width / loadedImage.getWidth();
+                    params.height = (int) (loadedImage.getHeight()*scale);
+                    imageView.setLayoutParams(params);
+                    imageView.setImageBitmap(loadedImage);
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+
+                }
+            });
         }
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +100,7 @@ public class PfNestedGridAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-    return imageView;
+    return convertView;
     }
 
     class ViewHolder{

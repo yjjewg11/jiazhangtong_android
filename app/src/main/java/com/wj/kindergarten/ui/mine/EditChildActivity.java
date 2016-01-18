@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -336,6 +337,12 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
      * @param uri
      */
     public void startPhotoZoom(Uri uri) {
+        Intent intent = createIntentCrop(uri);
+        startActivityForResult(intent, EditChildActivity.REQUESTCODE_CUTTING);
+    }
+
+    @NonNull
+    private Intent createIntentCrop(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         // crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
@@ -347,7 +354,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         intent.putExtra("outputX", 198);
         intent.putExtra("outputY", 198);
         intent.putExtra("return-data", true);
-        startActivityForResult(intent, EditChildActivity.REQUESTCODE_CUTTING);
+        return intent;
     }
 
 

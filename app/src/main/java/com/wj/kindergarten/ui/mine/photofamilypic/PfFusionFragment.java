@@ -21,8 +21,10 @@ import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +34,6 @@ import java.util.Set;
 
 public class PfFusionFragment extends Fragment {
 
-
     private View view;
     private PullToRefreshListView listView;
     private PfWallAdapter adapter;
@@ -41,11 +42,14 @@ public class PfFusionFragment extends Fragment {
     private List<List<AllPfAlbumSunObject>> lists = new ArrayList<>();
     //将按照日期分类的图片地址单独提取出来
     private boolean isFirst;
-    public void banScroll(){
+
+
+
+    public void banScroll() {
         listView.setEnabled(false);
     }
 
-    public void allowScroll(){
+    public void allowScroll() {
         listView.setEnabled(true);
     }
 
@@ -60,20 +64,21 @@ public class PfFusionFragment extends Fragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 //加载数据
+
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                 pageNo++;
+                loadData();
             }
         });
+
         adapter = new PfWallAdapter(getActivity());
         listView.setAdapter(adapter);
-            isFirst = true;
-            addListener();
-            loadData();
-
-
+        isFirst = true;
+        addListener();
+        loadData();
 
         return view;
     }
@@ -82,7 +87,7 @@ public class PfFusionFragment extends Fragment {
         GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == GloablUtils.GET_PF_ALBUM_LIST_SUCCESS){
+                if (msg.what == GloablUtils.GET_PF_ALBUM_LIST_SUCCESS) {
                     adapter.setImageList(lists);
                 }
             }
@@ -90,28 +95,27 @@ public class PfFusionFragment extends Fragment {
         GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == GloablUtils.CLASSFIY_PF_BY_DATE){
+                if (msg.what == GloablUtils.CLASSFIY_PF_BY_DATE) {
                     //将集合里面的照片按日期分类
-                    if(albumList != null && albumList.size() > 0){
+                    if (albumList != null && albumList.size() > 0) {
                         Iterator<AllPfAlbumSunObject> iterator = albumList.iterator();
                         String date = null;
-                        while (iterator.hasNext()){
+                        while (iterator.hasNext()) {
                             AllPfAlbumSunObject sunObject = iterator.next();
-                            if(sunObject == null) continue;
-                            if(date == null ||
-                                    !TimeUtil.getYMDTimeFromYMDHMS(sunObject.getPhoto_time()).equals(date)){
+                            if (sunObject == null) continue;
+                            if (date == null ||
+                                    !TimeUtil.getYMDTimeFromYMDHMS(sunObject.getPhoto_time()).equals(date)) {
                                 ArrayList<AllPfAlbumSunObject> list = new ArrayList<>();
                                 list.add(sunObject);
                                 lists.add(list);
-                            }else{
-                                lists.get(lists.size()-1).add(sunObject);
+                            } else {
+                                lists.get(lists.size() - 1).add(sunObject);
                             }
                             date = TimeUtil.getYMDTimeFromYMDHMS(sunObject.getPhoto_time());
                         }
                         GlobalHandler.getHandler().sendEmptyMessage(GloablUtils.GET_PF_ALBUM_LIST_SUCCESS);
                     }
-
-            }
+                }
             }
         });
     }
@@ -123,11 +127,16 @@ public class PfFusionFragment extends Fragment {
         UserRequest.getPfFusionPic(getActivity(), pageNo, family_uuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                if (listView.isRefreshing()) {
+                    listView.onRefreshComplete();
+                }
                 AllPfAlbum allPfAlbum = (AllPfAlbum) domain;
                 if (allPfAlbum != null && allPfAlbum.getList() != null &&
                         allPfAlbum.getList().getData() != null && allPfAlbum.getList().getData().size() > 0) {
                     albumList.addAll(allPfAlbum.getList().getData());
                     GlobalHandler.getHandler().sendEmptyMessage(GloablUtils.CLASSFIY_PF_BY_DATE);
+                } else {
+                    ToastUtils.showMessage("没有更多数据了!");
                 }
             }
 
@@ -142,4 +151,8 @@ public class PfFusionFragment extends Fragment {
             }
         });
     }
+    boolean isOne;
+
+
+
 }
