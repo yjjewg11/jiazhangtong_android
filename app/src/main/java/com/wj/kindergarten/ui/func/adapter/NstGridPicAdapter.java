@@ -12,6 +12,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +57,7 @@ public class NstGridPicAdapter extends BaseAdapter {
         viewHolder.mPicIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, PhotoWallActivity.class);
-                intent.putExtra(PhotoWallActivity.KEY_POSITION, position);
-                intent.putExtra(PhotoWallActivity.KEY_TYPE, "保存");
-                intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, (ArrayList<String>) mUrlList);
-                mContext.startActivity(intent);
+                Utils.carouselPic(mContext,position, (ArrayList<String>) mUrlList);
             }
         });
 

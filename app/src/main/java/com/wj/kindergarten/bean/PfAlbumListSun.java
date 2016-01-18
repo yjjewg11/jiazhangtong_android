@@ -13,6 +13,13 @@ public class PfAlbumListSun extends BaseModel{
     private String photo_count;@Expose
     private String status;
 
+    public PfAlbumListSun(String title) {
+        this.title = title;
+    }
+
+    public PfAlbumListSun() {
+    }
+
     @Override
     public String toString() {
         return "PfAlbumListSun{" +
@@ -22,6 +29,22 @@ public class PfAlbumListSun extends BaseModel{
                 ", photo_count='" + photo_count + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PfAlbumListSun that = (PfAlbumListSun) o;
+
+        return uuid.equals(that.uuid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 
     public String getUuid() {

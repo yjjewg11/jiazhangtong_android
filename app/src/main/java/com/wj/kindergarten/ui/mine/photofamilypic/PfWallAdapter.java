@@ -6,17 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 
-import com.huewu.pla.lib.MultiColumnListView;
-import com.huewu.pla.lib.internal.PLA_AdapterView;
+import com.etsy.android.grid.StaggeredGridView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.compounets.NestedGridView;
 import com.wj.kindergarten.ui.func.adapter.PfNestedGridAdapter;
-import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
-import com.wj.kindergarten.ui.other.ScaleImageView;
-import com.wj.kindergarten.utils.ImageLoaderUtil;
+
 import com.wj.kindergarten.utils.TimeUtil;
 
 import java.util.ArrayList;
@@ -64,7 +62,7 @@ public class PfWallAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pf_classic_by_date_album, null);
             viewHolder.pf_tv_date_time = (TextView) convertView.findViewById(R.id.pf_tv_date_time);
             viewHolder.pf_pic_count = (TextView) convertView.findViewById(R.id.pf_pic_count);
-            viewHolder.gridView = (NestedGridView) convertView.findViewById(R.id.pf_fusion_grid);
+            viewHolder.gridView = (GridView) convertView.findViewById(R.id.pf_fusion_grid);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -84,6 +82,6 @@ public class PfWallAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView pf_tv_date_time, pf_pic_count;
-        NestedGridView gridView;
+        GridView gridView;
     }
 }

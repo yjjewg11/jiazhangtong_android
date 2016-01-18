@@ -49,7 +49,7 @@
             android:drawableLeft="@drawable/album_info"
             android:drawablePadding="15dp"
             android:padding="@dimen/margin_15"
-            android:text="上传列表"
+            android:text="相册信息"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 </LinearLayout>

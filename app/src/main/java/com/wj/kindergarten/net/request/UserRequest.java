@@ -19,6 +19,7 @@ import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -116,6 +117,7 @@ public final class UserRequest {
     private static final String GET_INTERACTION_LINK = "rest/share/getHtmlTitle.json";
     private static final String GET_PF_ALBUM_LIST = "rest/fpFamilyPhotoCollection/queryMy.json";
     private static final String LOOK_FOR_ALL_PF = "rest/fPPhotoItem/queryMy.json";
+    private static final String DETE_ALBUM_LIST = "rest/fpFamilyPhotoCollection/delete.json";
 
     private UserRequest() {
     }
@@ -838,5 +840,10 @@ public final class UserRequest {
     public static void getPfAlbumList(Context context, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         SendRequest.getInstance().get(context,RequestType.GET_PF_ALBUM_LIST,params,RequestHttpUtil.BASE_URL+GET_PF_ALBUM_LIST,resultI);
+    }
+
+    public static void deleteAlbum(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+DETE_ALBUM_LIST,resultI);
     }
 }

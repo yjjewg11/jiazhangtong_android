@@ -54,6 +54,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 
 import org.json.JSONException;
@@ -72,6 +73,7 @@ import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -95,6 +97,14 @@ public class Utils {
         MobclickAgent.onEvent(CGApplication.getInstance(), s1);
     }
 
+
+    public static void carouselPic(Context context,int position,ArrayList<String> mUrlList){
+        Intent intent = new Intent(context, PhotoWallActivity.class);
+        intent.putExtra(PhotoWallActivity.KEY_POSITION, position);
+        intent.putExtra(PhotoWallActivity.KEY_TYPE, "保存");
+        intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, (ArrayList<String>) mUrlList);
+        context.startActivity(intent);
+    }
 
     public static void saveImageToGallery(String fileName, Context context, Bitmap bmp) {
         // 首先保存图片

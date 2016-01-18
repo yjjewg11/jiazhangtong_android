@@ -7,7 +7,7 @@
 
     <com.wj.kindergarten.ui.other.ScaleImageView
         android:layout_width="wrap_content"
-        app:id="@+id/pf_scale_image"
+        android:id="@+id/pf_scale_image"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -33,16 +33,16 @@
             android:id="@+id/pf_pic_count"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true" />
-        <com.wj.kindergarten.compounets.NestedGridView
+        <GridView
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20"
             android:layout_width="match_parent"
-            android:numColumns="3"
-            android:columnWidth="@dimen/margin_10"
+            android:numColumns="2"
+            android:columnWidth="@dimen/margin_3"
             android:id="@+id/pf_fusion_grid"
             android:layout_below="@+id/pf_pic_count"
             android:layout_height="wrap_content">
-
-
-        </com.wj.kindergarten.compounets.NestedGridView>
+        </GridView>
     </RelativeLayout>
 
 
