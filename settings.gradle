@@ -1,2 +1,2 @@
-include ':app', ':pulltorefreshlib', ':QrCodeScan', ':waterfall-layout'
+include ':app', ':pulltorefreshlib', ':QrCodeScan'
 project(':pulltorefreshlib').projectDir = new File('pulltorefreshlibrary')

@@ -515,6 +515,13 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void titleRightImageListener() {
+        if (mTabIdArray [3] .equals(nowTab)){
+            ((PhotoFamilyFragment)getSupportFragmentManager().findFragmentByTag(mTabIdArray[3])).addRightListener();
+        }
+    }
+
+    @Override
     protected void titleLeftButtonListener() {
         super.titleLeftButtonListener();
     }

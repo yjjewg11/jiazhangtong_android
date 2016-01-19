@@ -32,5 +32,6 @@ public interface GloablUtils {
     int CLASSFIY_PF_BY_DATE = 3001;
     int PF_EDIT_TAKE_PHOTO = 3002;
     int PF_EDIT_CHOOSE_IMAGE = 3003;
+    int PF_ALBUM_ADD_WATERFALL_PIC = 3004; //处理添加相册瀑布流照片
 
 }

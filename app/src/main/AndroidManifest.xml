@@ -123,6 +123,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"

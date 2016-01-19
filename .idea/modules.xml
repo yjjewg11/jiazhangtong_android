@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jiazhangtong_android-master.iml" filepath="$PROJECT_DIR$/jiazhangtong_android-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlib.iml" filepath="$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/waterfall-layout/waterfall-layout.iml" filepath="$PROJECT_DIR$/waterfall-layout/waterfall-layout.iml" />
     </modules>
   </component>
 </project>
