@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment">
 
-    <include layout="@layout/layout_pulltorefresh"/>
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:layout_width="match_parent"
+        android:id="@+id/pf_album_scrollView"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/pf_album_scroll_linear"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 </FrameLayout>

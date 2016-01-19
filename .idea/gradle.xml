@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/QrCodeScan" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/pulltorefreshlibrary" />
-            <option value="$PROJECT_DIR$/waterfall-layout" />
           </set>
         </option>
       </GradleProjectSettings>

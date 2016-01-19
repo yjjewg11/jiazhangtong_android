@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,8 +30,10 @@ import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.utils.WindowUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +64,6 @@ public class PhotoFamilyFragment extends Fragment {
             "http://img01.sogoucdn.com/app/a/100520024/bb33c849ec21ea3a98b3598d56efb8c4",
             "http://img03.sogoucdn.com/app/a/100520024/d409d7b4fb46c19da38cd398acea013b",
     };
-
 
     {
         for(String path : images){
@@ -98,9 +101,9 @@ public class PhotoFamilyFragment extends Fragment {
                 tv_collect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(),ConllectPicActivity.class);
+                        Intent intent = new Intent(getActivity(), ConllectPicActivity.class);
                         //TODO 放入收藏的照片集合
-                        intent.putExtra("collect_list",list);
+                        intent.putExtra("collect_list", list);
                         startActivity(intent);
                     }
                 });
@@ -126,6 +129,30 @@ public class PhotoFamilyFragment extends Fragment {
                 popupWindow.showAsDropDown(((MainActivity) getActivity()).titleLeftButton);
             }
         });
+    }
+
+    public void addRightListener() {
+
+
+        final View view = View.inflate(getActivity(),R.layout.pop_pf_choose_pic,null);
+        TextView put_in_pic = (TextView) view.findViewById(R.id.put_in_pic);
+        put_in_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PfUpGalleryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final PopupWindow rightpopupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        Utils.setPopWindow(rightpopupWindow);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rightpopupWindow.dismiss();
+            }
+        });
+        rightpopupWindow.showAsDropDown(view);
     }
 
     //获取家庭相册集

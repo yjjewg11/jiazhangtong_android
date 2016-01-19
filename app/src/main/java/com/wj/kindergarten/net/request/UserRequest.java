@@ -754,7 +754,6 @@ public final class UserRequest {
 
     public static void getUserInfo(Context context, String storeJESSIONID, String jessionid_md5) {
         RequestParams params = new RequestParams();
-        params.put("JSESSIONID",storeJESSIONID);
         params.put("md5", jessionid_md5);
         SendRequest.getInstance().get(context, RequestType.GET_USER_INFO, params, RequestHttpUtil.BASE_URL + GET_USER_INFO, new RequestResultI() {
             @Override
