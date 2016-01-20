@@ -31,6 +31,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
@@ -51,6 +52,7 @@ public class PhotoFamilyFragment extends Fragment {
     private PfFusionFragment pfFusionFragment;
     private FrameLayout back_pf_scroll_fl;
     private PfFragmentLinearLayout pf_back_ll;
+    public static String family_uuid = "";
     boolean flIsLocationTop;
     private boolean isOne;
     private float moveY;
@@ -94,10 +96,11 @@ public class PhotoFamilyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //弹出菜单
-                View view = View.inflate(getActivity(), R.layout.pf_left_choose, null);
-                TextView tv_collect = (TextView) view.findViewById(R.id.tv_head_collect);
-                TextView tv_up_list = (TextView) view.findViewById(R.id.tv_up_list);
-                TextView tv_album_info = (TextView) view.findViewById(R.id.tv_album_info);
+                View viewleft = View.inflate(getActivity(), R.layout.pf_left_choose, null);
+                final PopupWindow popupWindow = new PopupWindow(viewleft, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                TextView tv_collect = (TextView) viewleft.findViewById(R.id.tv_head_collect);
+                TextView tv_up_list = (TextView) viewleft.findViewById(R.id.tv_up_list);
+                TextView tv_album_info = (TextView) viewleft.findViewById(R.id.tv_album_info);
                 tv_collect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -105,13 +108,16 @@ public class PhotoFamilyFragment extends Fragment {
                         //TODO 放入收藏的照片集合
                         intent.putExtra("collect_list", list);
                         startActivity(intent);
+                        popupWindow.dismiss();
                     }
                 });
 
                 tv_up_list.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent intent = new Intent(getActivity(), UpLoadActivity.class);
+                        startActivity(intent);
+                        popupWindow.dismiss();
                     }
                 });
 
@@ -121,10 +127,10 @@ public class PhotoFamilyFragment extends Fragment {
                         //点击启动相册详细页面
                         Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
                         startActivity(intent);
+                        popupWindow.dismiss();
                     }
                 });
 
-                PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 Utils.setPopWindow(popupWindow);
                 popupWindow.showAsDropDown(((MainActivity) getActivity()).titleLeftButton);
             }
@@ -133,20 +139,20 @@ public class PhotoFamilyFragment extends Fragment {
 
     public void addRightListener() {
 
-
-        final View view = View.inflate(getActivity(),R.layout.pop_pf_choose_pic,null);
-        TextView put_in_pic = (TextView) view.findViewById(R.id.put_in_pic);
+        final View rightView = View.inflate(getActivity(),R.layout.pop_pf_choose_pic,null);
+        final PopupWindow rightpopupWindow = new PopupWindow(rightView, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        TextView put_in_pic = (TextView) rightView.findViewById(R.id.put_in_pic);
         put_in_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PfUpGalleryActivity.class);
                 startActivity(intent);
+                rightpopupWindow.dismiss();
             }
         });
 
-        final PopupWindow rightpopupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         Utils.setPopWindow(rightpopupWindow);
-        view.setOnClickListener(new View.OnClickListener() {
+        rightView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rightpopupWindow.dismiss();
@@ -163,6 +169,7 @@ public class PhotoFamilyFragment extends Fragment {
                 PfAlbumList pfAlbumList = (PfAlbumList) domain;
                 if (pfAlbumList != null && pfAlbumList.getList() != null && pfAlbumList.getList().size() > 0) {
                     albumList = pfAlbumList.getList();
+                    family_uuid =  pfAlbumList.getList().get(0).getUuid();
                 }
             }
 
