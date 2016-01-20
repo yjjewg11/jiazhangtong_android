@@ -1,17 +1,26 @@
 package com.wj.kindergarten.net.upload;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.media.ExifInterface;
 import android.os.Build;
 
 import android.os.Environment;
+import android.provider.MediaStore;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.bean.BaseResponse;
+import com.wj.kindergarten.bean.PicObject;
 import com.wj.kindergarten.net.RequestHttpUtil;
+import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;
@@ -24,6 +33,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by zoupengqiang on 14-5-26.
@@ -31,6 +43,7 @@ import java.io.FileOutputStream;
  */
 public class UploadFile {
     public static final String URL = RequestHttpUtil.BASE_URL + "rest/uploadFile/upload.json";
+    public static final String UP_LOAD_PF_URL = RequestHttpUtil.BASE_URL + "rest/fPPhotoItem/upload.json";
     private UploadImage uploadImage;
     private Context context;
     private int type;
@@ -44,6 +57,116 @@ public class UploadFile {
         this.type = type;
         this.width = width;
         this.height = height;
+    }
+
+    private void upLoadFilePf(final File file, final String path,String photo_time,String address,String md5,String note,String family_uuid) {
+        if (file != null && file.exists() && file.length() > 0) {
+            try {
+                RequestParams params = new RequestParams();
+                params.put("file", file);
+                params.put("type", type);
+                params.put("photo_time",photo_time);
+                params.put("address",address);
+                params.put("md5",md5);
+                params.put("note",note);
+                params.put("family_uuid",family_uuid);
+                CGLog.d(URL + "?" + params.toString());
+                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] header, JSONObject response) {
+                        super.onSuccess(statusCode, header, response);
+                        CGLog.d("back1:" + response.toString());
+                        try {
+                            BaseResponse baseResponse = new BaseResponse(response);
+                            if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
+                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
+                            } else {
+                                uploadImage.failure("上传图片失败");
+                            }
+                        } catch (Exception e) {
+                            uploadImage.failure("上传图片不成功");
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String response) {
+                        super.onSuccess(statusCode, headers, response);
+                        CGLog.d("back2:" + response.toString());
+                        uploadImage.failure("上传图片失败");
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        super.onSuccess(statusCode, headers, response);
+                        CGLog.d("back3:" + response.toString());
+                        uploadImage.failure("上传图片失败");
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers,
+                                          String responseBody, Throwable e) {
+                        super.onFailure(statusCode, headers, responseBody, e);
+                        uploadImage.failure("上传图片失败");
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                uploadImage.failure("上传图片失败");
+            }
+        } else {
+            uploadImage.failure("上传的文件不存在");
+        }
+    }
+
+
+    public void upLoadPf(String path) {
+        if (Utils.isNetworkAvailable(context)) {
+            try {
+                File file = new File(path);
+                if (isompress(path)) {
+                    Bitmap bitmap = compressBySize(path, width, height);
+                    file = saveFile(bitmap, 70);
+                    if (bitmap != null && !bitmap.isRecycled()) {
+                        bitmap.recycle();
+                    }
+                }
+                PicObject picObject =  queryDetailInfo(path);
+                if(picObject != null){
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), PhotoFamilyFragment.family_uuid);
+                }else{
+                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.family_uuid);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                uploadImage.failure("处理图片失败");
+            }
+        } else {
+            uploadImage.failure("网络连接已断开或不可用");
+        }
+    }
+
+
+    private PicObject queryDetailInfo(String path) throws IOException {
+        PicObject picObject = new PicObject();
+        ExifInterface exifInterface = new ExifInterface(path);
+        picObject.setTime(exifInterface.getAttribute(ExifInterface.TAG_DATETIME));
+        float[] location = new float[2];
+        exifInterface.getLatLong(location);
+        if (location[0] != 0.0f && location[1] != 0.0f) {
+            Geocoder ge = new Geocoder(context);
+            List<Address> listAdress = ge.getFromLocation(location[0], location[1], 1000);
+            if(listAdress != null && listAdress.size() > 0){
+                Address address = listAdress.get(0);
+                if(address != null){
+                    picObject.setAddress(address.getCountryName()+""+address.getLocality());
+                }
+
+            }
+        }
+        picObject.setMd5(path);
+        return picObject;
     }
 
     /**
