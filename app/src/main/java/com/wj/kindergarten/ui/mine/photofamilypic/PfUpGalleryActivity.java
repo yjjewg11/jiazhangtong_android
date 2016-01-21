@@ -346,7 +346,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     galleryList.clear();
                     galleryList.addAll(getImages(scanList));
                     Collections.reverse(galleryList);
-                    galleryList.add(0, "");
+//                    galleryList.add(0, "");
                     adapter.notifyDataSetChanged();
                     nowDir = getString(R.string.all_photo);
                     break;
@@ -355,7 +355,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     galleryList.clear();
                     galleryList.addAll(getImages(showListS));
                     Collections.reverse(galleryList);
-                    galleryList.add(0, "");
+//                    galleryList.add(0, "");
                     adapter.setFirstSpecial(true);
                     adapter.notifyDataSetChanged();
                     break;
@@ -454,10 +454,6 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
             } else {
                 Intent intent = new Intent(this, PicUploadService.class);
-//                intent.putStringArrayListExtra(RESULT_LIST, (ArrayList) images);
-//                setResult(RESULT_OK, intent);
-//                finish();
-                //把队列加入到上传列表中
                 intent.putExtra("up_list",(ArrayList<String>)images);
                 startService(intent);
                 finish();

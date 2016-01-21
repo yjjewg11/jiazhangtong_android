@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+        <include layout="@layout/title_normal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edit_bg1"
+            android:padding="@dimen/small_padding">
+
+            <HorizontalScrollView
+                android:id="@+id/hs_interaction_hs"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/repairs_photo_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/edit_text_style"
+            android:text="相册名称:  "
+            android:layout_width="wrap_content"
+            android:layout_height="44dp" />
+        <EditText
+            android:id="@+id/edit_pf_name"
+            android:hint="请输入相册名称"
+            style="@style/edit_text_white_style"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="44dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/edit_text_style"
+            android:text="背景音乐:  "
+            android:layout_width="wrap_content"
+            android:layout_height="44dp" />
+        <EditText
+            android:id="@+id/edit_pf_choose_music"
+            android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:hint="请选择音乐"
+            android:paddingRight="@dimen/margin_10"
+            android:drawableRight="@drawable/youjiantou"
+            style="@style/edit_text_white_style"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="44dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/edit_text_style"
+            android:text="封面图片:  "
+            android:layout_width="match_parent"
+            android:layout_height="44dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        <ImageView
+            android:layout_marginLeft="@dimen/margin_10"
+            android:id="@+id/edit_pf_iamge"
+            android:padding="@dimen/margin_10"
+            android:background="@color/white"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/edit_pf_right_pic"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/youjiantou"
+                android:layout_alignParentRight="true"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    
+
+
+</LinearLayout>

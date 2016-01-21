@@ -12,15 +12,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.ViewPager;
-import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -58,16 +54,12 @@ import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.viewpager.CirclePageIndicator;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * InteractionSentActivity
@@ -118,7 +110,7 @@ public class InteractionSentActivity extends BaseActivity {
 
     @Override
     protected void setContentLayout() {
-        layoutId = R.layout.activity_interaction_send;
+        layoutId = R.layout.edit_pf_activity;
     }
 
     @Override

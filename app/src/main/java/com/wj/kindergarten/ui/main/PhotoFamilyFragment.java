@@ -158,7 +158,7 @@ public class PhotoFamilyFragment extends Fragment {
                 rightpopupWindow.dismiss();
             }
         });
-        rightpopupWindow.showAsDropDown(view);
+        rightpopupWindow.showAsDropDown(rightView);
     }
 
     //获取家庭相册集
