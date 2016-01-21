@@ -28,5 +28,13 @@
             android:layout_marginRight="6dp"
             android:button="@drawable/pictures_select_icon" />
     </RelativeLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_show_already"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:text="已导入"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 
 </FrameLayout>

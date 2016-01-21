@@ -22,6 +22,8 @@ public interface GloablUtils {
     String CACHE_USER_INFO = "cacheUserInfo.txt";
     String CACHE_DATA = "cacheData";
 
+    String SAVE_ALREADY_UPLOAD_PIC = "save_already_upload_pic";
+
     String MINE_ADD_CHILD_FINISH = "add_child_finish";
 
 

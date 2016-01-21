@@ -11,6 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by tangt on 2015/12/3.
@@ -59,5 +62,38 @@ public abstract class StoreDataInSerialize {
             }
         }
         return login;
+    }
+
+    public static void saveAlreadyUploadPic(HashSet<String> set){
+        File wenjian = new File(file,GloablUtils.SAVE_ALREADY_UPLOAD_PIC);
+        if(!wenjian.exists()){
+            try {
+                wenjian.createNewFile();
+            } catch (IOException e) {
+            }
+        }
+
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(wenjian,true));
+            outputStream.writeObject(set);
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> getAlreadyUploadPic (){
+        File wenjian = new File(file,GloablUtils.SAVE_ALREADY_UPLOAD_PIC);
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(wenjian));
+            ArrayList<String> list = (ArrayList<String>) inputStream.readObject();
+            inputStream.close();
+            return list;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
