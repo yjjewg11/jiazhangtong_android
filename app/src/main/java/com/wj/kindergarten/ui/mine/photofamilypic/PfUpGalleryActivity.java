@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.EditPfActivity;
 import com.wj.kindergarten.ui.func.adapter.PfUpGalleryAdapter;
 import com.wj.kindergarten.ui.imagescan.GalleryImagesAdapter;
 import com.wj.kindergarten.ui.imagescan.PfGalleryImagesAdapter;
@@ -32,6 +34,7 @@ import com.wj.kindergarten.ui.imagescan.PhotoPopAdapter;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V1;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V2;
+import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -95,6 +98,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     private boolean isCut = false;
 
     private static  int SIGN_BOARD ;
+    private int type;
 
     /**
      * 被选中的图片列表 key
@@ -114,6 +118,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onCreate() {
         initSelectPic((ArrayList) getIntent().getSerializableExtra(Constants.ALREADY_SELECT_KEY));
+        type = getIntent().getIntExtra("type",0);
         SIGN_BOARD = (getIntent().getIntExtra("signBoard",0));
 
         initWidget();
@@ -132,7 +137,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
             setTitleText("选择图片", "确定");
             return;
         }
-        setTitleText("选择图片共("+pics.size()+"张)", "确定");
+        setTitleText("选择图片共(" + pics.size() + "张)", "确定");
         for (String path : pics) {
             mSelectMap.put(path, true);
         }
@@ -153,7 +158,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
         mGridView = (GridView) findViewById(R.id.child_grid);
 //        galleryList.add(0, "");
 //        scanList.add(0, "");
-        adapter = new PfGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView);
+        adapter = new PfGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView,type);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -453,11 +458,18 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
             if (isCut) {
 
             } else {
-                Intent intent = new Intent(this, PicUploadService.class);
-                intent.putExtra("up_list",(ArrayList<String>)images);
-                startService(intent);
+                //判断返回类型
+                if(type == PhotoFamilyFragment.ADD_PIC){
+                    Intent intent = new Intent(this, PicUploadService.class);
+                    intent.putExtra("up_list",(ArrayList<String>)images);
+                    startService(intent);
+                    ToastUtils.showMessage("已将" + images.size() + "张图片加入下载队列");
+                }else if(type == EditPfActivity .CHOOSE_NEW){
+                    Intent intent = new Intent();
+                    intent.putExtra(RESULT_LIST, (ArrayList<String>) images);
+                    setResult(RESULT_OK,intent);
+                }
                 finish();
-                ToastUtils.showMessage("已将"+images.size()+"张图片加入下载队列");
             }
         } else {
             if (isCamera) {

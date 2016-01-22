@@ -12,7 +12,26 @@ public class AllPfAlbumSunObject extends BaseModel{
     private String path;@Expose
     private int type;@Expose
     private String address;@Expose
-    private String note;
+    private String note;@Expose
+    private String family_uuid;@Expose
+    private String create_useruuid;
+
+
+    public String getFamily_uuid() {
+        return family_uuid;
+    }
+
+    public void setFamily_uuid(String family_uuid) {
+        this.family_uuid = family_uuid;
+    }
+
+    public String getCreate_useruuid() {
+        return create_useruuid;
+    }
+
+    public void setCreate_useruuid(String create_useruuid) {
+        this.create_useruuid = create_useruuid;
+    }
 
     public String getUuid() {
         return uuid;
@@ -71,6 +90,8 @@ public class AllPfAlbumSunObject extends BaseModel{
                 ", type=" + type +
                 ", address='" + address + '\'' +
                 ", note='" + note + '\'' +
+                ", family_uuid='" + family_uuid + '\'' +
+                ", create_useruuid='" + create_useruuid + '\'' +
                 '}';
     }
 }

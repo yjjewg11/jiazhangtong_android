@@ -1,6 +1,8 @@
 package com.wj.kindergarten.ui.func;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -11,6 +13,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.PfMusic;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.ShowMusicAdapter;
+import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +57,17 @@ public class FindMusicOfPfActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-
+        if(adapter.getList() == null) return;
+        if(adapter.getList().size() == 0){
+            ToastUtils.showMessage("选首歌吧!");
+            return;
+        }
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        intent.putExtra("bundle",bundle);
+        bundle.putSerializable("pfMusic",adapter.getList().get(0));
+        setResult(RESULT_OK,intent);
+        finish();
     }
 
     private void initViews() {
@@ -72,8 +85,8 @@ public class FindMusicOfPfActivity extends BaseActivity {
                 MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 
 
-                                        //新建一个歌曲对象,将从cursor里读出的信息存放进去,直到取完cursor里面的内容为止.
-            cursor.moveToFirst();
+              //新建一个歌曲对象,将从cursor里读出的信息存放进去,直到取完cursor里面的内容为止.
+               cursor.moveToFirst();
 
             while (cursor.moveToNext()){
                 PfMusic pfMusic = new PfMusic();

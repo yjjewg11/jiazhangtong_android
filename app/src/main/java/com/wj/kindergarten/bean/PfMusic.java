@@ -32,4 +32,20 @@ public class PfMusic implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PfMusic pfMusic = (PfMusic) o;
+
+        return path.equals(pfMusic.path);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return path.hashCode();
+    }
 }

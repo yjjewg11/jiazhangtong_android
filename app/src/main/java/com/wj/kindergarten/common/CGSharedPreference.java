@@ -289,7 +289,20 @@ public class CGSharedPreference {
         MainTopicSun topic = new MainTopicSun();
         SharedPreferences sharedPreferences = getSharedPreferences();
         topic.setTitle(sharedPreferences.getString("topic_title", ""));
-        topic.setUrl(sharedPreferences.getString("topic_link_url",""));
+        topic.setUrl(sharedPreferences.getString("topic_link_url", ""));
         return topic;
+    }
+
+    public static String [] getPfMaxAndMinTime() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        String max =  sharedPreferences.getString("pf_maxtime", null);
+        String min =  sharedPreferences.getString("pf_mintime",null);
+        return new String[]{max,min};
+    }
+    public void setPfMaxAndMinTime(String [] times){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("pf_maxtime",times[0]);
+        editor.putString("pf_mintime",times[1]);
+        editor.commit();
     }
 }

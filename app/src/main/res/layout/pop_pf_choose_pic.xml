@@ -18,6 +18,7 @@
 
 
         <TextView
+            android:id="@+id/pop_of_choose_new_pic"
             android:layout_weight="1"
             android:gravity="center"
             android:paddingRight="@dimen/margin_20"
