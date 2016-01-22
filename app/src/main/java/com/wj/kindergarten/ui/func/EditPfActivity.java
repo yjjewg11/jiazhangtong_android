@@ -11,7 +11,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -30,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
@@ -38,6 +42,7 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Class;
 import com.wj.kindergarten.bean.Emot;
 import com.wj.kindergarten.bean.HtmlTitle;
+import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.bean.PfMusic;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.handler.GlobalHandler;
@@ -54,15 +59,21 @@ import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.emot.FaceAdapter;
 import com.wj.kindergarten.ui.imagescan.GalleryImagesActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
+import com.wj.kindergarten.ui.mine.CommonChooseImageImpl;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.viewpager.CirclePageIndicator;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.UserHeadImageUtil;
 import com.wj.kindergarten.utils.Utils;
 
+import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,16 +86,24 @@ import java.util.List;
  */
 public class EditPfActivity extends BaseActivity {
 
-
-    private static final int REQUEST_MUSIC_CODE  = 3008;
+    public static final int CHOOSE_NEW = 5000;
+    private static final int REFRESH_PHOTO = 3011;
+    private static final int CHOOSE_IMAGE = 3010;
+    private static final int TAKE_PHOTO = 3009;
+    private static final int REQUEST_MUSIC_CODE = 3008;
     private LinearLayout photoContent = null;
     private ArrayList<String> images = new ArrayList<>();
-    @ViewInject(id=R.id.edit_pf_choose_music,click="onClick")
+    @ViewInject(id = R.id.edit_pf_choose_music, click = "onClick")
     private EditText edit_pf_choose_music;
     private ImageView edit_pf_iamge;
-    @ViewInject(id=R.id.edit_pf_right_pic,click="onClick")
+    @ViewInject(id = R.id.edit_pf_right_pic, click = "onClick")
     private TextView edit_pf_right_pic;
     private PfMusic pfMusic;
+    private Serializable pfAlbumListSun;
+    private Bundle bundle;
+    private PfAlbumListSun pf_album_object;
+    private RelativeLayout scrollRelativeLayout;
+    private EditText edit_pf_name;
 
 
     @Override
@@ -99,13 +118,16 @@ public class EditPfActivity extends BaseActivity {
 
     boolean isResult = true;
     AlertDialog alertDialog;
+
     @Override
     protected void onCreate() {
+        FinalActivity.initInjectedView(this);
+        Intent intent = getIntent();
+        bundle = intent.getBundleExtra("bundle");
         setTitleText("编辑相册", "完成");
 
         initViews();
-
-
+        initData();
 
         GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
             @Override
@@ -122,23 +144,57 @@ public class EditPfActivity extends BaseActivity {
         });
     }
 
-    public void onClick(View view){
-        switch (view.getId()){
-            case R.id.edit_pf_choose_music :
-                 Intent intent = new Intent(this,FindMusicOfPfActivity.class);
-                 startActivityForResult(intent,REQUEST_MUSIC_CODE,null);
-                break;
-            case R.id.edit_pf_right_pic :
+    private void initData() {
+        if (bundle == null) {
+            ImageView photoView = new ImageView(mContext);
+            int photoW = (int) getResources().getDimension(R.dimen.fix_detail_photo_height);
+            int photoMargin = (int) getResources().getDimension(R.dimen.small_padding);
+            LinearLayout.LayoutParams photoLayoutParams = new LinearLayout.LayoutParams(photoW, photoW);
+            if (images.size() > 0) {
+                photoLayoutParams.leftMargin = photoMargin;
+            }
+            photoLayoutParams.gravity = Gravity.CENTER;
+            photoView.setLayoutParams(photoLayoutParams);
+            photoView.setScaleType(ImageView.ScaleType.FIT_XY);
+            photoView.setImageResource(R.drawable.interaction_add_image);
+            photoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    File appDir = new File(Environment.getExternalStorageDirectory()+"/CGImage");
+//                    FileUtil.deleteFolder(appDir);
+                    takePhoto();
+                }
+            });
+            photoContent.addView(photoView);
+            return;
+        }
+        pf_album_object = (PfAlbumListSun) bundle.getSerializable("pf_album_object");
+        if (pf_album_object == null) return;
+        scrollRelativeLayout.setVisibility(View.GONE);
+        edit_pf_name.setText("" + Utils.isNull(pf_album_object.getTitle()));
+        edit_pf_choose_music.setText("" + Utils.isNull(pf_album_object.getHerald()));
+        ImageLoaderUtil.displayMyImage(pf_album_object.getHerald(), edit_pf_iamge);
+    }
 
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.edit_pf_choose_music:
+                Intent intent = new Intent(this, FindMusicOfPfActivity.class);
+                startActivityForResult(intent, REQUEST_MUSIC_CODE, null);
+                break;
+            case R.id.edit_pf_right_pic:
+                UserHeadImageUtil.showChooseImageDialog(this, view, new CommonChooseImageImpl(EditPfActivity.this,
+                        TAKE_PHOTO, CHOOSE_IMAGE));
                 break;
         }
     }
 
-
     private void initViews() {
+        edit_pf_name = (EditText) findViewById(R.id.edit_pf_name);
         edit_pf_choose_music = (EditText) findViewById(R.id.edit_pf_choose_music);
         photoContent = (LinearLayout) findViewById(R.id.repairs_photo_content);
         edit_pf_iamge = (ImageView) findViewById(R.id.edit_pf_iamge);
+        scrollRelativeLayout = (RelativeLayout) findViewById(R.id.edit_pf_relativeLayout);
     }
 
 
@@ -164,7 +220,7 @@ public class EditPfActivity extends BaseActivity {
 
         photoContent.removeAllViews();
         // photoContent.setBackgroundColor(getResources().getColor(android.R.color.black));
-        for (int i = 0; i < images.size(); i++) {
+        for (int i = 0; i < (images.size() > 5 ? 5 : images.size()); i++) {
             final int position = i;
             ImageView photoView = new ImageView(mContext);
             LinearLayout.LayoutParams photoLayoutParams = new LinearLayout.LayoutParams(photoW, photoW);
@@ -206,14 +262,14 @@ public class EditPfActivity extends BaseActivity {
     }
 
 
-
     /**
      * 添加已有图片
      */
     private void takePhoto() {
-        Intent intent = new Intent(this, GalleryImagesActivity.class);
-        intent.putExtra(Constants.ALREADY_SELECT_KEY, images);
-//        startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+        Intent intent = new Intent(this, PfUpGalleryActivity.class);
+        intent.putExtra(Constants.ALREADY_SELECT_KEY ,images);
+        intent.putExtra("type", CHOOSE_NEW);
+        startActivityForResult(intent, REFRESH_PHOTO);
     }
 
     /**
@@ -233,29 +289,39 @@ public class EditPfActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) return;
-        if(data == null) return;
-        if(requestCode == REQUEST_MUSIC_CODE){
-            pfMusic = (PfMusic) getIntent().getSerializableExtra("pfMusic");
+
+        if(requestCode == TAKE_PHOTO ){
+            Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME));
+            if(uri != null){
+                ImageLoaderUtil.displayMyImage(uri.toString(),edit_pf_iamge);
+            }
+        }
+
+        if (data == null) return;
+        if (requestCode == REQUEST_MUSIC_CODE) {
+            Bundle bundle = (Bundle) getIntent().getBundleExtra("bundle");
+            pfMusic = (PfMusic) bundle.getSerializable("pfMusic");
             showText();
         }
-//            if (requestCode == REQUEST_TAKE_PHOTO) {
-//                images.clear();
-//                ArrayList<String> result = data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
-//                images.addAll(result);
-//                refreshPhoto();
-//            } else if (requestCode == REQUEST_SHOW_GALLERY) {
-//                images.clear();
-//                ArrayList<String> result = data.getStringArrayListExtra(PhotoWallActivity.RESULT_LIST);
-//                images.addAll(result);
-//                refreshPhoto();
-//            }
+        if (requestCode == CHOOSE_IMAGE) {
+            Uri uri = data.getData();
+            if (uri != null) {
+                ImageLoaderUtil.displayMyImage(uri.toString(), edit_pf_iamge);
+            }
+        }
+        if (requestCode == REFRESH_PHOTO){
+            images.clear();
+            ArrayList<String> result = data.getStringArrayListExtra(GalleryImagesActivity.RESULT_LIST);
+            images.addAll(result);
+            refreshPhoto();
+        }
 
 
     }
 
     private void showText() {
-        if(pfMusic == null) return;
-        edit_pf_choose_music.setText(""+pfMusic.getTitle());
+        if (pfMusic == null) return;
+        edit_pf_choose_music.setText("" + pfMusic.getTitle());
     }
 
 
@@ -285,7 +351,6 @@ public class EditPfActivity extends BaseActivity {
 //            }
 //        }
 //    }
-
 
 
 }

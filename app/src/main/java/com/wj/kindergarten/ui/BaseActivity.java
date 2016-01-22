@@ -752,7 +752,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 
-    private static final String IMAGE_FILE_NAME = "avatarImage.jpg";
+    public static final String IMAGE_FILE_NAME = "avatarImage.jpg";
     private static final int REQUESTCODE_PICK_WEB = 100101;        // 相册选图标记
     private static final int REQUESTCODE_TAKE_WEB = 100102;        // 相机拍照标记
     private static final int REQUESTCODE_CUTTING_WEB = 2;

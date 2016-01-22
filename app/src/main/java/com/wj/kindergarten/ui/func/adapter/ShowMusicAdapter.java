@@ -23,6 +23,10 @@ public class ShowMusicAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<PfMusic> oneList = new ArrayList<>();
 
+    public List<PfMusic> getList() {
+        return list;
+    }
+
     public ShowMusicAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -63,23 +67,27 @@ public class ShowMusicAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         final PfMusic pfMusic = list.get(position);
-        if(oneList.size() > 0){
-            if (pfMusic.equals(oneList.get(0))){
-                Drawable drawable = context.getDrawable(R.drawable.xuanzhong_pf);
-                viewHolder.pf_item_music_text.setCompoundDrawables(null, null, null, drawable);
-            }
-        }
+
         if(pfMusic != null ){
-            viewHolder.pf_item_music_text.setText(""+pfMusic.getTitle());
             viewHolder.pf_item_music_text.setCompoundDrawables(null, null, null, null);
+            viewHolder.pf_item_music_text.setText("" + pfMusic.getTitle());
             viewHolder.pf_item_music_linear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     oneList.clear();
-                    oneList.add(pfMusic);
+                    oneList.add(list.get(position));
                     notifyDataSetChanged();
                 }
             });
+
+            if(oneList.size() > 0){
+                if(pfMusic.equals(oneList.get(0))){
+                    Drawable drawable = context.getResources().getDrawable(R.drawable.xuanzhong_pf);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                    viewHolder.pf_item_music_text.setCompoundDrawables(null, null, drawable, null);
+                }
+            }
+
         }
         return convertView;
     }

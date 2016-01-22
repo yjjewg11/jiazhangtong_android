@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.services.PicUploadService;
+import com.wj.kindergarten.ui.func.EditPfActivity;
+import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
@@ -54,15 +56,17 @@ public class PfGalleryImagesAdapter extends BaseAdapter {
     private boolean isFirstSpecial = true;
     //还可以选择的图片数
     private int canSelect = 100;
+    private int type;
 
 
-    public PfGalleryImagesAdapter(List<String> list, int canSelect, HashMap<String, Boolean> selectMap, GridView mGridView) {
+    public PfGalleryImagesAdapter(List<String> list, int canSelect, HashMap<String, Boolean> selectMap, GridView mGridView,int type) {
         this.list = list;
         this.canSelect = canSelect;
         this.mGridView = mGridView;
         this.mSelectMap = selectMap;
         db = FinalDb.create(mGridView.getContext());
         imageAlreadyList =   db.findAll(AlreadySavePath.class);
+        this.type = type;
         CGLog.v("打印数据集合 ; "+imageAlreadyList);
     }
 
@@ -180,12 +184,18 @@ public class PfGalleryImagesAdapter extends BaseAdapter {
                     viewHolder.mImageView.setImageBitmap(bitmap);
                 }
             }
-//        }
-        judgeIsShow(position, viewHolder);
+        //如果是新建相册，则不需要显示已导入，
+        if(type == EditPfActivity.CHOOSE_NEW){
+
+            //如果是在已有相册的基础上添加照片，则需要标明是否已导入。
+        }else if (type == PhotoFamilyFragment.ADD_PIC){
+            judgeIsShow(position, viewHolder);
+        }
         return convertView;
     }
 
     private void judgeIsShow(int position, ViewHolder viewHolder) {
+
         AlreadySavePath alreadySavePath = new AlreadySavePath(list.get(position));
         if(imageAlreadyList.contains(alreadySavePath)){
             viewHolder.mCheckBox.setVisibility(View.GONE);

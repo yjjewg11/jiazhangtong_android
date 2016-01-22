@@ -9,6 +9,12 @@ import com.wj.kindergarten.CGApplication;
  * Created by Administrator on 2015/11/9.
  */
 public interface GloablUtils {
+
+    //家庭相册根据familyuuid分类的表
+    String FAMILY_UUID = "family_uuid";
+    //用来存放所有照片对象的表
+    String FAMILY_UUID_OBJECT = "family_uuid_object";
+
     //芒果id
     String MOGO_ID = "b1be6cfbb82542c4ba00f32ef1166884";
     String FROM_COURSE_TO_MINE_COURSE = "my_course_to";

@@ -26,6 +26,7 @@ import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.EditPfActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
@@ -44,6 +45,7 @@ import java.util.List;
  * Created by tangt on 2016/1/14.
  */
 public class PhotoFamilyFragment extends Fragment {
+    public static final int ADD_PIC = 5001;
     private TabLayout tab_layout;
     private ViewPager viewPager;
     private FragmentPagerAdapter pagerAdapter;
@@ -142,6 +144,16 @@ public class PhotoFamilyFragment extends Fragment {
         final View rightView = View.inflate(getActivity(),R.layout.pop_pf_choose_pic,null);
         final PopupWindow rightpopupWindow = new PopupWindow(rightView, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         TextView put_in_pic = (TextView) rightView.findViewById(R.id.put_in_pic);
+        TextView pop_of_choose_new_pic= (TextView) rightView.findViewById(R.id.pop_of_choose_new_pic);
+        pop_of_choose_new_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EditPfActivity.class);
+//                Bundle bundle = new Bundle();
+//                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+            }
+        });
         put_in_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
