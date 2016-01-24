@@ -8,12 +8,22 @@ import com.google.gson.annotations.Expose;
 public class AllPfAlbum extends BaseModel {
     @Expose
     private AllPfAlbumSun list;
+    @Expose
+    private String lastTime;
 
+    public String getLastTime() {
+        return lastTime;
+    }
+
+    public void setLastTime(String lastTime) {
+        this.lastTime = lastTime;
+    }
 
     @Override
     public String toString() {
         return "AllPfAlbum{" +
                 "list=" + list +
+                ", lastTime='" + lastTime + '\'' +
                 '}';
     }
 

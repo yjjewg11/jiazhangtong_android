@@ -78,4 +78,7 @@ public interface RequestType {
      int GET_INTERACTION_LINK = 162;
      int GET_PF_ALBUM_LIST = 163;
      int LOOK_FOR_ALL_PF = 164;
+     int PF_PIC_BY_UUID = 165;
+     int CHECK_PF_IS_CHANGE = 166;
+     int PF_OBJ_BY_UPDATE = 167;
 }

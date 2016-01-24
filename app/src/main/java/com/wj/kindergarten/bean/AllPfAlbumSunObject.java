@@ -14,8 +14,16 @@ public class AllPfAlbumSunObject extends BaseModel{
     private String address;@Expose
     private String note;@Expose
     private String family_uuid;@Expose
-    private String create_useruuid;
+    private String create_useruuid;@Expose
+    private int status;
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getFamily_uuid() {
         return family_uuid;
@@ -92,6 +100,7 @@ public class AllPfAlbumSunObject extends BaseModel{
                 ", note='" + note + '\'' +
                 ", family_uuid='" + family_uuid + '\'' +
                 ", create_useruuid='" + create_useruuid + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

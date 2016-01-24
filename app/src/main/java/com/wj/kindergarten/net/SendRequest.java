@@ -39,6 +39,7 @@ import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
 import com.wj.kindergarten.bean.PfAlbumList;
+import com.wj.kindergarten.bean.PfChangeData;
 import com.wj.kindergarten.bean.PrivilegeActiveList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
@@ -56,6 +57,7 @@ import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainCourse;
 import com.wj.kindergarten.bean.TrainSchoolInfoListFather;
 
+import com.wj.kindergarten.bean.UUIDList;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
@@ -465,6 +467,15 @@ public class SendRequest {
                 break;
             case RequestType.LOOK_FOR_ALL_PF :
                 resultI.result(getDomain(domain, AllPfAlbum.class));
+                break;
+            case RequestType.PF_PIC_BY_UUID :
+                resultI.result(getDomain(domain, AllPfAlbum.class));
+                break;
+            case RequestType.CHECK_PF_IS_CHANGE :
+                resultI.result(getDomain(domain, PfChangeData.class));
+                break;
+            case RequestType.PF_OBJ_BY_UPDATE :
+                resultI.result(getDomain(domain, UUIDList.class));
                 break;
             default:
                 break;

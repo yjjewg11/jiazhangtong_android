@@ -15,6 +15,10 @@ import com.loopj.android.http.ResponseHandlerInterface;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
 
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.cookie.Cookie;
 
@@ -37,7 +41,6 @@ public class RequestHttpUtil {
     public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 
 
-
 //    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
 
 //    public static final String BASE_URL = "http://192.168.0.108:8080/px-mobile/";
@@ -58,7 +61,7 @@ public class RequestHttpUtil {
     }
 
 
-//    private void getCookie(AsyncHttpClient httpClient) {
+    //    private void getCookie(AsyncHttpClient httpClient) {
 //        List<Cookie> cookies =  httpClient.getgetCookies();
 //        StringBuffer sb = new StringBuffer();
 //        for (int i = 0; i < cookies.size(); i++) {
@@ -79,7 +82,10 @@ public class RequestHttpUtil {
         getCookie();
         getClient().addHeader("Accept-Encoding", "gzip");
         getClient().addHeader("content/type", "application/json;charset=utf-8");
+
+        initAfinal();
     }
+
 
     private static void getCookie() {
         PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
@@ -136,5 +142,17 @@ public class RequestHttpUtil {
     protected static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
 
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
+    }
+
+    private static FinalHttp afinal;
+
+    private static void initAfinal() {
+        afinal = new FinalHttp();
+        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
+        afinal.configCookieStore(myCookieStore);
+    }
+
+    public static void afinalPost(Context context, String path, AjaxParams params, AjaxCallBack ajaxCallBack) {
+        afinal.post(path,params,ajaxCallBack);
     }
 }

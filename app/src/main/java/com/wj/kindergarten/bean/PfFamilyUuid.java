@@ -1,5 +1,6 @@
 package com.wj.kindergarten.bean;
 
+import net.tsz.afinal.annotation.sqlite.Id;
 import net.tsz.afinal.annotation.sqlite.Table;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 public class PfFamilyUuid implements Serializable {
     private String maxTime;
     private String minTime;
+    @Id(column = "family_uuid")
     private String family_uuid;
 
     public String getMaxTime() {
