@@ -86,6 +86,9 @@ public final class UserRequest {
     //获取热门课程
 
     private static final String TRAIN_HOT_CLASS =  "rest/pxCourse/hotByPage.json";
+    private static final String PF_PIC_BY_UUID = "rest/fPPhotoItem/queryOfIncrement.json";
+    private static final String CHECK_PF_IS_CHANGE = "rest/fPPhotoItem/ queryOfNewDataOrUpdate.json";
+    private static final String PF_OBJ_BY_UPDATE = "rest/fPPhotoItem/queryOfIncrement.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -829,13 +832,6 @@ public final class UserRequest {
         SendRequest.getInstance().get(context,RequestType.GET_INTERACTION_LINK,params,RequestHttpUtil.BASE_URL+GET_INTERACTION_LINK,resultI);
     }
 
-    public static void getPfFusionPic(Context context, int pageNo,String family_uuid,RequestResultI resultI) {
-        RequestParams params = new RequestParams();
-        params.put("pageNo",pageNo);
-        params.put("family_uuid",family_uuid);
-        SendRequest.getInstance().get(context,RequestType.LOOK_FOR_ALL_PF,params,RequestHttpUtil.BASE_URL+LOOK_FOR_ALL_PF,resultI);
-    }
-
     public static void getPfAlbumList(Context context, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         SendRequest.getInstance().get(context,RequestType.GET_PF_ALBUM_LIST,params,RequestHttpUtil.BASE_URL+GET_PF_ALBUM_LIST,resultI);
@@ -844,5 +840,29 @@ public final class UserRequest {
     public static void deleteAlbum(Context context, String uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         SendRequest.getInstance().get(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+DETE_ALBUM_LIST,resultI);
+    }
+
+    public static void getPfPicByUuid(Context context,String family_uuid, String s, String maxTime, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("family_uuid",family_uuid);
+        params.put("minTime",s);
+        params.put("maxTime",maxTime);
+        SendRequest.getInstance().get(context,RequestType.PF_PIC_BY_UUID,params,RequestHttpUtil.BASE_URL+PF_PIC_BY_UUID,resultI);
+    }
+
+    public static void getPfDataIsChange(Context context,String family_uuid, String minTime, String maxTime, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("family_uuid",family_uuid);
+        params.put("minTime",minTime);
+        params.put("maxTime",maxTime);
+        SendRequest.getInstance().get(context,RequestType.CHECK_PF_IS_CHANGE,params,RequestHttpUtil.BASE_URL+CHECK_PF_IS_CHANGE,resultI);
+    }
+
+    public static void getUUIDListByUpdate(Context context,String family_uuid, String minTime, String maxTime, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("family_uuid",family_uuid);
+        params.put("minTime",minTime);
+        params.put("maxTime",maxTime);
+        SendRequest.getInstance().get(context,RequestType.PF_OBJ_BY_UPDATE,params,RequestHttpUtil.BASE_URL+PF_OBJ_BY_UPDATE,resultI);
     }
 }

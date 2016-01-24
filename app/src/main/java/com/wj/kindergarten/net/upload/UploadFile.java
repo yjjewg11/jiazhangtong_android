@@ -23,6 +23,10 @@ import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
 
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,69 +62,72 @@ public class UploadFile {
         this.width = width;
         this.height = height;
     }
-
-    private void upLoadFilePf(final File file, final String path,String photo_time,String address,String md5,String note,String family_uuid) {
+    FinalHttp fh = new FinalHttp();
+    private void upLoadFilePf(final File file, final String path,String photo_time,String address,String md5,String note,String family_uuid,AjaxCallBack ajaxCallBack) {
         if (file != null && file.exists() && file.length() > 0) {
+            //使用afinal上传文件框架回调进度
+            AjaxParams params = new AjaxParams();
             try {
-                RequestParams params = new RequestParams();
+//                RequestParams params = new RequestParams();
                 params.put("file", file);
-                params.put("type", type);
                 params.put("photo_time",photo_time);
                 params.put("address",address);
                 params.put("md5",md5);
                 params.put("note",note);
                 params.put("family_uuid",family_uuid);
-                CGLog.d(URL + "?" + params.toString());
-                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] header, JSONObject response) {
-                        super.onSuccess(statusCode, header, response);
-                        CGLog.d("back1:" + response.toString());
-                        try {
-                            BaseResponse baseResponse = new BaseResponse(response);
-                            if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
-                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
-                            } else {
-                                uploadImage.failure("上传图片失败");
-                            }
+                RequestHttpUtil.afinalPost(context, UP_LOAD_PF_URL,params,ajaxCallBack);
+//                CGLog.d(URL + "?" + params.toString());
+//                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new JsonHttpResponseHandler() {
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] header, JSONObject response) {
+//                        super.onSuccess(statusCode, header, response);
+//                        CGLog.d("back1:" + response.toString());
+//                        try {
+//                            BaseResponse baseResponse = new BaseResponse(response);
+//                            if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
+//                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
+//                            } else {
+//                                uploadImage.failure("上传图片失败");
+//                            }
                         } catch (Exception e) {
-                            uploadImage.failure("上传图片不成功");
+                            ajaxCallBack.onFailure(e,00,"上传图片不成功 ");
                             e.printStackTrace();
                         }
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String response) {
-                        super.onSuccess(statusCode, headers, response);
-                        CGLog.d("back2:" + response.toString());
-                        uploadImage.failure("上传图片失败");
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        super.onSuccess(statusCode, headers, response);
-                        CGLog.d("back3:" + response.toString());
-                        uploadImage.failure("上传图片失败");
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers,
-                                          String responseBody, Throwable e) {
-                        super.onFailure(statusCode, headers, responseBody, e);
-                        uploadImage.failure("上传图片失败");
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                uploadImage.failure("上传图片失败");
-            }
-        } else {
-            uploadImage.failure("上传的文件不存在");
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, String response) {
+//                        super.onSuccess(statusCode, headers, response);
+//                        CGLog.d("back2:" + response.toString());
+//                        uploadImage.failure("上传图片失败");
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                        super.onSuccess(statusCode, headers, response);
+//                        CGLog.d("back3:" + response.toString());
+//                        uploadImage.failure("上传图片失败");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int statusCode, Header[] headers,
+//                                          String responseBody, Throwable e) {
+//                        super.onFailure(statusCode, headers, responseBody, e);
+//                        uploadImage.failure("上传图片失败");
+//                    }
+//                });
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                uploadImage.failure("上传图片失败");
+//            }
+//        } else {
+//            uploadImage.failure("上传的文件不存在");
+//        }
         }
     }
 
 
-    public void upLoadPf(String path) {
+    public void upLoadPf(String path,AjaxCallBack ajaxCallBack) {
         if (Utils.isNetworkAvailable(context)) {
             try {
                 File file = new File(path);
@@ -133,9 +140,9 @@ public class UploadFile {
                 }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
-                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), PhotoFamilyFragment.family_uuid);
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), PhotoFamilyFragment.getFamily_uuid(),ajaxCallBack);
                 }else{
-                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.family_uuid);
+                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.getFamily_uuid(),ajaxCallBack);
                 }
 
             } catch (Exception e) {

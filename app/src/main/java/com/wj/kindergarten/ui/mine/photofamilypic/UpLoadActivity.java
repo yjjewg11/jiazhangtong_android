@@ -1,14 +1,18 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.UpLoadProgressAdapter;
 
@@ -25,6 +29,18 @@ public class UpLoadActivity extends BaseActivity {
     private PullToRefreshListView listView;
     private UpLoadProgressAdapter progressAdapter;
     private UpdateBroadCastReceiver receiver;
+    private PicUploadService.TransportBinder binder;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (PicUploadService.TransportBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     @Override
     protected void setContentLayout() {
@@ -50,6 +66,7 @@ public class UpLoadActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(receiver);
+        unbindService(connection);
     }
 
     private void register() {
@@ -65,6 +82,7 @@ public class UpLoadActivity extends BaseActivity {
         listView.setMode(PullToRefreshBase.Mode.DISABLED);
         progressAdapter = new UpLoadProgressAdapter(this);
         listView.setAdapter(progressAdapter);
+        bindService(new Intent(this,PicUploadService.class),connection,BIND_AUTO_CREATE);
 
     }
 
@@ -91,7 +109,6 @@ public class UpLoadActivity extends BaseActivity {
                     break;
             }
         }
-
-
     }
+
 }

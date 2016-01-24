@@ -54,11 +54,14 @@ public class PhotoFamilyFragment extends Fragment {
     private PfFusionFragment pfFusionFragment;
     private FrameLayout back_pf_scroll_fl;
     private PfFragmentLinearLayout pf_back_ll;
-    public static String family_uuid = "";
+    private static String family_uuid;
     boolean flIsLocationTop;
     private boolean isOne;
     private float moveY;
     private ArrayList<String> list = new ArrayList<>();
+    public static String getFamily_uuid() {
+        return family_uuid;
+    }
     private String [] images = new String []{
             "http://img03.sogoucdn.com/app/a/100520024/83ef625cdb1ea0a339645e6a1ade033c",
             "http://img02.sogoucdn.com/app/a/100520024/ad55a6132984150bf7b6df71fab9d16b",
@@ -81,6 +84,7 @@ public class PhotoFamilyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
         if (view != null) return view;
+        family_uuid = "";
         view = inflater.inflate(R.layout.photo_family_pic, null);
         initViews(view);
         initClickListener();
@@ -158,6 +162,7 @@ public class PhotoFamilyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PfUpGalleryActivity.class);
+                intent.putExtra("type",ADD_PIC);
                 startActivity(intent);
                 rightpopupWindow.dismiss();
             }

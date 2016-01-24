@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
+import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -38,13 +40,36 @@ import java.util.List;
 public class PfFusionFragment extends Fragment {
 
     private View view;
-    private PullToRefreshScrollView scrollView;
+    private PullToRefreshListView pullList;
+    public static final int PF_GET_ALBUM_DATA_SUCCESS = 3050;
     private PfWallAdapter adapter;
     private List<AllPfAlbumSunObject> albumList = new ArrayList<>();
     //将网络获取的照片按照日期分类排列
     private List<List<AllPfAlbumSunObject>> lists = new ArrayList<>();
     //将按照日期分类的图片地址单独提取出来
     private boolean isFirst;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case PF_GET_ALBUM_DATA_SUCCESS :
+                    List<AllPfAlbumSunObject> allList = (List<AllPfAlbumSunObject>) msg.obj;
+                    if(allList != null && allList.size() > 0){
+                        albumList.addAll(allList);
+                    }
+                    break;
+                //查询指定时间前的数据
+                case PfLoadDataProxy.NORMAL_DATA :
+
+                    break;
+                //有maxTime后时间的刷新的数据
+                case PfLoadDataProxy.REFRESH_DATA :
+
+                    break;
+            }
+        }
+    };
+    private PfLoadDataProxy mPfLoadDataProxy;
 
 
     @Nullable
@@ -52,18 +77,17 @@ public class PfFusionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
-        scrollView = (PullToRefreshScrollView) view.findViewById(R.id.pf_album_scrollView);
-        scrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+        pullList = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
+        pullList.setMode(PullToRefreshBase.Mode.BOTH);
+        pullList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                //将刷新的数据添加到集合中
             }
 
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                pageNo++;
-                loadData();
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+
             }
         });
 
@@ -73,7 +97,7 @@ public class PfFusionFragment extends Fragment {
         //TODO 先屏蔽数据加载
 //        isFirst = true;
 //        addListener();
-//        loadData();
+        loadData();
 
         return view;
     }
@@ -183,37 +207,11 @@ public class PfFusionFragment extends Fragment {
     }
 
     int pageNo = 1;
-    String family_uuid = "";
 
     public void loadData() {
-        UserRequest.getPfFusionPic(getActivity(), pageNo, family_uuid, new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                if (scrollView.isRefreshing()) {
-                    scrollView.onRefreshComplete();
-                }
-                AllPfAlbum allPfAlbum = (AllPfAlbum) domain;
-                if (allPfAlbum != null && allPfAlbum.getList() != null &&
-                        allPfAlbum.getList().getData() != null && allPfAlbum.getList().getData().size() > 0) {
-                    albumList.addAll(allPfAlbum.getList().getData());
-                    GlobalHandler.getHandler().sendEmptyMessage(GloablUtils.CLASSFIY_PF_BY_DATE);
-                } else {
-                    ToastUtils.showMessage("没有更多数据了!");
-                }
-            }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
+        mPfLoadDataProxy = new PfLoadDataProxy(getActivity(),mHandler);
+        mPfLoadDataProxy.loadData(PhotoFamilyFragment.getFamily_uuid(),pageNo,false);
     }
-    boolean isOne;
 
 
 
