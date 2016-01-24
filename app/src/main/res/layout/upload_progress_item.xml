@@ -19,6 +19,7 @@
             android:layout_alignParentLeft="true" />
 
         <ProgressBar
+            android:max="100"
             android:backgroundTint="@color/color_e5e5e5"
             android:layout_marginRight="@dimen/margin_10"
             android:layout_toLeftOf="@+id/up_Load_wait"
