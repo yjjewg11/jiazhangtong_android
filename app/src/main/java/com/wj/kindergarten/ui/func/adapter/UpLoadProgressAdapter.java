@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.PfProgressItem;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class UpLoadProgressAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<String> list = new ArrayList<>();
+    private PullToRefreshListView listView;
 
     public void changeDataSource(List<String> list){
         this.list.clear();
@@ -32,9 +35,10 @@ public class UpLoadProgressAdapter extends BaseAdapter {
         return list.size() == 0;
     }
 
-    public UpLoadProgressAdapter(Context context) {
+    public UpLoadProgressAdapter(Context context,PullToRefreshListView listView) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+        this.listView = listView;
     }
 
     @Override
@@ -65,8 +69,18 @@ public class UpLoadProgressAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageLoaderUtil.displayMyImage(list.get(position),viewHolder.up_load_progress_image);
+
+//        list.in
+            ImageLoaderUtil.displayMyImage(list.get(position),viewHolder.up_load_progress_image);
+
+        viewHolder.up_load_progressBar.setTag(list.get(position));
+
         return convertView;
+    }
+
+    public void findView(String tag,int progress){
+          ProgressBar progressBar = (ProgressBar) listView.findViewWithTag(tag);
+          progressBar.setProgress(progress);
     }
 
     class ViewHolder {

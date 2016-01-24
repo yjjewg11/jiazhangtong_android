@@ -1,6 +1,9 @@
 package com.wj.kindergarten.utils;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
@@ -17,16 +20,28 @@ public class ToastUtils {
         if(duration == 0){
             duration = Snackbar.LENGTH_SHORT;
         }
-        Snackbar.make(view,left,duration).setAction(right,onClickListener).show();
+        Snackbar.make(view,left,duration).setAction(right, onClickListener).show();
     }
 
     public static void showSnackBar(View view,String left,String right){
-        showSnackBar(view,left,right,0,null);
+        showSnackBar(view, left, right, 0, null);
     }
 
 
     public static void noMoreContentShow(){
         Toast toast = Toast.makeText(CGApplication.context,"没有更多内容了!",Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    public static void showDialog(Context context,String title,String content,AlertDialog.OnClickListener positionListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog dialog =  builder.setTitle(title).setMessage(content).setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        })
+                .setPositiveButton("取消",positionListener).create();
+        dialog.show();
     }
 }

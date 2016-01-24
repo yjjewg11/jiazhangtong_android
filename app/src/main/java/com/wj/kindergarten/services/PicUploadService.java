@@ -11,11 +11,16 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.wj.kindergarten.bean.AlreadySavePath;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
+import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.ToastUtils;
+import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -46,11 +51,13 @@ public class PicUploadService extends Service {
         public void onStart() {
             super.onStart();
             CGLog.v("上传开始!");
+            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_START, 10);
         }
 
         @Override
         public void onLoading(long count, long current) {
             super.onLoading(count, current);
+            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_LOADING, 60);
             CGLog.v("查看上传进度 : "+current+"/"+count);
         }
 
@@ -58,6 +65,17 @@ public class PicUploadService extends Service {
         public void onSuccess(Object o) {
             super.onSuccess(o);
             CGLog.v("上传成功 : " + o.toString());
+            BaseModel baseModel = GsonKdUtil.getGson().fromJson(o.toString(), BaseModel.class);
+            if(baseModel.getResMsg().getStatus().equals("sessionTimeout")){
+                ToastUtils.showMessage(baseModel.getResMsg().getMessage());
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getBaseContext().startActivity(intent);
+
+                sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED,0);
+                list.clear();
+                return;
+            }
             success();
         }
 
@@ -69,7 +87,7 @@ public class PicUploadService extends Service {
     };
     private void success() {
         db.save(new AlreadySavePath(list.get(count)));
-        sendBroad();
+        sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED,100);
         count++;
         if (count >= size) {
             list.clear();
@@ -78,12 +96,11 @@ public class PicUploadService extends Service {
         uploadFile.upLoadPf(list.get(count),ajaxCallBack);
     }
 
-    private void sendBroad(int type) {
+    private void sendBroad(String action,int progress) {
         if (isTransmission()) {
-            Intent intent = new Intent(getApplicationContext(), UpLoadActivity.class);
-            intent.putExtra("up_list", list);
-            intent.putExtra("up_pic_now", list.get(count));
-            getApplicationContext().startActivity(intent);
+            Intent intent = new Intent(action);
+            intent.putExtra("path",list.get(count));
+            sendBroadcast(intent);
         }
     }
 
@@ -166,6 +183,13 @@ public class PicUploadService extends Service {
 
         public ArrayList<String> getList() {
             return list == null ? null : list;
+        }
+
+        public void cancleUpLoadSinglePic(String path) {
+            if(list.contains(path)){
+                list.remove(path);
+                ToastUtils.showMessage("删除成功!");
+            }
         }
     }
 
