@@ -26,6 +26,7 @@ import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -40,8 +41,7 @@ import java.util.List;
 public class PfFusionFragment extends Fragment {
 
     private View view;
-    private PullToRefreshListView pullList;
-    public static final int PF_GET_ALBUM_DATA_SUCCESS = 3050;
+    private PullToRefreshScrollView pullScroll;
     private PfWallAdapter adapter;
     private List<AllPfAlbumSunObject> albumList = new ArrayList<>();
     //将网络获取的照片按照日期分类排列
@@ -52,15 +52,12 @@ public class PfFusionFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
-                case PF_GET_ALBUM_DATA_SUCCESS :
+                //查询指定时间前的数据
+                case PfLoadDataProxy.NORMAL_DATA :
                     List<AllPfAlbumSunObject> allList = (List<AllPfAlbumSunObject>) msg.obj;
                     if(allList != null && allList.size() > 0){
                         albumList.addAll(allList);
                     }
-                    break;
-                //查询指定时间前的数据
-                case PfLoadDataProxy.NORMAL_DATA :
-
                     break;
                 //有maxTime后时间的刷新的数据
                 case PfLoadDataProxy.REFRESH_DATA :
@@ -77,26 +74,22 @@ public class PfFusionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
-        pullList = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
-        pullList.setMode(PullToRefreshBase.Mode.BOTH);
-        pullList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+        pullScroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                //将刷新的数据添加到集合中
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
             }
 
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 
             }
         });
 
-//        adapter = new PfWallAdapter(getActivity());
-//        listView.setAdapter(adapter);
+        adapter = new PfWallAdapter(getActivity());
 
-        //TODO 先屏蔽数据加载
-//        isFirst = true;
-//        addListener();
         loadData();
 
         return view;
@@ -110,10 +103,10 @@ public class PfFusionFragment extends Fragment {
                    View view = View.inflate(getActivity(),R.layout.pf_classic_by_date_album, null);
                     TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
                     TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
-                    LinearLayout pf_fusion_out_ll = (LinearLayout) view.findViewById(R.id.pf_fusion_out_ll);
-                    LinearLayout pf_album_linearLayout_left = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_left);
-                    LinearLayout pf_album_linearLayout_center = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_center);
-                    LinearLayout pf_album_linearLayout_right = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_right);
+//                    LinearLayout pf_fusion_out_ll = (LinearLayout) view.findViewById(R.id.pf_fusion_out_ll);
+//                    LinearLayout pf_album_linearLayout_left = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_left);
+//                    LinearLayout pf_album_linearLayout_center = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_center);
+//                    LinearLayout pf_album_linearLayout_right = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_right);
 
 //                    if (lists != null && lists.size() > 0 &&
 //                            lists.get(position) != null && lists.get(position).size() > 0) {
@@ -210,9 +203,7 @@ public class PfFusionFragment extends Fragment {
 
     public void loadData() {
         mPfLoadDataProxy = new PfLoadDataProxy(getActivity(),mHandler);
-        mPfLoadDataProxy.loadData(PhotoFamilyFragment.getFamily_uuid(),pageNo,false);
+        mPfLoadDataProxy.loadData( ((MainActivity)getActivity()).getFamily_uuid() ,pageNo,false);
     }
-
-
 
 }

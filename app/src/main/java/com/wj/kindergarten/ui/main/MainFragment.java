@@ -83,6 +83,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).clearLeftIcon();
+        ((MainActivity) getActivity()).clearRightIcon();
         ((BaseActivity) getActivity()).clearCenterIcon();
         ((MainActivity) getActivity()).setTitleText("首页");
         if (rootView == null) {

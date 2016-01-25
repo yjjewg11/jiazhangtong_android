@@ -4,29 +4,30 @@ import net.tsz.afinal.annotation.sqlite.Id;
 import net.tsz.afinal.annotation.sqlite.Table;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by tangt on 2016/1/22.
  */
 public class PfFamilyUuid implements Serializable {
-    private String maxTime;
-    private String minTime;
+    private Date maxTime;
+    private Date minTime;
     @Id(column = "family_uuid")
     private String family_uuid;
 
-    public String getMaxTime() {
+    public Date getMaxTime() {
         return maxTime;
     }
 
-    public void setMaxTime(String maxTime) {
+    public void setMaxTime(Date maxTime) {
         this.maxTime = maxTime;
     }
 
-    public String getMinTime() {
+    public Date getMinTime() {
         return minTime;
     }
 
-    public void setMinTime(String minTime) {
+    public void setMinTime(Date minTime) {
         this.minTime = minTime;
     }
 

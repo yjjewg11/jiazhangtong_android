@@ -30,6 +30,8 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.FoundTypeCount;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.bean.PfAlbumList;
+import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
 
@@ -63,6 +65,16 @@ public class MainActivity extends BaseActivity {
     private int mImageViewArray2[] = {R.drawable.school_tab, R.drawable.found_tab,
             R.drawable.message_tab, R.drawable.pf_album,R.drawable.mine_tab};
     private int [] typeCount = new int[3];
+    private List<PfAlbumListSun> albumList;
+    private static String family_uuid;
+
+    public static String getFamily_uuid() {
+        return family_uuid;
+    }
+
+    public static void setFamily_uuid(String family_uuid) {
+        MainActivity.family_uuid = family_uuid;
+    }
 
     public int[] getTypeCount() {
         return typeCount;
@@ -114,6 +126,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate() {
 
 
+        family_uuid = "";
         getSupportActionBar().setElevation(0);
         getCount();
         instance = this;
@@ -127,6 +140,7 @@ public class MainActivity extends BaseActivity {
         listener();
         checkVersion();
         handler.sendEmptyMessageDelayed(2, 500);
+        initPfAlbum();
 
 
         //获取系统参数
@@ -144,6 +158,32 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void initPfAlbum() {
+        loadPfData();
+    }
+    //获取家庭相册集
+    private void loadPfData() {
+        UserRequest.getPfAlbumList(this, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                PfAlbumList pfAlbumList = (PfAlbumList) domain;
+                if (pfAlbumList != null && pfAlbumList.getList() != null && pfAlbumList.getList().size() > 0) {
+                    albumList = pfAlbumList.getList();
+                    family_uuid =  pfAlbumList.getList().get(0).getUuid();
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
 
 
     private void getTopicConfig() {

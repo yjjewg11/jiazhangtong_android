@@ -219,6 +219,7 @@ public class EditPfActivity extends BaseActivity {
         int photoMargin = (int) getResources().getDimension(R.dimen.small_padding);
 
         photoContent.removeAllViews();
+        if(photoContent.getChildCount() > 5) return;
         // photoContent.setBackgroundColor(getResources().getColor(android.R.color.black));
         for (int i = 0; i < (images.size() > 5 ? 5 : images.size()); i++) {
             final int position = i;

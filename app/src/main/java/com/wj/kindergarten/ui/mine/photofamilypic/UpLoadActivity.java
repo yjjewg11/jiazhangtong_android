@@ -71,7 +71,7 @@ public class UpLoadActivity extends BaseActivity {
     private void addView() {
         linearLayout.removeAllViews();
         for (final String path : binder.getList()) {
-            View view = View.inflate(this, R.layout.upload_progress_item, null);
+            final View view = View.inflate(this, R.layout.upload_progress_item, null);
             ImageView up_load_progress_image = (ImageView) view.findViewById(R.id.up_load_progress_image);
             ProgressBar up_load_progressBar = (ProgressBar) view.findViewById(R.id.up_load_progressBar);
             up_Load_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
@@ -84,6 +84,7 @@ public class UpLoadActivity extends BaseActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             binder.cancleUpLoadSinglePic(path);
+                            linearLayout.removeView(view);
                             dialog.cancel();
                         }
                     });
@@ -180,10 +181,11 @@ public class UpLoadActivity extends BaseActivity {
 
     private void judgeAddNoContent() {
         if(linearLayout.getChildCount() == 0){
-            TextView textView = new TextView(this);
-            textView.setText("暂时还没有上传内容!");
-            textView.setGravity(Gravity.CENTER);
-            linearLayout.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            setContentView(View.inflate(this,R.layout.nothing_view,null));
+//            TextView textView = new TextView(this);
+//            textView.setText("暂时还没有上传内容!");
+//            textView.setGravity(Gravity.CENTER);
+//            linearLayout.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
     }
 

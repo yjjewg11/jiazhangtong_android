@@ -17,6 +17,7 @@ import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.PicObject;
 import com.wj.kindergarten.net.RequestHttpUtil;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
@@ -140,9 +141,9 @@ public class UploadFile {
                 }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
-                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), PhotoFamilyFragment.getFamily_uuid(),ajaxCallBack);
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), MainActivity.getFamily_uuid(),ajaxCallBack);
                 }else{
-                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.getFamily_uuid(),ajaxCallBack);
+                    upLoadFilePf(file, path, "", "", "", "", MainActivity.getFamily_uuid(),ajaxCallBack);
                 }
 
             } catch (Exception e) {

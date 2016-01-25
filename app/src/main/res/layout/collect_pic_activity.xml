@@ -7,10 +7,14 @@
 
     <GridView
         android:layout_width="match_parent"
-        android:numColumns="3"
+        android:cacheColorHint="@android:color/transparent"
+        android:columnWidth="100dip"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
         android:id="@+id/collect_grid_view"
-        android:padding="@dimen/margin_10"
-        android:columnWidth="@dimen/margin_3"
         android:layout_height="match_parent"/>
 
 </LinearLayout>
