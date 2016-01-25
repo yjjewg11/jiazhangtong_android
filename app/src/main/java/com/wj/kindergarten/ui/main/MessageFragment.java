@@ -66,6 +66,7 @@ public class MessageFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((BaseActivity) getActivity()).clearCenterIcon();
         ((MainActivity) getActivity()).clearLeftIcon();
+        ((MainActivity) getActivity()).clearRightIcon();
         ((BaseActivity) getActivity()).setTitleText("消息");
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null);

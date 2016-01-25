@@ -25,7 +25,32 @@ public final class TimeUtil {
 
     public static SimpleDateFormat formatYMD = new SimpleDateFormat("yyyy-MM-dd");
 
+    public static SimpleDateFormat formatString = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+
     private TimeUtil() {
+    }
+
+
+    public static Date formatDate(String time){
+        try {
+            return format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getStringDate(Date date){
+        return formatString.format(date);
+    }
+
+    public static Date getDateFromString(String date){
+        try {
+            return formatString.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

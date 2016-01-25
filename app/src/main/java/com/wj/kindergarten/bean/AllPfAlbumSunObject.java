@@ -1,21 +1,39 @@
 package com.wj.kindergarten.bean;
 
+import android.support.annotation.IdRes;
+
 import com.google.gson.annotations.Expose;
+
+import net.tsz.afinal.annotation.sqlite.Id;
+import net.tsz.afinal.annotation.sqlite.Table;
 
 /**
  * Created by tangt on 2016/1/13.
  */
+//可自己指定表名 ：
+//    @Table(name = "aaa")
 public class AllPfAlbumSunObject extends BaseModel{
+    private int id;
     @Expose
     private String uuid;@Expose
     private String photo_time;@Expose
     private String path;@Expose
     private int type;@Expose
     private String address;@Expose
-    private String note;@Expose
+    private String note;
+//    @Id(column = "family_uuid")
+    @Expose
     private String family_uuid;@Expose
     private String create_useruuid;@Expose
     private int status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getStatus() {
         return status;
@@ -92,7 +110,8 @@ public class AllPfAlbumSunObject extends BaseModel{
     @Override
     public String toString() {
         return "AllPfAlbumSunObject{" +
-                "uuid='" + uuid + '\'' +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
                 ", photo_time='" + photo_time + '\'' +
                 ", path='" + path + '\'' +
                 ", type=" + type +

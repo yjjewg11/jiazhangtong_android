@@ -33,7 +33,7 @@ public class UserHeadImageUtil {
      * @param con
      */
     public static void showChooseImageDialog(Context con, View view, final ChooseImage chooseImage) {
-        if (!isShow) {
+//        if (!isShow) {
             isShow = true;
             context = con;
             View popupView = View.inflate(con, R.layout.user_head_image_layout, null);
@@ -82,6 +82,6 @@ public class UserHeadImageUtil {
             mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
             mPopupWindow.update();
             mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-        }
+//        }
     }
 }

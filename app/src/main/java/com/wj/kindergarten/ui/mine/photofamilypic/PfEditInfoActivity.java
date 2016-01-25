@@ -134,6 +134,11 @@ public class PfEditInfoActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case GloablUtils.PF_EDIT_TAKE_PHOTO :
+                Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/" + IMAGE_FILE_NAME));
+                if(uri != null){
+                    ImageLoaderUtil.displayMyImage(uri.toString(),iv_appear_image);
+                }
+                break;
             case GloablUtils.PF_EDIT_CHOOSE_IMAGE :
                 ImageLoaderUtil.displayMyImage(data.getData().toString(),iv_appear_image);
                 break;

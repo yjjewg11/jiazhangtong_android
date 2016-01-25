@@ -64,10 +64,10 @@ public class PfWallAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pf_classic_by_date_album, null);
             viewHolder.pf_tv_date_time = (TextView) convertView.findViewById(R.id.pf_tv_date_time);
             viewHolder.pf_pic_count = (TextView) convertView.findViewById(R.id.pf_pic_count);
-            viewHolder.pf_fusion_out_ll = (LinearLayout) convertView.findViewById(R.id.pf_fusion_out_ll);
-            viewHolder.pf_album_linearLayout_left = (LinearLayout) convertView.findViewById(R.id.pf_album_linearLayout_left);
-            viewHolder.pf_album_linearLayout_center = (LinearLayout) convertView.findViewById(R.id.pf_album_linearLayout_center);
-            viewHolder.pf_album_linearLayout_right = (LinearLayout) convertView.findViewById(R.id.pf_album_linearLayout_right);
+//            viewHolder.pf_fusion_out_ll = (LinearLayout) convertView.findViewById(R.id.pf_fusion_out_ll);
+//            viewHolder.pf_album_linearLayout_left = (LinearLayout) convertView.findViewById(R.id.pf_album_linearLayout_left);
+//            viewHolder.pf_album_linearLayout_center = (LinearLayout) convertView.findViewById(R.id.pf_album_linearLayout_center);
+//            viewHolder.pf_album_linearLayout_right = (LinearLayout) convertView.findViewById(R.id.pf_album_linearLayout_right);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

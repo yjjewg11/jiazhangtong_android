@@ -30,6 +30,7 @@ public class ConllectPicActivity extends BaseActivity{
 
     }
 
+
     @Override
     protected void onCreate() {
         collect_list = (List<String>) getIntent().getSerializableExtra("collect_list");

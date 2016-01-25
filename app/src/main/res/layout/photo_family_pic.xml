@@ -25,10 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_10"/>
     <FrameLayout
+        android:id="@+id/pf_change_content_fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/common_view_pager"/>
+
     </FrameLayout>
 
 </com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout>

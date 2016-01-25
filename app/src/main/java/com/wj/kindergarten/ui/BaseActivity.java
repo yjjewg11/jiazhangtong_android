@@ -622,6 +622,10 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     }
 
+    public void clearRightIcon() {
+        titleRightImageView.setImageResource(0);
+    }
+
     public interface ReLoginConfig {
         public void getConfig();
     }

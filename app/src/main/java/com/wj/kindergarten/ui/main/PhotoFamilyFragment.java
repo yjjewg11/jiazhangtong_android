@@ -47,21 +47,17 @@ import java.util.List;
 public class PhotoFamilyFragment extends Fragment {
     public static final int ADD_PIC = 5001;
     private TabLayout tab_layout;
-    private ViewPager viewPager;
-    private FragmentPagerAdapter pagerAdapter;
+//    private FragmentPagerAdapter pagerAdapter;
     private List<PfAlbumListSun> albumList;
     private View view;
     private PfFusionFragment pfFusionFragment;
+    private TestFragment boutique_album_framgent;
     private FrameLayout back_pf_scroll_fl;
     private PfFragmentLinearLayout pf_back_ll;
-    private static String family_uuid;
     boolean flIsLocationTop;
     private boolean isOne;
     private float moveY;
     private ArrayList<String> list = new ArrayList<>();
-    public static String getFamily_uuid() {
-        return family_uuid;
-    }
     private String [] images = new String []{
             "http://img03.sogoucdn.com/app/a/100520024/83ef625cdb1ea0a339645e6a1ade033c",
             "http://img02.sogoucdn.com/app/a/100520024/ad55a6132984150bf7b6df71fab9d16b",
@@ -77,6 +73,8 @@ public class PhotoFamilyFragment extends Fragment {
             list.add(path);
         }
     }
+    //标签 ： 时光轴，精品相册
+    private String [] fragment_tags = new String [] { "fusion" ,"boutique_album"};
 
 
     @Nullable
@@ -84,13 +82,19 @@ public class PhotoFamilyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
         if (view != null) return view;
-        family_uuid = "";
         view = inflater.inflate(R.layout.photo_family_pic, null);
         initViews(view);
+        initFragment();
         initClickListener();
         initTabLayout();
-        loadPfData();
+
         return view;
+    }
+
+    private void initFragment() {
+        pfFusionFragment = new PfFusionFragment();
+        pf_back_ll.setOnInterceptTouchEvent(new MyTouch());
+        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,pfFusionFragment,fragment_tags[0]).commit();
     }
 
     private void initHead() {
@@ -156,6 +160,7 @@ public class PhotoFamilyFragment extends Fragment {
 //                Bundle bundle = new Bundle();
 //                intent.putExtra("bundle",bundle);
                 startActivity(intent);
+                rightpopupWindow.dismiss();
             }
         });
         put_in_pic.setOnClickListener(new View.OnClickListener() {
@@ -178,30 +183,6 @@ public class PhotoFamilyFragment extends Fragment {
         rightpopupWindow.showAsDropDown(rightView);
     }
 
-    //获取家庭相册集
-    private void loadPfData() {
-        UserRequest.getPfAlbumList(getActivity(), new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                PfAlbumList pfAlbumList = (PfAlbumList) domain;
-                if (pfAlbumList != null && pfAlbumList.getList() != null && pfAlbumList.getList().size() > 0) {
-                    albumList = pfAlbumList.getList();
-                    family_uuid =  pfAlbumList.getList().get(0).getUuid();
-                }
-            }
-
-            @Override
-            public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
-    }
-
     private void initClickListener() {
 
     }
@@ -210,7 +191,7 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initViews(View v) {
         tab_layout = (TabLayout) v.findViewById(R.id.common_tab_layout);
-        viewPager = (ViewPager) v.findViewById(R.id.common_viewPager);
+//        viewPager = (ViewPager) v.findViewById(R.id.common_viewPager);
         back_pf_scroll_fl = (FrameLayout) v.findViewById(R.id.back_pf_scroll_fl);
         pf_back_ll = (PfFragmentLinearLayout) v.findViewById(R.id.pf_back_ll);
 
@@ -235,43 +216,84 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initTabLayout() {
 
-
-        pagerAdapter = new FragmentPagerAdapter(getFragmentManager()) {
+        tab_layout.addTab(tab_layout.newTab().setText("时光轴"));
+        tab_layout.addTab(tab_layout.newTab().setText("精品相册"));
+        tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public int getCount() {
-                return 2;
+            public void onTabSelected(TabLayout.Tab tab) {
+                   switch (tab.getPosition()){
+                       case 0 :
+                           //时光轴
+                           PfFusionFragment mfFusionFragment = (PfFusionFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
+                           if(mfFusionFragment != null){
+                               getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,mfFusionFragment,fragment_tags[0]).commit();
+                           }else{
+                               getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,pfFusionFragment,fragment_tags[0]).commit();
+                           }
+                           break;
+                       case 1 :
+                           //精辟相册
+                           if(getFragmentManager().findFragmentByTag(fragment_tags[1]) == null){
+                               boutique_album_framgent = new TestFragment();
+                           }else{
+                               boutique_album_framgent = (TestFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
+                           }
+
+                           getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,boutique_album_framgent,fragment_tags[1]).commit();
+                           break;
+                   }
             }
 
             @Override
-            public Fragment getItem(int position) {
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-                switch (position) {
-                    case 0:
-                        if (pfFusionFragment == null) {
-                            pfFusionFragment = new PfFusionFragment();
-                        }
-                        pf_back_ll.setOnInterceptTouchEvent(new MyTouch());
-                        return pfFusionFragment;
-                    case 1:
-                        return new TestFragment();
-                    case 2:
-                        return new TestFragment();
-                }
-
-
-                return null;
             }
 
             @Override
-            public CharSequence getPageTitle(int position) {
-                return titles[position];
-            }
-        };
+            public void onTabReselected(TabLayout.Tab tab) {
 
-        viewPager.setAdapter(pagerAdapter);
-        tab_layout.setupWithViewPager(viewPager);
+            }
+        });
+
+//        pagerAdapter = new FragmentPagerAdapter(getFragmentManager()) {
+//            @Override
+//            public int getCount() {
+//                return 2;
+//            }
+//
+//            @Override
+//            public Fragment getItem(int position) {
+//
+//                switch (position) {
+//                    case 0:
+//                        if (pfFusionFragment == null) {
+//                            pfFusionFragment = new PfFusionFragment();
+//                        }
+//                        pf_back_ll.setOnInterceptTouchEvent(new MyTouch());
+//                        return pfFusionFragment;
+//                    case 1:
+//                        return new TestFragment();
+//                    case 2:
+//                        return new TestFragment();
+//                }
+//
+//
+//                return null;
+//            }
+//
+//            @Override
+//            public CharSequence getPageTitle(int position) {
+//                return titles[position];
+//            }
+//        };
+
+        //取消viewPager，改用动态添加fragment，原因为上下滑动和左右滑动容易冲突。
+
+//        viewPager.setAdapter(pagerAdapter);
+//        tab_layout.setupWithViewPager(viewPager);
 
     }
+
     class MyTouch implements PfFragmentLinearLayout.OnInterceptTouchEvent {
 
 
