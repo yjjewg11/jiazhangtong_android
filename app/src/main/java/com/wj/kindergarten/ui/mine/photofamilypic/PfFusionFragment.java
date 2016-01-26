@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +34,8 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 
+import net.tsz.afinal.db.sqlite.DbModel;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,15 +51,16 @@ public class PfFusionFragment extends Fragment {
     private List<List<AllPfAlbumSunObject>> lists = new ArrayList<>();
     //将按照日期分类的图片地址单独提取出来
     private boolean isFirst;
+    private List<String> allList;//接受日期集合
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
                 //查询指定时间前的数据
                 case PfLoadDataProxy.NORMAL_DATA :
-                    List<AllPfAlbumSunObject> allList = (List<AllPfAlbumSunObject>) msg.obj;
+                    allList = (List<String>) msg.obj;
                     if(allList != null && allList.size() > 0){
-                        albumList.addAll(allList);
+                        addListDataByDate();
                     }
                     break;
                 //有maxTime后时间的刷新的数据
@@ -67,6 +71,7 @@ public class PfFusionFragment extends Fragment {
         }
     };
     private PfLoadDataProxy mPfLoadDataProxy;
+    private LinearLayout fragment_pf_fusion_linear;
 
 
     @Nullable
@@ -75,6 +80,7 @@ public class PfFusionFragment extends Fragment {
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+        fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
         pullScroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
@@ -88,115 +94,80 @@ public class PfFusionFragment extends Fragment {
             }
         });
 
-        adapter = new PfWallAdapter(getActivity());
+//        adapter = new PfWallAdapter(getActivity());
 
         loadData();
 
         return view;
     }
 
-    private void addListener() {
-        GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
-            @Override
-            public void handleMessage(Message msg) {
-                if(msg.what == GloablUtils.PF_ALBUM_ADD_WATERFALL_PIC){
-                   View view = View.inflate(getActivity(),R.layout.pf_classic_by_date_album, null);
-                    TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
-                    TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
-//                    LinearLayout pf_fusion_out_ll = (LinearLayout) view.findViewById(R.id.pf_fusion_out_ll);
-//                    LinearLayout pf_album_linearLayout_left = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_left);
-//                    LinearLayout pf_album_linearLayout_center = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_center);
-//                    LinearLayout pf_album_linearLayout_right = (LinearLayout) view.findViewById(R.id.pf_album_linearLayout_right);
+    private void addListDataByDate() {
 
-//                    if (lists != null && lists.size() > 0 &&
-//                            lists.get(position) != null && lists.get(position).size() > 0) {
-//                        viewHolder.pf_pic_count.setText("共" + lists.get(position).size() + "张");
-//                        viewHolder.pf_tv_date_time.setText("" +
-//                                TimeUtil.getYMDTimeFromYMDHMS(lists.get(position).get(0).getPhoto_time()));
-//                        if (lists.get(position).size() == 1) {
-//                            viewHolder.pf_album_linearLayout_center.setVisibility(View.GONE);
-//                            viewHolder.pf_album_linearLayout_right.setVisibility(View.GONE);
-//                            ImageView imageView = new ImageView(context);
-//                            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//                            viewHolder.pf_fusion_out_ll.addView(imageView, setLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                                    ViewGroup.LayoutParams.MATCH_PARENT));
-//                            ImageLoaderUtil.displayMyImage(lists.get(position).get(0).getPath(), imageView);
-//                        } else if (lists.get(position).size() > 1 && lists.get(position).size() <= 3) {
-//                            viewHolder.pf_album_linearLayout_center.setVisibility(View.GONE);
-//                            viewHolder.pf_album_linearLayout_right.setVisibility(View.GONE);
-//                            for (AllPfAlbumSunObject object : lists.get(position)) {
-//                                ImageView imageView = new ImageView(context);
-//                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                                params.weight = 1;
-//                                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-//                                viewHolder.pf_fusion_out_ll.addView(imageView, params);
-//                                ImageLoaderUtil.displayMyImage(object.getPath(), imageView);
-//                            }
-//                        } else if (lists.get(position).size() > 3) {
-//                            //给容器中添加3个垂直linearLayout用来添加图片
-//                            int count = 0;
-//                            for (AllPfAlbumSunObject object : lists.get(position)) {
-//                                if(count == 3){
-//                                    count = 0;
-//                                }
-//                                count ++;
-//                                ImageView imageView = new ImageView(context);
-//                                ImageLoaderUtil.displayMyImage(object.getPath(),imageView);
-//                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-//                                        LinearLayout.LayoutParams.WRAP_CONTENT);
-//                                if(count == 0){
-//                                    viewHolder.pf_album_linearLayout_left.addView(imageView, params);
-//                                }else if(count == 1){
-//                                    viewHolder.pf_album_linearLayout_center.addView(imageView, params);
-//                                }else if(count == 2){
-//                                    viewHolder.pf_album_linearLayout_right.addView(imageView, params);
-//                                }
-//
-//                            }
-//
-//
-//                        }
-//                    }
+        for(String date : allList){
 
+        List<AllPfAlbumSunObject> objectList =  mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), date);
+        if(objectList == null) continue;
+            int position = -1;
+            View view = View.inflate(getActivity(),R.layout.pf_classic_by_date_album, null);
 
-
+        TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
+        TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
+            pf_tv_date_time.setText(""+date);
+            pf_pic_count.setText(""+objectList.size());
+            LinearLayout linearLayout1 = (LinearLayout) view.findViewById(R.id.pf_classic_album_linear_1);
+            LinearLayout linearLayout2 = (LinearLayout) view.findViewById(R.id.pf_classic_album_linear_2);
+            LinearLayout linearLayout3 = (LinearLayout) view.findViewById(R.id.pf_classic_album_linear_3);
+            ImageView pf_classic_album_0 = (ImageView) view.findViewById(R.id.pf_classic_album_0);
+            ImageView pf_classic_album_1 = (ImageView) view.findViewById(R.id.pf_classic_album_1);
+            ImageView pf_classic_album_2 = (ImageView) view.findViewById(R.id.pf_classic_album_2);
+            ImageView pf_classic_album_3 = (ImageView) view.findViewById(R.id.pf_classic_album_3);
+            ImageView pf_classic_album_4 = (ImageView) view.findViewById(R.id.pf_classic_album_4);
+            ImageView pf_classic_album_5 = (ImageView) view.findViewById(R.id.pf_classic_album_5);
+            int size = objectList.size();
+            if(size <= 2){
+                linearLayout2.setVisibility(View.GONE);
+                linearLayout3.setVisibility(View.GONE);
+            }else if(size <= 4){
+                linearLayout3.setVisibility(View.GONE);
+            }
+            for(int i = 0 ; i < (objectList.size() > 6 ? 6 : objectList.size()) ; i++ ){
+                if(i == 0){
+                    setListener(objectList, pf_classic_album_0, i);
+                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_0);
+                }else if(i == 1){
+                    setListener(objectList, pf_classic_album_1, i);
+                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_1);
+                }else if(i == 2){
+                    setListener(objectList, pf_classic_album_2, i);
+                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_2);
+                }else if(i == 3){
+                    setListener(objectList, pf_classic_album_3, i);
+                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_3);
+                }else if(i == 4){
+                    setListener(objectList, pf_classic_album_4, i);
+                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_4);
+                }else if(i == 5){
+                    setListener(objectList, pf_classic_album_5, i);
+                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_5);
                 }
             }
-        });
-        GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what == GloablUtils.GET_PF_ALBUM_LIST_SUCCESS) {
-                    adapter.setImageList(lists);
-                }
-            }
-        });
-        GlobalHandler.getHandler().addMessageHandlerListener(new MessageHandlerListener() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what == GloablUtils.CLASSFIY_PF_BY_DATE) {
-                    //将集合里面的照片按日期分类
-                    if (albumList != null && albumList.size() > 0) {
-                        Iterator<AllPfAlbumSunObject> iterator = albumList.iterator();
-                        String date = null;
-                        while (iterator.hasNext()) {
-                            AllPfAlbumSunObject sunObject = iterator.next();
-                            if (sunObject == null) continue;
-                            if (date == null ||
-                                    !TimeUtil.getYMDTimeFromYMDHMS(sunObject.getPhoto_time()).equals(date)) {
-                                ArrayList<AllPfAlbumSunObject> list = new ArrayList<>();
-                                list.add(sunObject);
-                                lists.add(list);
-                            } else {
-                                lists.get(lists.size() - 1).add(sunObject);
-                            }
-                            date = TimeUtil.getYMDTimeFromYMDHMS(sunObject.getPhoto_time());
-                        }
-                        GlobalHandler.getHandler().sendEmptyMessage(GloablUtils.GET_PF_ALBUM_LIST_SUCCESS);
-                    }
-                }
-            }
-        });
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            fragment_pf_fusion_linear.addView(view,params);
+
+        }
+
+    }
+
+    private void setListener(List<AllPfAlbumSunObject> objectList, ImageView pf_classic_album_0, int i) {
+        pf_classic_album_0.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+    }
+
+    private String judgeReturnPath(AllPfAlbumSunObject object, int i) {
+        String path = null;
+        if (object != null){
+            path = object.getPath();
+        }
+        return path;
     }
 
     int pageNo = 1;

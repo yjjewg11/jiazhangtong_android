@@ -23,6 +23,7 @@ import com.wj.kindergarten.utils.Utils;
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.db.sqlite.DbModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -58,30 +59,32 @@ public class PfLoadDataProxy {
         CGLog.v("打印存放集合 : "+listT.toString() + "集合大小 : "+listT.size());
         //通过familyuuid查找数据库对象
         pfFamilyUuid = familyUuidSql.findById(familyUuid,PfFamilyUuid.class);
-        CGLog.v("打印对象　；"+pfFamilyUuid);
+        CGLog.v("打印对象　；" + pfFamilyUuid);
         String minTime = null;
 
-        loadFromSqlite();
+
         if (!isPullup) {
             //如果为空，则没有获取过数据,从网络获取 ; 有则直接从数据库取
             if (pfFamilyUuid == null) {
                 pfFamilyUuid = new PfFamilyUuid();
                 pfFamilyUuid.setFamily_uuid(familyUuid);
                 pfFamilyUuid.setMaxTime(new Date());
+                savePfFamilyUUid(pfFamilyUuid.getFamily_uuid());
             }
 // else {
 //                loadFromSqlite(pfFamilyUuid);
 //                return;
 //            }
-            loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMaxTime()), pageNo, NORMAL_DATA);
+            loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMaxTime()),"", pageNo, NORMAL_DATA);
         } else {
-            loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMinTime()), pageNo, NORMAL_DATA);
+            loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMinTime()),formatTime(pfFamilyUuid.getUpdateNewCountTime()), pageNo, NORMAL_DATA);
         }
+        loadFromSqlite();
 
     }
 
-    private void loadPic(final String familyUuid, final String minTime, final String maxTime, int pageNo, final int type) {
-        UserRequest.getPfPicByUuid(context, familyUuid, minTime, maxTime, pageNo, new RequestResultI() {
+    private void loadPic(final String familyUuid, final String minTime, final String maxTime,final String updateNewCountTime, int pageNo, final int type) {
+        UserRequest.getPfPicByUuid(context, familyUuid, minTime, maxTime, updateNewCountTime, pageNo, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 AllPfAlbum allPfAlbum = (AllPfAlbum) domain;
@@ -94,28 +97,16 @@ public class PfLoadDataProxy {
                 if (TextUtils.isEmpty(minTime)) {
                     pfFamilyUuid.setMinTime(TimeUtil.formatDate(Utils.isNull(allPfAlbum.getLastTime())));
                 }
+                pfFamilyUuid.setUpdateNewCountTime(pfFamilyUuid.getMaxTime());
                 //说明是第一次查询,保存到数据库
-                if (familyUuidSql.findById(familyUuid, PfFamilyUuid.class) == null) {
-//                    familyUuidSql.f
-                    familyUuidSql.save(pfFamilyUuid);
-                } else {
-                    familyUuidSql.update(pfFamilyUuid);
-                }
+                savePfFamilyUUid(familyUuid);
                 if (allPfAlbum.getList().getData() == null
                         || allPfAlbum.getList().getData().size() <= 0) return;
                 //如果请求类型是最新的数据，那么则通知主面板进行刷新。
                 //把获取到的数据保存到数据库中
-                for(AllPfAlbumSunObject object : allPfAlbum.getList().getData()){
+                for (AllPfAlbumSunObject object : allPfAlbum.getList().getData()) {
                     familyUuidObjectSql.save(object);
                 }
-                Message message = new Message();
-                message.obj = allPfAlbum.getList().getData();
-                if (type == REFRESH_DATA) {
-                    message.what = REFRESH_DATA;
-                } else if (type == NORMAL_DATA) {
-                    message.what = NORMAL_DATA;
-                }
-                handler.sendMessage(message);
                 //在获取到maxtime和mintime的值之后，查询有没有更新
                 loadDataIsChange(familyUuid);
             }
@@ -132,23 +123,34 @@ public class PfLoadDataProxy {
         });
     }
 
+    private void savePfFamilyUUid(String familyUuid) {
+        if (familyUuidSql.findById(familyUuid, PfFamilyUuid.class) == null) {
+//                    familyUuidSql.f
+            familyUuidSql.save(pfFamilyUuid);
+        } else {
+            familyUuidSql.update(pfFamilyUuid);
+        }
+    }
+
 
     private void loadFromSqlite() {
         //根据family_uuid把对象根据日期分组，显示多少组及其数量
-
-        List<AllPfAlbumSunObject> listTest = familyUuidObjectSql.findAll(AllPfAlbumSunObject.class);
-        String sql = "SELECT strftime('%Y-%m-%d',create_time),count(1) from "+"all_pf_album_sun_object"+"  WHERE family_uuid ='"+pfFamilyUuid.getFamily_uuid()+"'\n" +
+//        List<AllPfAlbumSunObject> listTest = familyUuidObjectSql.findAll(AllPfAlbumSunObject.class);
+        String sql = "SELECT strftime('%Y-%m-%d',create_time),count(1) from "+"com_wj_kindergarten_bean_AllPfAlbumSunObject"+"  WHERE family_uuid ='"+pfFamilyUuid.getFamily_uuid()+"'\n" +
                 "GROUP BY strftime('%Y-%m-%d',create_time)";
-        CGLog.v("打印存放照片对象的数据库表  ： ");
         if (pfFamilyUuid.getMaxTime() == null ||
                 pfFamilyUuid.getMinTime() == null) return;
-        DbModel dbModel =  familyUuidObjectSql.findDbModelBySQL(sql);
+        List<String> dateArray = new ArrayList<>();
         List<DbModel> dbList = familyUuidObjectSql.findDbModelListBySQL(sql);
-        CGLog.v("打印有无对象和对象集合 : "+dbModel + "看看集合 :"+dbList+"  : 大小 "+(dbList == null ? null : dbList.size()));
-        List<AllPfAlbumSunObject> list = familyUuidObjectSql.findAllByWhere(AllPfAlbumSunObject.class, "family_uuid = " + pfFamilyUuid.getFamily_uuid());
+        for(DbModel model : dbList){
+           String date = (String) model.getDataMap().get("strftime('%Y-%m-%d',create_time)");
+            if(!TextUtils.isEmpty(date)){
+                dateArray.add(date);
+            }
+        }
         Message message = new Message();
         message.what = NORMAL_DATA;
-        message.obj = list;
+        message.obj = dateArray;
         handler.sendMessage(message);
     }
 
@@ -156,17 +158,16 @@ public class PfLoadDataProxy {
     private void loadDataIsChange(final String family_uuid) {
         //如果有一个时间为空，说明是第一次加载，不需要更新
         if (judgeIsLoaded()) return;
-        UserRequest.getPfDataIsChange(context, family_uuid, TimeUtil.getStringDate(pfFamilyUuid.getMinTime()), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
+        queryDataByUpdate(family_uuid, new Date());
+        UserRequest.getPfDataIsChange(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMinTime()), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 PfChangeData pfChangeData = (PfChangeData) domain;
                 if (pfChangeData == null) return;
                 if (pfChangeData.getNewDataCount() > 0) {
-                    loadPic(family_uuid, formatTime(pfFamilyUuid.getMaxTime()), "", 1, REFRESH_DATA);
+                    loadPic(family_uuid, formatTime(pfFamilyUuid.getMaxTime()), "", "", 1, REFRESH_DATA);
                 }
-                if (pfChangeData.getUpdateDataCount() > 0) {
-                    queryDataByUpdate(family_uuid);
-                }
+
             }
 
             @Override
@@ -179,6 +180,7 @@ public class PfLoadDataProxy {
 
             }
         });
+
     }
 
     private String formatTime(Date date) {
@@ -194,12 +196,14 @@ public class PfLoadDataProxy {
     }
 
     //根据上面方法查询到的变化的数量如果大于0，则调用这个接口
-    private void queryDataByUpdate(String family_uuid) {
+    private void queryDataByUpdate(String family_uuid, final Date date) {
         if (judgeIsLoaded()) return;
-        UserRequest.getUUIDListByUpdate(context, family_uuid, TimeUtil.getStringDate(pfFamilyUuid.getMinTime()), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
+        UserRequest.getUUIDListByUpdate(context, family_uuid, TimeUtil.getStringDate(pfFamilyUuid.getMinTime()), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()),TimeUtil.getStringDate(date), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 final UUIDList uuidList = (UUIDList) domain;
+                pfFamilyUuid.setUpdateEditTime(date);
+                familyUuidSql.save(pfFamilyUuid);
                 if (uuidList == null || uuidList.getList() == null || uuidList.getList().getData() == null
                         || uuidList.getList().getData().size() == 0) return;
                 threadPoolExecutor.execute(new Runnable() {
@@ -235,4 +239,10 @@ public class PfLoadDataProxy {
         threadPoolExecutor.shutdownNow();
     }
 
+    public List<AllPfAlbumSunObject> queryListByDate(String family_uuid,String date) {
+        String sql = " strftime('%Y-%m-%d',create_time) ='"+date+"' and family_uuid ='"+family_uuid+"';";
+        List<AllPfAlbumSunObject> objectList =  familyUuidObjectSql.findAllByWhere(AllPfAlbumSunObject.class, sql);
+        return objectList;
+
+    }
 }

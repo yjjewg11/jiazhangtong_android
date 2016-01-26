@@ -842,11 +842,12 @@ public final class UserRequest {
         SendRequest.getInstance().get(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+DETE_ALBUM_LIST,resultI);
     }
 
-    public static void getPfPicByUuid(Context context,String family_uuid, String s, String maxTime, int pageNo, RequestResultI resultI) {
+    public static void getPfPicByUuid(Context context,String family_uuid, String s, String maxTime,String updateTime, int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("family_uuid",family_uuid);
         params.put("minTime",s);
         params.put("maxTime",maxTime);
+        params.put("updateTime",updateTime);
         SendRequest.getInstance().get(context,RequestType.PF_PIC_BY_UUID,params,RequestHttpUtil.BASE_URL+PF_PIC_BY_UUID,resultI);
     }
 
@@ -858,11 +859,20 @@ public final class UserRequest {
         SendRequest.getInstance().get(context,RequestType.CHECK_PF_IS_CHANGE,params,RequestHttpUtil.BASE_URL+CHECK_PF_IS_CHANGE,resultI);
     }
 
-    public static void getUUIDListByUpdate(Context context,String family_uuid, String minTime, String maxTime, RequestResultI resultI) {
+    public static void getUUIDListByUpdate(Context context,String family_uuid, String minTime, String maxTime,String updateTime, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("family_uuid",family_uuid);
         params.put("minTime",minTime);
         params.put("maxTime",maxTime);
+        params.put("updateTime",updateTime);
         SendRequest.getInstance().get(context,RequestType.PF_OBJ_BY_UPDATE,params,RequestHttpUtil.BASE_URL+PF_OBJ_BY_UPDATE,resultI);
+    }
+
+
+    public static void getSinglePfInfo(Context context,String uuid,RequestResultI resultI){
+        RequestParams params = new RequestParams();
+        params.put("uuid", uuid);
+        String url = RequestHttpUtil.BASE_URL+"rest/fPPhotoItem/"+uuid+".json";
+        SendRequest.getInstance().get(context,RequestType.GET_SINGLE_PF_INFO,params,url,resultI);
     }
 }

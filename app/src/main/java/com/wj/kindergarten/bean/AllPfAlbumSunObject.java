@@ -1,11 +1,8 @@
 package com.wj.kindergarten.bean;
 
-import android.support.annotation.IdRes;
-
 import com.google.gson.annotations.Expose;
 
 import net.tsz.afinal.annotation.sqlite.Id;
-import net.tsz.afinal.annotation.sqlite.Table;
 
 /**
  * Created by tangt on 2016/1/13.
@@ -13,19 +10,46 @@ import net.tsz.afinal.annotation.sqlite.Table;
 //可自己指定表名 ：
 //    @Table(name = "aaa")
 public class AllPfAlbumSunObject extends BaseModel{
+    @Expose
+    private String create_time;
     private int id;
     @Expose
+    @Id(column = "uuid")
     private String uuid;@Expose
     private String photo_time;@Expose
     private String path;@Expose
     private int type;@Expose
     private String address;@Expose
     private String note;
-//    @Id(column = "family_uuid")
     @Expose
     private String family_uuid;@Expose
     private String create_useruuid;@Expose
-    private int status;
+    private int status;@Expose
+    private String md5;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AllPfAlbumSunObject object = (AllPfAlbumSunObject) o;
+
+        return uuid.equals(object.uuid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
 
     public int getId() {
         return id;
@@ -110,7 +134,8 @@ public class AllPfAlbumSunObject extends BaseModel{
     @Override
     public String toString() {
         return "AllPfAlbumSunObject{" +
-                "id=" + id +
+                "create_time='" + create_time + '\'' +
+                ", id=" + id +
                 ", uuid='" + uuid + '\'' +
                 ", photo_time='" + photo_time + '\'' +
                 ", path='" + path + '\'' +
@@ -121,5 +146,14 @@ public class AllPfAlbumSunObject extends BaseModel{
                 ", create_useruuid='" + create_useruuid + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+
+    public String getMd5() {
+        return md5;
     }
 }

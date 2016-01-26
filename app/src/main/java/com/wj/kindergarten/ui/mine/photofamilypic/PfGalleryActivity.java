@@ -1,9 +1,7 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -13,10 +11,19 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.SingleNewInfo;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.imagescan.AutoDownLoadListener;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +35,11 @@ public class PfGalleryActivity extends BaseActivity {
     private List<AllPfAlbumSunObject> list;
     private ViewPager viewPager;
     private AllPfAlbumSunObject sunObject;
+    private int position;
+    private FinalDb family_uuid_object;
 
     private TextView[] textViews;
+    private PagerAdapter pagerAdapter;
 
     @Override
     protected void setContentLayout() {
@@ -52,7 +62,9 @@ public class PfGalleryActivity extends BaseActivity {
 
         Intent intent = getIntent();
         list = (ArrayList) intent.getSerializableExtra("list");
+        position = intent.getIntExtra("position",0);
         setTitleRightImage(R.drawable.modification_pf, 0);
+        family_uuid_object = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT,true);
         initViews();
         changeTitle();
         initBottomBt();
@@ -83,10 +95,22 @@ public class PfGalleryActivity extends BaseActivity {
                         break;
                     case R.id.pf_bottom_download:
 
-                        ImageLoaderUtil.downLoadImageLoader(sunObject.getPath(),new AutoDownLoadListener(PfGalleryActivity.this));
+                        if(sunObject.getPath().contains("http")){
+                            ImageLoaderUtil.downLoadImageLoader(sunObject.getPath(),new AutoDownLoadListener(PfGalleryActivity.this));
+                        }else{
+                            ToastUtils.showMessage("图片已下载!");
+                        }
                         break;
                     case R.id.pf_bottom_delete:
-
+                         ToastUtils.showDialog(PfGalleryActivity.this, "提示 !", "你确定要删除吗?", new DialogInterface.OnClickListener() {
+                             @Override
+                             public void onClick(DialogInterface dialog, int which) {
+                                 list.remove(sunObject);
+                                 pagerAdapter.notifyDataSetChanged();
+                                 family_uuid_object.delete(sunObject);
+                                 dialog.cancel();
+                             }
+                         });
                         break;
                 }
             }
@@ -106,7 +130,14 @@ public class PfGalleryActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if (list == null || list.size() == 0) return;
                 sunObject = list.get(position);
+                setTitleText(TimeUtil.getYMDTimeFromYMDHMS(sunObject.getCreate_time()), "");
+                queryItemNewInfo(sunObject.getUuid());
+                //做调试，屏蔽
+//                if(sunObject.getStatus() != 0){
+//                    queryItemNewInfo(sunObject.getUuid());
+//                }
             }
 
             @Override
@@ -116,9 +147,34 @@ public class PfGalleryActivity extends BaseActivity {
         });
     }
 
+    private void queryItemNewInfo(String uuid) {
+        UserRequest.getSinglePfInfo(this, uuid, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                   SingleNewInfo singleNewInfo = (SingleNewInfo) domain;
+                if(singleNewInfo != null){
+                   sunObject =  singleNewInfo.getData();
+                   sunObject.setStatus(0);
+                    family_uuid_object.update(sunObject);
+                    pagerAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
     private void initViews() {
         viewPager = (ViewPager) findViewById(R.id.pf_edit_viewPager);
-        viewPager.setAdapter(new PagerAdapter() {
+        pagerAdapter = new PagerAdapter() {
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
@@ -128,13 +184,14 @@ public class PfGalleryActivity extends BaseActivity {
                 TextView pf_gallery_location = (TextView) view.findViewById(R.id.pf_gallery_location);
                 TextView pf_gallery_people = (TextView) view.findViewById(R.id.pf_gallery_people);
                 AllPfAlbumSunObject object = null;
+                if(list != null && list.size() > 0) object = list.get(position);
                 if (object != null) {
                     ImageLoaderUtil.displayMyImage(object.getPath(), pf_gallery_image);
                     pf_gallery_annotation.setText("" + Utils.isNull(object.getNote()));
                     pf_gallery_location.setText("" + Utils.isNull(object.getAddress()));
                     pf_gallery_people.setText("" + Utils.isNull(object.getPhoto_time()));
                 } else {
-                    pf_gallery_image.setImageResource(R.drawable.load1);
+                    pf_gallery_image.setImageResource(R.drawable.new_album);
                 }
                 container.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 return view;
@@ -154,6 +211,8 @@ public class PfGalleryActivity extends BaseActivity {
             public boolean isViewFromObject(View view, Object object) {
                 return view == object;
             }
-        });
+        };
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setCurrentItem(position);
     }
 }
