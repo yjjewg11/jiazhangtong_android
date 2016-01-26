@@ -15,9 +15,9 @@
 
 
         <ImageView
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_launcher"
             android:layout_width="wrap_content"
-            android:maxHeight="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/pf_gallery_image"
             android:layout_gravity="center_horizontal" />

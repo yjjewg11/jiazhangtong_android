@@ -477,6 +477,9 @@ public class SendRequest {
             case RequestType.PF_OBJ_BY_UPDATE :
                 resultI.result(getDomain(domain, UUIDList.class));
                 break;
+            case RequestType.GET_SINGLE_PF_INFO :
+
+                break;
             default:
                 break;
         }

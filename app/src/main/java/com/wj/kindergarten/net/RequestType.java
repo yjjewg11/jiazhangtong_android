@@ -81,4 +81,5 @@ public interface RequestType {
      int PF_PIC_BY_UUID = 165;
      int CHECK_PF_IS_CHANGE = 166;
      int PF_OBJ_BY_UPDATE = 167;
+     int GET_SINGLE_PF_INFO = 168;
 }
