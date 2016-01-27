@@ -14,23 +14,14 @@ public class PfFamilyUuid implements Serializable {
     private Date minTime;
     @Id(column = "family_uuid")
     private String family_uuid;
-    private Date updateEditTime;
-    private Date updateNewCountTime;
+    private Date updateTime;
 
-    public Date getUpdateEditTime() {
-        return updateEditTime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdateEditTime(Date updateEditTime) {
-        this.updateEditTime = updateEditTime;
-    }
-
-    public Date getUpdateNewCountTime() {
-        return updateNewCountTime;
-    }
-
-    public void setUpdateNewCountTime(Date updateNewCountTime) {
-        this.updateNewCountTime = updateNewCountTime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Date getMaxTime() {
@@ -63,8 +54,6 @@ public class PfFamilyUuid implements Serializable {
                 "maxTime=" + maxTime +
                 ", minTime=" + minTime +
                 ", family_uuid='" + family_uuid + '\'' +
-                ", updateEditTime=" + updateEditTime +
-                ", updateNewCountTime=" + updateNewCountTime +
                 '}';
     }
 }
