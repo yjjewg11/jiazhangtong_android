@@ -47,7 +47,7 @@ import java.util.List;
 public class PhotoFamilyFragment extends Fragment {
     public static final int ADD_PIC = 5001;
     private TabLayout tab_layout;
-//    private FragmentPagerAdapter pagerAdapter;
+    //    private FragmentPagerAdapter pagerAdapter;
     private List<PfAlbumListSun> albumList;
     private View view;
     private PfFusionFragment pfFusionFragment;
@@ -58,7 +58,7 @@ public class PhotoFamilyFragment extends Fragment {
     private boolean isOne;
     private float moveY;
     private ArrayList<String> list = new ArrayList<>();
-    private String [] images = new String []{
+    private String[] images = new String[]{
             "http://img03.sogoucdn.com/app/a/100520024/83ef625cdb1ea0a339645e6a1ade033c",
             "http://img02.sogoucdn.com/app/a/100520024/ad55a6132984150bf7b6df71fab9d16b",
             "http://img02.sogoucdn.com/app/a/100520024/f4ade868d7abc6769cae5ee9d70bf75c",
@@ -67,14 +67,20 @@ public class PhotoFamilyFragment extends Fragment {
             "http://img01.sogoucdn.com/app/a/100520024/bb33c849ec21ea3a98b3598d56efb8c4",
             "http://img03.sogoucdn.com/app/a/100520024/d409d7b4fb46c19da38cd398acea013b",
     };
+    private boolean canScroll = true;
+
+    public void setCanScroll(boolean canScroll) {
+        this.canScroll = canScroll;
+    }
 
     {
-        for(String path : images){
+        for (String path : images) {
             list.add(path);
         }
     }
+
     //标签 ： 时光轴，精品相册
-    private String [] fragment_tags = new String [] { "fusion" ,"boutique_album"};
+    private String[] fragment_tags = new String[]{"fusion", "boutique_album"};
 
 
     @Nullable
@@ -94,7 +100,7 @@ public class PhotoFamilyFragment extends Fragment {
     private void initFragment() {
         pfFusionFragment = new PfFusionFragment();
         pf_back_ll.setOnInterceptTouchEvent(new MyTouch());
-        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,pfFusionFragment,fragment_tags[0]).commit();
+        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[0]).commit();
     }
 
     private void initHead() {
@@ -149,10 +155,10 @@ public class PhotoFamilyFragment extends Fragment {
 
     public void addRightListener() {
 
-        final View rightView = View.inflate(getActivity(),R.layout.pop_pf_choose_pic,null);
-        final PopupWindow rightpopupWindow = new PopupWindow(rightView, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        final View rightView = View.inflate(getActivity(), R.layout.pop_pf_choose_pic, null);
+        final PopupWindow rightpopupWindow = new PopupWindow(rightView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         TextView put_in_pic = (TextView) rightView.findViewById(R.id.put_in_pic);
-        TextView pop_of_choose_new_pic= (TextView) rightView.findViewById(R.id.pop_of_choose_new_pic);
+        TextView pop_of_choose_new_pic = (TextView) rightView.findViewById(R.id.pop_of_choose_new_pic);
         pop_of_choose_new_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +173,7 @@ public class PhotoFamilyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PfUpGalleryActivity.class);
-                intent.putExtra("type",ADD_PIC);
+                intent.putExtra("type", ADD_PIC);
                 startActivity(intent);
                 rightpopupWindow.dismiss();
             }
@@ -204,12 +210,16 @@ public class PhotoFamilyFragment extends Fragment {
         if (margin < -Math.abs(back_pf_scroll_fl.getHeight())) {
             margin = -back_pf_scroll_fl.getHeight();
         }
-        if(margin > 0){
+        if (margin > 0) {
             margin = 0;
         }
-        params.topMargin = margin;
-        back_pf_scroll_fl.setLayoutParams(params);
-        back_pf_scroll_fl.requestLayout();
+
+        if (canScroll) {
+            params.topMargin = margin;
+            back_pf_scroll_fl.setLayoutParams(params);
+            back_pf_scroll_fl.requestLayout();
+
+        }
     }
 
     String[] titles = new String[]{"时光轴", "精品相册"};
@@ -221,27 +231,27 @@ public class PhotoFamilyFragment extends Fragment {
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                   switch (tab.getPosition()){
-                       case 0 :
-                           //时光轴
-                           PfFusionFragment mfFusionFragment = (PfFusionFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
-                           if(mfFusionFragment != null){
-                               getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,mfFusionFragment,fragment_tags[0]).commit();
-                           }else{
-                               getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,pfFusionFragment,fragment_tags[0]).commit();
-                           }
-                           break;
-                       case 1 :
-                           //精辟相册
-                           if(getFragmentManager().findFragmentByTag(fragment_tags[1]) == null){
-                               boutique_album_framgent = new TestFragment();
-                           }else{
-                               boutique_album_framgent = (TestFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
-                           }
+                switch (tab.getPosition()) {
+                    case 0:
+                        //时光轴
+                        PfFusionFragment mfFusionFragment = (PfFusionFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
+                        if (mfFusionFragment != null) {
+                            getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, mfFusionFragment, fragment_tags[0]).commit();
+                        } else {
+                            getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[0]).commit();
+                        }
+                        break;
+                    case 1:
+                        //精辟相册
+                        if (getFragmentManager().findFragmentByTag(fragment_tags[1]) == null) {
+                            boutique_album_framgent = new TestFragment();
+                        } else {
+                            boutique_album_framgent = (TestFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
+                        }
 
-                           getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl,boutique_album_framgent,fragment_tags[1]).commit();
-                           break;
-                   }
+                        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, boutique_album_framgent, fragment_tags[1]).commit();
+                        break;
+                }
             }
 
             @Override

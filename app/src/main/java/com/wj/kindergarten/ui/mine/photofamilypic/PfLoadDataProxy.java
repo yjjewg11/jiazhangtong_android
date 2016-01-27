@@ -44,6 +44,7 @@ public class PfLoadDataProxy {
     public static final int REFRESH_DATA = 3060;
     public static final int NORMAL_DATA = 3061;
     private PfFamilyUuid pfFamilyUuid;
+    private static final int QUERY_MAX_PF = 6;
 
     public PfLoadDataProxy(Context context, Handler handler) {
         familyUuidSql = FinalDb.create(context, GloablUtils.FAMILY_UUID, true);
@@ -240,7 +241,7 @@ public class PfLoadDataProxy {
     }
 
     public List<AllPfAlbumSunObject> queryListByDate(String family_uuid,String date) {
-        String sql = " strftime('%Y-%m-%d',create_time) ='"+date+"' and family_uuid ='"+family_uuid+"';";
+        String sql = " strftime('%Y-%m-%d',create_time) ='"+date+"' and family_uuid ='"+family_uuid+"' "+"limit "+QUERY_MAX_PF+";";
         List<AllPfAlbumSunObject> objectList =  familyUuidObjectSql.findAllByWhere(AllPfAlbumSunObject.class, sql);
         return objectList;
 
