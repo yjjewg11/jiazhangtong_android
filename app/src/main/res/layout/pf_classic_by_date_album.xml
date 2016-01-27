@@ -39,79 +39,13 @@
     <LinearLayout
         android:id="@+id/pf_classic_linear"
         android:paddingRight="@dimen/margin_10"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingLeft="@dimen/margin_15"
+        android:background="@color/color_e5e5e5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="300dp">
 
 
-        <LinearLayout
-            android:id="@+id/pf_classic_album_linear_1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-            <ImageView
-                android:id="@+id/pf_classic_album_0"
-                android:scaleType="fitXY"
-                android:src="@drawable/new_album"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/pf_classic_album_1"
-                android:layout_marginLeft="@dimen/margin_3"
-                android:scaleType="fitXY"
-                android:layout_weight="1"
-                android:src="@drawable/play"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pf_classic_album_linear_2"
-            android:layout_marginTop="@dimen/margin_3"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-            <ImageView
-                android:id="@+id/pf_classic_album_2"
-                android:scaleType="fitXY"
-                android:src="@drawable/play"
-                android:layout_width="150dp"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/pf_classic_album_3"
-                android:layout_marginLeft="@dimen/margin_3"
-                android:scaleType="fitXY"
-                android:layout_weight="1"
-                android:src="@drawable/new_album"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pf_classic_album_linear_3"
-            android:layout_marginTop="@dimen/margin_3"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
-
-            <ImageView
-                android:id="@+id/pf_classic_album_4"
-                android:scaleType="fitXY"
-                android:src="@drawable/new_album"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/pf_classic_album_5"
-                android:layout_marginLeft="@dimen/margin_3"
-                android:scaleType="fitXY"
-                android:layout_weight="1"
-                android:src="@drawable/play"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-        </LinearLayout>
 
     </LinearLayout>
 

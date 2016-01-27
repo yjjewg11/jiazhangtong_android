@@ -6,6 +6,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.func.adapter.PfAlbumRecycleAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
@@ -52,19 +57,19 @@ public class PfFusionFragment extends Fragment {
     //将按照日期分类的图片地址单独提取出来
     private boolean isFirst;
     private List<String> allList;//接受日期集合
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 //查询指定时间前的数据
-                case PfLoadDataProxy.NORMAL_DATA :
+                case PfLoadDataProxy.NORMAL_DATA:
                     allList = (List<String>) msg.obj;
-                    if(allList != null && allList.size() > 0){
+                    if (allList != null && allList.size() > 0) {
                         addListDataByDate();
                     }
                     break;
                 //有maxTime后时间的刷新的数据
-                case PfLoadDataProxy.REFRESH_DATA :
+                case PfLoadDataProxy.REFRESH_DATA:
 
                     break;
             }
@@ -81,7 +86,7 @@ public class PfFusionFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
-        pullScroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
         pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
@@ -103,68 +108,55 @@ public class PfFusionFragment extends Fragment {
 
     private void addListDataByDate() {
 
-        for(String date : allList){
+        for (String date : allList) {
 
-        List<AllPfAlbumSunObject> objectList =  mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), date);
-        if(objectList == null) continue;
-            int position = -1;
-            View view = View.inflate(getActivity(),R.layout.pf_classic_by_date_album, null);
+            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), date);
+            if (objectList == null) continue;
 
-        TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
-        TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
-            pf_tv_date_time.setText(""+date);
-            pf_pic_count.setText(""+objectList.size());
-            LinearLayout linearLayout1 = (LinearLayout) view.findViewById(R.id.pf_classic_album_linear_1);
-            LinearLayout linearLayout2 = (LinearLayout) view.findViewById(R.id.pf_classic_album_linear_2);
-            LinearLayout linearLayout3 = (LinearLayout) view.findViewById(R.id.pf_classic_album_linear_3);
-            ImageView pf_classic_album_0 = (ImageView) view.findViewById(R.id.pf_classic_album_0);
-            ImageView pf_classic_album_1 = (ImageView) view.findViewById(R.id.pf_classic_album_1);
-            ImageView pf_classic_album_2 = (ImageView) view.findViewById(R.id.pf_classic_album_2);
-            ImageView pf_classic_album_3 = (ImageView) view.findViewById(R.id.pf_classic_album_3);
-            ImageView pf_classic_album_4 = (ImageView) view.findViewById(R.id.pf_classic_album_4);
-            ImageView pf_classic_album_5 = (ImageView) view.findViewById(R.id.pf_classic_album_5);
+            View view = View.inflate(getActivity(), R.layout.pf_classic_by_date_album, null);
+            LinearLayout pf_classic_linear = (LinearLayout) view.findViewById(R.id.pf_classic_linear);
+            TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
+            TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
+            pf_tv_date_time.setText("" + date);
+            pf_pic_count.setText("共" + objectList.size() + "张");
             int size = objectList.size();
-            if(size <= 2){
-                linearLayout2.setVisibility(View.GONE);
-                linearLayout3.setVisibility(View.GONE);
-            }else if(size <= 4){
-                linearLayout3.setVisibility(View.GONE);
+            if (size == 1) {
+                ImageView imageView = new ImageView(getActivity());
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100, 100);
+                ImageLoaderUtil.displayMyImage(date,imageView);
+                pf_classic_linear.addView(imageView,params);
+
             }
-            for(int i = 0 ; i < (objectList.size() > 6 ? 6 : objectList.size()) ; i++ ){
-                if(i == 0){
-                    setListener(objectList, pf_classic_album_0, i);
-                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_0);
-                }else if(i == 1){
-                    setListener(objectList, pf_classic_album_1, i);
-                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_1);
-                }else if(i == 2){
-                    setListener(objectList, pf_classic_album_2, i);
-                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_2);
-                }else if(i == 3){
-                    setListener(objectList, pf_classic_album_3, i);
-                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_3);
-                }else if(i == 4){
-                    setListener(objectList, pf_classic_album_4, i);
-                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_4);
-                }else if(i == 5){
-                    setListener(objectList, pf_classic_album_5, i);
-                    ImageLoaderUtil.displayMyImage(judgeReturnPath(objectList.get(i), i),pf_classic_album_5);
+            if (1 < size && size <= 2) {
+                for(int i = 0 ; i < 2 ; i ++){
+                    ImageView imageView = new ImageView(getActivity());
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,80);
+                    params.weight = 1;
+                    ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),imageView);
+                    pf_classic_linear.addView(imageView,params);
                 }
+            } else if (size > 2) {
+                RecyclerView recyclerView = new RecyclerView(getActivity());
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                recyclerView.setAdapter(new PfAlbumRecycleAdapter(getActivity(), objectList));
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                pf_classic_linear.addView(recyclerView,params);
             }
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            fragment_pf_fusion_linear.addView(view,params);
+            fragment_pf_fusion_linear.addView(view, params);
 
         }
 
     }
 
     private void setListener(List<AllPfAlbumSunObject> objectList, ImageView pf_classic_album_0, int i) {
-        pf_classic_album_0.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+        pf_classic_album_0.setOnClickListener(new TransportListener(getActivity(), i, objectList));
     }
 
     private String judgeReturnPath(AllPfAlbumSunObject object, int i) {
         String path = null;
-        if (object != null){
+        if (object != null) {
             path = object.getPath();
         }
         return path;
@@ -173,8 +165,8 @@ public class PfFusionFragment extends Fragment {
     int pageNo = 1;
 
     public void loadData() {
-        mPfLoadDataProxy = new PfLoadDataProxy(getActivity(),mHandler);
-        mPfLoadDataProxy.loadData( ((MainActivity)getActivity()).getFamily_uuid() ,pageNo,false);
+        mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
+        mPfLoadDataProxy.loadData(((MainActivity) getActivity()).getFamily_uuid(), pageNo, false);
     }
 
 }
