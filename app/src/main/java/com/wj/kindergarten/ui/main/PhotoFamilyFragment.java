@@ -67,7 +67,7 @@ public class PhotoFamilyFragment extends Fragment {
             "http://img01.sogoucdn.com/app/a/100520024/bb33c849ec21ea3a98b3598d56efb8c4",
             "http://img03.sogoucdn.com/app/a/100520024/d409d7b4fb46c19da38cd398acea013b",
     };
-    private boolean canScroll = true;
+    public boolean canScroll = true;
 
     public void setCanScroll(boolean canScroll) {
         this.canScroll = canScroll;
@@ -98,7 +98,7 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void initFragment() {
-        pfFusionFragment = new PfFusionFragment();
+        pfFusionFragment = new PfFusionFragment(this);
         pf_back_ll.setOnInterceptTouchEvent(new MyTouch());
         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[0]).commit();
     }
@@ -203,12 +203,29 @@ public class PhotoFamilyFragment extends Fragment {
 
     }
 
+    public interface JudgeTop{
+        void onTop();
+        void notNoTop();
+    }
+    private JudgeTop judgeTop;
+
+    public void setJudgeTop(JudgeTop judgeTop) {
+        this.judgeTop = judgeTop;
+    }
+
     private void bottomRequest() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
         int margin = (int) (params.topMargin + moveY);
 
-        if (margin < -Math.abs(back_pf_scroll_fl.getHeight())) {
+        if (margin <= -Math.abs(back_pf_scroll_fl.getHeight())) {
             margin = -back_pf_scroll_fl.getHeight();
+            if(judgeTop != null) {
+                judgeTop.onTop();
+            }
+        }else{
+            if(judgeTop != null){
+                judgeTop.notNoTop();
+            }
         }
         if (margin > 0) {
             margin = 0;

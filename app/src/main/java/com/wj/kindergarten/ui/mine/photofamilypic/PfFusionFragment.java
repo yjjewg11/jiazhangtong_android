@@ -26,6 +26,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.QueryGroupCount;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
@@ -48,22 +49,30 @@ import java.util.List;
 
 public class PfFusionFragment extends Fragment {
 
+    private PhotoFamilyFragment photoFamilyFragment;
+
+    public PfFusionFragment(PhotoFamilyFragment photoFamilyFragment) {
+        super();
+        this.photoFamilyFragment = photoFamilyFragment;
+    }
+
     private View view;
     private PullToRefreshScrollView pullScroll;
+    private PhotoFamilyFragment.JudgeTop judgeTop;
     private PfWallAdapter adapter;
     private List<AllPfAlbumSunObject> albumList = new ArrayList<>();
     //将网络获取的照片按照日期分类排列
     private List<List<AllPfAlbumSunObject>> lists = new ArrayList<>();
     //将按照日期分类的图片地址单独提取出来
     private boolean isFirst;
-    private List<String> allList;//接受日期集合
+    private List<QueryGroupCount> allList;//接受日期,和数量的对象
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 //查询指定时间前的数据
                 case PfLoadDataProxy.NORMAL_DATA:
-                    allList = (List<String>) msg.obj;
+                    allList = (List<QueryGroupCount>) msg.obj;
                     if (allList != null && allList.size() > 0) {
                         addListDataByDate();
                     }
@@ -84,6 +93,22 @@ public class PfFusionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
+        judgeTop = new PhotoFamilyFragment.JudgeTop() {
+            @Override
+            public void onTop() {
+                pullScroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+                photoFamilyFragment.canScroll = false;
+
+            }
+
+            @Override
+            public void notNoTop() {
+                pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
+                if (pullScroll.getScrollY() == 0) {
+                    photoFamilyFragment.canScroll = true;
+                }
+            }
+        };
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
         pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
@@ -95,11 +120,9 @@ public class PfFusionFragment extends Fragment {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
+                   mPfLoadDataProxy.loadData(MainActivity.getFamily_uuid(),1,true);
             }
         });
-
-//        adapter = new PfWallAdapter(getActivity());
 
         loadData();
 
@@ -108,40 +131,45 @@ public class PfFusionFragment extends Fragment {
 
     private void addListDataByDate() {
 
-        for (String date : allList) {
+        for (QueryGroupCount count : allList) {
 
-            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), date);
+            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), count.getDate());
             if (objectList == null) continue;
 
             View view = View.inflate(getActivity(), R.layout.pf_classic_by_date_album, null);
-            LinearLayout pf_classic_linear = (LinearLayout) view.findViewById(R.id.pf_classic_linear);
+            ImageView iv_0 = (ImageView) view.findViewById(R.id.pf_iv_0);
+            ImageView iv_1 = (ImageView) view.findViewById(R.id.pf_iv_1);
+            ImageView iv_2 = (ImageView) view.findViewById(R.id.pf_iv_2);
+            ImageView iv_3 = (ImageView) view.findViewById(R.id.pf_iv_3);
+            ImageView iv_4 = (ImageView) view.findViewById(R.id.pf_iv_4);
+            ImageView iv_5 = (ImageView) view.findViewById(R.id.pf_iv_5);
             TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
             TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
-            pf_tv_date_time.setText("" + date);
-            pf_pic_count.setText("共" + objectList.size() + "张");
+            pf_tv_date_time.setText("" + count.getDate());
+            pf_pic_count.setText("共" + count.getCount() + "张");
             int size = objectList.size();
-            if (size == 1) {
-                ImageView imageView = new ImageView(getActivity());
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100, 100);
-                ImageLoaderUtil.displayMyImage(date,imageView);
-                pf_classic_linear.addView(imageView,params);
-
-            }
-            if (1 < size && size <= 2) {
-                for(int i = 0 ; i < 2 ; i ++){
-                    ImageView imageView = new ImageView(getActivity());
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,80);
-                    params.weight = 1;
-                    ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),imageView);
-                    pf_classic_linear.addView(imageView,params);
+            if (size > 0){
+                for (int i = 0 ; i < size ; i++){
+                    if(i == 0){
+                        iv_0.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_0);
+                    }else if(i == 1){
+                        iv_1.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_1);
+                    }else if(i == 2){
+                        iv_2.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_2);
+                    }else if(i == 3){
+                        iv_3.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_3);
+                    }else if(i == 4){
+                        iv_4.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_4);
+                    }else if(i == 5){
+                        iv_5.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_5);
+                    }
                 }
-            } else if (size > 2) {
-                RecyclerView recyclerView = new RecyclerView(getActivity());
-                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                recyclerView.setAdapter(new PfAlbumRecycleAdapter(getActivity(), objectList));
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                pf_classic_linear.addView(recyclerView,params);
             }
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             fragment_pf_fusion_linear.addView(view, params);
@@ -166,6 +194,14 @@ public class PfFusionFragment extends Fragment {
 
     public void loadData() {
         mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
+        mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
+            @Override
+            public void finish() {
+                if(pullScroll.isRefreshing()){
+                    pullScroll.onRefreshComplete();
+                }
+            }
+        });
         mPfLoadDataProxy.loadData(((MainActivity) getActivity()).getFamily_uuid(), pageNo, false);
     }
 

@@ -2,6 +2,8 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -40,6 +42,32 @@ public class PfGalleryActivity extends BaseActivity {
 
     private TextView[] textViews;
     private PagerAdapter pagerAdapter;
+    private static final int BEGIN_SCAN_PF = 4000;
+    private static final int FINISH_SCAN = 4001;
+    int page = 1;
+    int pageCount = 0;
+    private List<AllPfAlbumSunObject> listObj = new ArrayList<>();
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case BEGIN_SCAN_PF:
+                    AllPfAlbumSunObject object = (AllPfAlbumSunObject) msg.obj;
+                    String sql = " strftime('%Y-%m-%d',create_time) ='" + object.getCreate_time() + "' and family_uuid ='" + object.getFamily_uuid() + "'" + "order by id limit 50 offset " + pageCount + ";";
+                    List<AllPfAlbumSunObject> listt = family_object_db.findAllByWhere(AllPfAlbumSunObject.class, sql);
+                    if (listt != null && listt.size() > 0) {
+                        pageCount+=50;
+                        list.addAll(listt);
+                    }
+                    pagerAdapter.notifyDataSetChanged();
+                    break;
+                case FINISH_SCAN:
+
+                    break;
+            }
+        }
+    };
+    private FinalDb family_object_db;
 
     @Override
     protected void setContentLayout() {
@@ -59,12 +87,18 @@ public class PfGalleryActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-
+        family_object_db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT, true);
         Intent intent = getIntent();
         list = (ArrayList) intent.getSerializableExtra("list");
-        position = intent.getIntExtra("position",0);
+        if (list != null && list.size() > 0) {
+            Message message = new Message();
+            message.obj = list.get(0);
+            message.what = BEGIN_SCAN_PF;
+            mHandler.sendMessage(message);
+        }
+        position = intent.getIntExtra("position", 0);
         setTitleRightImage(R.drawable.modification_pf, 0);
-        family_uuid_object = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT,true);
+        family_uuid_object = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT, true);
         initViews();
         changeTitle();
         initBottomBt();
@@ -82,7 +116,7 @@ public class PfGalleryActivity extends BaseActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sunObject == null) return;
+                if (sunObject == null) return;
                 switch (v.getId()) {
                     case R.id.pf_bottom_collect:
 
@@ -95,22 +129,22 @@ public class PfGalleryActivity extends BaseActivity {
                         break;
                     case R.id.pf_bottom_download:
 
-                        if(sunObject.getPath().contains("http")){
-                            ImageLoaderUtil.downLoadImageLoader(sunObject.getPath(),new AutoDownLoadListener(PfGalleryActivity.this));
-                        }else{
+                        if (sunObject.getPath().contains("http")) {
+                            ImageLoaderUtil.downLoadImageLoader(sunObject.getPath(), new AutoDownLoadListener(PfGalleryActivity.this));
+                        } else {
                             ToastUtils.showMessage("图片已下载!");
                         }
                         break;
                     case R.id.pf_bottom_delete:
-                         ToastUtils.showDialog(PfGalleryActivity.this, "提示 !", "你确定要删除吗?", new DialogInterface.OnClickListener() {
-                             @Override
-                             public void onClick(DialogInterface dialog, int which) {
-                                 list.remove(sunObject);
-                                 pagerAdapter.notifyDataSetChanged();
-                                 family_uuid_object.delete(sunObject);
-                                 dialog.cancel();
-                             }
-                         });
+                        ToastUtils.showDialog(PfGalleryActivity.this, "提示 !", "你确定要删除吗?", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                list.remove(sunObject);
+                                pagerAdapter.notifyDataSetChanged();
+                                family_uuid_object.delete(sunObject);
+                                dialog.cancel();
+                            }
+                        });
                         break;
                 }
             }
@@ -151,10 +185,10 @@ public class PfGalleryActivity extends BaseActivity {
         UserRequest.getSinglePfInfo(this, uuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                   SingleNewInfo singleNewInfo = (SingleNewInfo) domain;
-                if(singleNewInfo != null){
-                   sunObject =  singleNewInfo.getData();
-                   sunObject.setStatus(0);
+                SingleNewInfo singleNewInfo = (SingleNewInfo) domain;
+                if (singleNewInfo != null) {
+                    sunObject = singleNewInfo.getData();
+                    sunObject.setStatus(0);
                     family_uuid_object.update(sunObject);
                     pagerAdapter.notifyDataSetChanged();
                 }
@@ -184,7 +218,7 @@ public class PfGalleryActivity extends BaseActivity {
                 TextView pf_gallery_location = (TextView) view.findViewById(R.id.pf_gallery_location);
                 TextView pf_gallery_people = (TextView) view.findViewById(R.id.pf_gallery_people);
                 AllPfAlbumSunObject object = null;
-                if(list != null && list.size() > 0) object = list.get(position);
+                if (list != null && list.size() > 0) object = list.get(position);
                 if (object != null) {
                     ImageLoaderUtil.displayMyImage(object.getPath(), pf_gallery_image);
                     pf_gallery_annotation.setText("" + Utils.isNull(object.getNote()));
