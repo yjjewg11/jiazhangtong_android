@@ -43,10 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
-            android:drawableTop="@drawable/pf_delete"
-            android:id="@+id/pf_bottom_delete"
+            android:drawableTop="@drawable/bianji_jpxc_jingpin"
+            android:id="@+id/pf_bottom_edit"
             style="@style/pf_bottom_style"
-            android:text="删除"
+            android:text="编辑"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

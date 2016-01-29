@@ -8,6 +8,7 @@
         <include layout="@layout/title_normal"/>
     </FrameLayout>
 
+
     <android.support.v4.view.ViewPager
         android:layout_weight="1"
         android:id="@+id/pf_edit_viewPager"

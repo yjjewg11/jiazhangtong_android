@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -26,6 +27,7 @@ import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.http.AjaxCallBack;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,13 +38,14 @@ import java.util.List;
 public class PicUploadService extends Service {
 
 
+    private ArrayList<AlreadySavePath> listObject;
+
     public PicUploadService() {
     }
 
     private UploadFile uploadFile;
     private String failedPath;
     private FinalDb db;
-    private ArrayList<String> list = new ArrayList<>();
 
     int count = 0;
     int size = 0;
@@ -72,8 +75,7 @@ public class PicUploadService extends Service {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 getBaseContext().startActivity(intent);
 
-                sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED,0);
-                list.clear();
+                sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED, 0);
                 return;
             }
             success();
@@ -82,24 +84,35 @@ public class PicUploadService extends Service {
         @Override
         public void onFailure(Throwable t, int errorNo, String strMsg) {
             super.onFailure(t, errorNo, strMsg);
-            CGLog.v("上传失败 : "+strMsg);
+            CGLog.v("上传失败 : " + strMsg);
+            AlreadySavePath alreadySavePath = listObject.get(count);
+            alreadySavePath.setStatus(3);
+            db.update(alreadySavePath);
+            count++;
+            if(count >= size){
+                if(listObject != null)listObject.clear();
+                return;
+            }
         }
     };
     private void success() {
-        db.save(new AlreadySavePath(list.get(count)));
+        AlreadySavePath alreadySavePath = listObject.get(count);
+        alreadySavePath.setStatus(0);
+        alreadySavePath.setSuccess_time(new Date());
+        db.update(alreadySavePath);
         sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED,100);
         count++;
         if (count >= size) {
-            list.clear();
+            if(listObject != null)listObject.clear();
             return;
         }
-        uploadFile.upLoadPf(list.get(count),ajaxCallBack);
+        uploadFile.upLoadPf(listObject.get(count).getLocalPath(),ajaxCallBack);
     }
 
     private void sendBroad(String action,int progress) {
         if (isTransmission()) {
             Intent intent = new Intent(action);
-            intent.putExtra("path",list.get(count));
+            intent.putExtra("path",listObject.get(count).getLocalPath());
             sendBroadcast(intent);
         }
     }
@@ -115,12 +128,12 @@ public class PicUploadService extends Service {
 
         @Override
         public void failure(String message) {
-            if (!TextUtils.isEmpty(failedPath) && !failedPath.equals(list.get(count))) {
-                failedPath = list.get(count);
-            } else {
-                count++;
-            }
-            uploadFile.upLoadPf(list.get(count),ajaxCallBack);
+//            if (!TextUtils.isEmpty(failedPath) && !failedPath.equals(listObject.get(count).getLocalPath())) {
+//                failedPath = list.get(count);
+//            } else {
+//                count++;
+//            }
+//            uploadFile.upLoadPf(list.get(count),ajaxCallBack);
         }
     };
 
@@ -152,19 +165,40 @@ public class PicUploadService extends Service {
     public IBinder onBind(Intent intent) {
         return new TransportBinder();
     }
-
+    boolean upLoad = true;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        upLoad = true;
+        //判断是否是wifi状态
+        if(!Utils.isWifi(getApplicationContext())){
+            ToastUtils.showDialog(getApplicationContext(), "提示！", "当前处于非WIFI网络，确定上传?", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-        count = 0;
-        ArrayList arrayList = (ArrayList) intent.getSerializableExtra("up_list");
-        if (arrayList != null && arrayList.size() > 0) {
-            size = arrayList.size();
-            list.addAll(arrayList);
-            uploadFile.upLoadPf(list.get(0),ajaxCallBack);
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    upLoad = false;
+                }
+            });
         }
+
+        //判断是否上传
+        if(upLoad){
+            count = 0;
+            String sql = "status = '1'";
+            listObject = (ArrayList<AlreadySavePath>) db.findAllByWhere(AlreadySavePath.class,sql);
+            if(listObject != null && listObject.size() > 0){
+                size = listObject.size();
+                uploadFile.upLoadPf(listObject.get(0).getLocalPath(), ajaxCallBack);
+            }
+        }
+
+
         return super.onStartCommand(intent, flags, startId);
     }
+
 
     String loadName = "com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity";
 
@@ -181,13 +215,14 @@ public class PicUploadService extends Service {
             isTransMission = false;
         }
 
-        public ArrayList<String> getList() {
-            return list == null ? null : list;
+        public ArrayList<AlreadySavePath> getList() {
+            return listObject == null ? null : listObject;
         }
 
-        public void cancleUpLoadSinglePic(String path) {
-            if(list.contains(path)){
-                list.remove(path);
+        public void cancleUpLoadSinglePic(AlreadySavePath alreadySavePath) {
+            if(listObject.contains(alreadySavePath)){
+                listObject.remove(alreadySavePath);
+                db.delete(alreadySavePath);
                 ToastUtils.showMessage("删除成功!");
             }
         }

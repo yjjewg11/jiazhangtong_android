@@ -14,6 +14,8 @@ public interface GloablUtils {
     String FAMILY_UUID = "family_uuid";
     //用来存放所有照片对象的表
     String FAMILY_UUID_OBJECT = "family_uuid_object";
+    //存放上传照片状态的数据库
+    String UP_LOAD_STATUS_PIC = "up_load_status_pic";
 
     //芒果id
     String MOGO_ID = "b1be6cfbb82542c4ba00f32ef1166884";

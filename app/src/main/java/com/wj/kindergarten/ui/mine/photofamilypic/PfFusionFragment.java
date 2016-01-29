@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,6 +36,7 @@ import com.wj.kindergarten.ui.func.adapter.PfAlbumRecycleAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
+import com.wj.kindergarten.ui.more.BanScrollView;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -50,6 +52,11 @@ import java.util.List;
 public class PfFusionFragment extends Fragment {
 
     private PhotoFamilyFragment photoFamilyFragment;
+    private BanScrollView banScrollView;
+    boolean scrollIsTop = true;
+    public boolean scrollIsTop(){
+        return scrollIsTop;
+    }
 
     public PfFusionFragment(PhotoFamilyFragment photoFamilyFragment) {
         super();
@@ -58,7 +65,6 @@ public class PfFusionFragment extends Fragment {
 
     private View view;
     private PullToRefreshScrollView pullScroll;
-    private PhotoFamilyFragment.JudgeTop judgeTop;
     private PfWallAdapter adapter;
     private List<AllPfAlbumSunObject> albumList = new ArrayList<>();
     //将网络获取的照片按照日期分类排列
@@ -93,24 +99,28 @@ public class PfFusionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
-        judgeTop = new PhotoFamilyFragment.JudgeTop() {
-            @Override
-            public void onTop() {
-                pullScroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-                photoFamilyFragment.canScroll = false;
 
-            }
-
-            @Override
-            public void notNoTop() {
-                pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
-                if (pullScroll.getScrollY() == 0) {
-                    photoFamilyFragment.canScroll = true;
-                }
-            }
-        };
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
+        banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+        banScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                scrollIsTop = (v.getScrollY() == 0);
+                return false;
+            }
+        });
+        photoFamilyFragment.setLocationChanged(new PhotoFamilyFragment.LocationChanged() {
+            @Override
+            public void onTop() {
+                banScrollView.setCanScroll(true);
+            }
+
+            @Override
+            public void onBottom() {
+                banScrollView.setCanScroll(false);
+            }
+        });
         pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
         pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:paddingTop="@dimen/margin_20"
+        android:paddingBottom="@dimen/margin_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="你爸爸"
+            android:id="@+id/pf_info_name"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/pf_info_image" />
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="这是一条评论内容，风景很漂亮"
+            android:id="@+id/pf_info_content"
+            android:layout_below="@+id/pf_info_name"
+            android:layout_toRightOf="@+id/pf_info_image" />
+
+        <TextView
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="30分钟前"
+            android:id="@+id/pf_info_time"
+            android:layout_alignTop="@+id/pf_info_name"
+            android:layout_alignParentRight="true" />
+
+        <com.wj.kindergarten.compounets.CircleImage
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pf_info_image"
+            android:layout_alignTop="@+id/pf_info_name"
+            android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+    <View
+        android:background="@color/background_division"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>

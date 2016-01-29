@@ -44,4 +44,11 @@ public class ToastUtils {
                 .setPositiveButton("确定",positionListener).create();
         dialog.show();
     }
+
+    public static void showDialog(Context context,String title,String content,AlertDialog.OnClickListener positionListener,AlertDialog.OnClickListener cancle) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog dialog =  builder.setTitle(title).setMessage(content).setNegativeButton("取消",cancle)
+                .setPositiveButton("确定",positionListener).create();
+        dialog.show();
+    }
 }

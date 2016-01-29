@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment">
 
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    <com.wj.kindergarten.ui.more.BanScrollView
         android:layout_width="match_parent"
         android:id="@+id/fragment_pf_fusion_scroll"
         android:layout_height="match_parent">
@@ -16,5 +16,5 @@
 
 
         </LinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    </com.wj.kindergarten.ui.more.BanScrollView>
 </FrameLayout>
