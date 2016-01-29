@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.PfProgressItem;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -70,20 +71,20 @@ public class UpLoadActivity extends BaseActivity {
 
     private void addView() {
         linearLayout.removeAllViews();
-        for (final String path : binder.getList()) {
+        for (final AlreadySavePath alreadySavePath : binder.getList()) {
             final View view = View.inflate(this, R.layout.upload_progress_item, null);
             ImageView up_load_progress_image = (ImageView) view.findViewById(R.id.up_load_progress_image);
             ProgressBar up_load_progressBar = (ProgressBar) view.findViewById(R.id.up_load_progressBar);
             up_Load_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
-            ImageLoaderUtil.displayMyImage("file://"+path,up_load_progress_image);
-            view.setTag(path);
+            ImageLoaderUtil.displayMyImage("file://"+alreadySavePath.getLocalPath(),up_load_progress_image);
+            view.setTag(alreadySavePath.getLocalPath());
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     ToastUtils.showDialog(UpLoadActivity.this, "提示!", "您确定要删除此图片?", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            binder.cancleUpLoadSinglePic(path);
+                            binder.cancleUpLoadSinglePic(alreadySavePath);
                             linearLayout.removeView(view);
                             dialog.cancel();
                         }
@@ -143,11 +144,11 @@ public class UpLoadActivity extends BaseActivity {
         linearLayout = (LinearLayout) findViewById(R.id.pf_scroll_progress_linear);
 
     }
-
-    private void setEmpty() {
-        View noView = View.inflate(this, R.layout.nothing_view, null);
-        setContentView(noView);
-    }
+//
+//    private void setEmpty() {
+//        View noView = View.inflate(this, R.layout.nothing_view, null);
+//        setContentView(noView);
+//    }
 
 
 
@@ -181,11 +182,11 @@ public class UpLoadActivity extends BaseActivity {
 
     private void judgeAddNoContent() {
         if(linearLayout.getChildCount() == 0){
-            setContentView(View.inflate(this,R.layout.nothing_view,null));
-//            TextView textView = new TextView(this);
-//            textView.setText("暂时还没有上传内容!");
-//            textView.setGravity(Gravity.CENTER);
-//            linearLayout.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//            setContentView(View.inflate(this,R.layout.nothing_view,null));
+            TextView textView = new TextView(this);
+            textView.setText("暂时还没有上传内容!");
+            textView.setGravity(Gravity.CENTER);
+            linearLayout.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
     }
 

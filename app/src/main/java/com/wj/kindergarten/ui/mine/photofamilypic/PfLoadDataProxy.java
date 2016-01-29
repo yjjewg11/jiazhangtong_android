@@ -64,7 +64,7 @@ public class PfLoadDataProxy {
     //根据家庭uuid查询所有照片数量,判断是否是上拉刷新，
     public void loadData(String familyUuid, int pageNo, boolean isPullup) {
         List<PfFamilyUuid> listT = familyUuidSql.findAll(PfFamilyUuid.class);//验证update是否生效
-        CGLog.v("打印存放集合 : " + listT.toString() + "集合大小 : " + listT.size());
+//        CGLog.v("打印存放集合 : " + listT.toString() + "集合大小 : " + listT.size());
         //通过familyuuid查找数据库对象
         pfFamilyUuid = familyUuidSql.findById(familyUuid, PfFamilyUuid.class);
         CGLog.v("打印对象　；" + pfFamilyUuid);
@@ -78,16 +78,14 @@ public class PfLoadDataProxy {
                 pfFamilyUuid.setFamily_uuid(familyUuid);
                 pfFamilyUuid.setMaxTime(new Date());
                 savePfFamilyUUid(pfFamilyUuid.getFamily_uuid());
+            } else {
+                loadFromSqlite();
+                return;
             }
-// else {
-//                loadFromSqlite(pfFamilyUuid);
-//                return;
-//            }
             loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMaxTime()), "", pageNo, NORMAL_DATA);
         } else {
             loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMinTime()), formatTime(pfFamilyUuid.getUpdateTime()), pageNo, NORMAL_DATA);
         }
-        loadFromSqlite();
 
     }
 

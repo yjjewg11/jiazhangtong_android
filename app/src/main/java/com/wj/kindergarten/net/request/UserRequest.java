@@ -20,6 +20,7 @@ import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -28,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+
+import javax.net.ssl.SSLEngine;
 
 /**
  * RsaResponse
@@ -121,6 +124,7 @@ public final class UserRequest {
     private static final String GET_PF_ALBUM_LIST = "rest/fpFamilyPhotoCollection/queryMy.json";
     private static final String LOOK_FOR_ALL_PF = "rest/fPPhotoItem/queryMy.json";
     private static final String DETE_ALBUM_LIST = "rest/fpFamilyPhotoCollection/delete.json";
+    private static final String EDIT_SINGLE_PF = "rest/fpFamilyPhotoCollection/save.json";
 
     private UserRequest() {
     }
@@ -874,5 +878,19 @@ public final class UserRequest {
         params.put("uuid", uuid);
         String url = RequestHttpUtil.BASE_URL+"rest/fPPhotoItem/"+uuid+".json";
         SendRequest.getInstance().get(context,RequestType.GET_SINGLE_PF_INFO,params,url,resultI);
+    }
+
+    public static void editSinglePf(Context context, String uuid, String address ,String note,RequestResultI resultI) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("uuid",uuid);
+            jsonObject.put("address",address);
+            jsonObject.put("note",note);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SendRequest.getInstance().post(context,RequestType.ZAN,jsonObject.toString(),RequestHttpUtil.BASE_URL+EDIT_SINGLE_PF,resultI);
+
+
     }
 }

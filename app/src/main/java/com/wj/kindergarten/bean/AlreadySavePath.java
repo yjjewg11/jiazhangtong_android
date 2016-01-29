@@ -4,35 +4,23 @@ import net.tsz.afinal.annotation.sqlite.Id;
 import net.tsz.afinal.annotation.sqlite.Table;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by tangt on 2016/1/21.
  */
 @Table(name = "already_save_path")
 public class AlreadySavePath implements Serializable {
-    @Id(column = "already_path")
-    private String alreadyPath;
+    @Id(column = "localPath")
+    private String localPath;
+    private int status;
+    private Date success_time;
 
-    public AlreadySavePath(String alreadyPath) {
-        this.alreadyPath = alreadyPath;
+    public AlreadySavePath(String localPath) {
+        this.localPath = localPath;
     }
 
     public AlreadySavePath() {
-    }
-
-    public String getAlreadyPath() {
-        return alreadyPath;
-    }
-
-    public void setAlreadyPath(String alreadyPath) {
-        this.alreadyPath = alreadyPath;
-    }
-
-    @Override
-    public String toString() {
-        return "AlreadySavePath{" +
-                "alreadyPath='" + alreadyPath + '\'' +
-                '}';
     }
 
     @Override
@@ -42,12 +30,45 @@ public class AlreadySavePath implements Serializable {
 
         AlreadySavePath that = (AlreadySavePath) o;
 
-        return alreadyPath.equals(that.alreadyPath);
+        return localPath.equals(that.localPath);
 
     }
 
     @Override
     public int hashCode() {
-        return alreadyPath.hashCode();
+        return localPath.hashCode();
+    }
+
+    public String getLocalPath() {
+        return localPath;
+    }
+
+    public void setLocalPath(String localPath) {
+        this.localPath = localPath;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getSuccess_time() {
+        return success_time;
+    }
+
+    public void setSuccess_time(Date success_time) {
+        this.success_time = success_time;
+    }
+
+    @Override
+    public String toString() {
+        return "AlreadySavePath{" +
+                "localPath='" + localPath + '\'' +
+                ", status=" + status +
+                ", success_time=" + success_time +
+                '}';
     }
 }

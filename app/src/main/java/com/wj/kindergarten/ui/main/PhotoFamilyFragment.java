@@ -2,6 +2,8 @@ package com.wj.kindergarten.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -19,6 +22,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfAlbumList;
@@ -54,7 +58,23 @@ public class PhotoFamilyFragment extends Fragment {
     private TestFragment boutique_album_framgent;
     private FrameLayout back_pf_scroll_fl;
     private PfFragmentLinearLayout pf_back_ll;
-    boolean flIsLocationTop;
+    boolean flIsLocationTop ;
+    private LocationChanged locationChanged;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+        }
+    };
+
+    public void setLocationChanged(LocationChanged locationChanged) {
+        this.locationChanged = locationChanged;
+    }
+
+    public boolean isFlIsLocationTop() {
+        return flIsLocationTop;
+    }
+
     private boolean isOne;
     private float moveY;
     private ArrayList<String> list = new ArrayList<>();
@@ -68,6 +88,7 @@ public class PhotoFamilyFragment extends Fragment {
             "http://img03.sogoucdn.com/app/a/100520024/d409d7b4fb46c19da38cd398acea013b",
     };
     public boolean canScroll = true;
+    private ObjectAnimator animotor;
 
     public void setCanScroll(boolean canScroll) {
         this.canScroll = canScroll;
@@ -203,15 +224,6 @@ public class PhotoFamilyFragment extends Fragment {
 
     }
 
-    public interface JudgeTop{
-        void onTop();
-        void notNoTop();
-    }
-    private JudgeTop judgeTop;
-
-    public void setJudgeTop(JudgeTop judgeTop) {
-        this.judgeTop = judgeTop;
-    }
 
     private void bottomRequest() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
@@ -219,24 +231,20 @@ public class PhotoFamilyFragment extends Fragment {
 
         if (margin <= -Math.abs(back_pf_scroll_fl.getHeight())) {
             margin = -back_pf_scroll_fl.getHeight();
-            if(judgeTop != null) {
-                judgeTop.onTop();
-            }
         }else{
-            if(judgeTop != null){
-                judgeTop.notNoTop();
-            }
+
         }
         if (margin > 0) {
             margin = 0;
         }
 
-        if (canScroll) {
+        CGLog.v("打印列表是否在顶部 ; "+pfFusionFragment.scrollIsTop());
+           if(flIsLocationTop && !pfFusionFragment.scrollIsTop()) return;
+
             params.topMargin = margin;
             back_pf_scroll_fl.setLayoutParams(params);
             back_pf_scroll_fl.requestLayout();
 
-        }
     }
 
     String[] titles = new String[]{"时光轴", "精品相册"};
@@ -321,25 +329,97 @@ public class PhotoFamilyFragment extends Fragment {
 
     }
 
+    boolean isFirst ;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(!isFirst){
+            int height = back_pf_scroll_fl.getHeight();
+            isFirst = true;
+            animotor = ObjectAnimator.ofInt(new Wrapper(back_pf_scroll_fl),"topMargin",-height);
+            animotor.setDuration(300);
+            animotor.setInterpolator(new DecelerateInterpolator());
+        }
+
+    }
+    public void flMoveTop(){
+        int height = back_pf_scroll_fl.getHeight();
+        ObjectAnimator animator = ObjectAnimator.ofInt(new Wrapper(back_pf_scroll_fl),"topMargin",-height);
+        animator.setDuration(300).setInterpolator(new DecelerateInterpolator());
+        animator.start();
+    }
+    public void flMoveBottom(){
+        ObjectAnimator animator = ObjectAnimator.ofInt(new Wrapper(back_pf_scroll_fl),"topMargin",0);
+        animator.setDuration(300).setInterpolator(new DecelerateInterpolator());
+        animator.start();
+    }
+
     class MyTouch implements PfFragmentLinearLayout.OnInterceptTouchEvent {
 
+
+        private float startY;
 
         @Override
         public boolean onInterceptTouch(MotionEvent event) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+                    startY = event.getRawY();
                     rawY = event.getRawY();
                     break;
                 case MotionEvent.ACTION_MOVE:
                     moveY = event.getRawY() - rawY;
+                    CGLog.v("打印移动值 ： "+(int)moveY);
                     bottomRequest();
                     rawY = event.getRawY();
                     break;
                 case MotionEvent.ACTION_UP:
+                    //下移
+                    CGLog.v("打印差值 ： "+((int)event.getRawY() - rawY));
+                    if(event.getRawY() - startY > 30){
+                        flMoveBottom();
+                        flIsLocationTop = false;
+                        locationChanged.onBottom();
+                    }
+                    //上移
+                    if(event.getRawY() - startY < -30){
+                        flMoveTop();
+                        flIsLocationTop = true;
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                locationChanged.onTop();
+                            }
+                        },300);
+
+                    }
                     break;
             }
             return false;
         }
+    }
+
+    class Wrapper {
+        FrameLayout frameLayout;
+        private int topMargin;
+
+        public Wrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
+
+        public int getTopMargin() {
+            return ((LinearLayout.LayoutParams)(frameLayout.getLayoutParams())).topMargin;
+        }
+
+        public void setTopMargin(int topMargin) {
+            ((LinearLayout.LayoutParams)(frameLayout.getLayoutParams())).topMargin = topMargin;
+            frameLayout.requestLayout();
+        }
+    }
+
+    public interface LocationChanged{
+        void onTop();
+        void onBottom();
     }
 
 }

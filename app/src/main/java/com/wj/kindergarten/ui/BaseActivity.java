@@ -519,6 +519,8 @@ public abstract class BaseActivity extends ActionBarActivity {
                     titleRightImageListener();
                 }
             });
+        }else{
+            titleRightImageView.setVisibility(View.INVISIBLE);
         }
 
         if (rightImage2 != 0) {

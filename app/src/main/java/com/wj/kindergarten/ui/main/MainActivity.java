@@ -41,6 +41,7 @@ import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -141,6 +142,8 @@ public class MainActivity extends BaseActivity {
         checkVersion();
         handler.sendEmptyMessageDelayed(2, 500);
         initPfAlbum();
+        //启动服务上传图片
+        startService(new Intent(this, PicUploadService.class));
 
 
         //获取系统参数

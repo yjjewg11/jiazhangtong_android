@@ -12,7 +12,6 @@ import net.tsz.afinal.annotation.sqlite.Id;
 public class AllPfAlbumSunObject extends BaseModel{
     @Expose
     private String create_time;
-    private int id;
     @Expose
     @Id(column = "uuid")
     private String uuid;@Expose
@@ -49,14 +48,6 @@ public class AllPfAlbumSunObject extends BaseModel{
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getStatus() {
@@ -135,7 +126,6 @@ public class AllPfAlbumSunObject extends BaseModel{
     public String toString() {
         return "AllPfAlbumSunObject{" +
                 "create_time='" + create_time + '\'' +
-                ", id=" + id +
                 ", uuid='" + uuid + '\'' +
                 ", photo_time='" + photo_time + '\'' +
                 ", path='" + path + '\'' +

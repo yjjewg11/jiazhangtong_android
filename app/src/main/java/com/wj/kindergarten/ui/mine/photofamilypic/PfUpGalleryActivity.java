@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -36,8 +37,11 @@ import com.wj.kindergarten.ui.imagescan.ScanPhoto_V1;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V2;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.FileUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -99,6 +103,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
     private static  int SIGN_BOARD ;
     private int type;
+    private FinalDb db;
 
     /**
      * 被选中的图片列表 key
@@ -117,6 +122,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onCreate() {
+        db = FinalDb.create(this);
         initSelectPic((ArrayList) getIntent().getSerializableExtra(Constants.ALREADY_SELECT_KEY));
         type = getIntent().getIntExtra("type",0);
         SIGN_BOARD = (getIntent().getIntExtra("signBoard",0));
@@ -460,8 +466,14 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
             } else {
                 //判断返回类型
                 if(type == PhotoFamilyFragment.ADD_PIC){
+                    //将图片存入数据库
+                    for (String path : images){
+                        AlreadySavePath alreadySavePath = new AlreadySavePath();
+                        alreadySavePath.setLocalPath(path);
+                        alreadySavePath.setStatus(1);
+                        db.save(alreadySavePath);
+                    }
                     Intent intent = new Intent(this, PicUploadService.class);
-                    intent.putExtra("up_list",(ArrayList<String>)images);
                     startService(intent);
                     ToastUtils.showMessage("已将" + images.size() + "张图片加入下载队列");
                 }else if(type == EditPfActivity .CHOOSE_NEW){
