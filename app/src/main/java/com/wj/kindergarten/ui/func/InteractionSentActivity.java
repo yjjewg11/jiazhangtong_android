@@ -110,7 +110,7 @@ public class InteractionSentActivity extends BaseActivity {
 
     @Override
     protected void setContentLayout() {
-        layoutId = R.layout.edit_pf_activity;
+        layoutId = R.layout.activity_interaction_send;
     }
 
     @Override

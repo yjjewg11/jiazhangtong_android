@@ -19,12 +19,15 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.db.sqlite.DbModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -95,7 +98,12 @@ public class PfLoadDataProxy {
             public void result(BaseModel domain) {
                 AllPfAlbum allPfAlbum = (AllPfAlbum) domain;
                 if (dataLoadFinish != null) dataLoadFinish.finish();
-                if (allPfAlbum == null || allPfAlbum.getList() == null) return;
+                if (allPfAlbum == null || allPfAlbum.getList() == null || allPfAlbum.getList().getData() == null ||
+                        allPfAlbum.getList().getData().size() == 0){
+                    ToastUtils.showMessage("没有更多内容了！");
+                    dataLoadFinish.noMoreData();
+                    return;
+                }
                 //如果是查询指定时间后的数据，maxtime为空，获取到的lasttime赋值给maxtime
                 if (TextUtils.isEmpty(maxTime)) {
                     pfFamilyUuid.setMaxTime(TimeUtil.formatDate(Utils.isNull(allPfAlbum.getLastTime())));
@@ -163,6 +171,14 @@ public class PfLoadDataProxy {
             }
             dateArray.add(count);
         }
+        Collections.sort(dateArray, new Comparator<QueryGroupCount>() {
+            @Override
+            public int compare(QueryGroupCount one, QueryGroupCount two) {
+                long o = TimeUtil.getMillionFromYMD(one.getDate());
+                long t = TimeUtil.getMillionFromYMD(two.getDate());
+                return o - t > 0 ? 1 : -1;
+            }
+        });
         Message message = new Message();
         message.what = NORMAL_DATA;
         message.obj = dateArray;
@@ -268,5 +284,6 @@ public class PfLoadDataProxy {
 
     public interface DataLoadFinish {
         void finish();
+        void noMoreData();
     }
 }

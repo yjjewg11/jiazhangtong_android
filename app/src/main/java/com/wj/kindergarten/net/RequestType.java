@@ -82,4 +82,5 @@ public interface RequestType {
      int CHECK_PF_IS_CHANGE = 166;
      int PF_OBJ_BY_UPDATE = 167;
      int GET_SINGLE_PF_INFO = 168;
+     int GET_BOUTIQUE_ALBUM = 169;
 }

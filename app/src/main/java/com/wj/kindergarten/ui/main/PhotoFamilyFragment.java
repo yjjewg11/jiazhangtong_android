@@ -7,42 +7,32 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.bean.BaseModel;
-import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfAlbumListSun;
-import com.wj.kindergarten.net.RequestResultI;
-import com.wj.kindergarten.net.request.UserRequest;
-import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.EditPfActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
-import com.wj.kindergarten.utils.WindowUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,11 +45,15 @@ public class PhotoFamilyFragment extends Fragment {
     private List<PfAlbumListSun> albumList;
     private View view;
     private PfFusionFragment pfFusionFragment;
-    private TestFragment boutique_album_framgent;
+    private BoutiqueAlbumFragment boutique_album_framgent;
     private FrameLayout back_pf_scroll_fl;
     private PfFragmentLinearLayout pf_back_ll;
     boolean flIsLocationTop ;
     private LocationChanged locationChanged;
+    private int getFlTopMargin(){
+        LinearLayout.LayoutParams params  = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
+        return params.topMargin;
+    }
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -183,7 +177,7 @@ public class PhotoFamilyFragment extends Fragment {
         pop_of_choose_new_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), EditPfActivity.class);
+                Intent intent = new Intent(getActivity(), BoutiqueGalleryActivity.class);
 //                Bundle bundle = new Bundle();
 //                intent.putExtra("bundle",bundle);
                 startActivity(intent);
@@ -269,9 +263,9 @@ public class PhotoFamilyFragment extends Fragment {
                     case 1:
                         //精辟相册
                         if (getFragmentManager().findFragmentByTag(fragment_tags[1]) == null) {
-                            boutique_album_framgent = new TestFragment();
+                            boutique_album_framgent = new BoutiqueAlbumFragment();
                         } else {
-                            boutique_album_framgent = (TestFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
+                            boutique_album_framgent = (BoutiqueAlbumFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
                         }
 
                         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, boutique_album_framgent, fragment_tags[1]).commit();
@@ -367,19 +361,28 @@ public class PhotoFamilyFragment extends Fragment {
                     rawY = event.getRawY();
                     break;
                 case MotionEvent.ACTION_MOVE:
+                    CGLog.v("打印scrollview滑动的距离　：　"+pfFusionFragment.getBanScrollView().getRefreshableView().getScrollY());
                     moveY = event.getRawY() - rawY;
                     CGLog.v("打印移动值 ： "+(int)moveY);
                     bottomRequest();
+                    if(getFlTopMargin() == 0 && event.getRawY() - startY > 50){
+                        flMoveBottom();
+                        flIsLocationTop = false;
+                        locationChanged.onBottom();
+                    }
+                    //当不在顶部的时候，scrollview停止滑动
+                    if(getFlTopMargin() == - back_pf_scroll_fl.getHeight()){
+                        locationChanged.onTop();
+                    }else{
+                        locationChanged.onBottom();
+                    }
                     rawY = event.getRawY();
                     break;
                 case MotionEvent.ACTION_UP:
                     //下移
                     CGLog.v("打印差值 ： "+((int)event.getRawY() - rawY));
-                    if(event.getRawY() - startY > 30){
-                        flMoveBottom();
-                        flIsLocationTop = false;
-                        locationChanged.onBottom();
-                    }
+
+
                     //上移
                     if(event.getRawY() - startY < -30){
                         flMoveTop();

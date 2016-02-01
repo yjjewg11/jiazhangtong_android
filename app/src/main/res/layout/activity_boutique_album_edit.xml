@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <include layout="@layout/title_normal"/>
+    </FrameLayout>
+
+    <GridView
+        android:paddingRight="@dimen/margin_20"
+        android:paddingLeft="@dimen/margin_20"
+        android:id="@+id/boutique_edit_child_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:columnWidth="@dimen/margin_10"
+        android:stretchMode="columnWidth"
+        android:visibility="visible" />
+</LinearLayout>

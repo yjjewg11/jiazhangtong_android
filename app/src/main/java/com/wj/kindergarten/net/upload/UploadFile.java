@@ -132,13 +132,13 @@ public class UploadFile {
         if (Utils.isNetworkAvailable(context)) {
             try {
                 File file = new File(path);
-                if (isompress(path)) {
-                    Bitmap bitmap = compressBySize(path, width, height);
-                    file = saveFile(bitmap, 70);
-                    if (bitmap != null && !bitmap.isRecycled()) {
-                        bitmap.recycle();
-                    }
-                }
+//                if (isompress(path)) {
+//                    Bitmap bitmap = compressBySize(path, width, height);
+//                    file = saveFile(bitmap, 70);
+//                    if (bitmap != null && !bitmap.isRecycled()) {
+//                        bitmap.recycle();
+//                    }
+//                }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
                     upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), MainActivity.getFamily_uuid(),ajaxCallBack);

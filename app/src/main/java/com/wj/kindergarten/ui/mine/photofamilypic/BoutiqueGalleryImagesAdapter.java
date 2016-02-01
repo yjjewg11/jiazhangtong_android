@@ -1,11 +1,10 @@
-package com.wj.kindergarten.ui.imagescan;
+package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +17,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.ui.imagescan.CustomImageView;
+import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,22 +35,30 @@ import java.util.List;
  * @data: 2015/1/4 16:09
  * @version: v1.0
  */
-public class GalleryImagesAdapter extends BaseAdapter {
+public class BoutiqueGalleryImagesAdapter extends BaseAdapter {
     //封装ImageView的宽和高的对象
     private Point mPoint = new Point(0, 0);
     //存储图片的选中情况
     private HashMap<String, Boolean> mSelectMap = new HashMap<>();
+
+    public void setmSelectMap(HashMap<String, Boolean> mSelectMap) {
+        this.mSelectMap = mSelectMap;
+    }
+
     private GridView mGridView;
     //数据源
-    private List<String> list;
+    private List<AllPfAlbumSunObject> list;
     //第一个Item是否为特殊按钮(拍照)
     private boolean isFirstSpecial = true;
     //还可以选择的图片数
     private int canSelect = BoutiqueGalleryActivity.IMAGE_MAX;
+    private List<AllPfAlbumSunObject> selectList = new ArrayList<>();
 
+    public List<AllPfAlbumSunObject> getSelectList() {
+        return selectList;
+    }
 
-
-    public GalleryImagesAdapter(List<String> list, int canSelect, HashMap<String, Boolean> selectMap, GridView mGridView) {
+    public BoutiqueGalleryImagesAdapter(List<AllPfAlbumSunObject> list, int canSelect, HashMap<String, Boolean> selectMap, GridView mGridView) {
         this.list = list;
         this.canSelect = canSelect;
         this.mGridView = mGridView;
@@ -86,9 +97,10 @@ public class GalleryImagesAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
         final ViewHolder viewHolder;
-        final String path = list.get(position);
+        final AllPfAlbumSunObject object = list.get(position);
 
-        CGLog.d("PATH:" + path);
+        final String path = object.getPath();
+        CGLog.d("PATH:" + object.getPath());
 
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        FuniLog.i("ImageScan", "path:" + path);
@@ -111,14 +123,6 @@ public class GalleryImagesAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.mImageView.setImageResource(R.drawable.friends_sends_pictures_no);
         }
-
-        if (position == 0 && isFirstSpecial) {
-            viewHolder.mCheckBox.setSelected(false);
-            viewHolder.mCheckBox.setVisibility(View.GONE);
-            //viewHolder.mImageView.setImageURI(Uri.parse(path));
-            viewHolder.mImageView.setImageResource(R.drawable.photo);
-            viewHolder.mImageView.setScaleType(ImageView.ScaleType.CENTER);
-        } else {
             if (!Utils.stringIsNull(path) && !path.contains("CGImage")) {
                 viewHolder.mImageView.setTag(path);
                 viewHolder.mCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -138,10 +142,12 @@ public class GalleryImagesAdapter extends BaseAdapter {
                         }
                         if (isChecked) {
                             mSelectMap.put(path, isChecked);
+                            if(!selectList.contains(list.get(position))) selectList.add(list.get(position));
                         } else {
                             mSelectMap.remove(path);
+                            selectList.remove(list.get(position));
                         }
-                        ((GalleryImagesActivity) parent.getContext()).selectChange(mSelectMap);
+                        ((BoutiqueGalleryActivity) parent.getContext()).selectChange(mSelectMap);
                     }
                 });
 
@@ -149,23 +155,8 @@ public class GalleryImagesAdapter extends BaseAdapter {
 
                 viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 viewHolder.mCheckBox.setVisibility(View.VISIBLE);
-                //利用NativeImageLoader类加载本地图片
-                Bitmap bitmap = NativeImageLoader.getInstance().loadNativeImage(path, mPoint, new NativeImageLoader.NativeImageCallBack() {
-
-                    @Override
-                    public void onImageLoader(Bitmap bitmap, String path) {
-                        ImageView mImageView = (ImageView) mGridView.findViewWithTag(path);
-                        if (bitmap != null && mImageView != null) {
-                            mImageView.setImageBitmap(bitmap);
-                        }
-                    }
-                });
-
-                if (bitmap != null) {
-                    viewHolder.mImageView.setImageBitmap(bitmap);
-                }
+                ImageLoaderUtil.displayMyImage(path,viewHolder.mImageView);
             }
-        }
 
         return convertView;
     }

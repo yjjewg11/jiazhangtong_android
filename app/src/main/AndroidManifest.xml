@@ -141,6 +141,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -532,7 +537,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.wj.kindergarten.services.PicUploadService"></service>
+        <service android:name="com.wj.kindergarten.services.PicUploadService" />
         <service
             android:name="com.umeng.message.UmengService"
             android:exported="true"
@@ -604,13 +609,15 @@
             android:name="com.adsmogo.adview.AdsMogoWebView"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" />
-           <!--  注册Service，自主广告与交换广告的应用下载功能所需   -->
+         
+        <!--  注册Service，自主广告与交换广告的应用下载功能所需   -->
          
         <service
             android:name="com.adsmogo.controller.service.UpdateService"
             android:exported="true"
             android:process=":remote" />
-           <!--  注册Service，安装应用所用   -->
+         
+        <!--  注册Service，安装应用所用   -->
          
         <service
             android:name="com.adsmogo.controller.service.CountService"
@@ -639,12 +646,12 @@
 
         <service
             android:name="com.qq.e.comm.DownloadService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name="com.qq.e.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent"></activity>
+            android:theme="@android:style/Theme.Translucent" />
 
         <receiver android:name="com.wj.kindergarten.receiver.ReceiverTwoCodeURl">
             <intent-filter>
@@ -658,7 +665,9 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="OsYjK06n1U8Rb2qZvVF7CwiX" />
 
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity"></activity>
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity" />
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity" />
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity"></activity>
     </application>
 
 </manifest>

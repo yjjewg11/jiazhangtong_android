@@ -30,6 +30,14 @@ public final class TimeUtil {
     private TimeUtil() {
     }
 
+    public  static Long getMillionFromYMD(String time){
+        try {
+            return formatYMD.parse(time).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static Date formatDate(String time){
         try {

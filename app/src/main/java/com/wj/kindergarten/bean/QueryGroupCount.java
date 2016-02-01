@@ -6,6 +6,15 @@ package com.wj.kindergarten.bean;
 public class QueryGroupCount  {
     private String date;
     private int count;
+    private String hearld;
+
+    public String getHearld() {
+        return hearld;
+    }
+
+    public void setHearld(String hearld) {
+        this.hearld = hearld;
+    }
 
     public String getDate() {
         return date;

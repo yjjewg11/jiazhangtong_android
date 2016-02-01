@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_10"
+    android:paddingRight="@dimen/margin_10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/boutique_album_edit_imageView"
+        android:scaleType="fitXY"
+        android:src="@drawable/new_album"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+    <TextView
+        android:layout_marginTop="@dimen/margin_5"
+        android:textSize="17sp"
+        android:id="@+id/boutique_album_edit_titlesss"
+        android:text="这是编辑的标题!"
+        android:ellipsize="end"
+        android:lines="2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+</LinearLayout>
