@@ -45,6 +45,7 @@
 
 
         <ImageView
+            android:scaleType="centerCrop"
             android:layout_marginBottom="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
             android:src="@drawable/zhanweitu"

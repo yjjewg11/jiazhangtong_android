@@ -15,22 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
-
-
-        <TextView
-            android:id="@+id/pop_of_choose_new_pic"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingRight="@dimen/margin_20"
-            android:paddingLeft="@dimen/margin_20"
-            android:text="新建相册"
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
-        <View
-            android:background="@color/color_cccccc"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
         <TextView
             android:id="@+id/put_in_pic"
             android:layout_weight="1"
@@ -40,6 +24,23 @@
             android:text="导入相册"
             android:layout_width="match_parent"
             android:layout_height="60dp" />
+
+        <View
+            android:background="@color/color_cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <TextView
+            android:id="@+id/pop_of_choose_new_pic"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingRight="@dimen/margin_20"
+            android:paddingLeft="@dimen/margin_20"
+            android:text="新建精品相册"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+
+
     </LinearLayout>
         </RelativeLayout>
 

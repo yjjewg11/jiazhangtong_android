@@ -37,6 +37,7 @@ import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.more.BanScrollView;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -53,9 +54,13 @@ public class PfFusionFragment extends Fragment {
 
     private PhotoFamilyFragment photoFamilyFragment;
     private BanScrollView banScrollView;
-    boolean scrollIsTop = true;
+
+    public BanScrollView getBanScrollView() {
+        return banScrollView;
+    }
+
     public boolean scrollIsTop(){
-        return scrollIsTop;
+        return banScrollView.getRefreshableView().getScrollY() == 0;
     }
 
     public PfFusionFragment(PhotoFamilyFragment photoFamilyFragment) {
@@ -103,22 +108,17 @@ public class PfFusionFragment extends Fragment {
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
         banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
-        banScrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                scrollIsTop = (v.getScrollY() == 0);
-                return false;
-            }
-        });
         photoFamilyFragment.setLocationChanged(new PhotoFamilyFragment.LocationChanged() {
             @Override
             public void onTop() {
                 banScrollView.setCanScroll(true);
+                banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
             }
 
             @Override
             public void onBottom() {
                 banScrollView.setCanScroll(false);
+                banScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
             }
         });
         pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
@@ -211,6 +211,12 @@ public class PfFusionFragment extends Fragment {
                     pullScroll.onRefreshComplete();
                 }
             }
+
+            @Override
+            public void noMoreData() {
+                banScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
+            }
+
         });
         mPfLoadDataProxy.loadData(((MainActivity) getActivity()).getFamily_uuid(), pageNo, false);
     }

@@ -3,6 +3,7 @@ package com.wj.kindergarten.ui.more;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -32,6 +33,7 @@ public class BanScrollView extends PullToRefreshScrollView {
 
         return super.dispatchTouchEvent(ev);
     }
+
 
     public boolean canScroll() {
         return canScroll;

@@ -3,6 +3,7 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 
 
 import com.loopj.android.http.RequestParams;
@@ -92,6 +93,7 @@ public final class UserRequest {
     private static final String PF_PIC_BY_UUID = "rest/fPPhotoItem/queryOfIncrement.json";
     private static final String CHECK_PF_IS_CHANGE = "rest/fPPhotoItem/ queryOfNewDataOrUpdate.json";
     private static final String PF_OBJ_BY_UPDATE = "rest/fPPhotoItem/queryOfIncrement.json";
+    private static final String GET_BOUTIQUE_ALBUM = "rest/fPMovie/queryMy.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -889,8 +891,14 @@ public final class UserRequest {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        SendRequest.getInstance().post(context,RequestType.ZAN,jsonObject.toString(),RequestHttpUtil.BASE_URL+EDIT_SINGLE_PF,resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(), RequestHttpUtil.BASE_URL + EDIT_SINGLE_PF, resultI);
 
 
+    }
+
+    public static void getBoutiqueAlbumList(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.GET_BOUTIQUE_ALBUM,params,RequestHttpUtil.BASE_URL+GET_BOUTIQUE_ALBUM,resultI);
     }
 }
