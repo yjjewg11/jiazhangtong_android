@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfInfoListFragment">
+
+    <GridView
+        android:id="@+id/pf_info_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:columnWidth="100dip"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:visibility="visible" />
+
+</LinearLayout>

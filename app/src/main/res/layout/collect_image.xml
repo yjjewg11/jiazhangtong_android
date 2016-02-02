@@ -11,7 +11,7 @@
         android:layout_height="100dp">
         <ImageView
             android:layout_gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/common_pf_xuanzhong"
             android:src="@drawable/xuanzhong_pf"
             android:layout_width="wrap_content"

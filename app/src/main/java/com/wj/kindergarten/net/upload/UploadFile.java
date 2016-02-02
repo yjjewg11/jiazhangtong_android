@@ -76,6 +76,8 @@ public class UploadFile {
                 params.put("md5",md5);
                 params.put("note",note);
                 params.put("family_uuid",family_uuid);
+                params.put("phone_type", Build.MODEL);
+//                params.put("phone_uuid",);
                 RequestHttpUtil.afinalPost(context, UP_LOAD_PF_URL,params,ajaxCallBack);
 //                CGLog.d(URL + "?" + params.toString());
 //                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new JsonHttpResponseHandler() {

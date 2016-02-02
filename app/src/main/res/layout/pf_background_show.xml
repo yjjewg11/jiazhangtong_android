@@ -42,6 +42,7 @@
             android:layout_centerHorizontal="true" />
 
         <TextView
+
             android:textColor="@color/white"
             style="@style/back_pf_text_style"
             android:gravity="center_horizontal"
@@ -89,6 +90,20 @@
             android:layout_alignTop="@+id/textView33"
             android:layout_alignParentRight="true"
             android:layout_alignLeft="@+id/textView34" />
+
+        <TextView
+            android:textSize="12sp"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:padding="2dp"
+            android:background="@drawable/pf_first_page"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="20000"
+            android:id="@+id/textView45"
+            android:layout_alignTop="@+id/pic_back_fl"
+            android:layout_toRightOf="@+id/pic_back_fl" />
     </RelativeLayout>
 
 </LinearLayout>
