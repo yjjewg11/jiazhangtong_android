@@ -3,6 +3,7 @@ package com.wj.kindergarten.utils;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;

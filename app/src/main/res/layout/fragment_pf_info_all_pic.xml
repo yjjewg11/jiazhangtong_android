@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfInfoAllPIcFragment">
+    <GridView
+        android:layout_weight="1"
+        android:id="@+id/pf_info_all_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:columnWidth="100dip"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:visibility="visible" />
+    <RelativeLayout
+        android:background="@color/red"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/xiajiantou"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="所有照片"
+            android:id="@+id/pf_info_choose_text"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+
+</LinearLayout>

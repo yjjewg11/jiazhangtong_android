@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,10 +11,13 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -54,6 +58,7 @@ public class PfFusionFragment extends Fragment {
 
     private PhotoFamilyFragment photoFamilyFragment;
     private BanScrollView banScrollView;
+    boolean noMoreData;
 
     public BanScrollView getBanScrollView() {
         return banScrollView;
@@ -90,11 +95,34 @@ public class PfFusionFragment extends Fragment {
                     break;
                 //有maxTime后时间的刷新的数据
                 case PfLoadDataProxy.REFRESH_DATA:
-
+                     showView();
                     break;
             }
         }
     };
+
+    private void showView() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        TextView textView = new TextView(getActivity());
+        textView.setText(""+"您有新数据了，点击更新!");
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPfLoadDataProxy.loadData(MainActivity.getFamily_uuid(),1,false);
+            }
+        });
+        builder.setView(textView);
+        AlertDialog dialog = builder.create();
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams params =  window.getAttributes();
+        params.x = 100;
+        params.y = 150;
+        params.gravity = Gravity.TOP;
+        window.setAttributes(params);
+        dialog.show();
+
+    }
+
     private PfLoadDataProxy mPfLoadDataProxy;
     private LinearLayout fragment_pf_fusion_linear;
 
@@ -112,7 +140,10 @@ public class PfFusionFragment extends Fragment {
             @Override
             public void onTop() {
                 banScrollView.setCanScroll(true);
-                banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+                if(!noMoreData){
+                    banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+                }
+
             }
 
             @Override
@@ -214,6 +245,7 @@ public class PfFusionFragment extends Fragment {
 
             @Override
             public void noMoreData() {
+                noMoreData = true;
                 banScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
             }
 

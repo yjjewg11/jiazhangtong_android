@@ -54,7 +54,6 @@ public class PfLoadDataProxy {
     public static final int REFRESH_DATA = 3060;
     public static final int NORMAL_DATA = 3061;
     private PfFamilyUuid pfFamilyUuid;
-    private static final int QUERY_MAX_PF = 6;
 
     public PfLoadDataProxy(Context context, Handler handler) {
         familyUuidSql = FinalDb.create(context, GloablUtils.FAMILY_UUID, true);
@@ -124,8 +123,12 @@ public class PfLoadDataProxy {
                 }
                 //在获取到maxtime和mintime的值之后，查询有没有更新
                 //在获取到新数据之后，保存到数据库中后再从数据库查出来取出来。
-                loadFromSqlite();
+//                loadFromSqlite();
                 loadDataIsChange(familyUuid);
+                //判断类型是否是请求的增量更新数据
+                if(type == REFRESH_DATA){
+                    handler.sendEmptyMessage(REFRESH_DATA);
+                }
             }
 
             @Override
@@ -176,7 +179,7 @@ public class PfLoadDataProxy {
             public int compare(QueryGroupCount one, QueryGroupCount two) {
                 long o = TimeUtil.getMillionFromYMD(one.getDate());
                 long t = TimeUtil.getMillionFromYMD(two.getDate());
-                return o - t > 0 ? 1 : -1;
+                return o - t > 0 ? -1 : 1;
             }
         });
         Message message = new Message();

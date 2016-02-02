@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.QueryGroupCount;
+import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoDirModel;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
@@ -31,13 +32,11 @@ import java.util.List;
  */
 public class BoutiquePopAdapter extends BaseAdapter {
     private List<QueryGroupCount> dataList;
-    private BoutiqueGalleryActivity boutiqueGalleryActivity = null;
     private FinalDb db;
 
-    public BoutiquePopAdapter(BoutiqueGalleryActivity boutiqueGalleryActivity, List<QueryGroupCount> dataList) {
+    public BoutiquePopAdapter(BaseActivity baseActivity, List<QueryGroupCount> dataList) {
         this.dataList = dataList;
-        this.boutiqueGalleryActivity = boutiqueGalleryActivity;
-        db = FinalDb.create(boutiqueGalleryActivity, GloablUtils.FAMILY_UUID_OBJECT);
+        db = FinalDb.create(baseActivity, GloablUtils.FAMILY_UUID_OBJECT);
     }
 
     @Override

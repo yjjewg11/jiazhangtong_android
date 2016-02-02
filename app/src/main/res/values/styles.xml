@@ -189,6 +189,7 @@
     </style>
 
     <style name="back_pf_text_style">
+        <item name="android:visibility">invisible</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">13sp</item>
     </style>

@@ -9,7 +9,9 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +44,12 @@ public class UpLoadActivity extends BaseActivity {
     public static final String PF_UPDATE_PROGRESS_LOADING = "pf_update_progress_loading";
     public static final String PF_UPDATE_PROGRESS_SUCCESSED = "pf_update_progress_successed";
     public static final String PF_UPDATE_PROGRESS_FAILED= "pf_update_progress_failed";
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
     private UpdateBroadCastReceiver receiver;
     private PicUploadService.TransportBinder binder;
@@ -156,21 +164,36 @@ public class UpLoadActivity extends BaseActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String path = intent.getStringExtra("path");
+            final String path = intent.getStringExtra("path");
             switch (intent.getAction()) {
                 case PF_UPDATE_PROGRESS_START:
                     int index =  linearLayout.indexOfChild(linearLayout.findViewWithTag(path));
                     linearLayout.removeViews(0,index);
-                    ((ProgressBar)
-                            (linearLayout.findViewWithTag(path).findViewById(R.id.up_load_progressBar))).setProgress(95);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ProgressBar)
+                                    (linearLayout.findViewWithTag(path).findViewById(R.id.up_load_progressBar))).setProgress(30);
+                        }
+                    });
                     break;
                 case PF_UPDATE_PROGRESS_LOADING:
-                    ((ProgressBar)
-                            (linearLayout.findViewWithTag(path).findViewById(R.id.up_load_progressBar))).setProgress(99);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ProgressBar)
+                                    (linearLayout.findViewWithTag(path).findViewById(R.id.up_load_progressBar))).setProgress(85);
+                        }
+                    });
                     break;
                 case PF_UPDATE_PROGRESS_SUCCESSED:
-                     linearLayout.removeView(linearLayout.findViewWithTag(path));
-                     judgeAddNoContent();
+                     mHandler.post(new Runnable() {
+                         @Override
+                         public void run() {
+                             linearLayout.removeView(linearLayout.findViewWithTag(path));
+                             judgeAddNoContent();
+                         }
+                     });
                     break;
                 case PF_UPDATE_PROGRESS_FAILED :
                     linearLayout.removeAllViews();

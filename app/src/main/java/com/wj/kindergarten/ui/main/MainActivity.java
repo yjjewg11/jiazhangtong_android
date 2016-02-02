@@ -604,6 +604,7 @@ public class MainActivity extends BaseActivity {
         long now_back = System.currentTimeMillis();
         if (now_back - pre_back <= BACK_QUIT) {
             ShareUtils.clear();
+            stopService(new Intent(this,PicUploadService.class));
             finish();
             return;
         } else {
