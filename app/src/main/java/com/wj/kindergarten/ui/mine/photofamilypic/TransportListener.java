@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
@@ -27,7 +28,7 @@ public class TransportListener implements View.OnClickListener {
         this.context = context;
     }
 
-    public TransportListener(int position, List<AllPfAlbumSunObject> list, Context context, List<QueryGroupCount> queryGroupCounts) {
+    public TransportListener(Context context, int position, List<AllPfAlbumSunObject> list, List<QueryGroupCount> queryGroupCounts) {
         this.position = position;
         this.list = list;
         this.context = context;

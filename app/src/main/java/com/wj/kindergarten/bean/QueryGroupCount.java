@@ -1,9 +1,11 @@
 package com.wj.kindergarten.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by tangt on 2016/1/27.
  */
-public class QueryGroupCount  {
+public class QueryGroupCount  implements Serializable{
     private String date;
     private int count;
     private String hearld;

@@ -131,6 +131,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name="com.wj.kindergarten.ui.func.EditPfActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -666,8 +671,8 @@
             android:value="OsYjK06n1U8Rb2qZvVF7CwiX" />
 
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity"></activity>
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity" />
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity"></activity>
     </application>
 
 </manifest>

@@ -73,6 +73,9 @@ public class PfFusionFragment extends Fragment {
         this.photoFamilyFragment = photoFamilyFragment;
     }
 
+    public PfFusionFragment() {
+    }
+
     private View view;
     private PullToRefreshScrollView pullScroll;
     private PfWallAdapter adapter;
@@ -192,22 +195,22 @@ public class PfFusionFragment extends Fragment {
             if (size > 0){
                 for (int i = 0 ; i < size ; i++){
                     if(i == 0){
-                        iv_0.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        iv_0.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
                         ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_0);
                     }else if(i == 1){
-                        iv_1.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        iv_1.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
                         ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_1);
                     }else if(i == 2){
-                        iv_2.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        iv_2.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
                         ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_2);
                     }else if(i == 3){
-                        iv_3.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        iv_3.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
                         ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_3);
                     }else if(i == 4){
-                        iv_4.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        iv_4.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
                         ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_4);
                     }else if(i == 5){
-                        iv_5.setOnClickListener(new TransportListener(getActivity(),i,objectList));
+                        iv_5.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
                         ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_5);
                     }
                 }
