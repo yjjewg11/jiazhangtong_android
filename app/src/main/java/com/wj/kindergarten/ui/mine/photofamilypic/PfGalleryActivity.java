@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -61,12 +63,14 @@ public class PfGalleryActivity extends BaseActivity {
 
 
     private FrameLayout pf_gallery_new_layout_fl;
-    private String [] tags = new String[]{
-            "album_list","single_pf"
+    private String[] tags = new String[]{
+
+            "album_list",//fragment放置照片集合
+            "single_pf"//放置单张照片详情
     };
     private ArrayList<AllPfAlbumSunObject> objectList;
     private int position;
-    private ArrayList<QueryGroupCount> queryGroupCounts ;
+    private ArrayList<QueryGroupCount> queryGroupCounts;
 
     @Override
     protected void setContentLayout() {
@@ -87,41 +91,48 @@ public class PfGalleryActivity extends BaseActivity {
     }
 
     private void initFragment() {
-        PfSingleInfoFragment fragment = new PfSingleInfoFragment(position,objectList);
-        getSupportFragmentManager().beginTransaction().replace(R.id.pf_gallery_new_layout_fl,fragment).commit();
+        PfSingleInfoFragment fragment = new PfSingleInfoFragment(position, objectList);
+        getSupportFragmentManager().beginTransaction().replace(R.id.pf_gallery_new_layout_fl, fragment).commit();
     }
 
     private void initViews() {
         pf_gallery_new_layout_fl = (FrameLayout) findViewById(R.id.pf_gallery_new_layout_fl);
     }
 
-    @Override
-    public void onBackPressed() {
-       Fragment fragment =  getSupportFragmentManager().findFragmentByTag(tags[0]);
-        if(fragment != null && fragment.isVisible()){
-            finish();
-        }else{
-           Fragment album_fagment =  getSupportFragmentManager().findFragmentByTag(tags[0]);
-            if(album_fagment == null){
-                album_fagment =new PfInfoAllPIcFragment(queryGroupCounts);
-            }
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.pf_gallery_new_layout_fl,album_fagment,tags[1]).commit();
-        }
-    }
 
     public void getData() {
-        position = getIntent().getIntExtra("position",0);
+        position = getIntent().getIntExtra("position", 0);
         objectList = (ArrayList<AllPfAlbumSunObject>) getIntent().getSerializableExtra("list");
         queryGroupCounts = (ArrayList<QueryGroupCount>) getIntent().getSerializableExtra("countList");
     }
 
-    public void changeToSingleFragment(int position,List<AllPfAlbumSunObject> objectList){
-      PfSingleInfoFragment fragment = (PfSingleInfoFragment) getSupportFragmentManager().findFragmentByTag(tags[0]);
-        if(fragment == null){
-            fragment = new PfSingleInfoFragment(position,objectList);
+    public void changeToSingleFragment(int position, List<AllPfAlbumSunObject> objectList) {
+        PfSingleInfoFragment fragment = (PfSingleInfoFragment) getSupportFragmentManager().findFragmentByTag(tags[1]);
+        if (fragment == null) {
+            fragment = new PfSingleInfoFragment(position, objectList);
         }
         getSupportFragmentManager().beginTransaction().
-                replace(R.id.pf_gallery_new_layout_fl, fragment, tags[0]).commit();
+                replace(R.id.pf_gallery_new_layout_fl, fragment, tags[1]).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(tags[0]);
+            if (fragment != null && fragment.getUserVisibleHint()) {
+                finish();
+            } else {
+                //此时在详情页面，返回进入列表页面
+                Fragment album_fagment = getSupportFragmentManager().findFragmentByTag(tags[0]);
+                if (album_fagment == null) {
+                    album_fagment = new PfInfoAllPIcFragment(queryGroupCounts);
+                }
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.pf_gallery_new_layout_fl, album_fagment, tags[0])
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+            }
+            return true;
+        }
+        return false;
     }
 }

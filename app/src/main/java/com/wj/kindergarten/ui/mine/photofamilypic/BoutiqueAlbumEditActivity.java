@@ -23,7 +23,7 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
 
     private BoutiqueAlbumEditAdapter adapter;
     private List<AllPfAlbumSunObject> objectList;
-    public static final int BOUTIQUE_ALBUM_EDIT_SINGLE_OBJECT = 6000;
+    public static final int BOUTIQUE_ALBUM_EDIT_SINGLE_OBJECT = 6006;
     private GridView gridView;
 
     @Override
@@ -59,7 +59,6 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != RESULT_OK) return;
         if (requestCode == BOUTIQUE_ALBUM_EDIT_SINGLE_OBJECT ){
             AllPfAlbumSunObject o = (AllPfAlbumSunObject) data.getSerializableExtra("object");
