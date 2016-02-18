@@ -541,7 +541,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
+        <service android:name="com.wj.kindergarten.services.PlayMusicService" />
         <service android:name="com.wj.kindergarten.services.PicUploadService" />
         <service
             android:name="com.umeng.message.UmengService"
@@ -672,7 +672,9 @@
 
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity" />
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity"></activity>
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity" />
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity" />
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity"></activity>
     </application>
 
 </manifest>

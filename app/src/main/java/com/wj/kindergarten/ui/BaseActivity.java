@@ -183,17 +183,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //加载顶部的状态栏颜色，使用于4.4以上版本
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(true);
-//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//            tintManager.setStatusBarTintEnabled(false);
-//            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
-//            config = tintManager.getConfig();
-//        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#ff4966"));
-        }
+
+        commonDialog = new HintInfoDialog(this);
         mContext = this;
         //新开界面将webview置空
         webView = null;

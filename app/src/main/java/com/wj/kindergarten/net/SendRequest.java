@@ -40,6 +40,8 @@ import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
 import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfChangeData;
+import com.wj.kindergarten.bean.PfModeName;
+import com.wj.kindergarten.bean.PfMusic;
 import com.wj.kindergarten.bean.PrivilegeActiveList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
@@ -479,6 +481,12 @@ public class SendRequest {
                 break;
             case RequestType.GET_SINGLE_PF_INFO :
 
+                break;
+            case RequestType.GET_BOUTIQUE_MODE :
+                resultI.result(getDomain(domain, PfModeName.class));
+                break;
+            case RequestType.GET_MODE_MUSIC :
+                resultI.result(getDomain(domain, PfMusic.class));
                 break;
             default:
                 break;

@@ -79,17 +79,28 @@ public class PfFusionFragment extends Fragment {
     //将网络获取的照片按照日期分类排列
     private List<List<AllPfAlbumSunObject>> lists = new ArrayList<>();
     //将按照日期分类的图片地址单独提取出来
+    //保存日期的集合
+    private List<QueryGroupCount> queryGroupCounts = new ArrayList<>();
     private boolean isFirst;
-    private List<QueryGroupCount> allList;//接受日期,和数量的对象
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 //查询指定时间前的数据
                 case PfLoadDataProxy.NORMAL_DATA:
-                    allList = (List<QueryGroupCount>) msg.obj;
+                    List<QueryGroupCount> allList = (List<QueryGroupCount>) msg.obj;
+                    List<QueryGroupCount> newData = new ArrayList<>();
                     if (allList != null && allList.size() > 0) {
-                        addListDataByDate();
+                        for(QueryGroupCount queryGroupCount : allList){
+                            if(!queryGroupCounts.contains(queryGroupCount)){
+                                queryGroupCounts.add(queryGroupCount);
+                                newData.add(queryGroupCount);
+                            }
+                        }
+                        if(newData.size() > 0){
+                            addListDataByDate(newData);
+                        }
+
                     }
                     break;
                 //有maxTime后时间的刷新的数据
@@ -169,7 +180,7 @@ public class PfFusionFragment extends Fragment {
         return view;
     }
 
-    private void addListDataByDate() {
+    private void addListDataByDate(List<QueryGroupCount> allList) {
 
         for (QueryGroupCount count : allList) {
 

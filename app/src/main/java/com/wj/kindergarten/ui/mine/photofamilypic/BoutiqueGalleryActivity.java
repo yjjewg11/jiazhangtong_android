@@ -504,8 +504,6 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                 Intent intent = new Intent(this,PfChoosedPicActivity.class);
 
                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
-//                setResult(RESULT_OK, intent);
-//                finish();
                 startActivityForResult(intent,PF_CHOOSE_PIC,null);
 
 

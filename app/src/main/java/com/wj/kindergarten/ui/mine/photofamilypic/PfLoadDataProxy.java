@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -98,7 +99,7 @@ public class PfLoadDataProxy {
                 AllPfAlbum allPfAlbum = (AllPfAlbum) domain;
                 if (dataLoadFinish != null) dataLoadFinish.finish();
                 if (allPfAlbum == null || allPfAlbum.getList() == null || allPfAlbum.getList().getData() == null ||
-                        allPfAlbum.getList().getData().size() == 0){
+                        allPfAlbum.getList().getData().size() == 0) {
                     ToastUtils.showMessage("没有更多内容了！");
                     dataLoadFinish.noMoreData();
                     return;
@@ -119,14 +120,17 @@ public class PfLoadDataProxy {
                 //如果请求类型是最新的数据，那么则通知主面板进行刷新。
                 //把获取到的数据保存到数据库中
                 for (AllPfAlbumSunObject object : allPfAlbum.getList().getData()) {
-                    familyUuidObjectSql.save(object);
+                    AllPfAlbumSunObject object1 = familyUuidObjectSql.findById(object.getUuid(), AllPfAlbumSunObject.class);
+                    if (object1 == null) {
+                        familyUuidObjectSql.save(object);
+                    }
                 }
                 //在获取到maxtime和mintime的值之后，查询有没有更新
                 //在获取到新数据之后，保存到数据库中后再从数据库查出来取出来。
-//                loadFromSqlite();
+                loadFromSqlite();
                 loadDataIsChange(familyUuid);
                 //判断类型是否是请求的增量更新数据
-                if(type == REFRESH_DATA){
+                if (type == REFRESH_DATA) {
                     handler.sendEmptyMessage(REFRESH_DATA);
                 }
             }
@@ -145,8 +149,10 @@ public class PfLoadDataProxy {
 
     private void savePfFamilyUUid(String familyUuid) {
         if (familyUuidSql.findById(familyUuid, PfFamilyUuid.class) == null) {
-//                    familyUuidSql.f
-            familyUuidSql.save(pfFamilyUuid);
+            PfFamilyUuid uuid = familyUuidSql.findById(familyUuid, PfFamilyUuid.class);
+            if (uuid != null) {
+                familyUuidSql.save(pfFamilyUuid);
+            }
         } else {
             familyUuidSql.update(pfFamilyUuid);
         }
@@ -237,7 +243,7 @@ public class PfLoadDataProxy {
             public void result(BaseModel domain) {
                 final UUIDList uuidList = (UUIDList) domain;
                 pfFamilyUuid.setUpdateTime(date);
-                familyUuidSql.save(pfFamilyUuid);
+                familyUuidSql.update(pfFamilyUuid);
                 if (uuidList == null || uuidList.getList() == null || uuidList.getList().getData() == null
                         || uuidList.getList().getData().size() == 0) return;
                 threadPoolExecutor.execute(new Runnable() {
@@ -247,6 +253,9 @@ public class PfLoadDataProxy {
                         Iterator<UUIDListSunObj> iterator = listSunObjs.iterator();
                         while (iterator.hasNext()) {
                             UUIDListSunObj obj = iterator.next();
+                            if(obj == null) continue;
+                            if(TextUtils.isEmpty(obj.getU())) continue;
+                            CGLog.v("打印obj : "+obj);
                             AllPfAlbumSunObject objSql = familyUuidObjectSql.findById(obj.getU(), AllPfAlbumSunObject.class);
                             if (objSql == null) continue;
                             objSql.setStatus(obj.getS());
@@ -279,7 +288,6 @@ public class PfLoadDataProxy {
         String count = "select count(*) from com_wj_kindergarten_bean_AllPfAlbumSunObject where " +
                 " strftime('%Y-%m-%d',create_time) ='" + date + "' and family_uuid ='" + family_uuid + "' ";
 //        DbModel   familyUuidObjectSql.findDbModelBySQL(count);
-
         return objectList;
 
     }
@@ -287,6 +295,7 @@ public class PfLoadDataProxy {
 
     public interface DataLoadFinish {
         void finish();
+
         void noMoreData();
     }
 }

@@ -19,8 +19,7 @@ public class AllPfAlbumSunObject extends BaseModel{
     private String path;@Expose
     private int type;@Expose
     private String address;@Expose
-    private String note;
-    @Expose
+    private String note;@Expose
     private String family_uuid;@Expose
     private String create_useruuid;@Expose
     private int status;@Expose
@@ -146,6 +145,4 @@ public class AllPfAlbumSunObject extends BaseModel{
     public String getMd5() {
         return md5;
     }
-
-
 }

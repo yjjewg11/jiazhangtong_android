@@ -3,7 +3,9 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -13,7 +15,9 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueAlbumEditAdapter;
 import com.wj.kindergarten.utils.GloablUtils;
 
+import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalDb;
+import net.tsz.afinal.annotation.view.ViewInject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +29,9 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
     private List<AllPfAlbumSunObject> objectList;
     public static final int BOUTIQUE_ALBUM_EDIT_SINGLE_OBJECT = 6006;
     private GridView gridView;
+    @ViewInject(id = R.id.boutique_album_edit_next_step)
+    private TextView boutique_album_edit_next_step;
+
 
     @Override
     protected void setContentLayout() {
@@ -38,11 +45,27 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        FinalActivity.initInjectedView(this);
         setTitleText("编辑照片信息");
         getData();
         initViews();
+        initClick();
     }
 
+    private void initClick() {
+        boutique_album_edit_next_step.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BoutiqueAlbumEditActivity.this,BoutiqueModeActivity.class));
+            }
+        });
+    }
+
+    public void startForResult(AllPfAlbumSunObject object){
+        Intent intent = new Intent(this, SinglePfEditActivity.class);
+        intent.putExtra("object", object);
+        startActivityForResult(intent, BOUTIQUE_ALBUM_EDIT_SINGLE_OBJECT, null);
+    }
 
 
     private void initViews() {
@@ -66,6 +89,7 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
                 int index = objectList.indexOf(o);
                 objectList.remove(o);
                 objectList.add(index,o);
+                adapter.setObjectList(objectList);
                 adapter.notifyDataSetChanged();
             }
         }

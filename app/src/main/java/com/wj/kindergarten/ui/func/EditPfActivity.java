@@ -322,7 +322,7 @@ public class EditPfActivity extends BaseActivity {
 
     private void showText() {
         if (pfMusic == null) return;
-        edit_pf_choose_music.setText("" + pfMusic.getTitle());
+//        edit_pf_choose_music.setText("" + pfMusic.getTitle());
     }
 
 

@@ -56,4 +56,5 @@ public class PfFamilyUuid implements Serializable {
                 ", family_uuid='" + family_uuid + '\'' +
                 '}';
     }
+
 }
