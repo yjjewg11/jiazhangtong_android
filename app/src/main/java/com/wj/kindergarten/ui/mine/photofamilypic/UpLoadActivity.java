@@ -28,8 +28,12 @@ import com.wj.kindergarten.bean.PfProgressItem;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.UpLoadProgressAdapter;
+import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ToastUtils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,8 +47,8 @@ public class UpLoadActivity extends BaseActivity {
     public static final String PF_UPDATE_PROGRESS_START = "pf_update_progress_start";
     public static final String PF_UPDATE_PROGRESS_LOADING = "pf_update_progress_loading";
     public static final String PF_UPDATE_PROGRESS_SUCCESSED = "pf_update_progress_successed";
-    public static final String PF_UPDATE_PROGRESS_FAILED= "pf_update_progress_failed";
-    private Handler mHandler = new Handler(){
+    public static final String PF_UPDATE_PROGRESS_FAILED = "pf_update_progress_failed";
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -67,10 +71,11 @@ public class UpLoadActivity extends BaseActivity {
     };
     private LinearLayout linearLayout;
     private ImageView up_Load_wait;
+    private FinalDb db;
 
     private void bindSuccess() {
         binder.startTransMission();
-        if (binder.getList() == null || binder.getList().size() == 0){
+        if (binder.getList() == null || binder.getList().size() == 0) {
             judgeAddNoContent();
             return;
         }
@@ -80,11 +85,14 @@ public class UpLoadActivity extends BaseActivity {
     private void addView() {
         linearLayout.removeAllViews();
         for (final AlreadySavePath alreadySavePath : binder.getList()) {
+            //判断是否已经上传成功，如果是则不添加
+            AlreadySavePath dbPath =  db.findById(alreadySavePath.getLocalPath(), AlreadySavePath.class);
+            if(dbPath.getStatus() == 0) continue;
             final View view = View.inflate(this, R.layout.upload_progress_item, null);
             ImageView up_load_progress_image = (ImageView) view.findViewById(R.id.up_load_progress_image);
             ProgressBar up_load_progressBar = (ProgressBar) view.findViewById(R.id.up_load_progressBar);
             up_Load_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
-            ImageLoaderUtil.displayMyImage("file://"+alreadySavePath.getLocalPath(),up_load_progress_image);
+            ImageLoaderUtil.displayMyImage("file://" + alreadySavePath.getLocalPath(), up_load_progress_image);
             view.setTag(alreadySavePath.getLocalPath());
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -121,6 +129,11 @@ public class UpLoadActivity extends BaseActivity {
         register();
         setTitleText("上传进度");
         initViews();
+        initRemoveView();
+    }
+
+    private void initRemoveView() {
+        db = FinalDb.create(this);
     }
 
     @Override
@@ -159,43 +172,29 @@ public class UpLoadActivity extends BaseActivity {
 //    }
 
 
-
     public class UpdateBroadCastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             final String path = intent.getStringExtra("path");
+            int progress = intent.getIntExtra("progress", -1);
+            int total = intent.getIntExtra("total", -1);
+            CGLog.v("打印progress : " + progress + " total : " + total);
+            View view = linearLayout.findViewWithTag(path);
+            if(view == null) return;
+            ProgressBar bar = (ProgressBar) (view.findViewById(R.id.up_load_progressBar));
             switch (intent.getAction()) {
-                case PF_UPDATE_PROGRESS_START:
-                    int index =  linearLayout.indexOfChild(linearLayout.findViewWithTag(path));
-                    linearLayout.removeViews(0,index);
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ((ProgressBar)
-                                    (linearLayout.findViewWithTag(path).findViewById(R.id.up_load_progressBar))).setProgress(30);
-                        }
-                    });
-                    break;
                 case PF_UPDATE_PROGRESS_LOADING:
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ((ProgressBar)
-                                    (linearLayout.findViewWithTag(path).findViewById(R.id.up_load_progressBar))).setProgress(85);
-                        }
-                    });
+                    bar.setProgress(progress);
+                    bar.setMax(total);
                     break;
                 case PF_UPDATE_PROGRESS_SUCCESSED:
-                     mHandler.post(new Runnable() {
-                         @Override
-                         public void run() {
-                             linearLayout.removeView(linearLayout.findViewWithTag(path));
-                             judgeAddNoContent();
-                         }
-                     });
+                    bar.setMax(100);
+                    bar.setProgress(100);
+                        linearLayout.removeView(view);
+                    judgeAddNoContent();
                     break;
-                case PF_UPDATE_PROGRESS_FAILED :
+                case PF_UPDATE_PROGRESS_FAILED:
                     linearLayout.removeAllViews();
                     judgeAddNoContent();
                     break;
@@ -204,12 +203,12 @@ public class UpLoadActivity extends BaseActivity {
     }
 
     private void judgeAddNoContent() {
-        if(linearLayout.getChildCount() == 0){
+        if (linearLayout.getChildCount() == 0) {
 //            setContentView(View.inflate(this,R.layout.nothing_view,null));
             TextView textView = new TextView(this);
             textView.setText("暂时还没有上传内容!");
             textView.setGravity(Gravity.CENTER);
-            linearLayout.addView(textView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            linearLayout.addView(textView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
     }
 

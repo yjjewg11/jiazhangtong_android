@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.GsonKdUtil;
+import com.wj.kindergarten.net.upload.ProgressCallBack;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
@@ -49,70 +50,34 @@ public class PicUploadService extends Service {
 
     int count = 0;
     int size = 0;
-    private AjaxCallBack ajaxCallBack = new AjaxCallBack() {
-        @Override
-        public void onStart() {
-            super.onStart();
-            CGLog.v("上传开始!");
-            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_START, 10);
-        }
 
+    private ProgressCallBack progressCallBack = new ProgressCallBack() {
         @Override
-        public void onLoading(long count, long current) {
-            super.onLoading(count, current);
-            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_LOADING, 60);
-            CGLog.v("查看上传进度 : "+current+"/"+count);
-        }
-
-        @Override
-        public void onSuccess(Object o) {
-            super.onSuccess(o);
-            CGLog.v("上传成功 : " + o.toString());
-            BaseModel baseModel = GsonKdUtil.getGson().fromJson(o.toString(), BaseModel.class);
-            if(baseModel.getResMsg().getStatus().equals("sessionTimeout")){
-                ToastUtils.showMessage(baseModel.getResMsg().getMessage());
-                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                getBaseContext().startActivity(intent);
-
-                sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED, 0);
-                return;
-            }
-            success();
-        }
-
-        @Override
-        public void onFailure(Throwable t, int errorNo, String strMsg) {
-            super.onFailure(t, errorNo, strMsg);
-            CGLog.v("上传失败 : " + strMsg);
-            AlreadySavePath alreadySavePath = listObject.get(count);
-            alreadySavePath.setStatus(3);
-            db.update(alreadySavePath);
-            count++;
-            if(count >= size){
-                if(listObject != null)listObject.clear();
-                return;
-            }
+        public void progress(int current, int total) {
+            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_LOADING,current,total);
         }
     };
-    private void success() {
+
+    private void successes() {
         AlreadySavePath alreadySavePath = listObject.get(count);
         alreadySavePath.setStatus(0);
         alreadySavePath.setSuccess_time(new Date());
         db.update(alreadySavePath);
-        sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED,100);
+        sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED,100,100);
         count++;
         if (count >= size) {
             if(listObject != null)listObject.clear();
             return;
         }
-        uploadFile.upLoadPf(listObject.get(count).getLocalPath(),ajaxCallBack);
+        uploadFile.upLoadPf(listObject.get(count).getLocalPath(),progressCallBack);
     }
 
-    private void sendBroad(String action,int progress) {
+    private void sendBroad(String action,int progress,int total) {
         if (isTransmission()) {
             Intent intent = new Intent(action);
             intent.putExtra("path",listObject.get(count).getLocalPath());
+            intent.putExtra("progress",progress);
+            intent.putExtra("total",total);
             sendBroadcast(intent);
         }
     }
@@ -121,19 +86,19 @@ public class PicUploadService extends Service {
         @Override
         public void success(Result result) {
             //直接把地址写入到数据库
-
+            successes();
         }
-
-
-
         @Override
         public void failure(String message) {
-//            if (!TextUtils.isEmpty(failedPath) && !failedPath.equals(listObject.get(count).getLocalPath())) {
-//                failedPath = list.get(count);
-//            } else {
-//                count++;
-//            }
-//            uploadFile.upLoadPf(list.get(count),ajaxCallBack);
+            CGLog.v("上传失败 : " + message);
+            AlreadySavePath alreadySavePath = listObject.get(count);
+            alreadySavePath.setStatus(3);
+            db.update(alreadySavePath);
+            count++;
+            if(count >= size){
+                if(listObject != null)listObject.clear();
+                return;
+            }
         }
     };
 
@@ -191,7 +156,7 @@ public class PicUploadService extends Service {
             listObject = (ArrayList<AlreadySavePath>) db.findAllByWhere(AlreadySavePath.class,sql);
             if(listObject != null && listObject.size() > 0){
                 size = listObject.size();
-                uploadFile.upLoadPf(listObject.get(0).getLocalPath(), ajaxCallBack);
+                uploadFile.upLoadPf(listObject.get(0).getLocalPath(), progressCallBack);
             }
         }
 
