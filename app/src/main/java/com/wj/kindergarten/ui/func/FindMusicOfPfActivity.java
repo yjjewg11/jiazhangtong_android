@@ -1,5 +1,7 @@
 package com.wj.kindergarten.ui.func;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,9 +12,14 @@ import android.provider.MediaStore;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfMusic;
+import com.wj.kindergarten.bean.PfMusicSunObject;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.ShowMusicAdapter;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -24,7 +31,7 @@ import java.util.List;
 public class FindMusicOfPfActivity extends BaseActivity {
     private PullToRefreshListView listView;
     private ShowMusicAdapter adapter;
-    List<PfMusic> pfMusics = new ArrayList<PfMusic>();
+    List<PfMusicSunObject> pfMusics = new ArrayList<>();
     private static final int GET_DATA_SUCCESSED = 3006;
     private Handler handler = new Handler(){
         @Override
@@ -48,11 +55,48 @@ public class FindMusicOfPfActivity extends BaseActivity {
     }
 
     @Override
+    protected void titleLeftButtonListener() {
+        super.titleLeftButtonListener();
+        stopMusic();
+    }
+
+    @Override
     protected void onCreate() {
+        setTitleText("选择背景音乐", "确认");
         initViews();
-        setTitleText("选择背景音乐", "保存");
+        initClick();
+
         loadMusic();
 
+    }
+
+    private void initClick() {
+
+    }
+
+    int pageNo = 1;
+    private void loadMusic() {
+        UserRequest.getModeMusic(this,pageNo, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                PfMusic pfMusic = (PfMusic) domain;
+                if(pfMusic != null && pfMusic.getList() != null
+                        && pfMusic.getList().getData() != null && pfMusic.getList().getData().size() > 0){
+                    pfMusics.addAll(pfMusic.getList().getData());
+                    handler.sendEmptyMessage(GET_DATA_SUCCESSED);
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
     }
 
     @Override
@@ -63,11 +107,14 @@ public class FindMusicOfPfActivity extends BaseActivity {
             return;
         }
         Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        intent.putExtra("bundle",bundle);
-        bundle.putSerializable("pfMusic",adapter.getList().get(0));
-        setResult(RESULT_OK,intent);
+        intent.putExtra("object", adapter.getList().get(0));
+        setResult(RESULT_OK, intent);
+        stopMusic();
         finish();
+    }
+
+    private void stopMusic() {
+        sendBroadcast(new Intent(GloablUtils.STOP_MUSIC_PLAY));
     }
 
     private void initViews() {
@@ -75,62 +122,7 @@ public class FindMusicOfPfActivity extends BaseActivity {
         listView.setMode(PullToRefreshBase.Mode.DISABLED);
         adapter = new ShowMusicAdapter(this);
         listView.setAdapter(adapter);
-
     }
 
-
-    private void loadMusic() {
-        Cursor cursor = getContentResolver().query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null,
-                MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-
-
-              //新建一个歌曲对象,将从cursor里读出的信息存放进去,直到取完cursor里面的内容为止.
-               cursor.moveToFirst();
-
-            while (cursor.moveToNext()){
-                PfMusic pfMusic = new PfMusic();
-
-            long id = cursor.getLong(cursor
-                    .getColumnIndex(MediaStore.Audio.Media._ID));   //音乐id
-
-            String title = cursor.getString((cursor
-                    .getColumnIndex(MediaStore.Audio.Media.TITLE)));//音乐标题
-
-            String artist = cursor.getString(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.ARTIST));//艺术家
-
-            long duration = cursor.getLong(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.DURATION));//时长
-
-            long size = cursor.getLong(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.SIZE));  //文件大小
-
-            String url = cursor.getString(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.DATA));  //文件路径
-
-            String album = cursor.getString(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.ALBUM)); //唱片图片
-
-            long album_id = cursor.getLong(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)); //唱片图片ID
-
-            int isMusic = cursor.getInt(cursor
-                    .getColumnIndex(MediaStore.Audio.Media.IS_MUSIC));//是否为音乐
-
-            if (isMusic != 0 && duration/(1000 * 30) >= 1) {     //只把1分钟以上的音乐添加到集合当中
-//                mp3Info.setId(id);
-                pfMusic.setTitle(title);
-//                mp3Info.setArtist(artist);
-//                mp3Info.setDuration(duration);
-//                mp3Info.setSize(size);
-                pfMusic.setPath(url);
-//                mp3Info.setAlbum(album);
-//                mp3Info.setAlbum_id(album_id);
-                pfMusics.add(pfMusic);
-            }
-            }
-        handler.sendEmptyMessage(GET_DATA_SUCCESSED);
-    }
 
 }

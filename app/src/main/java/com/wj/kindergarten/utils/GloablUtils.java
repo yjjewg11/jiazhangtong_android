@@ -37,8 +37,6 @@ public interface GloablUtils {
 
     String SET_PULL_LAOUT_LIST_BACKGROUND_COLOR = "#ffffff";
 
-    //接受二维码链接的广播action
-    String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
 
     //图片查询地址
     Uri QUERY_PIC =  MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
@@ -49,5 +47,11 @@ public interface GloablUtils {
     int PF_EDIT_TAKE_PHOTO = 3002;
     int PF_EDIT_CHOOSE_IMAGE = 3003;
     int PF_ALBUM_ADD_WATERFALL_PIC = 3004; //处理添加相册瀑布流照片
+
+
+    //接受二维码链接的广播action
+    String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
+    //停止音乐播放的广播
+    String STOP_MUSIC_PLAY = "stop_music_play";
 
 }

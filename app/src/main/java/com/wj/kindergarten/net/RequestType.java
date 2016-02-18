@@ -83,4 +83,6 @@ public interface RequestType {
      int PF_OBJ_BY_UPDATE = 167;
      int GET_SINGLE_PF_INFO = 168;
      int GET_BOUTIQUE_ALBUM = 169;
+     int GET_BOUTIQUE_MODE = 170;
+     int GET_MODE_MUSIC = 171;
 }

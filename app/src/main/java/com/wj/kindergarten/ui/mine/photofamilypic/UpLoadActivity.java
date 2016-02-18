@@ -183,13 +183,12 @@ public class UpLoadActivity extends BaseActivity {
             View view = linearLayout.findViewWithTag(path);
             if(view == null) return;
             ProgressBar bar = (ProgressBar) (view.findViewById(R.id.up_load_progressBar));
+            int progressUpdate = progress/total * 100;
             switch (intent.getAction()) {
                 case PF_UPDATE_PROGRESS_LOADING:
-                    bar.setProgress(progress);
-                    bar.setMax(total);
+                    bar.setProgress(progressUpdate);
                     break;
                 case PF_UPDATE_PROGRESS_SUCCESSED:
-                    bar.setMax(100);
                     bar.setProgress(100);
                         linearLayout.removeView(view);
                     judgeAddNoContent();

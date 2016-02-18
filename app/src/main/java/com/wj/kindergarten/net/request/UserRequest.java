@@ -19,7 +19,9 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
+import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
 import com.wj.kindergarten.utils.CGLog;
@@ -94,6 +96,8 @@ public final class UserRequest {
     private static final String CHECK_PF_IS_CHANGE = "rest/fPPhotoItem/ queryOfNewDataOrUpdate.json";
     private static final String PF_OBJ_BY_UPDATE = "rest/fPPhotoItem/queryOfIncrement.json";
     private static final String GET_BOUTIQUE_ALBUM = "rest/fPMovie/queryMy.json";
+    private static final String GET_BOUTIQUE_MODE = "rest/fPMovieTemplate/query.json";
+    private static final String GET_MODE_MUSIC = "rest/mp3/query.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -899,6 +903,18 @@ public final class UserRequest {
     public static void getBoutiqueAlbumList(Context context, int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
-        SendRequest.getInstance().get(context,RequestType.GET_BOUTIQUE_ALBUM,params,RequestHttpUtil.BASE_URL+GET_BOUTIQUE_ALBUM,resultI);
+        SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_ALBUM, params, RequestHttpUtil.BASE_URL + GET_BOUTIQUE_ALBUM, resultI);
+    }
+
+    public static void getBoutiqueMode(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.GET_BOUTIQUE_MODE,params,RequestHttpUtil.BASE_URL+GET_BOUTIQUE_MODE,resultI);
+    }
+
+    public static void getModeMusic(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context,RequestType.GET_MODE_MUSIC,params,RequestHttpUtil.BASE_URL+GET_MODE_MUSIC,resultI);
     }
 }

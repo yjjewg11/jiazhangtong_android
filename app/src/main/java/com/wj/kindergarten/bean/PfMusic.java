@@ -1,51 +1,28 @@
 package com.wj.kindergarten.bean;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 /**
  * Created by tangt on 2016/1/21.
  */
-public class PfMusic implements Serializable {
-    private String title;
-    private String path;
-
-    public PfMusic(String title, String path) {
-        this.title = title;
-        this.path = path;
-    }
-
-    public PfMusic() {
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
+public class PfMusic extends BaseModel {
+    @Expose
+    private PfMusicSun list;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PfMusic pfMusic = (PfMusic) o;
-
-        return path.equals(pfMusic.path);
-
+    public String toString() {
+        return "PfMusic{" +
+                "list=" + list +
+                '}';
     }
 
-    @Override
-    public int hashCode() {
-        return path.hashCode();
+    public PfMusicSun getList() {
+        return list;
+    }
+
+    public void setList(PfMusicSun list) {
+        this.list = list;
     }
 }

@@ -77,10 +77,8 @@ public class BoutiqueAlbumEditAdapter extends BaseAdapter {
             viewHolder.boutique_album_edit_title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(((BoutiqueAlbumEditActivity)context), SinglePfEditActivity.class);
-                    intent.putExtra("object",object);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    ((BoutiqueAlbumEditActivity)context).startActivityForResult(intent,BoutiqueAlbumEditActivity.BOUTIQUE_ALBUM_EDIT_SINGLE_OBJECT,null);
+                    BoutiqueAlbumEditActivity activity =  (BoutiqueAlbumEditActivity) context;
+                    activity.startForResult(object);
                 }
             });
 

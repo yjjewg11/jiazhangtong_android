@@ -33,4 +33,20 @@ public class QueryGroupCount  implements Serializable{
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        QueryGroupCount that = (QueryGroupCount) o;
+
+        return date.equals(that.date);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return date.hashCode();
+    }
 }

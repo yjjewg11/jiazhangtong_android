@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.PfMusic;
+import com.wj.kindergarten.bean.PfMusicSunObject;
+import com.wj.kindergarten.services.PlayMusicService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +24,9 @@ import java.util.List;
 public class ShowMusicAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<PfMusic> oneList = new ArrayList<>();
+    private List<PfMusicSunObject> oneList = new ArrayList<>();
 
-    public List<PfMusic> getList() {
+    public List<PfMusicSunObject> getList() {
         return list;
     }
 
@@ -31,9 +34,9 @@ public class ShowMusicAdapter extends BaseAdapter {
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
-    private List<PfMusic> list = new ArrayList<>();
+    private List<PfMusicSunObject> list = new ArrayList<>();
 
-    public void setList(List<PfMusic> list) {
+    public void setList(List<PfMusicSunObject> list) {
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
@@ -66,14 +69,18 @@ public class ShowMusicAdapter extends BaseAdapter {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final PfMusic pfMusic = list.get(position);
+        final PfMusicSunObject object = list.get(position);
 
-        if(pfMusic != null ){
+        if(object != null ){
             viewHolder.pf_item_music_text.setCompoundDrawables(null, null, null, null);
-            viewHolder.pf_item_music_text.setText("" + pfMusic.getTitle());
+            viewHolder.pf_item_music_text.setText("" + object.getTitle());
             viewHolder.pf_item_music_linear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent =  new Intent(context, PlayMusicService.class);
+                    intent.putExtra("musicPath",object.getPath());
+                    intent.putExtra("status",0);
+                    context.startService(intent);
                     oneList.clear();
                     oneList.add(list.get(position));
                     notifyDataSetChanged();
@@ -81,7 +88,7 @@ public class ShowMusicAdapter extends BaseAdapter {
             });
 
             if(oneList.size() > 0){
-                if(pfMusic.equals(oneList.get(0))){
+                if(object.equals(oneList.get(0))){
                     Drawable drawable = context.getResources().getDrawable(R.drawable.xuanzhong_pf);
                     drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     viewHolder.pf_item_music_text.setCompoundDrawables(null, null, drawable, null);

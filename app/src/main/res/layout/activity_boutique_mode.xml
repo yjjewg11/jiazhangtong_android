@@ -2,22 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity">
+    android:layout_height="match_parent"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <include layout="@layout/title_normal"/>
+        <include layout="@layout/title_normal"/>
     </FrameLayout>
-
-    <GridView
+    <com.handmark.pulltorefresh.library.PullToRefreshGridView
         android:layout_weight="1"
         android:paddingTop="@dimen/margin_15"
         android:paddingRight="@dimen/margin_20"
         android:paddingLeft="@dimen/margin_20"
-        android:id="@+id/boutique_edit_child_grid"
+        android:id="@+id/boutique_mode_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="@android:color/transparent"
@@ -29,18 +28,4 @@
         android:stretchMode="columnWidth"
         android:visibility="visible" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-        <TextView
-            android:id="@+id/boutique_album_edit_next_step"
-            android:textColor="@color/white"
-            android:background="@color/title_bg"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text="下一步"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-    </RelativeLayout>
 </LinearLayout>
