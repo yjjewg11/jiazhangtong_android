@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.bean.BaseResponse;
@@ -24,9 +25,6 @@ import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
 
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -63,13 +61,11 @@ public class UploadFile {
         this.width = width;
         this.height = height;
     }
-    FinalHttp fh = new FinalHttp();
-    private void upLoadFilePf(final File file, final String path,String photo_time,String address,String md5,String note,String family_uuid,AjaxCallBack ajaxCallBack) {
+    //带进度上传相册图片
+    private void upLoadFilePf(final File file, final String path,String photo_time,String address,String md5,String note,String family_uuid, final ProgressCallBack progressCallBack) {
         if (file != null && file.exists() && file.length() > 0) {
-            //使用afinal上传文件框架回调进度
-            AjaxParams params = new AjaxParams();
             try {
-//                RequestParams params = new RequestParams();
+                RequestParams params = new RequestParams();
                 params.put("file", file);
                 params.put("photo_time",photo_time);
                 params.put("address",address);
@@ -77,60 +73,46 @@ public class UploadFile {
                 params.put("note",note);
                 params.put("family_uuid",family_uuid);
                 params.put("phone_type", Build.MODEL);
-//                params.put("phone_uuid",);
-                RequestHttpUtil.afinalPost(context, UP_LOAD_PF_URL,params,ajaxCallBack);
-//                CGLog.d(URL + "?" + params.toString());
-//                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new JsonHttpResponseHandler() {
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] header, JSONObject response) {
-//                        super.onSuccess(statusCode, header, response);
-//                        CGLog.d("back1:" + response.toString());
-//                        try {
-//                            BaseResponse baseResponse = new BaseResponse(response);
-//                            if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
-//                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
-//                            } else {
-//                                uploadImage.failure("上传图片失败");
-//                            }
+                CGLog.d(URL + "?" + params.toString());
+                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                        try {
+                            JSONObject response = new JSONObject(new String(bytes));
+                            CGLog.d("back1:" + response.toString());
+                            BaseResponse baseResponse = new BaseResponse(response);
+                            if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
+                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
+                            } else {
+                                uploadImage.failure("上传图片失败");
+                            }
                         } catch (Exception e) {
-                            ajaxCallBack.onFailure(e,00,"上传图片不成功 ");
                             e.printStackTrace();
                         }
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, String response) {
-//                        super.onSuccess(statusCode, headers, response);
-//                        CGLog.d("back2:" + response.toString());
-//                        uploadImage.failure("上传图片失败");
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                        super.onSuccess(statusCode, headers, response);
-//                        CGLog.d("back3:" + response.toString());
-//                        uploadImage.failure("上传图片失败");
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int statusCode, Header[] headers,
-//                                          String responseBody, Throwable e) {
-//                        super.onFailure(statusCode, headers, responseBody, e);
-//                        uploadImage.failure("上传图片失败");
-//                    }
-//                });
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                uploadImage.failure("上传图片失败");
-//            }
-//        } else {
-//            uploadImage.failure("上传的文件不存在");
-//        }
+                    }
+
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                        uploadImage.failure("上传图片失败");
+                    }
+
+                    @Override
+                    public void onProgress(int bytesWritten, int totalSize) {
+                        progressCallBack.progress(bytesWritten,totalSize);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                uploadImage.failure("上传图片失败");
+            }
+        } else {
+            uploadImage.failure("上传的文件不存在");
         }
-    }
+        }
 
 
-    public void upLoadPf(String path,AjaxCallBack ajaxCallBack) {
+
+    public void upLoadPf(String path,ProgressCallBack progressCallBack) {
         if (Utils.isNetworkAvailable(context)) {
             try {
                 File file = new File(path);
@@ -143,9 +125,9 @@ public class UploadFile {
 //                }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
-                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), MainActivity.getFamily_uuid(),ajaxCallBack);
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), MainActivity.getFamily_uuid(),progressCallBack);
                 }else{
-                    upLoadFilePf(file, path, "", "", "", "", MainActivity.getFamily_uuid(),ajaxCallBack);
+                    upLoadFilePf(file, path, "", "", "", "", MainActivity.getFamily_uuid(),progressCallBack);
                 }
 
             } catch (Exception e) {
@@ -178,6 +160,9 @@ public class UploadFile {
         picObject.setMd5(path);
         return picObject;
     }
+
+
+
 
     /**
      * 上传
