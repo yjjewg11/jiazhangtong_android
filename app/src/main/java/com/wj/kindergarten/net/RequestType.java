@@ -85,4 +85,5 @@ public interface RequestType {
      int GET_BOUTIQUE_ALBUM = 169;
      int GET_BOUTIQUE_MODE = 170;
      int GET_MODE_MUSIC = 171;
+     int GET_SINGLE_PF_EXTRA_INFO = 172;
 }

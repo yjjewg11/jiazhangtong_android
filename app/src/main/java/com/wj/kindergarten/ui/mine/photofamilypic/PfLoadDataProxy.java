@@ -149,10 +149,7 @@ public class PfLoadDataProxy {
 
     private void savePfFamilyUUid(String familyUuid) {
         if (familyUuidSql.findById(familyUuid, PfFamilyUuid.class) == null) {
-            PfFamilyUuid uuid = familyUuidSql.findById(familyUuid, PfFamilyUuid.class);
-            if (uuid != null) {
-                familyUuidSql.save(pfFamilyUuid);
-            }
+            familyUuidSql.save(pfFamilyUuid);
         } else {
             familyUuidSql.update(pfFamilyUuid);
         }
@@ -253,9 +250,9 @@ public class PfLoadDataProxy {
                         Iterator<UUIDListSunObj> iterator = listSunObjs.iterator();
                         while (iterator.hasNext()) {
                             UUIDListSunObj obj = iterator.next();
-                            if(obj == null) continue;
-                            if(TextUtils.isEmpty(obj.getU())) continue;
-                            CGLog.v("打印obj : "+obj);
+                            if (obj == null) continue;
+                            if (TextUtils.isEmpty(obj.getU())) continue;
+                            CGLog.v("打印obj : " + obj);
                             AllPfAlbumSunObject objSql = familyUuidObjectSql.findById(obj.getU(), AllPfAlbumSunObject.class);
                             if (objSql == null) continue;
                             objSql.setStatus(obj.getS());

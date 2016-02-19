@@ -22,8 +22,17 @@ public class AllPfAlbumSunObject extends BaseModel{
     private String note;@Expose
     private String family_uuid;@Expose
     private String create_useruuid;@Expose
+    private String create_user;@Expose
     private int status;@Expose
     private String md5;
+
+    public String getCreate_user() {
+        return create_user;
+    }
+
+    public void setCreate_user(String create_user) {
+        this.create_user = create_user;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -121,6 +130,7 @@ public class AllPfAlbumSunObject extends BaseModel{
         this.note = note;
     }
 
+
     @Override
     public String toString() {
         return "AllPfAlbumSunObject{" +
@@ -133,10 +143,11 @@ public class AllPfAlbumSunObject extends BaseModel{
                 ", note='" + note + '\'' +
                 ", family_uuid='" + family_uuid + '\'' +
                 ", create_useruuid='" + create_useruuid + '\'' +
+                ", create_user='" + create_user + '\'' +
                 ", status=" + status +
+                ", md5='" + md5 + '\'' +
                 '}';
     }
-
 
     public void setMd5(String md5) {
         this.md5 = md5;

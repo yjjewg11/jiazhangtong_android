@@ -27,6 +27,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.SingleNewInfo;
+import com.wj.kindergarten.bean.SinlePfExtraInfo;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.PfPopPicAdapter;
@@ -56,6 +57,8 @@ public class PfSingleInfoFragment extends Fragment {
 
     private TextView[] textViews;
     private PagerAdapter pagerAdapter;
+    private PfGalleryActivity activity;
+    private SinlePfExtraInfo singleInfo;
 
     public PfSingleInfoFragment(int position, List<AllPfAlbumSunObject> list) {
         this.position = position;
@@ -85,6 +88,7 @@ public class PfSingleInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(fragmentView != null) return fragmentView;
+        activity = (PfGalleryActivity) getActivity();
         ((PfGalleryActivity)getActivity()).hideActionbar();
         fragmentView = inflater.inflate(R.layout.pf_gallery_activity,null);
         initViews();
@@ -287,12 +291,12 @@ public class PfSingleInfoFragment extends Fragment {
             public void onPageSelected(int position) {
                 if (list == null || list.size() == 0) return;
                 sunObject = list.get(position);
-//                setTitleText(TimeUtil.getYMDTimeFromYMDHMS(sunObject.getCreate_time()), "");
-                queryItemNewInfo(sunObject.getUuid());
+                setTitleText(TimeUtil.getYMDTimeFromYMDHMS(sunObject.getCreate_time()));
                 //做调试，屏蔽
-//                if(sunObject.getStatus() != 0){
-//                    queryItemNewInfo(sunObject.getUuid());
-//                }
+                if (sunObject.getStatus() != 0) {
+                    queryItemNewInfo(sunObject.getUuid());
+                }
+                queryExtraData(sunObject.getUuid());
             }
 
             @Override
@@ -300,6 +304,36 @@ public class PfSingleInfoFragment extends Fragment {
 
             }
         });
+    }
+
+    private void queryExtraData(String uuid) {
+        UserRequest.getSinglePfExtraInfo(getActivity(), uuid, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                singleInfo = (SinlePfExtraInfo) domain;
+                if (singleInfo != null) {
+                    initCollect();
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
+    private void initCollect() {
+
+    }
+
+    private void setTitleText(String ymdTimeFromYMDHMS) {
+        activity.changeTitle(ymdTimeFromYMDHMS);
     }
 
 }

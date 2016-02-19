@@ -21,7 +21,6 @@ public class AutoDownLoadListener implements ImageLoadingListener {
 
     @Override
     public void onLoadingStarted(String imageUri, View view) {
-        ToastUtils.showMessage("图片保存失败");
     }
 
     @Override
@@ -33,6 +32,7 @@ public class AutoDownLoadListener implements ImageLoadingListener {
     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
         String fileName = System.currentTimeMillis() + ".jpg";
         Utils.saveImageToGallery(fileName, context, loadedImage);
+        ToastUtils.showMessage("图片保存成功");
     }
 
     @Override

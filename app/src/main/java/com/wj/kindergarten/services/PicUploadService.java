@@ -18,6 +18,7 @@ import com.wj.kindergarten.net.upload.ProgressCallBack;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
@@ -59,17 +60,17 @@ public class PicUploadService extends Service {
     };
 
     private void successes() {
+        size = listObject.size();
         AlreadySavePath alreadySavePath = listObject.get(count);
         alreadySavePath.setStatus(0);
         alreadySavePath.setSuccess_time(new Date());
         db.update(alreadySavePath);
         sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED,100,100);
-        count++;
+        listObject.remove(count);
         if (count >= size) {
-            if(listObject != null)listObject.clear();
             return;
         }
-        uploadFile.upLoadPf(listObject.get(count).getLocalPath(),progressCallBack);
+        checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
     }
 
     private void sendBroad(String action,int progress,int total) {
@@ -92,15 +93,20 @@ public class PicUploadService extends Service {
         public void failure(String message) {
             CGLog.v("上传失败 : " + message);
             AlreadySavePath alreadySavePath = listObject.get(count);
+            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED,0,0);
             alreadySavePath.setStatus(3);
             db.update(alreadySavePath);
-            count++;
-            if(count >= size){
-                if(listObject != null)listObject.clear();
-                return;
+            listObject.remove(count);
+            if(listObject.size() > 0){
+                checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
             }
         }
     };
+
+    private void checkAlreadyUpload(String localPath, ProgressCallBack progressCallBack) {
+        //检查数据库是否有此数据，否则不上传
+        uploadFile.upLoadPf(localPath, progressCallBack);
+    }
 
     private boolean isTransMission;
 
@@ -135,8 +141,13 @@ public class PicUploadService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         upLoad = true;
         //判断是否是wifi状态
+
+        //判断是否上传
+        findPic();
+        if(listObject == null || listObject.size() == 0) return super.onStartCommand(intent,flags,startId);
+
         if(!Utils.isWifi(getApplicationContext())){
-            ToastUtils.showDialog(getApplicationContext(), "提示！", "当前处于非WIFI网络，确定上传?", new DialogInterface.OnClickListener() {
+            ToastUtils.showDialog(MainActivity.instance, "提示！", "当前处于非WIFI网络，确定上传?", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -148,20 +159,21 @@ public class PicUploadService extends Service {
                 }
             });
         }
-
-        //判断是否上传
         if(upLoad){
             count = 0;
-            String sql = "status = '1'";
-            listObject = (ArrayList<AlreadySavePath>) db.findAllByWhere(AlreadySavePath.class,sql);
             if(listObject != null && listObject.size() > 0){
                 size = listObject.size();
-                uploadFile.upLoadPf(listObject.get(0).getLocalPath(), progressCallBack);
+                checkAlreadyUpload(listObject.get(0).getLocalPath(), progressCallBack);
             }
         }
 
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void findPic() {
+        String sql = "status = '1' or status = '3'";
+        listObject = (ArrayList<AlreadySavePath>) db.findAllByWhere(AlreadySavePath.class,sql);
     }
 
 
@@ -172,6 +184,13 @@ public class PicUploadService extends Service {
     }
 
     public class TransportBinder extends Binder {
+
+        public void reStartUpload(){
+            findPic();
+            if(listObject != null && listObject.size() > 0)
+            checkAlreadyUpload(listObject.get(0).getLocalPath(),progressCallBack);
+        }
+
         public void startTransMission() {
             isTransMission = true;
         }
