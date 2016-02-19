@@ -197,7 +197,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                 simplePic.add(galleryList.get(position).getPath());
                 intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, simplePic);
                 startActivity(intent);
-                boutique_gallery_confirm.setText("" + boutiquePopAdapter.getItem(position));
+//                boutique_gallery_confirm.setText("" + boutiquePopAdapter.getItem(position));
             }
         });
 //        initChangeDirList();

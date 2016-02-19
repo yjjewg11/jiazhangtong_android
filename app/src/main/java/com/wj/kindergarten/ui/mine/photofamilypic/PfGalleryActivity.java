@@ -135,4 +135,8 @@ public class PfGalleryActivity extends BaseActivity {
         }
         return false;
     }
+
+    public void changeTitle(String title){
+        setTitleText(""+title);
+    }
 }

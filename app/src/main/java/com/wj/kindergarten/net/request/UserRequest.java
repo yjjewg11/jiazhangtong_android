@@ -98,6 +98,7 @@ public final class UserRequest {
     private static final String GET_BOUTIQUE_ALBUM = "rest/fPMovie/queryMy.json";
     private static final String GET_BOUTIQUE_MODE = "rest/fPMovieTemplate/query.json";
     private static final String GET_MODE_MUSIC = "rest/mp3/query.json";
+    private static final String GET_SINGLE_PF_EXTRA_INFO = "rest/fPPhotoItem/extra.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -916,5 +917,11 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
         SendRequest.getInstance().get(context,RequestType.GET_MODE_MUSIC,params,RequestHttpUtil.BASE_URL+GET_MODE_MUSIC,resultI);
+    }
+
+    public static void getSinglePfExtraInfo(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",uuid);
+        SendRequest.getInstance().get(context,RequestType.GET_SINGLE_PF_EXTRA_INFO,params,RequestHttpUtil.BASE_URL+GET_SINGLE_PF_EXTRA_INFO,resultI);
     }
 }

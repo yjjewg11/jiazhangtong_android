@@ -56,6 +56,7 @@ import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
+    private final int START_UPLOAD_PIC = 999;
     //Fragment界面数组
     private Class fragmentArray[] = {MainFragment.class, FoundFragment.class, MessageFragment.class,
             PhotoFamilyFragment.class,MineFragment.class};
@@ -143,7 +144,7 @@ public class MainActivity extends BaseActivity {
         handler.sendEmptyMessageDelayed(2, 500);
         initPfAlbum();
         //启动服务上传图片
-        startService(new Intent(this, PicUploadService.class));
+        handler.sendEmptyMessageDelayed(START_UPLOAD_PIC,1000);
 
 
         //获取系统参数
@@ -256,9 +257,8 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                     break;
-                case 100:
-
-                    //
+                case START_UPLOAD_PIC:
+                    startService(new Intent(MainActivity.this, PicUploadService.class));
                     break;
             }
 

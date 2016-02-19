@@ -70,7 +70,6 @@ public class UpLoadActivity extends BaseActivity {
         }
     };
     private LinearLayout linearLayout;
-    private ImageView up_Load_wait;
     private FinalDb db;
 
     private void bindSuccess() {
@@ -86,12 +85,23 @@ public class UpLoadActivity extends BaseActivity {
         linearLayout.removeAllViews();
         for (final AlreadySavePath alreadySavePath : binder.getList()) {
             //判断是否已经上传成功，如果是则不添加
-            AlreadySavePath dbPath =  db.findById(alreadySavePath.getLocalPath(), AlreadySavePath.class);
+            final AlreadySavePath dbPath =  db.findById(alreadySavePath.getLocalPath(), AlreadySavePath.class);
             if(dbPath.getStatus() == 0) continue;
             final View view = View.inflate(this, R.layout.upload_progress_item, null);
             ImageView up_load_progress_image = (ImageView) view.findViewById(R.id.up_load_progress_image);
-            ProgressBar up_load_progressBar = (ProgressBar) view.findViewById(R.id.up_load_progressBar);
-            up_Load_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
+            ImageView up_Load_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
+            up_Load_wait.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //检查状态是否为失败，否则不从此开始上传
+                   AlreadySavePath o =  db.findById(dbPath.getLocalPath(), AlreadySavePath.class);
+                    if(o.getStatus() == 3){
+                          binder.reStartUpload();
+                    }else{
+                        ToastUtils.showMessage("图片正在上传中，请耐心等待一会儿！");
+                    }
+                }
+            });
             ImageLoaderUtil.displayMyImage("file://" + alreadySavePath.getLocalPath(), up_load_progress_image);
             view.setTag(alreadySavePath.getLocalPath());
             view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -183,18 +193,24 @@ public class UpLoadActivity extends BaseActivity {
             View view = linearLayout.findViewWithTag(path);
             if(view == null) return;
             ProgressBar bar = (ProgressBar) (view.findViewById(R.id.up_load_progressBar));
-            int progressUpdate = progress/total * 100;
+            TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
+            int progressUpdate =(int) (Double.valueOf(progress)/Double.valueOf(total) * 100);
             switch (intent.getAction()) {
                 case PF_UPDATE_PROGRESS_LOADING:
+                    CGLog.v("上传图片地址及进度更新 ："+path  +" --->"+progressUpdate);
                     bar.setProgress(progressUpdate);
+                    tv_progress.setText(""+progressUpdate+"%");
                     break;
                 case PF_UPDATE_PROGRESS_SUCCESSED:
                     bar.setProgress(100);
+                    tv_progress.setText("" + 100+"%");
                         linearLayout.removeView(view);
                     judgeAddNoContent();
                     break;
                 case PF_UPDATE_PROGRESS_FAILED:
-                    linearLayout.removeAllViews();
+                    ImageView upload_wait = (ImageView)view.findViewById(R.id.up_Load_wait);
+                    upload_wait.setImageResource(R.drawable.upload_failed);
+                    bar.setProgress(0);
                     judgeAddNoContent();
                     break;
             }

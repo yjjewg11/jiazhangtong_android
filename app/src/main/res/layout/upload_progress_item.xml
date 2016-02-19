@@ -19,18 +19,27 @@
             android:layout_alignParentLeft="true" />
 
         <ProgressBar
+            android:layout_toLeftOf="@+id/upload_tv_progress"
             android:max="100"
+            android:progressDrawable="@drawable/progress_drawable"
             android:backgroundTint="@color/color_e5e5e5"
-            android:layout_marginRight="@dimen/margin_10"
-            android:layout_toLeftOf="@+id/up_Load_wait"
+            android:layout_marginRight="10dp"
             android:layout_marginLeft="@dimen/margin_10"
             android:layout_toRightOf="@+id/up_load_progress_image"
             android:layout_centerVertical="true"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/up_load_progressBar"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/up_load_progressBar" />
+        <TextView
+            android:gravity="center"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_centerVertical="true"
+            android:text="0%"
+            android:layout_toLeftOf="@+id/up_Load_wait"
+            android:id="@+id/upload_tv_progress"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/up_Load_wait"

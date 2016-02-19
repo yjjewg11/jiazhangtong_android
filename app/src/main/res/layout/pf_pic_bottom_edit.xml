@@ -28,25 +28,26 @@
             android:text="评论"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <TextView
-            android:drawableTop="@drawable/fenxiang"
+            android:drawableTop="@drawable/pf_zan"
+            android:id="@+id/pf_bottom_dianzan"
+            style="@style/pf_bottom_style"
+            android:text="点赞"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:drawableTop="@drawable/fenxiangnew"
             android:id="@+id/pf_bottom_share"
             style="@style/pf_bottom_style"
             android:text="分享"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
-            android:drawableTop="@drawable/pf_download"
-            android:id="@+id/pf_bottom_download"
+            android:drawableTop="@drawable/pf_more"
+            android:id="@+id/pf_bottom_more"
             style="@style/pf_bottom_style"
-            android:text="下载"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:drawableTop="@drawable/bianji_jpxc_jingpin"
-            android:id="@+id/pf_bottom_edit"
-            style="@style/pf_bottom_style"
-            android:text="编辑"
+            android:text="更多"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
