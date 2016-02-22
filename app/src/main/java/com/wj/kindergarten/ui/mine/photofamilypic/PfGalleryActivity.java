@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.QueryGroupCount;
@@ -44,6 +45,7 @@ import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfInfoAllPIcFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfSingleInfoFragment;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.TimeUtil;
@@ -61,7 +63,7 @@ import java.util.List;
  */
 public class PfGalleryActivity extends BaseActivity {
 
-
+    public static final int EDIT_SINGLE_PF_REQUEST_CODE = 4060;
     private FrameLayout pf_gallery_new_layout_fl;
     private String[] tags = new String[]{
 
@@ -84,6 +86,7 @@ public class PfGalleryActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        commonDialog = new HintInfoDialog(this,"数据加载中，请稍后...");
         setTitleText("选择照片");
         getData();
         initViews();
@@ -137,6 +140,39 @@ public class PfGalleryActivity extends BaseActivity {
     }
 
     public void changeTitle(String title){
-        setTitleText(""+title);
+        setTitleText("" + title);
+    }
+
+    public void showDialog(String text){
+        commonDialog.show();
+        if(!TextUtils.isEmpty(text) && commonDialog.isShowing()){
+            commonDialog.setText(text);
+        }
+
+    }
+
+    public void startEditActivity(AllPfAlbumSunObject object){
+        Intent intent = new Intent(this,SinglePfEditActivity.class);
+        intent.putExtra("object", object);
+        startActivityForResult(intent, EDIT_SINGLE_PF_REQUEST_CODE, null);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK) return;
+        if(requestCode == EDIT_SINGLE_PF_REQUEST_CODE){
+            AllPfAlbumSunObject object = (AllPfAlbumSunObject) data.getSerializableExtra("object");
+            if(object != null)
+            notifiFragmentUpdate(object);
+        }
+    }
+
+    private void notifiFragmentUpdate(AllPfAlbumSunObject object) {
+        //返回的编辑相片的数据通知fragment进行刷新
+       PfSingleInfoFragment fragment = (PfSingleInfoFragment) getSupportFragmentManager().findFragmentByTag(tags[1]);
+        if(fragment != null){
+            fragment.updateSingleData(object);
+        }
     }
 }

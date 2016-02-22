@@ -15,6 +15,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -35,6 +36,7 @@ import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adsmogo.adapters.AdsMogoCustomEventPlatformEnum;
@@ -51,14 +53,21 @@ import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Group;
+import com.wj.kindergarten.bean.Reply;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.func.InteractionListActivity;
+import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -912,6 +921,12 @@ public class Utils {
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
         mPopupWindow.update();
     }
+    public static void setPopWindow(PopupWindow mPopupWindow,int style){
+        setPopWindow(mPopupWindow);
+        if(style > 0 ){
+            mPopupWindow.setAnimationStyle(style);
+        }
+    }
 
     public static boolean isWifi(Context mContext) {
         ConnectivityManager connectivityManager = (ConnectivityManager) mContext
@@ -922,5 +937,56 @@ public class Utils {
             return true;
         }
         return false;
+    }
+
+    //公共收藏模块
+    public static void commonStore(Context context,String title,int type,String reluuid,String url,RequestResultI resultI){
+        UserRequest.store(context,title,type,reluuid,url,resultI);
+    }
+
+    public static void commonCancleStore(Context context,String uuid,RequestResultI resultI){
+        UserRequest.cancelStore(true, context, uuid, resultI);
+    }
+
+    public static void showDianzanStatus(Context context,TextView textView){
+        Drawable drawable = context.getResources().getDrawable(R.drawable.pf_yidianzan);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+        textView.setCompoundDrawables(null, drawable, null, null);
+        textView.setText("已点赞");
+        textView.setTextColor(context.getResources().getColor(R.color.title_bg));
+    }
+
+    public static void cancleDizanStatus(Context context,TextView textView){
+        Drawable drawable = context.getResources().getDrawable(R.drawable.pf_zan);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+        textView.setCompoundDrawables(null, drawable, null, null);
+        textView.setText("点赞");
+        textView.setTextColor(context.getResources().getColor(R.color.color_929292));
+    }
+
+
+    public static void showStoreStatus(Context context,TextView textView){
+        Drawable drawable = context.getResources().getDrawable(R.drawable.shoucangnewred);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+        textView.setCompoundDrawables(null, drawable, null, null);
+        textView.setText("已收藏");
+        textView.setTextColor(context.getResources().getColor(R.color.title_bg));
+    }
+
+    public static void cancleStoreStatus(Context context,TextView textView){
+        Drawable drawable = context.getResources().getDrawable(R.drawable.shoucangnewwhtire);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+        textView.setCompoundDrawables(null, drawable, null, null);
+        textView.setText("收藏");
+        textView.setTextColor(context.getResources().getColor(R.color.color_929292));
+    }
+
+    public static void commonSendReply(Context context,String rel_uuid,String to_uuid,String uuid,String replyContent,int type,RequestResultI resultI){
+        if (Utils.stringIsNull(replyContent)) {
+            ToastUtils.showMessage("请输入内容");
+            return;
+        }
+        UserRequest.commonReply(context, rel_uuid, to_uuid, uuid,replyContent.trim(),
+                type, resultI);
     }
 }

@@ -47,6 +47,7 @@ import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
 import com.wj.kindergarten.bean.SchoolList;
 import com.wj.kindergarten.bean.SignList;
+import com.wj.kindergarten.bean.SinlePfExtraInfo;
 import com.wj.kindergarten.bean.SpecialCourseInfoList;
 import com.wj.kindergarten.bean.SpecialCourseTypeList;
 import com.wj.kindergarten.bean.StoreList;
@@ -487,6 +488,9 @@ public class SendRequest {
                 break;
             case RequestType.GET_MODE_MUSIC :
                 resultI.result(getDomain(domain, PfMusic.class));
+                break;
+            case RequestType.GET_SINGLE_PF_EXTRA_INFO :
+                resultI.result(getDomain(domain, SinlePfExtraInfo.class));
                 break;
             default:
                 break;

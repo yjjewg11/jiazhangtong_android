@@ -111,6 +111,11 @@
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
+    <!-- 弹出框动画为上下伸缩-->
+    <style name="ShareAnimBPB">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
 
     <style name="trainContentStyle">
         <item name="android:textSize">14sp</item>

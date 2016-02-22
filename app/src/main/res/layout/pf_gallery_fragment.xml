@@ -5,7 +5,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
+        <com.wj.kindergarten.ui.more.ListenScrollView
+            android:id="@+id/pf_single_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -41,7 +42,7 @@
                     <include layout="@layout/pf_info_aeesee_item"/>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </com.wj.kindergarten.ui.more.ListenScrollView>
 
 
     </RelativeLayout>

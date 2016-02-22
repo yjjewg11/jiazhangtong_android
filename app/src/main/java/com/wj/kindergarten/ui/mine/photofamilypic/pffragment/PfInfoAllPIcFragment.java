@@ -107,7 +107,7 @@ public class PfInfoAllPIcFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((PfGalleryActivity) getActivity()).showActionbar();
+        ((PfGalleryActivity)getActivity()).setTitleText("图片选择");
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_info_all_pic, null);
         db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT, true);

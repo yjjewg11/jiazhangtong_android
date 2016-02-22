@@ -138,6 +138,12 @@ public abstract class BaseActivity extends ActionBarActivity {
         return webList;
     }
 
+    public void cancleDialog(){
+        if(commonDialog.isShowing()){
+            commonDialog.dismiss();
+        }
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -184,7 +190,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        commonDialog = new HintInfoDialog(this);
         mContext = this;
         //新开界面将webview置空
         webView = null;
