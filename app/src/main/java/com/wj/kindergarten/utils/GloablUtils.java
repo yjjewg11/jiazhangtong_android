@@ -3,12 +3,15 @@ package com.wj.kindergarten.utils;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 
 /**
  * Created by Administrator on 2015/11/9.
  */
 public interface GloablUtils {
+
+    int ALL_BACK = R.drawable.all_arrow;
 
     //家庭相册根据familyuuid分类的表
     String FAMILY_UUID = "family_uuid";

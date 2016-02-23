@@ -116,13 +116,13 @@ public class UploadFile {
         if (Utils.isNetworkAvailable(context)) {
             try {
                 File file = new File(path);
-//                if (isompress(path)) {
-//                    Bitmap bitmap = compressBySize(path, width, height);
-//                    file = saveFile(bitmap, 70);
-//                    if (bitmap != null && !bitmap.isRecycled()) {
-//                        bitmap.recycle();
-//                    }
-//                }
+                if (isompress(path)) {
+                    Bitmap bitmap = compressBySize(path, width, height);
+                    file = saveFile(bitmap, 70);
+                    if (bitmap != null && !bitmap.isRecycled()) {
+                        bitmap.recycle();
+                    }
+                }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
                     upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), MainActivity.getFamily_uuid(),progressCallBack);
@@ -257,13 +257,13 @@ public class UploadFile {
             File file = new File(path);
             FileInputStream fs = new FileInputStream(file);
             int len = fs.available() / 1024;
-//            if (null != bmp && Build.VERSION.SDK_INT > 12) {
-//                CGLog.d("压缩前：" + "大小" + len + "K，" + "宽：" + bmp.getWidth() + "，高：" + bmp.getHeight());
-//            } else {
-//                if (null != file) {
-//                    CGLog.d("压缩前：" + "大小" + len + "K，" + "宽：" + bmp.getWidth() + "，高：" + bmp.getHeight());
-//                }
-//            }
+            if (Build.VERSION.SDK_INT > 12) {
+                CGLog.d("压缩前：" + "大小" + len + "K，" + "宽：" );
+            } else {
+                if (null != file) {
+                    CGLog.d("压缩前：" + "大小" + len + "K，" + "宽：");
+                }
+            }
 
             if (len < 100) {
                 return false;
@@ -329,6 +329,9 @@ public class UploadFile {
 
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
         //size 100表示不进行压缩，70表示压缩率为30%
+//        do{
+//
+//        }while ()
         bm.compress(Bitmap.CompressFormat.JPEG, size, bos);
         FileInputStream fs = new FileInputStream(myCaptureFile);
         int len = fs.available() / 1024;

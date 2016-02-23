@@ -121,8 +121,8 @@ public class PhotoFamilyFragment extends Fragment {
     private void initHead() {
         ((MainActivity) getActivity()).clearCenterIcon();
         ((MainActivity) getActivity()).setTitleText("家庭相册");
-        ((MainActivity) getActivity()).showLeftButton(R.drawable.hanbao_left);
-        ((MainActivity) getActivity()).setTitleRightImage(R.drawable.new_album_carema, 0);
+        ((MainActivity) getActivity()).showLeftButton(R.drawable.pf_lefthanbao);
+        ((MainActivity) getActivity()).setTitleRightImage(R.drawable.pf_first_new_album, 0);
         ((MainActivity) getActivity()).titleLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

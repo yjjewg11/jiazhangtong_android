@@ -42,6 +42,7 @@ import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfChangeData;
 import com.wj.kindergarten.bean.PfModeName;
 import com.wj.kindergarten.bean.PfMusic;
+import com.wj.kindergarten.bean.PfSingleAssess;
 import com.wj.kindergarten.bean.PrivilegeActiveList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
@@ -492,6 +493,10 @@ public class SendRequest {
             case RequestType.GET_SINGLE_PF_EXTRA_INFO :
                 resultI.result(getDomain(domain, SinlePfExtraInfo.class));
                 break;
+            case RequestType.GET_SINGLE_PF_ASSESS :
+                resultI.result(getDomain(domain, PfSingleAssess.class));
+                break;
+
             default:
                 break;
         }

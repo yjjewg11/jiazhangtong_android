@@ -194,10 +194,14 @@ public class UpLoadActivity extends BaseActivity {
             if(view == null) return;
             ProgressBar bar = (ProgressBar) (view.findViewById(R.id.up_load_progressBar));
             TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
+            ImageView upload_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
             int progressUpdate =(int) (Double.valueOf(progress)/Double.valueOf(total) * 100);
             switch (intent.getAction()) {
                 case PF_UPDATE_PROGRESS_LOADING:
-                    CGLog.v("上传图片地址及进度更新 ："+path  +" --->"+progressUpdate);
+                    CGLog.v("上传图片地址及进度更新 ：" + path + " --->" + progressUpdate);
+                    if(upload_wait.getVisibility() == View.VISIBLE){
+                        upload_wait.setVisibility(View.INVISIBLE);
+                    }
                     bar.setProgress(progressUpdate);
                     tv_progress.setText(""+progressUpdate+"%");
                     break;
@@ -208,7 +212,6 @@ public class UpLoadActivity extends BaseActivity {
                     judgeAddNoContent();
                     break;
                 case PF_UPDATE_PROGRESS_FAILED:
-                    ImageView upload_wait = (ImageView)view.findViewById(R.id.up_Load_wait);
                     upload_wait.setImageResource(R.drawable.upload_failed);
                     bar.setProgress(0);
                     judgeAddNoContent();

@@ -70,6 +70,11 @@ public class PfGalleryActivity extends BaseActivity {
             "album_list",//fragment放置照片集合
             "single_pf"//放置单张照片详情
     };
+
+    public String[] getTags() {
+        return tags;
+    }
+
     private ArrayList<AllPfAlbumSunObject> objectList;
     private int position;
     private ArrayList<QueryGroupCount> queryGroupCounts;
@@ -118,25 +123,14 @@ public class PfGalleryActivity extends BaseActivity {
                 replace(R.id.pf_gallery_new_layout_fl, fragment, tags[1]).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Fragment fragment = getSupportFragmentManager().findFragmentByTag(tags[0]);
-            if (fragment != null && fragment.getUserVisibleHint()) {
-                finish();
-            } else {
-                //此时在详情页面，返回进入列表页面
-                Fragment album_fagment = getSupportFragmentManager().findFragmentByTag(tags[0]);
-                if (album_fagment == null) {
-                    album_fagment = new PfInfoAllPIcFragment(queryGroupCounts);
-                }
-                getSupportFragmentManager().beginTransaction().
-                        replace(R.id.pf_gallery_new_layout_fl, album_fagment, tags[0])
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
-            }
-            return true;
+    public void checkAlbumListFragment() {
+        Fragment album_fagment = getSupportFragmentManager().findFragmentByTag(tags[0]);
+        if (album_fagment == null) {
+            album_fagment = new PfInfoAllPIcFragment(queryGroupCounts);
         }
-        return false;
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.pf_gallery_new_layout_fl, album_fagment, tags[0])
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
     }
 
     public void changeTitle(String title){

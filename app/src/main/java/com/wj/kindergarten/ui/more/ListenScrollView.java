@@ -4,10 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+
 /**
  * Created by tangt on 2016/2/22.
  */
-public class ListenScrollView extends ScrollView {
+public class ListenScrollView extends PullToRefreshScrollView {
     private OnScrollChanged onScrollChanged;
 
     public void setOnScrollChanged(OnScrollChanged onScrollChanged) {
