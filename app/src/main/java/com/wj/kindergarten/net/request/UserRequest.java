@@ -105,6 +105,7 @@ public final class UserRequest {
     private static final String COMMON_ZAN_CANCEL = "rest/baseDianzan/delete.json";
     private static final String DELETE_SINGLE_INFO = "rest/fPPhotoItem/delete.json";
     private static final String GET_SINGLE_PF_ASSESS = "rest/baseReply/queryByRel_uuid.json";
+    private static final String SAVE_BOUTIQUE_ALBUM = "rest/fPMovie/save.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -991,6 +992,26 @@ public final class UserRequest {
         params.put("rel_uuid",rel_uuid);
         params.put("maxTime",maxTime);
         params.put("type",type);
-        SendRequest.getInstance().get(context,RequestType.GET_SINGLE_PF_ASSESS,params,RequestHttpUtil.BASE_URL+GET_SINGLE_PF_ASSESS,resultI);
+        SendRequest.getInstance().get(context, RequestType.GET_SINGLE_PF_ASSESS, params, RequestHttpUtil.BASE_URL + GET_SINGLE_PF_ASSESS, resultI);
+    }
+
+    //上传精品相册
+    public static void saveBoutiqueAlbum(Context context, String title, String mp3, String uuid, String herald,
+                                         String photo_uuids, String template_key, RequestResultI resultI){
+        JSONObject object = new JSONObject();
+        try{
+        object.put("title",title);
+        object.put("mp3",mp3);
+        object.put("uuid",uuid);
+        object.put("herald",herald);
+        object.put("template_key",template_key);
+        object.put("photo_uuids",photo_uuids);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        SendRequest.getInstance().post(context,RequestType.ZAN,object.toString(),RequestHttpUtil.BASE_URL+SAVE_BOUTIQUE_ALBUM,resultI);
+                
+        
+                
     }
 }

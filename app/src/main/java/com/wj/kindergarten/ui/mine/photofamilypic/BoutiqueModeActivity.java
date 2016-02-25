@@ -46,7 +46,8 @@ public class BoutiqueModeActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         FinalActivity.initInjectedView(this);
-         initData();
+        commonDialog = new HintInfoDialog(this,"数据加载中...请稍候");
+        initData();
         initView();
         initClick();
     }

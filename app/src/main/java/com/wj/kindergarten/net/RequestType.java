@@ -87,4 +87,5 @@ public interface RequestType {
      int GET_MODE_MUSIC = 171;
      int GET_SINGLE_PF_EXTRA_INFO = 172;
      int GET_SINGLE_PF_ASSESS = 173;
+     int SAVE_BOUTIQUE_ALBUM = 174;
 }

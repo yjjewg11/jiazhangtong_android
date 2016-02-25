@@ -63,12 +63,32 @@ public class PfAlbumListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        PfAlbumListSun sun = list.get(position);
-        if(sun != null){
-            viewHolder.pf_mine_tv.setText(""+sun.getTitle());
-            ImageLoaderUtil.displayMyImage(sun.getHerald(),viewHolder.pf_mine_image);
+        if(position == list.size() - 1){
+            viewHolder.pf_mine_image.setImageResource(R.drawable.tianjia_jpxc);
+            viewHolder.pf_mine_tv.setText("添加新成员");
+            addListener(viewHolder.pf_mine_image);
+        }else {
+            removeListener(viewHolder.pf_mine_image);
+            PfAlbumListSun sun = list.get(position);
+            if(sun != null){
+                viewHolder.pf_mine_tv.setText(""+sun.getTitle());
+                ImageLoaderUtil.displayMyImage(sun.getHerald(),viewHolder.pf_mine_image);
+            }
         }
         return convertView;
+    }
+
+    private void removeListener(ImageView pf_mine_image) {
+        pf_mine_image.setOnClickListener(null);
+    }
+
+    private void addListener(ImageView pf_mine_image) {
+        pf_mine_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入邀请成员页面
+            }
+        });
     }
 
     class ViewHolder{

@@ -100,7 +100,8 @@ public class PfGalleryActivity extends BaseActivity {
 
     private void initFragment() {
         PfSingleInfoFragment fragment = new PfSingleInfoFragment(position, objectList);
-        getSupportFragmentManager().beginTransaction().replace(R.id.pf_gallery_new_layout_fl, fragment).commit();
+        //先添加详情的fragment。
+        getSupportFragmentManager().beginTransaction().replace(R.id.pf_gallery_new_layout_fl, fragment,tags[1]).commit();
     }
 
     private void initViews() {

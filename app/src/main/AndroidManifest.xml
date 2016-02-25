@@ -131,6 +131,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -541,6 +546,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <service android:name="com.wj.kindergarten.services.PlayMusicService" />
         <service android:name="com.wj.kindergarten.services.PicUploadService" />
         <service
@@ -674,7 +680,7 @@
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity" />
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity" />
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity"></activity>
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity" />
     </application>
 
 </manifest>

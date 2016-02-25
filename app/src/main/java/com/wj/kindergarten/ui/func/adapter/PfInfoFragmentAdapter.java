@@ -18,10 +18,12 @@ import java.util.List;
 public class PfInfoFragmentAdapter extends FragmentPagerAdapter {
 
     private int mcount;
+    private ViewPager viewPager;
     private PfSingleInfoFragment pfSingleInfoFragment;
 
-    public PfInfoFragmentAdapter(FragmentManager fm,PfSingleInfoFragment pfSingleInfoFragment) {
+    public PfInfoFragmentAdapter(FragmentManager fm,ViewPager viewPager,PfSingleInfoFragment pfSingleInfoFragment) {
         super(fm);
+        this.viewPager = viewPager;
         this.pfSingleInfoFragment = pfSingleInfoFragment;
     }
     private List<AllPfAlbumSunObject> objectList = new ArrayList<>();
@@ -30,13 +32,18 @@ public class PfInfoFragmentAdapter extends FragmentPagerAdapter {
            this.objectList.clear();
            this.objectList.addAll(objectList);
            notifyDataSetChanged();
+    }
 
+    public AllPfAlbumSunObject getCurrentObject(){
+        if(viewPager != null){
+            return objectList.get(viewPager.getCurrentItem());
+        }
+         return null;
     }
 
     @Override
     public Fragment getItem(int position) {
-        AllPfAlbumSunObject object = objectList.get(position);
-        return new PFSingleObjectInfoFragment(object,pfSingleInfoFragment);
+        return new PFSingleObjectInfoFragment(this,pfSingleInfoFragment);
     }
 
     @Override

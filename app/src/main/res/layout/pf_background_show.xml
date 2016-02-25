@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/pf_backGround_rl"
         android:background="@drawable/rectangle"
         android:layout_width="match_parent"
         android:layout_height="200dp">
@@ -23,7 +24,7 @@
                 android:src="@drawable/ic_launcher"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView2" />
+                android:id="@+id/pf_backGround_image" />
 
         </FrameLayout>
 
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="我的家庭相册"
-            android:id="@+id/textView29"
+            android:id="@+id/pf_backGround_family_name"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
@@ -50,11 +51,11 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="234"
-            android:id="@+id/textView31"
-            android:layout_below="@+id/textView29"
+            android:id="@+id/pf_backGround_count"
+            android:layout_below="@+id/pf_backGround_family_name"
             android:layout_marginTop="15dp"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/textView29" />
+            android:layout_toLeftOf="@+id/pf_backGround_family_name" />
 
         <TextView
             style="@style/back_pf_text_style"
@@ -64,9 +65,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="相册照片"
             android:id="@+id/textView33"
-            android:layout_below="@+id/textView31"
+            android:layout_below="@+id/pf_backGround_count"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/textView31" />
+            android:layout_alignRight="@+id/pf_backGround_count" />
 
         <TextView
             android:textColor="@color/white"
@@ -75,9 +76,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="4"
-            android:id="@+id/textView34"
+            android:id="@+id/pf_backGround_count_right"
             android:layout_above="@+id/textView33"
-            android:layout_toRightOf="@+id/textView29"
+            android:layout_toRightOf="@+id/pf_backGround_family_name"
             android:layout_alignParentRight="true" />
 
         <TextView
@@ -89,7 +90,7 @@
             android:id="@+id/textView35"
             android:layout_alignTop="@+id/textView33"
             android:layout_alignParentRight="true"
-            android:layout_alignLeft="@+id/textView34" />
+            android:layout_alignLeft="@+id/pf_backGround_count_right" />
 
         <TextView
             android:textSize="12sp"

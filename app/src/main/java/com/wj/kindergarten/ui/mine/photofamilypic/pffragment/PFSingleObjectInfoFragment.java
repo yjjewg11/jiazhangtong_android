@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.emot.SendMessage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
+import com.wj.kindergarten.ui.func.adapter.PfInfoFragmentAdapter;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 import com.wj.kindergarten.ui.more.ListenScrollView;
 import com.wj.kindergarten.utils.CGLog;
@@ -82,20 +84,26 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private PfSingleInfoFragment pfSingleInfoFragment;
     private ImageView pf_delete;
     private ImageView pf_edit;
+    private PfInfoFragmentAdapter pfInfoFragmentAdapter;
 
-    public PFSingleObjectInfoFragment(AllPfAlbumSunObject sunObject,PfSingleInfoFragment pfSingleInfoFragment) {
-        this.sunObject = sunObject;
+    public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter,PfSingleInfoFragment pfSingleInfoFragment) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
+        this.pfInfoFragmentAdapter = pfInfoFragmentAdapter;
     }
 
     public PFSingleObjectInfoFragment() {
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (innerView != null) return innerView;
+        //在每次重用view之后都会更新数据
+        initData();
+        if(innerView != null){
+            return innerView;
+        }
         dialog = new HintInfoDialog(getActivity(),"加载数据中...请稍后");
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
@@ -113,6 +121,14 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void onScrollChanged(int l, int t, int oldl, int oldt) {
                 //隐藏输入法
                 bottomCancle();
+            }
+        });
+        pf_gallery_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> list = new ArrayList();
+                list.add(sunObject.getPath());
+                Utils.carouselPic(getActivity(),0, (ArrayList<String>) list);
             }
         });
         pf_single_scroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -135,6 +151,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
         initTopView();
 
         return innerView;
+    }
+
+    private void initData() {
+        if(pfInfoFragmentAdapter != null){
+            sunObject = pfInfoFragmentAdapter.getCurrentObject();
+        }
     }
 
     private void initTopView() {

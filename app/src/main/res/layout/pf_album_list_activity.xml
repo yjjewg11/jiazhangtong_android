@@ -3,16 +3,47 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <include layout="@layout/title_normal"/>
-    <com.wj.kindergarten.compounets.NestedGridView
+    </FrameLayout>
+    <GridView
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:numColumns="2"
         android:id="@+id/pf_list_grid_view"
         android:padding="@dimen/margin_15"
         android:columnWidth="30dp"
-        android:layout_height="match_parent">
-
-
-    </com.wj.kindergarten.compounets.NestedGridView>
+        android:layout_height="match_parent"/>
+    <FrameLayout
+        android:id="@+id/pf_album_list_bottom_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:gravity="center"
+                android:text="编辑"
+                android:layout_weight="1"
+                android:id="@+id/pf_album_list_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <View
+                android:background="@color/color_cccccc"
+                android:layout_gravity="center_vertical"
+                android:layout_width="1dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:gravity="center"
+                android:text="删除"
+                android:layout_weight="1"
+                android:id="@+id/pf_album_list_delete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

@@ -130,10 +130,8 @@ public class PfSingleInfoFragment extends Fragment {
         db = FinalDb.create(getActivity(),GloablUtils.FAMILY_UUID_OBJECT);
     }
 
-
-
-
     public void deleteCurrentItem(AllPfAlbumSunObject sunObject) {
+        //不知为何，下标自动增加了2，待研究
         int currentIndex =  viewPager.getCurrentItem();
         CGLog.v("打印最近下标 : "+currentIndex);
         //从数据库，网络，轮播图中删除
@@ -141,7 +139,6 @@ public class PfSingleInfoFragment extends Fragment {
         db.delete(object);
         list.remove(currentIndex);
         pagerAdapter.setObjectList(list);
-        pagerAdapter.notifyDataSetChanged();
         UserRequest.deleteSinglePf(getActivity(), object.getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
@@ -214,7 +211,7 @@ public class PfSingleInfoFragment extends Fragment {
 
     private void initViews() {
         viewPager = (ViewPager) fragmentView.findViewById(R.id.pf_edit_viewPager);
-        pagerAdapter = new PfInfoFragmentAdapter(getFragmentManager(),this);
+        pagerAdapter = new PfInfoFragmentAdapter(getFragmentManager(),viewPager,this);
         viewPager.setAdapter(pagerAdapter);
         pagerAdapter.setObjectList(list);
         viewPager.setCurrentItem(position);

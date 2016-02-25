@@ -4,10 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfAlbumListSun;
@@ -16,6 +20,8 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.PfAlbumListAdapter;
+import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.ui.more.FrameLayoutWrapper;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -26,9 +32,11 @@ import java.util.List;
  * Created by tangt on 2016/1/18.
  */
 public class PfAlbumListActivity extends BaseActivity {
-    private NestedGridView gridView;
+    private GridView gridView;
     private PfAlbumListAdapter adapter;
-    private ArrayList<PfAlbumListSun> listSuns;
+    private List<PfAlbumListSun> listSuns;
+    private FrameLayout pf_album_list_bottom_fl;
+    private ObjectAnimator anim;
 
     @Override
     protected void setContentLayout() {
@@ -42,19 +50,30 @@ public class PfAlbumListActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        listSuns = (ArrayList<PfAlbumListSun>) getIntent().getSerializableExtra("list");
+        listSuns = MainActivity.instance.getAlbumList();
+        listSuns.add(new PfAlbumListSun());
         initViews();
+        initAnimation();
         setTitleText("我的家庭相册");
         setTitleRightImage(R.drawable.new_album_carema,0);
     }
 
+    private void initAnimation() {
+        pf_album_list_bottom_fl.measure(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        anim = ObjectAnimator.ofInt(new FrameLayoutWrapper(pf_album_list_bottom_fl),"bottomMargin",-pf_album_list_bottom_fl.getMeasuredHeight());
+        anim.setDuration(300);
+        anim.start();
+    }
+
     private void initViews() {
-        gridView = (NestedGridView)findViewById(R.id.pf_list_grid_view);
+        pf_album_list_bottom_fl = (FrameLayout) findViewById(R.id.pf_album_list_bottom_fl);
+        gridView = (GridView)findViewById(R.id.pf_list_grid_view);
         adapter = new PfAlbumListAdapter(this);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                anim.reverse();
                 AlertDialog.Builder builder = new AlertDialog.Builder(PfAlbumListActivity.this);
                 AlertDialog dialog = builder.setTitle("修改相册信息")
                         .setNegativeButton("确定", new DialogInterface.OnClickListener() {
@@ -70,12 +89,7 @@ public class PfAlbumListActivity extends BaseActivity {
                             }
                         }).create();
                 dialog.show();
-                ToastUtils.showSnackBar(view, "编辑", "删除", Snackbar.LENGTH_INDEFINITE, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        deleteAlbum(listSuns.get(position));
-                    }
-                });
+                deleteAlbum(listSuns.get(position));
             }
         });
 

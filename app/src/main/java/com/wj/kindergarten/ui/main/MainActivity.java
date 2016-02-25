@@ -70,6 +70,10 @@ public class MainActivity extends BaseActivity {
     private List<PfAlbumListSun> albumList;
     private static String family_uuid;
 
+    public List<PfAlbumListSun> getAlbumList() {
+        return albumList;
+    }
+
     public static String getFamily_uuid() {
         return family_uuid;
     }

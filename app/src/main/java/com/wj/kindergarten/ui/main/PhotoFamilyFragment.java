@@ -1,35 +1,47 @@
 package com.wj.kindergarten.ui.main;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ant.liao.GifView;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.umeng.socialize.utils.BitmapUtils;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.ui.func.EditPfActivity;
+import com.wj.kindergarten.ui.imagescan.BitmapCallBack;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.Constant.BitmapUtil;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
@@ -50,6 +62,13 @@ public class PhotoFamilyFragment extends Fragment {
     private PfFragmentLinearLayout pf_back_ll;
     boolean flIsLocationTop ;
     private LocationChanged locationChanged;
+    private RelativeLayout pf_backGround_rl;
+    private ImageView pf_backGround_image;
+    private TextView pf_backGround_family_name;
+    private TextView pf_backGround_count;
+    private TextView pf_backGround_count_right;
+    private GifView gif;
+
     private int getFlTopMargin(){
         LinearLayout.LayoutParams params  = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
         return params.topMargin;
@@ -102,14 +121,59 @@ public class PhotoFamilyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
+        ((MainActivity)getActivity()).hideActionbar();
         if (view != null) return view;
         view = inflater.inflate(R.layout.photo_family_pic, null);
+        initHeadView();
+        initHeadViewData();
         initViews(view);
         initFragment();
         initClickListener();
         initTabLayout();
 
         return view;
+    }
+
+    private void initHeadViewData() {
+        PfAlbumListSun sun = null;
+        if(MainActivity.instance.getAlbumList() != null && MainActivity.instance.getAlbumList().size() > 0){
+            sun = MainActivity.instance.getAlbumList().get(0);
+            if(sun == null) return;
+        }
+        if(!TextUtils.isEmpty(sun.getHerald())){
+            ImageLoaderUtil.displayImage(sun.getHerald(),pf_backGround_image);
+        BitmapCallBack.loadBitmap(sun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
+            @Override
+            public void callback(Bitmap bitmap) {
+                BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
+                pf_backGround_rl.setBackground(drawable);
+            }
+        });
+        }
+        String text = Utils.isNull(sun.getTitle());
+        if(TextUtils.isEmpty(text)){
+            text = "问界互动家园";
+        }else{
+        }
+        pf_backGround_family_name.setText("" +text);
+
+    }
+
+    private void initHeadView() {
+        gif = (GifView) view.findViewById(R.id.pf_family_gif);
+        gif.setGifImage(R.drawable.gifdownload);
+        pf_backGround_rl = (RelativeLayout) view.findViewById(R.id.pf_backGround_rl);
+        pf_backGround_image = (ImageView) view.findViewById(R.id.pf_backGround_image);
+        pf_backGround_family_name = (TextView) view.findViewById(R.id.pf_backGround_family_name);
+        pf_backGround_count = (TextView) view.findViewById(R.id.pf_backGround_count);
+        pf_backGround_count_right = (TextView) view.findViewById(R.id.pf_backGround_count_right);
+        pf_backGround_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  Intent intent = new Intent(getActivity(), PfAlbumListActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initFragment() {

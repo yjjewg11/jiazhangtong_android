@@ -44,6 +44,7 @@ public class FindMusicOfPfActivity extends BaseActivity {
         }
     };
 
+
     @Override
     protected void setContentLayout() {
         layoutId = R.layout.find_music_of_pf;
@@ -115,6 +116,12 @@ public class FindMusicOfPfActivity extends BaseActivity {
 
     private void stopMusic() {
         sendBroadcast(new Intent(GloablUtils.STOP_MUSIC_PLAY));
+    }
+
+    @Override
+    public void onBackPressed() {
+        stopMusic();
+        super.onBackPressed();
     }
 
     private void initViews() {

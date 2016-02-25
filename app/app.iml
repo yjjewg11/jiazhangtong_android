@@ -107,6 +107,7 @@
     <orderEntry type="library" exported="" name="baidumapapi_util_v3_6_1" level="project" />
     <orderEntry type="library" exported="" name="baidumapapi_map_v3_6_1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.4" level="project" />
+    <orderEntry type="library" exported="" name="GifView" level="project" />
     <orderEntry type="library" exported="" name="httpmime-4.1.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.3" level="project" />
