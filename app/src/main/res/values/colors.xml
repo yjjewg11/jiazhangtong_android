@@ -17,4 +17,5 @@
     <color name="ml_blue">#ff239efe</color>
     <color name="ml_red">#ffff0000</color>
     <color name="share_background">#88666666</color>
+    <color name="f0f0f0">#f0f0f0</color>
 </resources>

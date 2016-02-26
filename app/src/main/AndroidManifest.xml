@@ -681,6 +681,7 @@
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity" />
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity" />
         <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity" />
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity"></activity>
     </application>
 
 </manifest>

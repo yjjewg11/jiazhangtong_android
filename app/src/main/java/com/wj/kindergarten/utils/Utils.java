@@ -34,6 +34,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -107,7 +108,7 @@ public class Utils {
     }
 
 
-    public static void carouselPic(Context context,int position,ArrayList<String> mUrlList){
+    public static void carouselPic(Context context, int position, ArrayList<String> mUrlList) {
         Intent intent = new Intent(context, PhotoWallActivity.class);
         intent.putExtra(PhotoWallActivity.KEY_POSITION, position);
         intent.putExtra(PhotoWallActivity.KEY_TYPE, "保存");
@@ -156,24 +157,24 @@ public class Utils {
     private Utils() {
     }
 
-    public static Float stringToFloat(String thing){
+    public static Float stringToFloat(String thing) {
         return Float.valueOf(thing);
     }
 
-    public static String isNull(String thing){
-        if(thing == null || thing.equals("null")){
+    public static String isNull(String thing) {
+        if (thing == null || thing.equals("null")) {
             return "";
         }
         return thing;
     }
 
-    public static float MearsureText(String text){
+    public static float MearsureText(String text) {
         Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        return  mTextPaint.measureText(text);
+        return mTextPaint.measureText(text);
     }
 
-    public static void ads(Activity activity,ViewGroup viewGrop) {
-        AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity,GloablUtils.MOGO_ID,360,150, AdsMogoType.Custom,true);
+    public static void ads(Activity activity, ViewGroup viewGrop) {
+        AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity, GloablUtils.MOGO_ID, 360, 150, AdsMogoType.Custom, true);
         adsMogoLayoutCode.isOtherSizes = true;
         adsMogoLayoutCode.setBackgroundColor(Color.parseColor("#ffffff"));
 
@@ -203,12 +204,12 @@ public class Utils {
 //        AdsMogoNative adsMogoNative  = new AdsMogoNative(activity,GloablUtils.MOGO_ID,nativeListener);
 //        adsMogoNative.loadAd();
 
-        ViewGroup viewGroup = (ViewGroup)adsMogoLayoutCode.getParent();
-        if(viewGroup!=null)
+        ViewGroup viewGroup = (ViewGroup) adsMogoLayoutCode.getParent();
+        if (viewGroup != null)
             viewGroup.removeView(adsMogoLayoutCode);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
-        viewGrop.addView(adsMogoLayoutCode,params);
+        viewGrop.addView(adsMogoLayoutCode, params);
     }
 
 
@@ -219,20 +220,20 @@ public class Utils {
         return false;
     }
 
-    public static void syncCookie(String url){
-        if(TextUtils.isEmpty(url)) return ;
+    public static void syncCookie(String url) {
+        if (TextUtils.isEmpty(url)) return;
 
-       String myUrl =  url.split("//")[1];
-       String secondUrl =  myUrl.split("/")[0];
+        String myUrl = url.split("//")[1];
+        String secondUrl = myUrl.split("/")[0];
         String firstUrl = null;
-        if(secondUrl.contains(":")){
+        if (secondUrl.contains(":")) {
             firstUrl = secondUrl.split(":")[0];
-        }else{
+        } else {
             firstUrl = secondUrl;
         }
 
 
-        try{
+        try {
             CookieSyncManager.createInstance(CGApplication.getInstance());
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.setAcceptCookie(true);
@@ -267,7 +268,7 @@ public class Utils {
         }
     }
 
-    public static Integer getIntegerFromString(String s){
+    public static Integer getIntegerFromString(String s) {
         return Integer.valueOf(s);
     }
 
@@ -903,11 +904,11 @@ public class Utils {
         return vn;
     }
 
-    public static void setWindowAlpha(Activity activity,float f){
+    public static void setWindowAlpha(Activity activity, float f) {
 
-            WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-            lp.alpha = f; //0.0-1.0
-            activity.getWindow().setAttributes(lp);
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.alpha = f; //0.0-1.0
+        activity.getWindow().setAttributes(lp);
 
     }
 
@@ -921,9 +922,10 @@ public class Utils {
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
         mPopupWindow.update();
     }
-    public static void setPopWindow(PopupWindow mPopupWindow,int style){
+
+    public static void setPopWindow(PopupWindow mPopupWindow, int style) {
         setPopWindow(mPopupWindow);
-        if(style > 0 ){
+        if (style > 0) {
             mPopupWindow.setAnimationStyle(style);
         }
     }
@@ -940,15 +942,15 @@ public class Utils {
     }
 
     //公共收藏模块
-    public static void commonStore(Context context,String title,int type,String reluuid,String url,RequestResultI resultI){
-        UserRequest.store(context,title,type,reluuid,url,resultI);
+    public static void commonStore(Context context, String title, int type, String reluuid, String url, RequestResultI resultI) {
+        UserRequest.store(context, title, type, reluuid, url, resultI);
     }
 
-    public static void commonCancleStore(Context context,String uuid,RequestResultI resultI){
+    public static void commonCancleStore(Context context, String uuid, RequestResultI resultI) {
         UserRequest.cancelStore(true, context, uuid, resultI);
     }
 
-    public static void showDianzanStatus(Context context,TextView textView){
+    public static void showDianzanStatus(Context context, TextView textView) {
         Drawable drawable = context.getResources().getDrawable(R.drawable.pf_yidianzan);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
         textView.setCompoundDrawables(null, drawable, null, null);
@@ -956,7 +958,7 @@ public class Utils {
         textView.setTextColor(context.getResources().getColor(R.color.title_bg));
     }
 
-    public static void cancleDizanStatus(Context context,TextView textView){
+    public static void cancleDizanStatus(Context context, TextView textView) {
         Drawable drawable = context.getResources().getDrawable(R.drawable.pf_zan);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
         textView.setCompoundDrawables(null, drawable, null, null);
@@ -965,7 +967,7 @@ public class Utils {
     }
 
 
-    public static void showStoreStatus(Context context,TextView textView){
+    public static void showStoreStatus(Context context, TextView textView) {
         Drawable drawable = context.getResources().getDrawable(R.drawable.shoucangnewred);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
         textView.setCompoundDrawables(null, drawable, null, null);
@@ -973,7 +975,7 @@ public class Utils {
         textView.setTextColor(context.getResources().getColor(R.color.title_bg));
     }
 
-    public static void cancleStoreStatus(Context context,TextView textView){
+    public static void cancleStoreStatus(Context context, TextView textView) {
         Drawable drawable = context.getResources().getDrawable(R.drawable.shoucangnewwhtire);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
         textView.setCompoundDrawables(null, drawable, null, null);
@@ -981,12 +983,18 @@ public class Utils {
         textView.setTextColor(context.getResources().getColor(R.color.color_929292));
     }
 
-    public static void commonSendReply(Context context,String rel_uuid,String to_uuid,String uuid,String replyContent,int type,RequestResultI resultI){
+    public static void commonSendReply(Context context, String rel_uuid, String to_uuid, String uuid, String replyContent, int type, RequestResultI resultI) {
         if (Utils.stringIsNull(replyContent)) {
             ToastUtils.showMessage("请输入内容");
             return;
         }
-        UserRequest.commonReply(context, rel_uuid, to_uuid, uuid,replyContent.trim(),
+        UserRequest.commonReply(context, rel_uuid, to_uuid, uuid, replyContent.trim(),
                 type, resultI);
+    }
+
+    public static boolean checkEdit(EditText editText) {
+        if (editText.getText() == null) return false;
+        if(TextUtils.isEmpty(editText.getText().toString())) return false;
+        return true;
     }
 }

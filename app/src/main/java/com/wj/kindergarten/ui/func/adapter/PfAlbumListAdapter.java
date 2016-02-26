@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.PfAlbumListSun;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
 import java.util.ArrayList;
@@ -29,8 +31,10 @@ public class PfAlbumListAdapter extends BaseAdapter {
     }
 
     public void setList(List<PfAlbumListSun> list) {
-        this.list.clear();
-        this.list.addAll(list);
+        if(list != null){
+            this.list.clear();
+            this.list.addAll(list);
+        }
         this.list.add(new PfAlbumListSun("邀请新成员"));
         notifyDataSetChanged();
     }
@@ -87,6 +91,7 @@ public class PfAlbumListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //进入邀请成员页面
+                ((PfAlbumListActivity)context).addFamilyMember("");
             }
         });
     }
