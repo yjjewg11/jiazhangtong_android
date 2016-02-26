@@ -18,6 +18,7 @@
         android:stretchMode="columnWidth"
         android:visibility="visible" />
     <RelativeLayout
+        android:id="@+id/all_pf_info_bottom_rl"
         android:background="@color/red"
         android:layout_width="match_parent"
         android:layout_height="48dp">

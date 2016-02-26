@@ -54,6 +54,7 @@ import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Group;
 import com.wj.kindergarten.bean.Reply;
@@ -65,6 +66,8 @@ import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -996,5 +999,11 @@ public class Utils {
         if (editText.getText() == null) return false;
         if(TextUtils.isEmpty(editText.getText().toString())) return false;
         return true;
+    }
+
+    public static void showPfSingleinfo(Context context, int position, ArrayList<AllPfAlbumSunObject> collect_list) {
+        Intent intent = new Intent(context, PfGalleryActivity.class);
+        intent.putExtra("list",collect_list);
+        context.startActivity(intent);
     }
 }

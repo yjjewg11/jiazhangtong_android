@@ -1,9 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic.pffragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,12 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.QueryGroupCount;
 import com.wj.kindergarten.ui.func.adapter.BoutiquePopAdapter;
@@ -44,6 +41,7 @@ public class PfInfoAllPIcFragment extends Fragment {
     private BoutiquePopAdapter boutiquePopAdapter;
     private FinalDb db;
     private View popView;
+    private RelativeLayout all_pf_info_bottom_rl;
 
     public PfInfoAllPIcFragment(List<QueryGroupCount> queryGroupCounts) {
         this.queryGroupCounts = queryGroupCounts;
@@ -98,7 +96,7 @@ public class PfInfoAllPIcFragment extends Fragment {
                 queryByDate(queryGroupCount.getDate());
                 adapter.notifyDataSetChanged();
                 popupPic.dismiss();
-                pf_info_choose_text.setText(""+queryGroupCount.getDate());
+                pf_info_choose_text.setText("" + queryGroupCount.getDate());
             }
         });
         popupPic.showAtLocation(pf_info_choose_text, Gravity.BOTTOM, 0, 0);
@@ -109,8 +107,13 @@ public class PfInfoAllPIcFragment extends Fragment {
                              Bundle savedInstanceState) {
         ((PfGalleryActivity)getActivity()).setTitleText("图片选择");
         ((PfGalleryActivity)getActivity()).showActionbar();
-        if (view != null) return view;
+        if (view != null){
+            judgeBottomVisible();
+            return view;
+        }
         view = inflater.inflate(R.layout.fragment_pf_info_all_pic, null);
+        all_pf_info_bottom_rl = (RelativeLayout) view.findViewById(R.id.all_pf_info_bottom_rl);
+        judgeBottomVisible();
         db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT, true);
         FinalActivity.initInjectedView(this, view);
         pf_info_choose_text.setOnClickListener(new View.OnClickListener() {
@@ -128,13 +131,26 @@ public class PfInfoAllPIcFragment extends Fragment {
                 activity.changeToSingleFragment(position, objectList);
             }
         });
-        queryData();
+        getData();
         return view;
     }
 
-    private void queryData() {
-        List<AllPfAlbumSunObject> list = db.findAll(AllPfAlbumSunObject.class);
-        this.objectList.addAll(list);
+    private void judgeBottomVisible() {
+        //如果特殊，说明显示穿过来的集合里的照片
+        if(((PfGalleryActivity)getActivity()).isSpecial()){
+            all_pf_info_bottom_rl.setVisibility(View.GONE);
+        }else {
+            all_pf_info_bottom_rl.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void getData() {
+        if(((PfGalleryActivity)getActivity()).isSpecial()){
+            objectList =  ((PfGalleryActivity)getActivity()).getObjectList();
+        }else {
+            List<AllPfAlbumSunObject> list = db.findAll(AllPfAlbumSunObject.class);
+            this.objectList.addAll(list);
+        }
         adapter.setObjectList(objectList);
     }
 

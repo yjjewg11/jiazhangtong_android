@@ -8,7 +8,16 @@ import com.google.gson.annotations.Expose;
 public class SinlePfExtraInfo extends BaseModel{
     @Expose
     private boolean isFavor;@Expose
-    private PfDianZan dianZan;
+    private PfDianZan dianZan;@Expose
+    private int reply_count;
+
+    public int getReply_count() {
+        return reply_count;
+    }
+
+    public void setReply_count(int reply_count) {
+        this.reply_count = reply_count;
+    }
 
     public boolean isFavor() {
         return isFavor;
@@ -31,6 +40,7 @@ public class SinlePfExtraInfo extends BaseModel{
         return "SinlePfExtraInfo{" +
                 "isFavor=" + isFavor +
                 ", dianZan=" + dianZan +
+                ", reply_count=" + reply_count +
                 '}';
     }
 }

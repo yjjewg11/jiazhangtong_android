@@ -65,6 +65,16 @@ public class PfGalleryActivity extends BaseActivity {
 
     public static final int EDIT_SINGLE_PF_REQUEST_CODE = 4060;
     private FrameLayout pf_gallery_new_layout_fl;
+    private boolean isSpecial;
+
+    public ArrayList<AllPfAlbumSunObject> getObjectList() {
+        return objectList;
+    }
+
+    public boolean isSpecial() {
+        return isSpecial;
+    }
+
     private String[] tags = new String[]{
 
             "album_list",//fragment放置照片集合
@@ -112,7 +122,13 @@ public class PfGalleryActivity extends BaseActivity {
     public void getData() {
         position = getIntent().getIntExtra("position", 0);
         objectList = (ArrayList<AllPfAlbumSunObject>) getIntent().getSerializableExtra("list");
+        //判断querygroupcounts是否为空，如果是说明显示数据库的全部照片；不是，则返回显示传送过来的指定集合的照片
         queryGroupCounts = (ArrayList<QueryGroupCount>) getIntent().getSerializableExtra("countList");
+        if(queryGroupCounts == null){
+            isSpecial = true;
+        }else{
+            isSpecial = false;
+        }
     }
 
     public void changeToSingleFragment(int position, List<AllPfAlbumSunObject> objectList) {

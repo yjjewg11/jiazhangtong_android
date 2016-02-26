@@ -21,6 +21,7 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.MsgDataModel;
 import com.wj.kindergarten.bean.Teacher;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -68,6 +69,7 @@ public class MessageFragment extends Fragment {
         ((MainActivity) getActivity()).clearLeftIcon();
         ((MainActivity) getActivity()).clearRightIcon();
         ((BaseActivity) getActivity()).setTitleText("消息");
+
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null);
 
@@ -79,8 +81,8 @@ public class MessageFragment extends Fragment {
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-//                    nowPage = 1;
-//                    queryMessage(nowPage);
+                    nowPage = 1;
+                    queryMessage(nowPage);
                 }
 
                 @Override
@@ -154,7 +156,9 @@ public class MessageFragment extends Fragment {
             });
             mHandler.sendEmptyMessageDelayed(SET_REFRESH,0);
         }
-
+        if(!CGSharedPreference.getMessageState()){
+            mHandler.sendEmptyMessage(SET_REFRESH);
+        }
         return rootView;
     }
 

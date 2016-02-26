@@ -1,7 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -14,7 +13,6 @@ import com.wj.kindergarten.bean.PfFamilyUuid;
 import com.wj.kindergarten.bean.QueryGroupCount;
 import com.wj.kindergarten.bean.UUIDList;
 import com.wj.kindergarten.bean.UUIDListSunObj;
-import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.utils.CGLog;
@@ -73,7 +71,6 @@ public class PfLoadDataProxy {
         CGLog.v("打印对象　；" + pfFamilyUuid);
         String minTime = null;
 
-
         if (!isPullup) {
             //如果为空，则没有获取过数据,从网络获取 ; 有则直接从数据库取
             if (pfFamilyUuid == null) {
@@ -82,7 +79,7 @@ public class PfLoadDataProxy {
                 pfFamilyUuid.setMaxTime(new Date());
                 savePfFamilyUUid(pfFamilyUuid.getFamily_uuid());
             } else {
-                loadFromSqlite();
+                loadFromSqliteByCreateTime();
                 return;
             }
             loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMaxTime()), "", pageNo, NORMAL_DATA);
@@ -127,7 +124,7 @@ public class PfLoadDataProxy {
                 }
                 //在获取到maxtime和mintime的值之后，查询有没有更新
                 //在获取到新数据之后，保存到数据库中后再从数据库查出来取出来。
-                loadFromSqlite();
+                loadFromSqliteByCreateTime();
                 loadDataIsChange(familyUuid);
                 //判断类型是否是请求的增量更新数据
                 if (type == REFRESH_DATA) {
@@ -155,19 +152,28 @@ public class PfLoadDataProxy {
         }
     }
 
+    private void loadFromSqliteByPhotoTime(){
+        loadFromDataBases("photo_time");
+    }
 
-    private void loadFromSqlite() {
+
+
+    private void loadFromSqliteByCreateTime() {
         //根据family_uuid把对象根据日期分组，显示多少组及其数量
 //        List<AllPfAlbumSunObject> listTest = familyUuidObjectSql.findAll(AllPfAlbumSunObject.class);
-        String sql = "SELECT strftime('%Y-%m-%d',create_time),count(1) from " + "com_wj_kindergarten_bean_AllPfAlbumSunObject" + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() + "'\n" +
-                "GROUP BY strftime('%Y-%m-%d',create_time)";
+        loadFromDataBases("create_time");
+    }
+
+    private void loadFromDataBases(String timeType) {
+        String sql = "SELECT strftime('%Y-%m-%d',"+timeType+"),count(1) from " + "com_wj_kindergarten_bean_AllPfAlbumSunObject" + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() + "'\n" +
+                "GROUP BY strftime('%Y-%m-%d',"+timeType+")";
         if (pfFamilyUuid.getMaxTime() == null ||
                 pfFamilyUuid.getMinTime() == null) return;
         List<QueryGroupCount> dateArray = new ArrayList<>();
         List<DbModel> dbList = familyUuidObjectSql.findDbModelListBySQL(sql);
         for (DbModel model : dbList) {
             QueryGroupCount count = new QueryGroupCount();
-            String date = (String) model.getDataMap().get("strftime('%Y-%m-%d',create_time)");
+            String date = (String) model.getDataMap().get("strftime('%Y-%m-%d',"+timeType+")");
             int sumCount = Integer.valueOf((String) model.getDataMap().get("count(1)"));
             if (!TextUtils.isEmpty(date)) {
                 count.setDate(date);
