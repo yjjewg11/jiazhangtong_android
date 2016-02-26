@@ -16,10 +16,15 @@
         android:padding="@dimen/margin_15"
         android:columnWidth="30dp"
         android:layout_height="match_parent"/>
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/pf_album_list_bottom_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <View
+            android:background="@color/background_division"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -44,6 +49,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity {
     private long pre_back = 0;
     private boolean isClickMessage = false;
     private ImageView msgImageView = null;
-    private HintInfoDialog dialog ;
+    private HintInfoDialog dialog;
     private List<TrainClass> TC_list ;
     private static TrainChildInfoList TCI;
     public static  MainActivity instance;
@@ -418,6 +418,7 @@ public class MainActivity extends BaseActivity {
                 if (tabId.equals(mTabIdArray[2])) {
                     Utils.registerUmengClickEvent(MessageConstant.MINE_MSG);
                     isClickMessage = true;
+
                     CGSharedPreference.setMessageState(true);
                 } else {
                     if (isClickMessage) {

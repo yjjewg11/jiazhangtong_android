@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
@@ -17,11 +18,11 @@ import java.util.List;
  * Created by tangt on 2016/1/18.
  */
 public class PfCollectPicAdapter extends BaseAdapter {
-    private List<String> list;
+    private List<AllPfAlbumSunObject> list;
     private Context context;
     private LayoutInflater inflater;
 
-    public PfCollectPicAdapter(Context context, List<String> list) {
+    public PfCollectPicAdapter(Context context, List<AllPfAlbumSunObject> list) {
         this.list = list;
         this.context = context;
         this.inflater = LayoutInflater.from(context);
@@ -49,8 +50,14 @@ public class PfCollectPicAdapter extends BaseAdapter {
             ImageView imageView = (ImageView) convertView.findViewById(R.id.collect_item_image);
             convertView.setTag(imageView);
         }
-        ImageView imageView = (ImageView) convertView.getTag();
-        ImageLoaderUtil.displayMyImage(list.get(position),imageView);
+        AllPfAlbumSunObject sunObject = list.get(position);
+        if(sunObject != null){
+            ImageView imageView = (ImageView) convertView.getTag();
+            ImageLoaderUtil.displayMyImage(sunObject.getPath(),imageView);
+        }else {
+
+        }
+
 
         return convertView;
     }

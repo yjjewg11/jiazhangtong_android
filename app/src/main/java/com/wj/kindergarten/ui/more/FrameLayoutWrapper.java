@@ -7,10 +7,10 @@ import android.widget.LinearLayout;
  * Created by tangt on 2016/2/25.
  */
 public class FrameLayoutWrapper  {
-    private FrameLayout frameLayout;
+    private LinearLayout frameLayout;
     private int bottomMargin;
 
-    public FrameLayoutWrapper(FrameLayout frameLayout) {
+    public FrameLayoutWrapper(LinearLayout frameLayout) {
         this.frameLayout = frameLayout;
     }
 

@@ -24,6 +24,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.PfDianZan;
 import com.wj.kindergarten.bean.PfSingleAssess;
 import com.wj.kindergarten.bean.PfSingleAssessObject;
 import com.wj.kindergarten.bean.Reply;
@@ -100,8 +101,10 @@ public class PFSingleObjectInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //在每次重用view之后都会更新数据
-        initData();
+
         if(innerView != null){
+            initData();
+            showPic();
             return innerView;
         }
         dialog = new HintInfoDialog(getActivity(),"加载数据中...请稍后");
@@ -128,7 +131,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void onClick(View v) {
                 ArrayList<String> list = new ArrayList();
                 list.add(sunObject.getPath());
-                Utils.carouselPic(getActivity(),0, (ArrayList<String>) list);
+                Utils.carouselPic(getActivity(), 0, (ArrayList<String>) list);
             }
         });
         pf_single_scroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -143,6 +146,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 queSingleAssess();
             }
         });
+        initData();
         showPic();
         chcekUpadate();
         queryExtraData(sunObject.getUuid());
@@ -340,7 +344,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 singleInfo = (SinlePfExtraInfo) domain;
                 if (singleInfo != null) {
                     //初始化底部按钮显示状态
-//                    initCollect();
+                    initCollect();
                 }
             }
 
@@ -354,6 +358,25 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
             }
         });
+    }
+
+    private void initCollect() {
+        //可以收藏
+        if(singleInfo.isFavor()){
+            Utils.cancleStoreStatus(getActivity(),textViews[0]);
+        }else{
+            Utils.showStoreStatus(getActivity(),textViews[0]);
+        }
+
+        PfDianZan dianZan =  singleInfo.getDianZan();
+        if(dianZan != null){
+            //可以点赞
+            if(dianZan.getYidianzan() == 0){
+                Utils.cancleDizanStatus(getActivity(),textViews[2]);
+            }else{
+                Utils.showDianzanStatus(getActivity(), textViews[2]);
+            }
+        }
     }
 
     private void initBottomBt() {

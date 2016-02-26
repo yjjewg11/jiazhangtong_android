@@ -5,6 +5,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.compounets.NestedGridView;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.PfCollectPicAdapter;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class ConllectPicActivity extends BaseActivity{
     private GridView gridView;
-    private List<String> collect_list;
+    private List<AllPfAlbumSunObject> collect_list;
 
     @Override
     protected void setContentLayout() {
@@ -33,7 +34,7 @@ public class ConllectPicActivity extends BaseActivity{
 
     @Override
     protected void onCreate() {
-        collect_list = (List<String>) getIntent().getSerializableExtra("collect_list");
+        collect_list = (List<AllPfAlbumSunObject>) getIntent().getSerializableExtra("collect_list");
         initViews();
         setTitleText("我的收藏");
 
@@ -45,7 +46,7 @@ public class ConllectPicActivity extends BaseActivity{
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Utils.carouselPic(ConllectPicActivity.this,position, (ArrayList<String>) collect_list);
+                Utils.showPfSingleinfo(ConllectPicActivity.this, position, (ArrayList<AllPfAlbumSunObject>) collect_list);
             }
         });
 

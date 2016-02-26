@@ -26,6 +26,7 @@ import com.ant.liao.GifView;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.umeng.socialize.utils.BitmapUtils;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.ui.func.EditPfActivity;
 import com.wj.kindergarten.ui.imagescan.BitmapCallBack;
@@ -41,8 +42,11 @@ import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Constant.BitmapUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +72,10 @@ public class PhotoFamilyFragment extends Fragment {
     private TextView pf_backGround_count;
     private TextView pf_backGround_count_right;
     private GifView gif;
+    private RelativeLayout pf_pic_left_bt;
+    private TextView pf_pic_center_tv;
+    private RelativeLayout pf_pic_right_iv;
+    private FinalDb db;
 
     private int getFlTopMargin(){
         LinearLayout.LayoutParams params  = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
@@ -90,16 +98,7 @@ public class PhotoFamilyFragment extends Fragment {
 
     private boolean isOne;
     private float moveY;
-    private ArrayList<String> list = new ArrayList<>();
-    private String[] images = new String[]{
-            "http://img03.sogoucdn.com/app/a/100520024/83ef625cdb1ea0a339645e6a1ade033c",
-            "http://img02.sogoucdn.com/app/a/100520024/ad55a6132984150bf7b6df71fab9d16b",
-            "http://img02.sogoucdn.com/app/a/100520024/f4ade868d7abc6769cae5ee9d70bf75c",
-            "http://img01.sogoucdn.com/app/a/100520024/f12f63ca6757d36a6044c317876dd00c",
-            "http://img02.sogoucdn.com/app/a/100520024/7c7942e15af5220fd165e571aa0fca33",
-            "http://img01.sogoucdn.com/app/a/100520024/bb33c849ec21ea3a98b3598d56efb8c4",
-            "http://img03.sogoucdn.com/app/a/100520024/d409d7b4fb46c19da38cd398acea013b",
-    };
+    private ArrayList<AllPfAlbumSunObject> list = new ArrayList<>();
     public boolean canScroll = true;
     private ObjectAnimator animotor;
 
@@ -107,11 +106,6 @@ public class PhotoFamilyFragment extends Fragment {
         this.canScroll = canScroll;
     }
 
-    {
-        for (String path : images) {
-            list.add(path);
-        }
-    }
 
     //标签 ： 时光轴，精品相册
     private String[] fragment_tags = new String[]{"fusion", "boutique_album"};
@@ -121,9 +115,10 @@ public class PhotoFamilyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
-        ((MainActivity)getActivity()).hideActionbar();
         if (view != null) return view;
         view = inflater.inflate(R.layout.photo_family_pic, null);
+        db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
+        initBar();
         initHeadView();
         initHeadViewData();
         initViews(view);
@@ -132,6 +127,31 @@ public class PhotoFamilyFragment extends Fragment {
         initTabLayout();
 
         return view;
+    }
+
+    private void initBar() {
+        pf_pic_left_bt = (RelativeLayout) view.findViewById(R.id.pf_pic_left_bt);
+        pf_pic_center_tv = (TextView) view.findViewById(R.id.pf_pic_center_tv);
+        pf_pic_right_iv = (RelativeLayout) view.findViewById(R.id.pf_pic_right_iv);
+
+        pf_pic_left_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickLeft();
+            }
+        });
+        pf_pic_center_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        pf_pic_right_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addRightListener();
+            }
+        });
     }
 
     private void initHeadViewData() {
@@ -161,7 +181,7 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initHeadView() {
         gif = (GifView) view.findViewById(R.id.pf_family_gif);
-        gif.setGifImage(R.drawable.gifdownload);
+        gif.setGifImage(R.drawable.update_new2);
         pf_backGround_rl = (RelativeLayout) view.findViewById(R.id.pf_backGround_rl);
         pf_backGround_image = (ImageView) view.findViewById(R.id.pf_backGround_image);
         pf_backGround_family_name = (TextView) view.findViewById(R.id.pf_backGround_family_name);
@@ -183,53 +203,49 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void initHead() {
-        ((MainActivity) getActivity()).clearCenterIcon();
-        ((MainActivity) getActivity()).setTitleText("家庭相册");
-        ((MainActivity) getActivity()).showLeftButton(R.drawable.pf_lefthanbao);
-        ((MainActivity) getActivity()).setTitleRightImage(R.drawable.pf_first_new_album, 0);
-        ((MainActivity) getActivity()).titleLeftButton.setOnClickListener(new View.OnClickListener() {
+        ((MainActivity)getActivity()).hideActionbar();
+    }
+
+    private void clickLeft() {
+        //弹出菜单
+        View viewleft = View.inflate(getActivity(), R.layout.pf_left_choose, null);
+        final PopupWindow popupWindow = new PopupWindow(viewleft, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView tv_collect = (TextView) viewleft.findViewById(R.id.tv_head_collect);
+        TextView tv_up_list = (TextView) viewleft.findViewById(R.id.tv_up_list);
+        TextView tv_album_info = (TextView) viewleft.findViewById(R.id.tv_album_info);
+        tv_collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //弹出菜单
-                View viewleft = View.inflate(getActivity(), R.layout.pf_left_choose, null);
-                final PopupWindow popupWindow = new PopupWindow(viewleft, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                TextView tv_collect = (TextView) viewleft.findViewById(R.id.tv_head_collect);
-                TextView tv_up_list = (TextView) viewleft.findViewById(R.id.tv_up_list);
-                TextView tv_album_info = (TextView) viewleft.findViewById(R.id.tv_album_info);
-                tv_collect.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), ConllectPicActivity.class);
-                        //TODO 放入收藏的照片集合
-                        intent.putExtra("collect_list", list);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                    }
-                });
-
-                tv_up_list.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), UpLoadActivity.class);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                    }
-                });
-
-                tv_album_info.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //点击启动相册详细页面
-                        Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
-                        startActivity(intent);
-                        popupWindow.dismiss();
-                    }
-                });
-
-                Utils.setPopWindow(popupWindow);
-                popupWindow.showAsDropDown(((MainActivity) getActivity()).titleLeftButton);
+                Intent intent = new Intent(getActivity(), ConllectPicActivity.class);
+                //TODO 放入收藏的照片集合
+                list.addAll(db.findAll(AllPfAlbumSunObject.class));
+                intent.putExtra("collect_list", list);
+                startActivity(intent);
+                popupWindow.dismiss();
             }
         });
+
+        tv_up_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UpLoadActivity.class);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+
+        tv_album_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点击启动相册详细页面
+                Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+
+        Utils.setPopWindow(popupWindow);
+        popupWindow.showAsDropDown(pf_pic_left_bt);
     }
 
     public void addRightListener() {

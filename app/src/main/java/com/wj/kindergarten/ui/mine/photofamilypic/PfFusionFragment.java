@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -178,6 +179,16 @@ public class PfFusionFragment extends Fragment {
         loadData();
 
         return view;
+    }
+
+    private void addAllDataByDate(List<QueryGroupCount> allList){
+        for(QueryGroupCount count : allList){
+            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), count.getDate());
+            if(objectList == null) continue;
+            View view = View.inflate(getActivity(),R.layout.pf_single_date,null);
+            GridView mGridView = (GridView) view.findViewById(R.id.pf_single_date_grid);
+//            mGridView.setAdapter(new );
+        }
     }
 
     private void addListDataByDate(List<QueryGroupCount> allList) {

@@ -67,19 +67,8 @@ public class PfSingleInfoFragment extends Fragment {
     private List<AllPfAlbumSunObject> list = new ArrayList<>();
     private ViewPager viewPager;
     private int position;
-    private FinalDb family_uuid_object;
-
-    private TextView[] textViews;
     private PfInfoFragmentAdapter pagerAdapter;
     private PfGalleryActivity activity;
-    private SinlePfExtraInfo singleInfo;
-    private ViewEmot2 emot2;
-    private FrameLayout frame_bottom_tab;
-    private LinearLayout bottom_assess;
-    private View pf_more_view;
-    private ImageView pf_delete;
-    private ImageView pf_edit;
-    private int[] location;
     private FinalDb db;
 
     public PfSingleInfoFragment(int position, List<AllPfAlbumSunObject> list) {
@@ -185,25 +174,7 @@ public class PfSingleInfoFragment extends Fragment {
 
 
 
-    private void initCollect() {
-            //可以收藏
-        if(singleInfo.isFavor()){
-            Utils.cancleStoreStatus(getActivity(),textViews[0]);
-        }else{
-            Utils.showStoreStatus(getActivity(),textViews[0]);
-        }
 
-
-        PfDianZan dianZan =  singleInfo.getDianZan();
-        if(dianZan != null){
-            //可以点赞
-            if(dianZan.getYidianzan() == 0){
-                Utils.cancleDizanStatus(getActivity(),textViews[2]);
-            }else{
-                Utils.showDianzanStatus(getActivity(), textViews[2]);
-            }
-        }
-    }
 
     private void setTitleText(String ymdTimeFromYMDHMS) {
         activity.changeTitle(ymdTimeFromYMDHMS);
