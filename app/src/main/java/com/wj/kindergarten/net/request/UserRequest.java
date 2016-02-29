@@ -22,6 +22,9 @@ import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
 import com.wj.kindergarten.utils.CGLog;
@@ -106,6 +109,12 @@ public final class UserRequest {
     private static final String DELETE_SINGLE_INFO = "rest/fPPhotoItem/delete.json";
     private static final String GET_SINGLE_PF_ASSESS = "rest/baseReply/queryByRel_uuid.json";
     private static final String SAVE_BOUTIQUE_ALBUM = "rest/fPMovie/save.json";
+    private static final String GET_BOUTIQUE_SINGLE_INFO = "rest/fPMovie/get.json";
+    private static final String DELETE_BOUTIQUE_SINGLE = "rest/fPMovie/delete.json";
+    private static final String PF_ADD_FAVORITE = "rest/fPPhotoItem/addFavorites.json";
+    private static final String PF_CANCLE_FAVORITE = "rest/fPPhotoItem/deleteFavorites.json";
+    private static final String GET_PF_COLLECT_PIC = "rest/fPPhotoItem/queryMyFavorites.json";
+    private static final String GET_BOUTIQUE_REVIEW_URL = "rest/fPMovie/save.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -1009,9 +1018,61 @@ public final class UserRequest {
         }catch (JSONException e){
             e.printStackTrace();
         }
-        SendRequest.getInstance().post(context,RequestType.ZAN,object.toString(),RequestHttpUtil.BASE_URL+SAVE_BOUTIQUE_ALBUM,resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, object.toString(), RequestHttpUtil.BASE_URL + SAVE_BOUTIQUE_ALBUM, resultI);
                 
         
                 
+    }
+
+    public static void getBoutiqueSingleInfo(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",uuid);
+        SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_SINGLE_INFO, params, RequestHttpUtil.BASE_URL +
+                GET_BOUTIQUE_SINGLE_INFO, resultI);
+    }
+
+    public static void deleteBoutiqueSingle(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",uuid);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL + DELETE_BOUTIQUE_SINGLE, resultI);
+    }
+
+    public static void picCommonStore(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",uuid);
+        SendRequest.getInstance().post(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+PF_ADD_FAVORITE,resultI);
+    }
+
+    public static void picCommonCancleStore(Context context, String uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",uuid);
+        SendRequest.getInstance().post(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+PF_CANCLE_FAVORITE,resultI);
+    }
+
+    public static void gePfCollect(Context context, int pageNo, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context, RequestType.PF_PIC_BY_UUID, params, RequestHttpUtil.BASE_URL +
+                GET_PF_COLLECT_PIC, resultI);
+    }
+
+    public static void getBoutiqueReviewUrl(Context context, String title, String mp3, String uuid, String herald,
+                                            String template_key,String photo_uuids,int status, RequestResultI resultI) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("title", title);
+            object.put("mp3", mp3);
+            object.put("uuid", uuid);
+            object.put("herald", herald);
+            object.put("template_key", template_key);
+            object.put("photo_uuids", photo_uuids);
+            object.put("status", status);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        SendRequest.getInstance().post(context,RequestType.GET_BOUTIQUE_REVIEW_URL,object.toString(),
+                RequestHttpUtil.BASE_URL+GET_BOUTIQUE_REVIEW_URL,resultI);
+
     }
 }

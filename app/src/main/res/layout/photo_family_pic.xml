@@ -88,7 +88,6 @@
         android:id="@+id/back_pf_scroll_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <include layout="@layout/pf_background_show"/>
     </FrameLayout>
 

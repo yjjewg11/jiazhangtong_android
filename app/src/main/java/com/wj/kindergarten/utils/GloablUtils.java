@@ -58,6 +58,7 @@ public interface GloablUtils {
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";
 
-    int MODE_OF_PF = 21;
+    int MODE_OF_PF = 21;//相册
+    int BOUTIQUE_COMMON_TYPE = 22;//精品相册
 
 }

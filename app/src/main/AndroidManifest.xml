@@ -676,12 +676,42 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="OsYjK06n1U8Rb2qZvVF7CwiX" />
 
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity"></activity>
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
     </application>
 
 </manifest>

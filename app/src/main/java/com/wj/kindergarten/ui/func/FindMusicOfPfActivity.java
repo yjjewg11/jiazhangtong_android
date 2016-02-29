@@ -108,7 +108,7 @@ public class FindMusicOfPfActivity extends BaseActivity {
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra("object", adapter.getList().get(0));
+        intent.putExtra("mp3", adapter.getList().get(0).getPath());
         setResult(RESULT_OK, intent);
         stopMusic();
         finish();

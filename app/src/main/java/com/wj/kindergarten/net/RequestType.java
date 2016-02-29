@@ -88,4 +88,6 @@ public interface RequestType {
      int GET_SINGLE_PF_EXTRA_INFO = 172;
      int GET_SINGLE_PF_ASSESS = 173;
      int SAVE_BOUTIQUE_ALBUM = 174;
+     int GET_BOUTIQUE_SINGLE_INFO = 175;
+     int GET_BOUTIQUE_REVIEW_URL = 176;
 }

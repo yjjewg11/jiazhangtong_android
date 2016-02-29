@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.ChooseImage;
 import com.wj.kindergarten.utils.DateTimePickDialogUtil;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -37,6 +39,7 @@ public class PfEditInfoActivity extends BaseActivity {
     private TextView tv_album_name;
     private ImageView iv_appear_image;
     private TextView pf_tv_birthday;
+    String family_uuid;
 
     @Override
     protected void setContentLayout() {
@@ -51,9 +54,21 @@ public class PfEditInfoActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        setTitleText("相册信息");
+        setTitleText("相册信息", "保存");
+
         initViews();
         initClicks();
+        initData();
+    }
+
+    private void initData() {
+        family_uuid = getIntent().getStringExtra("uuid");
+        if(TextUtils.isEmpty(family_uuid)) return;
+//        MainActivity.instance.get
+    }
+
+    @Override
+    protected void titleRightButtonListener() {
 
     }
 

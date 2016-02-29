@@ -11,6 +11,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.PfModeNameObject;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueAlbumEditAdapter;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -31,6 +32,8 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
     private GridView gridView;
     @ViewInject(id = R.id.boutique_album_edit_next_step)
     private TextView boutique_album_edit_next_step;
+    private String uuid;
+    private PfModeNameObject pfModeNameObject;
 
 
     @Override
@@ -56,7 +59,10 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
         boutique_album_edit_next_step.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BoutiqueAlbumEditActivity.this,BoutiqueModeActivity.class));
+                Intent intent = new Intent(BoutiqueAlbumEditActivity.this,BoutiqueModeActivity.class);
+                intent.putExtra("objectList", (ArrayList) objectList);
+//                intent.putExtra("mode",pfModeNameObject);
+                startActivity(intent);
             }
         });
     }
@@ -78,6 +84,7 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
     public void getData() {
         Intent intent = getIntent();
         objectList = (ArrayList<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
+//        pfModeNameObject =(PfModeNameObject) intent.getSerializableExtra("mode");
     }
 
     @Override

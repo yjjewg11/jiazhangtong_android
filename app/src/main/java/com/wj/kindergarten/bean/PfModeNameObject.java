@@ -2,10 +2,12 @@ package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by tangt on 2016/2/18.
  */
-    public class PfModeNameObject {
+    public class PfModeNameObject implements Serializable{
     @Expose
         private String mp3;@Expose
         private String herald;@Expose

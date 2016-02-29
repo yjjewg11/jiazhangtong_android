@@ -11,9 +11,11 @@ import android.widget.RelativeLayout;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.PfModeNameObject;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class PfChoosedPicActivity extends BaseActivity {
     private HashMap<String,Boolean> selectMap = new HashMap<>();
     private PfChoosePicAdapter adapter;
     private ArrayList<String> images = new ArrayList<>();
+    private String uuid;
+    private PfModeNameObject pfModeNameObject;
 
     @Override
     protected void setContentLayout() {
@@ -53,7 +57,8 @@ public class PfChoosedPicActivity extends BaseActivity {
             public void onClick(View v) {
                 //带着集合进入编辑页面
                  Intent intent = new Intent(PfChoosedPicActivity.this,BoutiqueAlbumEditActivity.class);
-                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
+                 intent.putExtra("objectList", (ArrayList) objectList);
+//                 intent.putExtra("mode",pfModeNameObject);
                  startActivity(intent);
             }
         });
@@ -76,7 +81,10 @@ public class PfChoosedPicActivity extends BaseActivity {
 
     private void getData() {
         Intent intent = getIntent();
+//        pfModeNameObject = (PfModeNameObject) intent.getSerializableExtra("mode");
         objectList = (List<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
+
+
         if(objectList != null && objectList.size() > 0){
             Iterator<AllPfAlbumSunObject> iterator = objectList.iterator();
             while (iterator.hasNext()){

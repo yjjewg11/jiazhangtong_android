@@ -111,6 +111,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
     private boolean isCut = false;
 
     private static int SIGN_BOARD;
+    //右下角确定按钮
     private TextView boutique_gallery_confirm;
     private FinalDb db;
     private View view;
@@ -502,7 +503,6 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 
             } else {
                 Intent intent = new Intent(this,PfChoosedPicActivity.class);
-
                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
                 startActivityForResult(intent,PF_CHOOSE_PIC,null);
 

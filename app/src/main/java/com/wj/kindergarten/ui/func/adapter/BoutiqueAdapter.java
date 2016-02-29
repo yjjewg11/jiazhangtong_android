@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BoutiqueAlbum;
+import com.wj.kindergarten.bean.BoutiqueAlbumListSun;
+import com.wj.kindergarten.utils.ImageLoaderUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +24,9 @@ import java.util.List;
 public class BoutiqueAdapter extends BaseAdapter{
     private Context context;
     private LayoutInflater inflater;
-    private List<BoutiqueAlbum> list;
+    private List<BoutiqueAlbumListSun> list = new ArrayList<>();
 
-    public void setList(List<BoutiqueAlbum> list) {
+    public void setList(List<BoutiqueAlbumListSun> list) {
 
         this.list.clear();
         this.list.addAll(list);
@@ -38,7 +41,7 @@ public class BoutiqueAdapter extends BaseAdapter{
     @Override
     public int getCount() {
         //TODO 添加的假数据
-        return 10;
+        return list.size();
     }
 
     @Override
@@ -59,7 +62,7 @@ public class BoutiqueAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.boutique_album_itme,null);
             viewHolder.boutique_album_item_title = (TextView) convertView.findViewById(R.id.boutique_album_item_title);
             viewHolder.boutique_album_item_people = (TextView) convertView.findViewById(R.id.boutique_album_item_title);
-            viewHolder.boutique_album_item_time = (TextView) convertView.findViewById(R.id.boutique_album_item_time);
+            viewHolder.boutique_album_item_count = (TextView) convertView.findViewById(R.id.boutique_album_item_count);
             viewHolder.boutique_album_item_image = (ImageView) convertView.findViewById(R.id.boutique_album_item_image);
             viewHolder.boutique_bottom_delete = (FrameLayout) convertView.findViewById(R.id.boutique_bottom_delete);
             viewHolder.boutique_bottom_edit = (FrameLayout) convertView.findViewById(R.id.boutique_bottom_edit);
@@ -69,12 +72,18 @@ public class BoutiqueAdapter extends BaseAdapter{
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        BoutiqueAlbumListSun sun = list.get(position);
+        if(sun != null){
+            ImageLoaderUtil.displayImage(sun.getHerald(),viewHolder.boutique_album_item_image);
+            viewHolder.boutique_album_item_title.setText("" + sun.getTitle());
+            viewHolder.boutique_album_item_people.setText(sun.getCreate_username());
+            viewHolder.boutique_album_item_count.setText(""+sun.getPhoto_count());
+        }
 
         return convertView;
     }
     class ViewHolder {
-        TextView boutique_album_item_title,boutique_album_item_people,boutique_album_item_time;
+        TextView boutique_album_item_title,boutique_album_item_people,boutique_album_item_count;
         ImageView boutique_album_item_image;
         FrameLayout boutique_bottom_delete,boutique_bottom_edit,boutique_bottom_pinglun,boutique_bottom_edit2;
     }

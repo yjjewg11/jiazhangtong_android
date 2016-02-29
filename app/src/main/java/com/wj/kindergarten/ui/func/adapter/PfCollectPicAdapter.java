@@ -12,20 +12,26 @@ import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by tangt on 2016/1/18.
  */
 public class PfCollectPicAdapter extends BaseAdapter {
-    private List<AllPfAlbumSunObject> list;
+    private List<AllPfAlbumSunObject> list = new ArrayList<>();
     private Context context;
     private LayoutInflater inflater;
 
-    public PfCollectPicAdapter(Context context, List<AllPfAlbumSunObject> list) {
-        this.list = list;
+    public PfCollectPicAdapter(Context context) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setList(List<AllPfAlbumSunObject> list){
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override

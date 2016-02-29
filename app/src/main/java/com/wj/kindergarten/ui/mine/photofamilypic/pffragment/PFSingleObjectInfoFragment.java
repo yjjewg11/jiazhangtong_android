@@ -505,9 +505,9 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void result(BaseModel domain) {
                 bottomCancle();
                 cancleDialog();
-
+                ToastUtils.showMessage("评论回复成功!");
                 PfSingleAssessObject object = new PfSingleAssessObject();
-                if(object == null) return;
+                if (object == null) return;
                 object.setContent(message);
                 object.setCreate_user(sunObject.getCreate_user());
                 object.setCreate_time("刚刚");
@@ -532,7 +532,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     private void cacleStore() {
         showDialog("取消收藏中...");
-        Utils.commonCancleStore(getActivity(), sunObject.getUuid(), new RequestResultI() {
+        Utils.picCommonCancleStore(getActivity(), sunObject.getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 cancleDialog();
@@ -558,7 +558,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         if(TextUtils.isEmpty(title)){
             title = "这是一张照片!";
         }
-        Utils.commonStore(getActivity(), title, GloablUtils.MODE_OF_PF, sunObject.getUuid(), sunObject.getPath(), new RequestResultI() {
+        Utils.picCommonStore(getActivity(),sunObject.getUuid(),new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 cancleDialog();
@@ -614,7 +614,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 ((PfGalleryActivity)getActivity()).startEditActivity(sunObject);
             }
         });
-        int [] location = getLocation(textViews[4]);
+        int [] location = Utils.getLocation(textViews[4]);
         pf_more_view.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         CGLog.v("打印测量的高度 　：" + pf_more_view.getMeasuredHeight() + " 宽度 : " + pf_more_view.getMeasuredWidth());
         pf_more_view.getMeasuredHeight();
@@ -624,12 +624,6 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void deleteData(AllPfAlbumSunObject sunObject) {
         //从数据库，网络，轮播图中删除
         pfSingleInfoFragment.deleteCurrentItem(sunObject);
-    }
-    public int[] getLocation(View view) {
-        //获取更多按钮的位置
-        int [] location = new int[2];
-        view.getLocationInWindow(location);
-        return location;
     }
 
     public void showRightInfo(){

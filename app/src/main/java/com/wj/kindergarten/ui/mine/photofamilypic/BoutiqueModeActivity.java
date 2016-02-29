@@ -10,6 +10,7 @@ import android.widget.GridView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfModeName;
 import com.wj.kindergarten.bean.PfModeNameObject;
@@ -33,6 +34,8 @@ public class BoutiqueModeActivity extends BaseActivity {
     private PullToRefreshGridView gridView;
     private BoutiqueModeAdapter adapter;
     private List<PfModeNameObject> list = new ArrayList<>();
+    private List<AllPfAlbumSunObject> objectList;
+    private PfModeNameObject pfModeNameObject;
 
     @Override
     protected void setContentLayout() {
@@ -47,9 +50,18 @@ public class BoutiqueModeActivity extends BaseActivity {
     protected void onCreate() {
         FinalActivity.initInjectedView(this);
         commonDialog = new HintInfoDialog(this,"数据加载中...请稍候");
+        getData();
         initData();
         initView();
         initClick();
+    }
+
+    private void getData() {
+        Intent intent = getIntent();
+        objectList = (ArrayList)intent.getSerializableExtra("objectList");
+//        pfModeNameObject = (PfModeNameObject) intent.getSerializableExtra("mode");
+//        if(pfModeNameObject == null) pfModeNameObject = new PfModeNameObject();
+
     }
 
     private void initClick() {
@@ -58,7 +70,9 @@ public class BoutiqueModeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PfModeNameObject object = (PfModeNameObject) adapter.getItem(position);
                 Intent intent = new Intent(BoutiqueModeActivity.this,BoutiqueModeReviewActivity.class);
+                intent.putExtra("objectList",(ArrayList)objectList);
                 intent.putExtra("key",object.getKey());
+//                intent.putExtra("mode",pfModeNameObject);
                 startActivity(intent);
             }
         });

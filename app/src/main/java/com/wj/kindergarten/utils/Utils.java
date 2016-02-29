@@ -943,7 +943,6 @@ public class Utils {
         }
         return false;
     }
-
     //公共收藏模块
     public static void commonStore(Context context, String title, int type, String reluuid, String url, RequestResultI resultI) {
         UserRequest.store(context, title, type, reluuid, url, resultI);
@@ -951,6 +950,16 @@ public class Utils {
 
     public static void commonCancleStore(Context context, String uuid, RequestResultI resultI) {
         UserRequest.cancelStore(true, context, uuid, resultI);
+    }
+
+    //专门针对图片的收藏和取消收藏
+
+    public static void picCommonStore(Context context,String uuid,RequestResultI resultI){
+        UserRequest.picCommonStore(context,uuid,resultI);
+    }
+
+    public static void picCommonCancleStore(Context context,String uuid,RequestResultI resultI){
+        UserRequest.picCommonCancleStore(context,uuid,resultI);
     }
 
     public static void showDianzanStatus(Context context, TextView textView) {
@@ -1005,5 +1014,11 @@ public class Utils {
         Intent intent = new Intent(context, PfGalleryActivity.class);
         intent.putExtra("list",collect_list);
         context.startActivity(intent);
+    }
+    public static int[] getLocation(View view) {
+        //获取更多按钮的位置
+        int [] location = new int[2];
+        view.getLocationInWindow(location);
+        return location;
     }
 }

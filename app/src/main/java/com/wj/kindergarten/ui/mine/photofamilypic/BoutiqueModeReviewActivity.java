@@ -11,12 +11,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
+import com.wj.kindergarten.bean.AllPfAlbumSun;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.BoutiqueReviewAddress;
+import com.wj.kindergarten.bean.PfModeNameObject;
+import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoutiqueModeReviewActivity extends BaseActivity {
 
@@ -27,6 +38,15 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     @ViewInject(id = R.id.boutique_review_tv_upload)
     private TextView boutique_review_tv_upload;
     private EditText editText;
+    private int status = 1;//可见状态,临存，未发布
+    private String title;//上传标题
+    private String uuid;//精品相册uuid
+    private String key;//模板主键
+    private String mp3;//音乐地址
+    private String hearld;//封面图片
+    private ArrayList<AllPfAlbumSunObject> objectList;//照片地址集合
+    private PfModeNameObject pfModeNameObject;
+    private BoutiqueReviewAddress address;
 
     @Override
     protected void setContentLayout() {
@@ -41,8 +61,21 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         FinalActivity.initInjectedView(this);
-        setTitleText("相册模板预览","音乐");
+        setTitleText("相册模板预览", "音乐");
         initViews();
+        getData();
+        loadData(1);
+    }
+
+    private void getData() {
+        Intent intent = getIntent();
+//        pfModeNameObject = (PfModeNameObject) intent.getSerializableExtra("mode");
+        objectList = (ArrayList<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
+        key = intent.getStringExtra("key");
+        if(pfModeNameObject == null) pfModeNameObject = new PfModeNameObject();
+        pfModeNameObject.setKey(key);
+        //TODO 随便设了一个值
+        pfModeNameObject.setTitle("111111");
     }
 
     @Override
@@ -83,7 +116,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         if(editable != null){
             title = editable.toString();
         }
-//        UserRequest.saveBoutiqueAlbum(this,title,);
+        loadData(0);
     }
 
     @Override
@@ -91,9 +124,56 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         if(resultCode != RESULT_OK) return;
         switch (requestCode){
             case GET_MODE_MUSIC :
-
+                mp3 = data.getStringExtra("mp3");
+                pfModeNameObject.setMp3(mp3);
+                loadData(1);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    protected void loadData(final int cacheStatus) {
+        commonDialog.show();
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0 ; i < objectList.size() ; i++){
+            AllPfAlbumSunObject object = objectList.get(i);
+            if(i != objectList.size() -1 ){
+                builder.append(object.getPath()+",");
+            }else{
+                builder.append(object.getPath());
+            }
+        }
+        UserRequest.getBoutiqueReviewUrl(this, pfModeNameObject.getTitle(),
+                pfModeNameObject.getMp3(), uuid, pfModeNameObject.getHerald(), pfModeNameObject.getKey()
+                , builder.toString(), cacheStatus, new RequestResultI() {
+                    @Override
+                    public void result(BaseModel domain) {
+                        if(commonDialog.isShowing()){
+                            commonDialog.dismiss();
+                        }
+                        if(cacheStatus == 0){
+                            finish();
+                            ActivityManger.getInstance().finishPfActivities();
+                        }
+                        address = (BoutiqueReviewAddress) domain;
+                        if (address != null) {
+                            updateData();
+                        }
+                    }
+
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
+
+                    }
+
+                    @Override
+                    public void failure(String message) {
+
+                    }
+                });
+    }
+
+    private void updateData() {
+        boutique_review_webview.loadUrl(address.getShare_url());
     }
 }

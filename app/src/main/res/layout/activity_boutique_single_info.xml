@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity">
+
+    <include layout="@layout/title_normal"/>
+    <com.handmark.pulltorefresh.library.PullToRefreshWebView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/boutique_single_info_webview"
+        android:layout_height="match_parent">
+
+    </com.handmark.pulltorefresh.library.PullToRefreshWebView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/boutique_single_info_assess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/pf_pic_bottom_edit"/>
+    </FrameLayout>
+</LinearLayout>

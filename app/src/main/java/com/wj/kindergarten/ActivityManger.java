@@ -3,6 +3,7 @@ package com.wj.kindergarten;
 import android.app.Activity;
 import android.app.Application;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,5 +42,27 @@ public class ActivityManger extends Application {
         }
 
        // System.exit(0);
+
+        if(pfActivities.size() > 0){
+            Iterator<Activity> pfIterator = pfActivities.iterator();
+            while (pfIterator.hasNext()){
+                Activity pfActivity = pfIterator.next();
+                pfActivity.finish();
+            }
+        }
+    }
+
+    List<Activity> pfActivities = new ArrayList<>();
+    public void addPfActivities(Activity activity){
+        pfActivities.add(activity);
+    }
+    public void finishPfActivities(){
+        if(pfActivities.size() > 0){
+            Iterator<Activity> pfIteator = pfActivities.iterator();
+            while (pfIteator.hasNext()){
+                Activity pfActivity = pfIteator.next();
+                pfActivity.finish();
+            }
+        }
     }
 }

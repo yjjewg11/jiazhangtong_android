@@ -3,8 +3,11 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.wj.kindergarten.utils.CGLog;
 
 /**
@@ -13,16 +16,31 @@ import com.wj.kindergarten.utils.CGLog;
 public class PfFragmentLinearLayout extends LinearLayout {
 
     boolean flIsLocationTop;
+    private FrameLayout contentFl;
+    private int poor;
 
-    public JudgeIsVisible judgeIsVisible;
-    private OnInterceptTouchEvent onInterceptTouchEvent;
-
-    public void setOnInterceptTouchEvent(OnInterceptTouchEvent onInterceptTouchEvent) {
-        this.onInterceptTouchEvent = onInterceptTouchEvent;
+    public void setContentFl(FrameLayout contentFl) {
+        this.contentFl = contentFl;
     }
 
-    public void setJudgeIsVisible(JudgeIsVisible judgeIsVisible) {
-        this.judgeIsVisible = judgeIsVisible;
+    public int getFlTopMargin(){
+       return  ((LinearLayout.LayoutParams)contentFl.getLayoutParams()).topMargin;
+    }
+
+    public void setFlTopMargin(int margin){
+        ((LayoutParams)contentFl.getLayoutParams()).topMargin = margin;
+        contentFl.requestLayout();
+    }
+
+    private boolean judgeScrollByABS(){
+       int abs =  Math.abs(contentFl.getHeight()) - Math.abs(((LayoutParams)contentFl.getLayoutParams()).topMargin);
+       return abs > 0;
+    }
+
+    private DecideSubViewScroll decideSubViewScroll;
+
+    public void setDecideSubViewScroll(DecideSubViewScroll decideSubViewScroll) {
+        this.decideSubViewScroll = decideSubViewScroll;
     }
 
     public PfFragmentLinearLayout(Context context) {
@@ -34,67 +52,116 @@ public class PfFragmentLinearLayout extends LinearLayout {
     }
 
     float rowY;
+    int startY;
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        //通过拦截事件来进行抽屉滑动，是否进行拦截通过判断1.上面那个布局容器可见，2.当位于顶端时，listview是否位于顶端。
-
-//            moveEvent(ev);
-        onInterceptTouchEvent.onInterceptTouch(ev);
-
-
-//        if(flIsLocationTop && )
-
-        return super.onInterceptTouchEvent(ev);
-//
-    }
-
-    private void moveEvent(MotionEvent ev) {
+        //通过拦截事件来进行抽屉滑动，
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
-                rowY =  ev.getRawY();
+                lastY = (int) ev.getRawY();
+                startY = (int) ev.getRawY();
+                break;
             case MotionEvent.ACTION_MOVE:
-                if (Math.abs(getScrollY()) > judgeIsVisible.getHeight()){
-                       flIsLocationTop = true;
-                    int scroll = 0;
-                    //判断在滑动顶部时，如何继续上滑则禁止，下滑则允许。
-                    if(rowY - ev.getRawY() > 0){
-
-                    }else{
-                      scroll = (int) (rowY - ev.getRawY());
-                    }
-                    scrollBy(0,scroll);
-                }else{
-                    //如果滑动到最底部，继续下滑则禁止
-//                    int scrollBottom = 0;
-//                    if(rowY - ev.getRawY() < 0){
-//
-//                    }else{
-//                        scrollBottom = (int) (rowY - ev.getRawY());
-//                    }
-                    scrollBy(0,(int) (rowY - ev.getRawY()));
+                decideSubViewScroll.allowScroll();
+                //情况1：当fl的Math.abs(fl.topMargin < fl.getHeight()) ,进行拦截
+                if(judgeScrollByABS() && Math.abs(ev.getRawY() - startY) > 10){
+                    CGLog.v("正确拦截,返回结果1 ："+judgeScrollByABS());
+                    return true;
                 }
 
+                //拦截情况2：当fl的topMargin等于fl.getHeight()时，并且子view位于顶部，并判断是上滑还是下滑
+                //并且滑动一段距离后进行拦截
+                int poor = (int) (ev.getRawY() - lastY);
+                if(contentFl.getHeight() == Math.abs(getFlTopMargin()) &&
+                        decideSubViewScroll.subViewLocationTop() && poor > 0
+                        && Math.abs(ev.getRawY() - startY) > 10){
+                    CGLog.v("正确拦截,返回结果2 ：true");
+                    return true;
+                }
+                CGLog.v("未进行拦截!!!");
+                break;
+        }
+//        onInterceptTouchEvent.onInterceptTouch(ev);
 
-                rowY = ev.getRawY();
-                CGLog.v("打印滑动的初始位置 ; " + rowY);
-                CGLog.v("打印现在的Y的值： "+ev.getRawY());
-                CGLog.v("打印Y的差值 ："+ (ev.getRawY()-rowY));
-                CGLog.v("打印移动量 : "+getScrollY());
+
+        return super.onInterceptTouchEvent(ev);
+
+    }
+
+
+    int lastY;
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_MOVE:
+                CGLog.v("onTouchEvent移动事件!!!");
+                poor = (int) (event.getRawY() - lastY);
+                poor =  (lastY == 0 ? 0 : poor);
+
+                int topMargin = getFlTopMargin()+poor;
+                if(topMargin > 0){
+                    topMargin = 0;
+                }
+                if(Math.abs(topMargin) > contentFl.getHeight()){
+                    topMargin = -contentFl.getHeight();
+                }
+                setFlTopMargin(topMargin);
+                decideSubViewScroll.stopScroll();
+                lastY = (int) event.getRawY();
                 break;
             case MotionEvent.ACTION_UP:
-
+                addAnim(event);
                 break;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private void addAnim(MotionEvent event) {
+        CGLog.v("打印onTouchEvent的抬起事件!！！！");
+        if(Math.abs(getFlTopMargin()) > 0){
+            //动画上移,根据手势判断
+            if(poor < 0){
+                flMoveTop();
+                //动画下移
+            }else {
+                flMoveBottom();
+            }
         }
     }
 
-    public interface JudgeIsVisible{
-        boolean isVisible();
-        void notVisible();
-        void alwaysVisible();
-        float getHeight();
+    public interface DecideSubViewScroll{
+        void allowScroll();
+        void stopScroll();
+        boolean subViewLocationTop();
     }
 
-    public interface OnInterceptTouchEvent{
-        boolean onInterceptTouch(MotionEvent event);
+    class Wrapper {
+        FrameLayout frameLayout;
+        private int topMargin;
+
+        public Wrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
+
+        public int getTopMargin() {
+            return ((LinearLayout.LayoutParams)(frameLayout.getLayoutParams())).topMargin;
+        }
+
+        public void setTopMargin(int topMargin) {
+            ((LinearLayout.LayoutParams)(frameLayout.getLayoutParams())).topMargin = topMargin;
+            frameLayout.requestLayout();
+        }
+    }
+
+    public void flMoveTop(){
+        int height = contentFl.getHeight();
+        ObjectAnimator animator = ObjectAnimator.ofInt(new Wrapper(contentFl),"topMargin",-height);
+        animator.setDuration(300).setInterpolator(new DecelerateInterpolator());
+        animator.start();
+    }
+    public void flMoveBottom(){
+        ObjectAnimator animator = ObjectAnimator.ofInt(new Wrapper(contentFl),"topMargin",0);
+        animator.setDuration(300).setInterpolator(new DecelerateInterpolator());
+        animator.start();
     }
 }

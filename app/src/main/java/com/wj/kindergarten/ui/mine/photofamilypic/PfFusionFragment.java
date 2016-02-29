@@ -141,29 +141,29 @@ public class PfFusionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        initScrollListen();
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
 
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
         banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+        banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         photoFamilyFragment.setLocationChanged(new PhotoFamilyFragment.LocationChanged() {
             @Override
             public void onTop() {
                 banScrollView.setCanScroll(true);
-                if(!noMoreData){
-                    banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+                if (!noMoreData) {
+
                 }
 
             }
 
             @Override
             public void onBottom() {
-                banScrollView.setCanScroll(false);
-                banScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
             }
         });
-        pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
         pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
@@ -179,6 +179,26 @@ public class PfFusionFragment extends Fragment {
         loadData();
 
         return view;
+    }
+
+    private void initScrollListen() {
+        photoFamilyFragment.setSubViewDecideScroll(new PfFragmentLinearLayout.DecideSubViewScroll() {
+
+            @Override
+            public void allowScroll() {
+                banScrollView.setCanScroll(true);
+            }
+
+            @Override
+            public void stopScroll() {
+                banScrollView.setCanScroll(false);
+            }
+
+            @Override
+            public boolean subViewLocationTop() {
+                return banScrollView.getRefreshableView().getScrollY() == 0;
+            }
+        });
     }
 
     private void addAllDataByDate(List<QueryGroupCount> allList){
@@ -267,7 +287,6 @@ public class PfFusionFragment extends Fragment {
             @Override
             public void noMoreData() {
                 noMoreData = true;
-                banScrollView.setMode(PullToRefreshBase.Mode.DISABLED);
             }
 
         });

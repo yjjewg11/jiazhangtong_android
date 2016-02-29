@@ -20,6 +20,9 @@ import com.wj.kindergarten.bean.ArticleDetail;
 import com.wj.kindergarten.bean.ArticleList;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BaseResponse;
+import com.wj.kindergarten.bean.BoutiqueAlbum;
+import com.wj.kindergarten.bean.BoutiqueReviewAddress;
+import com.wj.kindergarten.bean.BoutiqueSingleInfo;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
@@ -495,6 +498,15 @@ public class SendRequest {
                 break;
             case RequestType.GET_SINGLE_PF_ASSESS :
                 resultI.result(getDomain(domain, PfSingleAssess.class));
+                break;
+            case RequestType.GET_BOUTIQUE_SINGLE_INFO:
+                resultI.result(getDomain(domain, BoutiqueSingleInfo.class));
+                break;
+            case RequestType.GET_BOUTIQUE_REVIEW_URL:
+                resultI.result(getDomain(domain, BoutiqueReviewAddress.class));
+                break;
+            case RequestType.GET_BOUTIQUE_ALBUM :
+                resultI.result(getDomain(domain, BoutiqueAlbum.class));
                 break;
 
             default:
