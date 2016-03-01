@@ -17,50 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d02bc208-ab59-48a0-b575-b177b82d9699" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_hanbao.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_jtxc_red.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AddFamilyMemberParams.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAllpic.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleChooseActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSinglePicAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSingleShowAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PFAlbumMember.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_choose.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_single_pic.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_album_member_info.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_family_first_time_item.xml" />
-      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\src\main\res\drawable-hdpi\pf_lefthanbao.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosePicAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosePicAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\src\main\res\drawable-hdpi\all_arrow.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/all_arrow.png" />
     </list>
     <ignored path="ChildreGarden.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -4309,7 +4266,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456741802179</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="1.精品相册图片选择增加封面显示。&#10;                  2.精品相册编辑修改照片和获取所有照片进行显示。&#10;                  3家庭相册详情修改保存完成，和显示已邀请家庭成员。&#10;                  4.邀请新的家庭成员和编辑修改已邀请的家庭成员的信息。           &#10;                  5.家庭相册首页时光轴初步显示，继续完善优化。&#10;">
+      <created>1456828330386</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1456828330386</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView">
