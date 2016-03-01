@@ -119,7 +119,10 @@ public class PhotoFamilyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
-        if (view != null) return view;
+        if (view != null){
+            initHeadViewData();
+            return view;
+        }
         view = inflater.inflate(R.layout.photo_family_pic, null);
         db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         initBar();
@@ -131,6 +134,10 @@ public class PhotoFamilyFragment extends Fragment {
         initTabLayout();
 
         return view;
+    }
+
+    private void initBack() {
+
     }
 
     private void initBar() {
@@ -185,7 +192,7 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initHeadView() {
         gif = (GifView) view.findViewById(R.id.pf_family_gif);
-        gif.setGifImage(R.drawable.update_new2);
+        gif.setGifImage(R.drawable.update_jtxc_red);
         pf_backGround_rl = (RelativeLayout) view.findViewById(R.id.pf_backGround_rl);
         pf_backGround_image = (ImageView) view.findViewById(R.id.pf_backGround_image);
         pf_backGround_family_name = (TextView) view.findViewById(R.id.pf_backGround_family_name);
@@ -194,8 +201,8 @@ public class PhotoFamilyFragment extends Fragment {
         pf_backGround_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  Intent intent = new Intent(getActivity(), PfAlbumListActivity.class);
-                startActivity(intent);
+//                  Intent intent = new Intent(getActivity(), PfAlbumListActivity.class);
+//                startActivity(intent);
             }
         });
     }
@@ -207,6 +214,7 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initHead() {
         ((MainActivity)getActivity()).hideActionbar();
+
     }
 
     private void clickLeft() {

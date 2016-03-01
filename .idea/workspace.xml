@@ -13,58 +13,54 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d02bc208-ab59-48a0-b575-b177b82d9699" name="Default" comment="１.点击家庭相册邀请成员。－－已完成&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumListSun.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueReviewAddress.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfoObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_info.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appindexing_8_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_basement_8_1_0.xml" />
-      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\tyknt0u4.tsj.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ActivityManger.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ActivityManger.java" />
+    <list default="true" id="d02bc208-ab59-48a0-b575-b177b82d9699" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_hanbao.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_jtxc_red.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AddFamilyMemberParams.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAllpic.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleChooseActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSinglePicAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSingleShowAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PFAlbumMember.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_choose.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_single_pic.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_album_member_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_family_first_time_item.xml" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\src\main\res\drawable-hdpi\pf_lefthanbao.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbum.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbum.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/ConllectPicActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/ConllectPicActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/FindMusicOfPfActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/FindMusicOfPfActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosePicAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosePicAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfCollectPicAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfCollectPicAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFragmentLinearLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFragmentLinearLayout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeNameObject.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeNameObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_itme.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_itme.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/collect_pic_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/collect_pic_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\src\main\res\drawable-hdpi\all_arrow.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/all_arrow.png" />
     </list>
     <ignored path="ChildreGarden.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -146,95 +142,49 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
-              <folding>
-                <element signature="e#6048#6330#0" expanded="true" />
-                <element signature="e#6329#6330#0" expanded="true" />
-                <element signature="e#7195#7438#0" expanded="true" />
-                <element signature="e#7437#7438#0" expanded="true" />
-              </folding>
+              <caret line="123" column="19" selection-start-line="123" selection-start-column="19" selection-end-line="123" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PfFusionFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PfFusionFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="151" column="68" selection-start-line="151" selection-start-column="68" selection-end-line="151" selection-end-column="68" />
+              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding>
-                <element signature="e#11341#11342#0" expanded="true" />
-                <element signature="e#11390#11391#0" expanded="true" />
+                <element signature="e#3057#4247#0" expanded="true" />
+                <element signature="e#4246#4247#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BoutiqueAlbumFragment.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java">
+      <file leaf-file-name="fragment_pf_fusion.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.1202874">
-              <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+            <state vertical-scroll-proportion="-15.766666">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="photo_family_pic.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml">
           <provider editor-type-id="android-designer">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8333335">
-              <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="pf_background_show.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.6">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_test.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PfFragmentLinearLayout.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFragmentLinearLayout.java">
+      <file leaf-file-name="PfLoadDataProxy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BoutiqueAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-              <folding />
+              <caret line="284" column="27" selection-start-line="284" selection-start-column="27" selection-end-line="284" selection-end-column="27" />
+              <folding>
+                <element signature="e#6404#6405#0" expanded="true" />
+                <element signature="e#6451#6452#0" expanded="true" />
+                <element signature="e#11659#11660#0" expanded="true" />
+                <element signature="e#11707#11708#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -3340,57 +3290,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/pf_album_list_activity.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/FrameLayoutWrapper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/pf_single_date.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfSingleGridAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MessageFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SinlePfExtraInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfSingleInfoFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_info_all_pic.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfInfoAllPIcFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFragmentLinearLayout.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbum.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumList.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_itme.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumListSun.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfo.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfoObject.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_info.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/collect_pic_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfCollectPicAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/ConllectPicActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeNameObject.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueReviewAddress.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/FindMusicOfPfActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ActivityManger.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosePicAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PFAlbumMember.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/pf_album_member_info.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_choose.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSinglePicAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleChooseActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/boutique_single_pic.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSingleShowAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAllpic.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AddFamilyMemberParams.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/pf_family_first_time_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml" />
       </list>
     </option>
   </component>
@@ -3414,7 +3364,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="AndroidView" proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -3426,6 +3376,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3454,15 +3405,192 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="photofamilypic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="func" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kindergarten" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="func" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3539,6 +3667,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jiazhangtong_android-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -3585,95 +3739,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kindergarten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kindergarten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="photofamilypic" />
+              <option name="myItemId" value="bean" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3775,11 +3841,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="88dcb9ed" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="192.168.130.101:5555" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23_x86" />
     <property name="FullScreen" value="false" />
     <property name="android.project.structure.last.selected" value="app" />
@@ -3793,8 +3861,8 @@
     <property name="ExportApk.BuildType" value="release" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="extractMethod.generateAnnotations" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="Pf&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java&#10;Activitym&#9;PSI&#9;JAVA://com.wj.kindergarten.ActivityManger&#10;Boutique&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java&#10;Pfload&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.PfLoadDataProxy&#10;PF&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java&#10;Utils&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.Utils&#10;Boutiq&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java&#10;Pfsin&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java&#10;PfGal&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity&#10;Pfsingle&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfSingleInfoFragment&#10;All&#9;PSI&#9;JAVA://com.wj.kindergarten.bean.AllPfAlbumSunObject&#10;Pfall&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java&#10;Gl&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.GloablUtils&#10;Main&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java&#10;User&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java&#10;PfSing&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java&#10;Pa&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfInfoFragmentAdapter.java&#10;PfG&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;Uplo&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java&#10;UPload&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/UpLoadActivity.java&#10;Upload&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java&#10;Glo&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.GloablUtils&#10;Up&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java&#10;Pfsi&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfSingleInfoFragment.java&#10;PFG&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;PFGaller&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;Sch&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/SchoolHtmlActivity.java&#10;Inter&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/InteractionFragment.java&#10;Base&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java&#10;Uti&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/utils/Utils.java&#10;Html&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/SchoolHtmlActivity.java&#10;PfGa&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity&#10;Alre&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/bean/AlreadySavePath.java&#10;Me&#9;FILE&#9;file://D:/android_sdk_location/sources/android-22/android/media/MediaPlayer.java&#10;Upl&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java&#10;PfFa&#9;PSI&#9;JAVA://com.wj.kindergarten.bean.PfFamilyUuid&#10;Alla&#9;PSI&#9;JAVA://com.wj.kindergarten.bean.AllPfAlbumSunObject&#10;Imagel&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.imagescan.NativeImageLoader&#10;Music&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.func.FindMusicOfPfActivity&#10;Nes&#9;PSI&#9;JAVA://com.wj.kindergarten.compounets.NestedGridView&#10;PFg&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;Uploads&#9;PSI&#9;JAVA://com.wj.kindergarten.services.PicUploadService&#10;CGa&#9;PSI&#9;JAVA://com.wj.kindergarten.CGApplication&#10;PfLoad&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java&#10;Pxload&#9;PSI&#9;JAVA://com.sun.xml.internal.bind.v2.runtime.unmarshaller.LeafPropertyXsiLoader&#10;Allsu&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbumSunObject.java&#10;Shareu&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.ShareUtils&#10;Gallery&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.imagescan.GalleryImagesActivity&#10;Load&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java&#10;Pfl&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
-    <property name="DEBUGGABLE_DEVICE" value="xiaomi-mi_4c-88dcb9ed" />
+    <property name="SearchEverywhereHistoryKey" value="Photo&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java&#10;Inte&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java&#10;Pf&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java&#10;PfE&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java&#10;Inter&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java&#10;All&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbumSunObject.java&#10;Pho&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java&#10;Phot&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java&#10;Boutique&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java&#10;Boutiquer&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java&#10;Boutiqueg&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java&#10;Ph&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java&#10;User&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java&#10;Pfch&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java&#10;Share&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.ShareUtils&#10;Activitym&#9;PSI&#9;JAVA://com.wj.kindergarten.ActivityManger&#10;Pfload&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.PfLoadDataProxy&#10;PF&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java&#10;Utils&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.Utils&#10;Boutiq&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java&#10;Pfsin&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java&#10;PfGal&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity&#10;Pfsingle&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfSingleInfoFragment&#10;Pfall&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java&#10;Gl&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.GloablUtils&#10;Main&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java&#10;PfSing&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java&#10;Pa&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfInfoFragmentAdapter.java&#10;PfG&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;Uplo&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java&#10;UPload&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/UpLoadActivity.java&#10;Upload&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java&#10;Glo&#9;PSI&#9;JAVA://com.wj.kindergarten.utils.GloablUtils&#10;Up&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java&#10;Pfsi&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfSingleInfoFragment.java&#10;PFG&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;PFGaller&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java&#10;Sch&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/SchoolHtmlActivity.java&#10;Base&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java&#10;Uti&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/utils/Utils.java&#10;Html&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/ui/func/SchoolHtmlActivity.java&#10;PfGa&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity&#10;Alre&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/bean/AlreadySavePath.java&#10;Me&#9;FILE&#9;file://D:/android_sdk_location/sources/android-22/android/media/MediaPlayer.java&#10;Upl&#9;FILE&#9;file://D:/work-wenjie-project/jiazhangtong_android-master/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java&#10;PfFa&#9;PSI&#9;JAVA://com.wj.kindergarten.bean.PfFamilyUuid&#10;Alla&#9;PSI&#9;JAVA://com.wj.kindergarten.bean.AllPfAlbumSunObject&#10;Imagel&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.imagescan.NativeImageLoader&#10;Music&#9;PSI&#9;JAVA://com.wj.kindergarten.ui.func.FindMusicOfPfActivity&#10;Nes&#9;PSI&#9;JAVA://com.wj.kindergarten.compounets.NestedGridView" />
+    <property name="DEBUGGABLE_DEVICE" value="unknown-google_nexus_4___5_0_0___api_21___768x1280-192.168.130.101:5555" />
     <property name="DEBUGGABLE_PROCESS" value="com.wenjie.jiazhangtong" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -3820,9 +3888,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.wj.kindergarten.ui.func.adapter" />
       <recent name="com.wj.kindergarten.bean" />
       <recent name="com.wj.kindergarten.ui.mine.photofamilypic" />
-      <recent name="com.wj.kindergarten.ui.func.adapter" />
       <recent name="com.wj.kindergarten.ui.map" />
       <recent name="com.wj.kindergarten.ui.func" />
     </key>
@@ -4235,7 +4303,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456466037601</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="1.今天已完成精品相册上传保存。&#10;&#10;2.精品相册列表以及详情展示和底部按钮等功能。&#10;&#10;3.更改照片详情收藏接口，完成收藏列表显示。">
+      <created>1456741802179</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1456741802179</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4258,9 +4332,10 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7542662" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24810319" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5665529" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5665529" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -4276,13 +4351,12 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -4297,8 +4371,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.????????????????????.&#10;" />
-    <MESSAGE value="0.??????????&#10;&#10;1.????????????????????&#10;&#10;2.?????????????&#10;&#10;3.?????????????��????????bug??&#10;&#10;4.??????????????????????????????&#10;&#10;5.????��?????????tab???��?????&#10;&#10;6.??????????&#10;&#10;" />
     <MESSAGE value="1.????????????????bug??&#10;&#10;2.???????????????????&#10;&#10;3.?????????????????????bug??&#10;&#10;4.????????????????????????????&#10;&#10;5.????????????bug?????????��???&#10;" />
     <MESSAGE value="1.??????????????&#10;&#10;2??????????????????bug????????????????????????bug??&#10;&#10;3.????????????????bug??&#10;" />
     <MESSAGE value="1.????????????bug??&#10;&#10;                   2.????????????????????????????&#10; &#10;                   3.????????????????????????&#10;&#10;                   4.???????????????&#10;&#10;                   5.??????????????????????????????????????????????&#10;&#10;                   6.??????????&#10;&#10;                   7.?????????????????????????&#10;&#10;                   8.?????????????&#10;&#10;                 &#10;&#10;1??????&gt;??????????&gt;?????????????????????&#10;&#10;&#10;2????????&gt;??????????&gt;??????????????-ok&#10;3?????????#f0f0f0????????????????--ok&#10;4????????????????????????????��?????????-ok&#10;&#10;&#10;5?????????&#10;a???��????&gt;?????TAB???????????#ffffff???��?????????TAB??-ok&#10;b??????��?��??????????30%???&#10;c??????��?��??????????16SP-ok&#10;d??????��?��?????????12sp-ok&#10;&#10;&#10;6??????&#10;a?????????????????????????#cccccc&#10;b?????????????????????????????&#10;c????????????????????????????15DP&#10;d?????????????????????-?????&#10;e???????????????12sp???????#aaaaaa-&#10;f???????????��??????????????????3??-ok&#10;&#10;&#10;7????????&#10;a???????????-ok&#10;b?????????????????????????��????????????????????????&#10;c?????????????????????????????????????-ok&#10;d??????????��?????????????????????-ok&#10;" />
@@ -4322,7 +4394,9 @@
     <MESSAGE value="1.照片收藏和取消收藏。&#10;      2.照片发表评论并追加到上述评论中。&#10;      3.点赞和取消点赞。&#10;      4.分享照片详情。&#10;      5. 照片删除和编辑和切换顶部显示，调试追加评论接口。&#10;" />
     <MESSAGE value="1.照片详情控件改版显示更流畅。&#10;      2.修复编辑数据之后返回没有更细的bug。&#10;      3.修复照片照片详情顶部不能点击显示的bug。&#10;      4.解决上传图片文件过大导致传送失败的bug。&#10;      5.进入照片详情显示第一张照片时底部按钮不能点击的bug。&#10;      6.更改返回选择多图为标题栏旁边选择多图。&#10;      7.切换相册首页顶部栏图标。&#10;" />
     <MESSAGE value="１.点击家庭相册邀请成员。－－已完成&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="１.点击家庭相册邀请成员。－－已完成&#10;" />
+    <MESSAGE value="1.今天已完成精品相册上传保存。&#10;&#10;2.精品相册列表以及详情展示和底部按钮等功能。&#10;&#10;3.更改照片详情收藏接口，完成收藏列表显示。" />
+    <MESSAGE value="1.精品相册图片选择增加封面显示。&#10;                  2.精品相册编辑修改照片和获取所有照片进行显示。&#10;                  3家庭相册详情修改保存完成，和显示已邀请家庭成员。&#10;                  4.邀请新的家庭成员和编辑修改已邀请的家庭成员的信息。           &#10;                  5.家庭相册首页时光轴初步显示，继续完善优化。&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.精品相册图片选择增加封面显示。&#10;                  2.精品相册编辑修改照片和获取所有照片进行显示。&#10;                  3家庭相册详情修改保存完成，和显示已邀请家庭成员。&#10;                  4.邀请新的家庭成员和编辑修改已邀请的家庭成员的信息。           &#10;                  5.家庭相册首页时光轴初步显示，继续完善优化。&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4335,7 +4409,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java</url>
-          <line>242</line>
+          <line>247</line>
           <properties />
           <option name="timeStamp" value="349" />
         </line-breakpoint>
@@ -4479,7 +4553,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java</url>
-          <line>80</line>
+          <line>199</line>
           <properties />
           <option name="timeStamp" value="587" />
         </line-breakpoint>
@@ -4497,15 +4571,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java</url>
-          <line>68</line>
+          <line>75</line>
           <properties />
           <option name="timeStamp" value="730" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java</url>
-          <line>209</line>
-          <properties />
-          <option name="timeStamp" value="732" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$PROJECT_DIR$/app/libs/afinal_0.5.1_bin.jar!/net/tsz/afinal/http/HttpHandler.class</url>
@@ -4527,7 +4595,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java</url>
-          <line>91</line>
+          <line>92</line>
           <properties />
           <option name="timeStamp" value="771" />
         </line-breakpoint>
@@ -4556,34 +4624,34 @@
           <option name="timeStamp" value="844" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java</url>
-          <line>58</line>
-          <properties />
-          <option name="timeStamp" value="847" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java</url>
-          <line>64</line>
-          <properties />
-          <option name="timeStamp" value="848" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java</url>
-          <line>106</line>
+          <line>145</line>
           <properties />
           <option name="timeStamp" value="856" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java</url>
-          <line>114</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java</url>
+          <line>83</line>
           <properties />
-          <option name="timeStamp" value="872" />
+          <option name="timeStamp" value="885" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java</url>
-          <line>81</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java</url>
+          <line>91</line>
           <properties />
-          <option name="timeStamp" value="873" />
+          <option name="timeStamp" value="886" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="891" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="893" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/app/src/main/res/values/strings.xml</url>
@@ -4597,178 +4665,289 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java</url>
-          <line>140</line>
+          <line>141</line>
           <properties method="failure" />
           <option name="timeStamp" value="700" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="874" />
+      <option name="time" value="894" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumList.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_single_pf_edit.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#390#391#0" expanded="true" />
-            <element signature="e#421#422#0" expanded="true" />
-            <element signature="e#466#467#0" expanded="true" />
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#536#537#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#606#607#0" expanded="true" />
-            <element signature="e#642#643#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#720#721#0" expanded="true" />
-            <element signature="e#780#781#0" expanded="true" />
-            <element signature="e#812#813#0" expanded="true" />
-          </folding>
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pulltorefreshlibrary/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0843806">
-          <caret line="80" column="6" selection-start-line="80" selection-start-column="6" selection-end-line="80" selection-end-column="6" />
-          <folding>
-            <element signature="e#5871#5872#0" expanded="false" />
-            <element signature="e#5901#5902#0" expanded="false" />
-          </folding>
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbum.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/SinglePfEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33931777">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding>
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#283#284#0" expanded="true" />
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#366#367#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.4362657">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="582" column="31" selection-start-line="582" selection-start-column="31" selection-end-line="582" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/boutique_album_itme.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.256167">
-          <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.47755834">
+          <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
           <folding>
-            <element signature="e#1752#1770#0" expanded="true" />
+            <element signature="e#2803#2804#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumListSun.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PFAlbumMember.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="18" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
-          <folding>
-            <element signature="e#443#444#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#639#640#0" expanded="true" />
-            <element signature="e#677#678#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfDianZan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33213645">
+        <state vertical-scroll-proportion="0.33931777">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/boutique_gallery_activity.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5637343">
-          <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.12713473">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_gallery_fragment.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_album_member_info.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6666665">
-          <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
-          <folding />
+        <state vertical-scroll-proportion="1.5882353">
+          <caret line="31" column="51" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="51" />
+          <folding>
+            <element signature="e#591#609#0" expanded="true" />
+            <element signature="e#925#942#0" expanded="true" />
+            <element signature="e#983#1001#0" expanded="true" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_info.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_choose.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.933333">
-          <caret line="18" column="52" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="52" />
+        <state vertical-scroll-proportion="-7.633333">
+          <caret line="15" column="51" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="511" column="39" selection-start-line="511" selection-start-column="39" selection-end-line="511" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfoObject.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2603232">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#770#771#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#874#875#0" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+            <element signature="e#944#945#0" expanded="true" />
+            <element signature="e#978#979#0" expanded="true" />
+            <element signature="e#1011#1012#0" expanded="true" />
+            <element signature="e#1040#1041#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1120#1121#0" expanded="true" />
+            <element signature="e#1158#1159#0" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#1246#1247#0" expanded="true" />
+            <element signature="e#1292#1293#0" expanded="true" />
+            <element signature="e#1325#1326#0" expanded="true" />
+            <element signature="e#1354#1355#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+            <element signature="e#1434#1435#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33213645">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/all_arrow.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/title_normal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07590133">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumListSun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6301616">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfo.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSinglePicAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4290844">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#577#578#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+            <element signature="e#836#837#0" expanded="true" />
+            <element signature="e#893#894#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
+            <element signature="e#1008#1009#0" expanded="true" />
+            <element signature="e#1035#1036#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="209" column="0" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAllpic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4847397">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+            <element signature="e#323#324#0" expanded="true" />
+            <element signature="e#382#383#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+          <caret line="188" column="84" selection-start-line="188" selection-start-column="84" selection-end-line="188" selection-end-column="84" />
           <folding>
-            <element signature="e#1557#1805#0" expanded="true" />
-            <element signature="e#1804#1805#0" expanded="true" />
-            <element signature="e#2666#2667#0" expanded="true" />
-            <element signature="e#2731#2732#0" expanded="true" />
-            <element signature="e#3161#4539#0" expanded="true" />
-            <element signature="e#4538#4539#0" expanded="true" />
-            <element signature="e#7907#7908#0" expanded="true" />
-            <element signature="e#7938#7939#0" expanded="true" />
-            <element signature="e#10450#10451#0" expanded="true" />
-            <element signature="e#10507#10508#0" expanded="true" />
-            <element signature="e#10900#11048#0" expanded="true" />
-            <element signature="e#11047#11048#0" expanded="true" />
+            <element signature="e#2992#2993#0" expanded="true" />
+            <element signature="e#3057#3058#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.6">
+          <caret line="159" column="56" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22441652">
+          <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8333335">
+          <caret line="90" column="39" selection-start-line="90" selection-start-column="39" selection-end-line="90" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.2">
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AddFamilyMemberParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33213645">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#404#405#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#480#481#0" expanded="true" />
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#672#673#0" expanded="true" />
+            <element signature="e#704#705#0" expanded="true" />
+            <element signature="e#742#743#0" expanded="true" />
+            <element signature="e#776#777#0" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
+            <element signature="e#876#877#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4776,147 +4955,133 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="960" column="35" selection-start-line="960" selection-start-column="35" selection-end-line="960" selection-end-column="35" />
-          <folding>
-            <element signature="e#12314#12357#0" expanded="true" />
-            <element signature="e#25702#25781#0" expanded="true" />
-            <element signature="e#26365#26443#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+          <caret line="1004" column="5" selection-start-line="1004" selection-start-column="5" selection-end-line="1004" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbumSun.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_family_member.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33213645">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state vertical-scroll-proportion="-5.8333335">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4290844">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/collect_pic_activity.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3586338">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfCollectPicAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <caret line="94" column="17" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/ConllectPicActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="36" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
-          <folding>
-            <element signature="e#1671#1974#0" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SinlePfExtraInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28366247">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <caret line="1112" column="28" selection-start-line="1112" selection-start-column="28" selection-end-line="1112" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="649" column="0" selection-start-line="649" selection-start-column="0" selection-end-line="649" selection-end-column="0" />
+          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_album_edit.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/BanScrollView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33931777">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbumSunObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4362657">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_album.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.3">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_interaction.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.733333">
-          <caret line="36" column="58" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="58" />
+        <state vertical-scroll-proportion="-0.9">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueReviewAddress.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6301616">
-          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-          <folding>
-            <element signature="e#499#500#0" expanded="true" />
-            <element signature="e#529#530#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-            <element signature="e#613#614#0" expanded="true" />
-            <element signature="e#649#650#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#773#774#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33213645">
-          <caret line="252" column="19" selection-start-line="252" selection-start-column="19" selection-end-line="252" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/boutique_gallery_activity.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/NstGridPicAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9666667">
-          <caret line="81" column="58" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSingleShowAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.333333">
-          <caret line="504" column="59" selection-start-line="504" selection-start-column="59" selection-end-line="504" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.1454219">
+          <caret line="55" column="14" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
           <folding>
-            <element signature="e#4715#4941#0" expanded="true" />
-            <element signature="e#4940#4941#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleChooseActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4362657">
+          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="83" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
+          <caret line="212" column="88" selection-start-line="212" selection-start-column="88" selection-end-line="212" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/boutique_single_pic.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.5">
+          <caret line="5" column="43" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfoObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6714542">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -4924,238 +5089,76 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="84" selection-start-line="61" selection-start-column="84" selection-end-line="61" selection-end-column="84" />
+          <caret line="62" column="84" selection-start-line="62" selection-start-column="84" selection-end-line="62" selection-end-column="84" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_mode_review.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46678635">
-          <caret line="712" column="62" selection-start-line="712" selection-start-column="62" selection-end-line="712" selection-end-column="62" />
-          <folding>
-            <element signature="e#7084#7102#0" expanded="true" />
-            <element signature="e#7253#7271#0" expanded="true" />
-            <element signature="e#7740#7758#0" expanded="true" />
-            <element signature="e#8011#8029#0" expanded="true" />
-            <element signature="e#8256#8274#0" expanded="true" />
-            <element signature="e#8508#8526#0" expanded="true" />
-            <element signature="e#8777#8795#0" expanded="true" />
-            <element signature="e#9037#9055#0" expanded="true" />
-            <element signature="e#9302#9320#0" expanded="true" />
-            <element signature="e#9566#9584#0" expanded="true" />
-            <element signature="e#9831#9849#0" expanded="true" />
-            <element signature="e#10094#10112#0" expanded="true" />
-            <element signature="e#10341#10359#0" expanded="true" />
-            <element signature="e#10582#10600#0" expanded="true" />
-            <element signature="e#10829#10847#0" expanded="true" />
-            <element signature="e#11078#11096#0" expanded="true" />
-            <element signature="e#11327#11345#0" expanded="true" />
-            <element signature="e#11580#11598#0" expanded="true" />
-            <element signature="e#11830#11848#0" expanded="true" />
-            <element signature="e#12084#12102#0" expanded="true" />
-            <element signature="e#12338#12356#0" expanded="true" />
-            <element signature="e#12598#12616#0" expanded="true" />
-            <element signature="e#12854#12872#0" expanded="true" />
-            <element signature="e#13097#13115#0" expanded="true" />
-            <element signature="e#13352#13370#0" expanded="true" />
-            <element signature="e#13612#13630#0" expanded="true" />
-            <element signature="e#13857#13875#0" expanded="true" />
-            <element signature="e#14114#14132#0" expanded="true" />
-            <element signature="e#14376#14394#0" expanded="true" />
-            <element signature="e#14634#14652#0" expanded="true" />
-            <element signature="e#14890#14908#0" expanded="true" />
-            <element signature="e#15145#15163#0" expanded="true" />
-            <element signature="e#15388#15406#0" expanded="true" />
-            <element signature="e#15628#15646#0" expanded="true" />
-            <element signature="e#15875#15893#0" expanded="true" />
-            <element signature="e#16123#16141#0" expanded="true" />
-            <element signature="e#16367#16385#0" expanded="true" />
-            <element signature="e#16613#16631#0" expanded="true" />
-            <element signature="e#16857#16875#0" expanded="true" />
-            <element signature="e#17107#17125#0" expanded="true" />
-            <element signature="e#17355#17373#0" expanded="true" />
-            <element signature="e#17604#17622#0" expanded="true" />
-            <element signature="e#17858#17876#0" expanded="true" />
-            <element signature="e#18119#18137#0" expanded="true" />
-            <element signature="e#18368#18386#0" expanded="true" />
-            <element signature="e#18613#18631#0" expanded="true" />
-            <element signature="e#18860#18878#0" expanded="true" />
-            <element signature="e#19109#19127#0" expanded="true" />
-            <element signature="e#19356#19374#0" expanded="true" />
-            <element signature="e#19676#19694#0" expanded="true" />
-            <element signature="e#19877#19895#0" expanded="true" />
-            <element signature="e#20131#20149#0" expanded="true" />
-            <element signature="e#20410#20428#0" expanded="true" />
-            <element signature="e#20654#20672#0" expanded="true" />
-            <element signature="e#20900#20918#0" expanded="true" />
-            <element signature="e#21159#21177#0" expanded="true" />
-            <element signature="e#21404#21422#0" expanded="true" />
-            <element signature="e#21658#21676#0" expanded="true" />
-            <element signature="e#21919#21937#0" expanded="true" />
-            <element signature="e#22176#22194#0" expanded="true" />
-            <element signature="e#22426#22444#0" expanded="true" />
-            <element signature="e#22675#22693#0" expanded="true" />
-            <element signature="e#22932#22950#0" expanded="true" />
-            <element signature="e#23185#23203#0" expanded="true" />
-            <element signature="e#23423#23441#0" expanded="true" />
-            <element signature="e#23738#23756#0" expanded="true" />
-            <element signature="e#30592#30610#0" expanded="true" />
-            <element signature="e#32624#32642#0" expanded="true" />
-            <element signature="e#32890#32908#0" expanded="true" />
-            <element signature="e#33156#33174#0" expanded="true" />
-            <element signature="e#33422#33440#0" expanded="true" />
-            <element signature="e#33694#33712#0" expanded="true" />
-            <element signature="e#33963#33981#0" expanded="true" />
-            <element signature="e#34235#34253#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_mode.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.7">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueModeAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/FindMusicOfPfActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeNameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <caret line="70" column="81" selection-start-line="70" selection-start-column="81" selection-end-line="70" selection-end-column="81" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ActivityManger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="36" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
-          <folding>
-            <element signature="e#1441#1442#0" expanded="true" />
-            <element signature="e#1483#1484#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
           <folding>
-            <element signature="e#6269#6270#0" expanded="true" />
-            <element signature="e#6340#6341#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="151" column="68" selection-start-line="151" selection-start-column="68" selection-end-line="151" selection-end-column="68" />
-          <folding>
-            <element signature="e#11341#11342#0" expanded="true" />
-            <element signature="e#11390#11391#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_family_first_time_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.6">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2908438">
-          <caret line="508" column="68" selection-start-line="508" selection-start-column="68" selection-end-line="508" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62298024">
-          <caret line="975" column="67" selection-start-line="975" selection-start-column="67" selection-end-line="975" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFragmentLinearLayout.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/InteractionAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="36" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -5163,43 +5166,43 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
+          <caret line="123" column="19" selection-start-line="123" selection-start-column="19" selection-end-line="123" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="284" column="27" selection-start-line="284" selection-start-column="27" selection-end-line="284" selection-end-column="27" />
           <folding>
-            <element signature="e#6048#6330#0" expanded="true" />
-            <element signature="e#6329#6330#0" expanded="true" />
-            <element signature="e#7195#7438#0" expanded="true" />
-            <element signature="e#7437#7438#0" expanded="true" />
+            <element signature="e#6404#6405#0" expanded="true" />
+            <element signature="e#6451#6452#0" expanded="true" />
+            <element signature="e#11659#11660#0" expanded="true" />
+            <element signature="e#11707#11708#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8333335">
-          <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
+        <state vertical-scroll-proportion="-15.766666">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.6">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.1202874">
-          <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding>
+            <element signature="e#3057#4247#0" expanded="true" />
+            <element signature="e#4246#4247#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

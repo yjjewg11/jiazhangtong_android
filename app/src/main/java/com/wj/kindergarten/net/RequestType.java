@@ -90,4 +90,7 @@ public interface RequestType {
      int SAVE_BOUTIQUE_ALBUM = 174;
      int GET_BOUTIQUE_SINGLE_INFO = 175;
      int GET_BOUTIQUE_REVIEW_URL = 176;
+     int GET_PF_ALBUM_INFO = 177;
+     int GET_ALL_PIC_FROM_BOUTIQUE = 178;
+     int ADD_FAMILY_MEMBER = 179;
 }

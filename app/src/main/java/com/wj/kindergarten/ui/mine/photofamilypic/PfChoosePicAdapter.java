@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
@@ -47,9 +48,20 @@ public class PfChoosePicAdapter extends BaseAdapter {
     //还可以选择的图片数
     private int canSelect = BoutiqueGalleryActivity.IMAGE_MAX;
     private List<AllPfAlbumSunObject> selectList = new ArrayList<>();
+    private List<AllPfAlbumSunObject> singleObject = new ArrayList<>();
 
     public List<AllPfAlbumSunObject> getSelectList() {
         return selectList;
+    }
+
+    public void clearSingleList(int position){
+        if(list == null) return;
+        singleObject.clear();
+        singleObject.add(list.get(position));
+        notifyDataSetChanged();
+    }
+    public AllPfAlbumSunObject getCurrentObj(int position){
+        return list.get(position);
     }
 
     public PfChoosePicAdapter(List<AllPfAlbumSunObject> list, int canSelect, HashMap<String, Boolean> selectMap, GridView mGridView) {
@@ -58,6 +70,9 @@ public class PfChoosePicAdapter extends BaseAdapter {
         this.mGridView = mGridView;
         this.mSelectMap = selectMap;
         this.list.add(new AllPfAlbumSunObject());
+        if(list.size() > 0){
+            singleObject.add(list.get(0));
+        }
     }
 
     public void setFirstSpecial(boolean isFirstSpecial) {
@@ -104,7 +119,7 @@ public class PfChoosePicAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.mImageView = (CustomImageView) convertView.findViewById(R.id.child_image);
             viewHolder.mCheckBox = (CheckBox) convertView.findViewById(R.id.child_checkbox);
-
+            viewHolder.tv_show_already = (TextView) convertView.findViewById(R.id.tv_show_already);
             //监听ImageView的宽和高
             viewHolder.mImageView.setOnMeasureListener(new CustomImageView.OnMeasureListener() {
 
@@ -118,14 +133,16 @@ public class PfChoosePicAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.mImageView.setImageResource(R.drawable.friends_sends_pictures_no);
         }
-            if(position == list.size() - 1){
-                viewHolder.mCheckBox.setSelected(false);
-                viewHolder.mCheckBox.setVisibility(View.GONE);
-                //viewHolder.mImageView.setImageURI(Uri.parse(path));
-                viewHolder.mImageView.setImageResource(R.drawable.tianjia_jpxc);
-                viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            }else{
 
+        viewHolder.tv_show_already.setText("封面");
+        viewHolder.tv_show_already.setVisibility(View.GONE);
+        if (position == list.size() - 1) {
+            viewHolder.mCheckBox.setSelected(false);
+            viewHolder.mCheckBox.setVisibility(View.GONE);
+            //viewHolder.mImageView.setImageURI(Uri.parse(path));
+            viewHolder.mImageView.setImageResource(R.drawable.tianjia_jpxc);
+            viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        } else {
             if (!Utils.stringIsNull(path) && !path.contains("CGImage")) {
                 viewHolder.mImageView.setTag(path);
                 viewHolder.mCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -145,7 +162,7 @@ public class PfChoosePicAdapter extends BaseAdapter {
                         }
                         if (isChecked) {
                             mSelectMap.put(path, isChecked);
-                            if(!selectList.contains(object)){
+                            if (!selectList.contains(object)) {
                                 selectList.add(object);
                             }
                         } else {
@@ -160,11 +177,13 @@ public class PfChoosePicAdapter extends BaseAdapter {
 
                 viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 viewHolder.mCheckBox.setVisibility(View.VISIBLE);
-                ImageLoaderUtil.displayMyImage(path,viewHolder.mImageView);
-
+                ImageLoaderUtil.displayMyImage(path, viewHolder.mImageView);
+                if(singleObject.get(0).getPath().equals(path)){
+                    viewHolder.tv_show_already.setVisibility(View.VISIBLE);
+                }
             }
 
-            }
+        }
 
         return convertView;
     }
@@ -195,5 +214,6 @@ public class PfChoosePicAdapter extends BaseAdapter {
     public class ViewHolder {
         public CustomImageView mImageView;
         public CheckBox mCheckBox;
+        TextView tv_show_already;
     }
 }

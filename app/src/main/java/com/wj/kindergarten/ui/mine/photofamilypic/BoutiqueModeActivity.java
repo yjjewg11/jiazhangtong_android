@@ -12,6 +12,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
 import com.wj.kindergarten.bean.PfModeName;
 import com.wj.kindergarten.bean.PfModeNameObject;
 import com.wj.kindergarten.net.RequestResultI;
@@ -35,7 +36,7 @@ public class BoutiqueModeActivity extends BaseActivity {
     private BoutiqueModeAdapter adapter;
     private List<PfModeNameObject> list = new ArrayList<>();
     private List<AllPfAlbumSunObject> objectList;
-    private PfModeNameObject pfModeNameObject;
+    private BoutiqueSingleInfoObject boutiqueSingleInfoObject;
 
     @Override
     protected void setContentLayout() {
@@ -59,9 +60,7 @@ public class BoutiqueModeActivity extends BaseActivity {
     private void getData() {
         Intent intent = getIntent();
         objectList = (ArrayList)intent.getSerializableExtra("objectList");
-//        pfModeNameObject = (PfModeNameObject) intent.getSerializableExtra("mode");
-//        if(pfModeNameObject == null) pfModeNameObject = new PfModeNameObject();
-
+        boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
     }
 
     private void initClick() {
@@ -72,7 +71,7 @@ public class BoutiqueModeActivity extends BaseActivity {
                 Intent intent = new Intent(BoutiqueModeActivity.this,BoutiqueModeReviewActivity.class);
                 intent.putExtra("objectList",(ArrayList)objectList);
                 intent.putExtra("key",object.getKey());
-//                intent.putExtra("mode",pfModeNameObject);
+                intent.putExtra("object",boutiqueSingleInfoObject);
                 startActivity(intent);
             }
         });

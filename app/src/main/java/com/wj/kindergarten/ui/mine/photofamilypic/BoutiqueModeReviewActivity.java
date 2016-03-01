@@ -16,6 +16,7 @@ import com.wj.kindergarten.bean.AllPfAlbumSun;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueReviewAddress;
+import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
 import com.wj.kindergarten.bean.PfModeNameObject;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -45,8 +46,8 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     private String mp3;//音乐地址
     private String hearld;//封面图片
     private ArrayList<AllPfAlbumSunObject> objectList;//照片地址集合
-    private PfModeNameObject pfModeNameObject;
     private BoutiqueReviewAddress address;
+    private BoutiqueSingleInfoObject boutiqueSingleInfoObject;
 
     @Override
     protected void setContentLayout() {
@@ -69,13 +70,9 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     private void getData() {
         Intent intent = getIntent();
-//        pfModeNameObject = (PfModeNameObject) intent.getSerializableExtra("mode");
         objectList = (ArrayList<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
+        boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
         key = intent.getStringExtra("key");
-        if(pfModeNameObject == null) pfModeNameObject = new PfModeNameObject();
-        pfModeNameObject.setKey(key);
-        //TODO 随便设了一个值
-        pfModeNameObject.setTitle("111111");
     }
 
     @Override
@@ -125,7 +122,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         switch (requestCode){
             case GET_MODE_MUSIC :
                 mp3 = data.getStringExtra("mp3");
-                pfModeNameObject.setMp3(mp3);
                 loadData(1);
                 break;
         }
@@ -138,13 +134,18 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         for(int i = 0 ; i < objectList.size() ; i++){
             AllPfAlbumSunObject object = objectList.get(i);
             if(i != objectList.size() -1 ){
-                builder.append(object.getPath()+",");
+                builder.append(object.getUuid()+",");
             }else{
-                builder.append(object.getPath());
+                builder.append(object.getUuid());
             }
         }
-        UserRequest.getBoutiqueReviewUrl(this, pfModeNameObject.getTitle(),
-                pfModeNameObject.getMp3(), uuid, pfModeNameObject.getHerald(), pfModeNameObject.getKey()
+        if(boutiqueSingleInfoObject != null){
+            title = boutiqueSingleInfoObject.getTitle();
+            hearld = boutiqueSingleInfoObject.getHerald();
+            uuid = boutiqueSingleInfoObject.getUuid();
+        }
+        UserRequest.getBoutiqueReviewUrl(this, title,
+                mp3, uuid, hearld, key
                 , builder.toString(), cacheStatus, new RequestResultI() {
                     @Override
                     public void result(BaseModel domain) {

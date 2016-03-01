@@ -41,6 +41,7 @@ import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
+import com.wj.kindergarten.bean.PfAlbumInfo;
 import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfChangeData;
 import com.wj.kindergarten.bean.PfModeName;
@@ -507,6 +508,9 @@ public class SendRequest {
                 break;
             case RequestType.GET_BOUTIQUE_ALBUM :
                 resultI.result(getDomain(domain, BoutiqueAlbum.class));
+                break;
+            case RequestType.GET_PF_ALBUM_INFO :
+                resultI.result(getDomain(domain, PfAlbumInfo.class));
                 break;
 
             default:

@@ -19,7 +19,7 @@
                 android:layout_width="60dp"
                 android:layout_height="match_parent">
             <ImageView
-                android:src="@drawable/pf_lefthanbao"
+                android:src="@drawable/pf_hanbao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/pf_family_image_left"

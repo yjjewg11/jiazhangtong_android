@@ -14,10 +14,10 @@ public abstract class BitmapUtil {
     //此类对图片做模糊处理
     public static BitmapDrawable blur(Resources resources,float radius,Bitmap bkg) {
         if(radius < 0){
-            radius = 110;
+            radius = 30;
         }
         long startMs = System.currentTimeMillis();
-        float scaleFactor = 8;//图片缩放比例；//模糊程度
+        float scaleFactor = 7;//图片缩放比例；//模糊程度
 
         Bitmap overlay = Bitmap.createBitmap(
                 (int) (bkg.getWidth() / scaleFactor),

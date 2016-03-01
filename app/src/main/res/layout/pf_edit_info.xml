@@ -157,22 +157,22 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/textView44"
+                    android:id="@+id/pf_edit_info_invite"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/linearLayout2"
+                    android:layout_below="@+id/memer_linear"
                     android:gravity="center"
                     android:text="邀请更多亲戚家属共同维护相册"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
+                    android:id="@+id/memer_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/textView43"
-                    android:orientation="horizontal" />
+                    android:orientation="vertical" />
 
             </RelativeLayout>
         </LinearLayout>

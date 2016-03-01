@@ -23,9 +23,11 @@ import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleChooseActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
@@ -115,6 +117,9 @@ public final class UserRequest {
     private static final String PF_CANCLE_FAVORITE = "rest/fPPhotoItem/deleteFavorites.json";
     private static final String GET_PF_COLLECT_PIC = "rest/fPPhotoItem/queryMyFavorites.json";
     private static final String GET_BOUTIQUE_REVIEW_URL = "rest/fPMovie/save.json";
+    private static final String ADD_OR_EDIT_PF_ALBUM = "rest/fpFamilyPhotoCollection/save.json";
+    private static final String GET_ALL_PIC_FROM_BOUTIQUE = "rest/fPPhotoItem/queryForMovieUuid.json";
+    private static final String ADD_FAMILY_MEMBER = "rest/fPFamilyMembers/save.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -147,7 +152,7 @@ public final class UserRequest {
     private static final String GET_PF_ALBUM_LIST = "rest/fpFamilyPhotoCollection/queryMy.json";
     private static final String LOOK_FOR_ALL_PF = "rest/fPPhotoItem/queryMy.json";
     private static final String DETE_ALBUM_LIST = "rest/fpFamilyPhotoCollection/delete.json";
-    private static final String EDIT_SINGLE_PF = "rest/fpFamilyPhotoCollection/save.json";
+    private static final String EDIT_SINGLE_PF = "rest/fPPhotoItem/save.json";
 
     private UserRequest() {
     }
@@ -959,7 +964,8 @@ public final class UserRequest {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(), RequestHttpUtil.BASE_URL + EDIT_SINGLE_PF, resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, jsonObject.toString(),
+                RequestHttpUtil.BASE_URL + EDIT_SINGLE_PF, resultI);
 
 
     }
@@ -1071,8 +1077,51 @@ public final class UserRequest {
             e.printStackTrace();
         }
 
-        SendRequest.getInstance().post(context,RequestType.GET_BOUTIQUE_REVIEW_URL,object.toString(),
-                RequestHttpUtil.BASE_URL+GET_BOUTIQUE_REVIEW_URL,resultI);
+        SendRequest.getInstance().post(context, RequestType.GET_BOUTIQUE_REVIEW_URL, object.toString(),
+                RequestHttpUtil.BASE_URL + GET_BOUTIQUE_REVIEW_URL, resultI);
 
+    }
+
+    public static void AddOrEditPfAlbum(Context context, String title, String uuid, String status, String herald, RequestResultI resultI) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("title", title);
+            object.put("uuid", uuid);
+            object.put("status", status);
+            object.put("herald", herald);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        SendRequest.getInstance().post(context, RequestType.ZAN, object.toString(),
+                RequestHttpUtil.BASE_URL + ADD_OR_EDIT_PF_ALBUM, resultI);
+    }
+
+    public static void getAlbumInfo(Context context, String family_uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",family_uuid);
+        String url = RequestHttpUtil.BASE_URL+"rest/fpFamilyPhotoCollection/get.json";
+        SendRequest.getInstance().get(context, RequestType.GET_PF_ALBUM_INFO, params, url, resultI);
+    }
+
+    public static void getAllPicFromBoutiqueAlbum(Context context, String movie_uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("movie_uuid",movie_uuid);
+        SendRequest.getInstance().get(context, RequestType.GET_ALL_PIC_FROM_BOUTIQUE, params, RequestHttpUtil.BASE_URL+
+                GET_ALL_PIC_FROM_BOUTIQUE, resultI);
+    }
+    public static void addFamilyMember(Context context,String family_uuid,String tel,
+                                       String uuid,String family_name,RequestResultI resultI){
+        JSONObject object = new JSONObject();
+        try{
+        object.put("family_uuid",family_uuid);
+        object.put("tel",tel);
+        object.put("uuid",uuid);
+        object.put("family_name",family_name);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        SendRequest.getInstance().post(context,RequestType.ZAN,object.toString(),RequestHttpUtil.BASE_URL+
+                ADD_FAMILY_MEMBER,resultI);
     }
 }

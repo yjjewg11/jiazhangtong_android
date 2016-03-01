@@ -163,7 +163,6 @@ public class PfAlbumListActivity extends BaseActivity {
 //    }
 
     public void addFamilyMember(String uuid){
-        Intent intent = new Intent(this,AddFamilyMemberActivity.class);
-        startActivityForResult(intent, GloablUtils.ADD_FAMILY_MEMBER);
+
     }
 }

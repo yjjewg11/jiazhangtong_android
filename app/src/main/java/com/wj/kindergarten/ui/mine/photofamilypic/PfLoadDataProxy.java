@@ -39,6 +39,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class PfLoadDataProxy {
     private DataLoadFinish dataLoadFinish;
+    private final String QUERY_CLOUMN = "photo_time";
 
     public void setDataLoadFinish(DataLoadFinish dataLoadFinish) {
         this.dataLoadFinish = dataLoadFinish;
@@ -161,7 +162,7 @@ public class PfLoadDataProxy {
     private void loadFromSqliteByCreateTime() {
         //根据family_uuid把对象根据日期分组，显示多少组及其数量
 //        List<AllPfAlbumSunObject> listTest = familyUuidObjectSql.findAll(AllPfAlbumSunObject.class);
-        loadFromDataBases("create_time");
+        loadFromDataBases(QUERY_CLOUMN);
     }
 
     private void loadFromDataBases(String timeType) {
@@ -285,14 +286,18 @@ public class PfLoadDataProxy {
         threadPoolExecutor.shutdownNow();
     }
 
-    public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date) {
-        String sql = " strftime('%Y-%m-%d',create_time) ='" + date + "' and family_uuid ='" + family_uuid + "' " + "limit 6";
+    public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date,String limitCount){
+//        "limit 6"
+
+        String sql = " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' " + limitCount;
         List<AllPfAlbumSunObject> objectList = familyUuidObjectSql.findAllByWhere(AllPfAlbumSunObject.class, sql);
         String count = "select count(*) from com_wj_kindergarten_bean_AllPfAlbumSunObject where " +
-                " strftime('%Y-%m-%d',create_time) ='" + date + "' and family_uuid ='" + family_uuid + "' ";
-//        DbModel   familyUuidObjectSql.findDbModelBySQL(count);
+                " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' ";
         return objectList;
+    }
 
+    public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date) {
+       return queryListByDate(family_uuid,date,"");
     }
 
 

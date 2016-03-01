@@ -13,13 +13,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AddFamilyMemberParams;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
+
+import java.util.List;
 
 public class AddFamilyMemberActivity extends BaseActivity {
 
@@ -35,6 +42,7 @@ public class AddFamilyMemberActivity extends BaseActivity {
     TextView add_family_add_bt;
     @ViewInject(id = R.id.iv_add_member,click = "onClick")
     ImageView iv_add_member;
+    private AddFamilyMemberParams member;
 
 
     @Override
@@ -49,21 +57,52 @@ public class AddFamilyMemberActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        getData();
         setTitleText("添加家人");
         FinalActivity.initInjectedView(this);
+    }
+
+    private void getData() {
+        member =(AddFamilyMemberParams) getIntent().getSerializableExtra("member");
     }
 
     public void onClick(View view){
         switch (view.getId()){
             case R.id.add_family_add_bt:
                 if(checkData()){
-//                    addFamily();
+
+                    addFamily();
                 }
                 break;
             case R.id.iv_add_member:
                 startConstact();
                 break;
         }
+    }
+
+    private void addFamily() {
+        member.setFamily_name(editRelation.getText().toString());
+        member.setTel(editPhone.getText().toString());
+        UserRequest.addFamilyMember(this, member.getFamily_uuid(), member.getFamily_name(), member.getTel(),
+                 member.getUuid(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                ToastUtils.showMessage("修改成功!");
+                setResult(RESULT_OK, new Intent());
+                finish();
+
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
     }
 
     private void startConstact() {

@@ -29,11 +29,13 @@ import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.QueryGroupCount;
+import com.wj.kindergarten.compounets.NestedGridView;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.PfAlbumRecycleAdapter;
+import com.wj.kindergarten.ui.func.adapter.PfFirstTimeAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
@@ -99,7 +101,8 @@ public class PfFusionFragment extends Fragment {
                             }
                         }
                         if(newData.size() > 0){
-                            addListDataByDate(newData);
+//                            addListDataByDate(newData);
+                            addDataByOrder(fragment_pf_fusion_linear,newData);
                         }
 
                     }
@@ -111,6 +114,8 @@ public class PfFusionFragment extends Fragment {
             }
         }
     };
+
+
 
     private void showView() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -201,15 +206,23 @@ public class PfFusionFragment extends Fragment {
         });
     }
 
-    private void addAllDataByDate(List<QueryGroupCount> allList){
-        for(QueryGroupCount count : allList){
-            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), count.getDate());
-            if(objectList == null) continue;
-            View view = View.inflate(getActivity(),R.layout.pf_single_date,null);
-            GridView mGridView = (GridView) view.findViewById(R.id.pf_single_date_grid);
-//            mGridView.setAdapter(new );
+    private void addDataByOrder(LinearLayout linearLayout,List<QueryGroupCount> newData) {
+        for(QueryGroupCount count : newData){
+            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(),count.getDate());
+                if(objectList == null) continue;
+                View view = View.inflate(getActivity(),R.layout.pf_family_first_time_item,null);
+                TextView pf_family_first_item_time = (TextView) view.findViewById(R.id.pf_family_first_item_time);
+                TextView pf_family_first_item_count = (TextView) view.findViewById(R.id.pf_family_first_item_count);
+                pf_family_first_item_time.setText("" + count.getDate());
+                pf_family_first_item_count.setText("共" + count.getCount() + "张");
+                NestedGridView gridView = (NestedGridView) view.findViewById(R.id.pf_family_first_item_grid);
+                gridView.setVisibility(View.VISIBLE);
+                PfFirstTimeAdapter adapter = new PfFirstTimeAdapter(getActivity(),objectList);
+                gridView.setAdapter(adapter);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            linearLayout.addView(view, params);
+            }
         }
-    }
 
     private void addListDataByDate(List<QueryGroupCount> allList) {
 

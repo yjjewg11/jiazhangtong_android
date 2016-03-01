@@ -11,9 +11,13 @@ import android.widget.RelativeLayout;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
 import com.wj.kindergarten.bean.PfModeNameObject;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
+import com.wj.kindergarten.utils.GloablUtils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ public class PfChoosedPicActivity extends BaseActivity {
     private ArrayList<String> images = new ArrayList<>();
     private String uuid;
     private PfModeNameObject pfModeNameObject;
+    private BoutiqueSingleInfoObject boutiqueSingleInfoObject;
+    private FinalDb db;
 
     @Override
     protected void setContentLayout() {
@@ -46,6 +52,7 @@ public class PfChoosedPicActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         setTitleText("选择图片");
+        db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT);
         getData();
         initViews();
         initClickListener();
@@ -58,7 +65,7 @@ public class PfChoosedPicActivity extends BaseActivity {
                 //带着集合进入编辑页面
                  Intent intent = new Intent(PfChoosedPicActivity.this,BoutiqueAlbumEditActivity.class);
                  intent.putExtra("objectList", (ArrayList) objectList);
-//                 intent.putExtra("mode",pfModeNameObject);
+                 intent.putExtra("object",boutiqueSingleInfoObject);
                  startActivity(intent);
             }
         });
@@ -69,11 +76,14 @@ public class PfChoosedPicActivity extends BaseActivity {
                     returnList();
                     finish();
                 } else {
-                    Intent intent = new Intent(PfChoosedPicActivity.this, PhotoWallActivity.class);
-                    ArrayList<String> simplePic = new ArrayList<>();
-                    simplePic.add(images.get(position));
-                    intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, simplePic);
-                    startActivity(intent);
+                    //不要查看详细，改成切换封面
+                    adapter.clearSingleList(position);
+                    boutiqueSingleInfoObject.setHerald(adapter.getCurrentObj(position).getPath());
+//                    Intent intent = new Intent(PfChoosedPicActivity.this, PhotoWallActivity.class);
+//                    ArrayList<String> simplePic = new ArrayList<>();
+//                    simplePic.add(images.get(position));
+//                    intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, simplePic);
+//                    startActivity(intent);
                 }
             }
         });
@@ -83,8 +93,9 @@ public class PfChoosedPicActivity extends BaseActivity {
         Intent intent = getIntent();
 //        pfModeNameObject = (PfModeNameObject) intent.getSerializableExtra("mode");
         objectList = (List<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
-
-
+        boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
+        //说明是新建，
+        if(boutiqueSingleInfoObject == null) boutiqueSingleInfoObject = new BoutiqueSingleInfoObject();
         if(objectList != null && objectList.size() > 0){
             Iterator<AllPfAlbumSunObject> iterator = objectList.iterator();
             while (iterator.hasNext()){

@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,9 +15,12 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshWebView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.BoutiqueAllpic;
 import com.wj.kindergarten.bean.BoutiqueSingleInfo;
 import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
+import com.wj.kindergarten.bean.PfAlbumInfo;
 import com.wj.kindergarten.bean.PfDianZan;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -29,6 +33,7 @@ import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoutiqueSingleInfoActivity extends BaseActivity {
@@ -55,8 +60,10 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     private View pf_more_view;
     private ImageView pf_delete;
     private ImageView pf_edit;
+    private ArrayList<AllPfAlbumSunObject> objectList;
 
     private void initHttpData() {
+        setTitleText(""+boutiqueSingleInfo.getData().getTitle());
         boutiqueWebView.getRefreshableView().loadUrl(boutiqueSingleInfo.getShare_url());
         if(boutiqueSingleInfo.isFavor()){
             Utils.cancleStoreStatus(this, textViews[0]);
@@ -92,6 +99,29 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         initBottomView();
         initBottomClick();
         getBoutiqueInfo();
+        queryAllpicClassBoutique();
+    }
+
+    private void queryAllpicClassBoutique() {
+        UserRequest.getAllPicFromBoutiqueAlbum(this, uuid, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                BoutiqueAllpic boutiqueAllpic = (BoutiqueAllpic) domain;
+                if(boutiqueAllpic != null && boutiqueAllpic.getList() != null){
+                    objectList.addAll(boutiqueAllpic.getList());
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
     }
 
     private void initBottomClick() {
@@ -156,7 +186,10 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-
+                Intent intent = new Intent(BoutiqueSingleInfoActivity.this,PfChoosedPicActivity.class);
+                intent.putExtra("object",boutiqueSingleInfo.getData());
+                intent.putExtra("objectList",objectList);
+                startActivity(intent);
             }
         });
         int [] location = Utils.getLocation(textViews[4]);
@@ -253,6 +286,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             public void result(BaseModel domain) {
                 if (commonDialog.isShowing()) {
                     commonDialog.dismiss();
+                    Utils.cancleStoreStatus(BoutiqueSingleInfoActivity.this,textViews[0]);
                     ToastUtils.showMessage("取消收藏成功!");
                 }
             }
@@ -278,6 +312,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     public void result(BaseModel domain) {
                         if (commonDialog.isShowing()) {
                             commonDialog.dismiss();
+                            Utils.showStoreStatus(BoutiqueSingleInfoActivity.this,textViews[0]);
                             ToastUtils.showMessage("收藏成功!");
                         }
                     }
