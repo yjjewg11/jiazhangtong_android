@@ -47,6 +47,7 @@ import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Constant.MessageConstant;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -624,5 +625,20 @@ public class MainActivity extends BaseActivity {
         Log.i("TAG","添加任务栈  ： "+activityManager.getRunningTasks(10).size());
         super.onDestroy();
 //        unregisterReceiver(receive);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK) return;
+        switch (requestCode){
+            case GloablUtils.UPDATE_SUCCESSED_REFRESH:
+                CGLog.v("打印currentTab : "+mTabHost.getCurrentTabTag() +" tab ： "+mTabHost.getCurrentTab());
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                   PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    familyFragment.initHeadBack();
+                }
+                break;
+        }
     }
 }

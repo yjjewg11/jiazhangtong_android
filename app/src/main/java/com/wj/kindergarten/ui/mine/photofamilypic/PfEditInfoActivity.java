@@ -113,6 +113,7 @@ public class PfEditInfoActivity extends BaseActivity {
         hearld = info.getHerald();
         tv_album_name.setText("" + title);
         ImageLoaderUtil.displayImage(hearld, iv_appear_image);
+        memer_linear.removeAllViews();
         List<PFAlbumMember> memberList = pfAlbumInfo.getMembers_list();
         if (memberList != null && memberList.size() > 0) {
             for (final PFAlbumMember member : memberList) {
@@ -153,7 +154,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
     private void saveAlbum() {
         String uuid = pfAlbumInfo == null ? "" : pfAlbumInfo.getData().getUuid();
-        UserRequest.AddOrEditPfAlbum(this, title, uuid ,"0" , hearld, new RequestResultI() {
+        UserRequest.AddOrEditPfAlbum(this, title, uuid, "0", hearld, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 ToastUtils.showMessage("保存成功!");
@@ -183,6 +184,7 @@ public class PfEditInfoActivity extends BaseActivity {
                 int dex = objectList.indexOf(sun);
                 MainActivity.instance.getAlbumList().remove(dex);
                 MainActivity.instance.getAlbumList().add(dex, sun);
+                setOwnResult();
                 finish();
                 return;
             }
@@ -295,5 +297,22 @@ public class PfEditInfoActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    @Override
+    protected void titleLeftButtonListener() {
+        setOwnResult();
+        super.titleLeftButtonListener();
+    }
+
+    private void setOwnResult(){
+        setResult(RESULT_OK,new Intent());
+    }
+
+    @Override
+    public void onBackPressed() {
+        setOwnResult();
+        super.onBackPressed();
+
     }
 }

@@ -93,4 +93,5 @@ public interface RequestType {
      int GET_PF_ALBUM_INFO = 177;
      int GET_ALL_PIC_FROM_BOUTIQUE = 178;
      int ADD_FAMILY_MEMBER = 179;
+     int INIT_SYNC_UPLOAD = 180;
 }

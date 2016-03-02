@@ -299,7 +299,20 @@ public class CGSharedPreference {
         String min =  sharedPreferences.getString("pf_mintime",null);
         return new String[]{max,min};
     }
-    public void setPfMaxAndMinTime(String [] times){
+
+    public static boolean getUploadSyncStatus() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        boolean upload_sync_status =  sharedPreferences.getBoolean("upload_sync_status", false);
+        return upload_sync_status;
+    }
+
+    public static void setUploadSyncStatus(boolean uploadSyncStatus){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("upload_sync_status", uploadSyncStatus);
+        editor.commit();
+    }
+
+    public  void setPfMaxAndMinTime(String [] times){
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString("pf_maxtime",times[0]);
         editor.putString("pf_mintime",times[1]);

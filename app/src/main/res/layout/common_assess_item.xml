@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:paddingTop="@dimen/margin_20"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.wj.kindergarten.compounets.CircleImage
+            android:layout_width="wrap_content"
+            android:minWidth="65dp"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:minHeight="65dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/common_assess_item_head_img" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="你老娘"
+            android:id="@+id/common_assess_item_name"
+            android:layout_alignTop="@+id/common_assess_item_head_img"
+            android:layout_toRightOf="@+id/common_assess_item_head_img"
+            android:layout_marginLeft="21dp" />
+
+        <TextView
+            android:textColor="@color/color_8e8e8e"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="这是一条惨无人道的评论"
+            android:id="@+id/common_assess_item_content"
+            android:layout_alignBottom="@+id/common_assess_item_head_img"
+            android:layout_alignLeft="@+id/common_assess_item_name" />
+
+        <TextView
+            android:textColor="@color/color_8e8e8e"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="1光年前"
+            android:id="@+id/common_assess_item_time"
+            android:layout_marginRight="9dp"
+            android:layout_alignTop="@+id/common_assess_item_name"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:padding="@dimen/margin_10"
+            android:textColor="#cc5c55"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="删除"
+            android:id="@+id/common_assess_item_delete"
+            android:layout_alignBottom="@+id/common_assess_item_content"
+            android:layout_alignRight="@+id/common_assess_item_time" />
+    </RelativeLayout>
+    <TextView
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:id="@+id/common_assess_item_write_assess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_edit_bg1"
+        android:editable="false"
+        android:gravity="center_vertical"
+        android:hint="写下您的评论..."
+        android:padding="@dimen/small_padding"
+        android:singleLine="true"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textSize="@dimen/normal_text" />
+</LinearLayout>

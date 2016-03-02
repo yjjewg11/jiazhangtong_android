@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,25 +18,27 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AlreadySavePath;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.SyncUploadPic;
+import com.wj.kindergarten.bean.SyncUploadPicObj;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.EditPfActivity;
-import com.wj.kindergarten.ui.func.adapter.PfUpGalleryAdapter;
-import com.wj.kindergarten.ui.imagescan.GalleryImagesAdapter;
 import com.wj.kindergarten.ui.imagescan.PfGalleryImagesAdapter;
 import com.wj.kindergarten.ui.imagescan.PfPhotoPopAdapter;
 import com.wj.kindergarten.ui.imagescan.PhotoDirModel;
-import com.wj.kindergarten.ui.imagescan.PhotoPopAdapter;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V1;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V2;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.FileUtil;
-import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -55,7 +56,7 @@ import java.util.Map;
 /**
  * Created by tangt on 2016/1/19.
  */
-public class PfUpGalleryActivity extends BaseActivity implements View.OnClickListener{
+public class PfUpGalleryActivity extends BaseActivity implements View.OnClickListener {
     //开始扫描
     private final int SCAN_PHOTO_BEGIN = 0;
     //扫描完成
@@ -101,9 +102,9 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     private ArrayList<String> chooseList = null;
     private boolean isCut = false;
 
-    private static  int SIGN_BOARD ;
+    private static int SIGN_BOARD;
     private int type;
-    private FinalDb db;
+    private FinalDb uploadDb;
 
     /**
      * 被选中的图片列表 key
@@ -115,17 +116,63 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
         layoutId = R.layout.imagescan_images_activity;
     }
 
+    //如果未从网络同步已上传照片，则需要同步,默认未同步
     @Override
     public void setNeedLoading() {
-        isNeedLoading = false;
+        uploadDb = FinalDb.create(this);
+        CGSharedPreference.getUploadSyncStatus();
+        isNeedLoading = !CGSharedPreference.getUploadSyncStatus();
+    }
+
+    int pageNo = 1;
+
+    @Override
+    protected void loadData() {
+        UserRequest.initSyncUploadPic(this, pageNo, MainActivity.getFamily_uuid(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                CGSharedPreference.setUploadSyncStatus(true);
+                SyncUploadPic syncUploadPic = (SyncUploadPic) domain;
+                if(syncUploadPic != null && syncUploadPic.getList() != null
+                        &&syncUploadPic.getList().getData() != null && syncUploadPic.getList().getData().size() > 0){
+                    Iterator<SyncUploadPicObj> iterator = syncUploadPic.getList().getData().iterator();
+                    while (iterator.hasNext()){
+                        SyncUploadPicObj obj = iterator.next();
+                        saveUploadObj(obj);
+                    }
+                }else {
+                    ToastUtils.showMessage("暂无同步数据!");
+                }
+                loadSuc();
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
+    private void saveUploadObj(SyncUploadPicObj obj) {
+        AlreadySavePath savePath =  uploadDb.findById(obj.getMd5(), AlreadySavePath.class);
+        if(savePath == null){
+            savePath = new AlreadySavePath();
+            savePath.setStatus(0);
+            savePath.setLocalPath(obj.getMd5());
+            uploadDb.save(savePath);
+        }
     }
 
     @Override
     public void onCreate() {
-        db = FinalDb.create(this);
         initSelectPic((ArrayList) getIntent().getSerializableExtra(Constants.ALREADY_SELECT_KEY));
-        type = getIntent().getIntExtra("type",0);
-        SIGN_BOARD = (getIntent().getIntExtra("signBoard",0));
+        type = getIntent().getIntExtra("type", 0);
+        SIGN_BOARD = (getIntent().getIntExtra("signBoard", 0));
 
         initWidget();
 
@@ -164,7 +211,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
         mGridView = (GridView) findViewById(R.id.child_grid);
 //        galleryList.add(0, "");
 //        scanList.add(0, "");
-        adapter = new PfGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView,type);
+        adapter = new PfGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView, type);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -409,7 +456,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     }
 
     public void selectChange(HashMap<String, Boolean> mSelectMap) {
-        setTitleText("选择图片"+"(" + mSelectMap.size()+")", "确定");
+        setTitleText("选择图片" + "(" + mSelectMap.size() + ")", "确定");
     }
 
     /**
@@ -465,21 +512,21 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
             } else {
                 //判断返回类型
-                if(type == PhotoFamilyFragment.ADD_PIC){
+                if (type == PhotoFamilyFragment.ADD_PIC) {
                     //将图片存入数据库
-                    for (String path : images){
+                    for (String path : images) {
                         AlreadySavePath alreadySavePath = new AlreadySavePath();
                         alreadySavePath.setLocalPath(path);
                         alreadySavePath.setStatus(1);
-                        db.save(alreadySavePath);
+                        uploadDb.save(alreadySavePath);
                     }
                     Intent intent = new Intent(this, PicUploadService.class);
                     startService(intent);
                     ToastUtils.showMessage("已将" + images.size() + "张图片加入下载队列");
-                }else if(type == EditPfActivity .CHOOSE_NEW){
+                } else if (type == EditPfActivity.CHOOSE_NEW) {
                     Intent intent = new Intent();
                     intent.putExtra(RESULT_LIST, (ArrayList<String>) images);
-                    setResult(RESULT_OK,intent);
+                    setResult(RESULT_OK, intent);
                 }
                 finish();
             }
@@ -544,4 +591,5 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
             FileUtil.deleteFolder(appDir);
         }
     }
+
 }

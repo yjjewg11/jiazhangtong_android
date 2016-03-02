@@ -63,7 +63,6 @@ dependencies {
     compile files('libs/baidumapapi_util_v3_6_1.jar')
     compile files('libs/baidumapapi_map_v3_6_1.jar')
     compile files('libs/baidumapapi_base_v3_6_1.jar')
-    //    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/afinal_0.5.1_bin.jar')
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'com.android.support:support-annotations:22.2.1'
@@ -75,5 +74,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:recyclerview-v7:22.1.1'
     compile files('libs/GifView.jar')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 }

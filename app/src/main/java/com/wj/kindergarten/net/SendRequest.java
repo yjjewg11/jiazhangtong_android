@@ -21,6 +21,7 @@ import com.wj.kindergarten.bean.ArticleList;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.BoutiqueAlbum;
+import com.wj.kindergarten.bean.BoutiqueAllpic;
 import com.wj.kindergarten.bean.BoutiqueReviewAddress;
 import com.wj.kindergarten.bean.BoutiqueSingleInfo;
 import com.wj.kindergarten.bean.ConfigObject;
@@ -58,6 +59,7 @@ import com.wj.kindergarten.bean.SpecialCourseTypeList;
 import com.wj.kindergarten.bean.StoreList;
 
 import com.wj.kindergarten.bean.StudyStateObjectList;
+import com.wj.kindergarten.bean.SyncUploadPic;
 import com.wj.kindergarten.bean.TeacherCountList;
 
 import com.wj.kindergarten.bean.TeacherInfo;
@@ -323,6 +325,7 @@ public class SendRequest {
             case RequestType.INTERACTION_SEND:
             case RequestType.LOGIN_OUT:
             case RequestType.READ_MESSAGE:
+            case RequestType.ADD_FAMILY_MEMBER:
                 resultI.result(getDomain(domain, BaseModel.class));
                 break;
             case RequestType.CHANGE_CHILD:
@@ -511,6 +514,12 @@ public class SendRequest {
                 break;
             case RequestType.GET_PF_ALBUM_INFO :
                 resultI.result(getDomain(domain, PfAlbumInfo.class));
+                break;
+            case RequestType.INIT_SYNC_UPLOAD:
+                resultI.result(getDomain(domain, SyncUploadPic.class));
+                break;
+            case RequestType.GET_ALL_PIC_FROM_BOUTIQUE:
+                resultI.result(getDomain(domain, BoutiqueAllpic.class));
                 break;
 
             default:

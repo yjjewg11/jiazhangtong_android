@@ -83,4 +83,20 @@ public class PfSingleAssessObject {
     public void setCreate_useruuid(String create_useruuid) {
         this.create_useruuid = create_useruuid;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PfSingleAssessObject object = (PfSingleAssessObject) o;
+
+        return uuid.equals(object.uuid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
 }

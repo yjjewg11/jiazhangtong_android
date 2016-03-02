@@ -15,6 +15,7 @@
 
     </com.handmark.pulltorefresh.library.PullToRefreshWebView>
     <LinearLayout
+        android:visibility="gone"
         android:orientation="vertical"
         android:id="@+id/boutique_single_info_assess"
         android:layout_width="match_parent"

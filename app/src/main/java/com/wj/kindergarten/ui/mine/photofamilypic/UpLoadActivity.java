@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
@@ -192,8 +193,8 @@ public class UpLoadActivity extends BaseActivity {
             CGLog.v("打印progress : " + progress + " total : " + total);
             View view = linearLayout.findViewWithTag(path);
             if(view == null) return;
-            ProgressBar bar = (ProgressBar) (view.findViewById(R.id.up_load_progressBar));
-            TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
+            NumberProgressBar bar = (NumberProgressBar) (view.findViewById(R.id.up_load_progressBar));
+//            TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
             ImageView upload_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
             int progressUpdate =(int) (Double.valueOf(progress)/Double.valueOf(total) * 100);
             switch (intent.getAction()) {
@@ -203,11 +204,11 @@ public class UpLoadActivity extends BaseActivity {
                         upload_wait.setVisibility(View.INVISIBLE);
                     }
                     bar.setProgress(progressUpdate);
-                    tv_progress.setText(""+progressUpdate+"%");
+//                    tv_progress.setText(""+progressUpdate+"%");
                     break;
                 case PF_UPDATE_PROGRESS_SUCCESSED:
                     bar.setProgress(100);
-                    tv_progress.setText("" + 100+"%");
+//                    tv_progress.setText("" + 100+"%");
                         linearLayout.removeView(view);
                     judgeAddNoContent();
                     break;

@@ -150,10 +150,9 @@ public class PfFusionFragment extends Fragment {
         initScrollListen();
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
-
-        pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
-        fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
-        banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+//        pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+//        fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
+//        banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         photoFamilyFragment.setLocationChanged(new PhotoFamilyFragment.LocationChanged() {
             @Override
@@ -217,7 +216,7 @@ public class PfFusionFragment extends Fragment {
                 pf_family_first_item_count.setText("共" + count.getCount() + "张");
                 NestedGridView gridView = (NestedGridView) view.findViewById(R.id.pf_family_first_item_grid);
                 gridView.setVisibility(View.VISIBLE);
-                PfFirstTimeAdapter adapter = new PfFirstTimeAdapter(getActivity(),objectList);
+//                PfFirstTimeAdapter adapter = new PfFirstTimeAdapter(getActivity(),objectList);
                 gridView.setAdapter(adapter);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             linearLayout.addView(view, params);
@@ -299,6 +298,7 @@ public class PfFusionFragment extends Fragment {
 
             @Override
             public void noMoreData() {
+
                 noMoreData = true;
             }
 

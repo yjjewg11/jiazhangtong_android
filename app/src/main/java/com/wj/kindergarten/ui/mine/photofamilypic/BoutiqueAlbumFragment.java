@@ -119,6 +119,7 @@ public class BoutiqueAlbumFragment extends Fragment {
                        ToastUtils.showMessage("没有");
                    }else {
                        ToastUtils.showMessage("没有更多内容了!!!");
+                       pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
                    }
                }
            }

@@ -57,9 +57,18 @@ public class AddFamilyMemberActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        getData();
-        setTitleText("添加家人");
         FinalActivity.initInjectedView(this);
+        getData();
+        initViewData();
+        setTitleText("添加家人");
+
+    }
+
+    private void initViewData() {
+        editPhone.setText(""+member.getTel());
+        editName.setText("");
+        editRelation.setText(""+member.getFamily_name());
+
     }
 
     private void getData() {
@@ -70,7 +79,6 @@ public class AddFamilyMemberActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.add_family_add_bt:
                 if(checkData()){
-
                     addFamily();
                 }
                 break;

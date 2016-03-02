@@ -32,6 +32,7 @@ import com.wj.kindergarten.ui.func.EditPfActivity;
 import com.wj.kindergarten.ui.imagescan.BitmapCallBack;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.FusionListFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
@@ -60,7 +61,6 @@ public class PhotoFamilyFragment extends Fragment {
     //    private FragmentPagerAdapter pagerAdapter;
     private List<PfAlbumListSun> albumList;
     private View view;
-    private PfFusionFragment pfFusionFragment;
     private BoutiqueAlbumFragment boutique_album_framgent;
     private FrameLayout back_pf_scroll_fl;
     private PfFragmentLinearLayout pf_back_ll;
@@ -76,6 +76,7 @@ public class PhotoFamilyFragment extends Fragment {
     private TextView pf_pic_center_tv;
     private RelativeLayout pf_pic_right_iv;
     private FinalDb db;
+    private FusionListFragment pfFusionListFragment;
 
     private int getFlTopMargin(){
         LinearLayout.LayoutParams params  = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
@@ -120,7 +121,6 @@ public class PhotoFamilyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
         if (view != null){
-            initHeadViewData();
             return view;
         }
         view = inflater.inflate(R.layout.photo_family_pic, null);
@@ -139,6 +139,7 @@ public class PhotoFamilyFragment extends Fragment {
     private void initBack() {
 
     }
+
 
     private void initBar() {
         pf_pic_left_bt = (RelativeLayout) view.findViewById(R.id.pf_pic_left_bt);
@@ -165,15 +166,24 @@ public class PhotoFamilyFragment extends Fragment {
         });
     }
 
+    public void initHeadBack(){
+        initHeadViewData();
+    }
+
     private void initHeadViewData() {
         PfAlbumListSun sun = null;
         if(MainActivity.instance.getAlbumList() != null && MainActivity.instance.getAlbumList().size() > 0){
-            sun = MainActivity.instance.getAlbumList().get(0);
+            for(PfAlbumListSun albumListSun : MainActivity.instance.getAlbumList()){
+                if(albumListSun != null && albumListSun.getUuid().equals(MainActivity.instance.getFamily_uuid())){
+                    sun = albumListSun;
+                    break;
+                }
+            }
         }
         if(sun == null) return;
         if(!TextUtils.isEmpty(sun.getHerald())){
             ImageLoaderUtil.displayImage(sun.getHerald(),pf_backGround_image);
-        BitmapCallBack.loadBitmap(sun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
+            BitmapCallBack.loadBitmap(sun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
             @Override
             public void callback(Bitmap bitmap) {
                 BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
@@ -208,8 +218,8 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void initFragment() {
-        pfFusionFragment = new PfFusionFragment(this);
-        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[0]).commit();
+        pfFusionListFragment = new FusionListFragment(this);
+        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
     }
 
     private void initHead() {
@@ -248,7 +258,7 @@ public class PhotoFamilyFragment extends Fragment {
                 //点击启动相册详细页面
                 Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
                 intent.putExtra("uuid",MainActivity.getFamily_uuid());
-                startActivity(intent);
+                MainActivity.instance.startActivityForResult(intent, GloablUtils.UPDATE_SUCCESSED_REFRESH);
                 popupWindow.dismiss();
             }
         });
@@ -308,27 +318,6 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
 
-    private void bottomRequest() {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
-        int margin = (int) (params.topMargin + moveY);
-
-        if (margin <= -Math.abs(back_pf_scroll_fl.getHeight())) {
-            margin = -back_pf_scroll_fl.getHeight();
-        }else{
-
-        }
-        if (margin > 0) {
-            margin = 0;
-        }
-
-        CGLog.v("打印列表是否在顶部 ; "+pfFusionFragment.scrollIsTop());
-           if(flIsLocationTop && !pfFusionFragment.scrollIsTop()) return;
-
-            params.topMargin = margin;
-            back_pf_scroll_fl.setLayoutParams(params);
-            back_pf_scroll_fl.requestLayout();
-
-    }
 
     String[] titles = new String[]{"时光轴", "精品相册"};
 
@@ -342,11 +331,11 @@ public class PhotoFamilyFragment extends Fragment {
                 switch (tab.getPosition()) {
                     case 0:
                         //时光轴
-                        PfFusionFragment mfFusionFragment = (PfFusionFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
-                        if (mfFusionFragment != null) {
-                            getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, mfFusionFragment, fragment_tags[0]).commit();
+                        FusionListFragment fusionListFragment = (FusionListFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
+                        if (fusionListFragment != null) {
+                            getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionListFragment, fragment_tags[0]).commit();
                         } else {
-                            getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[0]).commit();
+                            getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
                         }
                         break;
                     case 1:
@@ -411,74 +400,6 @@ public class PhotoFamilyFragment extends Fragment {
 //        tab_layout.setupWithViewPager(viewPager);
 
     }
-
-    boolean isFirst ;
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-//        if(!isFirst){
-//            int height = back_pf_scroll_fl.getHeight();
-//            isFirst = true;
-//            animotor = ObjectAnimator.ofInt(new Wrapper(back_pf_scroll_fl),"topMargin",-height);
-//            animotor.setDuration(300);
-//            animotor.setInterpolator(new DecelerateInterpolator());
-//        }
-
-    }
-
-//    class MyTouch implements PfFragmentLinearLayout.OnInterceptTouchEvent {
-//
-//
-//        private float startY;
-//
-//        public boolean onInterceptTouch(MotionEvent event) {
-//            switch (event.getAction()) {
-//                case MotionEvent.ACTION_DOWN:
-//                    startY = event.getRawY();
-//                    rawY = event.getRawY();
-//                    break;
-//                case MotionEvent.ACTION_MOVE:
-//                    CGLog.v("打印scrollview滑动的距离　：　"+pfFusionFragment.getBanScrollView().getRefreshableView().getScrollY());
-//                    moveY = event.getRawY() - rawY;
-//                    CGLog.v("打印移动值 ： " + (int) moveY);
-//                    locationChanged.onTop();
-////                    bottomRequest();
-////                    if(getFlTopMargin() == 0 && event.getRawY() - startY > 50){
-////                        flMoveBottom();
-////                        flIsLocationTop = false;
-////                        locationChanged.onBottom();
-////                    }
-////                    //当不在顶部的时候，scrollview停止滑动
-////                    if(getFlTopMargin() == - back_pf_scroll_fl.getHeight()){
-////
-////                    }else{
-////                        locationChanged.onBottom();
-////                    }
-////                    rawY = event.getRawY();
-//                    break;
-//                case MotionEvent.ACTION_UP:
-//                    //下移
-//                    CGLog.v("打印差值 ： "+((int)event.getRawY() - rawY));
-//
-//
-//                    //上移
-//                    if(event.getRawY() - startY < -30){
-//                        flMoveTop();
-//                        flIsLocationTop = true;
-//
-//                        handler.postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                locationChanged.onTop();
-//                            }
-//                        },300);
-//
-//                    }
-//                    break;
-//            }
-//            return false;
-//        }
-//    }
 
 
 

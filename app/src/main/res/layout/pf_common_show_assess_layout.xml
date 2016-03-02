@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/pf_common_show_assess_title"
+        android:background="@color/white"
+        android:textColor="@color/title_bg"
+        android:paddingRight="@dimen/margin_10"
+        android:drawableRight="@drawable/xiajiantou"
+        android:paddingLeft="@dimen/margin_10"
+        android:gravity="center_vertical"
+        android:text="评论内容"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+    <FrameLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_pulltorefresh"/>
+    </FrameLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/pf_comon_show_assess_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

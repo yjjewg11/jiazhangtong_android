@@ -291,8 +291,8 @@ public class PfLoadDataProxy {
 
         String sql = " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' " + limitCount;
         List<AllPfAlbumSunObject> objectList = familyUuidObjectSql.findAllByWhere(AllPfAlbumSunObject.class, sql);
-        String count = "select count(*) from com_wj_kindergarten_bean_AllPfAlbumSunObject where " +
-                " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' ";
+//        String count = "select count(*) from com_wj_kindergarten_bean_AllPfAlbumSunObject where " +
+//                " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' ";
         return objectList;
     }
 

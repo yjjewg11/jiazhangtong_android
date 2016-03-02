@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <LinearLayout
+        android:id="@+id/pf_pic_bottom_viewGroup"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,13 +22,35 @@
             android:drawableTop="@drawable/shoucangnewwhtire"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <TextView
-            android:drawableTop="@drawable/hudongnew"
-            android:id="@+id/pf_bottom_assess"
-            style="@style/pf_bottom_style"
-            android:text="评论"
+
+        <FrameLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <TextView
+                android:drawableTop="@drawable/hudongnew"
+                android:id="@+id/pf_bottom_assess"
+                style="@style/pf_bottom_style"
+                android:text="评论"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+                <TextView
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:id="@+id/pf_pic_bottom_assess_count"
+                    android:textSize="11sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/assess_circle"
+                    android:text="0"
+                    android:minWidth="@dimen/margin_15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp" />
+
+
+        </FrameLayout>
+
 
         <TextView
             android:drawableTop="@drawable/pf_zan"

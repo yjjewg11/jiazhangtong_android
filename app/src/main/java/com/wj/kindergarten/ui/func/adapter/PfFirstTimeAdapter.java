@@ -1,6 +1,8 @@
 package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,25 +11,41 @@ import android.widget.ImageView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ThreadManager;
 
+import net.tsz.afinal.FinalDb;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Created by tangt on 2016/3/1.
  */
 public class PfFirstTimeAdapter extends BaseAdapter{
     private List<AllPfAlbumSunObject> objectList;
+    public void notifyData(){
+        notifyDataSetChanged();
+    }
     private Context context;
-    private LayoutInflater inflater;
 
-    public PfFirstTimeAdapter(Context context, List<AllPfAlbumSunObject> objectList) {
-        this.context = context;
+
+    public PfFirstTimeAdapter(Context context,List<AllPfAlbumSunObject> objectList){
         this.objectList = objectList;
-        inflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
-    public PfFirstTimeAdapter() {
+    public PfFirstTimeAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setObjectList(List<AllPfAlbumSunObject> objectList) {
+        this.objectList = objectList;
+        notifyData();
     }
 
     @Override

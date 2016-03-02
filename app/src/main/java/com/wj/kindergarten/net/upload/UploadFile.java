@@ -112,13 +112,15 @@ public class UploadFile {
 
 
 
+    //上传相册压缩大小
+    private int compressSize = 100;
     public void upLoadPf(String path,ProgressCallBack progressCallBack) {
         if (Utils.isNetworkAvailable(context)) {
             try {
                 File file = new File(path);
                 if (isompress(path)) {
                     Bitmap bitmap = compressBySize(path, width, height);
-                    file = saveFile(bitmap, 70);
+                    file = saveFile(bitmap, compressSize);
                     if (bitmap != null && !bitmap.isRecycled()) {
                         bitmap.recycle();
                     }

@@ -21,6 +21,7 @@ import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleChooseActivity;
@@ -28,6 +29,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
@@ -120,6 +122,7 @@ public final class UserRequest {
     private static final String ADD_OR_EDIT_PF_ALBUM = "rest/fpFamilyPhotoCollection/save.json";
     private static final String GET_ALL_PIC_FROM_BOUTIQUE = "rest/fPPhotoItem/queryForMovieUuid.json";
     private static final String ADD_FAMILY_MEMBER = "rest/fPFamilyMembers/save.json";
+    private static final String INIT_SYNC_UPLOAD = "rest/fPPhotoItem/queryAlreadyUploaded.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -1052,7 +1055,7 @@ public final class UserRequest {
     public static void picCommonCancleStore(Context context, String uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("uuid",uuid);
-        SendRequest.getInstance().post(context,RequestType.ZAN,params,RequestHttpUtil.BASE_URL+PF_CANCLE_FAVORITE,resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL + PF_CANCLE_FAVORITE, resultI);
     }
 
     public static void gePfCollect(Context context, int pageNo, RequestResultI resultI) {
@@ -1107,11 +1110,11 @@ public final class UserRequest {
     public static void getAllPicFromBoutiqueAlbum(Context context, String movie_uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("movie_uuid",movie_uuid);
-        SendRequest.getInstance().get(context, RequestType.GET_ALL_PIC_FROM_BOUTIQUE, params, RequestHttpUtil.BASE_URL+
+        SendRequest.getInstance().get(context, RequestType.GET_ALL_PIC_FROM_BOUTIQUE, params, RequestHttpUtil.BASE_URL +
                 GET_ALL_PIC_FROM_BOUTIQUE, resultI);
     }
-    public static void addFamilyMember(Context context,String family_uuid,String tel,
-                                       String uuid,String family_name,RequestResultI resultI){
+
+    public static void addFamilyMember(Context context, String family_uuid, String family_name, String tel, String uuid, RequestResultI resultI) {
         JSONObject object = new JSONObject();
         try{
         object.put("family_uuid",family_uuid);
@@ -1121,7 +1124,15 @@ public final class UserRequest {
         }catch (JSONException e){
             e.printStackTrace();
         }
-        SendRequest.getInstance().post(context,RequestType.ZAN,object.toString(),RequestHttpUtil.BASE_URL+
-                ADD_FAMILY_MEMBER,resultI);
+        SendRequest.getInstance().post(context, RequestType.ADD_FAMILY_MEMBER, object.toString(), RequestHttpUtil.BASE_URL +
+                ADD_FAMILY_MEMBER, resultI);
+    }
+
+    public static void initSyncUploadPic(Context context, int pageNo, String family_uuid, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        params.put("phone_uuid",family_uuid);
+        SendRequest.getInstance().get(context, RequestType.INIT_SYNC_UPLOAD, params, RequestHttpUtil.BASE_URL +
+                INIT_SYNC_UPLOAD, resultI);
     }
 }

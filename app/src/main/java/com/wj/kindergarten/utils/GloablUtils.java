@@ -54,6 +54,9 @@ public interface GloablUtils {
     int REQUEST_CONTACT = 3051;
     int GET_SINGLE_PIC_FROM_BOUTIQUE = 3052;
     int INVITE_MORE_PEOPLE = 3053;
+    int UPDATE_SUCCESSED_REFRESH = 3054;
+
+
     //接受二维码链接的广播action
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
