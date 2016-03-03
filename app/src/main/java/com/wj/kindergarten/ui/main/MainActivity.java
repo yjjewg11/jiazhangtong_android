@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -637,6 +638,15 @@ public class MainActivity extends BaseActivity {
                 if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
                     familyFragment.initHeadBack();
+                }
+                break;
+            case GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED:
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    String uuid = data.getStringExtra("uuid");
+                    if(!TextUtils.isEmpty(uuid)){
+                        familyFragment.updateBoutiqueFragmentData(uuid);
+                    }
                 }
                 break;
         }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
 import com.wj.kindergarten.bean.PfModeNameObject;
@@ -49,6 +50,7 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        ActivityManger.getInstance().addPfActivities(this);
         FinalActivity.initInjectedView(this);
         setTitleText("编辑照片信息");
         getData();

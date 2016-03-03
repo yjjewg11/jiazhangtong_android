@@ -17,26 +17,25 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <FrameLayout
-                    android:id="@+id/pf_gallery_fl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <include layout="@layout/pf_info_four_message"/>
-                </FrameLayout>
                 <ImageView
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:layout_marginBottom="@dimen/margin_20"
                     android:layout_marginTop="@dimen/margin_15"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/zhanweitu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:id="@+id/pf_gallery_image" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <include layout="@layout/pf_gallery_fragment_extra_info"/>
+                </FrameLayout>
                 <LinearLayout
                     android:orientation="vertical"
                     android:id="@+id/pf_info_assess"

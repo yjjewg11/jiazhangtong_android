@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.TransportListener;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ThreadManager;
@@ -77,6 +78,7 @@ public class PfFirstTimeAdapter extends BaseAdapter{
         AllPfAlbumSunObject o = objectList.get(position);
         if(o != null){
             ImageLoaderUtil.displayMyImage(o.getPath(),holder.iv);
+            holder.iv.setOnClickListener( new TransportListener(context,position,objectList,null));
         }
         return convertView;
     }

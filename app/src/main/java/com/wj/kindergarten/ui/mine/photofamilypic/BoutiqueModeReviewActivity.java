@@ -61,6 +61,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        ActivityManger.getInstance().addPfActivities(this);
         FinalActivity.initInjectedView(this);
         setTitleText("相册模板预览", "音乐");
         initViews();
@@ -143,6 +144,9 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
             title = boutiqueSingleInfoObject.getTitle();
             hearld = boutiqueSingleInfoObject.getHerald();
             uuid = boutiqueSingleInfoObject.getUuid();
+        }
+        if(TextUtils.isEmpty(title)){
+            title = "相册预览!";
         }
         UserRequest.getBoutiqueReviewUrl(this, title,
                 mp3, uuid, hearld, key

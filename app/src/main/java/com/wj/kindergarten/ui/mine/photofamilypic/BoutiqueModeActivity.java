@@ -10,6 +10,7 @@ import android.widget.GridView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
@@ -49,6 +50,7 @@ public class BoutiqueModeActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        ActivityManger.getInstance().addPfActivities(this);
         FinalActivity.initInjectedView(this);
         commonDialog = new HintInfoDialog(this,"数据加载中...请稍候");
         getData();

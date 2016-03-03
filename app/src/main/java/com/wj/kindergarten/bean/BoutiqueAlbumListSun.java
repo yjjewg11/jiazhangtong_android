@@ -30,6 +30,22 @@ public class BoutiqueAlbumListSun extends BaseModel{
         this.create_username = create_username;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BoutiqueAlbumListSun sun = (BoutiqueAlbumListSun) o;
+
+        return uuid.equals(sun.uuid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
+
     public String getUuid() {
         return uuid;
     }

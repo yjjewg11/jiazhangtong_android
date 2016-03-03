@@ -155,7 +155,7 @@ public class PhotoFamilyFragment extends Fragment {
         pf_pic_center_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                  changePFAlbum();
             }
         });
         pf_pic_right_iv.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +164,10 @@ public class PhotoFamilyFragment extends Fragment {
                 addRightListener();
             }
         });
+    }
+
+    private void changePFAlbum() {
+
     }
 
     public void initHeadBack(){
@@ -224,7 +228,12 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initHead() {
         ((MainActivity)getActivity()).hideActionbar();
+    }
 
+    public void updateBoutiqueFragmentData(String uuid){
+        if(boutique_album_framgent != null){
+            boutique_album_framgent.updateData(uuid);
+        }
     }
 
     private void clickLeft() {
@@ -341,11 +350,10 @@ public class PhotoFamilyFragment extends Fragment {
                     case 1:
                         //精辟相册
                         if (getFragmentManager().findFragmentByTag(fragment_tags[1]) == null) {
-                            boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this);
+                            if(boutique_album_framgent == null)boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this);
                         } else {
                             boutique_album_framgent = (BoutiqueAlbumFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
                         }
-
                         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, boutique_album_framgent, fragment_tags[1]).commit();
                         break;
                 }

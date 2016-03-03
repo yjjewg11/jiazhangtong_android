@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:id="@+id/common_assess_item_rl"
         android:gravity="center_vertical"
         android:paddingTop="@dimen/margin_20"
         android:paddingBottom="20dp"
@@ -27,6 +28,9 @@
             android:layout_marginLeft="21dp" />
 
         <TextView
+            android:layout_below="@+id/common_assess_item_name"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_15"
             android:textColor="@color/color_8e8e8e"
             android:textSize="14sp"
             android:layout_width="wrap_content"
@@ -34,8 +38,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="这是一条惨无人道的评论"
             android:id="@+id/common_assess_item_content"
-            android:layout_alignBottom="@+id/common_assess_item_head_img"
-            android:layout_alignLeft="@+id/common_assess_item_name" />
+            android:layout_alignLeft="@+id/common_assess_item_name"
+            android:layout_toLeftOf="@+id/common_assess_item_time" />
 
         <TextView
             android:textColor="@color/color_8e8e8e"
@@ -50,6 +54,7 @@
             android:layout_alignParentRight="true" />
 
         <TextView
+            android:gravity="bottom"
             android:padding="@dimen/margin_10"
             android:textColor="#cc5c55"
             android:textSize="12sp"

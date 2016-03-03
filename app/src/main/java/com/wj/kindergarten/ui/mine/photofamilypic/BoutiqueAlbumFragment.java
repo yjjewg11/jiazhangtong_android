@@ -22,10 +22,13 @@ import com.wj.kindergarten.bean.BoutiqueAlbumListSun;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueAdapter;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
+import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class BoutiqueAlbumFragment extends Fragment {
@@ -35,6 +38,8 @@ public class BoutiqueAlbumFragment extends Fragment {
     PhotoFamilyFragment photoFamilyFragment;
     int firstVisibleItemOwn = -1;
     private List<BoutiqueAlbumListSun> boutiqueAlbumList = new ArrayList<>();
+    private HintInfoDialog dialog;
+
     public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment) {
         this.photoFamilyFragment = photoFamilyFragment;
     }
@@ -43,8 +48,9 @@ public class BoutiqueAlbumFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initScrollListener();
-        if(view != null) return view;
-        view = inflater.inflate(R.layout.fragment_test,null);
+        if (view != null) return view;
+        dialog = new HintInfoDialog(getActivity());
+        view = inflater.inflate(R.layout.fragment_test, null);
         pullListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
         pullListView.setAdapter(boutiqueAdapter);
@@ -57,7 +63,8 @@ public class BoutiqueAlbumFragment extends Fragment {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                pageNo++;
+                loadData();
             }
         });
         pullListView.getRefreshableView().setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -74,8 +81,8 @@ public class BoutiqueAlbumFragment extends Fragment {
         pullListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),BoutiqueSingleInfoActivity.class);
-                intent.putExtra("uuid",boutiqueAlbumList.get(position).getUuid());
+                Intent intent = new Intent(getActivity(), BoutiqueSingleInfoActivity.class);
+                intent.putExtra("uuid", boutiqueAlbumList.get(position).getUuid());
                 startActivity(intent);
             }
         });
@@ -105,34 +112,58 @@ public class BoutiqueAlbumFragment extends Fragment {
 
     int pageNo = 1;
 
-   public void loadData(){
-       UserRequest.getBoutiqueAlbumList(getActivity(),pageNo, new RequestResultI() {
-           @Override
-           public void result(BaseModel domain) {
-               BoutiqueAlbum boutiqueAlbum = (BoutiqueAlbum) domain;
-               if(boutiqueAlbum != null && boutiqueAlbum.getList() != null
-                       && boutiqueAlbum.getList().getData() != null && boutiqueAlbum.getList().getData().size() > 0){
-                   boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());
-                   boutiqueAdapter.setList(boutiqueAlbumList);
-               }else{
-                   if(pageNo == 1){
-                       ToastUtils.showMessage("没有");
-                   }else {
-                       ToastUtils.showMessage("没有更多内容了!!!");
-                       pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
-                   }
-               }
-           }
+    public void loadData() {
+        if(!pullListView.isRefreshing()){
+            dialog.show();
+        }
+        UserRequest.getBoutiqueAlbumList(getActivity(), pageNo, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                if(pullListView.isRefreshing()){
+                    pullListView.onRefreshComplete();
+                }else{
+                    if(dialog.isShowing()){
+                        dialog.dismiss();
+                    }
+                }
+                BoutiqueAlbum boutiqueAlbum = (BoutiqueAlbum) domain;
+                if (boutiqueAlbum != null && boutiqueAlbum.getList() != null
+                        && boutiqueAlbum.getList().getData() != null && boutiqueAlbum.getList().getData().size() > 0) {
+                    boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());
+                    boutiqueAdapter.setList(boutiqueAlbumList);
+                } else {
+                    if (pageNo == 1) {
+//                        ToastUtils.showMessage("没有");
+                    } else {
+                        ToastUtils.showMessage("没有更多内容了!!!");
+                        pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
+                    }
+                }
+            }
 
-           @Override
-           public void result(List<BaseModel> domains, int total) {
+            @Override
+            public void result(List<BaseModel> domains, int total) {
 
-           }
+            }
 
-           @Override
-           public void failure(String message) {
+            @Override
+            public void failure(String message) {
 
-           }
-       });
-   };
+            }
+        });
+    }
+
+    public void updateData(String uuid) {
+        Iterator<BoutiqueAlbumListSun> iterator = boutiqueAlbumList.iterator();
+        while (iterator.hasNext()){
+            BoutiqueAlbumListSun sun = iterator.next();
+            if(sun.getUuid().equals(uuid)){
+                boutiqueAlbumList.remove(sun);
+                boutiqueAdapter.setList(boutiqueAlbumList);
+                break;
+            }
+        }
+    }
+
+    ;
 }

@@ -1,8 +1,11 @@
 package com.wj.kindergarten.ui.mine.photofamilypic.pffragment;
 
+import android.app.MediaRouteButton;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,14 +14,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
@@ -36,6 +42,7 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.emot.SendMessage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
+import com.wj.kindergarten.ui.func.adapter.PfCommonAssessAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfInfoFragmentAdapter;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 import com.wj.kindergarten.ui.more.ListenScrollView;
@@ -59,6 +66,8 @@ import java.util.List;
  * Created by tangt on 2016/2/23.
  */
 public class PFSingleObjectInfoFragment extends Fragment {
+    private final int UPDATE_ASSESS_COUNT = 301;
+    private final int POP_DELAY_300 = 300;
     private AllPfAlbumSunObject sunObject;
     private ListenScrollView pf_single_scroll;
     private View innerView;
@@ -71,11 +80,6 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private TextView title_webview_normal_text;
     private TextView title_webview_normal_spinner;
     private ImageView normal_title_right_icon;
-    private FrameLayout pf_gallery_fl;
-    private TextView pf_info_careme_time;
-    private TextView pf_info_location;
-    private TextView pf_info_device;
-    private TextView pf_info_upload_people;
     private LinearLayout bottom_assess;
     private FrameLayout frame_bottom_tab;
     private TextView[] textViews;
@@ -86,6 +90,39 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private ImageView pf_delete;
     private ImageView pf_edit;
     private PfInfoFragmentAdapter pfInfoFragmentAdapter;
+    private TextView pf_gallery_fragment_extra_info_description;
+    private TextView pf_gallery_fragment_extra_info_time;
+    private TextView pf_gallery_fragment_extra_info_human;
+    private TextView pf_gallery_fragment_extra_info_address;
+    private View assessView;
+    private TextView pf_common_show_assess_title;
+    private PullToRefreshListView assessListView;
+    private PopupWindow popAssessWindow;
+    private PfCommonAssessAdapter pfCommonAssessAdapter;
+    private List<PfSingleAssessObject> assessObjectList = new ArrayList<>();
+    private LinearLayout pf_pic_bottom_viewGroup;
+    private TextView pf_pic_bottom_assess_count;
+    private Handler mHanlder = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case POP_DELAY_300:
+                    emot2.showSoftKeyboard();
+                    bottom_assess.setVisibility(View.VISIBLE);
+                    pf_pic_bottom_viewGroup.setVisibility(View.GONE);
+                    break;
+                case UPDATE_ASSESS_COUNT:
+                    int count = singleInfo.getReply_count();
+                    if (count == 0) {
+                        pf_pic_bottom_assess_count.setVisibility(View.GONE);
+                    } else {
+                        pf_pic_bottom_assess_count.setVisibility(View.VISIBLE);
+                    }
+                    pf_pic_bottom_assess_count.setText("" + count);
+                    break;
+            }
+        }
+    };
 
     public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter,PfSingleInfoFragment pfSingleInfoFragment) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
@@ -110,13 +147,11 @@ public class PFSingleObjectInfoFragment extends Fragment {
         dialog = new HintInfoDialog(getActivity(),"加载数据中...请稍后");
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
+        initExtraView();
+        pf_pic_bottom_assess_count = (TextView) innerView.findViewById(R.id.pf_pic_bottom_assess_count);
+        pf_pic_bottom_viewGroup = (LinearLayout) innerView.findViewById(R.id.pf_pic_bottom_viewGroup);
         pf_single_scroll = (ListenScrollView) innerView.findViewById(R.id.pf_single_scroll);
         pf_gallery_image = (ImageView) innerView.findViewById(R.id.pf_gallery_image);
-        pf_gallery_fl = (FrameLayout) innerView.findViewById(R.id.pf_gallery_fl);
-        pf_info_careme_time = (TextView) innerView.findViewById(R.id.pf_info_careme_time);
-        pf_info_location = (TextView) innerView.findViewById(R.id.pf_info_location);
-        pf_info_device = (TextView) innerView.findViewById(R.id.pf_info_device);
-        pf_info_upload_people = (TextView) innerView.findViewById(R.id.pf_info_upload_people);
         pf_single_scroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         maxTime = TimeUtil.getStringDate(new Date());
         pf_single_scroll.setOnScrollChanged(new ListenScrollView.OnScrollChanged() {
@@ -157,9 +192,17 @@ public class PFSingleObjectInfoFragment extends Fragment {
         return innerView;
     }
 
+    private void initExtraView() {
+        pf_gallery_fragment_extra_info_description = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_description);
+        pf_gallery_fragment_extra_info_time = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_time);
+        pf_gallery_fragment_extra_info_address = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_address);
+        pf_gallery_fragment_extra_info_human = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_human);
+    }
+
     private void initData() {
         if(pfInfoFragmentAdapter != null){
             sunObject = pfInfoFragmentAdapter.getCurrentObject();
+            updatePfInfo();
         }
     }
 
@@ -176,15 +219,15 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 getActivity().finish();
             }
         });
-        normal_title_right_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRightInfo();
-            }
-        });
+//        normal_title_right_icon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showRightInfo();
+//            }
+//        });
         Drawable drawable = getResources().getDrawable(R.drawable.pf_card_view);
-        drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getIntrinsicHeight());
-        title_webview_normal_text.setCompoundDrawables(null, null, drawable, null);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getIntrinsicHeight());
+//        title_webview_normal_text.setCompoundDrawables(null, null, drawable, null);
         title_webview_normal_text.setCompoundDrawablePadding(4);
         title_webview_normal_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,7 +241,68 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void chcekUpadate() {
         if (sunObject.getStatus() != 0) {
             queryItemNewInfo(sunObject.getUuid());
+        }else{
+            updatePfInfo();
         }
+    }
+
+    private void updatePfInfo() {
+        pf_gallery_fragment_extra_info_description.setText(""+Utils.isNull(sunObject.getNote()));
+        pf_gallery_fragment_extra_info_time.setText("拍摄时间: "+Utils.isNull(sunObject.getPhoto_time()));
+        pf_gallery_fragment_extra_info_address.setText("拍摄地点: "+Utils.isNull(sunObject.getAddress()));
+        pf_gallery_fragment_extra_info_human.setText("上传人: "+Utils.isNull(sunObject.getCreate_user()));
+    }
+
+    private void showAssessList() {
+        if (assessView == null) {
+            assessView = View.inflate(getActivity(), R.layout.pf_common_show_assess_layout, null);
+            pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
+            assessListView = (PullToRefreshListView) assessView.findViewById(R.id.pulltorefresh_list);
+            assessListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+            assessListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+                @Override
+                public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+
+                }
+
+                @Override
+                public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                    pageNo++;
+                    queSingleAssess();
+                }
+            });
+            pf_common_show_assess_title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popAssessWindow.dismiss();
+                }
+            });
+            pfCommonAssessAdapter = new PfCommonAssessAdapter(getActivity());
+            pfCommonAssessAdapter.setBottomListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomShow();
+                }
+            });
+            assessListView.setAdapter(pfCommonAssessAdapter);
+            //初始化底部评论模块
+            emot2 = new ViewEmot2(getActivity(), new SendMessage() {
+                @Override
+                public void send(String message) {
+                    sendReply(message);
+                }
+            });
+
+            bottom_assess.addView(emot2);
+        }
+        pfCommonAssessAdapter.setObjectList(assessObjectList);
+
+        //指定显示高度
+        int height = WindowUtils.dm.heightPixels / 5 * 3;
+        CGLog.v("打印高度 : " + height);
+        popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
+        Utils.setPopWindow(popAssessWindow);
+        popAssessWindow.showAsDropDown(textViews[1], Gravity.BOTTOM, 0, 0);
     }
 
     private void showPic() {
@@ -222,26 +326,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    pf_gallery_image.setImageBitmap(loadedImage);
                     //将图片按比例放大显示
                     int height = (WindowUtils.dm.widthPixels / loadedImage.getWidth()) * loadedImage.getHeight();
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) pf_gallery_image.getLayoutParams();
                     params.height = height;
                     pf_gallery_image.setLayoutParams(params);
-                    //判断图片大小是否要显示上面的信息
-                    if (height > WindowUtils.dm.heightPixels / 3 * 2) {
-                        pf_gallery_fl.setVisibility(View.GONE);
-                        normal_title_right_icon.setImageResource(R.drawable.xinxi_photo);
-                    } else {
-                        pf_gallery_fl.setVisibility(View.VISIBLE);
-                        normal_title_right_icon.setImageResource(0);
-                        if (sunObject != null) {
-                            pf_info_careme_time.append("" + Utils.isNull(sunObject.getCreate_time()));
-                            pf_info_location.append("" + Utils.isNull(sunObject.getAddress()));
-                            pf_info_device.append("" + Utils.isNull(sunObject.getCreate_useruuid()));
-                            pf_info_upload_people.append("" + Utils.isNull(sunObject.getCreate_useruuid()));
-                        }
-                    }
+                    pf_gallery_image.setImageBitmap(loadedImage);
                 }
 
                 @Override
@@ -264,7 +354,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null
                                 && pfSingleAssess.getList().getData().size() > 0) {
-                            addAssess(pfSingleAssess.getList().getData());
+                            assessObjectList.addAll(pfSingleAssess.getList().getData());
                         }else{
                             if(pageNo == 1){
                                 addNothing();
@@ -362,6 +452,10 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     private void initCollect() {
         //可以收藏
+        if(singleInfo.getStatus() == 2){
+            deleteData(sunObject);
+            return;
+        }
         if(singleInfo.isFavor()){
             Utils.cancleStoreStatus(getActivity(),textViews[0]);
         }else{
@@ -377,6 +471,8 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 Utils.showDianzanStatus(getActivity(), textViews[2]);
             }
         }
+
+        mHanlder.sendEmptyMessage(UPDATE_ASSESS_COUNT);
     }
 
     private void initBottomBt() {
@@ -389,16 +485,6 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 (TextView) innerView.findViewById(R.id.pf_bottom_share),
                 (TextView) innerView.findViewById(R.id.pf_bottom_more),
         };
-
-        //初始化底部评论模块
-        emot2 = new ViewEmot2(getActivity(), new SendMessage() {
-            @Override
-            public void send(String message) {
-                sendReply(message);
-            }
-        });
-
-        bottom_assess.addView(emot2);
 
         final View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -416,7 +502,8 @@ public class PFSingleObjectInfoFragment extends Fragment {
                         }
                         break;
                     case R.id.pf_bottom_assess:
-                        beginAssess();
+                        showAssessList();
+//                        beginAssess();
                         break;
                     case R.id.pf_bottom_share:
                         String note = sunObject.getNote();
@@ -490,12 +577,16 @@ public class PFSingleObjectInfoFragment extends Fragment {
     }
 
     public void bottomShow(){
-        emot2.showSoftKeyboard();
-        bottom_assess.setVisibility(View.VISIBLE);
+        if (popAssessWindow.isShowing()) {
+            popAssessWindow.dismiss();
+        }
+        mHanlder.sendEmptyMessageDelayed(POP_DELAY_300, 300);
     }
     public void bottomCancle(){
         emot2.hideSoftKeyboard();
         bottom_assess.setVisibility(View.GONE);
+        pf_pic_bottom_viewGroup.setVisibility(View.VISIBLE);
+        showAssessList();
     }
 
     private void sendReply(final String message) {
@@ -503,19 +594,16 @@ public class PFSingleObjectInfoFragment extends Fragment {
         Utils.commonSendReply(getActivity(), sunObject.getUuid(), sunObject.getCreate_useruuid(), "", message, GloablUtils.MODE_OF_PF, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                bottomCancle();
                 cancleDialog();
                 ToastUtils.showMessage("评论回复成功!");
                 PfSingleAssessObject object = new PfSingleAssessObject();
                 if (object == null) return;
                 object.setContent(message);
                 object.setCreate_user(sunObject.getCreate_user());
-                object.setCreate_time("刚刚");
+                object.setCreate_time(TimeUtil.getNowDate());
                 object.setCreate_img(sunObject.getPath());
-                List<PfSingleAssessObject> assessList = new ArrayList<>();
-                assessList.add(object);
-                addAssess(assessList);
-
+                assessObjectList.add(object);
+                bottomCancle();
             }
 
             @Override

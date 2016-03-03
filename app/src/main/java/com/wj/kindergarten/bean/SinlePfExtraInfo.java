@@ -9,7 +9,26 @@ public class SinlePfExtraInfo extends BaseModel{
     @Expose
     private boolean isFavor;@Expose
     private PfDianZan dianZan;@Expose
-    private int reply_count;
+    private int reply_count;@Expose
+    private int status;
+
+    @Override
+    public String toString() {
+        return "SinlePfExtraInfo{" +
+                "isFavor=" + isFavor +
+                ", dianZan=" + dianZan +
+                ", reply_count=" + reply_count +
+                ", status=" + status +
+                '}';
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getReply_count() {
         return reply_count;
@@ -35,12 +54,4 @@ public class SinlePfExtraInfo extends BaseModel{
         this.dianZan = dianZan;
     }
 
-    @Override
-    public String toString() {
-        return "SinlePfExtraInfo{" +
-                "isFavor=" + isFavor +
-                ", dianZan=" + dianZan +
-                ", reply_count=" + reply_count +
-                '}';
-    }
 }

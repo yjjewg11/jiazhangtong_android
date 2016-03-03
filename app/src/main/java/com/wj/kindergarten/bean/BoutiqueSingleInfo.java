@@ -10,7 +10,8 @@ public class BoutiqueSingleInfo extends BaseModel{
     private BoutiqueSingleInfoObject data;@Expose
     boolean isFavor;@Expose
     PfDianZan dianZan;@Expose
-    String share_url;
+    String share_url;@Expose
+    int reply_count;
 
     @Override
     public String toString() {
@@ -19,7 +20,16 @@ public class BoutiqueSingleInfo extends BaseModel{
                 ", isFavor=" + isFavor +
                 ", dianZan=" + dianZan +
                 ", share_url='" + share_url + '\'' +
+                ", reply_count=" + reply_count +
                 '}';
+    }
+
+    public int getReply_count() {
+        return reply_count;
+    }
+
+    public void setReply_count(int reply_count) {
+        this.reply_count = reply_count;
     }
 
     public BoutiqueSingleInfoObject getData() {

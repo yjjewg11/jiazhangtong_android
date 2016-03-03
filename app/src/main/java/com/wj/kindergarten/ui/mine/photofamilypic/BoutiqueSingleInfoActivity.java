@@ -1,31 +1,35 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshWebView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueAllpic;
 import com.wj.kindergarten.bean.BoutiqueSingleInfo;
 import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
-import com.wj.kindergarten.bean.PfAlbumInfo;
 import com.wj.kindergarten.bean.PfDianZan;
 import com.wj.kindergarten.bean.PfSingleAssess;
 import com.wj.kindergarten.bean.PfSingleAssessObject;
+import com.wj.kindergarten.bean.UserInfo;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -46,6 +50,7 @@ import java.util.List;
 
 public class BoutiqueSingleInfoActivity extends BaseActivity {
 
+    private final int POP_DELAY_300 = 203;
     private final int UPDATE_ASSESS_COUNT = 202;
     private TextView[] textViews;
     private PullToRefreshWebView boutiqueWebView;
@@ -62,13 +67,18 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     initHttpData();
                     break;
                 case UPDATE_ASSESS_COUNT:
-                    int count = pfSingleAssess.getList().getTotalCount();
-                    if(count == 0){
+                    int count = boutiqueSingleInfo.getReply_count();
+                    if (count == 0) {
                         pf_pic_bottom_assess_count.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         pf_pic_bottom_assess_count.setVisibility(View.VISIBLE);
                     }
-                    pf_pic_bottom_assess_count.setText(""+count);
+                    pf_pic_bottom_assess_count.setText("" + count);
+                    break;
+                case POP_DELAY_300:
+                    emot2.showSoftKeyboard();
+                    boutique_single_info_assess.setVisibility(View.VISIBLE);
+                    pf_pic_bottom_viewGroup.setVisibility(View.GONE);
                     break;
             }
         }
@@ -78,33 +88,34 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     private View pf_more_view;
     private ImageView pf_delete;
     private ImageView pf_edit;
-    private ArrayList<AllPfAlbumSunObject> objectList;
+    private ArrayList<AllPfAlbumSunObject> objectList = new ArrayList<>();
     private View assessView;
-    private PullToRefreshListView assessList;
+    private PullToRefreshListView assessListView;
     private String maxTime;
     private PfCommonAssessAdapter pfCommonAssessAdapter;
     private TextView pf_pic_bottom_assess_count;
     private PfSingleAssess pfSingleAssess;
     private LinearLayout pf_pic_bottom_viewGroup;
     private TextView pf_common_show_assess_title;
+    private PopupWindow popAssessWindow;
     //在主页面底部加入输入框后，在弹出框弹出时，会将它隐藏，所以添加到popwindow中
-    private LinearLayout pf_comon_show_assess_linear;
+//    private LinearLayout pf_comon_show_assess_linear;
 
     private void initHttpData() {
         setTitleText("" + boutiqueSingleInfo.getData().getTitle());
         boutiqueWebView.getRefreshableView().loadUrl(boutiqueSingleInfo.getShare_url());
-        if(boutiqueSingleInfo.isFavor()){
+        if (boutiqueSingleInfo.isFavor()) {
             Utils.cancleStoreStatus(this, textViews[0]);
-        }else{
-            Utils.showStoreStatus(this,textViews[0]);
+        } else {
+            Utils.showStoreStatus(this, textViews[0]);
         }
 
-        PfDianZan dianZan =  boutiqueSingleInfo.getDianZan();
-        if(dianZan != null){
+        PfDianZan dianZan = boutiqueSingleInfo.getDianZan();
+        if (dianZan != null) {
             //可以点赞
-            if(dianZan.getYidianzan() == 0){
-                Utils.cancleDizanStatus(this,textViews[2]);
-            }else{
+            if (dianZan.getYidianzan() == 0) {
+                Utils.cancleDizanStatus(this, textViews[2]);
+            } else {
                 Utils.showDianzanStatus(this, textViews[2]);
             }
         }
@@ -131,16 +142,18 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         queryAssess();
     }
 
-    public void showDialog(){
+    public void showDialog() {
         commonDialog.show();
     }
-    public void cancleDialog(){
-        if(commonDialog.isShowing()){
+
+    public void cancleDialog() {
+        if (commonDialog.isShowing()) {
             commonDialog.dismiss();
         }
     }
 
     int pageNo = 1;
+
     private void queryAssess() {
         showDialog();
         UserRequest.getPfSingleAssess(this, pageNo, GloablUtils.BOUTIQUE_COMMON_TYPE, uuid, maxTime,
@@ -153,7 +166,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                                 && pfSingleAssess.getList().getData() != null
                                 && pfSingleAssess.getList().getData().size() > 0) {
                             assessObjectList.addAll(pfSingleAssess.getList().getData());
-                            mHanlder.sendEmptyMessage(UPDATE_ASSESS_COUNT);
+                        }else {
+                            if(pageNo == 1){
+
+                            }else {
+                                assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
+                                ToastUtils.showMessage("没有更多数据了!");
+                            }
                         }
                     }
 
@@ -176,7 +195,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             public void result(BaseModel domain) {
                 cancleDialog();
                 BoutiqueAllpic boutiqueAllpic = (BoutiqueAllpic) domain;
-                if(boutiqueAllpic != null && boutiqueAllpic.getList() != null){
+                if (boutiqueAllpic != null && boutiqueAllpic.getList() != null) {
                     objectList.addAll(boutiqueAllpic.getList());
                 }
             }
@@ -194,7 +213,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     }
 
     private void initBottomClick() {
-        for(TextView textView : textViews){
+        for (TextView textView : textViews) {
             textView.setOnClickListener(listener);
         }
     }
@@ -202,13 +221,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.pf_bottom_collect:
                     String text = textViews[0].getText().toString();
-                    if(text.equals("收藏")){
+                    if (text.equals("收藏")) {
                         //进行收藏
                         store();
-                    }else{
+                    } else {
                         //取消收藏
                         cacleStore();
                     }
@@ -224,9 +243,9 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     break;
                 case R.id.pf_bottom_dianzan:
                     String dianzanText = textViews[2].getText().toString();
-                    if(dianzanText.equals("点赞")){
+                    if (dianzanText.equals("点赞")) {
                         dianzan();
-                    }else{
+                    } else {
                         cancleDianzan();
                     }
                     break;
@@ -238,57 +257,63 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     };
 
     private void showAssessList() {
-        if(assessView == null){
-        assessView = View.inflate(this,R.layout.pf_common_show_assess_layout,null);
-        pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
-        assessList = (PullToRefreshListView) assessView.findViewById(R.id.pulltorefresh_list);
-        assessList.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-        pf_comon_show_assess_linear = (LinearLayout) assessView.findViewById(R.id.pf_comon_show_assess_linear);
-        assessList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        if (assessView == null) {
+            assessView = View.inflate(this, R.layout.pf_common_show_assess_layout, null);
+            pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
+            assessListView = (PullToRefreshListView) assessView.findViewById(R.id.pulltorefresh_list);
+            assessListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+            assessListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+                @Override
+                public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 
-            }
+                }
 
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-
-            }
-        });
-        pfCommonAssessAdapter = new PfCommonAssessAdapter(this);
+                @Override
+                public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                    pageNo++;
+                    queryAssess();
+                }
+            });
+            pf_common_show_assess_title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popAssessWindow.dismiss();
+                }
+            });
+            pfCommonAssessAdapter = new PfCommonAssessAdapter(this);
             pfCommonAssessAdapter.setBottomListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     bottomShow();
                 }
             });
-        assessList.setAdapter(pfCommonAssessAdapter);
+            assessListView.setAdapter(pfCommonAssessAdapter);
             emot2 = new ViewEmot2(this, new SendMessage() {
                 @Override
                 public void send(String message) {
                     sendReply(message);
                 }
             });
-            pf_comon_show_assess_linear.addView(emot2);
+            boutique_single_info_assess.addView(emot2);
         }
         pfCommonAssessAdapter.setObjectList(assessObjectList);
 
         //指定显示高度
-        int height = WindowUtils.dm.heightPixels/5*2;
-        CGLog.v("打印高度 : "+height);
-        PopupWindow popupWindow = new PopupWindow(assessView,ViewGroup.LayoutParams.MATCH_PARENT,height);
-        Utils.setPopWindow(popupWindow);
-        popupWindow.showAsDropDown(textViews[1], Gravity.BOTTOM, 0, 0);
+        int height = WindowUtils.dm.heightPixels / 5 * 3;
+        CGLog.v("打印高度 : " + height);
+        popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
+        Utils.setPopWindow(popAssessWindow);
+        popAssessWindow.showAsDropDown(textViews[1], Gravity.BOTTOM, 0, 0);
     }
 
     private void showMore() {
-        if(pf_more_view == null){
-            pf_more_view = View.inflate(this,R.layout.pf_single_more,null);
+        if (pf_more_view == null) {
+            pf_more_view = View.inflate(this, R.layout.pf_single_more, null);
             pf_delete = (ImageView) pf_more_view.findViewById(R.id.pf_single_delete);
             pf_edit = (ImageView) pf_more_view.findViewById(R.id.pf_single_edit);
         }
 
-        final PopupWindow popupWindow = new PopupWindow(pf_more_view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        final PopupWindow popupWindow = new PopupWindow(pf_more_view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         Utils.setPopWindow(popupWindow);
         pf_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,34 +322,31 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 deleteData(boutiqueSingleInfo.getData().getUuid());
             }
         });
-        pf_common_show_assess_title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
         pf_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                Intent intent = new Intent(BoutiqueSingleInfoActivity.this,PfChoosedPicActivity.class);
-                intent.putExtra("object",boutiqueSingleInfo.getData());
-                intent.putExtra("objectList",objectList);
+                Intent intent = new Intent(BoutiqueSingleInfoActivity.this, PfChoosedPicActivity.class);
+                intent.putExtra("object", boutiqueSingleInfo.getData());
+                intent.putExtra("objectList", objectList);
                 startActivity(intent);
             }
         });
-        int [] location = Utils.getLocation(textViews[4]);
+        int[] location = Utils.getLocation(textViews[4]);
         pf_more_view.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         CGLog.v("打印测量的高度 　：" + pf_more_view.getMeasuredHeight() + " 宽度 : " + pf_more_view.getMeasuredWidth());
         pf_more_view.getMeasuredHeight();
         popupWindow.showAtLocation(textViews[4], Gravity.NO_GRAVITY, location[0], location[1] - pf_more_view.getMeasuredHeight());
     }
 
-    private void deleteData(String uuid) {
+    private void deleteData(final String uuid) {
         UserRequest.deleteBoutiqueSingle(this, uuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 ToastUtils.showMessage("删除成功!");
+                Intent intent = new Intent();
+                intent.putExtra("uuid",uuid);
+                setResult(RESULT_OK,intent);
                 finish();
             }
 
@@ -386,17 +408,18 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         });
     }
 
-    public void bottomShow(){
-        emot2.showSoftKeyboard();
-        pf_comon_show_assess_linear.setVisibility(View.VISIBLE);
-        boutique_single_info_assess.setVisibility(View.VISIBLE);
-        pf_pic_bottom_viewGroup.setVisibility(View.GONE);
+    public void bottomShow() {
+        if (popAssessWindow.isShowing()) {
+            popAssessWindow.dismiss();
+        }
+        mHanlder.sendEmptyMessageDelayed(POP_DELAY_300, 300);
     }
-    public void bottomCancle(){
+
+    public void bottomCancle() {
         emot2.hideSoftKeyboard();
-        pf_comon_show_assess_linear.setVisibility(View.GONE);
         boutique_single_info_assess.setVisibility(View.GONE);
         pf_pic_bottom_viewGroup.setVisibility(View.VISIBLE);
+        showAssessList();
     }
 
     private void cacleStore() {
@@ -407,7 +430,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             public void result(BaseModel domain) {
                 if (commonDialog.isShowing()) {
                     commonDialog.dismiss();
-                    Utils.cancleStoreStatus(BoutiqueSingleInfoActivity.this,textViews[0]);
+                    Utils.cancleStoreStatus(BoutiqueSingleInfoActivity.this, textViews[0]);
                     ToastUtils.showMessage("取消收藏成功!");
                 }
             }
@@ -433,7 +456,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     public void result(BaseModel domain) {
                         if (commonDialog.isShowing()) {
                             commonDialog.dismiss();
-                            Utils.showStoreStatus(BoutiqueSingleInfoActivity.this,textViews[0]);
+                            Utils.showStoreStatus(BoutiqueSingleInfoActivity.this, textViews[0]);
                             ToastUtils.showMessage("收藏成功!");
                         }
                     }
@@ -458,6 +481,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 if (boutiqueSingleInfo != null) {
                     infoObject = boutiqueSingleInfo.getData();
                     mHanlder.sendEmptyMessage(GET_DATA_SUCCESSED);
+                    mHanlder.sendEmptyMessage(UPDATE_ASSESS_COUNT);
                 }
             }
 
@@ -484,6 +508,19 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         boutiqueWebView.setMode(PullToRefreshBase.Mode.DISABLED);
         setWebView(boutiqueWebView.getRefreshableView());
         boutique_single_info_assess = (LinearLayout) findViewById(R.id.boutique_single_info_assess);
+        boutiqueWebView.getRefreshableView().setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                showDialog();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                cancleDialog();
+            }
+        });
     }
 
     private void sendReply(final String message) {
@@ -491,15 +528,18 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         Utils.commonSendReply(this, boutiqueSingleInfo.getData().getUuid(), "", "", message, GloablUtils.BOUTIQUE_COMMON_TYPE, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                if(commonDialog.isShowing()){
+                if (commonDialog.isShowing()) {
                     commonDialog.dismiss();
                     ToastUtils.showMessage("评论回复成功!");
                     bottomCancle();
                     PfSingleAssessObject object = new PfSingleAssessObject();
+                    UserInfo userInfo = CGApplication.getInstance().getLogin().getUserinfo();
                     object.setContent(message);
+                    object.setCreate_user(userInfo.getName());
+                    object.setCreate_img(userInfo.getImg());
                     object.setCreate_useruuid(boutiqueSingleInfo.getData().getUuid());
-                    object.setCreate_time(TimeUtil.getStringDate(new Date()));
-                    assessObjectList.add(0,object);
+                    object.setCreate_time(TimeUtil.getNowDate());
+                    assessObjectList.add(0, object);
                     pfCommonAssessAdapter.setObjectList(assessObjectList);
                 }
             }

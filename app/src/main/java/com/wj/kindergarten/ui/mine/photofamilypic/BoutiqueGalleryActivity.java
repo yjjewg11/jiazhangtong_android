@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.QueryGroupCount;
 import com.wj.kindergarten.common.Constants;
@@ -133,6 +134,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void onCreate() {
+        ActivityManger.getInstance().addPfActivities(this);
         db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT);
         initSelectPic((ArrayList) getIntent().getSerializableExtra(Constants.ALREADY_SELECT_KEY));
         SIGN_BOARD = (getIntent().getIntExtra("signBoard", 0));

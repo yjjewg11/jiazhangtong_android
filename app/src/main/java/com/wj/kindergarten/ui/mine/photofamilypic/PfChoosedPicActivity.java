@@ -10,6 +10,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
 import com.wj.kindergarten.bean.PfModeNameObject;
@@ -51,6 +52,7 @@ public class PfChoosedPicActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        ActivityManger.getInstance().addPfActivities(this);
         setTitleText("选择图片");
         db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT);
         getData();
@@ -64,7 +66,7 @@ public class PfChoosedPicActivity extends BaseActivity {
             public void onClick(View v) {
                 //带着集合进入编辑页面
                  Intent intent = new Intent(PfChoosedPicActivity.this,BoutiqueAlbumEditActivity.class);
-                 intent.putExtra("objectList", (ArrayList) objectList);
+                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
                  intent.putExtra("object",boutiqueSingleInfoObject);
                  startActivity(intent);
             }

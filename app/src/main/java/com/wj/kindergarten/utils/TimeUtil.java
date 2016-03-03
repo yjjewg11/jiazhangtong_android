@@ -30,7 +30,7 @@ public final class TimeUtil {
     private TimeUtil() {
     }
 
-    public  static Long getMillionFromYMD(String time){
+    public static Long getMillionFromYMD(String time) {
         try {
             return formatYMD.parse(time).getTime();
         } catch (ParseException e) {
@@ -39,7 +39,7 @@ public final class TimeUtil {
         return null;
     }
 
-    public static Date formatDate(String time){
+    public static Date formatDate(String time) {
         try {
             return format.parse(time);
         } catch (ParseException e) {
@@ -48,11 +48,16 @@ public final class TimeUtil {
         return null;
     }
 
-    public static String getStringDate(Date date){
+    public static String getYMDHMSFromY_M_D_M_H_S(String date) {
+        Date dateYMDHMS = getDateFromString(date);
+        return format.format(dateYMDHMS);
+    }
+
+    public static String getStringDate(Date date) {
         return formatString.format(date);
     }
 
-    public static Date getDateFromString(String date){
+    public static Date getDateFromString(String date) {
         try {
             return formatString.parse(date);
         } catch (ParseException e) {
@@ -62,12 +67,12 @@ public final class TimeUtil {
     }
 
 
-    public static String getYMDTimeFromYMDHMS(String time){
-        Date date  = null;
+    public static String getYMDTimeFromYMDHMS(String time) {
+        Date date = null;
         try {
-            if(TextUtils.isEmpty(time)){
+            if (TextUtils.isEmpty(time)) {
                 date = new Date();
-            }else{
+            } else {
                 date = format.parse(time);
             }
         } catch (ParseException e) {
@@ -123,7 +128,6 @@ public final class TimeUtil {
     }
 
 
-
     public static int getWeekOfDayNum(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
@@ -136,14 +140,14 @@ public final class TimeUtil {
         return c.get(Calendar.DAY_OF_WEEK) - 1;
     }
 
-    public static String getYMDTimeFromDate(Date date){
+    public static String getYMDTimeFromDate(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(date);
     }
 
     //通过yyyy-MM-dd格式的时间得到毫秒数
 
-    public static Long getMullions(String date){
+    public static Long getMullions(String date) {
         Date d = null;
         try {
             d = format.parse(date);
@@ -153,24 +157,25 @@ public final class TimeUtil {
         }
         return d.getTime();
     }
+
     //获取的毫秒数转化为时间
-    public static String getDateToString(Long m){
+    public static String getDateToString(Long m) {
         Date c = new Date();
         c.setTime(m);
-       return formatYMD.format(c);
+        return formatYMD.format(c);
     }
 
     public static long compareTime(Date date, String plandate) {
-          String th =  formatYMD.format(date);
-          Date date2 = null;
-          Date date3 = null;
+        String th = formatYMD.format(date);
+        Date date2 = null;
+        Date date3 = null;
         try {
-            date2 =  formatYMD.parse(th);
+            date2 = formatYMD.parse(th);
             date3 = formatYMD.parse(plandate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return date3.getTime()-date2.getTime();
+        return date3.getTime() - date2.getTime();
     }
 }
