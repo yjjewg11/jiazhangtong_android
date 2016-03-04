@@ -128,7 +128,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void loadData() {
-        UserRequest.initSyncUploadPic(this, pageNo, MainActivity.getFamily_uuid(), new RequestResultI() {
+        UserRequest.initSyncUploadPic(this, pageNo,new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 CGSharedPreference.setUploadSyncStatus(true);

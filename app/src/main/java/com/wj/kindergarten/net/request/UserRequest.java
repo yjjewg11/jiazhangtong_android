@@ -1128,10 +1128,10 @@ public final class UserRequest {
                 ADD_FAMILY_MEMBER, resultI);
     }
 
-    public static void initSyncUploadPic(Context context, int pageNo, String family_uuid, RequestResultI resultI) {
+    public static void initSyncUploadPic(Context context, int pageNo,RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo",pageNo);
-        params.put("phone_uuid",family_uuid);
+        params.put("phone_uuid",CGApplication.getInstance().getAndroid_id());
         SendRequest.getInstance().get(context, RequestType.INIT_SYNC_UPLOAD, params, RequestHttpUtil.BASE_URL +
                 INIT_SYNC_UPLOAD, resultI);
     }

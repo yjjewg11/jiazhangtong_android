@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.PicObject;
 import com.wj.kindergarten.net.RequestHttpUtil;
@@ -73,6 +74,7 @@ public class UploadFile {
                 params.put("note",note);
                 params.put("family_uuid",family_uuid);
                 params.put("phone_type", Build.MODEL);
+                params.put("phone_uuid", CGApplication.getInstance().getAndroid_id());
                 CGLog.d(URL + "?" + params.toString());
                 RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new AsyncHttpResponseHandler() {
                     @Override

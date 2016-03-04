@@ -65,7 +65,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
                 decideSubViewScroll.allowScroll();
                 //情况1：当fl的Math.abs(fl.topMargin < fl.getHeight()) ,进行拦截
                 if(judgeScrollByABS() && Math.abs(ev.getRawY() - startY) > 10){
-                    CGLog.v("正确拦截,返回结果1 ："+judgeScrollByABS());
                     return true;
                 }
 
@@ -75,10 +74,8 @@ public class PfFragmentLinearLayout extends LinearLayout {
                 if(contentFl.getHeight() == Math.abs(getFlTopMargin()) &&
                         decideSubViewScroll.subViewLocationTop() && poor > 0
                         && Math.abs(ev.getRawY() - startY) > 10){
-                    CGLog.v("正确拦截,返回结果2 ：true");
                     return true;
                 }
-                CGLog.v("未进行拦截!!!");
                 break;
         }
 //        onInterceptTouchEvent.onInterceptTouch(ev);

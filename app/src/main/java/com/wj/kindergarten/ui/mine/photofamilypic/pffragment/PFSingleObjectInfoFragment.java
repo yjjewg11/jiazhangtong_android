@@ -152,7 +152,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         pf_pic_bottom_viewGroup = (LinearLayout) innerView.findViewById(R.id.pf_pic_bottom_viewGroup);
         pf_single_scroll = (ListenScrollView) innerView.findViewById(R.id.pf_single_scroll);
         pf_gallery_image = (ImageView) innerView.findViewById(R.id.pf_gallery_image);
-        pf_single_scroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        pf_single_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
         maxTime = TimeUtil.getStringDate(new Date());
         pf_single_scroll.setOnScrollChanged(new ListenScrollView.OnScrollChanged() {
             @Override
@@ -324,13 +324,19 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
                 }
 
+                private float convertFloat(int number){
+                    return Float.valueOf(number);
+                }
+
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                     //将图片按比例放大显示
-                    int height = (WindowUtils.dm.widthPixels / loadedImage.getWidth()) * loadedImage.getHeight();
+                    float height = (convertFloat(WindowUtils.dm.widthPixels) / convertFloat(loadedImage.getWidth())) * convertFloat(loadedImage.getHeight());
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) pf_gallery_image.getLayoutParams();
-                    params.height = height;
+                    params.height = (int) height;
+                    CGLog.v("打印高度 : "+params.height);
                     pf_gallery_image.setLayoutParams(params);
+                    pf_gallery_image.requestLayout();
                     pf_gallery_image.setImageBitmap(loadedImage);
                 }
 
@@ -583,6 +589,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         mHanlder.sendEmptyMessageDelayed(POP_DELAY_300, 300);
     }
     public void bottomCancle(){
+        if(emot2 == null) return;
         emot2.hideSoftKeyboard();
         bottom_assess.setVisibility(View.GONE);
         pf_pic_bottom_viewGroup.setVisibility(View.VISIBLE);

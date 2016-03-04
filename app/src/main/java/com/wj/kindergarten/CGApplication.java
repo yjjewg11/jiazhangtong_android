@@ -75,6 +75,11 @@ public class CGApplication extends Application {
 
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
+    private String android_id;
+
+    public String getAndroid_id() {
+        return android_id;
+    }
 
     public String getLatLongString() {
         return latLongString;
@@ -103,6 +108,7 @@ public class CGApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());
 //        initSearch();
 
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
 //    private void initSearch() {

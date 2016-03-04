@@ -2,10 +2,12 @@ package com.wj.kindergarten.ui.main;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -71,6 +73,7 @@ public class MainActivity extends BaseActivity {
     private int [] typeCount = new int[3];
     private List<PfAlbumListSun> albumList;
     private static String family_uuid;
+    private UploadBroadCast receiver;
 
     public List<PfAlbumListSun> getAlbumList() {
         return albumList;
@@ -151,6 +154,7 @@ public class MainActivity extends BaseActivity {
         initPfAlbum();
         //启动服务上传图片
         handler.sendEmptyMessageDelayed(START_UPLOAD_PIC,1000);
+        registerUpload();
 
 
         //获取系统参数
@@ -166,6 +170,14 @@ public class MainActivity extends BaseActivity {
 //        getActivity().registerReceiver(receive, intentFilter);
 
 
+    }
+
+    private void registerUpload() {
+        receiver = new UploadBroadCast();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(GloablUtils.ALREADY_UPLOADING);
+        filter.addAction(GloablUtils.ALREADY_UPLOADING_FINISHED);
+        registerReceiver(receiver,filter);
     }
 
     private void initPfAlbum() {
@@ -620,12 +632,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+                unregisterReceiver(receiver);
         Log.i("TAG", "页面被销毁!");
         ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 //        Log.i("TAG","添加运行任务 ： "+activityManager.getAppTasks().size());
         Log.i("TAG","添加任务栈  ： "+activityManager.getRunningTasks(10).size());
         super.onDestroy();
-//        unregisterReceiver(receive);
+
     }
 
     @Override
@@ -649,6 +662,24 @@ public class MainActivity extends BaseActivity {
                     }
                 }
                 break;
+        }
+    }
+
+    class UploadBroadCast extends BroadcastReceiver{
+
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            PhotoFamilyFragment photoFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+            if(photoFragment == null ) return;
+            switch (intent.getAction()){
+                case GloablUtils.ALREADY_UPLOADING:
+                    photoFragment.startGif();
+                    break;
+                case GloablUtils.ALREADY_UPLOADING_FINISHED:
+                    photoFragment.stopGif();
+                    break;
+            }
         }
     }
 }

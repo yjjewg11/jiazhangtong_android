@@ -3,10 +3,12 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -84,6 +86,21 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     private void initViews() {
         setWebView(boutique_review_webview);
+        boutique_review_webview.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                if(commonDialog.isShowing()){
+                    commonDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                commonDialog.show();
+            }
+        });
         boutique_review_tv_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +148,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     protected void loadData(final int cacheStatus) {
         commonDialog.show();
+        commonDialog.setText("正在加载模板，请稍候!");
         StringBuilder builder = new StringBuilder();
         for(int i = 0 ; i < objectList.size() ; i++){
             AllPfAlbumSunObject object = objectList.get(i);

@@ -22,6 +22,7 @@ import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -65,9 +66,11 @@ public class PicUploadService extends Service {
         alreadySavePath.setStatus(0);
         alreadySavePath.setSuccess_time(new Date());
         db.update(alreadySavePath);
-        sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED,100,100);
+        sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED, 100, 100);
+        sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
         listObject.remove(count);
         if (count >= size) {
+            sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
             return;
         }
         checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);

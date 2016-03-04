@@ -126,7 +126,9 @@ public class PfEditInfoActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         AddFamilyMemberParams params = new AddFamilyMemberParams();
-                        params.setTel(member.getTel());
+                        if (!TextUtils.isEmpty(member.getTel())) {
+                            params.setTel(member.getTel().replaceAll(" ",""));
+                        }
                         params.setFamily_uuid(family_uuid);
                         params.setUuid(member.getUuid());
                         params.setFamily_name(member.getFamily_name());

@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +20,16 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.QueryGroupCount;
 import com.wj.kindergarten.ui.func.adapter.FusionAdapter;
+import com.wj.kindergarten.ui.func.adapter.FusionListOwnGridAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
+import com.wj.kindergarten.ui.more.PfRefreshLinearLayout;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ThreadManager;
 
@@ -43,10 +49,12 @@ public class FusionListFragment extends Fragment{
     private int firstItem;
     private PhotoFamilyFragment photoFamilyFragment;
     private View mainView;
-    private PullToRefreshListView pullListView;
+//    private PullToRefreshListView pullListView;
     private PfLoadDataProxy mPfLoadDataProxy;
+    private List<AllPfAlbumSunObject> allObjects = new ArrayList<>();
     private List<QueryGroupCount> queryGroupCounts = new ArrayList<>();
     private HashMap<String,List<AllPfAlbumSunObject>> map = new HashMap<>();
+    private HashMap<String,Integer> mapSize = new HashMap();
 
     private Handler mHandler = new Handler(){
         @Override
@@ -60,6 +68,7 @@ public class FusionListFragment extends Fragment{
                             queryGroupCounts.addAll(allList);
 //                            fusionAdapter.setQueryGroupCounts(queryGroupCounts);
                             queryAllpic();
+                            queryAlldata();
                         }
                         break;
                     //有maxTime后时间的刷新的数据
@@ -67,11 +76,27 @@ public class FusionListFragment extends Fragment{
                         showView();
                         break;
                 case QUERY_FINISHED:
-                    fusionAdapter.setQueryMap(map, queryGroupCounts);
+//                    fusionAdapter.setQueryMap(map, queryGroupCounts);
+                    ownGridAdapter.setqueryCount(mapSize);
                     break;
             }
         }
     };
+    private PfRefreshLinearLayout fusion_list_fresh_linear;
+    private int visibleItem;
+    private int totalItem;
+
+    private void queryAlldata() {
+        String sql = "family_uuid = '"+MainActivity.getFamily_uuid()+"';";
+        List<AllPfAlbumSunObject> list = db.findAllByWhere(AllPfAlbumSunObject.class, sql);
+        if(list != null && list.size() > 0){
+            allObjects.addAll(list);
+            ownGridAdapter.setQueryList(queryGroupCounts,allObjects);
+        }
+    }
+
+    private StickyGridHeadersGridView fusion_list_fragment_stick_grid;
+    private FusionListOwnGridAdapter ownGridAdapter;
 
     private void queryAllpic() {
         ThreadManager.instance.excuteRunnable(new Runnable() {
@@ -96,6 +121,7 @@ public class FusionListFragment extends Fragment{
                 "' and family_uuid ='" + MainActivity.getFamily_uuid() + "'";
         List<AllPfAlbumSunObject> list =  db.findAllByWhere(AllPfAlbumSunObject.class, sql);
         map.put(queryGroupCount.getDate(),list);
+        mapSize.put(queryGroupCount.getDate(),list.size());
     }
 
     private FusionAdapter fusionAdapter;
@@ -147,9 +173,17 @@ public class FusionListFragment extends Fragment{
         if(mainView != null) return mainView;
         initDb();
         mainView = View.inflate(getActivity(), R.layout.fusion_list_fragment,null);
-        pullListView = (PullToRefreshListView) mainView.findViewById(R.id.pulltorefresh_list);
-        pullListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-        pullListView.getRefreshableView().setOnScrollListener(new AbsListView.OnScrollListener() {
+        fusion_list_fresh_linear = (PfRefreshLinearLayout)mainView.findViewById(R.id.fusion_list_fresh_linear);
+        fusion_list_fresh_linear.setPullScroll(new PfRefreshLinearLayout.PullScroll() {
+            @Override
+            public boolean judgeScrollBotom() {
+                CGLog.v("判断是否滑动到底部了?    "+(firstItem + visibleItem == totalItem) );
+                return firstItem + visibleItem == totalItem;
+            }
+        });
+        fusion_list_fragment_stick_grid = (StickyGridHeadersGridView) mainView.findViewById(R.id.fusion_list_fragment_stick_grid);
+        fusion_list_fresh_linear.setStickyGridHeadersGridView(fusion_list_fragment_stick_grid);
+        fusion_list_fragment_stick_grid.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -157,22 +191,16 @@ public class FusionListFragment extends Fragment{
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                firstItem = firstVisibleItem;
+                   firstItem = firstVisibleItem;
+                   visibleItem = visibleItemCount;
+                   totalItem = totalItemCount;
+                   CGLog.v("firstVisibleItem : "+firstVisibleItem +"   visibleItemCount : "+visibleItemCount+
+                   "    totalItemCount:"+totalItemCount);
             }
         });
-        pullListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                mPfLoadDataProxy.loadData(MainActivity.getFamily_uuid(), 1, true);
-            }
-        });
+        ownGridAdapter = new FusionListOwnGridAdapter(getActivity());
+        fusion_list_fragment_stick_grid.setAdapter(ownGridAdapter);
         fusionAdapter = new FusionAdapter(getActivity());
-        pullListView.setAdapter(fusionAdapter);
         loadData();
 
         return mainView;
@@ -188,14 +216,14 @@ public class FusionListFragment extends Fragment{
         mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
             @Override
             public void finish() {
-                if (pullListView.isRefreshing()) {
-                    pullListView.onRefreshComplete();
-                }
+//                if (pullListView.isRefreshing()) {
+//                    pullListView.onRefreshComplete();
+//                }
             }
 
             @Override
             public void noMoreData() {
-                pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
+//                pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
                 noMoreData = true;
             }
 

@@ -46,6 +46,7 @@ import com.wj.kindergarten.utils.Constant.BitmapUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
+import com.wj.kindergarten.utils.WindowUtils;
 
 import net.tsz.afinal.FinalDb;
 
@@ -77,6 +78,17 @@ public class PhotoFamilyFragment extends Fragment {
     private RelativeLayout pf_pic_right_iv;
     private FinalDb db;
     private FusionListFragment pfFusionListFragment;
+    private TextView pf_background_show_number;
+
+    public void startGif(){
+        if(gif == null)return;
+        gif.setVisibility(View.VISIBLE);
+    }
+    public void stopGif(){
+        if(gif == null){
+            gif.setVisibility(View.INVISIBLE);
+        }
+    }
 
     private int getFlTopMargin(){
         LinearLayout.LayoutParams params  = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
@@ -127,8 +139,8 @@ public class PhotoFamilyFragment extends Fragment {
         db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         initBar();
         initHeadView();
-        initHeadViewData();
         initViews(view);
+        initHeadViewData();
         initFragment();
         initClickListener();
         initTabLayout();
@@ -185,6 +197,15 @@ public class PhotoFamilyFragment extends Fragment {
             }
         }
         if(sun == null) return;
+        int count = Integer.valueOf(sun.getPhoto_count());
+        String n = null;
+        if(count > 1000){
+            n =  sun.getPhoto_count().substring(0,1);
+            n = n+".k";
+        }else{
+            n = sun.getPhoto_count();
+        }
+        pf_background_show_number.setText(""+n);
         if(!TextUtils.isEmpty(sun.getHerald())){
             ImageLoaderUtil.displayImage(sun.getHerald(),pf_backGround_image);
             BitmapCallBack.loadBitmap(sun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
@@ -320,10 +341,12 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initViews(View v) {
         tab_layout = (TabLayout) v.findViewById(R.id.common_tab_layout);
+
 //        viewPager = (ViewPager) v.findViewById(R.id.common_viewPager);
         back_pf_scroll_fl = (FrameLayout) v.findViewById(R.id.back_pf_scroll_fl);
         pf_back_ll = (PfFragmentLinearLayout) v.findViewById(R.id.pf_back_ll);
         pf_back_ll.setContentFl(back_pf_scroll_fl);
+        pf_background_show_number = (TextView) v.findViewById(R.id.pf_background_show_number);
     }
 
 
@@ -331,9 +354,13 @@ public class PhotoFamilyFragment extends Fragment {
     String[] titles = new String[]{"时光轴", "精品相册"};
 
     private void initTabLayout() {
-
-        tab_layout.addTab(tab_layout.newTab().setText("时光轴"));
-        tab_layout.addTab(tab_layout.newTab().setText("精品相册"));
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tab_layout.getLayoutParams();
+        params.height = (int)(Float.valueOf(45)*Float.valueOf(WindowUtils.getDesnity()));
+        CGLog.v("打印密度 : "+WindowUtils.getDesnity());
+        CGLog.v("打印tab高度 : "+params.height);
+        tab_layout.setLayoutParams(params);
+        tab_layout.addTab(tab_layout.newTab().setCustomView(R.layout.photo_tab_fusion));
+        tab_layout.addTab(tab_layout.newTab().setCustomView(R.layout.photo_tab_boutique_album));
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

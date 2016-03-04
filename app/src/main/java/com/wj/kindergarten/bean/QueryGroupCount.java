@@ -10,6 +10,7 @@ public class QueryGroupCount  implements Serializable{
     private int count;
     private String hearld;
 
+
     public String getHearld() {
         return hearld;
     }

@@ -50,7 +50,7 @@
 
                 <RelativeLayout
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="right|center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <com.ant.liao.GifView
@@ -63,14 +63,14 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/pf_pic_right_iv"
-                    android:gravity="center"
+                    android:gravity="right|center_vertical"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <ImageView
                     android:src="@drawable/pf_first_new_album"
                     android:id="@+id/pf_family_right_image"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 </RelativeLayout>
 

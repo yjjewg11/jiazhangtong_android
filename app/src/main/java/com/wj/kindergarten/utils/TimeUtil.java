@@ -90,6 +90,10 @@ public final class TimeUtil {
         Date date = new Date();
         return format.format(date);
     }
+    public static long getNowTime(){
+        Date date = new Date();
+        return date.getTime();
+    }
 
     public static String getWeekOfDay(String date) {
         String mWay = getDay(date);

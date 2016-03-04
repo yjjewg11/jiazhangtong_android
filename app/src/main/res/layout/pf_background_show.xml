@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="20000"
-            android:id="@+id/textView45"
+            android:id="@+id/pf_background_show_number"
             android:layout_alignTop="@+id/pic_back_fl"
             android:layout_toRightOf="@+id/pic_back_fl" />
     </RelativeLayout>

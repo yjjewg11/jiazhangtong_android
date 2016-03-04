@@ -61,6 +61,8 @@ public interface GloablUtils {
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";
+    String ALREADY_UPLOADING = "already_uploading";
+    String ALREADY_UPLOADING_FINISHED = "already_uploading_finished";
 
     int MODE_OF_PF = 21;//相册
     int BOUTIQUE_COMMON_TYPE = 22;//精品相册

@@ -103,7 +103,11 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
     private void initHttpData() {
         setTitleText("" + boutiqueSingleInfo.getData().getTitle());
-        boutiqueWebView.getRefreshableView().loadUrl(boutiqueSingleInfo.getShare_url());
+        String path = "http://www.wenjienet.com/px-cc/index.html?t="+TimeUtil.getNowDate();
+        boutiqueWebView.getRefreshableView().loadUrl(
+//                path
+                boutiqueSingleInfo.getShare_url()
+        );
         if (boutiqueSingleInfo.isFavor()) {
             Utils.cancleStoreStatus(this, textViews[0]);
         } else {
