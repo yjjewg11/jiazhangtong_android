@@ -227,6 +227,7 @@ public class PhotoFamilyFragment extends Fragment {
 
     private void initHeadView() {
         gif = (GifView) view.findViewById(R.id.pf_family_gif);
+        gif.setVisibility(View.INVISIBLE);
         gif.setGifImage(R.drawable.update_jtxc_red);
         pf_backGround_rl = (RelativeLayout) view.findViewById(R.id.pf_backGround_rl);
         pf_backGround_image = (ImageView) view.findViewById(R.id.pf_backGround_image);

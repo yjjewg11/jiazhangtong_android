@@ -183,6 +183,12 @@ public class FusionListFragment extends Fragment{
         });
         fusion_list_fragment_stick_grid = (StickyGridHeadersGridView) mainView.findViewById(R.id.fusion_list_fragment_stick_grid);
         fusion_list_fresh_linear.setStickyGridHeadersGridView(fusion_list_fragment_stick_grid);
+        fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPfLoadDataProxy.loadData(MainActivity.getFamily_uuid(),1,true);
+            }
+        });
         fusion_list_fragment_stick_grid.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -216,9 +222,7 @@ public class FusionListFragment extends Fragment{
         mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
             @Override
             public void finish() {
-//                if (pullListView.isRefreshing()) {
-//                    pullListView.onRefreshComplete();
-//                }
+                fusion_list_fresh_linear.onRefreshComplete();
             }
 
             @Override
@@ -243,7 +247,6 @@ public class FusionListFragment extends Fragment{
             @Override
             public void stopScroll() {
             }
-
             @Override
             public boolean subViewLocationTop() {
                 return firstItem == 0;
