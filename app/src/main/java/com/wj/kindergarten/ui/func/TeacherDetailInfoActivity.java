@@ -8,18 +8,15 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.TeacherDetailInfo;
+import com.wj.kindergarten.bean.TeacherDetailInfo;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.SpecialCourseInfoList;
 import com.wj.kindergarten.bean.SpecialCourseInfoObject;
@@ -30,7 +27,6 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
-import com.wj.kindergarten.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;

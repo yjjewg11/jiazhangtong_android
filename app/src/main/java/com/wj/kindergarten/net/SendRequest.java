@@ -8,7 +8,7 @@ import com.loopj.android.http.RequestParams;
 import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
-import com.wj.kindergarten.TeacherDetailInfo;
+import com.wj.kindergarten.bean.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddChild;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;

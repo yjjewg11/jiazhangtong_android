@@ -973,7 +973,7 @@ public final class UserRequest {
 
     }
 
-    public static void getBoutiqueAlbumList(Context context, int pageNo, RequestResultI resultI) {
+    public static void getBoutiqueAllbumListFromType(Context context, String type,int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo", pageNo);
         SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_ALBUM, params, RequestHttpUtil.BASE_URL + GET_BOUTIQUE_ALBUM, resultI);

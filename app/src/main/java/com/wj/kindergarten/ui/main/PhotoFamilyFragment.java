@@ -10,11 +10,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,28 +23,33 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ant.liao.GifView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.nineoldandroids.animation.ObjectAnimator;
-import com.umeng.socialize.utils.BitmapUtils;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.PfAlbumListSun;
-import com.wj.kindergarten.ui.func.EditPfActivity;
+import com.wj.kindergarten.bean.PfFamilyUuid;
+import com.wj.kindergarten.bean.PopAttributes;
+import com.wj.kindergarten.ui.func.adapter.BoutiqueChooseItemAdapter;
+import com.wj.kindergarten.ui.func.adapter.FusionChooseItemAdapter;
+import com.wj.kindergarten.ui.func.adapter.TopViewAdapter;
 import com.wj.kindergarten.ui.imagescan.BitmapCallBack;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.FusionListFragment;
-import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
-import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
-import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.PointPositionListener;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.observer.ObserverFamilyUuid;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Constant.BitmapUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.PopWindowUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
 
@@ -79,6 +84,29 @@ public class PhotoFamilyFragment extends Fragment {
     private FinalDb db;
     private FusionListFragment pfFusionListFragment;
     private TextView pf_background_show_number;
+    private List<PfAlbumListSun> pfAlbumListSunList = new ArrayList<>();
+    private FinalDb dbFamilyAlbum;
+    private PfAlbumListSun pfAlbumListSun;
+    private String currentFamily_uuid;
+    public static PhotoFamilyFragment instance;
+    private View topVeiw;
+    private PullToRefreshListView topViewPullList;
+    private TopViewAdapter topViewAdapter;
+    private ObserverFamilyUuid observer;
+    private LinearLayout photo_tab_fusion_linear;
+    private TextView photo_tab_fusion_tv;
+    private RelativeLayout photo_tab_boutique_relative;
+    private TextView photo_tab_boutique_tv;
+    private PopAttributes popRight;
+    private PopAttributes popleft;
+
+    public ObserverFamilyUuid getObserver() {
+        return observer;
+    }
+
+    public String getCurrentFamily_uuid() {
+        return currentFamily_uuid;
+    }
 
     public void startGif(){
         if(gif == null)return;
@@ -136,7 +164,11 @@ public class PhotoFamilyFragment extends Fragment {
             return view;
         }
         view = inflater.inflate(R.layout.photo_family_pic, null);
-        db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
+        instance = this;
+        initDb();
+        initFamilyAlbumData();
+        initFamilyAlbum();
+        initObserver();
         initBar();
         initHeadView();
         initViews(view);
@@ -148,8 +180,35 @@ public class PhotoFamilyFragment extends Fragment {
         return view;
     }
 
-    private void initBack() {
+    private void initObserver() {
+        observer = new ObserverFamilyUuid();
+    }
 
+    private void initFamilyAlbum() {
+        if(pfAlbumListSunList.size() != 0){
+            pfAlbumListSun = pfAlbumListSunList.get(0);
+            currentFamily_uuid = pfAlbumListSun.getUuid();
+        }
+    }
+
+    private void initDb() {
+        db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
+        dbFamilyAlbum = FinalDb.create(getActivity(),GloablUtils.FAMILY_UUID);
+    }
+
+    private void initFamilyAlbumData() {
+        if(MainActivity.instance.getAlbumList() != null && MainActivity.instance.getAlbumList().size() > 0){
+            pfAlbumListSunList.addAll(MainActivity.instance.getAlbumList());
+        }else {
+            List<PfFamilyUuid> pfFamilyUuids =  dbFamilyAlbum.findAll(PfFamilyUuid.class);
+            if(pfFamilyUuids == null || pfFamilyUuids.size() == 0) return;
+            int size = pfFamilyUuids.size();
+            for(int k = 0 ; k < size ; k ++){
+                PfAlbumListSun sun = new PfAlbumListSun();
+                sun.setUuid(pfFamilyUuids.get(k).getFamily_uuid());
+                pfAlbumListSunList.add(sun);
+            }
+        }
     }
 
 
@@ -179,6 +238,22 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void changePFAlbum() {
+        if(topVeiw == null){
+            topVeiw = View.inflate(getActivity(),R.layout.pf_family_top_pop,null);
+            topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
+            topViewAdapter = new TopViewAdapter(getActivity(),pfAlbumListSunList);
+            topViewPullList.setAdapter(topViewAdapter);
+        }
+        final PopupWindow popupWindowTop = PopWindowUtil.showPoPWindow(topVeiw, pf_pic_center_tv);
+        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PfAlbumListSun sun = (PfAlbumListSun) topViewAdapter.getItem(position - 1);
+                currentFamily_uuid = sun.getUuid();
+                observer.setFamily_uuid(currentFamily_uuid);
+                popupWindowTop.dismiss();
+            }
+        });
 
     }
 
@@ -187,28 +262,20 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void initHeadViewData() {
-        PfAlbumListSun sun = null;
-        if(MainActivity.instance.getAlbumList() != null && MainActivity.instance.getAlbumList().size() > 0){
-            for(PfAlbumListSun albumListSun : MainActivity.instance.getAlbumList()){
-                if(albumListSun != null && albumListSun.getUuid().equals(MainActivity.instance.getFamily_uuid())){
-                    sun = albumListSun;
-                    break;
-                }
-            }
-        }
-        if(sun == null) return;
-        int count = Integer.valueOf(sun.getPhoto_count());
+        if(pfAlbumListSun == null) return;
+        if(TextUtils.isEmpty(pfAlbumListSun.getTitle())) return;
+        int count = Integer.valueOf(pfAlbumListSun.getPhoto_count());
         String n = null;
         if(count > 1000){
-            n =  sun.getPhoto_count().substring(0,1);
+            n =  pfAlbumListSun.getPhoto_count().substring(0,1);
             n = n+".k";
         }else{
-            n = sun.getPhoto_count();
+            n = pfAlbumListSun.getPhoto_count();
         }
         pf_background_show_number.setText(""+n);
-        if(!TextUtils.isEmpty(sun.getHerald())){
-            ImageLoaderUtil.displayImage(sun.getHerald(),pf_backGround_image);
-            BitmapCallBack.loadBitmap(sun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
+        if(!TextUtils.isEmpty(pfAlbumListSun.getHerald())){
+            ImageLoaderUtil.displayImage(pfAlbumListSun.getHerald(),pf_backGround_image);
+            BitmapCallBack.loadBitmap(pfAlbumListSun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
             @Override
             public void callback(Bitmap bitmap) {
                 BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
@@ -216,12 +283,12 @@ public class PhotoFamilyFragment extends Fragment {
             }
         });
         }
-        String text = Utils.isNull(sun.getTitle());
+        String text = Utils.isNull(pfAlbumListSun.getTitle());
         if(TextUtils.isEmpty(text)){
             text = "问界互动家园";
         }else{
         }
-        pf_backGround_family_name.setText("" +text);
+        pf_backGround_family_name.setText("" + text);
 
     }
 
@@ -244,7 +311,7 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void initFragment() {
-        pfFusionListFragment = new FusionListFragment(this);
+        pfFusionListFragment = new FusionListFragment(this,currentFamily_uuid);
         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
     }
 
@@ -287,8 +354,12 @@ public class PhotoFamilyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //点击启动相册详细页面
+                if (pfAlbumListSun == null) {
+                    ToastUtils.showMessage("暂无相册信息!");
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
-                intent.putExtra("uuid",MainActivity.getFamily_uuid());
+                intent.putExtra("uuid", pfAlbumListSun.getUuid());
                 MainActivity.instance.startActivityForResult(intent, GloablUtils.UPDATE_SUCCESSED_REFRESH);
                 popupWindow.dismiss();
             }
@@ -354,20 +425,21 @@ public class PhotoFamilyFragment extends Fragment {
 
     String[] titles = new String[]{"时光轴", "精品相册"};
 
+    int boutiquePosition = 1;
+    int fusionPosition = 0;
     private void initTabLayout() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tab_layout.getLayoutParams();
         params.height = (int)(Float.valueOf(45)*Float.valueOf(WindowUtils.getDesnity()));
-        CGLog.v("打印密度 : "+WindowUtils.getDesnity());
-        CGLog.v("打印tab高度 : "+params.height);
+        CGLog.v("打印密度 : " + WindowUtils.getDesnity());
+        CGLog.v("打印tab高度 : " + params.height);
         tab_layout.setLayoutParams(params);
         tab_layout.addTab(tab_layout.newTab().setCustomView(R.layout.photo_tab_fusion));
         tab_layout.addTab(tab_layout.newTab().setCustomView(R.layout.photo_tab_boutique_album));
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
+                switch (tab.getPosition()){
                     case 0:
-                        //时光轴
                         FusionListFragment fusionListFragment = (FusionListFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
                         if (fusionListFragment != null) {
                             getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionListFragment, fragment_tags[0]).commit();
@@ -376,7 +448,7 @@ public class PhotoFamilyFragment extends Fragment {
                         }
                         break;
                     case 1:
-                        //精辟相册
+                        //精品相册
                         if (getFragmentManager().findFragmentByTag(fragment_tags[1]) == null) {
                             if(boutique_album_framgent == null)boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this);
                         } else {
@@ -389,12 +461,46 @@ public class PhotoFamilyFragment extends Fragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                switch (tab.getPosition()){
+                    case 0 :
+                        if(popleft == null){
+                            popleft = new PopAttributes();
+                            popleft.setWidth(WindowUtils.dm.widthPixels / 2);
+                            popleft.setHeight(-1);
+                            popleft.setGrarity(Gravity.LEFT);
+                            popleft.setLeftOffset(0);
+                        }
+                        PopWindowUtil.showPoPWindow(getActivity(), tab_layout, new FusionChooseItemAdapter(getActivity(), boutiquePosition),
+                                popleft,new PointPositionListener() {
+                                    @Override
+                                    public void positionChange(int position) {
+                                        fusionPosition = position;
+                                    }
+                                });
+                        break;
+                    case 1 :
+                        if(popRight == null){
+                            popRight = new PopAttributes();
+                            popRight.setWidth(WindowUtils.dm.widthPixels / 2);
+                            popRight.setHeight(-1);
+                            popRight.setGrarity(Gravity.RIGHT);
+                            popRight.setLeftOffset(WindowUtils.dm.widthPixels/2);
+                        }
+                        PopWindowUtil.showPoPWindow(getActivity(), tab_layout, new BoutiqueChooseItemAdapter(getActivity(), boutiquePosition),
+                                popRight,new PointPositionListener() {
+                                    @Override
+                                    public void positionChange(int position) {
+                                        if(boutiquePosition == position) return;
+                                        boutique_album_framgent.loadDataAccordingType(position);
+                                        boutiquePosition = position;
+                                    }
+                                });
+                        break;
+                }
             }
         });
 
@@ -436,7 +542,6 @@ public class PhotoFamilyFragment extends Fragment {
 //        tab_layout.setupWithViewPager(viewPager);
 
     }
-
 
 
     public interface LocationChanged{

@@ -1,11 +1,10 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,8 @@ import com.wj.kindergarten.bean.BoutiqueAlbumListSun;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueAdapter;
-import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.observer.Watcher;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BoutiqueAlbumFragment extends Fragment {
+public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     View view;
     private PullToRefreshListView pullListView;
     private BoutiqueAdapter boutiqueAdapter;
@@ -39,6 +38,9 @@ public class BoutiqueAlbumFragment extends Fragment {
     int firstVisibleItemOwn = -1;
     private List<BoutiqueAlbumListSun> boutiqueAlbumList = new ArrayList<>();
     private HintInfoDialog dialog;
+    private String family_uuid;
+    private String [] typeAll = {"mine","all"};
+    String nowType = typeAll[0];
 
     public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment) {
         this.photoFamilyFragment = photoFamilyFragment;
@@ -50,6 +52,7 @@ public class BoutiqueAlbumFragment extends Fragment {
         initScrollListener();
         if (view != null) return view;
         dialog = new HintInfoDialog(getActivity());
+        photoFamilyFragment.getObserver().registerObserver(this);
         view = inflater.inflate(R.layout.fragment_test, null);
         pullListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
@@ -64,7 +67,7 @@ public class BoutiqueAlbumFragment extends Fragment {
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 pageNo++;
-                loadData();
+                loadData(nowType);
             }
         });
         pullListView.getRefreshableView().setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -86,7 +89,7 @@ public class BoutiqueAlbumFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        loadData();
+        loadData(nowType);
 
         return view;
     }
@@ -112,23 +115,24 @@ public class BoutiqueAlbumFragment extends Fragment {
 
     int pageNo = 1;
 
-    public void loadData() {
+    public void loadData(String type) {
         if(!pullListView.isRefreshing()){
             dialog.show();
         }
-        UserRequest.getBoutiqueAlbumList(getActivity(), pageNo, new RequestResultI() {
+        UserRequest.getBoutiqueAllbumListFromType(getActivity(),type, pageNo, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                if(pullListView.isRefreshing()){
+                if (pullListView.isRefreshing()) {
                     pullListView.onRefreshComplete();
-                }else{
-                    if(dialog.isShowing()){
+                } else {
+                    if (dialog.isShowing()) {
                         dialog.dismiss();
                     }
                 }
                 BoutiqueAlbum boutiqueAlbum = (BoutiqueAlbum) domain;
                 if (boutiqueAlbum != null && boutiqueAlbum.getList() != null
                         && boutiqueAlbum.getList().getData() != null && boutiqueAlbum.getList().getData().size() > 0) {
+                    if (pageNo == 1) boutiqueAlbumList.clear();
                     boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());
                     boutiqueAdapter.setList(boutiqueAlbumList);
                 } else {
@@ -163,6 +167,33 @@ public class BoutiqueAlbumFragment extends Fragment {
                 break;
             }
         }
+    }
+
+    @Override
+    public void refreshUUid(String family_uuid) {
+        if(!TextUtils.isEmpty(family_uuid)){
+            this.family_uuid = family_uuid;
+            refreshData();
+        }
+    }
+
+    private void refreshData() {
+        pageNo = 1;
+        loadData(nowType);
+    }
+
+    public void loadDataAccordingType(int position) {
+        if(position == 0){
+            nowType = typeAll[0];
+            loadAll();
+        }else if(position == 1){
+            nowType = typeAll[1];
+            refreshData();
+        }
+    }
+
+    private void loadAll() {
+        pageNo = 1;
     }
 
     ;

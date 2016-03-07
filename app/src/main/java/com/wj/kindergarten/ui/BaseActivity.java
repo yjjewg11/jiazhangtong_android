@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -920,4 +921,5 @@ public abstract class BaseActivity extends ActionBarActivity {
         intent.putExtra("return-data", true);
         startActivityForResult(intent, WEB_SECLECT_PIC);
     }
+
 }

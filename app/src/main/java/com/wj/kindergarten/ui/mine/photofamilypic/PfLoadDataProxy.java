@@ -87,7 +87,6 @@ public class PfLoadDataProxy {
         } else {
             loadPic(familyUuid, "", formatTime(pfFamilyUuid.getMinTime()), formatTime(pfFamilyUuid.getUpdateTime()), pageNo, NORMAL_DATA);
         }
-
     }
 
     private void loadPic(final String familyUuid, final String minTime, final String maxTime, final String updateNewCountTime, int pageNo, final int type) {
@@ -166,9 +165,9 @@ public class PfLoadDataProxy {
     }
 
     private void loadFromDataBases(String timeType) {
-        String sql = "SELECT strftime('%Y-%m-%d',"+timeType+"),count(1) from " + "com_wj_kindergarten_bean_AllPfAlbumSunObject" + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() + "'\n" +
-                "GROUP BY strftime('%Y-%m-%d',"+timeType+")";
-        if (pfFamilyUuid.getMaxTime() == null ||
+        String sql = "SELECT strftime('%Y-%m-%d',"+timeType+"),count(1) from " + "com_wj_kindergarten_bean_AllPfAlbumSunObject" + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() +"'"
++ "GROUP BY strftime('%Y-%m-%d',"+timeType+");";
+        if (pfFamilyUuid.getMaxTime() == null &&
                 pfFamilyUuid.getMinTime() == null) return;
         List<QueryGroupCount> dateArray = new ArrayList<>();
         List<DbModel> dbList = familyUuidObjectSql.findDbModelListBySQL(sql);

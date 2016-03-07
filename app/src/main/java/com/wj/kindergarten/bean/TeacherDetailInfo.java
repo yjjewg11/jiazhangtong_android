@@ -1,4 +1,4 @@
-package com.wj.kindergarten;
+package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
 import com.wj.kindergarten.bean.BaseModel;

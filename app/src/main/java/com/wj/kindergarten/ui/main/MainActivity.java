@@ -72,19 +72,10 @@ public class MainActivity extends BaseActivity {
             R.drawable.message_tab, R.drawable.pf_album,R.drawable.mine_tab};
     private int [] typeCount = new int[3];
     private List<PfAlbumListSun> albumList;
-    private static String family_uuid;
     private UploadBroadCast receiver;
 
     public List<PfAlbumListSun> getAlbumList() {
         return albumList;
-    }
-
-    public static String getFamily_uuid() {
-        return family_uuid;
-    }
-
-    public static void setFamily_uuid(String family_uuid) {
-        MainActivity.family_uuid = family_uuid;
     }
 
     public int[] getTypeCount() {
@@ -137,7 +128,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate() {
 
 
-        family_uuid = "";
         getSupportActionBar().setElevation(0);
         getCount();
         instance = this;
@@ -191,7 +181,6 @@ public class MainActivity extends BaseActivity {
                 PfAlbumList pfAlbumList = (PfAlbumList) domain;
                 if (pfAlbumList != null && pfAlbumList.getList() != null && pfAlbumList.getList().size() > 0) {
                     albumList = pfAlbumList.getList();
-                    family_uuid =  pfAlbumList.getList().get(0).getUuid();
                 }
             }
 

@@ -3,11 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/photo_tab_fusion_linear"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="45dp">
     <TextView
+        android:id="@+id/photo_tab_fusion_tv"
         android:drawablePadding="@dimen/margin_5"
         android:drawableRight="@drawable/xiajiantou"
         android:textSize="14sp"

@@ -23,7 +23,7 @@ import com.wj.kindergarten.utils.WindowUtils;
 public class PfRefreshLinearLayout extends LinearLayout {
     private TextView tv_bottom;
     private ImageView image_bottom;
-    private final int REFRESH_DISTANCE = (int) (100*WindowUtils.getDesnity());
+    private final int REFRESH_DISTANCE = (int) (70*WindowUtils.getDesnity());
     private final int BOTTOM_HEIGHT = 50;
     private ViewPropertyAnimator valueAnima;
 
@@ -177,10 +177,10 @@ public class PfRefreshLinearLayout extends LinearLayout {
         this.onRefreshListener = onRefreshListener;
     }
 
-    public void onRefreshComplete(){
+    public final void onRefreshComplete(){
         setRefreshing(false);
         tv_bottom.setText("上拉刷新...");
-        valueAnima.cancel();
+        if(valueAnima != null) valueAnima.cancel();
         scroller.startScroll(0, getScrollY(), 0, -getScrollY());
         invalidate();
     }

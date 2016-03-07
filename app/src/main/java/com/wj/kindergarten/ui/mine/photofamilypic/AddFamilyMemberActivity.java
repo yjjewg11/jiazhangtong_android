@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -65,9 +66,9 @@ public class AddFamilyMemberActivity extends BaseActivity {
     }
 
     private void initViewData() {
-        editPhone.setText(""+member.getTel());
+        editPhone.setText(""+Utils.isNull(member.getTel()));
         editName.setText("");
-        editRelation.setText(""+member.getFamily_name());
+        editRelation.setText(""+Utils.isNull(member.getFamily_name()));
 
     }
 

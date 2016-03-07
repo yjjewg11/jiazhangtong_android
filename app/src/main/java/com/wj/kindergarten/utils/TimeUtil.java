@@ -47,6 +47,14 @@ public final class TimeUtil {
         }
         return null;
     }
+    public static long getYMDHMSTime(String time){
+        try {
+            return format.parse(time).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
     public static String getYMDHMSFromY_M_D_M_H_S(String date) {
         Date dateYMDHMS = getDateFromString(date);

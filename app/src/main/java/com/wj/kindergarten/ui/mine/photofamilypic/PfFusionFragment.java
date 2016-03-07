@@ -55,6 +55,7 @@ import java.util.List;
 
 public class PfFusionFragment extends Fragment {
 
+    private String family_uuid;
     private PhotoFamilyFragment photoFamilyFragment;
     private BanScrollView banScrollView;
     boolean noMoreData;
@@ -67,13 +68,12 @@ public class PfFusionFragment extends Fragment {
         return banScrollView.getRefreshableView().getScrollY() == 0;
     }
 
-    public PfFusionFragment(PhotoFamilyFragment photoFamilyFragment) {
+    public PfFusionFragment(PhotoFamilyFragment photoFamilyFragment,String family_uuid) {
         super();
         this.photoFamilyFragment = photoFamilyFragment;
+        this.family_uuid = family_uuid;
     }
 
-    public PfFusionFragment() {
-    }
 
     private View view;
     private PullToRefreshScrollView pullScroll;
@@ -124,7 +124,7 @@ public class PfFusionFragment extends Fragment {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPfLoadDataProxy.loadData(MainActivity.getFamily_uuid(),1,false);
+                mPfLoadDataProxy.loadData(family_uuid,1,false);
             }
         });
         builder.setView(textView);
@@ -176,7 +176,7 @@ public class PfFusionFragment extends Fragment {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                   mPfLoadDataProxy.loadData(MainActivity.getFamily_uuid(),1,true);
+                   mPfLoadDataProxy.loadData(family_uuid,1,true);
             }
         });
 
@@ -207,7 +207,7 @@ public class PfFusionFragment extends Fragment {
 
     private void addDataByOrder(LinearLayout linearLayout,List<QueryGroupCount> newData) {
         for(QueryGroupCount count : newData){
-            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(),count.getDate());
+            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(family_uuid,count.getDate());
                 if(objectList == null) continue;
                 View view = View.inflate(getActivity(),R.layout.pf_family_first_time_item,null);
                 TextView pf_family_first_item_time = (TextView) view.findViewById(R.id.pf_family_first_item_time);
@@ -227,7 +227,7 @@ public class PfFusionFragment extends Fragment {
 
         for (QueryGroupCount count : allList) {
 
-            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(MainActivity.getFamily_uuid(), count.getDate());
+            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(family_uuid, count.getDate());
             if (objectList == null) continue;
 
             View view = View.inflate(getActivity(), R.layout.pf_classic_by_date_album, null);
@@ -303,7 +303,7 @@ public class PfFusionFragment extends Fragment {
             }
 
         });
-        mPfLoadDataProxy.loadData(((MainActivity) getActivity()).getFamily_uuid(), pageNo, false);
+        mPfLoadDataProxy.loadData(family_uuid, pageNo, false);
     }
 
 }

@@ -3,10 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:id="@+id/photo_tab_boutique_relative"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="45dp">
         <TextView
+            android:id="@+id/photo_tab_boutique_tv"
             android:textSize="14sp"
             android:drawableRight="@drawable/xiajiantou"
             android:drawablePadding="@dimen/margin_5"
