@@ -8,6 +8,24 @@
     tools:context="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity">
 
     <include layout="@layout/title_normal"/>
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="114dp">
+        <TextView
+            android:id="@+id/add_family_member_get_contact"
+            android:paddingRight="@dimen/margin_10"
+            android:drawableRight="@drawable/youjiantou"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:textColor="#222222"
+            android:textSize="15sp"
+            android:text="从手机通讯录添加"
+            android:paddingLeft="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+        
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_15"/>
@@ -65,15 +83,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
+            android:layout_alignParentRight="true"
             android:id="@+id/add_family_phone"
             android:hint="请输入手机号码"
             style="@style/add_family_edit_style"
             android:minWidth="100dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/iv_add_member" />
+            android:layout_alignParentTop="true" />
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="@dimen/margin_10"
             android:layout_alignParentRight="true"
             android:src="@drawable/pf_telephone"

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -206,7 +207,7 @@ public class FusionListFragment extends Fragment implements Watcher{
         fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPfLoadDataProxy.loadData(family_uuid,1,true);
+                mPfLoadDataProxy.loadData(family_uuid, 1, true);
             }
         });
         fusion_list_fragment_stick_grid.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -226,7 +227,15 @@ public class FusionListFragment extends Fragment implements Watcher{
         });
         ownGridAdapter = new FusionListOwnGridAdapter(getActivity());
         fusion_list_fragment_stick_grid.setAdapter(ownGridAdapter);
-        fusionAdapter = new FusionAdapter(getActivity());
+        fusion_list_fragment_stick_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String time = TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getPhoto_time());
+                String sql = "family_uuid = '"+family_uuid+"' and strftime('%Y-%m-%d',photo_time) = '"+time+"'";
+                List<AllPfAlbumSunObject> shortList =  db.findAllByWhere(AllPfAlbumSunObject.class, sql);
+                new TransportListener(getActivity(),position,shortList,null).onItemClick(parent,view,position,id);
+            }
+        });
         mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
         mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
             @Override
@@ -283,7 +292,8 @@ public class FusionListFragment extends Fragment implements Watcher{
         }
     }
 
-    private void refreshData() {
+    public void refreshData() {
         loadData();
     }
+
 }

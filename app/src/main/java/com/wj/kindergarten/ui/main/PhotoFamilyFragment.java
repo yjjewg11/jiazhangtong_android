@@ -39,6 +39,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.FusionListFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PointPositionListener;
@@ -61,7 +62,7 @@ import java.util.List;
 /**
  * Created by tangt on 2016/1/14.
  */
-public class PhotoFamilyFragment extends Fragment {
+public class PhotoFamilyFragment extends Fragment{
     public static final int ADD_PIC = 5001;
     private TabLayout tab_layout;
     //    private FragmentPagerAdapter pagerAdapter;
@@ -93,12 +94,11 @@ public class PhotoFamilyFragment extends Fragment {
     private PullToRefreshListView topViewPullList;
     private TopViewAdapter topViewAdapter;
     private ObserverFamilyUuid observer;
-    private LinearLayout photo_tab_fusion_linear;
-    private TextView photo_tab_fusion_tv;
-    private RelativeLayout photo_tab_boutique_relative;
-    private TextView photo_tab_boutique_tv;
     private PopAttributes popRight;
     private PopAttributes popleft;
+    private PopAttributes popTop;
+    private int topPosition;
+    private PfFusionFragment pfFusionFragment;
 
     public ObserverFamilyUuid getObserver() {
         return observer;
@@ -110,7 +110,9 @@ public class PhotoFamilyFragment extends Fragment {
 
     public void startGif(){
         if(gif == null)return;
-        gif.setVisibility(View.VISIBLE);
+        if(gif.getVisibility() == View.INVISIBLE){
+            gif.setVisibility(View.VISIBLE);
+        }
     }
     public void stopGif(){
         if(gif == null){
@@ -153,7 +155,7 @@ public class PhotoFamilyFragment extends Fragment {
 
 
     //标签 ： 时光轴，精品相册
-    private String[] fragment_tags = new String[]{"fusion", "boutique_album"};
+    private String[] fragment_tags = new String[]{"fusionList", "boutique_album","fusion"};
 
 
     @Nullable
@@ -167,9 +169,9 @@ public class PhotoFamilyFragment extends Fragment {
         instance = this;
         initDb();
         initFamilyAlbumData();
+        initBar();
         initFamilyAlbum();
         initObserver();
-        initBar();
         initHeadView();
         initViews(view);
         initHeadViewData();
@@ -188,6 +190,12 @@ public class PhotoFamilyFragment extends Fragment {
         if(pfAlbumListSunList.size() != 0){
             pfAlbumListSun = pfAlbumListSunList.get(0);
             currentFamily_uuid = pfAlbumListSun.getUuid();
+            if(!TextUtils.isEmpty(pfAlbumListSun.getTitle())){
+                pf_pic_center_tv.setText(""+Utils.isNull(pfAlbumListSun.getTitle()));
+            }else {
+                pf_pic_center_tv.setText("家庭相册-1");
+            }
+
         }
     }
 
@@ -238,23 +246,31 @@ public class PhotoFamilyFragment extends Fragment {
     }
 
     private void changePFAlbum() {
-        if(topVeiw == null){
-            topVeiw = View.inflate(getActivity(),R.layout.pf_family_top_pop,null);
-            topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
-            topViewAdapter = new TopViewAdapter(getActivity(),pfAlbumListSunList);
-            topViewPullList.setAdapter(topViewAdapter);
-        }
-        final PopupWindow popupWindowTop = PopWindowUtil.showPoPWindow(topVeiw, pf_pic_center_tv);
-        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PfAlbumListSun sun = (PfAlbumListSun) topViewAdapter.getItem(position - 1);
-                currentFamily_uuid = sun.getUuid();
-                observer.setFamily_uuid(currentFamily_uuid);
-                popupWindowTop.dismiss();
-            }
-        });
 
+        if(popTop == null){
+            popTop = new PopAttributes();
+            popTop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            popTop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+            popTop.setGrarity(Gravity.NO_GRAVITY);
+            popTop.setLeftOffset(0);
+        }
+        final TopViewAdapter topAdapter = new TopViewAdapter(getActivity(), pfAlbumListSunList,topPosition);
+        PopWindowUtil.showPoPWindow(getActivity(), pf_pic_center_tv, topAdapter,
+                popTop, new PopWindowUtil.OnItemClickListener() {
+                    @Override
+                    public void onItemClickListener(int position) {
+                        PfAlbumListSun sun = (PfAlbumListSun) topAdapter.getItem(position - 1);
+                        currentFamily_uuid = sun.getUuid();
+                        observer.setFamily_uuid(currentFamily_uuid);
+                        topPosition = position - 1;
+                        PfAlbumListSun albumListSun = (PfAlbumListSun) topAdapter.getItem(topPosition);
+                        String title = Utils.isNull(albumListSun.getTitle());
+                        if(TextUtils.isEmpty(title)){
+                            title = "家庭相册--"+topPosition;
+                        }
+                        pf_pic_center_tv.setText(""+title);
+                    }
+                });
     }
 
     public void initHeadBack(){
@@ -470,15 +486,17 @@ public class PhotoFamilyFragment extends Fragment {
                         if(popleft == null){
                             popleft = new PopAttributes();
                             popleft.setWidth(WindowUtils.dm.widthPixels / 2);
-                            popleft.setHeight(-1);
-                            popleft.setGrarity(Gravity.LEFT);
+                            popleft.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                            popleft.setGrarity(Gravity.NO_GRAVITY);
                             popleft.setLeftOffset(0);
                         }
-                        PopWindowUtil.showPoPWindow(getActivity(), tab_layout, new FusionChooseItemAdapter(getActivity(), boutiquePosition),
-                                popleft,new PointPositionListener() {
+                        PopWindowUtil.showPoPWindow(getActivity(), tab_layout, new FusionChooseItemAdapter(getActivity(), fusionPosition),
+                                popleft, new PopWindowUtil.OnItemClickListener() {
                                     @Override
-                                    public void positionChange(int position) {
-                                        fusionPosition = position;
+                                    public void onItemClickListener(int position) {
+                                        if(fusionPosition == position - 1) return;
+                                        fusionPosition = position - 1;
+                                        changFusionFragment();
                                     }
                                 });
                         break;
@@ -486,17 +504,17 @@ public class PhotoFamilyFragment extends Fragment {
                         if(popRight == null){
                             popRight = new PopAttributes();
                             popRight.setWidth(WindowUtils.dm.widthPixels / 2);
-                            popRight.setHeight(-1);
-                            popRight.setGrarity(Gravity.RIGHT);
+                            popRight.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                            popRight.setGrarity(Gravity.NO_GRAVITY);
                             popRight.setLeftOffset(WindowUtils.dm.widthPixels/2);
                         }
                         PopWindowUtil.showPoPWindow(getActivity(), tab_layout, new BoutiqueChooseItemAdapter(getActivity(), boutiquePosition),
-                                popRight,new PointPositionListener() {
+                                popRight, new PopWindowUtil.OnItemClickListener() {
                                     @Override
-                                    public void positionChange(int position) {
-                                        if(boutiquePosition == position) return;
-                                        boutique_album_framgent.loadDataAccordingType(position);
-                                        boutiquePosition = position;
+                                    public void onItemClickListener(int position) {
+                                        if(boutiquePosition == position - 1) return;
+                                        boutiquePosition = position - 1;
+                                        boutique_album_framgent.loadDataAccordingType(boutiquePosition);
                                     }
                                 });
                         break;
@@ -543,6 +561,30 @@ public class PhotoFamilyFragment extends Fragment {
 
     }
 
+    private void changFusionFragment() {
+        if(fusionPosition == 0){
+            FusionListFragment fusionListFragment = (FusionListFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
+            if (fusionListFragment != null) {
+                getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionListFragment, fragment_tags[0]).commit();
+            } else {
+                getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
+            }
+        }else if(fusionPosition == 1){
+            PfFusionFragment fusionFragment = (PfFusionFragment) getFragmentManager().findFragmentByTag(fragment_tags[2]);
+            if (fusionFragment != null) {
+                getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionFragment, fragment_tags[2]).commit();
+            } else {
+                pfFusionFragment = new PfFusionFragment(this,currentFamily_uuid);
+                getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[2]).commit();
+            }
+
+        }
+    }
+
+
+    public void refreshFusionData(){
+        pfFusionListFragment.refreshData();
+    }
 
     public interface LocationChanged{
         void onTop();

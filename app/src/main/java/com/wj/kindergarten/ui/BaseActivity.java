@@ -711,6 +711,13 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     //这个设置只针对话题，因为在设置下列事件后，webveiw的滑动没有起效果，所以单独针对话题来回调
     public void setWebView(WebView webView){
+        setWebView(webView,null);
+    }
+
+    public void setWebView(WebView webView,WebJavaScript webJavaScript){
+        if(webJavaScript == null){
+            webJavaScript = new WebJavaScript(webView);
+        }
         this.webView = webView;
         if(webView == null) return;
 //        webView.setWebViewClient(new WebViewClient(){
@@ -727,7 +734,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             }
         });
         //给所有的webview添加接口
-        webView.addJavascriptInterface(new WebJavaScript(webView),"JavaScriptCall");
+        webView.addJavascriptInterface(webJavaScript,"JavaScriptCall");
         WebSettings webSettings = webView.getSettings();
 //        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setUseWideViewPort(false);
@@ -762,11 +769,14 @@ public abstract class BaseActivity extends ActionBarActivity {
     private static final int REQUESTCODE_CUTTING_WEB = 2;
     protected static final int UPLOAD_PIC_TO_WEB = 100103;
     public boolean isTure;
-    class WebJavaScript{
+    public class WebJavaScript{
         public WebJavaScript(View view) {
             this.view = view;
         }
         private View view;
+
+        //
+
         //回调注册web回退事件
         @JavascriptInterface
         public void setDoBackFN(String str){

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.QueryGroupCount;
+import com.wj.kindergarten.utils.PopWindowUtil;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by tangt on 2016/1/26.
  */
-public class TransportListener implements View.OnClickListener {
+public class TransportListener implements View.OnClickListener,AdapterView.OnItemClickListener {
     private int position;
     private List<AllPfAlbumSunObject> list;
     private Context context;
@@ -37,6 +39,16 @@ public class TransportListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(context,PfGalleryActivity.class);
+        intent.putExtra("position",position);
+        intent.putExtra("list",(ArrayList)list);
+        intent.putExtra("countList",(ArrayList)queryGroupCounts);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(context,PfGalleryActivity.class);
         intent.putExtra("position",position);
         intent.putExtra("list",(ArrayList)list);

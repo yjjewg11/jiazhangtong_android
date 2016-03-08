@@ -12,7 +12,7 @@
         android:id="@+id/photo_tab_fusion_tv"
         android:drawablePadding="@dimen/margin_5"
         android:drawableRight="@drawable/xiajiantou"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:text="时光轴"
         android:gravity="center"
         android:layout_width="wrap_content"

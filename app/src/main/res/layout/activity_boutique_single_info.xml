@@ -6,7 +6,12 @@
     android:orientation="vertical"
     tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity">
 
+    <FrameLayout
+        android:id="@+id/boutqiue_single_info_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <include layout="@layout/title_normal"/>
+    </FrameLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshWebView
         android:layout_width="match_parent"
         android:layout_weight="1"
@@ -21,9 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <FrameLayout
+        android:id="@+id/boutqiue_single_info_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <include layout="@layout/pf_pic_bottom_edit"/>
     </FrameLayout>
 </LinearLayout>

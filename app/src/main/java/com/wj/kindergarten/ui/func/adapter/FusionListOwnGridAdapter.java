@@ -130,7 +130,7 @@ public class FusionListOwnGridAdapter extends BaseAdapter implements
         AllPfAlbumSunObject o = allObjects.get(position);
         if(o != null){
             ImageLoaderUtil.displayMyImage(o.getPath(), holder.iv);
-            holder.iv.setOnClickListener( new TransportListener(context,position,allObjects,null));
+//            holder.iv.setOnClickListener( new TransportListener(context,position,allObjects,null));
         }
         return convertView;
     }

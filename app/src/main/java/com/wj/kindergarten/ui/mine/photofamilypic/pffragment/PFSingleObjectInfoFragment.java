@@ -123,6 +123,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             }
         }
     };
+    private TextView pf_fragment_extra_dianzan_count;
 
     public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter,PfSingleInfoFragment pfSingleInfoFragment) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
@@ -197,6 +198,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         pf_gallery_fragment_extra_info_time = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_time);
         pf_gallery_fragment_extra_info_address = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_address);
         pf_gallery_fragment_extra_info_human = (TextView) innerView.findViewById(R.id.pf_gallery_fragment_extra_info_human);
+        pf_fragment_extra_dianzan_count = (TextView) innerView.findViewById(R.id.pf_fragment_extra_dianzan_count);
     }
 
     private void initData() {
@@ -477,6 +479,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 Utils.showDianzanStatus(getActivity(), textViews[2]);
             }
         }
+
 
         mHanlder.sendEmptyMessage(UPDATE_ASSESS_COUNT);
     }

@@ -7,8 +7,11 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshWebView;
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
@@ -43,6 +47,7 @@ import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
+import com.wj.kindergarten.wrapper.WrapperFl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -98,6 +103,10 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     private LinearLayout pf_pic_bottom_viewGroup;
     private TextView pf_common_show_assess_title;
     private PopupWindow popAssessWindow;
+    private FrameLayout boutqiue_single_info_top;
+    private FrameLayout boutqiue_single_info_bottom;
+    private ObjectAnimator animTop;
+    private ObjectAnimator animBottom;
     //在主页面底部加入输入框后，在弹出框弹出时，会将它隐藏，所以添加到popwindow中
 //    private LinearLayout pf_comon_show_assess_linear;
 
@@ -144,6 +153,29 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         getBoutiqueInfo();
         queryAllpicClassBoutique();
         queryAssess();
+        initAnim();
+    }
+
+    private void initAnim() {
+        boutqiue_single_info_top.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        boutqiue_single_info_bottom.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int topHeight = boutqiue_single_info_top.getMeasuredHeight();
+        int bottomHeight = boutqiue_single_info_bottom.getMeasuredHeight();
+        animTop = ObjectAnimator.ofInt(new WrapperFl(boutqiue_single_info_top),"topMargin",-topHeight);
+        animBottom = ObjectAnimator.ofInt(new WrapperFl(boutqiue_single_info_bottom),"topMargin",-bottomHeight);
+        animTop.setDuration(300);
+        animBottom.setDuration(300);
+        animTop.setInterpolator(new LinearInterpolator());
+        animBottom.setInterpolator(new LinearInterpolator());
+    }
+
+    private void fullBoutiqueScreen(){
+        animTop.start();
+        animBottom.start();
+    }
+    private void exitBoutiqueScreen(){
+        animBottom.reverse();
+        animTop.reverse();
     }
 
     public void showDialog() {
@@ -170,10 +202,10 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                                 && pfSingleAssess.getList().getData() != null
                                 && pfSingleAssess.getList().getData().size() > 0) {
                             assessObjectList.addAll(pfSingleAssess.getList().getData());
-                        }else {
-                            if(pageNo == 1){
+                        } else {
+                            if (pageNo == 1) {
 
-                            }else {
+                            } else {
                                 assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
                                 ToastUtils.showMessage("没有更多数据了!");
                             }
@@ -349,8 +381,8 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             public void result(BaseModel domain) {
                 ToastUtils.showMessage("删除成功!");
                 Intent intent = new Intent();
-                intent.putExtra("uuid",uuid);
-                setResult(RESULT_OK,intent);
+                intent.putExtra("uuid", uuid);
+                setResult(RESULT_OK, intent);
                 finish();
             }
 
@@ -507,10 +539,26 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     }
 
     private void initViews() {
+        boutqiue_single_info_top = (FrameLayout) findViewById(R.id.boutqiue_single_info_top);
+        boutqiue_single_info_bottom = (FrameLayout) findViewById(R.id.boutqiue_single_info_bottom);
         pf_pic_bottom_assess_count = (TextView) findViewById(R.id.pf_pic_bottom_assess_count);
         boutiqueWebView = (PullToRefreshWebView) findViewById(R.id.boutique_single_info_webview);
         boutiqueWebView.setMode(PullToRefreshBase.Mode.DISABLED);
-        setWebView(boutiqueWebView.getRefreshableView());
+        setWebView(boutiqueWebView.getRefreshableView(),new WebJavaScript(boutiqueWebView.getRefreshableView()){
+
+//            进入全屏播放
+            @JavascriptInterface
+             public void fullScreen(){
+                fullBoutiqueScreen();
+            };
+//            退出全屏播放
+            @JavascriptInterface
+            public void exitFullScreen(){
+                exitBoutiqueScreen();
+            };
+
+
+        });
         boutique_single_info_assess = (LinearLayout) findViewById(R.id.boutique_single_info_assess);
         boutiqueWebView.getRefreshableView().setWebViewClient(new WebViewClient(){
             @Override
@@ -571,4 +619,14 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         pf_pic_bottom_viewGroup = (LinearLayout) findViewById(R.id.pf_pic_bottom_viewGroup);
     }
 
+    @Override
+    public void onBackPressed() {
+        //如果底部兰是隐藏的，则弹出，否则退出界面
+        int topMargin =((LinearLayout.LayoutParams) (boutqiue_single_info_top.getLayoutParams())).topMargin;
+        if(topMargin != 0){
+            exitBoutiqueScreen();
+            return;
+        }
+        super.onBackPressed();
+    }
 }

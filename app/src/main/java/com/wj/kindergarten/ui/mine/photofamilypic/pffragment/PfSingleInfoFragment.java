@@ -120,7 +120,6 @@ public class PfSingleInfoFragment extends Fragment {
     }
 
     public void deleteCurrentItem(AllPfAlbumSunObject sunObject) {
-        //不知为何，下标自动增加了2，待研究
         int currentIndex =  viewPager.getCurrentItem();
         CGLog.v("打印最近下标 : "+currentIndex);
         //从数据库，网络，轮播图中删除

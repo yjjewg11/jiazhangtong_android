@@ -129,7 +129,7 @@ public class UploadFile {
                 }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
-                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getMd5(), picObject.getMd5(), PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getNote(), picObject.getMd5(), PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
                 }else{
                     upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
                 }

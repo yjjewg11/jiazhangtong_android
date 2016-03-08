@@ -40,7 +40,6 @@ public class BoutiqueAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        //TODO 添加的假数据
         return list.size();
     }
 

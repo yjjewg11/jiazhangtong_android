@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,11 @@ import java.util.List;
 public class TopViewAdapter extends BaseAdapter{
     private List<PfAlbumListSun> list;
     private Context context;
-
-    public TopViewAdapter(Context context,List<PfAlbumListSun> list) {
+    int position;
+    public TopViewAdapter(Context context,List<PfAlbumListSun> list,int position) {
         this.list = list;
         this.context = context;
+        this.position = position;
     }
 
     @Override
@@ -51,8 +53,19 @@ public class TopViewAdapter extends BaseAdapter{
         }else {
             holder = (Holder) convertView.getTag();
         }
+        if(this.position == position){
+            Drawable drawable = context.getResources().getDrawable(R.drawable.pf_item_choosed);
+            drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
+            holder.title.setCompoundDrawablePadding(4);
+            holder.title.setCompoundDrawables(null,null,drawable,null);
+        }else {
+            Drawable zanWei = context.getResources().getDrawable(R.drawable.xiajiatou);
+            zanWei.setBounds(0,0,zanWei.getMinimumWidth(),zanWei.getMinimumHeight());
+            holder.title.setCompoundDrawablePadding(4);
+            holder.title.setCompoundDrawables(null,null,zanWei,null);
+        }
         PfAlbumListSun sun = list.get(position);
-        if(sun == null){
+        if(sun != null){
             holder.title.setText(""+ Utils.isNull(sun.getTitle()));
         }else {
             holder.title.setText("家庭相册--"+(position+1));

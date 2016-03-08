@@ -103,7 +103,6 @@ public final class UserRequest {
     private static final String PF_PIC_BY_UUID = "rest/fPPhotoItem/queryOfIncrement.json";
     private static final String CHECK_PF_IS_CHANGE = "rest/fPPhotoItem/ queryOfNewDataOrUpdate.json";
     private static final String PF_OBJ_BY_UPDATE = "rest/fPPhotoItem/queryOfIncrement.json";
-    private static final String GET_BOUTIQUE_ALBUM = "rest/fPMovie/queryMy.json";
     private static final String GET_BOUTIQUE_MODE = "rest/fPMovieTemplate/query.json";
     private static final String GET_MODE_MUSIC = "rest/mp3/query.json";
     private static final String GET_SINGLE_PF_EXTRA_INFO = "rest/fPPhotoItem/extra.json";
@@ -976,7 +975,13 @@ public final class UserRequest {
     public static void getBoutiqueAllbumListFromType(Context context, String type,int pageNo, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("pageNo", pageNo);
-        SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_ALBUM, params, RequestHttpUtil.BASE_URL + GET_BOUTIQUE_ALBUM, resultI);
+        if(type.equals("mine")){
+            type = "queryMy";
+        }else if(type.equals("all")){
+            type = "query";
+        }
+        String url = RequestHttpUtil.BASE_URL + "rest/fPMovie/"+type+".json";
+        SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_ALBUM, params, url, resultI);
     }
 
     public static void getBoutiqueMode(Context context, int pageNo, RequestResultI resultI) {

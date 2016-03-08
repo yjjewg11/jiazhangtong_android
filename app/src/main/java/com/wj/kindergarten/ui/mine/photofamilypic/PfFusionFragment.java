@@ -39,6 +39,7 @@ import com.wj.kindergarten.ui.func.adapter.PfFirstTimeAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.observer.Watcher;
 import com.wj.kindergarten.ui.more.BanScrollView;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -53,7 +54,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class PfFusionFragment extends Fragment {
+public class PfFusionFragment extends Fragment implements Watcher{
 
     private String family_uuid;
     private PhotoFamilyFragment photoFamilyFragment;
@@ -101,8 +102,7 @@ public class PfFusionFragment extends Fragment {
                             }
                         }
                         if(newData.size() > 0){
-//                            addListDataByDate(newData);
-                            addDataByOrder(fragment_pf_fusion_linear,newData);
+                            addListDataByDate(newData);
                         }
 
                     }
@@ -146,13 +146,13 @@ public class PfFusionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         initScrollListen();
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
-//        pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
-//        fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
-//        banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+        photoFamilyFragment.getObserver().registerObserver(this);
+        pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
+        fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
+        banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         photoFamilyFragment.setLocationChanged(new PhotoFamilyFragment.LocationChanged() {
             @Override
@@ -204,24 +204,6 @@ public class PfFusionFragment extends Fragment {
             }
         });
     }
-
-    private void addDataByOrder(LinearLayout linearLayout,List<QueryGroupCount> newData) {
-        for(QueryGroupCount count : newData){
-            List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(family_uuid,count.getDate());
-                if(objectList == null) continue;
-                View view = View.inflate(getActivity(),R.layout.pf_family_first_time_item,null);
-                TextView pf_family_first_item_time = (TextView) view.findViewById(R.id.pf_family_first_item_time);
-                TextView pf_family_first_item_count = (TextView) view.findViewById(R.id.pf_family_first_item_count);
-                pf_family_first_item_time.setText("" + count.getDate());
-                pf_family_first_item_count.setText("共" + count.getCount() + "张");
-                NestedGridView gridView = (NestedGridView) view.findViewById(R.id.pf_family_first_item_grid);
-                gridView.setVisibility(View.VISIBLE);
-//                PfFirstTimeAdapter adapter = new PfFirstTimeAdapter(getActivity(),objectList);
-                gridView.setAdapter(adapter);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            linearLayout.addView(view, params);
-            }
-        }
 
     private void addListDataByDate(List<QueryGroupCount> allList) {
 
@@ -306,4 +288,8 @@ public class PfFusionFragment extends Fragment {
         mPfLoadDataProxy.loadData(family_uuid, pageNo, false);
     }
 
+    @Override
+    public void refreshUUid(String family_uuid) {
+        loadData();
+    }
 }

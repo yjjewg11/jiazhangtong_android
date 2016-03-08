@@ -73,4 +73,20 @@ public class PFAlbumMember extends BaseModel{
     public void setFamily_name(String family_name) {
         this.family_name = family_name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PFAlbumMember member = (PFAlbumMember) o;
+
+        return uuid.equals(member.uuid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
 }

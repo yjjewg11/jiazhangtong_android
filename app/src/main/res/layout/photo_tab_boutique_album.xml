@@ -9,7 +9,7 @@
         android:layout_height="45dp">
         <TextView
             android:id="@+id/photo_tab_boutique_tv"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:drawableRight="@drawable/xiajiantou"
             android:drawablePadding="@dimen/margin_5"
             android:gravity="center"

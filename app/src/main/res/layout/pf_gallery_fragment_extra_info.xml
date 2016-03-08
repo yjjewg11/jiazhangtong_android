@@ -16,6 +16,21 @@
             android:text="这是描述"
             android:id="@+id/pf_gallery_fragment_extra_info_description" />
 
+
+        <TextView
+            android:id="@+id/pf_fragment_extra_dianzan_count"
+            android:drawablePadding="@dimen/margin_10"
+            android:drawableLeft="@drawable/dianzanxiao"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="他爸爸点赞"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_marginTop="@dimen/margin_15"
+            android:background="@color/color_cccccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
         <TextView
             android:layout_marginTop="@dimen/margin_15"
         android:layout_width="match_parent"

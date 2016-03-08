@@ -56,7 +56,7 @@ public interface GloablUtils {
     int INVITE_MORE_PEOPLE = 3053;
     int UPDATE_SUCCESSED_REFRESH = 3054;
     int DELETE_BOUTIQUE_ALBUM_SUCCESSED = 3055;
-
+    int DELETE_FUSION_INFO_SUCCESSED = 3056;
     //接受二维码链接的广播action
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
@@ -66,7 +66,5 @@ public interface GloablUtils {
 
     int MODE_OF_PF = 21;//相册
     int BOUTIQUE_COMMON_TYPE = 22;//精品相册
-
-
 
 }

@@ -43,6 +43,8 @@ public class AddFamilyMemberActivity extends BaseActivity {
     TextView add_family_add_bt;
     @ViewInject(id = R.id.iv_add_member,click = "onClick")
     ImageView iv_add_member;
+    @ViewInject(id = R.id.add_family_member_get_contact,click = "onClick")
+    TextView add_family_member_get_contact;
     private AddFamilyMemberParams member;
 
 
@@ -84,6 +86,9 @@ public class AddFamilyMemberActivity extends BaseActivity {
                 }
                 break;
             case R.id.iv_add_member:
+
+                break;
+            case R.id.add_family_member_get_contact:
                 startConstact();
                 break;
         }

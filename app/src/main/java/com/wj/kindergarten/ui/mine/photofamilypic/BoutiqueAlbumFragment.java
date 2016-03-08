@@ -21,8 +21,10 @@ import com.wj.kindergarten.bean.BoutiqueAlbumListSun;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueAdapter;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.observer.Watcher;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 
@@ -85,8 +87,8 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), BoutiqueSingleInfoActivity.class);
-                intent.putExtra("uuid", boutiqueAlbumList.get(position).getUuid());
-                startActivity(intent);
+                intent.putExtra("uuid", boutiqueAlbumList.get(position - 1).getUuid());
+                MainActivity.instance.startActivityForResult(intent, GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED);
             }
         });
         loadData(nowType);
@@ -185,16 +187,12 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     public void loadDataAccordingType(int position) {
         if(position == 0){
             nowType = typeAll[0];
-            loadAll();
         }else if(position == 1){
             nowType = typeAll[1];
-            refreshData();
         }
+        refreshData();
     }
 
-    private void loadAll() {
-        pageNo = 1;
-    }
 
     ;
 }

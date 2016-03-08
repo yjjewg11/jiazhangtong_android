@@ -186,6 +186,7 @@
     </style>
 
     <style name="pf_bottom_style">
+        <item name="android:textColor">#8e8e8e</item>
         <item name="android:textSize">11sp</item>
         <item name="android:drawablePadding">2dp</item>
         <item name="android:paddingTop">2dp</item>

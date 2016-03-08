@@ -89,10 +89,10 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         boutique_review_webview.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
                 if(commonDialog.isShowing()){
                     commonDialog.dismiss();
                 }
+                super.onPageFinished(view, url);
             }
 
             @Override
@@ -175,6 +175,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
                             commonDialog.dismiss();
                         }
                         if(cacheStatus == 0){
+                            boutique_review_webview.destroy();
                             finish();
                             ActivityManger.getInstance().finishPfActivities();
                         }

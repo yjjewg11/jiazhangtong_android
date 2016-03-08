@@ -60,6 +60,7 @@ public class PfEditInfoActivity extends BaseActivity {
     int status = 0;
     String hearld;
     private TextView pf_edit_info_invite;
+    private List<PFAlbumMember> memberList;
 
     @Override
     protected void setContentLayout() {
@@ -114,7 +115,12 @@ public class PfEditInfoActivity extends BaseActivity {
         tv_album_name.setText("" + title);
         ImageLoaderUtil.displayImage(hearld, iv_appear_image);
         memer_linear.removeAllViews();
-        List<PFAlbumMember> memberList = pfAlbumInfo.getMembers_list();
+        memberList = pfAlbumInfo.getMembers_list();
+        addAllViews();
+    }
+
+    private void addAllViews() {
+        memer_linear.removeAllViews();
         if (memberList != null && memberList.size() > 0) {
             for (final PFAlbumMember member : memberList) {
                 View view = View.inflate(this, R.layout.pf_album_member_info, null);
@@ -125,14 +131,21 @@ public class PfEditInfoActivity extends BaseActivity {
                 pf_album_member_phone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AddFamilyMemberParams params = new AddFamilyMemberParams();
-                        if (!TextUtils.isEmpty(member.getTel())) {
-                            params.setTel(member.getTel().replaceAll(" ",""));
-                        }
-                        params.setFamily_uuid(family_uuid);
-                        params.setUuid(member.getUuid());
-                        params.setFamily_name(member.getFamily_name());
-                        editMember(params);
+//                        editMember(params);弹出框进行编辑
+                        View customView = View.inflate(PfEditInfoActivity.this,R.layout.pf_edit_family,null);
+                        final EditText pf_edit_family_name = (EditText) customView.findViewById(R.id.pf_edit_family_name);
+                        final EditText pf_edit_family_phone = (EditText) customView.findViewById(R.id.pf_edit_family_phone);
+                        pf_edit_family_name.setText(""+Utils.isNull(member.getFamily_name()));
+                        pf_edit_family_phone.setText(""+Utils.isNull(member.getTel()));
+                        ToastUtils.showDialog(PfEditInfoActivity.this, customView, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                member.setFamily_name(pf_edit_family_name.getText().toString());
+                                member.setTel(pf_edit_family_phone.getText().toString());
+                                editInfo(member);
+                            }
+                        });
                     }
                 });
                 memer_linear.addView(view);
@@ -308,7 +321,7 @@ public class PfEditInfoActivity extends BaseActivity {
     }
 
     private void setOwnResult(){
-        setResult(RESULT_OK,new Intent());
+        setResult(RESULT_OK, new Intent());
     }
 
     @Override
@@ -316,5 +329,27 @@ public class PfEditInfoActivity extends BaseActivity {
         setOwnResult();
         super.onBackPressed();
 
+    }
+
+    private void editInfo(final PFAlbumMember member){
+        UserRequest.addFamilyMember(this, member.getFamily_uuid(), member.getFamily_name(), member.getTel(),
+                member.getUuid(), new RequestResultI() {
+                    @Override
+                    public void result(BaseModel domain) {
+                        ToastUtils.showMessage("修改成功!");
+                        memberList.remove(member);
+                        memberList.add(member);
+                        addAllViews();
+                    }
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
+
+                    }
+
+                    @Override
+                    public void failure(String message) {
+
+                    }
+                });
     }
 }

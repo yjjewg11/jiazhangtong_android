@@ -55,7 +55,10 @@ public class BoutiqueChooseItemAdapter extends BaseAdapter {
             holder.tab.setCompoundDrawablePadding(4);
             holder.tab.setCompoundDrawables(null,null,drawable,null);
         }else {
-            holder.tab.setCompoundDrawables(null,null,null,null);
+            Drawable zanWei = context.getResources().getDrawable(R.drawable.xiajiatou);
+            zanWei.setBounds(0,0,zanWei.getMinimumWidth(),zanWei.getMinimumHeight());
+            holder.tab.setCompoundDrawablePadding(4);
+            holder.tab.setCompoundDrawables(null,null,zanWei,null);
         }
         if(position == 0){
             holder.tab.setText("浏览全部相册");

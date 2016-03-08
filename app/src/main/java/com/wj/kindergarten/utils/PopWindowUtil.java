@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.PopAttributes;
@@ -127,4 +128,26 @@ public class PopWindowUtil {
         });
         return showPoPWindow(topVeiw, targetView, popAttributes.getWidth(), popAttributes.getHeight(), popAttributes.getGrarity(),popAttributes.getLeftOffset());
     }
+    public static void showPoPWindow(Context context,View targetView,BaseAdapter adapter,PopAttributes popAttributes,
+                                     final OnItemClickListener onItemClickListener){
+        View topVeiw = View.inflate(context, R.layout.pf_family_top_pop, null);
+        PullToRefreshListView topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
+        topViewPullList.setAdapter(adapter);
+        topViewPullList.setMode(PullToRefreshBase.Mode.DISABLED);
+        final PopupWindow popupWindow = new PopupWindow(topVeiw,popAttributes.getWidth(),popAttributes.getHeight());
+        Utils.setPopWindow(popupWindow);
+        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupWindow.dismiss();
+                onItemClickListener.onItemClickListener(position);
+            }
+        });
+        popupWindow.showAsDropDown(targetView,popAttributes.getLeftOffset(), 0, popAttributes.getGrarity());
+    }
+
+    public interface OnItemClickListener{
+        void onItemClickListener(int position);
+    }
+
 }

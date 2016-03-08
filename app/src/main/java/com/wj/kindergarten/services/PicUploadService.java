@@ -23,6 +23,7 @@ import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -69,7 +70,7 @@ public class PicUploadService extends Service {
         sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED, 100, 100);
         sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
         listObject.remove(count);
-        if (count >= size) {
+        if (listObject.size() == 0) {
             sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
             return;
         }
