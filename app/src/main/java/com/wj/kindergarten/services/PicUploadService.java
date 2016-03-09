@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -46,6 +48,12 @@ public class PicUploadService extends Service {
 
     public PicUploadService() {
     }
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+        }
+    };
 
     private UploadFile uploadFile;
     private String failedPath;
@@ -62,19 +70,18 @@ public class PicUploadService extends Service {
     };
 
     private void successes() {
-        size = listObject.size();
-        AlreadySavePath alreadySavePath = listObject.get(count);
-        alreadySavePath.setStatus(0);
-        alreadySavePath.setSuccess_time(new Date());
-        db.update(alreadySavePath);
-        sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED, 100, 100);
-        sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
-        listObject.remove(count);
-        if (listObject.size() == 0) {
-            sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
-            return;
-        }
-        checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
+        ThreadManager.instance.excuteRunnable(new Runnable() {
+            @Override
+            public synchronized void run() {
+                size = listObject.size();
+                AlreadySavePath alreadySavePath = listObject.get(count);
+                alreadySavePath.setStatus(0);
+                alreadySavePath.setSuccess_time(new Date());
+                db.update(alreadySavePath);
+                listObject.remove(count);
+                mHandler.post(new SuccessRunable());
+            }
+        });
     }
 
     private void sendBroad(String action,int progress,int total) {
@@ -96,14 +103,19 @@ public class PicUploadService extends Service {
         @Override
         public void failure(String message) {
             CGLog.v("上传失败 : " + message);
-            AlreadySavePath alreadySavePath = listObject.get(count);
-            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED,0,0);
-            alreadySavePath.setStatus(3);
-            db.update(alreadySavePath);
-            listObject.remove(count);
-            if(listObject.size() > 0){
-                checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
-            }
+            ThreadManager.instance.excuteRunnable(new Runnable() {
+                @Override
+                public synchronized void run() {
+                    AlreadySavePath alreadySavePath = listObject.get(count);
+                    sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED,0,0);
+                    alreadySavePath.setStatus(3);
+                    db.update(alreadySavePath);
+                    listObject.remove(count);
+                    if(listObject.size() > 0){
+                        mHandler.post(new FailRunnable());
+                    }
+                }
+            });
         }
     };
 
@@ -214,6 +226,26 @@ public class PicUploadService extends Service {
                 ToastUtils.showMessage("删除成功!");
             }
         }
+    }
+
+    class SuccessRunable implements Runnable{
+            @Override
+            public void run() {
+                sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
+                sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED, 100, 100);
+                if (listObject.size() == 0) {
+                    sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
+                    return;
+                }
+                checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
+            }
+    }
+
+    class FailRunnable implements Runnable{
+            @Override
+            public void run() {
+                checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
+            }
     }
 
 }

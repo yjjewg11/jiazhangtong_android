@@ -50,6 +50,7 @@ public class BoutiqueModeActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        ActivityManger.getInstance().finishPfActivities();
         ActivityManger.getInstance().addPfActivities(this);
         FinalActivity.initInjectedView(this);
         commonDialog = new HintInfoDialog(this,"数据加载中...请稍候");
@@ -70,10 +71,10 @@ public class BoutiqueModeActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PfModeNameObject object = (PfModeNameObject) adapter.getItem(position);
-                Intent intent = new Intent(BoutiqueModeActivity.this,BoutiqueModeReviewActivity.class);
-                intent.putExtra("objectList",(ArrayList)objectList);
-                intent.putExtra("key",object.getKey());
-                intent.putExtra("object",boutiqueSingleInfoObject);
+                Intent intent = new Intent(BoutiqueModeActivity.this, BoutiqueModeReviewActivity.class);
+                intent.putExtra("objectList", (ArrayList) objectList);
+                intent.putExtra("key", object.getKey());
+                intent.putExtra("object", boutiqueSingleInfoObject);
                 startActivity(intent);
             }
         });
@@ -137,5 +138,11 @@ public class BoutiqueModeActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        ActivityManger.getInstance().finishPfActivities();
+        super.onBackPressed();
     }
 }

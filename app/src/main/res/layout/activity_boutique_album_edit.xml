@@ -38,9 +38,9 @@
             android:textColor="@color/white"
             android:background="@color/title_bg"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:text="下一步"
             android:layout_width="match_parent"
-            android:layout_height="48dp" />
+            android:layout_height="49dp" />
     </RelativeLayout>
 </LinearLayout>

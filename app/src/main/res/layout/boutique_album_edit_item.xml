@@ -12,13 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="150dp" />
     <TextView
-        android:layout_marginTop="@dimen/margin_5"
-        android:textSize="17sp"
+        android:textColor="@color/color_222222"
+        android:layout_marginTop="@dimen/margin_10"
+        android:textSize="12sp"
         android:id="@+id/boutique_album_edit_titlesss"
         android:text="这是编辑的标题!"
         android:ellipsize="end"
         android:lines="2"
+        android:maxLines="2"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -323,6 +323,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     bottomShow();
                 }
             });
+            pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
+                @Override
+                public void deleteData(PfSingleAssessObject object) {
+                    assessObjectList.remove(object);
+                    initBottomAssessCount();
+                }
+            });
             assessListView.setAdapter(pfCommonAssessAdapter);
             emot2 = new ViewEmot2(this, new SendMessage() {
                 @Override
@@ -560,7 +567,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
         });
         boutique_single_info_assess = (LinearLayout) findViewById(R.id.boutique_single_info_assess);
-        boutiqueWebView.getRefreshableView().setWebViewClient(new WebViewClient(){
+        boutiqueWebView.getRefreshableView().setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -593,6 +600,8 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     object.setCreate_time(TimeUtil.getNowDate());
                     assessObjectList.add(0, object);
                     pfCommonAssessAdapter.setObjectList(assessObjectList);
+                    initBottomAssessCount();
+                    emot2.cleanEditText();
                 }
             }
 
@@ -606,6 +615,15 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void initBottomAssessCount() {
+        if(assessObjectList.size() <= 0){
+            pf_pic_bottom_assess_count.setVisibility(View.GONE);
+        }else {
+            pf_pic_bottom_assess_count.setVisibility(View.VISIBLE);
+            pf_pic_bottom_assess_count.setText(""+assessObjectList.size());
+        }
     }
 
     private void initBottomView() {

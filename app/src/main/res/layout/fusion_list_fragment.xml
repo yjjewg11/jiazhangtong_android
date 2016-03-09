@@ -19,28 +19,7 @@
             android:horizontalSpacing="8dp"
             android:columnWidth="@dimen/margin_5"
             android:verticalSpacing="@dimen/small_padding" />
-        <RelativeLayout
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
-            <ImageView
-                android:id="@+id/image_bottom"
-                android:src="@drawable/dialog_style_xml_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/tv_bottom"
-                android:layout_marginRight="26dp" />
-            <TextView
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="上拉刷新.."
-                android:id="@+id/tv_bottom"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
+        <include layout="@layout/refresh_linearlayout_header"/>
         <!--<include layout="@layout/layout_pulltorefresh"/>-->
     </com.wj.kindergarten.ui.more.PfRefreshLinearLayout>
 

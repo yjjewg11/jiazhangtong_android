@@ -35,89 +35,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:paddingRight="@dimen/margin_10"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin_15"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/pf_classic_by_date_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    </LinearLayout>
 
-        <ImageView
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="@dimen/margin_5"
-            android:layout_marginRight="@dimen/margin_5"
-            android:src="@drawable/zhanweitu"
-            android:layout_width="230dp"
-            android:layout_height="230dp"
-            android:id="@+id/pf_iv_0" />
-
-        <LinearLayout
-            android:layout_toLeftOf="@+id/pf_iv_0"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/pf_iv_0"
-            android:layout_toRightOf="@+id/pf_iv_0"
-            android:id="@+id/linearLayout3">
-
-            <ImageView
-                android:id="@+id/pf_iv_1"
-                android:layout_marginBottom="@dimen/margin_5"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/zhanweitu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:id="@+id/pf_iv_2"
-                android:layout_weight="1"
-                android:scaleType="centerCrop"
-                android:src="@drawable/zhanweitu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_below="@+id/pf_iv_0"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/linearLayout3"
-            android:id="@+id/linearLayout4">
-            <ImageView
-                android:id="@+id/pf_iv_3"
-                android:layout_marginRight="@dimen/margin_5"
-                android:scaleType="centerCrop"
-                android:layout_weight="1"
-                android:src="@drawable/zhanweitu"
-                android:layout_width="wrap_content"
-                android:layout_height="115dp" />
-            <ImageView
-                android:id="@+id/pf_iv_4"
-                android:layout_marginRight="@dimen/margin_5"
-                android:scaleType="centerCrop"
-                android:layout_weight="1"
-                android:src="@drawable/zhanweitu"
-                android:layout_width="wrap_content"
-                android:layout_height="115dp" />
-        </LinearLayout>
-
-        <ImageView
-            android:scaleType="centerCrop"
-            android:src="@drawable/zhanweitu"
-            android:layout_width="wrap_content"
-            android:layout_height="115dp"
-            android:id="@+id/pf_iv_5"
-            android:layout_alignTop="@+id/linearLayout4"
-            android:layout_toRightOf="@+id/pf_iv_0"
-            android:layout_alignRight="@+id/linearLayout3" />
-
-    </RelativeLayout>
 
 
 </LinearLayout>

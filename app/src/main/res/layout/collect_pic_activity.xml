@@ -5,16 +5,21 @@
 
     <include layout="@layout/title_normal"/>
 
-    <com.handmark.pulltorefresh.library.PullToRefreshGridView
+    <com.wj.kindergarten.ui.more.PfRefreshLinearLayout
         android:layout_width="match_parent"
-        android:cacheColorHint="@android:color/transparent"
-        android:columnWidth="100dip"
-        android:gravity="center"
-        android:listSelector="@android:color/transparent"
-        android:numColumns="auto_fit"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:id="@+id/collect_grid_view"
-        android:layout_height="match_parent"/>
+        android:id="@+id/collect_pic_refresh_linear"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <GridView
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:horizontalSpacing="2dp"
+            android:columnWidth="2dp"
+            android:id="@+id/collect_pic_refresh_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <include layout="@layout/refresh_linearlayout_header"/>
+    </com.wj.kindergarten.ui.more.PfRefreshLinearLayout>
 
 </LinearLayout>

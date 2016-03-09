@@ -117,6 +117,7 @@ public class PfEditInfoActivity extends BaseActivity {
         memer_linear.removeAllViews();
         memberList = pfAlbumInfo.getMembers_list();
         addAllViews();
+
     }
 
     private void addAllViews() {

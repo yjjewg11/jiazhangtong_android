@@ -33,6 +33,10 @@ public class PfCommonAssessAdapter extends BaseAdapter {
     public void setBottomListener(View.OnClickListener bottomListener) {
         this.bottomListener = bottomListener;
     }
+    private DeleteAssessItemListener deleteAssessItemListener;
+    public void setDeleteDataListener(DeleteAssessItemListener deleteAssessItemListener){
+        this.deleteAssessItemListener = deleteAssessItemListener;
+    }
 
     private Context context;
     List<PfSingleAssessObject> objectList = new ArrayList<>();
@@ -110,6 +114,7 @@ public class PfCommonAssessAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     objectList.remove(object);
                     notifyDataSetChanged();
+                    deleteAssessItemListener.deleteData(object);
                 }
             });
             }
@@ -126,5 +131,9 @@ public class PfCommonAssessAdapter extends BaseAdapter {
         TextView common_assess_item_delete;
         TextView common_assess_item_write_assess;
         RelativeLayout common_assess_item_rl;
+    }
+
+    public interface DeleteAssessItemListener{
+        void deleteData(PfSingleAssessObject object);
     }
 }

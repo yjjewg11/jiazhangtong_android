@@ -36,6 +36,7 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 
 import net.tsz.afinal.FinalDb;
 
@@ -51,7 +52,7 @@ import java.util.List;
 public class FusionListFragment extends Fragment implements Watcher{
 
     private final int QUERY_FINISHED = 3070;
-    private final String QUERY_CLOUMN = "photo_time";
+    private final String QUERY_CLOUMN = "create_time";
     private int firstItem;
     private PhotoFamilyFragment photoFamilyFragment;
     private View mainView;
@@ -104,9 +105,16 @@ public class FusionListFragment extends Fragment implements Watcher{
             Collections.sort(list, new Comparator<AllPfAlbumSunObject>() {
                 @Override
                 public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {
-                    long t1 = (TimeUtil.getYMDHMSTime(o.getPhoto_time()));
+                    int cha = 0;
+                    long t1 = TimeUtil.getYMDHMSTime(o.getPhoto_time());
                     long t2 = TimeUtil.getYMDHMSTime(t.getPhoto_time());
-                    return (int) (t2 - t1);
+                    if(t2 - t1 >= 0){
+                        cha = 1;
+                    }else {
+                        cha = -1;
+                    }
+
+                    return cha;
                 }
             });
             allObjects.clear();
@@ -203,7 +211,6 @@ public class FusionListFragment extends Fragment implements Watcher{
             }
         });
         fusion_list_fragment_stick_grid = (StickyGridHeadersGridView) mainView.findViewById(R.id.fusion_list_fragment_stick_grid);
-        fusion_list_fresh_linear.setStickyGridHeadersGridView(fusion_list_fragment_stick_grid);
         fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -221,8 +228,6 @@ public class FusionListFragment extends Fragment implements Watcher{
                 firstItem = firstVisibleItem;
                 visibleItem = visibleItemCount;
                 totalItem = totalItemCount;
-                CGLog.v("firstVisibleItem : " + firstVisibleItem + "   visibleItemCount : " + visibleItemCount +
-                        "    totalItemCount:" + totalItemCount);
             }
         });
         ownGridAdapter = new FusionListOwnGridAdapter(getActivity());
@@ -237,6 +242,7 @@ public class FusionListFragment extends Fragment implements Watcher{
             }
         });
         mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
+        mPfLoadDataProxy.setQUERY_CLOUMN(QUERY_CLOUMN);
         mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
             @Override
             public void finish() {
@@ -247,6 +253,7 @@ public class FusionListFragment extends Fragment implements Watcher{
             public void noMoreData() {
                 fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.DISALBED);
                 noMoreData = true;
+                ToastUtils.showMessage("没有更多内容了!");
             }
 
         });

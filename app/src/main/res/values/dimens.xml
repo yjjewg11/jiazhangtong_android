@@ -20,6 +20,7 @@
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_3">3dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="big_padding">24dp</dimen>
     <dimen name="popwindow_padding_lr">16dp</dimen>

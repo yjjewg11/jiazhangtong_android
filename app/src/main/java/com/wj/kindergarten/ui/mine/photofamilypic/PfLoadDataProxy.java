@@ -39,7 +39,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class PfLoadDataProxy {
     private DataLoadFinish dataLoadFinish;
-    private final String QUERY_CLOUMN = "photo_time";
+    private String QUERY_CLOUMN = "photo_time";
+
+    public void setQUERY_CLOUMN(String QUERY_CLOUMN) {
+        this.QUERY_CLOUMN = QUERY_CLOUMN;
+    }
 
     public void setDataLoadFinish(DataLoadFinish dataLoadFinish) {
         this.dataLoadFinish = dataLoadFinish;
@@ -62,6 +66,8 @@ public class PfLoadDataProxy {
         this.handler = handler;
         threadPoolExecutor = new ThreadPoolExecutor(1, 1, 60 * 60, TimeUnit.SECONDS, linkedBlockingQueue);
     }
+
+
 
     //根据家庭uuid查询所有照片数量,判断是否是上拉刷新，
     public void loadData(String familyUuid, int pageNo, boolean isPullup) {

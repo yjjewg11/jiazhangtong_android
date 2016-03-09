@@ -59,6 +59,7 @@ public class BoutiqueAdapter extends BaseAdapter{
         if(convertView == null){
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(R.layout.boutique_album_itme,null);
+            viewHolder.boutique_album_item_dianzan = (TextView) convertView.findViewById(R.id.boutique_album_item_dianzan);
             viewHolder.boutique_album_item_title = (TextView) convertView.findViewById(R.id.boutique_album_item_title);
             viewHolder.boutique_album_item_people = (TextView) convertView.findViewById(R.id.boutique_album_item_title);
             viewHolder.boutique_album_item_count = (TextView) convertView.findViewById(R.id.boutique_album_item_count);
@@ -82,7 +83,8 @@ public class BoutiqueAdapter extends BaseAdapter{
         return convertView;
     }
     class ViewHolder {
-        TextView boutique_album_item_title,boutique_album_item_people,boutique_album_item_count;
+        TextView boutique_album_item_title,boutique_album_item_people,
+                boutique_album_item_count,boutique_album_item_dianzan;
         ImageView boutique_album_item_image;
         FrameLayout boutique_bottom_delete,boutique_bottom_edit,boutique_bottom_pinglun,boutique_bottom_edit2;
     }

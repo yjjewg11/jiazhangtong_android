@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -63,7 +64,8 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        ActivityManger.getInstance().addPfActivities(this);
+        //清空前面的选择集合。
+
         FinalActivity.initInjectedView(this);
         setTitleText("相册模板预览", "音乐");
         initViews();

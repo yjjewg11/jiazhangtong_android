@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,9 +29,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfDianZan;
+import com.wj.kindergarten.bean.PfInfoDianZan;
+import com.wj.kindergarten.bean.PfInfoDianZanObj;
 import com.wj.kindergarten.bean.PfSingleAssess;
 import com.wj.kindergarten.bean.PfSingleAssessObject;
 import com.wj.kindergarten.bean.Reply;
@@ -124,6 +128,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         }
     };
     private TextView pf_fragment_extra_dianzan_count;
+    private List<PfInfoDianZanObj> dianZanList;
 
     public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter,PfSingleInfoFragment pfSingleInfoFragment) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
@@ -249,10 +254,10 @@ public class PFSingleObjectInfoFragment extends Fragment {
     }
 
     private void updatePfInfo() {
-        pf_gallery_fragment_extra_info_description.setText(""+Utils.isNull(sunObject.getNote()));
+        pf_gallery_fragment_extra_info_description.setText("" + Utils.isNull(sunObject.getNote()));
         pf_gallery_fragment_extra_info_time.setText("拍摄时间: "+Utils.isNull(sunObject.getPhoto_time()));
-        pf_gallery_fragment_extra_info_address.setText("拍摄地点: "+Utils.isNull(sunObject.getAddress()));
-        pf_gallery_fragment_extra_info_human.setText("上传人: "+Utils.isNull(sunObject.getCreate_user()));
+        pf_gallery_fragment_extra_info_address.setText("拍摄地点: " + Utils.isNull(sunObject.getAddress()));
+        pf_gallery_fragment_extra_info_human.setText("上传人: " + Utils.isNull(sunObject.getCreate_user()));
     }
 
     private void showAssessList() {
@@ -280,6 +285,13 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 }
             });
             pfCommonAssessAdapter = new PfCommonAssessAdapter(getActivity());
+            pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
+                @Override
+                public void deleteData(PfSingleAssessObject object) {
+                    assessObjectList.remove(object);
+                    initBottomAssessCount();
+                }
+            });
             pfCommonAssessAdapter.setBottomListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -326,7 +338,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
                 }
 
-                private float convertFloat(int number){
+                private float convertFloat(int number) {
                     return Float.valueOf(number);
                 }
 
@@ -336,7 +348,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                     float height = (convertFloat(WindowUtils.dm.widthPixels) / convertFloat(loadedImage.getWidth())) * convertFloat(loadedImage.getHeight());
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) pf_gallery_image.getLayoutParams();
                     params.height = (int) height;
-                    CGLog.v("打印高度 : "+params.height);
+                    CGLog.v("打印高度 : " + params.height);
                     pf_gallery_image.setLayoutParams(params);
                     pf_gallery_image.requestLayout();
                     pf_gallery_image.setImageBitmap(loadedImage);
@@ -443,6 +455,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 if (singleInfo != null) {
                     //初始化底部按钮显示状态
                     initCollect();
+                    initDianZan();
                 }
             }
 
@@ -456,6 +469,27 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
             }
         });
+    }
+
+    private void initDianZan() {
+        PfInfoDianZan pfDianzan = singleInfo.getDianZanNameList();
+        if(pfDianzan != null && pfDianzan.getData() != null && pfDianzan.getData().size() > 0){
+            dianZanList = pfDianzan.getData();
+            StringBuilder builder = null;
+            int size = pfDianzan.getData().size();
+            for(int cou = 0 ; cou < size ; cou ++ ){
+                PfInfoDianZanObj dian = pfDianzan.getData().get(cou);
+                if(cou != size - 1){
+                    builder.append(Utils.isNull(dian.getUsername())+",");
+                }else {
+                    builder.append(Utils.isNull(dian.getUsername()));
+                }
+            }
+            String text = "<font color='#ff4966'>"+builder.toString()+"</font>"+size+"人觉得很赞";
+            pf_fragment_extra_dianzan_count.setText(Html.fromHtml(text));
+        }else {
+            pf_fragment_extra_dianzan_count.setText("0人点过赞");
+        }
     }
 
     private void initCollect() {
@@ -545,6 +579,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 cancleDialog();
                 Utils.cancleDizanStatus(getActivity(), textViews[2]);
                 ToastUtils.showMessage("取消点赞成功");
+                PfInfoDianZanObj obj = new PfInfoDianZanObj(CGApplication.getInstance().getLogin().getUserinfo().getUuid());
+                if(dianZanList == null)dianZanList = new ArrayList<>();
+                if(dianZanList.contains(obj)){
+                    dianZanList.remove(obj);
+                    initDianZan();
+                }
             }
 
             @Override
@@ -567,6 +607,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 ToastUtils.showMessage("点赞成功");
                 Utils.showDianzanStatus(getActivity(), textViews[2]);
                 cancleDialog();
+                PfInfoDianZanObj obj = new PfInfoDianZanObj();
+                obj.setUsername(CGApplication.getInstance().getLogin().getUserinfo().getName());
+                obj.setUsername(CGApplication.getInstance().getLogin().getUserinfo().getUuid());
+                if(dianZanList == null) dianZanList = new ArrayList<>();
+                dianZanList.add(obj);
+                initDianZan();
             }
 
             @Override
@@ -613,6 +659,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 object.setCreate_time(TimeUtil.getNowDate());
                 object.setCreate_img(sunObject.getPath());
                 assessObjectList.add(object);
+                initBottomAssessCount();
                 bottomCancle();
             }
 
@@ -626,6 +673,15 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
             }
         });
+    }
+
+    private void initBottomAssessCount() {
+        if(assessObjectList.size() <= 0 ){
+            pf_pic_bottom_assess_count.setVisibility(View.GONE);
+        }else {
+            pf_pic_bottom_assess_count.setText(""+assessObjectList.size());
+            pf_pic_bottom_assess_count.setVisibility(View.VISIBLE);
+        }
     }
 
     private void cacleStore() {

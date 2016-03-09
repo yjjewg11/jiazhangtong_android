@@ -56,6 +56,8 @@ import com.wj.kindergarten.utils.WindowUtils;
 
 import net.tsz.afinal.FinalDb;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +117,7 @@ public class PhotoFamilyFragment extends Fragment{
         }
     }
     public void stopGif(){
-        if(gif == null){
+        if(gif != null){
             gif.setVisibility(View.INVISIBLE);
         }
     }

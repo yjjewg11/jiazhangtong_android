@@ -34,12 +34,8 @@ public class PfRefreshLinearLayout extends LinearLayout {
     public void setMode(boolean mode){
         this.mode = mode;
     }
-    private StickyGridHeadersGridView stickyGridHeadersGridView;
     private Scroller scroller;
 
-    public void setStickyGridHeadersGridView(StickyGridHeadersGridView stickyGridHeadersGridView) {
-        this.stickyGridHeadersGridView = stickyGridHeadersGridView;
-    }
 
 
     public PfRefreshLinearLayout(Context context, AttributeSet attrs) {

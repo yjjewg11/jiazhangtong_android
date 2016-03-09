@@ -40,6 +40,7 @@ import com.wj.kindergarten.ui.func.adapter.PfWallAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.observer.Watcher;
+import com.wj.kindergarten.ui.mine.photofamilypic.viewmodel.PfFusionViewModel;
 import com.wj.kindergarten.ui.more.BanScrollView;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -141,6 +142,7 @@ public class PfFusionFragment extends Fragment implements Watcher{
 
     private PfLoadDataProxy mPfLoadDataProxy;
     private LinearLayout fragment_pf_fusion_linear;
+    private PfFusionViewModel viewModel;
 
 
     @Nullable
@@ -149,6 +151,7 @@ public class PfFusionFragment extends Fragment implements Watcher{
         initScrollListen();
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
+        viewModel = new PfFusionViewModel(getActivity());
         photoFamilyFragment.getObserver().registerObserver(this);
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
@@ -211,42 +214,13 @@ public class PfFusionFragment extends Fragment implements Watcher{
 
             List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(family_uuid, count.getDate());
             if (objectList == null) continue;
-
             View view = View.inflate(getActivity(), R.layout.pf_classic_by_date_album, null);
-            ImageView iv_0 = (ImageView) view.findViewById(R.id.pf_iv_0);
-            ImageView iv_1 = (ImageView) view.findViewById(R.id.pf_iv_1);
-            ImageView iv_2 = (ImageView) view.findViewById(R.id.pf_iv_2);
-            ImageView iv_3 = (ImageView) view.findViewById(R.id.pf_iv_3);
-            ImageView iv_4 = (ImageView) view.findViewById(R.id.pf_iv_4);
-            ImageView iv_5 = (ImageView) view.findViewById(R.id.pf_iv_5);
+            LinearLayout container_linear = (LinearLayout) view.findViewById(R.id.pf_classic_by_date_container);
             TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
             TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
             pf_tv_date_time.setText("" + count.getDate());
             pf_pic_count.setText("共" + count.getCount() + "张");
-            int size = objectList.size();
-            if (size > 0){
-                for (int i = 0 ; i < size ; i++){
-                    if(i == 0){
-                        iv_0.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
-                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_0);
-                    }else if(i == 1){
-                        iv_1.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
-                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_1);
-                    }else if(i == 2){
-                        iv_2.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
-                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_2);
-                    }else if(i == 3){
-                        iv_3.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
-                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_3);
-                    }else if(i == 4){
-                        iv_4.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
-                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_4);
-                    }else if(i == 5){
-                        iv_5.setOnClickListener(new TransportListener(getActivity(),i,objectList,allList));
-                        ImageLoaderUtil.displayMyImage(objectList.get(i).getPath(),iv_5);
-                    }
-                }
-            }
+            viewModel.loadView(objectList,container_linear);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             fragment_pf_fusion_linear.addView(view, params);
 
@@ -280,7 +254,7 @@ public class PfFusionFragment extends Fragment implements Watcher{
 
             @Override
             public void noMoreData() {
-
+                pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
                 noMoreData = true;
             }
 

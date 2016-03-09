@@ -10,7 +10,8 @@ public class SinlePfExtraInfo extends BaseModel{
     private boolean isFavor;@Expose
     private PfDianZan dianZan;@Expose
     private int reply_count;@Expose
-    private int status;
+    private int status;@Expose
+    private  PfInfoDianZan  dianZanNameList;
 
     @Override
     public String toString() {
@@ -19,7 +20,16 @@ public class SinlePfExtraInfo extends BaseModel{
                 ", dianZan=" + dianZan +
                 ", reply_count=" + reply_count +
                 ", status=" + status +
+                ", dianZanNameList=" + dianZanNameList +
                 '}';
+    }
+
+    public PfInfoDianZan getDianZanNameList() {
+        return dianZanNameList;
+    }
+
+    public void setDianZanNameList(PfInfoDianZan dianZanNameList) {
+        this.dianZanNameList = dianZanNameList;
     }
 
     public int getStatus() {
