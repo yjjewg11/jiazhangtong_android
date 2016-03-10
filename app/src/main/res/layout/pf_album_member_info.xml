@@ -31,5 +31,9 @@
              android:text="Medium Text"
              android:id="@+id/pf_album_member_phone" />
      </LinearLayout>
+    <View
+        android:background="@color/share_background"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
 
 </LinearLayout>

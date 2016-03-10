@@ -12,7 +12,7 @@
             android:layout_marginRight="@dimen/margin_5"
             android:src="@drawable/zhanweitu"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="220dp"
             android:id="@+id/pf_classic_by_date_three_iv_one" />
 
         <LinearLayout
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
-                android:layout_height="115dp" />
+                android:layout_height="150dp" />
             <ImageView
                 android:id="@+id/pf_classic_by_date_three_iv_three"
                 android:layout_marginRight="@dimen/margin_5"
@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
-                android:layout_height="115dp" />
+                android:layout_height="150dp" />
         </LinearLayout>
 
 </LinearLayout>

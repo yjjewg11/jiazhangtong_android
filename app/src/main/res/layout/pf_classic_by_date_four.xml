@@ -7,7 +7,7 @@
             android:padding="@dimen/margin_5"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:id="@+id/linearLayout3">
 
             <ImageView
@@ -40,7 +40,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp" />
+                android:layout_height="180dp" />
             <ImageView
                 android:layout_marginLeft="@dimen/margin_3"
                 android:id="@+id/pf_classic_by_date_four_iv_four"
@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp" />
+                android:layout_height="180dp" />
         </LinearLayout>
 
 

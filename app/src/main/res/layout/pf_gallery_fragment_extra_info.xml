@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="@dimen/margin_15"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_15">
 
         <TextView
-            android:textColor="@color/black"
+            android:id="@+id/pf_gallery_fragment_extra_info_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="这是描述"
-            android:id="@+id/pf_gallery_fragment_extra_info_description" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/color_222222"
+            android:textSize="14sp" />
 
 
         <TextView
             android:id="@+id/pf_fragment_extra_dianzan_count"
-            android:drawablePadding="@dimen/margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
             android:drawableLeft="@drawable/dianzanxiao"
-            android:layout_marginTop="@dimen/margin_15"
-            android:text="他爸爸点赞"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:drawablePadding="@dimen/margin_10"
+            android:text="0人点过赞"
+            android:textSize="11sp" />
+
         <View
-            android:layout_marginTop="@dimen/margin_15"
-            android:background="@color/color_cccccc"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
-
-        <TextView
+            android:layout_height="1dp"
             android:layout_marginTop="@dimen/margin_15"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="时间"
-        android:id="@+id/pf_gallery_fragment_extra_info_time" />
+            android:background="@color/color_cccccc" />
 
         <TextView
-            android:layout_marginTop="5dp"
+            android:id="@+id/pf_gallery_fragment_extra_info_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="时间"
+            style="@style/pf_info_style"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            style="@style/pf_info_style"
+            android:id="@+id/pf_gallery_fragment_extra_info_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp"
             android:text="地点"
-            android:id="@+id/pf_gallery_fragment_extra_info_address" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:layout_marginTop="5dp"
+            style="@style/pf_info_style"
+            android:id="@+id/pf_gallery_fragment_extra_info_human"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp"
             android:text="老师"
-            android:id="@+id/pf_gallery_fragment_extra_info_human" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
 </LinearLayout>

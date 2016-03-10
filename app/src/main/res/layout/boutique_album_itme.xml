@@ -13,69 +13,81 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/boutique_album_item_image"
-            android:scaleType="centerCrop"
-            android:src="@drawable/new_album"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="200dp">
+            <ImageView
+                android:id="@+id/boutique_album_item_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/new_album"
+                android:background="@color/share_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_gravity="bottom"
+                android:paddingTop="@dimen/margin_5"
+                android:background="#88000000"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:paddingRight="@dimen/margin_10"
+                android:paddingLeft="@dimen/margin_10"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="这是标题,可以用"
+                android:id="@+id/boutique_album_item_title" />
+
+        </FrameLayout>
 
 
         <TextView
-            android:layout_marginTop="@dimen/margin_15"
-            android:layout_marginBottom="@dimen/margin_15"
-            android:textColor="@color/color_222222"
-            android:textSize="15sp"
-            android:layout_marginLeft="@dimen/margin_10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="这是标题,可以用"
-            android:id="@+id/boutique_album_item_title" />
-
-
-    <RelativeLayout
-        android:paddingLeft="@dimen/margin_10"
-        android:paddingRight="@dimen/margin_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
+            android:padding="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
             android:textSize="12sp"
-            android:drawablePadding="6dp"
-            android:drawableLeft="@drawable/small_ren_jpxc"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="妈妈"
-            android:id="@+id/boutique_album_item_people"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
-
-        <TextView
-            android:textSize="12sp"
-            android:layout_toRightOf="@+id/boutique_album_item_people"
-            android:layout_marginLeft="40dp"
-            android:drawableLeft="@drawable/boutique_image_jpxc"
-            android:drawablePadding="@dimen/margin_6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="111张"
+            android:text="爸爸制作了几张照片"
             android:id="@+id/boutique_album_item_count"
             android:layout_alignParentTop="true" />
-    </RelativeLayout>
-        <TextView
-            android:textSize="11sp"
-            android:id="@+id/boutique_album_item_dianzan"
-            android:text="几人点过占"
-            android:drawablePadding="@dimen/margin_6"
-            android:layout_marginLeft="@dimen/margin_10"
-            android:drawableLeft="@drawable/dianzanxiao"
-            android:layout_marginRight="@dimen/margin_10"
-            android:layout_marginTop="@dimen/margin_15"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="44dp">
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                android:drawablePadding="@dimen/margin_10"
+                android:drawableLeft="@drawable/hudongnew"
+                android:textColor="#ff5a50"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:id="@+id/boutique_album_item_assess_count"
+                android:text="11"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textColor="#ff5a50"
+                    android:drawableLeft="@drawable/pf_zan"
+                    android:drawablePadding="@dimen/margin_10"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:id="@+id/boutique_album_item_dianzan_count"
+                    android:text="23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

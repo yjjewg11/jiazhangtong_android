@@ -12,7 +12,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="180dp" />
 
             <ImageView
                 android:layout_marginLeft="@dimen/margin_5"
@@ -21,5 +21,5 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="180dp" />
 </LinearLayout>
