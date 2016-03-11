@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.main;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,6 +15,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -40,6 +43,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.FusionListFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFragmentLinearLayout;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.PfLoadDataProxy;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PointPositionListener;
@@ -92,15 +96,13 @@ public class PhotoFamilyFragment extends Fragment{
     private PfAlbumListSun pfAlbumListSun;
     private String currentFamily_uuid;
     public static PhotoFamilyFragment instance;
-    private View topVeiw;
-    private PullToRefreshListView topViewPullList;
-    private TopViewAdapter topViewAdapter;
     private ObserverFamilyUuid observer;
     private PopAttributes popRight;
     private PopAttributes popleft;
     private PopAttributes popTop;
     private int topPosition;
     private PfFusionFragment pfFusionFragment;
+    private PfLoadDataProxy pfProxyLoadData;
 
     public ObserverFamilyUuid getObserver() {
         return observer;
@@ -108,6 +110,21 @@ public class PhotoFamilyFragment extends Fragment{
 
     public String getCurrentFamily_uuid() {
         return currentFamily_uuid;
+    }
+
+    private void showView() {
+        View viewNewData = View.inflate(getActivity(),R.layout.pf_new_data_info,null);
+        TextView tv_new_data = (TextView) viewNewData.findViewById(R.id.pf_new_data_tv);
+        final PopupWindow popNewData = new PopupWindow(viewNewData,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        Utils.setPopWindow(popNewData);
+        tv_new_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popNewData.dismiss();
+                observer.setFamily_uuid(currentFamily_uuid);
+            }
+        });
+        popNewData.showAsDropDown(pf_backGround_family_name,0,20);
     }
 
     public void startGif(){
@@ -121,15 +138,15 @@ public class PhotoFamilyFragment extends Fragment{
             gif.setVisibility(View.INVISIBLE);
         }
     }
-
-    private int getFlTopMargin(){
-        LinearLayout.LayoutParams params  = (LinearLayout.LayoutParams) back_pf_scroll_fl.getLayoutParams();
-        return params.topMargin;
-    }
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
 
+            switch (msg.what){
+                case PfLoadDataProxy.REFRESH_DATA:
+                    showView();
+                    break;
+            }
         }
     };
 
@@ -140,20 +157,8 @@ public class PhotoFamilyFragment extends Fragment{
     public void setLocationChanged(LocationChanged locationChanged) {
         this.locationChanged = locationChanged;
     }
-
-    public boolean isFlIsLocationTop() {
-        return flIsLocationTop;
-    }
-
-    private boolean isOne;
-    private float moveY;
     private ArrayList<AllPfAlbumSunObject> list = new ArrayList<>();
     public boolean canScroll = true;
-    private ObjectAnimator animotor;
-
-    public void setCanScroll(boolean canScroll) {
-        this.canScroll = canScroll;
-    }
 
 
     //标签 ： 时光轴，精品相册
@@ -204,6 +209,7 @@ public class PhotoFamilyFragment extends Fragment{
     private void initDb() {
         db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         dbFamilyAlbum = FinalDb.create(getActivity(),GloablUtils.FAMILY_UUID);
+        pfProxyLoadData = new PfLoadDataProxy(getActivity(),handler);
     }
 
     private void initFamilyAlbumData() {
@@ -267,10 +273,10 @@ public class PhotoFamilyFragment extends Fragment{
                         topPosition = position - 1;
                         PfAlbumListSun albumListSun = (PfAlbumListSun) topAdapter.getItem(topPosition);
                         String title = Utils.isNull(albumListSun.getTitle());
-                        if(TextUtils.isEmpty(title)){
-                            title = "家庭相册--"+topPosition;
+                        if (TextUtils.isEmpty(title)) {
+                            title = "家庭相册--" + topPosition;
                         }
-                        pf_pic_center_tv.setText(""+title);
+                        pf_pic_center_tv.setText("" + title);
                     }
                 });
     }
@@ -284,11 +290,14 @@ public class PhotoFamilyFragment extends Fragment{
         if(TextUtils.isEmpty(pfAlbumListSun.getTitle())) return;
         int count = Integer.valueOf(pfAlbumListSun.getPhoto_count());
         String n = null;
+        pf_background_show_number.setVisibility(View.VISIBLE);
         if(count > 1000){
             n =  pfAlbumListSun.getPhoto_count().substring(0,1);
             n = n+".k";
-        }else{
+        }else if(count > 0){
             n = pfAlbumListSun.getPhoto_count();
+        }else {
+            pf_background_show_number.setVisibility(View.INVISIBLE);
         }
         pf_background_show_number.setText(""+n);
         if(!TextUtils.isEmpty(pfAlbumListSun.getHerald())){
@@ -468,7 +477,7 @@ public class PhotoFamilyFragment extends Fragment{
                     case 1:
                         //精品相册
                         if (getFragmentManager().findFragmentByTag(fragment_tags[1]) == null) {
-                            if(boutique_album_framgent == null)boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this);
+                            if(boutique_album_framgent == null)boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this,currentFamily_uuid);
                         } else {
                             boutique_album_framgent = (BoutiqueAlbumFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
                         }
@@ -587,6 +596,11 @@ public class PhotoFamilyFragment extends Fragment{
     public void refreshFusionData(){
         pfFusionListFragment.refreshData();
     }
+
+    public void requestNewData() {
+        pfProxyLoadData.queryIncrementNewData(currentFamily_uuid);
+    }
+
 
     public interface LocationChanged{
         void onTop();

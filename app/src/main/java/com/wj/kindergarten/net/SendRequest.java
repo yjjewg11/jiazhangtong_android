@@ -8,6 +8,7 @@ import com.loopj.android.http.RequestParams;
 import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
+import com.wj.kindergarten.bean.BoutiqueDianzanList;
 import com.wj.kindergarten.bean.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddChild;
 import com.wj.kindergarten.bean.AddressBook;
@@ -482,7 +483,7 @@ public class SendRequest {
             case RequestType.PF_PIC_BY_UUID :
                 resultI.result(getDomain(domain, AllPfAlbum.class));
                 break;
-            case RequestType.CHECK_PF_IS_CHANGE :
+            case RequestType.QUERY_INCREMENT_NEW_DATA:
                 resultI.result(getDomain(domain, PfChangeData.class));
                 break;
             case RequestType.PF_OBJ_BY_UPDATE :
@@ -520,6 +521,9 @@ public class SendRequest {
                 break;
             case RequestType.GET_ALL_PIC_FROM_BOUTIQUE:
                 resultI.result(getDomain(domain, BoutiqueAllpic.class));
+                break;
+            case RequestType.GET_BOUTIQUE_DIAN_ZAN_LIST:
+                resultI.result(getDomain(domain, BoutiqueDianzanList.class));
                 break;
 
             default:

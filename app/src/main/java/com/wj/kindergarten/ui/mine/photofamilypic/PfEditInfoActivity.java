@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -61,6 +62,7 @@ public class PfEditInfoActivity extends BaseActivity {
     String hearld;
     private TextView pf_edit_info_invite;
     private List<PFAlbumMember> memberList;
+    private EditText editText;
 
     @Override
     protected void setContentLayout() {
@@ -136,15 +138,30 @@ public class PfEditInfoActivity extends BaseActivity {
                         View customView = View.inflate(PfEditInfoActivity.this,R.layout.pf_edit_family,null);
                         final EditText pf_edit_family_name = (EditText) customView.findViewById(R.id.pf_edit_family_name);
                         final EditText pf_edit_family_phone = (EditText) customView.findViewById(R.id.pf_edit_family_phone);
+                        TextView pf_edit_family_delete = (TextView) customView.findViewById(R.id.pf_edit_family_delete);
                         pf_edit_family_name.setText(""+Utils.isNull(member.getFamily_name()));
-                        pf_edit_family_phone.setText(""+Utils.isNull(member.getTel()));
-                        ToastUtils.showDialog(PfEditInfoActivity.this, customView, new DialogInterface.OnClickListener() {
+                        pf_edit_family_phone.setText("" + Utils.isNull(member.getTel()));
+                        final DialogInterface dialogInfo =  ToastUtils.showDialog(PfEditInfoActivity.this, customView, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 member.setFamily_name(pf_edit_family_name.getText().toString());
                                 member.setTel(pf_edit_family_phone.getText().toString());
                                 editInfo(member);
+                            }
+                        });
+                        pf_edit_family_delete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ToastUtils.showDialog(PfEditInfoActivity.this, "提示!", "您确认删除吗?", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if(dialogInfo != null) dialogInfo.cancel();
+                                        dialog.dismiss();
+                                        memberList.remove(member);
+                                        addAllViews();
+                                    }
+                                });
                             }
                         });
                     }
@@ -215,17 +232,18 @@ public class PfEditInfoActivity extends BaseActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.album_name:
+                        editText.setText("" + Utils.isNull(title));
                         dialog.show();
                         break;
                     case R.id.create_time:
-                        DateTimePickDialogUtil dialogUtil = new DateTimePickDialogUtil(PfEditInfoActivity.this,
-                                pf_tv_birthday.getText().toString(), new DateTimePickDialogUtil.ChooseTime() {
-                            @Override
-                            public void choose(String time) {
-                                pf_tv_birthday.setText(time);
-                            }
-                        });
-                        dialogUtil.dateTimePicKDialog();
+//                        DateTimePickDialogUtil dialogUtil = new DateTimePickDialogUtil(PfEditInfoActivity.this,
+//                                pf_tv_birthday.getText().toString(), new DateTimePickDialogUtil.ChooseTime() {
+//                            @Override
+//                            public void choose(String time) {
+//                                pf_tv_birthday.setText(time);
+//                            }
+//                        });
+//                        dialogUtil.dateTimePicKDialog();
                         break;
                     case R.id.appreance_photo:
                         Intent intent = new Intent(PfEditInfoActivity.this,BoutiqueSingleChooseActivity.class);
@@ -267,6 +285,7 @@ public class PfEditInfoActivity extends BaseActivity {
                 editMember(params);
             }
         });
+
         memer_linear = (LinearLayout) findViewById(R.id.memer_linear);
         relativeLayouts = new RelativeLayout[]{
                 (RelativeLayout) findViewById(R.id.album_name),
@@ -277,8 +296,9 @@ public class PfEditInfoActivity extends BaseActivity {
         iv_appear_image = (ImageView) findViewById(R.id.iv_appear_image);
         pf_tv_birthday = (TextView) findViewById(R.id.pf_tv_birthday);
 
-        final EditText editText = new EditText(this);
+        editText = new EditText(this);
         builder = new AlertDialog.Builder(this);
+        editText.setText(""+Utils.isNull(title));
         dialog = builder.setTitle("设置标题").setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -349,7 +369,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
                     @Override
                     public void failure(String message) {
-
+                        ToastUtils.showMessage(message);
                     }
                 });
     }

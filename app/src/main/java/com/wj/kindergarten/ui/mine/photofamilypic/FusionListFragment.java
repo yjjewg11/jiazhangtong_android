@@ -85,7 +85,8 @@ public class FusionListFragment extends Fragment implements Watcher{
                         break;
                     //有maxTime后时间的刷新的数据
                     case PfLoadDataProxy.REFRESH_DATA:
-                        showView();
+//                        showView();
+                        mPfLoadDataProxy.loadData(family_uuid,1,false);
                         break;
                 case QUERY_FINISHED:
 //                    fusionAdapter.setQueryMap(map, queryGroupCounts);
@@ -122,7 +123,6 @@ public class FusionListFragment extends Fragment implements Watcher{
             ownGridAdapter.setQueryList(queryGroupCounts,allObjects);
         }
     }
-
     private StickyGridHeadersGridView fusion_list_fragment_stick_grid;
     private FusionListOwnGridAdapter ownGridAdapter;
 
@@ -153,28 +153,6 @@ public class FusionListFragment extends Fragment implements Watcher{
     }
 
     private FusionAdapter fusionAdapter;
-
-    private void showView() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        TextView textView = new TextView(getActivity());
-        textView.setText(""+"您有新数据了，点击更新!");
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPfLoadDataProxy.loadData(family_uuid,1,false);
-            }
-        });
-        builder.setView(textView);
-        AlertDialog dialog = builder.create();
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams params =  window.getAttributes();
-        params.x = 100;
-        params.y = 150;
-        params.gravity = Gravity.TOP;
-        window.setAttributes(params);
-        dialog.show();
-
-    }
 
 
     private List<AllPfAlbumSunObject> findAllByDate(String date) {
@@ -265,7 +243,6 @@ public class FusionListFragment extends Fragment implements Watcher{
     private void initDb() {
         db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT,true);
     }
-
 
     public void loadData() {
         mPfLoadDataProxy.loadData(family_uuid, pageNo, false);

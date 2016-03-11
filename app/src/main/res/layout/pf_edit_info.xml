@@ -57,17 +57,19 @@
                         android:paddingRight="@dimen/margin_10">
 
                         <TextView
+                            android:gravity="center_vertical"
                             android:id="@+id/textView37"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignParentLeft="true"
                             android:text="相册名称"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         <TextView
+                            android:gravity="center"
                             android:id="@+id/tv_album_name"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:drawablePadding="4dp"
                             android:drawableRight="@drawable/youjiantou"
@@ -119,20 +121,21 @@
                         android:paddingRight="@dimen/margin_10">
 
                         <TextView
+                            android:gravity="center"
                             android:id="@+id/textView41"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignParentLeft="true"
                             android:text="创建时间"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         <TextView
+                            android:gravity="center"
                             android:id="@+id/pf_tv_birthday"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:drawablePadding="4dp"
-                            android:drawableRight="@drawable/youjiantou"
                             android:text="2015-22-22"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
                     </RelativeLayout>
@@ -157,12 +160,13 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:paddingTop="@dimen/margin_20"
                     android:id="@+id/pf_edit_info_invite"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="100dp"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/memer_linear"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:text="邀请更多亲戚家属共同维护相册"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

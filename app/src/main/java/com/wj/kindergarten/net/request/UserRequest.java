@@ -3,7 +3,6 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 
 
 import com.loopj.android.http.RequestParams;
@@ -19,20 +18,10 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
-import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleChooseActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
 
@@ -40,8 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-
-import javax.net.ssl.SSLEngine;
 
 /**
  * RsaResponse
@@ -101,7 +88,7 @@ public final class UserRequest {
 
     private static final String TRAIN_HOT_CLASS = "rest/pxCourse/hotByPage.json";
     private static final String PF_PIC_BY_UUID = "rest/fPPhotoItem/queryOfIncrement.json";
-    private static final String CHECK_PF_IS_CHANGE = "rest/fPPhotoItem/ queryOfNewDataOrUpdate.json";
+    private static final String QUERY_INCREMENT_NEW_DATA = "rest/fPPhotoItem/queryOfNewDataCount.json";
     private static final String PF_OBJ_BY_UPDATE = "rest/fPPhotoItem/queryOfIncrement.json";
     private static final String GET_BOUTIQUE_MODE = "rest/fPMovieTemplate/query.json";
     private static final String GET_MODE_MUSIC = "rest/mp3/query.json";
@@ -122,6 +109,7 @@ public final class UserRequest {
     private static final String GET_ALL_PIC_FROM_BOUTIQUE = "rest/fPPhotoItem/queryForMovieUuid.json";
     private static final String ADD_FAMILY_MEMBER = "rest/fPFamilyMembers/save.json";
     private static final String INIT_SYNC_UPLOAD = "rest/fPPhotoItem/queryAlreadyUploaded.json";
+    private static final String GET_BOUTIQUE_DIAN_ZAN_LIST = "rest/baseDianzan/queryNameByPage.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -932,12 +920,11 @@ public final class UserRequest {
         SendRequest.getInstance().get(context, RequestType.PF_PIC_BY_UUID, params, RequestHttpUtil.BASE_URL + PF_PIC_BY_UUID, resultI);
     }
 
-    public static void getPfDataIsChange(Context context, String family_uuid, String minTime, String maxTime, RequestResultI resultI) {
+    public static void queryIncrementNewData(Context context, String family_uuid,String maxTime, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("family_uuid", family_uuid);
-        params.put("minTime", minTime);
         params.put("maxTime", maxTime);
-        SendRequest.getInstance().get(context, RequestType.CHECK_PF_IS_CHANGE, params, RequestHttpUtil.BASE_URL + CHECK_PF_IS_CHANGE, resultI);
+        SendRequest.getInstance().get(context, RequestType.QUERY_INCREMENT_NEW_DATA, params, RequestHttpUtil.BASE_URL + QUERY_INCREMENT_NEW_DATA, resultI);
     }
 
     public static void getUUIDListByUpdate(Context context, String family_uuid, String minTime, String maxTime, String updateTime, RequestResultI resultI) {
@@ -1139,5 +1126,15 @@ public final class UserRequest {
         params.put("phone_uuid",CGApplication.getInstance().getAndroid_id());
         SendRequest.getInstance().get(context, RequestType.INIT_SYNC_UPLOAD, params, RequestHttpUtil.BASE_URL +
                 INIT_SYNC_UPLOAD, resultI);
+    }
+
+    public static void getBoutiqueDianzanList(Context context, int pageNo, String rel_uuid,RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        params.put("type", GloablUtils.BOUTIQUE_COMMON_TYPE);
+        params.put("rel_uuid",rel_uuid);
+
+        SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_DIAN_ZAN_LIST, params, RequestHttpUtil.BASE_URL +
+                GET_BOUTIQUE_DIAN_ZAN_LIST, resultI);
     }
 }

@@ -68,6 +68,7 @@ public class PfLoadDataProxy {
     }
 
 
+    boolean queryChangeandUpdate;
 
     //根据家庭uuid查询所有照片数量,判断是否是上拉刷新，
     public void loadData(String familyUuid, int pageNo, boolean isPullup) {
@@ -86,6 +87,11 @@ public class PfLoadDataProxy {
                 pfFamilyUuid.setMaxTime(new Date());
                 savePfFamilyUUid(pfFamilyUuid.getFamily_uuid());
             } else {
+                //同时查询有没有新数据
+                if(!queryChangeandUpdate) {
+                    queryChangeandUpdate = true;
+                    loadDataIsChange(pfFamilyUuid.getFamily_uuid());
+                }
                 loadFromSqliteByCreateTime();
                 return;
             }
@@ -131,13 +137,15 @@ public class PfLoadDataProxy {
                 //在获取到maxtime和mintime的值之后，查询有没有更新
                 //在获取到新数据之后，保存到数据库中后再从数据库查出来取出来。
                 loadFromSqliteByCreateTime();
-                loadDataIsChange(familyUuid);
+                if(!queryChangeandUpdate){
+                    loadDataIsChange(familyUuid);
+                    queryChangeandUpdate = true;
+                }
                 //判断类型是否是请求的增量更新数据
                 if (type == REFRESH_DATA) {
                     handler.sendEmptyMessage(REFRESH_DATA);
                 }
             }
-
             @Override
             public void result(List<BaseModel> domains, int total) {
 
@@ -192,9 +200,15 @@ public class PfLoadDataProxy {
         Collections.sort(dateArray, new Comparator<QueryGroupCount>() {
             @Override
             public int compare(QueryGroupCount one, QueryGroupCount two) {
+                int cha = 0;
                 long o = TimeUtil.getMillionFromYMD(one.getDate());
                 long t = TimeUtil.getMillionFromYMD(two.getDate());
-                return o - t > 0 ? -1 : 1;
+                if(o - t >= 0){
+                    cha = 1;
+                }else {
+                    cha = -1;
+                }
+                return cha;
             }
         });
         Message message = new Message();
@@ -207,8 +221,14 @@ public class PfLoadDataProxy {
     private void loadDataIsChange(final String family_uuid) {
         //如果有一个时间为空，说明是第一次加载，不需要更新
         if (judgeIsLoaded()) return;
-        queryDataByUpdate(family_uuid, new Date());
-        UserRequest.getPfDataIsChange(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMinTime()), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
+        queryDataByChangeCount(family_uuid, new Date());
+        queryIncrementNewData(family_uuid);
+
+    }
+
+    public final void queryIncrementNewData(final String family_uuid) {
+        pfFamilyUuid =  familyUuidSql.findById(family_uuid, PfFamilyUuid.class);
+        UserRequest.queryIncrementNewData(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 PfChangeData pfChangeData = (PfChangeData) domain;
@@ -229,7 +249,6 @@ public class PfLoadDataProxy {
 
             }
         });
-
     }
 
     private String formatTime(Date date) {
@@ -245,7 +264,7 @@ public class PfLoadDataProxy {
     }
 
     //根据上面方法查询到的变化的数量如果大于0，则调用这个接口
-    private void queryDataByUpdate(String family_uuid, final Date date) {
+    private void queryDataByChangeCount(String family_uuid, final Date date) {
         if (judgeIsLoaded()) return;
         UserRequest.getUUIDListByUpdate(context, family_uuid, TimeUtil.getStringDate(pfFamilyUuid.getMinTime()), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), TimeUtil.getStringDate(date), new RequestResultI() {
             @Override

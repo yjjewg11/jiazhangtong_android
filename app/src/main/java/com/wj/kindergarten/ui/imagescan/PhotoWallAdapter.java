@@ -63,7 +63,6 @@ public class PhotoWallAdapter extends PagerAdapter {
             @Override
             public boolean onLongClick(View v) {
                 ChooseTwoCode chooseTwoCode = new ChooseTwoCode(context, finalUri);
-                chooseTwoCode.tv_save.setVisibility(View.GONE);
                 chooseTwoCode.choose(v);
                 return false;
             }

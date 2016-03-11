@@ -1,12 +1,13 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ActivityManger;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AddFamilyMemberParams;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.net.RequestResultI;
@@ -68,16 +71,15 @@ public class AddFamilyMemberActivity extends BaseActivity {
     }
 
     private void initViewData() {
-        editPhone.setText(""+Utils.isNull(member.getTel()));
+        editPhone.setText("" + Utils.isNull(member.getTel()));
         editName.setText("");
-        editRelation.setText(""+Utils.isNull(member.getFamily_name()));
+        editRelation.setText("" + Utils.isNull(member.getFamily_name()));
 
     }
 
     private void getData() {
         member =(AddFamilyMemberParams) getIntent().getSerializableExtra("member");
     }
-
     public void onClick(View view){
         switch (view.getId()){
             case R.id.add_family_add_bt:
@@ -89,34 +91,45 @@ public class AddFamilyMemberActivity extends BaseActivity {
 
                 break;
             case R.id.add_family_member_get_contact:
-                startConstact();
+                    startConstact();
                 break;
         }
     }
 
+    private boolean checkOwnPermersion() {
+        String permision = "android.permission.READ_CONTACTS";
+        int deterMine =  checkCallingPermission(permision);
+        //已获得权限
+        if(deterMine == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        enforceCallingPermission(permision,"请求获取通讯录权限？");
+        return false;
+    }
+
     private void addFamily() {
         member.setFamily_name(editRelation.getText().toString());
-        member.setTel(editPhone.getText().toString());
+        String tel = editPhone.getText().toString();
+        if(!TextUtils.isEmpty(tel)){
+            tel = tel.replaceAll(" ","");
+            tel.trim();
+        }
+        member.setTel(tel);
         UserRequest.addFamilyMember(this, member.getFamily_uuid(), member.getFamily_name(), member.getTel(),
-                 member.getUuid(), new RequestResultI() {
-            @Override
-            public void result(BaseModel domain) {
-                ToastUtils.showMessage("修改成功!");
-                setResult(RESULT_OK, new Intent());
-                finish();
+                 member.getUuid(),new RequestFailedResult(){
 
-            }
+                    @Override
+                    public void result(BaseModel domain) {
+                        ToastUtils.showMessage("修改成功!");
+                        setResult(RESULT_OK, new Intent());
+                        finish();
+                    }
 
-            @Override
-            public void result(List<BaseModel> domains, int total) {
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
 
-            }
-
-            @Override
-            public void failure(String message) {
-
-            }
-        });
+                    }
+                });
     }
 
     private void startConstact() {

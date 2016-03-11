@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
 //        applicationId "com.zbar.lib"
-        minSdkVersion 8
-        targetSdkVersion 19
+        minSdkVersion 14
+        targetSdkVersion 21
     }
 
     buildTypes {

@@ -44,8 +44,9 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     private String [] typeAll = {"mine","all"};
     String nowType = typeAll[0];
 
-    public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment) {
+    public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment,String family_uuid) {
         this.photoFamilyFragment = photoFamilyFragment;
+        this.family_uuid = family_uuid;
     }
 
     @Nullable
@@ -58,6 +59,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
         view = inflater.inflate(R.layout.fragment_test, null);
         pullListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
+        boutiqueAdapter.setRel_uuid(family_uuid);
         pullListView.setAdapter(boutiqueAdapter);
         pullListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         pullListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

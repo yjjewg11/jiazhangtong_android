@@ -1,9 +1,6 @@
 package com.wj.kindergarten.services;
 
-import android.app.ActivityManager;
-import android.app.IntentService;
 import android.app.Service;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Binder;
@@ -11,17 +8,13 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.wj.kindergarten.bean.AlreadySavePath;
-import com.wj.kindergarten.bean.BaseModel;
-import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.net.upload.ProgressCallBack;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.main.MainActivity;
-import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -30,13 +23,9 @@ import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
-import net.tsz.afinal.http.AjaxCallBack;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by tangt on 2016/1/20.
@@ -65,7 +54,8 @@ public class PicUploadService extends Service {
     private ProgressCallBack progressCallBack = new ProgressCallBack() {
         @Override
         public void progress(int current, int total) {
-            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_LOADING,current,total);
+            CGLog.v("打印回调 ： "+current+"/ "+total);
+            sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_LOADING, current, total);
         }
     };
 
@@ -78,7 +68,6 @@ public class PicUploadService extends Service {
                 alreadySavePath.setStatus(0);
                 alreadySavePath.setSuccess_time(new Date());
                 db.update(alreadySavePath);
-                listObject.remove(count);
                 mHandler.post(new SuccessRunable());
             }
         });
@@ -107,13 +96,10 @@ public class PicUploadService extends Service {
                 @Override
                 public synchronized void run() {
                     AlreadySavePath alreadySavePath = listObject.get(count);
-                    sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED,0,0);
+                    sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_FAILED, 0, 0);
                     alreadySavePath.setStatus(3);
                     db.update(alreadySavePath);
-                    listObject.remove(count);
-                    if(listObject.size() > 0){
-                        mHandler.post(new FailRunnable());
-                    }
+                    mHandler.post(new FailRunnable());
                 }
             });
         }
@@ -233,17 +219,28 @@ public class PicUploadService extends Service {
             public void run() {
                 sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
                 sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED, 100, 100);
+                listObject.remove(count);
                 if (listObject.size() == 0) {
                     sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
+                    judgeUpdateData();
                     return;
                 }
                 checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
             }
+
+        private void judgeUpdateData() {
+            findPic();
+            if(listObject == null || listObject.size() == 0){
+                sendBroadcast(new Intent(GloablUtils.REQUEST_PIC_NEW_DATA));
+            }
+        }
     }
 
     class FailRunnable implements Runnable{
             @Override
             public void run() {
+                listObject.remove(count);
+                if(listObject.size() == 0) return;
                 checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
             }
     }

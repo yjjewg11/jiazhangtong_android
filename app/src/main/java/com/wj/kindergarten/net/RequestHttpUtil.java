@@ -15,10 +15,6 @@ import com.loopj.android.http.ResponseHandlerInterface;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
 
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.cookie.Cookie;
 
@@ -83,7 +79,7 @@ public class RequestHttpUtil {
         getClient().addHeader("Accept-Encoding", "gzip");
         getClient().addHeader("content/type", "application/json;charset=utf-8");
 
-        initAfinal();
+//        initAfinal();
     }
 
 
@@ -144,15 +140,15 @@ public class RequestHttpUtil {
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
     }
 
-    private static FinalHttp afinal;
-
-    private static void initAfinal() {
-        afinal = new FinalHttp();
-        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
-        afinal.configCookieStore(myCookieStore);
-    }
-
-    public static void afinalPost(Context context, String path, AjaxParams params, AjaxCallBack ajaxCallBack) {
-        afinal.post(path,params,ajaxCallBack);
-    }
+//    private static FinalHttp afinal;
+//
+//    private static void initAfinal() {
+//        afinal = new FinalHttp();
+//        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
+//        afinal.configCookieStore(myCookieStore);
+//    }
+//
+//    public static void afinalPost(Context context, String path, AjaxParams params, AjaxCallBack ajaxCallBack) {
+//        afinal.post(path,params,ajaxCallBack);
+//    }
 }

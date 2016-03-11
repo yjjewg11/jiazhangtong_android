@@ -30,6 +30,7 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.func.InteractionSentActivity;
 
 import static com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import static com.umeng.socialize.controller.listener.SocializeListeners.UMAuthListener;
@@ -62,7 +63,8 @@ public class ShareUtils {
      * @param con
      * @param view
      */
-    public static void showShareDialog(final Context con, final View view, String title1, String content1, final String picurl, final String url, boolean isMessage) {
+    public static void showShareDialog(final Context con, final View view, final String title1, String content1,
+                                       final String picurl, final String url, boolean isMessage) {
 //        if (!isShow) {
         String title = null;
         String content = null;
@@ -138,6 +140,15 @@ public class ShareUtils {
         //微信
         final String finalTitle = title;
         final String finalContent = content;
+        popupView.findViewById(R.id.share_send_interaction).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                sendInteration(title1,url);
+            }
+        });
+
         popupView.findViewById(R.id.share_copy_address).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +157,6 @@ public class ShareUtils {
                 copyAddress(url);
             }
         });
-
 
         popupView.findViewById(R.id.share_wx_f).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,6 +234,17 @@ public class ShareUtils {
         }
         mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
+    }
+
+    private static void sendInteration(String title1, String url) {
+        Intent intent = new Intent(context, InteractionSentActivity.class);
+        intent.putExtra("title", title1);
+        intent.putExtra("url",url);
+        intent.putExtra("isListFrom",false);
+        context.startActivity(intent);
+        if(context instanceof Activity){
+            ((Activity) context).finish();
+        }
     }
 
     private static void copyAddress(String url) {

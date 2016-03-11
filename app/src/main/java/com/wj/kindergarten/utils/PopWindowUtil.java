@@ -143,7 +143,25 @@ public class PopWindowUtil {
                 onItemClickListener.onItemClickListener(position);
             }
         });
-        popupWindow.showAsDropDown(targetView,popAttributes.getLeftOffset(), 0, popAttributes.getGrarity());
+        popupWindow.showAsDropDown(targetView, popAttributes.getLeftOffset(), 0, popAttributes.getGrarity());
+    }
+
+    public static void showPoPWindowLocation(Context context,View targetView,BaseAdapter adapter,PopAttributes popAttributes,
+                                     final OnItemClickListener onItemClickListener){
+        View topVeiw = View.inflate(context, R.layout.pf_family_top_pop, null);
+        PullToRefreshListView topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
+        topViewPullList.setAdapter(adapter);
+        topViewPullList.setMode(PullToRefreshBase.Mode.DISABLED);
+        final PopupWindow popupWindow = new PopupWindow(topVeiw,popAttributes.getWidth(),popAttributes.getHeight());
+        Utils.setPopWindow(popupWindow);
+        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupWindow.dismiss();
+                onItemClickListener.onItemClickListener(position);
+            }
+        });
+        popupWindow.showAtLocation(targetView, Gravity.NO_GRAVITY, popAttributes.getX(), popAttributes.getY());
     }
 
     public interface OnItemClickListener{

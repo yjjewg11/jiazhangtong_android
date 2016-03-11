@@ -15,7 +15,6 @@ import com.wj.kindergarten.utils.CGLog;
  */
 public class PfFragmentLinearLayout extends LinearLayout {
 
-    boolean flIsLocationTop;
     private FrameLayout contentFl;
     private int poor;
 
@@ -51,7 +50,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
         super(context, attrs);
     }
 
-    float rowY;
     int startY;
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -78,8 +76,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
                 }
                 break;
         }
-//        onInterceptTouchEvent.onInterceptTouch(ev);
-
 
         return super.onInterceptTouchEvent(ev);
 
@@ -91,7 +87,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_MOVE:
-                CGLog.v("onTouchEvent移动事件!!!");
                 poor = (int) (event.getRawY() - lastY);
                 poor =  (lastY == 0 ? 0 : poor);
 
@@ -114,7 +109,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
     }
 
     private void addAnim(MotionEvent event) {
-        CGLog.v("打印onTouchEvent的抬起事件!！！！");
         if(Math.abs(getFlTopMargin()) > 0){
             //动画上移,根据手势判断
             if(poor < 0){
@@ -134,7 +128,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
 
     class Wrapper {
         FrameLayout frameLayout;
-        private int topMargin;
 
         public Wrapper(FrameLayout frameLayout) {
             this.frameLayout = frameLayout;

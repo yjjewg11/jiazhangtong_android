@@ -25,6 +25,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
+import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -108,6 +109,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
             public void onClick(View v) {
                 View view = View.inflate(BoutiqueModeReviewActivity.this, R.layout.boutique_review_custom_title, null);
                 editText = (EditText) view.findViewById(R.id.boutique_custom_edittext);
+                editText.setText(""+ Utils.isNull(title));
                 AlertDialog.Builder builder = new AlertDialog.Builder(BoutiqueModeReviewActivity.this);
                 builder.setView(view);
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

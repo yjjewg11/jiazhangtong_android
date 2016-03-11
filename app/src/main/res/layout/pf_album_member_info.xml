@@ -4,12 +4,10 @@
     android:layout_height="match_parent">
 
      <LinearLayout
-         android:paddingTop="20dp"
-         android:paddingBottom="20dp"
          android:orientation="horizontal"
          android:gravity="center_vertical"
          android:layout_width="match_parent"
-         android:layout_height="wrap_content">
+         android:layout_height="60dp">
 
          <TextView
              android:textSize="17sp"
@@ -24,9 +22,9 @@
              android:drawablePadding="@dimen/margin_5"
              android:layout_marginRight="@dimen/margin_10"
              android:drawableRight="@drawable/youjiantou"
-             android:gravity="right"
+             android:gravity="right|center_vertical"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
+             android:layout_height="match_parent"
              android:textAppearance="?android:attr/textAppearanceMedium"
              android:text="Medium Text"
              android:id="@+id/pf_album_member_phone" />

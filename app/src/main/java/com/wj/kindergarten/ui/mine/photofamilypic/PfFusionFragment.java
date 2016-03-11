@@ -110,35 +110,14 @@ public class PfFusionFragment extends Fragment implements Watcher{
                     break;
                 //有maxTime后时间的刷新的数据
                 case PfLoadDataProxy.REFRESH_DATA:
-                     showView();
+//                     showView();
+                    mPfLoadDataProxy.loadData(family_uuid,1,false);
                     break;
             }
         }
     };
 
 
-
-    private void showView() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        TextView textView = new TextView(getActivity());
-        textView.setText(""+"您有新数据了，点击更新!");
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPfLoadDataProxy.loadData(family_uuid,1,false);
-            }
-        });
-        builder.setView(textView);
-        AlertDialog dialog = builder.create();
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams params =  window.getAttributes();
-        params.x = 100;
-        params.y = 150;
-        params.gravity = Gravity.TOP;
-        window.setAttributes(params);
-        dialog.show();
-
-    }
 
     private PfLoadDataProxy mPfLoadDataProxy;
     private LinearLayout fragment_pf_fusion_linear;

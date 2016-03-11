@@ -67,4 +67,5 @@ public interface GloablUtils {
     int MODE_OF_PF = 21;//相册
     int BOUTIQUE_COMMON_TYPE = 22;//精品相册
 
+    String REQUEST_PIC_NEW_DATA = "notify_pic_new_data";
 }

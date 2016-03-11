@@ -79,7 +79,7 @@ public interface RequestType {
      int GET_PF_ALBUM_LIST = 163;
      int LOOK_FOR_ALL_PF = 164;
      int PF_PIC_BY_UUID = 165;
-     int CHECK_PF_IS_CHANGE = 166;
+     int QUERY_INCREMENT_NEW_DATA = 166;
      int PF_OBJ_BY_UPDATE = 167;
      int GET_SINGLE_PF_INFO = 168;
      int GET_BOUTIQUE_ALBUM = 169;
@@ -94,4 +94,5 @@ public interface RequestType {
      int GET_ALL_PIC_FROM_BOUTIQUE = 178;
      int ADD_FAMILY_MEMBER = 179;
      int INIT_SYNC_UPLOAD = 180;
+     int GET_BOUTIQUE_DIAN_ZAN_LIST = 181;
 }

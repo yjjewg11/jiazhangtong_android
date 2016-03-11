@@ -17,6 +17,7 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.Selection;
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -246,6 +247,23 @@ public class InteractionSentActivity extends BaseActivity {
                 }
             }
         });
+        getIntentData();
+    }
+
+    boolean isListFrom = true;
+    private void getIntentData() {
+        link_title =  getIntent().getStringExtra("title");
+        link_url = getIntent().getStringExtra("url");
+        isListFrom = getIntent().getBooleanExtra("isListFrom",true);
+        if(Utils.isNull(link_title) != null && !TextUtils.isEmpty(link_title)){
+            send_interaction_link.append(""+Utils.isNull(link_title));
+        }
+        if(Utils.isNull(link_url) != null && !TextUtils.isEmpty(link_url)){
+            getLinkTitle(link_url);
+        }
+
+
+
     }
 
     private void getLinkTitle(String url) {
@@ -647,8 +665,15 @@ public class InteractionSentActivity extends BaseActivity {
                 Utils.showToast(mContext, domain.getResMsg().getMessage());
                 images.clear();
                 count = 0;
-                setResult(RESULT_OK);
-                finish();
+                if(isListFrom){
+                    setResult(RESULT_OK);
+                    finish();
+                }else {
+                    Intent intent = new Intent(InteractionSentActivity.this,InteractionListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
 
             @Override

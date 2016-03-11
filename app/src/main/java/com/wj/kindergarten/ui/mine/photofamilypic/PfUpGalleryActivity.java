@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.SyncUploadPic;
@@ -120,7 +121,6 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void setNeedLoading() {
         uploadDb = FinalDb.create(this);
-        CGSharedPreference.getUploadSyncStatus();
         isNeedLoading = !CGSharedPreference.getUploadSyncStatus();
     }
 
@@ -128,7 +128,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void loadData() {
-        UserRequest.initSyncUploadPic(this, pageNo,new RequestResultI() {
+        UserRequest.initSyncUploadPic(this, pageNo,new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 CGSharedPreference.setUploadSyncStatus(true);
@@ -153,7 +153,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void failure(String message) {
-
+                loadSuc();
             }
         });
     }

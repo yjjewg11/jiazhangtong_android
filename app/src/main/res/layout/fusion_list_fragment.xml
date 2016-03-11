@@ -5,10 +5,11 @@
     <com.wj.kindergarten.ui.more.PfRefreshLinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_9dp"
+        android:paddingRight="@dimen/margin_9dp"
         android:id="@+id/fusion_list_fresh_linear"
         android:layout_height="match_parent">
         <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/fusion_list_fragment_stick_grid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -16,11 +17,10 @@
             android:gravity="center"
             android:listSelector="@android:color/transparent"
             android:numColumns="3"
-            android:horizontalSpacing="8dp"
+            android:horizontalSpacing="2dp"
             android:columnWidth="@dimen/margin_5"
-            android:verticalSpacing="@dimen/small_padding" />
+            android:verticalSpacing="2dp" />
         <include layout="@layout/refresh_linearlayout_header"/>
-        <!--<include layout="@layout/layout_pulltorefresh"/>-->
     </com.wj.kindergarten.ui.more.PfRefreshLinearLayout>
 
 </FrameLayout>

@@ -167,6 +167,7 @@ public class MainActivity extends BaseActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(GloablUtils.ALREADY_UPLOADING);
         filter.addAction(GloablUtils.ALREADY_UPLOADING_FINISHED);
+        filter.addAction(GloablUtils.REQUEST_PIC_NEW_DATA);
         registerReceiver(receiver,filter);
     }
 
@@ -672,6 +673,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case GloablUtils.ALREADY_UPLOADING_FINISHED:
                     photoFragment.stopGif();
+                    break;
+                case GloablUtils.REQUEST_PIC_NEW_DATA:
+                    photoFragment.requestNewData();
                     break;
             }
         }

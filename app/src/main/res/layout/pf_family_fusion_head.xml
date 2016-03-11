@@ -16,11 +16,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:paddingLeft="@dimen/margin_15"
             android:drawableLeft="@drawable/redline"
             android:drawablePadding="@dimen/margin_15"
-            android:padding="@dimen/margin_10"
-            android:text="2015 - 11 1000 "
+            android:paddingBottom="@dimen/margin_10"
+            android:paddingRight="@dimen/margin_10"
+            android:paddingTop="@dimen/margin_10"
+            android:text="2015 - 11 -1000 "
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
