@@ -34,6 +34,7 @@ public class PicUploadService extends Service {
 
 
     private ArrayList<AlreadySavePath> listObject;
+    int successCount = 0;
 
     public PicUploadService() {
     }
@@ -142,6 +143,7 @@ public class PicUploadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         upLoad = true;
+        successCount = 0;
         //判断是否是wifi状态
 
         //判断是否上传

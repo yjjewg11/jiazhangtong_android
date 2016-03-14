@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyAlbumActivity">
+
+    <include layout="@layout/title_normal"/>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/album_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:text="相册名称"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_album_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="4dp"
+            android:drawableRight="@drawable/youjiantou"
+            android:text="我的家庭相册"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_cccccc" />
+
+    <RelativeLayout
+        android:id="@+id/appreance_photo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10">
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="封面图片"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/iv_appear_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -50,19 +50,30 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/pf_pic_center_tv">
 
-                <RelativeLayout
+                <FrameLayout
                     android:layout_weight="1"
-                    android:gravity="right|center_vertical"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <com.ant.liao.GifView
+                <ImageView
+                    android:scaleType="center"
+                    android:src="@drawable/update_list_pf"
+                    android:visibility="visible"
                     android:padding="2dp"
-                    android:enabled="false"
                     android:layout_weight="1"
                     android:id="@+id/pf_family_gif"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                </RelativeLayout>
+                    android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/photo_family_pic_tv_upload"
+                        android:paddingTop="7dp"
+                        android:textSize="11sp"
+                        android:textColor="@color/white"
+                        android:text="0"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
                 <RelativeLayout
                     android:id="@+id/pf_pic_right_iv"
                     android:gravity="right|center_vertical"
@@ -98,7 +109,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/common_tab_layout"/>
+        <include layout="@layout/common_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
     </FrameLayout>
 
     <View

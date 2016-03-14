@@ -8,6 +8,10 @@ import android.widget.LinearLayout;
  */
 public class WrapperFl {
     private FrameLayout frameLayout;
+    private int topMargin;
+
+    public WrapperFl() {
+    }
 
     public WrapperFl(FrameLayout frameLayout) {
         this.frameLayout = frameLayout;
@@ -20,6 +24,5 @@ public class WrapperFl {
     public void setTopMargin(int topMargin) {
          ((LinearLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin = topMargin;
          frameLayout.requestLayout();
-
     }
 }

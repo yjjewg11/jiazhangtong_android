@@ -19,6 +19,7 @@ import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -1057,25 +1058,6 @@ public final class UserRequest {
                 GET_PF_COLLECT_PIC, resultI);
     }
 
-    public static void getBoutiqueReviewUrl(Context context, String title, String mp3, String uuid, String herald,
-                                            String template_key,String photo_uuids,int status, RequestResultI resultI) {
-        JSONObject object = new JSONObject();
-        try {
-            object.put("title", title);
-            object.put("mp3", mp3);
-            object.put("uuid", uuid);
-            object.put("herald", herald);
-            object.put("template_key", template_key);
-            object.put("photo_uuids", photo_uuids);
-            object.put("status", status);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        SendRequest.getInstance().post(context, RequestType.GET_BOUTIQUE_REVIEW_URL, object.toString(),
-                RequestHttpUtil.BASE_URL + GET_BOUTIQUE_REVIEW_URL, resultI);
-
-    }
 
     public static void AddOrEditPfAlbum(Context context, String title, String uuid, String status, String herald, RequestResultI resultI) {
         JSONObject object = new JSONObject();
@@ -1136,5 +1118,23 @@ public final class UserRequest {
 
         SendRequest.getInstance().get(context, RequestType.GET_BOUTIQUE_DIAN_ZAN_LIST, params, RequestHttpUtil.BASE_URL +
                 GET_BOUTIQUE_DIAN_ZAN_LIST, resultI);
+    }
+
+    public static void getBoutiqueReviewUrl(Context context, String title, String mp3, String uuid, String herald, String key, String photo_uuids, int cacheStatus, RequestResultI resultI) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("title", title);
+            object.put("mp3", mp3);
+            object.put("uuid", uuid);
+            object.put("herald", herald);
+            object.put("template_key", key);
+            object.put("photo_uuids", photo_uuids);
+            object.put("status", cacheStatus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        SendRequest.getInstance().post(context, RequestType.GET_BOUTIQUE_REVIEW_URL, object.toString(),
+                RequestHttpUtil.BASE_URL + GET_BOUTIQUE_REVIEW_URL, resultI);
     }
 }

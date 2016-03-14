@@ -73,7 +73,7 @@ public class BoutiqueModeActivity extends BaseActivity {
                 PfModeNameObject object = (PfModeNameObject) adapter.getItem(position);
                 Intent intent = new Intent(BoutiqueModeActivity.this, BoutiqueModeReviewActivity.class);
                 intent.putExtra("objectList", (ArrayList) objectList);
-                intent.putExtra("key", object.getKey());
+                intent.putExtra("objectMode", object);
                 intent.putExtra("object", boutiqueSingleInfoObject);
                 startActivity(intent);
             }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
@@ -161,21 +162,74 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         boutqiue_single_info_bottom.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         int topHeight = boutqiue_single_info_top.getMeasuredHeight();
         int bottomHeight = boutqiue_single_info_bottom.getMeasuredHeight();
-        animTop = ObjectAnimator.ofInt(new WrapperFl(boutqiue_single_info_top),"topMargin",-topHeight);
-        animBottom = ObjectAnimator.ofInt(new WrapperFl(boutqiue_single_info_bottom),"topMargin",-bottomHeight);
+        CGLog.v("打印高度 : "+topHeight+" 宽度 : "+bottomHeight);
+        animTop = ObjectAnimator.ofInt(new TopWrapper(boutqiue_single_info_top), "topMargin", -topHeight);
+        animBottom = ObjectAnimator.ofInt(new BottomWrapper(boutqiue_single_info_bottom),"bottomMargin",-bottomHeight);
         animTop.setDuration(300);
         animBottom.setDuration(300);
         animTop.setInterpolator(new LinearInterpolator());
         animBottom.setInterpolator(new LinearInterpolator());
     }
 
-    private void fullBoutiqueScreen(){
-        animTop.start();
-        animBottom.start();
+    boolean isVisible = true;
+    class BottomWrapper{
+        private int bottomMargin;
+        public BottomWrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
+        FrameLayout frameLayout;
+
+        public int getBottomMargin() {
+            return ((FrameLayout.LayoutParams)frameLayout.getLayoutParams()).bottomMargin;
+        }
+
+        public void setBottomMargin(int bottomMargin) {
+            ((FrameLayout.LayoutParams)frameLayout.getLayoutParams()).bottomMargin = bottomMargin;
+            frameLayout.requestLayout();
+        }
     }
+
+    class TopWrapper{
+        private int topMargin;
+        public TopWrapper(FrameLayout frameLayout) {
+            this.frameLayout = frameLayout;
+        }
+        FrameLayout frameLayout;
+
+        public int getTopMargin() {
+            return ((FrameLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin;
+        }
+
+        public void setTopMargin(int topMargin) {
+            ((FrameLayout.LayoutParams)frameLayout.getLayoutParams()).topMargin = topMargin;
+            frameLayout.requestLayout();
+        }
+    }
+
+    private void fullBoutiqueScreen(){
+        mHanlder.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    animTop.start();
+                    animBottom.start();
+                    isVisible = false;
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     private void exitBoutiqueScreen(){
-        animBottom.reverse();
-        animTop.reverse();
+        mHanlder.post(new Runnable() {
+            @Override
+            public void run() {
+                animBottom.reverse();
+                animTop.reverse();
+                isVisible = true;
+            }
+        });
     }
 
     public void showDialog() {
@@ -186,6 +240,12 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         if (commonDialog.isShowing()) {
             commonDialog.dismiss();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        boutiqueWebView.getRefreshableView().destroy();
+        super.onDestroy();
     }
 
     int pageNo = 1;
@@ -343,6 +403,9 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
         //指定显示高度
         int height = WindowUtils.dm.heightPixels / 5 * 3;
+        if(assessObjectList.size() == 0){
+            height = 300;
+        }
         CGLog.v("打印高度 : " + height);
         popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
         Utils.setPopWindow(popAssessWindow);
@@ -637,14 +700,14 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         pf_pic_bottom_viewGroup = (LinearLayout) findViewById(R.id.pf_pic_bottom_viewGroup);
     }
 
+
     @Override
-    public void onBackPressed() {
-        //如果底部兰是隐藏的，则弹出，否则退出界面
-        int topMargin =((LinearLayout.LayoutParams) (boutqiue_single_info_top.getLayoutParams())).topMargin;
-        if(topMargin != 0){
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(!isVisible){
             exitBoutiqueScreen();
-            return;
+        }else {
+            finish();
         }
-        super.onBackPressed();
+        return super.onKeyDown(keyCode, event);
     }
 }

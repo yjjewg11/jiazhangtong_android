@@ -37,6 +37,7 @@ import com.wj.kindergarten.ui.func.adapter.BoutiqueChooseItemAdapter;
 import com.wj.kindergarten.ui.func.adapter.FusionChooseItemAdapter;
 import com.wj.kindergarten.ui.func.adapter.TopViewAdapter;
 import com.wj.kindergarten.ui.imagescan.BitmapCallBack;
+import com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyAlbumActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.FusionListFragment;
@@ -84,7 +85,6 @@ public class PhotoFamilyFragment extends Fragment{
     private TextView pf_backGround_family_name;
     private TextView pf_backGround_count;
     private TextView pf_backGround_count_right;
-    private GifView gif;
     private RelativeLayout pf_pic_left_bt;
     private TextView pf_pic_center_tv;
     private RelativeLayout pf_pic_right_iv;
@@ -103,6 +103,8 @@ public class PhotoFamilyFragment extends Fragment{
     private int topPosition;
     private PfFusionFragment pfFusionFragment;
     private PfLoadDataProxy pfProxyLoadData;
+    private ImageView pf_family_gif;
+    private TextView photo_family_pic_tv_upload;
 
     public ObserverFamilyUuid getObserver() {
         return observer;
@@ -127,15 +129,20 @@ public class PhotoFamilyFragment extends Fragment{
         popNewData.showAsDropDown(pf_backGround_family_name,0,20);
     }
 
+    int successCount = 0;
     public void startGif(){
-        if(gif == null)return;
-        if(gif.getVisibility() == View.INVISIBLE){
-            gif.setVisibility(View.VISIBLE);
+        successCount++;
+        if(pf_family_gif.getVisibility() == View.INVISIBLE){
+            pf_family_gif.setVisibility(View.VISIBLE);
+            photo_family_pic_tv_upload.setVisibility(View.VISIBLE);
         }
+        photo_family_pic_tv_upload.setText(""+successCount);
     }
     public void stopGif(){
-        if(gif != null){
-            gif.setVisibility(View.INVISIBLE);
+        successCount = 0;
+        if(pf_family_gif != null){
+            pf_family_gif.setVisibility(View.INVISIBLE);
+            photo_family_pic_tv_upload.setVisibility(View.INVISIBLE);
         }
     }
     private Handler handler = new Handler(){
@@ -320,9 +327,10 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void initHeadView() {
-        gif = (GifView) view.findViewById(R.id.pf_family_gif);
-        gif.setVisibility(View.INVISIBLE);
-        gif.setGifImage(R.drawable.update_jtxc_red);
+        pf_family_gif = (ImageView) view.findViewById(R.id.pf_family_gif);
+        photo_family_pic_tv_upload = (TextView) view.findViewById(R.id.photo_family_pic_tv_upload);
+        pf_family_gif.setVisibility(View.INVISIBLE);
+        photo_family_pic_tv_upload.setVisibility(View.INVISIBLE);
         pf_backGround_rl = (RelativeLayout) view.findViewById(R.id.pf_backGround_rl);
         pf_backGround_image = (ImageView) view.findViewById(R.id.pf_backGround_image);
         pf_backGround_family_name = (TextView) view.findViewById(R.id.pf_backGround_family_name);
@@ -359,6 +367,15 @@ public class PhotoFamilyFragment extends Fragment{
         TextView tv_collect = (TextView) viewleft.findViewById(R.id.tv_head_collect);
         TextView tv_up_list = (TextView) viewleft.findViewById(R.id.tv_up_list);
         TextView tv_album_info = (TextView) viewleft.findViewById(R.id.tv_album_info);
+        TextView tv_add_album = (TextView) viewleft.findViewById(R.id.tv_add_album);
+        tv_add_album.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AddFamilyAlbumActivity.class);
+                startActivity(intent);
+            }
+        });
+
         tv_collect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

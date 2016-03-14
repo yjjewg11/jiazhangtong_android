@@ -63,7 +63,38 @@ public class UploadFile {
         this.height = height;
     }
     //带进度上传相册图片
-    private void upLoadFilePf(final File file, final String path,String photo_time,String address,String md5,String note,String family_uuid, final ProgressCallBack progressCallBack) {
+
+
+    //上传相册压缩大小
+    private int compressSize = 100;
+    public void upLoadPf(String path,ProgressCallBack progressCallBack) {
+        if (Utils.isNetworkAvailable(context)) {
+            try {
+                File file = new File(path);
+                if (isompress(path)) {
+                    Bitmap bitmap = compressBySize(path, width, height);
+                    file = saveFile(bitmap, compressSize);
+                    if (bitmap != null && !bitmap.isRecycled()) {
+                        bitmap.recycle();
+                    }
+                }
+                PicObject picObject =  queryDetailInfo(path);
+                if(picObject != null){
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getNote(), picObject.getMd5(), PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
+                }else{
+                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                uploadImage.failure("处理图片失败");
+            }
+        } else {
+            uploadImage.failure("网络连接已断开或不可用");
+        }
+    }
+
+    private void upLoadFilePf(File file, String path, String photo_time, String address, String note, String md5, String family_uuid, final ProgressCallBack progressCallBack) {
         if (file != null && file.exists() && file.length() > 0) {
             try {
                 RequestParams params = new RequestParams();
@@ -109,37 +140,6 @@ public class UploadFile {
             }
         } else {
             uploadImage.failure("上传的文件不存在");
-        }
-        }
-
-
-
-    //上传相册压缩大小
-    private int compressSize = 100;
-    public void upLoadPf(String path,ProgressCallBack progressCallBack) {
-        if (Utils.isNetworkAvailable(context)) {
-            try {
-                File file = new File(path);
-                if (isompress(path)) {
-                    Bitmap bitmap = compressBySize(path, width, height);
-                    file = saveFile(bitmap, compressSize);
-                    if (bitmap != null && !bitmap.isRecycled()) {
-                        bitmap.recycle();
-                    }
-                }
-                PicObject picObject =  queryDetailInfo(path);
-                if(picObject != null){
-                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getNote(), picObject.getMd5(), PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
-                }else{
-                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                uploadImage.failure("处理图片失败");
-            }
-        } else {
-            uploadImage.failure("网络连接已断开或不可用");
         }
     }
 

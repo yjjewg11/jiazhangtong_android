@@ -20,6 +20,7 @@ import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueReviewAddress;
 import com.wj.kindergarten.bean.BoutiqueSingleInfoObject;
+import com.wj.kindergarten.bean.PfModeName;
 import com.wj.kindergarten.bean.PfModeNameObject;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -43,6 +44,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     @ViewInject(id = R.id.boutique_review_tv_upload)
     private TextView boutique_review_tv_upload;
     private EditText editText;
+    private PfModeNameObject modeObj;
     private int status = 1;//可见状态,临存，未发布
     private String title;//上传标题
     private String uuid;//精品相册uuid
@@ -78,7 +80,19 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         Intent intent = getIntent();
         objectList = (ArrayList<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
         boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
-        key = intent.getStringExtra("key");
+        modeObj = (PfModeNameObject) intent.getSerializableExtra("objectMode");
+        if(boutiqueSingleInfoObject != null){
+            title = boutiqueSingleInfoObject.getTitle();
+            hearld = boutiqueSingleInfoObject.getHerald();
+            uuid = boutiqueSingleInfoObject.getUuid();
+        }
+        if(modeObj != null){
+            title = boutiqueSingleInfoObject.getTitle();
+            hearld = boutiqueSingleInfoObject.getHerald();
+            uuid = boutiqueSingleInfoObject.getUuid();
+            mp3 = modeObj.getMp3();
+            key = modeObj.getKey();
+        }
     }
 
     @Override
@@ -162,11 +176,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
                 builder.append(object.getUuid());
             }
         }
-        if(boutiqueSingleInfoObject != null){
-            title = boutiqueSingleInfoObject.getTitle();
-            hearld = boutiqueSingleInfoObject.getHerald();
-            uuid = boutiqueSingleInfoObject.getUuid();
-        }
         if(TextUtils.isEmpty(title)){
             title = "相册预览!";
         }
@@ -203,5 +212,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     private void updateData() {
         boutique_review_webview.loadUrl(address.getShare_url());
+        uuid = address.getData_id();
     }
 }

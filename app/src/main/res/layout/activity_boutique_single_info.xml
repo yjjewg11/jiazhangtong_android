@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity">
-
+    <com.handmark.pulltorefresh.library.PullToRefreshWebView
+        android:layout_width="match_parent"
+        android:id="@+id/boutique_single_info_webview"
+        android:layout_height="match_parent"/>
     <FrameLayout
         android:id="@+id/boutqiue_single_info_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <include layout="@layout/title_normal"/>
     </FrameLayout>
-    <com.handmark.pulltorefresh.library.PullToRefreshWebView
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/boutique_single_info_webview"
-        android:layout_height="match_parent">
 
-    </com.handmark.pulltorefresh.library.PullToRefreshWebView>
+
     <LinearLayout
         android:visibility="gone"
         android:orientation="vertical"
@@ -26,9 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <FrameLayout
+        android:background="@color/white"
         android:id="@+id/boutqiue_single_info_bottom"
         android:layout_width="match_parent"
+        android:layout_gravity="bottom"
         android:layout_height="wrap_content">
         <include layout="@layout/pf_pic_bottom_edit"/>
     </FrameLayout>
-</LinearLayout>
+</FrameLayout>

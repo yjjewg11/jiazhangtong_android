@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/photo_tab_fusion_tv"
         android:drawablePadding="@dimen/margin_5"
-        android:drawableRight="@drawable/xiajiantou"
+        android:drawableRight="@drawable/pf_down_arrow_gray"
         android:textSize="15sp"
         android:text="时光轴"
         android:gravity="center"

@@ -4,9 +4,15 @@
     android:layout_height="match_parent"
     tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment">
     <FrameLayout
+        android:background="#f5f5f5"
+        android:padding="@dimen/margin_10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/layout_pulltorefresh"/>
+        <include layout="@layout/layout_pulltorefresh"
+            android:layout_width="match_parent"
+            android:divider="@color/white"
+            android:dividerHeight="0dp"
+            android:layout_height="match_parent" />
     </FrameLayout>
 
 </FrameLayout>

@@ -225,13 +225,13 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                 String path = ScanPhoto_V1.getPath(this, uri);
                 chooseList.add(path);
                 chooseImageFinish(chooseList, true);
-            }else if(requestCode == PF_CHOOSE_PIC){
+            } else if (requestCode == PF_CHOOSE_PIC) {
                 ArrayList<AllPfAlbumSunObject> list = (ArrayList) data.getSerializableExtra("selectList");
-                HashMap<String,Boolean> map = new HashMap<>();
+                HashMap<String, Boolean> map = new HashMap<>();
                 Iterator<AllPfAlbumSunObject> iterator = list.iterator();
-                while (iterator.hasNext()){
+                while (iterator.hasNext()) {
                     AllPfAlbumSunObject object = iterator.next();
-                    map.put(object.getPath(),true);
+                    map.put(object.getPath(), true);
                 }
                 adapter.setmSelectMap(map);
                 adapter.notifyDataSetChanged();
@@ -300,7 +300,6 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 //        queryGroupCounts.add(0, count);
 //
 //    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -316,15 +315,15 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 
     private void showSelect() {
         //TODO
-        if(view == null){
+        if (view == null) {
             QueryGroupCount queryGroupCount = new QueryGroupCount();
             queryGroupCount.setDate("所有照片");
             queryGroupCounts.add(0, queryGroupCount);
-        view = View.inflate(this,R.layout.boutique_gallery_pop_layout,null);
-        changeDirListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
-        changeDirListView.setMode(PullToRefreshBase.Mode.DISABLED);
-        boutiquePopAdapter = new BoutiquePopAdapter(this, queryGroupCounts);
-        changeDirListView.setAdapter(boutiquePopAdapter);
+            view = View.inflate(this, R.layout.boutique_gallery_pop_layout, null);
+            changeDirListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
+            changeDirListView.setMode(PullToRefreshBase.Mode.DISABLED);
+            boutiquePopAdapter = new BoutiquePopAdapter(this, queryGroupCounts);
+            changeDirListView.setAdapter(boutiquePopAdapter);
         }
         final PopupWindow popupPic = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         Utils.setPopWindow(popupPic);
@@ -337,20 +336,20 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
         changeDirListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                QueryGroupCount queryGroupCount = queryGroupCounts.get(position-1);
+                QueryGroupCount queryGroupCount = queryGroupCounts.get(position - 1);
                 Message message = new Message();
                 message.what = CHANGE_DIR;
                 message.obj = queryGroupCount;
-                message.arg1 = position-1;
+                message.arg1 = position - 1;
                 mHandler.sendMessage(message);
 //                boutiquePopAdapter.notifyDataSetChanged();
 //                hideChangeDirView();
                 popupPic.dismiss();
             }
         });
-        int [] location = new int[2];
+        int[] location = new int[2];
         boutique_gallery_confirm.getLocationInWindow(location);
-        popupPic.showAtLocation(boutique_gallery_confirm, Gravity.NO_GRAVITY,0,location[1]);
+        popupPic.showAtLocation(boutique_gallery_confirm, Gravity.NO_GRAVITY, 0, location[1]);
     }
 
     private List<AllPfAlbumSunObject> objectList;
@@ -418,7 +417,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
     };
 
     public List<AllPfAlbumSunObject> queryByDate(String date) {
-        String sql = "strftime('%Y-%m-%d',create_time) = '" + date+"';";
+        String sql = "strftime('%Y-%m-%d',create_time) = '" + date + "';";
         List<AllPfAlbumSunObject> objectList = db.findAllByWhere(AllPfAlbumSunObject.class, sql);
         if (objectList != null && objectList.size() > 0) {
             return objectList;
@@ -448,7 +447,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 
     public void selectChange(HashMap<String, Boolean> mSelectMap) {
         boutique_gallery_confirm.setText("" + "确定" +
-                "(" + mSelectMap.size()+ ")");
+                "(" + mSelectMap.size() + ")");
     }
 
     /**
@@ -499,14 +498,15 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
      * @param isCamera 是否是拍照
      */
     private int PF_CHOOSE_PIC = 5001;
+
     private void chooseImageFinish(List<String> images, boolean isCamera) {
         if (null != images && images.size() > 0) {
             if (isCut) {
 
             } else {
-                Intent intent = new Intent(this,PfChoosedPicActivity.class);
+                Intent intent = new Intent(this, PfChoosedPicActivity.class);
                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
-                startActivityForResult(intent,PF_CHOOSE_PIC,null);
+                startActivityForResult(intent, PF_CHOOSE_PIC, null);
 
 
             }

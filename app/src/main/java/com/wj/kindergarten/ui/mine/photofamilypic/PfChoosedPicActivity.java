@@ -99,6 +99,7 @@ public class PfChoosedPicActivity extends BaseActivity {
         //说明是新建，
         if(boutiqueSingleInfoObject == null) boutiqueSingleInfoObject = new BoutiqueSingleInfoObject();
         if(objectList != null && objectList.size() > 0){
+            boutiqueSingleInfoObject.setHerald(objectList.get(0).getPath());
             Iterator<AllPfAlbumSunObject> iterator = objectList.iterator();
             while (iterator.hasNext()){
                 AllPfAlbumSunObject object = iterator.next();

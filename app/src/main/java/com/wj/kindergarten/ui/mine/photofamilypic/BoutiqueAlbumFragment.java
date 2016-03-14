@@ -58,6 +58,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
         photoFamilyFragment.getObserver().registerObserver(this);
         view = inflater.inflate(R.layout.fragment_test, null);
         pullListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
+        pullListView.getRefreshableView().setDividerHeight(0);
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
         boutiqueAdapter.setRel_uuid(family_uuid);
         pullListView.setAdapter(boutiqueAdapter);

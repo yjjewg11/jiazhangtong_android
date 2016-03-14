@@ -10,7 +10,7 @@
         <TextView
             android:id="@+id/photo_tab_boutique_tv"
             android:textSize="15sp"
-            android:drawableRight="@drawable/xiajiantou"
+            android:drawableRight="@drawable/pf_down_arrow_gray"
             android:drawablePadding="@dimen/margin_5"
             android:gravity="center"
             android:text="精品相册"

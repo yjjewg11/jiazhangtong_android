@@ -480,7 +480,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         if (dianZanList == null && pfDianzan != null &&
                 pfDianzan.getData() != null && pfDianzan.getData().size() > 0)
             dianZanList = pfDianzan.getData();
-        if (dianZanList.size() > 0) {
+        if (dianZanList != null && dianZanList.size() > 0) {
             StringBuilder builder = new StringBuilder();
             int size = dianZanList.size();
             for (int cou = 0; cou < size; cou++) {
