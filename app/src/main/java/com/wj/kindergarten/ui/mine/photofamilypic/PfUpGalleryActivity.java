@@ -39,7 +39,9 @@ import com.wj.kindergarten.ui.imagescan.ScanPhoto_V1;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V2;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
+import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathDbTwo;
 import com.wj.kindergarten.utils.FileUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -120,7 +122,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     //如果未从网络同步已上传照片，则需要同步,默认未同步
     @Override
     public void setNeedLoading() {
-        uploadDb = FinalDb.create(this);
+        uploadDb = FinalDb.create(getApplicationContext(),"afinal.db",true, GloablUtils.ALREADY_DB_VERSION,new UploadPathDbTwo(this));
         isNeedLoading = !CGSharedPreference.getUploadSyncStatus();
     }
 
@@ -517,6 +519,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     for (String path : images) {
                         AlreadySavePath alreadySavePath = new AlreadySavePath();
                         alreadySavePath.setLocalPath(path);
+                        alreadySavePath.setFamily_uuid(PhotoFamilyFragment.instance.getCurrentFamily_uuid());
                         alreadySavePath.setStatus(1);
                         uploadDb.save(alreadySavePath);
                     }

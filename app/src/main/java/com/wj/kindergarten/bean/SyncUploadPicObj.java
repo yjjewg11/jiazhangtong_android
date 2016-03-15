@@ -8,13 +8,24 @@ import com.google.gson.annotations.Expose;
 public class SyncUploadPicObj extends BaseModel{
     @Expose
     private String md5;@Expose
-    private String phone_uuid;
+    private String phone_uuid;@Expose
+    private String family_uuid;
+
+    public String getFamily_uuid() {
+        return family_uuid;
+    }
+
+    public void setFamily_uuid(String family_uuid) {
+        this.family_uuid = family_uuid;
+    }
+
 
     @Override
     public String toString() {
         return "SyncUploadPicObj{" +
                 "md5='" + md5 + '\'' +
                 ", phone_uuid='" + phone_uuid + '\'' +
+                ", family_uuid='" + family_uuid + '\'' +
                 '}';
     }
 

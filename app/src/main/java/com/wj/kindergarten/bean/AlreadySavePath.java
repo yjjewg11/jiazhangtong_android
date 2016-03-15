@@ -16,6 +16,7 @@ public class AlreadySavePath implements Serializable {
     //0是成功，1是等待，2是失败
     private int status;
     private Date success_time;
+    private String family_uuid;
 
     public AlreadySavePath(String localPath) {
         this.localPath = localPath;
@@ -62,6 +63,14 @@ public class AlreadySavePath implements Serializable {
 
     public void setSuccess_time(Date success_time) {
         this.success_time = success_time;
+    }
+
+    public String getFamily_uuid() {
+        return family_uuid;
+    }
+
+    public void setFamily_uuid(String family_uuid) {
+        this.family_uuid = family_uuid;
     }
 
     @Override

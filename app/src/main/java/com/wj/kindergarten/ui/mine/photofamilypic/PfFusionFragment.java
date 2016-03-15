@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +62,7 @@ public class PfFusionFragment extends Fragment implements Watcher{
     private PhotoFamilyFragment photoFamilyFragment;
     private BanScrollView banScrollView;
     boolean noMoreData;
+    private Context context;
 
     public BanScrollView getBanScrollView() {
         return banScrollView;
@@ -94,18 +96,10 @@ public class PfFusionFragment extends Fragment implements Watcher{
                 //查询指定时间前的数据
                 case PfLoadDataProxy.NORMAL_DATA:
                     List<QueryGroupCount> allList = (List<QueryGroupCount>) msg.obj;
-                    List<QueryGroupCount> newData = new ArrayList<>();
-                    if (allList != null && allList.size() > 0) {
-                        for(QueryGroupCount queryGroupCount : allList){
-                            if(!queryGroupCounts.contains(queryGroupCount)){
-                                queryGroupCounts.add(queryGroupCount);
-                                newData.add(queryGroupCount);
-                            }
-                        }
-                        if(newData.size() > 0){
-                            addListDataByDate(newData);
-                        }
-
+                    if (allList != null) {
+                        queryGroupCounts.clear();
+                        queryGroupCounts.addAll(allList);
+                        addListDataByDate(allList);
                     }
                     break;
                 //有maxTime后时间的刷新的数据
@@ -130,6 +124,7 @@ public class PfFusionFragment extends Fragment implements Watcher{
         initScrollListen();
         if (view != null) return view;
         view = inflater.inflate(R.layout.fragment_pf_fusion, null);
+        context = getActivity();
         viewModel = new PfFusionViewModel(getActivity());
         photoFamilyFragment.getObserver().registerObserver(this);
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
@@ -158,10 +153,25 @@ public class PfFusionFragment extends Fragment implements Watcher{
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                   mPfLoadDataProxy.loadData(family_uuid,1,true);
+                mPfLoadDataProxy.loadData(family_uuid, 1, true);
             }
         });
+        mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
+        mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
+            @Override
+            public void finish() {
+                if (pullScroll.isRefreshing()) {
+                    pullScroll.onRefreshComplete();
+                }
+            }
 
+            @Override
+            public void noMoreData() {
+                pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
+                noMoreData = true;
+            }
+
+        });
         loadData();
 
         return view;
@@ -188,12 +198,12 @@ public class PfFusionFragment extends Fragment implements Watcher{
     }
 
     private void addListDataByDate(List<QueryGroupCount> allList) {
-
+        fragment_pf_fusion_linear.removeAllViews();
         for (QueryGroupCount count : allList) {
 
             List<AllPfAlbumSunObject> objectList = mPfLoadDataProxy.queryListByDate(family_uuid, count.getDate());
             if (objectList == null) continue;
-            View view = View.inflate(getActivity(), R.layout.pf_classic_by_date_album, null);
+            View view = View.inflate(context, R.layout.pf_classic_by_date_album, null);
             LinearLayout container_linear = (LinearLayout) view.findViewById(R.id.pf_classic_by_date_container);
             TextView pf_tv_date_time = (TextView) view.findViewById(R.id.pf_tv_date_time);
             TextView pf_pic_count = (TextView) view.findViewById(R.id.pf_pic_count);
@@ -222,27 +232,12 @@ public class PfFusionFragment extends Fragment implements Watcher{
     int pageNo = 1;
 
     public void loadData() {
-        mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
-        mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
-            @Override
-            public void finish() {
-                if(pullScroll.isRefreshing()){
-                    pullScroll.onRefreshComplete();
-                }
-            }
-
-            @Override
-            public void noMoreData() {
-                pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
-                noMoreData = true;
-            }
-
-        });
         mPfLoadDataProxy.loadData(family_uuid, pageNo, false);
     }
 
     @Override
     public void refreshUUid(String family_uuid) {
+        this.family_uuid = family_uuid;
         loadData();
     }
 }

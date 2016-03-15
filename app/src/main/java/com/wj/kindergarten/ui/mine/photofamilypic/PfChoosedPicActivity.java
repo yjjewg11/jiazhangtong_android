@@ -119,8 +119,16 @@ public class PfChoosedPicActivity extends BaseActivity {
 
     public void returnList(){
           Intent intent = new Intent();
-          intent.putExtra("selectList", (ArrayList) adapter.getSelectList());
-          setResult(RESULT_OK, intent);
+          if(getIntent().getBooleanExtra("edit",false)){
+              intent.setClass(this,BoutiqueGalleryActivity.class);
+              intent.putExtra("objectList",(ArrayList)objectList);
+              startActivity(intent);
+          }else {
+
+              intent.putExtra("selectList", (ArrayList) adapter.getSelectList());
+              setResult(RESULT_OK, intent);
+          }
+
     }
 
     @Override

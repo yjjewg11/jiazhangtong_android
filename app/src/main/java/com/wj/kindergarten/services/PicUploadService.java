@@ -16,6 +16,7 @@ import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathDbTwo;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ThreadManager;
@@ -119,9 +120,8 @@ public class PicUploadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        db = FinalDb.create(getApplicationContext());
+        db = FinalDb.create(getApplicationContext(),"afinal.db",true,GloablUtils.ALREADY_DB_VERSION,new UploadPathDbTwo(this));
         uploadFile = new UploadFile(getApplicationContext(), uploadImage, 0, 720, 1280);
-
     }
 
     public void destory() {

@@ -30,9 +30,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.bean.PfFamilyUuid;
 import com.wj.kindergarten.bean.PopAttributes;
+import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueChooseItemAdapter;
 import com.wj.kindergarten.ui.func.adapter.FusionChooseItemAdapter;
 import com.wj.kindergarten.ui.func.adapter.TopViewAdapter;
@@ -73,7 +77,6 @@ public class PhotoFamilyFragment extends Fragment{
     public static final int ADD_PIC = 5001;
     private TabLayout tab_layout;
     //    private FragmentPagerAdapter pagerAdapter;
-    private List<PfAlbumListSun> albumList;
     private View view;
     private BoutiqueAlbumFragment boutique_album_framgent;
     private FrameLayout back_pf_scroll_fl;
@@ -274,15 +277,15 @@ public class PhotoFamilyFragment extends Fragment{
                 popTop, new PopWindowUtil.OnItemClickListener() {
                     @Override
                     public void onItemClickListener(int position) {
-                        PfAlbumListSun sun = (PfAlbumListSun) topAdapter.getItem(position - 1);
-                        currentFamily_uuid = sun.getUuid();
+                        pfAlbumListSun = (PfAlbumListSun) topAdapter.getItem(position - 1);
+                        currentFamily_uuid = pfAlbumListSun.getUuid();
                         observer.setFamily_uuid(currentFamily_uuid);
                         topPosition = position - 1;
-                        PfAlbumListSun albumListSun = (PfAlbumListSun) topAdapter.getItem(topPosition);
-                        String title = Utils.isNull(albumListSun.getTitle());
+                        String title = Utils.isNull(pfAlbumListSun.getTitle());
                         if (TextUtils.isEmpty(title)) {
                             title = "家庭相册--" + topPosition;
                         }
+                        initHeadViewData();
                         pf_pic_center_tv.setText("" + title);
                     }
                 });
@@ -319,8 +322,7 @@ public class PhotoFamilyFragment extends Fragment{
         }
         String text = Utils.isNull(pfAlbumListSun.getTitle());
         if(TextUtils.isEmpty(text)){
-            text = "问界互动家园";
-        }else{
+            text = "家庭相册--" + topPosition;
         }
         pf_backGround_family_name.setText("" + text);
 
@@ -372,7 +374,7 @@ public class PhotoFamilyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),AddFamilyAlbumActivity.class);
-                startActivity(intent);
+                MainActivity.instance.startActivityForResult(intent, GloablUtils.ADD_NEW_ALBUM_SUCCESSED,null);
             }
         });
 
@@ -403,7 +405,7 @@ public class PhotoFamilyFragment extends Fragment{
                     return;
                 }
                 Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
-                intent.putExtra("uuid", pfAlbumListSun.getUuid());
+                intent.putExtra("uuid", currentFamily_uuid);
                 MainActivity.instance.startActivityForResult(intent, GloablUtils.UPDATE_SUCCESSED_REFRESH);
                 popupWindow.dismiss();
             }
@@ -616,6 +618,30 @@ public class PhotoFamilyFragment extends Fragment{
 
     public void requestNewData() {
         pfProxyLoadData.queryIncrementNewData(currentFamily_uuid);
+    }
+
+    public void reqetFamilyAlbum() {
+        UserRequest.getPfAlbumList(getActivity(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                PfAlbumList pfAlbumList = (PfAlbumList) domain;
+                if (pfAlbumList != null && pfAlbumList.getList() != null && pfAlbumList.getList().size() > 0) {
+                    pfAlbumListSunList.clear();
+                    pfAlbumListSunList.addAll(pfAlbumList.getList());
+                    initHeadViewData();
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
     }
 
 

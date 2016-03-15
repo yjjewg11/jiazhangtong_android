@@ -76,7 +76,7 @@ public class FusionListFragment extends Fragment implements Watcher{
                     //查询指定时间前的数据
                     case PfLoadDataProxy.NORMAL_DATA:
                         List<QueryGroupCount> allList = (List<QueryGroupCount>) msg.obj;
-                        if(allList != null && allList.size() > 0){
+                        if(allList != null){
                             queryGroupCounts.clear();
                             queryGroupCounts.addAll(allList);
                             queryAllpic();
@@ -102,7 +102,7 @@ public class FusionListFragment extends Fragment implements Watcher{
     private void queryAlldata() {
         String sql = "family_uuid = '"+family_uuid+"';";
         List<AllPfAlbumSunObject> list = db.findAllByWhere(AllPfAlbumSunObject.class, sql);
-        if(list != null && list.size() > 0){
+        if(list != null ){
             Collections.sort(list, new Comparator<AllPfAlbumSunObject>() {
                 @Override
                 public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {

@@ -404,7 +404,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         //指定显示高度
         int height = WindowUtils.dm.heightPixels / 5 * 3;
         if(assessObjectList.size() == 0){
-            height = 300;
+            height = 650;
         }
         CGLog.v("打印高度 : " + height);
         popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
@@ -435,12 +435,12 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 Intent intent = new Intent(BoutiqueSingleInfoActivity.this, PfChoosedPicActivity.class);
                 intent.putExtra("object", boutiqueSingleInfo.getData());
                 intent.putExtra("objectList", objectList);
+                intent.putExtra("edit",true);
                 startActivity(intent);
             }
         });
         int[] location = Utils.getLocation(textViews[4]);
         pf_more_view.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        CGLog.v("打印测量的高度 　：" + pf_more_view.getMeasuredHeight() + " 宽度 : " + pf_more_view.getMeasuredWidth());
         pf_more_view.getMeasuredHeight();
         popupWindow.showAtLocation(textViews[4], Gravity.NO_GRAVITY, location[0], location[1] - pf_more_view.getMeasuredHeight());
     }

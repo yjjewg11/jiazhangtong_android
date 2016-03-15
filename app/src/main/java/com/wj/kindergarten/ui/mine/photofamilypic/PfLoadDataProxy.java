@@ -203,7 +203,7 @@ public class PfLoadDataProxy {
                 int cha = 0;
                 long o = TimeUtil.getMillionFromYMD(one.getDate());
                 long t = TimeUtil.getMillionFromYMD(two.getDate());
-                if(o - t >= 0){
+                if(t - o >= 0){
                     cha = 1;
                 }else {
                     cha = -1;
@@ -252,7 +252,7 @@ public class PfLoadDataProxy {
     }
 
     private String formatTime(Date date) {
-
+        if(date == null)return null;
         return TimeUtil.getStringDate(date);
     }
 

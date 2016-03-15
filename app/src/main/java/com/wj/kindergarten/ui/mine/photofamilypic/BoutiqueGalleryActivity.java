@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -116,6 +117,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
     private TextView boutique_gallery_confirm;
     private FinalDb db;
     private View view;
+    private List<AllPfAlbumSunObject> selectList;
 
     /**
      * 被选中的图片列表 key
@@ -136,9 +138,8 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
     public void onCreate() {
         ActivityManger.getInstance().addPfActivities(this);
         db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT);
-        initSelectPic((ArrayList) getIntent().getSerializableExtra(Constants.ALREADY_SELECT_KEY));
         SIGN_BOARD = (getIntent().getIntExtra("signBoard", 0));
-
+        selectList = (List<AllPfAlbumSunObject>) getIntent().getSerializableExtra("objectList");
         initWidget();
         initClickListener();
 
@@ -192,6 +193,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 //        scanList.add(0, "");
         adapter = new BoutiqueGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView);
         mGridView.setAdapter(adapter);
+        if(selectList != null && selectList.size() > 0) adapter.setmSelectMap(getSelectMapFromList(selectList));
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -227,12 +229,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                 chooseImageFinish(chooseList, true);
             } else if (requestCode == PF_CHOOSE_PIC) {
                 ArrayList<AllPfAlbumSunObject> list = (ArrayList) data.getSerializableExtra("selectList");
-                HashMap<String, Boolean> map = new HashMap<>();
-                Iterator<AllPfAlbumSunObject> iterator = list.iterator();
-                while (iterator.hasNext()) {
-                    AllPfAlbumSunObject object = iterator.next();
-                    map.put(object.getPath(), true);
-                }
+                HashMap<String, Boolean> map = getSelectMapFromList(list);
                 adapter.setmSelectMap(map);
                 adapter.notifyDataSetChanged();
             }
@@ -254,6 +251,17 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
         }
 
 
+    }
+
+    @NonNull
+    private HashMap<String, Boolean> getSelectMapFromList(List<AllPfAlbumSunObject> list) {
+        HashMap<String, Boolean> map = new HashMap<>();
+        Iterator<AllPfAlbumSunObject> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            AllPfAlbumSunObject object = iterator.next();
+            map.put(object.getPath(), true);
+        }
+        return map;
     }
 
     /**
@@ -500,15 +508,13 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
     private int PF_CHOOSE_PIC = 5001;
 
     private void chooseImageFinish(List<String> images, boolean isCamera) {
-        if (null != images && images.size() > 0) {
+        if (adapter.getSelectList() != null && adapter.getSelectList().size() > 0) {
             if (isCut) {
 
             } else {
                 Intent intent = new Intent(this, PfChoosedPicActivity.class);
                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
                 startActivityForResult(intent, PF_CHOOSE_PIC, null);
-
-
             }
         } else {
             if (isCamera) {

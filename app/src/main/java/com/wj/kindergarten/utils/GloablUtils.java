@@ -57,6 +57,8 @@ public interface GloablUtils {
     int UPDATE_SUCCESSED_REFRESH = 3054;
     int DELETE_BOUTIQUE_ALBUM_SUCCESSED = 3055;
     int DELETE_FUSION_INFO_SUCCESSED = 3056;
+    int GET_PIC_ADD_FAMALI_ALBUM = 3057;
+    int ADD_NEW_ALBUM_SUCCESSED = 3058;
     //接受二维码链接的广播action
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
@@ -68,4 +70,11 @@ public interface GloablUtils {
     int BOUTIQUE_COMMON_TYPE = 22;//精品相册
 
     String REQUEST_PIC_NEW_DATA = "notify_pic_new_data";
+
+
+    //存储已上传图片的数据,
+    //version --
+    // 2  添加family_uuid字段
+    // 3同上
+    int ALREADY_DB_VERSION = 3;
 }

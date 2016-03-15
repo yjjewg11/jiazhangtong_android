@@ -658,6 +658,12 @@ public class MainActivity extends BaseActivity {
                     familyFragment.refreshFusionData();
                 }
                 break;
+            case GloablUtils.ADD_NEW_ALBUM_SUCCESSED:
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    familyFragment.reqetFamilyAlbum();
+                }
+                break;
         }
     }
 

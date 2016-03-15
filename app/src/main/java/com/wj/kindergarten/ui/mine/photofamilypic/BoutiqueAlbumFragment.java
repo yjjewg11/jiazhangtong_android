@@ -136,7 +136,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
                 }
                 BoutiqueAlbum boutiqueAlbum = (BoutiqueAlbum) domain;
                 if (boutiqueAlbum != null && boutiqueAlbum.getList() != null
-                        && boutiqueAlbum.getList().getData() != null && boutiqueAlbum.getList().getData().size() > 0) {
+                        && boutiqueAlbum.getList().getData() != null ) {
                     if (pageNo == 1) boutiqueAlbumList.clear();
                     boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());
                     boutiqueAdapter.setList(boutiqueAlbumList);
