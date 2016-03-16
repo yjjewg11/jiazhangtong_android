@@ -611,6 +611,9 @@ public class PhotoFamilyFragment extends Fragment{
         }
     }
 
+    public void refreshUpdateData(){
+        observer.setFamily_uuid(currentFamily_uuid);
+    }
 
     public void refreshFusionData(){
         pfFusionListFragment.refreshData();

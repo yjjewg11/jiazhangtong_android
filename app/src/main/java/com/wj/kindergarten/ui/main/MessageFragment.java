@@ -73,7 +73,7 @@ public class MessageFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null);
 
-            message_list_rl = (RelativeLayout)rootView.findViewById(R.id.message_list_rl);
+            message_list_rl = (RelativeLayout) rootView.findViewById(R.id.message_list_rl);
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list_interation);
             mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
             mListView.setDividerPadding(0);
@@ -143,20 +143,26 @@ public class MessageFragment extends Fragment {
                             getActivity().startActivity(intent);
                         } else if (dataModel.getType() == 10) {
                             CGLog.d("URL:" + dataModel.getUrl());
-                                Intent intent = new Intent(getActivity(), HtmlActivity.class);
-                                intent.putExtra("url",dataModel.getUrl());
-                                startActivity(intent);
+                            Intent intent = new Intent(getActivity(), HtmlActivity.class);
+                            intent.putExtra("url", dataModel.getUrl());
+                            startActivity(intent);
                         } else if (dataModel.getType() == 13) {
                             startActivity(new Intent(getActivity(), SignListActivity.class));
                         } else if (dataModel.getType() == 99) {
                             startActivity(new Intent(getActivity(), InteractionListActivity.class));
+                        } else if (dataModel.getType() == 20) {
+                            ((MainActivity)getActivity()).setCurrentTab(3);
+                        } else if (dataModel.getType() == 21) {
+
+                        } else if (dataModel.getType() == 22) {
+
                         }
                     }
                 }
             });
-            mHandler.sendEmptyMessageDelayed(SET_REFRESH,0);
+            mHandler.sendEmptyMessageDelayed(SET_REFRESH, 0);
         }
-        if(!CGSharedPreference.getMessageState()){
+        if (!CGSharedPreference.getMessageState()) {
             mHandler.sendEmptyMessage(SET_REFRESH);
         }
         return rootView;
@@ -204,19 +210,19 @@ public class MessageFragment extends Fragment {
     }
 
     private void queryMessage(final int page) {
-        ((MainActivity)getActivity()).getDialog().show();
+        ((MainActivity) getActivity()).getDialog().show();
 
         UserRequest.queryMessage(getActivity(), page, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                if(((MainActivity)getActivity()).getDialog().isShowing()){
-                ((MainActivity)getActivity()).getDialog().cancel();
+                if (((MainActivity) getActivity()).getDialog().isShowing()) {
+                    ((MainActivity) getActivity()).getDialog().cancel();
                 }
                 if (mListView.isRefreshing()) {
                     mListView.onRefreshComplete();
                 }
                 Msg msg = (Msg) domain;
-                if (msg != null && msg.getList() != null && msg.getList().getData()!= null &&
+                if (msg != null && msg.getList() != null && msg.getList().getData() != null &&
                         msg.getList().getData().size() > 0) {
                     if (page == 1) {
                         dataList.clear();
@@ -225,8 +231,8 @@ public class MessageFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     nowPage = page;
                 } else {
-                    if(page == 1){
-                        ((BaseActivity)getActivity()).noView(message_list_rl);
+                    if (page == 1) {
+                        ((BaseActivity) getActivity()).noView(message_list_rl);
                     }
                     Utils.showToast(CGApplication.getInstance(), "消息列表为空");
                 }

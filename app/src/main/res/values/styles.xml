@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="BaseStyle" parent="Theme.AppCompat.Light.NoActionBar" />
 

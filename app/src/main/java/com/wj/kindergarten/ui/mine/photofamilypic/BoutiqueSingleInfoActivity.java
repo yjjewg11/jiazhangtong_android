@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
@@ -425,7 +426,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                deleteData(boutiqueSingleInfo.getData().getUuid());
+                ToastUtils.showDialog(BoutiqueSingleInfoActivity.this, "提示", "您确定要删除吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteData(boutiqueSingleInfo.getData().getUuid());
+                    }
+                });
+
             }
         });
         pf_edit.setOnClickListener(new View.OnClickListener() {

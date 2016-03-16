@@ -17,7 +17,9 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseResponse;
+import com.wj.kindergarten.bean.PfResult;
 import com.wj.kindergarten.bean.PicObject;
+import com.wj.kindergarten.bean.UploadSuccessObj;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
@@ -25,7 +27,6 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
-
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -40,6 +41,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+
+
 
 /**
  * Created by zoupengqiang on 14-5-26.
@@ -115,7 +118,7 @@ public class UploadFile {
                             CGLog.d("back1:" + response.toString());
                             BaseResponse baseResponse = new BaseResponse(response);
                             if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
-                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), Result.class));
+                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), PfResult.class));
                             } else {
                                 uploadImage.failure("上传图片失败");
                             }
@@ -131,7 +134,8 @@ public class UploadFile {
 
                     @Override
                     public void onProgress(int bytesWritten, int totalSize) {
-                        progressCallBack.progress(bytesWritten,totalSize);
+                        super.onProgress(bytesWritten, totalSize);
+                        progressCallBack.progress((int)bytesWritten, (int)totalSize);
                     }
                 });
             } catch (Exception e) {

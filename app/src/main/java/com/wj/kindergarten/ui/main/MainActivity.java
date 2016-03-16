@@ -168,7 +168,8 @@ public class MainActivity extends BaseActivity {
         filter.addAction(GloablUtils.ALREADY_UPLOADING);
         filter.addAction(GloablUtils.ALREADY_UPLOADING_FINISHED);
         filter.addAction(GloablUtils.REQUEST_PIC_NEW_DATA);
-        registerReceiver(receiver,filter);
+        filter.addAction(GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED);
+        registerReceiver(receiver, filter);
     }
 
     private void initPfAlbum() {
@@ -683,7 +684,14 @@ public class MainActivity extends BaseActivity {
                 case GloablUtils.REQUEST_PIC_NEW_DATA:
                     photoFragment.requestNewData();
                     break;
+                case GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED:
+                    photoFragment.refreshUpdateData();
+                    break;
             }
         }
+    }
+
+    public void setCurrentTab(int position){
+        mTabHost.setCurrentTab(position);
     }
 }

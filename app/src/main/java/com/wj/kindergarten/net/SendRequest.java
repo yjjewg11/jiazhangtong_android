@@ -85,6 +85,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * SendRequest
  *
@@ -119,7 +120,7 @@ public class SendRequest {
             CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
             RequestHttpUtil.post(context, url, params, new JsonHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, org.apache.http.Header[] headers, JSONObject response) {
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     super.onSuccess(statusCode, headers, response);
                     try {
                         CGLog.i("SendRequest：" + requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
@@ -153,7 +154,7 @@ public class SendRequest {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                public void onFailure(int statusCode,Header[] headers, Throwable throwable, JSONArray errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
                     CGLog.d("SendRequest：" + requestType + "->" + errorResponse);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");

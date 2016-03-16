@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ import java.util.List;
 public class AddFamilyMemberActivity extends BaseActivity {
 
 
+    private static final int READ_CONSTANTS_PREMISSION = 3060;
     //利用注解初始化view
     @ViewInject(id = R.id.add_family_name)
     EditText editName;
@@ -91,20 +93,38 @@ public class AddFamilyMemberActivity extends BaseActivity {
 
                 break;
             case R.id.add_family_member_get_contact:
-                    startConstact();
+                addMember();
                 break;
         }
     }
 
-    private boolean checkOwnPermersion() {
-        String permision = "android.permission.READ_CONTACTS";
-        int deterMine =  checkCallingPermission(permision);
-        //已获得权限
-        if(deterMine == PackageManager.PERMISSION_GRANTED){
-            return true;
+    private void addMember() {
+        if(checkOwnPermersion()){
+            startConstact();
         }
-        enforceCallingPermission(permision,"请求获取通讯录权限？");
-        return false;
+    }
+
+    private boolean checkOwnPermersion() {
+
+        if (checkCallingOrSelfPermission(Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+//            ActivityCompat.getp
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
+//                    READ_CONSTANTS_PREMISSION);
+            return false;
+        }
+        return true;
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode){
+            case READ_CONSTANTS_PREMISSION:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    addMember();
+                }
+                break;
+        }
     }
 
     private void addFamily() {

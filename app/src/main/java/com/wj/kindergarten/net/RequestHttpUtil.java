@@ -15,10 +15,11 @@ import com.loopj.android.http.ResponseHandlerInterface;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
 
+
 import org.apache.http.HttpEntity;
-import org.apache.http.cookie.Cookie;
 
 import java.util.List;
+
 
 /**
  * RequestHttpUtil
@@ -85,7 +86,7 @@ public class RequestHttpUtil {
 
     private static void getCookie() {
         PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
-        getClient().setCookieStore(myCookieStore);
+        getClient().setCookieStore(new PersistentCookieStore(CGApplication.getInstance()));
     }
 
     public static void cancel(Context context, boolean isInterrupt) {
@@ -129,9 +130,6 @@ public class RequestHttpUtil {
 
     //带参数 提交数据
     public static void post(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {
-        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
-        List<Cookie> cookies = myCookieStore.getCookies();
-        MyCookieManager.add(cookies);
         getClient().post(context, uString, params, resp);
     }
 

@@ -26,6 +26,7 @@ import com.wj.kindergarten.ui.func.EditPfActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
@@ -64,8 +65,9 @@ public class PfGalleryImagesAdapter extends BaseAdapter {
         this.canSelect = canSelect;
         this.mGridView = mGridView;
         this.mSelectMap = selectMap;
-        db = FinalDb.create(mGridView.getContext());
-        imageAlreadyList =   db.findAll(AlreadySavePath.class);
+        db = FinalUtil.getAlreadyUploadDb(mGridView.getContext());
+        String sql = "family_uuid = '"+PhotoFamilyFragment.instance.getCurrentFamily_uuid()+"'";
+        imageAlreadyList =   db.findAllByWhere(AlreadySavePath.class, sql);
         this.type = type;
         CGLog.v("打印数据集合 ; "+imageAlreadyList);
     }

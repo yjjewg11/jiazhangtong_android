@@ -25,11 +25,13 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AlreadySavePath;
+import com.wj.kindergarten.bean.FindAlreadyPath;
 import com.wj.kindergarten.bean.PfProgressItem;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.UpLoadProgressAdapter;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ToastUtils;
@@ -86,7 +88,7 @@ public class UpLoadActivity extends BaseActivity {
         linearLayout.removeAllViews();
         for (final AlreadySavePath alreadySavePath : binder.getList()) {
             //判断是否已经上传成功，如果是则不添加
-            final AlreadySavePath dbPath =  db.findById(alreadySavePath.getLocalPath(), AlreadySavePath.class);
+            final AlreadySavePath dbPath = db.findById(alreadySavePath.getId(), AlreadySavePath.class);
             if(dbPath.getStatus() == 0) continue;
             final View view = View.inflate(this, R.layout.upload_progress_item, null);
             ImageView up_load_progress_image = (ImageView) view.findViewById(R.id.up_load_progress_image);
@@ -95,7 +97,7 @@ public class UpLoadActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     //检查状态是否为失败，否则不从此开始上传
-                   AlreadySavePath o =  db.findById(dbPath.getLocalPath(), AlreadySavePath.class);
+                   AlreadySavePath o = db.findById(dbPath.getId(), AlreadySavePath.class);
                     if(o.getStatus() == 3){
                           binder.reStartUpload();
                     }else{
@@ -144,7 +146,7 @@ public class UpLoadActivity extends BaseActivity {
     }
 
     private void initRemoveView() {
-        db = FinalDb.create(this);
+        db = FinalUtil.getAlreadyUploadDb(this);
     }
 
     @Override

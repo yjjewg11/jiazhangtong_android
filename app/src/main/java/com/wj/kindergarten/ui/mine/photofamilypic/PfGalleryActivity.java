@@ -90,6 +90,22 @@ public class PfGalleryActivity extends BaseActivity {
     }
 
     @Override
+    protected void titleLeftButtonListener() {
+        commonDelete();
+        super.titleLeftButtonListener();
+    }
+
+    public void commonDelete(){
+        sendBroadcast(new Intent(GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED));
+    }
+
+    @Override
+    public void onBackPressed() {
+        commonDelete();
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate() {
         commonDialog = new HintInfoDialog(this,"数据加载中，请稍后...");
         setTitleText("选择照片");

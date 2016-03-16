@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 
 import com.wj.kindergarten.bean.AlreadySavePath;
+import com.wj.kindergarten.bean.PfResult;
 import com.wj.kindergarten.net.upload.ProgressCallBack;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
@@ -18,6 +19,7 @@ import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathDbTwo;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.ToastUtils;
@@ -61,7 +63,7 @@ public class PicUploadService extends Service {
         }
     };
 
-    private void successes() {
+    private void successes(final String data_id) {
         ThreadManager.instance.excuteRunnable(new Runnable() {
             @Override
             public synchronized void run() {
@@ -69,6 +71,7 @@ public class PicUploadService extends Service {
                 AlreadySavePath alreadySavePath = listObject.get(count);
                 alreadySavePath.setStatus(0);
                 alreadySavePath.setSuccess_time(new Date());
+                alreadySavePath.setData_id(data_id);
                 db.update(alreadySavePath);
                 mHandler.post(new SuccessRunable());
             }
@@ -89,7 +92,12 @@ public class PicUploadService extends Service {
         @Override
         public void success(Result result) {
             //直接把地址写入到数据库
-            successes();
+            String data_id = null;
+            PfResult pfResult = (PfResult) result;
+            if(pfResult != null) {
+                data_id = pfResult.getData_id();
+            }
+            successes(data_id);
         }
         @Override
         public void failure(String message) {
@@ -120,7 +128,7 @@ public class PicUploadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        db = FinalDb.create(getApplicationContext(),"afinal.db",true,GloablUtils.ALREADY_DB_VERSION,new UploadPathDbTwo(this));
+        db = FinalUtil.getAlreadyUploadDb(this);
         uploadFile = new UploadFile(getApplicationContext(), uploadImage, 0, 720, 1280);
     }
 

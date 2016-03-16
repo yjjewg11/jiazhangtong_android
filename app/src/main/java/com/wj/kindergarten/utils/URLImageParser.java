@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.text.Html;
 import android.view.View;
 
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -13,6 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+
 
 /**
  * URLImageParser

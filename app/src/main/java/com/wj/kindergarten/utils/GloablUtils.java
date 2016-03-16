@@ -1,5 +1,6 @@
 package com.wj.kindergarten.utils;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -76,5 +77,7 @@ public interface GloablUtils {
     //version --
     // 2  添加family_uuid字段
     // 3同上
-    int ALREADY_DB_VERSION = 3;
+    //4 添加uuid字段方便照片删除时，同时删除已上传照片。
+    int ALREADY_DB_VERSION = 4;
+    String DELETE_PF_SINGLE_INFO_SUCCESSED = "delete_pf_single_info_successed";
 }

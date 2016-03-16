@@ -1,65 +1,32 @@
 package com.wj.kindergarten.ui.mine.photofamilypic.pffragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
-import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
-import com.wj.kindergarten.bean.PfDianZan;
-import com.wj.kindergarten.bean.PfSingleAssess;
-import com.wj.kindergarten.bean.PfSingleAssessObject;
-import com.wj.kindergarten.bean.SingleNewInfo;
-import com.wj.kindergarten.bean.SinlePfExtraInfo;
-import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
-import com.wj.kindergarten.ui.emot.EmotUtil;
-import com.wj.kindergarten.ui.emot.SendMessage;
-import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.PfInfoFragmentAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfPopPicAdapter;
-import com.wj.kindergarten.ui.imagescan.AutoDownLoadListener;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity;
-import com.wj.kindergarten.ui.more.ListenScrollView;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.GloablUtils;
-import com.wj.kindergarten.utils.ImageLoaderUtil;
-import com.wj.kindergarten.utils.ShareUtils;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
-import com.wj.kindergarten.utils.Utils;
-import com.wj.kindergarten.utils.WindowUtils;
 
 import net.tsz.afinal.FinalDb;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PfSingleInfoFragment extends Fragment {
@@ -69,7 +36,8 @@ public class PfSingleInfoFragment extends Fragment {
     private int position;
     private PfInfoFragmentAdapter pagerAdapter;
     private PfGalleryActivity activity;
-    private FinalDb db;
+    private FinalDb dbObj;
+    private FinalDb dbUpload;
 
     public PfSingleInfoFragment(int position, List<AllPfAlbumSunObject> list) {
         this.position = position;
@@ -116,21 +84,25 @@ public class PfSingleInfoFragment extends Fragment {
     }
 
     private void initDB() {
-        db = FinalDb.create(getActivity(),GloablUtils.FAMILY_UUID_OBJECT);
+        dbObj = FinalUtil.getFamilyUuidObjectDb(getActivity());
+        dbUpload = FinalUtil.getAlreadyUploadDb(getActivity());
     }
 
     public void deleteCurrentItem(AllPfAlbumSunObject sunObject) {
-        int currentIndex =  viewPager.getCurrentItem();
+        final int currentIndex =  viewPager.getCurrentItem();
         CGLog.v("打印最近下标 : "+currentIndex);
         //从数据库，网络，轮播图中删除
-        AllPfAlbumSunObject object = list.get(viewPager.getCurrentItem());
-        db.delete(object);
-        list.remove(currentIndex);
-        pagerAdapter.setObjectList(list);
+        final AllPfAlbumSunObject object = list.get(viewPager.getCurrentItem());
+
         UserRequest.deleteSinglePf(getActivity(), object.getUuid(), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 ToastUtils.showMessage("删除成功");
+                dbObj.delete(object);
+                String sql = "data_id = '"+object.getUuid()+"'";
+                dbUpload.deleteByWhere(AlreadySavePath.class,sql);
+                list.remove(currentIndex);
+                pagerAdapter.setObjectList(list);
             }
 
             @Override
