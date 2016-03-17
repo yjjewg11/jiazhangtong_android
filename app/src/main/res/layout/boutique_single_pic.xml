@@ -5,7 +5,7 @@
 
     <ImageView
         android:id="@+id/boutiqe_single_pic"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="100dp" />
 

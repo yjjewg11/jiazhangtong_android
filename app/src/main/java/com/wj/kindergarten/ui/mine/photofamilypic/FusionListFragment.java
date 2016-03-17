@@ -280,4 +280,7 @@ public class FusionListFragment extends Fragment implements Watcher{
         loadData();
     }
 
+    public void setMode() {
+        fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULLDOWN);
+    }
 }

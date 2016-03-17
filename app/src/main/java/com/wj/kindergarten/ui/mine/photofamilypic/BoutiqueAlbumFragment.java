@@ -44,6 +44,9 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     private String [] typeAll = {"mine","all"};
     String nowType = typeAll[0];
 
+    public BoutiqueAlbumFragment() {
+    }
+
     public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment,String family_uuid) {
         this.photoFamilyFragment = photoFamilyFragment;
         this.family_uuid = family_uuid;
@@ -54,6 +57,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initScrollListener();
         if (view != null) return view;
+        if(photoFamilyFragment == null) photoFamilyFragment = PhotoFamilyFragment.instance;
         dialog = new HintInfoDialog(getActivity());
         photoFamilyFragment.getObserver().registerObserver(this);
         view = inflater.inflate(R.layout.fragment_test, null);
@@ -100,6 +104,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     }
 
     private void initScrollListener() {
+        if(photoFamilyFragment == null) return;
         photoFamilyFragment.setSubViewDecideScroll(new PfFragmentLinearLayout.DecideSubViewScroll() {
             @Override
             public void allowScroll() {
@@ -196,6 +201,4 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
         refreshData();
     }
 
-
-    ;
 }

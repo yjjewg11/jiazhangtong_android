@@ -253,6 +253,12 @@ public class PhotoFamilyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                   changePFAlbum();
+                 int position =  tab_layout.getSelectedTabPosition();
+                 if(position == 0){
+                     if(pfFusionFragment != null) pfFusionFragment.setMode();
+                     if(pfFusionListFragment != null) pfFusionListFragment.setMode();
+                 }
+
             }
         });
         pf_pic_right_iv.setOnClickListener(new View.OnClickListener() {
@@ -272,7 +278,7 @@ public class PhotoFamilyFragment extends Fragment{
             popTop.setGrarity(Gravity.NO_GRAVITY);
             popTop.setLeftOffset(0);
         }
-        final TopViewAdapter topAdapter = new TopViewAdapter(getActivity(), pfAlbumListSunList,topPosition);
+        final TopViewAdapter topAdapter = new TopViewAdapter(getActivity(), pfAlbumListSunList,currentFamily_uuid);
         PopWindowUtil.showPoPWindow(getActivity(), pf_pic_center_tv, topAdapter,
                 popTop, new PopWindowUtil.OnItemClickListener() {
                     @Override
@@ -294,11 +300,13 @@ public class PhotoFamilyFragment extends Fragment{
     public void initHeadBack(){
         initHeadViewData();
     }
-
     private void initHeadViewData() {
         if(pfAlbumListSun == null) return;
         if(TextUtils.isEmpty(pfAlbumListSun.getTitle())) return;
-        int count = Integer.valueOf(pfAlbumListSun.getPhoto_count());
+        int count = 0;
+        if(pfAlbumListSun.getPhoto_count() != null && !TextUtils.isEmpty(pfAlbumListSun.getPhoto_count())){
+             count = Integer.valueOf(pfAlbumListSun.getPhoto_count()+"");
+        }
         String n = null;
         pf_background_show_number.setVisibility(View.VISIBLE);
         if(count > 1000){
@@ -471,7 +479,7 @@ public class PhotoFamilyFragment extends Fragment{
 
     String[] titles = new String[]{"时光轴", "精品相册"};
 
-    int boutiquePosition = 1;
+    int boutiquePosition = 0;
     int fusionPosition = 0;
     private void initTabLayout() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tab_layout.getLayoutParams();
@@ -645,6 +653,17 @@ public class PhotoFamilyFragment extends Fragment{
 
             }
         });
+    }
+
+    public void reBoutiqueData() {
+        if(handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(boutique_album_framgent != null){
+                    boutique_album_framgent.refreshUUid(currentFamily_uuid);
+                }
+            }
+        },300));
     }
 
 

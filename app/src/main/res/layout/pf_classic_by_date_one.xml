@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:scaleType="centerCrop"
+        style="@style/pf_classic_by_date"
         android:src="@drawable/zhanweitu"
         android:layout_width="match_parent"
         android:layout_height="220dp"

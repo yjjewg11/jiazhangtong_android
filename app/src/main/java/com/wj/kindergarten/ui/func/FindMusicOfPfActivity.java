@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -66,8 +67,21 @@ public class FindMusicOfPfActivity extends BaseActivity {
         setTitleText("选择背景音乐", "确认");
         initViews();
         initClick();
-
         loadMusic();
+        getData();
+
+    }
+
+    String mp3;
+    private void getData() {
+        mp3 = getIntent().getStringExtra("music");
+        if(mp3 != null && !TextUtils.isEmpty(mp3)){
+            List<PfMusicSunObject> list = new ArrayList<>();
+            PfMusicSunObject object = new PfMusicSunObject();
+            object.setPath(mp3);
+            list.add(object);
+            adapter.setOneList(list);
+        }
 
     }
 
@@ -102,13 +116,13 @@ public class FindMusicOfPfActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-        if(adapter.getList() == null) return;
-        if(adapter.getList().size() == 0){
+        if(adapter.getOneList() == null) return;
+        if(adapter.getOneList().size() == 0){
             ToastUtils.showMessage("选首歌吧!");
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra("mp3", adapter.getList().get(0).getPath());
+        intent.putExtra("mp3", adapter.getOneList().get(0).getPath());
         setResult(RESULT_OK, intent);
         stopMusic();
         finish();
@@ -130,6 +144,5 @@ public class FindMusicOfPfActivity extends BaseActivity {
         adapter = new ShowMusicAdapter(this);
         listView.setAdapter(adapter);
     }
-
 
 }

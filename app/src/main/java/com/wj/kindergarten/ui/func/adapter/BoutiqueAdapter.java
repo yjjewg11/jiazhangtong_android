@@ -94,7 +94,11 @@ public class BoutiqueAdapter extends BaseAdapter{
         }
         BoutiqueAlbumListSun sun = list.get(position);
         if(sun != null){
-            ImageLoaderUtil.displayImage(sun.getHerald(), viewHolder.boutique_album_item_image);
+            String path = sun.getHerald();
+            if(path.contains("@")){
+                path = path.substring(0,path.indexOf("@"));
+            }
+            ImageLoaderUtil.displayAlbumImage(path, viewHolder.boutique_album_item_image);
             viewHolder.boutique_album_item_title.setText("" + sun.getTitle());
             String text = "<font color='#6f2d0c'>"+ Utils.isNull(sun.getCreate_username())+"</font>"+
                     "制作于"+"<font color='#6f2d0c'>"+Utils.isNull(sun.getCreate_time())+"</font>,"+

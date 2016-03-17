@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.MsgDataModel;
@@ -35,11 +37,18 @@ import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.func.NoticeActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
 import com.wj.kindergarten.ui.message.MessageAdapter;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.TransportListener;
+import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.DbUtils;
 import com.wj.kindergarten.ui.more.HtmlActivity;
 import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +69,7 @@ public class MessageFragment extends Fragment {
     private int nowPage = 1;
     private RelativeLayout message_list_rl;
     private static final int SET_REFRESH = 10010;
+    private FinalDb albumDb;
 
 
     @Nullable
@@ -72,7 +82,7 @@ public class MessageFragment extends Fragment {
 
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null);
-
+            albumDb = FinalUtil.getFamilyUuidObjectDb(getActivity());
             message_list_rl = (RelativeLayout) rootView.findViewById(R.id.message_list_rl);
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list_interation);
             mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
@@ -153,9 +163,23 @@ public class MessageFragment extends Fragment {
                         } else if (dataModel.getType() == 20) {
                             ((MainActivity)getActivity()).setCurrentTab(3);
                         } else if (dataModel.getType() == 21) {
-
+                            //照片内容
+                           List<AllPfAlbumSunObject> objectList =  DbUtils.getAllPic(albumDb);
+                            AllPfAlbumSunObject object = new AllPfAlbumSunObject();
+                            object.setUuid(dataModel.getRel_uuid());
+                            if(objectList != null && objectList.size() > 0){
+                               int positionList =  objectList.indexOf(object) ;
+                                if(positionList < 0) positionList = 0;
+                                new TransportListener(getActivity(),positionList,objectList,null).onItemClick(parent,view,positionList,id);
+                            }
                         } else if (dataModel.getType() == 22) {
-
+                            //精品相册内容
+                            String uuid = dataModel.getRel_uuid();
+                            if(uuid != null && !TextUtils.isEmpty(uuid)){
+                                Intent intent = new Intent(getActivity(), BoutiqueSingleInfoActivity.class);
+                                intent.putExtra("uuid", uuid);
+                                MainActivity.instance.startActivityForResult(intent, GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED);
+                            }
                         }
                     }
                 }

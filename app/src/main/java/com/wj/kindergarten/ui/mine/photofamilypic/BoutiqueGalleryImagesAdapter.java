@@ -42,7 +42,9 @@ public class BoutiqueGalleryImagesAdapter extends BaseAdapter {
     private HashMap<String, Boolean> mSelectMap = new HashMap<>();
 
     public void setmSelectMap(HashMap<String, Boolean> mSelectMap) {
-        this.mSelectMap = mSelectMap;
+        this.mSelectMap.clear();
+        this.mSelectMap.putAll(mSelectMap);
+        notifyDataSetChanged();
     }
 
     private GridView mGridView;
@@ -142,7 +144,8 @@ public class BoutiqueGalleryImagesAdapter extends BaseAdapter {
                         }
                         if (isChecked) {
                             mSelectMap.put(path, isChecked);
-                            if(!selectList.contains(list.get(position))) selectList.add(list.get(position));
+                            if (!selectList.contains(list.get(position)))
+                                selectList.add(list.get(position));
                         } else {
                             mSelectMap.remove(path);
                             selectList.remove(list.get(position));
@@ -151,7 +154,9 @@ public class BoutiqueGalleryImagesAdapter extends BaseAdapter {
                     }
                 });
 
-                viewHolder.mCheckBox.setChecked(mSelectMap.containsKey(path) ? mSelectMap.get(path) : false);
+                boolean isfinalChcek = mSelectMap.containsKey(path) ? mSelectMap.get(path) : false;
+                CGLog.v("打印是否被选中 : "+isfinalChcek);
+                viewHolder.mCheckBox.setChecked(isfinalChcek);
 
                 viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 viewHolder.mCheckBox.setVisibility(View.VISIBLE);

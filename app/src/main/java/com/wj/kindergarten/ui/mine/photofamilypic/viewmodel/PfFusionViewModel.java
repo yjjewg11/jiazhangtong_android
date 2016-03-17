@@ -41,7 +41,7 @@ public class PfFusionViewModel {
     private void loadOne(List<AllPfAlbumSunObject> objectList, LinearLayout container_linear) {
         View view = View.inflate(context, R.layout.pf_classic_by_date_one, null);
         ImageView iv_0 = (ImageView) view.findViewById(R.id.pf_classic_by_date_one_iv_one);
-        ImageLoaderUtil.displayImage(objectList.get(0).getPath(), iv_0);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(0).getPath(), iv_0);
         iv_0.setOnClickListener(new TransportListener(context, 0, objectList, null));
         container_linear.addView(view);
     }
@@ -50,8 +50,8 @@ public class PfFusionViewModel {
         View view = View.inflate(context, R.layout.pf_classic_by_date_two, null);
         ImageView iv_0 = (ImageView) view.findViewById(R.id.pf_classic_by_date_two_iv_one);
         ImageView iv_1 = (ImageView) view.findViewById(R.id.pf_classic_by_date_two_iv_two);
-        ImageLoaderUtil.displayImage(objectList.get(0).getPath(), iv_0);
-        ImageLoaderUtil.displayImage(objectList.get(1).getPath(), iv_1);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(0).getPath(), iv_0);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(1).getPath(), iv_1);
         iv_0.setOnClickListener(new TransportListener(context, 0, objectList, null));
         iv_1.setOnClickListener(new TransportListener(context, 1, objectList, null));
         container_linear.addView(view);
@@ -62,9 +62,9 @@ public class PfFusionViewModel {
         ImageView iv_0 = (ImageView) view.findViewById(R.id.pf_classic_by_date_three_iv_one);
         ImageView iv_1 = (ImageView) view.findViewById(R.id.pf_classic_by_date_three_iv_two);
         ImageView iv_2 = (ImageView) view.findViewById(R.id.pf_classic_by_date_three_iv_three);
-        ImageLoaderUtil.displayImage(objectList.get(0).getPath(), iv_0);
-        ImageLoaderUtil.displayImage(objectList.get(1).getPath(), iv_1);
-        ImageLoaderUtil.displayImage(objectList.get(2).getPath(), iv_2);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(0).getPath(), iv_0);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(1).getPath(), iv_1);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(2).getPath(), iv_2);
         iv_0.setOnClickListener(new TransportListener(context, 0, objectList, null));
         iv_1.setOnClickListener(new TransportListener(context, 1, objectList, null));
         iv_2.setOnClickListener(new TransportListener(context, 2, objectList, null));
@@ -77,10 +77,10 @@ public class PfFusionViewModel {
         ImageView iv_1 = (ImageView) view.findViewById(R.id.pf_classic_by_date_four_iv_two);
         ImageView iv_2 = (ImageView) view.findViewById(R.id.pf_classic_by_date_four_iv_three);
         ImageView iv_3 = (ImageView) view.findViewById(R.id.pf_classic_by_date_four_iv_four);
-        ImageLoaderUtil.displayImage(objectList.get(0).getPath(), iv_0);
-        ImageLoaderUtil.displayImage(objectList.get(1).getPath(), iv_1);
-        ImageLoaderUtil.displayImage(objectList.get(2).getPath(), iv_2);
-        ImageLoaderUtil.displayImage(objectList.get(3).getPath(), iv_3);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(0).getPath(), iv_0);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(1).getPath(), iv_1);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(2).getPath(), iv_2);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(3).getPath(), iv_3);
         iv_0.setOnClickListener(new TransportListener(context, 0, objectList, null));
         iv_1.setOnClickListener(new TransportListener(context, 1, objectList, null));
         iv_2.setOnClickListener(new TransportListener(context, 2, objectList, null));
@@ -95,11 +95,11 @@ public class PfFusionViewModel {
         ImageView iv_2 = (ImageView) view.findViewById(R.id.pf_classic_by_date_five_iv_three);
         ImageView iv_3 = (ImageView) view.findViewById(R.id.pf_classic_by_date_five_iv_four);
         ImageView iv_4 = (ImageView) view.findViewById(R.id.pf_classic_by_date_five_iv_five);
-        ImageLoaderUtil.displayImage(objectList.get(0).getPath(), iv_0);
-        ImageLoaderUtil.displayImage(objectList.get(1).getPath(), iv_1);
-        ImageLoaderUtil.displayImage(objectList.get(2).getPath(), iv_2);
-        ImageLoaderUtil.displayImage(objectList.get(3).getPath(), iv_3);
-        ImageLoaderUtil.displayImage(objectList.get(4).getPath(), iv_4);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(0).getPath(), iv_0);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(1).getPath(), iv_1);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(2).getPath(), iv_2);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(3).getPath(), iv_3);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(4).getPath(), iv_4);
         iv_0.setOnClickListener(new TransportListener(context, 0, objectList, null));
         iv_1.setOnClickListener(new TransportListener(context, 1, objectList, null));
         iv_2.setOnClickListener(new TransportListener(context, 2, objectList, null));
@@ -116,12 +116,12 @@ public class PfFusionViewModel {
         ImageView iv_3 = (ImageView) view.findViewById(R.id.pf_iv_3);
         ImageView iv_4 = (ImageView) view.findViewById(R.id.pf_iv_4);
         ImageView iv_5 = (ImageView) view.findViewById(R.id.pf_iv_5);
-        ImageLoaderUtil.displayImage(objectList.get(0).getPath(), iv_0);
-        ImageLoaderUtil.displayImage(objectList.get(1).getPath(), iv_1);
-        ImageLoaderUtil.displayImage(objectList.get(2).getPath(), iv_2);
-        ImageLoaderUtil.displayImage(objectList.get(3).getPath(), iv_3);
-        ImageLoaderUtil.displayImage(objectList.get(4).getPath(), iv_4);
-        ImageLoaderUtil.displayImage(objectList.get(5).getPath(), iv_5);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(0).getPath(), iv_0);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(1).getPath(), iv_1);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(2).getPath(), iv_2);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(3).getPath(), iv_3);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(4).getPath(), iv_4);
+        ImageLoaderUtil.displayAlbumImage(objectList.get(5).getPath(), iv_5);
         iv_0.setOnClickListener(new TransportListener(context, 0, objectList, null));
         iv_1.setOnClickListener(new TransportListener(context, 1, objectList, null));
         iv_2.setOnClickListener(new TransportListener(context, 2, objectList, null));

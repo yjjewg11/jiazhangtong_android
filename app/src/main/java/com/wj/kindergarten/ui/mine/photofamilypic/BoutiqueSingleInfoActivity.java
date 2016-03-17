@@ -707,13 +707,27 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         pf_pic_bottom_viewGroup = (LinearLayout) findViewById(R.id.pf_pic_bottom_viewGroup);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        boutiqueWebView.getRefreshableView().onPause();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boutiqueWebView.getRefreshableView().onResume();
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(!isVisible){
-            exitBoutiqueScreen();
-        }else {
-            finish();
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(!isVisible){
+                exitBoutiqueScreen();
+            }else {
+                finish();
+            }
         }
         return super.onKeyDown(keyCode, event);
     }

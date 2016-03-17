@@ -169,6 +169,7 @@ public class MainActivity extends BaseActivity {
         filter.addAction(GloablUtils.ALREADY_UPLOADING_FINISHED);
         filter.addAction(GloablUtils.REQUEST_PIC_NEW_DATA);
         filter.addAction(GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED);
+        filter.addAction(GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED);
         registerReceiver(receiver, filter);
     }
 
@@ -686,6 +687,9 @@ public class MainActivity extends BaseActivity {
                     break;
                 case GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED:
                     photoFragment.refreshUpdateData();
+                    break;
+                case GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED:
+                    photoFragment.reBoutiqueData();
                     break;
             }
         }

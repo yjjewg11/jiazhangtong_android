@@ -61,8 +61,10 @@ public class ActivityManger extends Application {
             Iterator<Activity> pfIteator = pfActivities.iterator();
             while (pfIteator.hasNext()){
                 Activity pfActivity = pfIteator.next();
+                if(pfActivity != null)
                 pfActivity.finish();
             }
+            pfActivities.clear();
         }
     }
 }

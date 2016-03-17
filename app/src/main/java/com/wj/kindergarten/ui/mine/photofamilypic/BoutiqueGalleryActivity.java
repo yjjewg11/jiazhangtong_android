@@ -41,6 +41,7 @@ import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V1;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V2;
 import com.wj.kindergarten.utils.FileUtil;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -66,6 +67,7 @@ import java.util.Map;
  * @version: v1.0
  */
 public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClickListener {
+    private static final int UPDATE_DATA = 101;
     private final int CHANGE_DIR = 3;
     //开始扫描
     private final int SCAN_PHOTO_BEGIN = 0;
@@ -136,8 +138,9 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void onCreate() {
+        setTitleText("选择照片");
         ActivityManger.getInstance().addPfActivities(this);
-        db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT);
+        db = FinalUtil.getFamilyUuidObjectDb(this);
         SIGN_BOARD = (getIntent().getIntExtra("signBoard", 0));
         selectList = (List<AllPfAlbumSunObject>) getIntent().getSerializableExtra("objectList");
         initWidget();
@@ -193,7 +196,6 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 //        scanList.add(0, "");
         adapter = new BoutiqueGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView);
         mGridView.setAdapter(adapter);
-        if(selectList != null && selectList.size() > 0) adapter.setmSelectMap(getSelectMapFromList(selectList));
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -205,6 +207,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
 //                boutique_gallery_confirm.setText("" + boutiquePopAdapter.getItem(position));
             }
         });
+
 //        initChangeDirList();
     }
 
@@ -231,7 +234,6 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                 ArrayList<AllPfAlbumSunObject> list = (ArrayList) data.getSerializableExtra("selectList");
                 HashMap<String, Boolean> map = getSelectMapFromList(list);
                 adapter.setmSelectMap(map);
-                adapter.notifyDataSetChanged();
             }
         } else if (resultCode == RESULT_CANCELED) {//取消拍照 删除之前存入相册的占位图片
             try {
@@ -365,7 +367,19 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case SCAN_PHOTO_BEGIN://开始扫描
+                case UPDATE_DATA:
+                    if(selectList != null && selectList.size() > 0){
+                        HashMap<String,Boolean> map  =  getSelectMapFromList(selectList);
+                        for(AllPfAlbumSunObject object : galleryList){
+                            if(!map.containsKey(object.getPath())){
+                                map.remove(object.getPath());
+                            }
+                        }
+                        adapter.setmSelectMap(map);
+                    }
+                    break;
+                case SCAN_PHOTO_BEGIN:
+                //开始扫描
 //                    scanPhoto_v2();
                     objectList = db.findAll(AllPfAlbumSunObject.class);
                     if (objectList != null && objectList.size() > 0) {
@@ -373,8 +387,12 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                         mHandler.sendEmptyMessage(SCAN_PHOTO_COMPLETE);
                     }
                     break;
-                case SCAN_PHOTO_COMPLETE://扫描结束
-                    adapter.notifyDataSetChanged();
+                case SCAN_PHOTO_COMPLETE:
+                //扫描结束
+
+                        adapter.notifyDataSetChanged();
+
+                    mHandler.sendEmptyMessage(UPDATE_DATA);
                     nowDir = getString(R.string.all_photo);
                     break;
                 case SCAN_GROUP_BY_DATE:

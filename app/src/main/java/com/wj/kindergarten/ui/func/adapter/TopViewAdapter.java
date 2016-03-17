@@ -20,11 +20,11 @@ import java.util.List;
 public class TopViewAdapter extends BaseAdapter{
     private List<PfAlbumListSun> list;
     private Context context;
-    int position;
-    public TopViewAdapter(Context context,List<PfAlbumListSun> list,int position) {
+    String  currentUuid;
+    public TopViewAdapter(Context context,List<PfAlbumListSun> list,String  currentUuid) {
         this.list = list;
         this.context = context;
-        this.position = position;
+        this.currentUuid = currentUuid;
     }
 
     @Override
@@ -53,7 +53,9 @@ public class TopViewAdapter extends BaseAdapter{
         }else {
             holder = (Holder) convertView.getTag();
         }
-        if(this.position == position){
+
+        PfAlbumListSun sun = list.get(position);
+        if(this.currentUuid != null && this.currentUuid.equals(sun.getUuid())){
             Drawable drawable = context.getResources().getDrawable(R.drawable.pf_item_choosed);
             drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
             holder.title.setCompoundDrawablePadding(4);
@@ -64,7 +66,6 @@ public class TopViewAdapter extends BaseAdapter{
             holder.title.setCompoundDrawablePadding(4);
             holder.title.setCompoundDrawables(null,null,zanWei,null);
         }
-        PfAlbumListSun sun = list.get(position);
         if(sun != null){
             holder.title.setText(""+ Utils.isNull(sun.getTitle()));
         }else {

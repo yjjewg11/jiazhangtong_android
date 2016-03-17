@@ -1,6 +1,5 @@
 package com.wj.kindergarten.ui.mine.photofamilypic.pffragment;
 
-import android.app.MediaRouteButton;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -22,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -108,6 +108,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private List<PfSingleAssessObject> assessObjectList = new ArrayList<>();
     private LinearLayout pf_pic_bottom_viewGroup;
     private TextView pf_pic_bottom_assess_count;
+    private ProgressBar progressBar ;
     private Handler mHanlder = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -152,6 +153,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             showPic();
             return innerView;
         }
+        progressBar = new ProgressBar(getActivity());
         dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
@@ -329,10 +331,13 @@ public class PFSingleObjectInfoFragment extends Fragment {
                     path = path.substring(0, path.indexOf("@"));
                 }
             }
+
             ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
-
+                    if(dialog.isShowing()){
+                        dialog.cancel();
+                    }
                 }
 
                 @Override
@@ -342,6 +347,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                    if(progressDialog.isShowing()) progressDialog.cancel();
                     showBitmap(loadedImage);
                 }
 
@@ -762,7 +768,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         }
 
         final PopupWindow popupWindow = new PopupWindow(pf_more_view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        Utils.setPopWindow(popupWindow, R.style.ShareAnimBPB);
+        Utils.setPopWindow(popupWindow, R.style.ShareAnimTopAndBottom);
         pf_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -26,6 +26,16 @@ public class ShowMusicAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<PfMusicSunObject> oneList = new ArrayList<>();
 
+    public List<PfMusicSunObject> getOneList(){
+        return oneList;
+    }
+
+    public void setOneList(List<PfMusicSunObject> oneList) {
+        this.oneList.clear();
+        this.oneList.addAll(oneList);
+        notifyDataSetChanged();
+    }
+
     public List<PfMusicSunObject> getList() {
         return list;
     }
@@ -88,7 +98,7 @@ public class ShowMusicAdapter extends BaseAdapter {
             });
 
             if(oneList.size() > 0){
-                if(object.equals(oneList.get(0))){
+                if(object.getPath().equals(oneList.get(0).getPath())){
                     Drawable drawable = context.getResources().getDrawable(R.drawable.xuanzhong_pf);
                     drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     viewHolder.pf_item_music_text.setCompoundDrawables(null, null, drawable, null);

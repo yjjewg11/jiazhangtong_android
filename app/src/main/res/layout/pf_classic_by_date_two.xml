@@ -9,7 +9,7 @@
                 android:layout_marginRight="@dimen/margin_5"
                 android:id="@+id/pf_classic_by_date_two_iv_one"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />
@@ -18,7 +18,7 @@
                 android:layout_marginLeft="@dimen/margin_5"
                 android:id="@+id/pf_classic_by_date_two_iv_two"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />

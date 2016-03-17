@@ -28,10 +28,13 @@
             </RelativeLayout>
 
             <TextView
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:drawablePadding="@dimen/margin_5"
                 android:drawableRight="@drawable/xiajiatou"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"
+                android:maxWidth="130dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"

@@ -26,6 +26,8 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.FindMusicOfPfActivity;
+import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalActivity;
@@ -98,6 +100,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     @Override
     protected void titleRightButtonListener() {
         Intent intent = new Intent(this,FindMusicOfPfActivity.class);
+        intent.putExtra("music",mp3);
         startActivityForResult(intent, GET_MODE_MUSIC, null);
     }
 
@@ -123,7 +126,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
             public void onClick(View v) {
                 View view = View.inflate(BoutiqueModeReviewActivity.this, R.layout.boutique_review_custom_title, null);
                 editText = (EditText) view.findViewById(R.id.boutique_custom_edittext);
-                editText.setText(""+ Utils.isNull(title));
+                editText.setText("" + Utils.isNull(title));
                 AlertDialog.Builder builder = new AlertDialog.Builder(BoutiqueModeReviewActivity.this);
                 builder.setView(view);
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -135,6 +138,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         saveAlbum();
+                        dialog.cancel();
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -145,7 +149,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     private void saveAlbum() {
         Editable editable = editText.getText();
-        String title = null;
         if(editable != null){
             title = editable.toString();
         }
@@ -184,17 +187,24 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
                 , builder.toString(), cacheStatus, new RequestResultI() {
                     @Override
                     public void result(BaseModel domain) {
+                        try{
                         if(commonDialog.isShowing()){
                             commonDialog.dismiss();
                         }
                         if(cacheStatus == 0){
                             boutique_review_webview.destroy();
-                            finish();
                             ActivityManger.getInstance().finishPfActivities();
+//                            sendBroadcast(new Intent(GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED));
+                            finish();
+                            return;
                         }
                         address = (BoutiqueReviewAddress) domain;
                         if (address != null) {
                             updateData();
+                        }
+                        } catch (Exception e){
+                            CGLog.v("这是保存精品相册后的异常!");
+                            e.printStackTrace();
                         }
                     }
 

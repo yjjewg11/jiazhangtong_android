@@ -7,7 +7,7 @@
 
 
         <ImageView
-            android:scaleType="centerCrop"
+            style="@style/pf_classic_by_date"
             android:layout_marginBottom="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
             android:src="@drawable/zhanweitu"
@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/pf_classic_by_date_three_iv_two"
                 android:layout_marginRight="@dimen/margin_5"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             <ImageView
                 android:id="@+id/pf_classic_by_date_three_iv_three"
                 android:layout_marginRight="@dimen/margin_5"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"

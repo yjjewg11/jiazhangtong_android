@@ -80,4 +80,5 @@ public interface GloablUtils {
     //4 添加uuid字段方便照片删除时，同时删除已上传照片。
     int ALREADY_DB_VERSION = 4;
     String DELETE_PF_SINGLE_INFO_SUCCESSED = "delete_pf_single_info_successed";
+    String UPDATE_BOUTIQUE_ALBUM_SUCCESSED = "update_boutique_album_successed";
 }

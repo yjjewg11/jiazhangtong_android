@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -29,6 +30,7 @@ public class ImageLoaderUtil {
     private static DisplayImageOptions options = null;
     public static ImageLoader imageLoader = null;
     private static DisplayImageOptions myOptions;
+    private static DisplayImageOptions albumOptions;
 
 
     private static void initImageLoader(Context context, int loadingResource, int emptyResource, int failResource, String cachePath, int diskCacheSize, int roundeSize) {
@@ -65,10 +67,23 @@ public class ImageLoaderUtil {
 //                         .bitmapConfig(Bitmap.Config.)
                          .cacheOnDisk(true)
                          .build();
-
+//
+        albumOptions = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(drawable)
+                .showImageOnFail(drawable)
+                .showImageOnLoading(drawable)
+                .cacheInMemory(true)
+                        .imageScaleType(ImageScaleType.EXACTLY)
+//                         .bitmapConfig(Bitmap.Config.)
+                .cacheOnDisk(true)
+                .build();
 
 
         imageLoader = ImageLoader.getInstance();
+    }
+
+    public static void displayAlbumImage(String path,ImageView imageView){
+        imageLoader.displayImage(path,imageView,albumOptions);
     }
 
     public static void displayMyImage(String uri,ImageView imageView){

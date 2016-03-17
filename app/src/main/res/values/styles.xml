@@ -117,6 +117,11 @@
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
 
+    <style name="ShareAnimTopAndBottom">
+        <item name="android:windowEnterAnimation">@anim/anim_to_top</item>
+        <item name="android:windowExitAnimation">@anim/anim_to_bottom</item>
+    </style>
+
     <style name="trainContentStyle">
         <item name="android:textSize">14sp</item>
 
@@ -240,5 +245,9 @@
     <style name="pf_info_style">
         <item name="android:textColor">#8e8e8e</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="pf_classic_by_date">
+        <item name="android:scaleType">centerCrop</item>
     </style>
 </resources>

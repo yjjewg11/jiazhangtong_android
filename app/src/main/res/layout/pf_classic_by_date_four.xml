@@ -13,7 +13,7 @@
             <ImageView
                 android:id="@+id/pf_classic_by_date_four_iv_one"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
                 android:layout_marginRight="@dimen/margin_3"
@@ -22,7 +22,7 @@
                 android:layout_marginLeft="@dimen/margin_3"
                 android:id="@+id/pf_classic_by_date_four_iv_two"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -36,7 +36,7 @@
             <ImageView
                 android:layout_marginRight="@dimen/margin_3"
                 android:id="@+id/pf_classic_by_date_four_iv_three"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_marginLeft="@dimen/margin_3"
                 android:id="@+id/pf_classic_by_date_four_iv_four"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="wrap_content"

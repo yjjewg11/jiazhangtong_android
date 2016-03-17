@@ -134,7 +134,6 @@ public class RequestHttpUtil {
     }
 
     protected static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
-
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
     }
 

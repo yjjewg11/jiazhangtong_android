@@ -61,9 +61,9 @@ public class BoutiqueChooseItemAdapter extends BaseAdapter {
             holder.tab.setCompoundDrawables(null,null,zanWei,null);
         }
         if(position == 0){
-            holder.tab.setText("浏览全部相册");
-        }else if (position == 1){
             holder.tab.setText("我的精品相册");
+        }else if (position == 1){
+            holder.tab.setText("浏览全部相册");
         }
         return convertView;
     }

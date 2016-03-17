@@ -12,7 +12,7 @@
 
 
         <ImageView
-            android:scaleType="centerCrop"
+            style="@style/pf_classic_by_date"
             android:layout_marginBottom="@dimen/margin_5"
             android:layout_marginRight="@dimen/margin_5"
             android:src="@drawable/zhanweitu"
@@ -35,14 +35,14 @@
                 android:id="@+id/pf_iv_1"
                 android:layout_marginBottom="@dimen/margin_5"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <ImageView
                 android:id="@+id/pf_iv_2"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -67,7 +67,7 @@
             <ImageView
                 android:id="@+id/pf_iv_4"
                 android:layout_marginRight="@dimen/margin_5"
-                android:scaleType="centerCrop"
+                style="@style/pf_classic_by_date"
                 android:layout_weight="1"
                 android:src="@drawable/zhanweitu"
                 android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <ImageView
-            android:scaleType="centerCrop"
+            style="@style/pf_classic_by_date"
             android:src="@drawable/zhanweitu"
             android:layout_width="wrap_content"
             android:layout_height="115dp"

@@ -118,6 +118,9 @@ public class PfFusionFragment extends Fragment implements Watcher{
     private PfFusionViewModel viewModel;
 
 
+    public void setMode(){
+        pullScroll.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
