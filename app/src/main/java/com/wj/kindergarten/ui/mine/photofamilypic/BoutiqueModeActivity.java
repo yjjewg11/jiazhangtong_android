@@ -3,9 +3,11 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
@@ -34,10 +36,13 @@ public class BoutiqueModeActivity extends BaseActivity {
 
     @ViewInject(id = R.id.boutique_mode_grid)
     private PullToRefreshGridView gridView;
+    @ViewInject(id = R.id.boutique_mode_next_step,click = "onClick")
+    private RelativeLayout boutique_mode_next_step;
     private BoutiqueModeAdapter adapter;
     private List<PfModeNameObject> list = new ArrayList<>();
     private List<AllPfAlbumSunObject> objectList;
     private BoutiqueSingleInfoObject boutiqueSingleInfoObject;
+    private PfModeNameObject object;
 
     @Override
     protected void setContentLayout() {
@@ -60,22 +65,45 @@ public class BoutiqueModeActivity extends BaseActivity {
         initClick();
     }
 
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.boutique_mode_next_step:
+
+                if(object.getKey() == null || TextUtils.isEmpty(object.getKey())){
+                    if(list != null && list.size() > 0){
+                        object = list.get(0);
+                    }
+                }
+                object.setAlbumUUid(boutiqueSingleInfoObject.getUuid());
+                object.setHerald(boutiqueSingleInfoObject.getHerald());
+                Intent intent = new Intent(BoutiqueModeActivity.this, BoutiqueModeReviewActivity.class);
+                intent.putExtra("objectList", (ArrayList) objectList);
+                intent.putExtra("objectMode", object);
+                startActivity(intent);
+                break;
+        }
+    }
+
     private void getData() {
         Intent intent = getIntent();
         objectList = (ArrayList)intent.getSerializableExtra("objectList");
         boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
+        if(boutiqueSingleInfoObject != null){
+            if(object == null) object = new PfModeNameObject();
+            object.setHerald(boutiqueSingleInfoObject.getHerald());
+            object.setKey(boutiqueSingleInfoObject.getTemplate_key());
+            object.setTitle(boutiqueSingleInfoObject.getTitle());
+            object.setAlbumUUid(boutiqueSingleInfoObject.getUuid());
+        }
     }
 
     private void initClick() {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PfModeNameObject object = (PfModeNameObject) adapter.getItem(position);
-                Intent intent = new Intent(BoutiqueModeActivity.this, BoutiqueModeReviewActivity.class);
-                intent.putExtra("objectList", (ArrayList) objectList);
-                intent.putExtra("objectMode", object);
-                intent.putExtra("object", boutiqueSingleInfoObject);
-                startActivity(intent);
+                object = (PfModeNameObject) adapter.getItem(position);
+                adapter.setKey(object.getKey());
+                adapter.notifyDataSetChanged();
             }
         });
         gridView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<GridView>() {
@@ -95,6 +123,7 @@ public class BoutiqueModeActivity extends BaseActivity {
 
     private void initView() {
         adapter = new BoutiqueModeAdapter(this);
+        adapter.setKey(boutiqueSingleInfoObject.getTemplate_key());
         gridView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         gridView.setAdapter(adapter);
         loadMData(true);

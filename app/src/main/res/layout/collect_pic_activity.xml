@@ -14,8 +14,8 @@
             android:gravity="center"
             android:listSelector="@android:color/transparent"
             android:numColumns="4"
-            android:horizontalSpacing="2dp"
-            android:columnWidth="2dp"
+            android:horizontalSpacing="1dp"
+            android:columnWidth="1dp"
             android:id="@+id/collect_pic_refresh_gridView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

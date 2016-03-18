@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 public abstract class BitmapUtil {
 
     //此类对图片做模糊处理
-    public static BitmapDrawable blur(Resources resources,float radius,Bitmap bkg) {
+    public static synchronized BitmapDrawable blur(Resources resources,float radius,Bitmap bkg) {
         if(radius < 0){
             radius = 20;
         }

@@ -28,12 +28,16 @@ import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 
+import net.tsz.afinal.FinalActivity;
+import net.tsz.afinal.annotation.view.ViewInject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BoutiqueAlbumFragment extends Fragment implements Watcher{
+public class BoutiqueAlbumFragment extends Fragment implements Watcher {
     View view;
+    @ViewInject(id = R.id.pulltorefresh_list)
     private PullToRefreshListView pullListView;
     private BoutiqueAdapter boutiqueAdapter;
     PhotoFamilyFragment photoFamilyFragment;
@@ -41,13 +45,13 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     private List<BoutiqueAlbumListSun> boutiqueAlbumList = new ArrayList<>();
     private HintInfoDialog dialog;
     private String family_uuid;
-    private String [] typeAll = {"mine","all"};
+    private String[] typeAll = {"mine", "all"};
     String nowType = typeAll[0];
 
     public BoutiqueAlbumFragment() {
     }
 
-    public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment,String family_uuid) {
+    public BoutiqueAlbumFragment(PhotoFamilyFragment photoFamilyFragment, String family_uuid) {
         this.photoFamilyFragment = photoFamilyFragment;
         this.family_uuid = family_uuid;
     }
@@ -57,11 +61,12 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initScrollListener();
         if (view != null) return view;
-        if(photoFamilyFragment == null) photoFamilyFragment = PhotoFamilyFragment.instance;
+        if (photoFamilyFragment == null) photoFamilyFragment = PhotoFamilyFragment.instance;
+
         dialog = new HintInfoDialog(getActivity());
         photoFamilyFragment.getObserver().registerObserver(this);
         view = inflater.inflate(R.layout.fragment_test, null);
-        pullListView = (PullToRefreshListView) view.findViewById(R.id.pulltorefresh_list);
+        FinalActivity.initInjectedView(this, view);
         pullListView.getRefreshableView().setDividerHeight(0);
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
         boutiqueAdapter.setRel_uuid(family_uuid);
@@ -104,7 +109,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     }
 
     private void initScrollListener() {
-        if(photoFamilyFragment == null) return;
+        if (photoFamilyFragment == null) return;
         photoFamilyFragment.setSubViewDecideScroll(new PfFragmentLinearLayout.DecideSubViewScroll() {
             @Override
             public void allowScroll() {
@@ -126,10 +131,10 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     int pageNo = 1;
 
     public void loadData(String type) {
-        if(!pullListView.isRefreshing()){
+        if (!pullListView.isRefreshing()) {
             dialog.show();
         }
-        UserRequest.getBoutiqueAllbumListFromType(getActivity(),type, pageNo, new RequestResultI() {
+        UserRequest.getBoutiqueAllbumListFromType(getActivity(), type, pageNo, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
                 if (pullListView.isRefreshing()) {
@@ -141,7 +146,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
                 }
                 BoutiqueAlbum boutiqueAlbum = (BoutiqueAlbum) domain;
                 if (boutiqueAlbum != null && boutiqueAlbum.getList() != null
-                        && boutiqueAlbum.getList().getData() != null ) {
+                        && boutiqueAlbum.getList().getData() != null) {
                     if (pageNo == 1) boutiqueAlbumList.clear();
                     boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());
                     boutiqueAdapter.setList(boutiqueAlbumList);
@@ -169,9 +174,9 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
 
     public void updateData(String uuid) {
         Iterator<BoutiqueAlbumListSun> iterator = boutiqueAlbumList.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             BoutiqueAlbumListSun sun = iterator.next();
-            if(sun.getUuid().equals(uuid)){
+            if (sun.getUuid().equals(uuid)) {
                 boutiqueAlbumList.remove(sun);
                 boutiqueAdapter.setList(boutiqueAlbumList);
                 break;
@@ -181,7 +186,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
 
     @Override
     public void refreshUUid(String family_uuid) {
-        if(!TextUtils.isEmpty(family_uuid)){
+        if (!TextUtils.isEmpty(family_uuid)) {
             this.family_uuid = family_uuid;
             refreshData();
         }
@@ -193,9 +198,9 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher{
     }
 
     public void loadDataAccordingType(int position) {
-        if(position == 0){
+        if (position == 0) {
             nowType = typeAll[0];
-        }else if(position == 1){
+        } else if (position == 1) {
             nowType = typeAll[1];
         }
         refreshData();

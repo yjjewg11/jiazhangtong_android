@@ -64,7 +64,7 @@ public class ShareUtils {
      * @param view
      */
     public static void showShareDialog(final Context con, final View view, final String title1, String content1,
-                                       String picurl, final String url, boolean isMessage) {
+                                       String picurl, String url, boolean isMessage) {
 //        if (!isShow) {
         String title = null;
         String content = null;
@@ -82,6 +82,9 @@ public class ShareUtils {
 
         if(picurl!=null && picurl.contains("@")){
             picurl = picurl.substring(0,picurl.indexOf("@"));
+        }
+        if(url!=null && url.contains("@")){
+            url = url.substring(0,url.indexOf("@"));
         }
         isShow = true;
         context = con;
@@ -138,12 +141,13 @@ public class ShareUtils {
         //微信
         final String finalTitle = title;
         final String finalContent = content;
+        final String finalUrl = url;
         popupView.findViewById(R.id.share_send_interaction).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isShow = false;
                 mPopupWindow.dismiss();
-                sendInteration(title1,url);
+                sendInteration(title1, finalUrl);
             }
         });
 
@@ -152,7 +156,7 @@ public class ShareUtils {
             public void onClick(View v) {
                 isShow = false;
                 mPopupWindow.dismiss();
-                copyAddress(url);
+                copyAddress(finalUrl);
             }
         });
 
@@ -164,7 +168,7 @@ public class ShareUtils {
                 mPopupWindow.dismiss();
                 UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
                 wxHandler.addToSocialSDK();
-                shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, finalPicurl, url);
+                shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, finalPicurl, finalUrl);
                 Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
             }
         });
@@ -179,7 +183,7 @@ public class ShareUtils {
                 UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
                 wxCircleHandler.setToCircle(true);
                 wxCircleHandler.addToSocialSDK();
-                shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, finalPicurl1, url);
+                shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, finalPicurl1, finalUrl);
                 Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
             }
         });
@@ -195,7 +199,7 @@ public class ShareUtils {
                 } else {
                     content = finalContent;
                 }
-                shareTo(SHARE_MEDIA.SINA, finalTitle, content, finalPicurl1, url);
+                shareTo(SHARE_MEDIA.SINA, finalTitle, content, finalPicurl1, finalUrl);
                 ToastUtils.showMessage("分享中...请稍候!");
 
 
@@ -210,7 +214,7 @@ public class ShareUtils {
                 UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler((Activity) context, "100424468",
                         "SumAAk7jtaUSnZqd");
                 qqSsoHandler.addToSocialSDK();
-                shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, finalPicurl1, url);
+                shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, finalPicurl1, finalUrl);
                 Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
             }
         });

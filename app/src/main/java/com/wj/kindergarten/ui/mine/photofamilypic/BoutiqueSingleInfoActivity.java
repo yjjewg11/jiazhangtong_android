@@ -419,9 +419,8 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             pf_delete = (ImageView) pf_more_view.findViewById(R.id.pf_single_delete);
             pf_edit = (ImageView) pf_more_view.findViewById(R.id.pf_single_edit);
         }
-
         final PopupWindow popupWindow = new PopupWindow(pf_more_view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        Utils.setPopWindow(popupWindow);
+        Utils.setPopWindow(popupWindow,R.style.ShareAnimTopAndBottom);
         pf_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -432,7 +431,6 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                         deleteData(boutiqueSingleInfo.getData().getUuid());
                     }
                 });
-
             }
         });
         pf_edit.setOnClickListener(new View.OnClickListener() {
@@ -442,8 +440,9 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 Intent intent = new Intent(BoutiqueSingleInfoActivity.this, PfChoosedPicActivity.class);
                 intent.putExtra("object", boutiqueSingleInfo.getData());
                 intent.putExtra("objectList", objectList);
-                intent.putExtra("edit",true);
+                intent.putExtra("edit", true);
                 startActivity(intent);
+                finish();
             }
         });
         int[] location = Utils.getLocation(textViews[4]);
@@ -627,12 +626,18 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             @JavascriptInterface
              public void fullScreen(){
                 fullBoutiqueScreen();
-            };
+            }
 //            退出全屏播放
             @JavascriptInterface
             public void exitFullScreen(){
                 exitBoutiqueScreen();
-            };
+            }
+
+            @JavascriptInterface
+            public void makeFPMovie(){
+                startGalleryActivity();
+                finish();
+            }
 
 
         });
@@ -650,6 +655,12 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 cancleDialog();
             }
         });
+    }
+
+
+    private void startGalleryActivity(){
+        Intent intent = new Intent(this, BoutiqueGalleryActivity.class);
+        startActivity(intent);
     }
 
     private void sendReply(final String message) {

@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/margin_10"
-    android:paddingRight="@dimen/margin_10"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/boutique_album_edit_imageView"
-        android:scaleType="fitXY"
-        android:src="@drawable/new_album"
+    android:paddingRight="@dimen/margin_10">
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/boutique_album_edit_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/new_album" />
+        <TextView
+            android:id="@+id/boutique_album_edit_tv_choose"
+            android:visibility="gone"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:text="已选模板"
+            android:gravity="center"
+            android:background="#7f000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
     <TextView
-        android:textColor="@color/color_222222"
-        android:layout_marginTop="@dimen/margin_10"
-        android:textSize="12sp"
         android:id="@+id/boutique_album_edit_titlesss"
-        android:text="这是编辑的标题!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
         android:ellipsize="end"
         android:lines="2"
         android:maxLines="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="这是编辑的标题!"
+        android:textColor="@color/color_222222"
+        android:textSize="12sp" />
 
 </LinearLayout>

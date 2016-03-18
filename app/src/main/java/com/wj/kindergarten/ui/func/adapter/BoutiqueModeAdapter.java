@@ -23,6 +23,7 @@ import java.util.List;
 public class BoutiqueModeAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
+    String key;
 
     public BoutiqueModeAdapter(Context context) {
         this.context = context;
@@ -58,6 +59,7 @@ public class BoutiqueModeAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.boutique_album_edit_item,null);
             holder.modeImg = (ImageView) convertView.findViewById(R.id.boutique_album_edit_imageView);
             holder.modeName = (TextView) convertView.findViewById(R.id.boutique_album_edit_titlesss);
+            holder.boutique_album_edit_tv_choose = (TextView) convertView.findViewById(R.id.boutique_album_edit_tv_choose);
             convertView.setTag(holder);
         }else{
             holder = (Holder) convertView.getTag();
@@ -67,10 +69,21 @@ public class BoutiqueModeAdapter extends BaseAdapter {
             holder.modeName.setText(""+ Utils.isNull(pfModeNameObject.getTitle()));
             ImageLoaderUtil.displayImage(pfModeNameObject.getHerald(),holder.modeImg);
         }
+        if(pfModeNameObject != null && pfModeNameObject.getKey() != null && key != null &&
+                key.equals(pfModeNameObject.getKey())){
+                holder.boutique_album_edit_tv_choose.setVisibility(View.VISIBLE);
+        }else {
+            holder.boutique_album_edit_tv_choose.setVisibility(View.GONE);
+        }
         return convertView;
     }
+
+    public void setKey(String template_key) {
+        key = template_key;
+    }
+
     class Holder{
-        TextView modeName;
+        TextView modeName,boutique_album_edit_tv_choose;
         ImageView modeImg;
     }
 }

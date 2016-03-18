@@ -12,7 +12,16 @@ public class BoutiqueSingleInfoObject extends BaseModel{
     private String herald;@Expose
     private int photo_count;@Expose
     private int status;@Expose
-    private String photo_uuids;
+    private String photo_uuids;@Expose
+    private String template_key;
+
+    public String getTemplate_key() {
+        return template_key;
+    }
+
+    public void setTemplate_key(String template_key) {
+        this.template_key = template_key;
+    }
 
     @Override
     public String toString() {
@@ -23,6 +32,7 @@ public class BoutiqueSingleInfoObject extends BaseModel{
                 ", photo_count=" + photo_count +
                 ", status=" + status +
                 ", photo_uuids='" + photo_uuids + '\'' +
+                ", template_key='" + template_key + '\'' +
                 '}';
     }
 

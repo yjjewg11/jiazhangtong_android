@@ -1,21 +1,64 @@
 package com.wj.kindergarten.utils.Constant;
 
-import android.content.Context;
+import android.annotation.TargetApi;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
+import android.os.Build;
 import android.view.View;
 
 /**
- * Created by tangt on 2016/2/25.
+ * 设置高斯模糊的工具类
+ * Created by zsl on 15/5/9.
  */
-public class FastBlur {
+public class Fglass {
 
-    public static Bitmap doBlur(Bitmap sentBitmap, int radius,
-                                boolean canReuseInBitmap) {
+    /**
+     * 设置高斯模糊
+     *
+     * ps:
+     * 设置高斯模糊是依靠scaleFactor和radius配合使用的，比如这里默认设置是：scaleFactor = 8;radius = 2; 模糊效果和scaleFactor = 1;radius = 20;是一样的，而且效率高
+     * @param fromView 从某个View获取截图
+     * @param toView 高斯模糊设置到某个View上
+     * @param radius 模糊度
+     * @param scaleFactor 缩放比例
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public static void blur(View fromView, View toView,float radius,float scaleFactor) {
+
+        //获取View的截图
+        fromView.buildDrawingCache();
+        Bitmap bkg = fromView.getDrawingCache();
+
+        if (radius<1||radius>26) {
+            scaleFactor = 8;
+            radius = 2;
+        }
+
+        Bitmap overlay = Bitmap.createBitmap((int) (toView.getMeasuredWidth()/scaleFactor),
+                (int) (toView.getMeasuredHeight()/scaleFactor), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(overlay);
+        canvas.translate(-toView.getLeft()/scaleFactor, -toView.getTop()/scaleFactor);
+        canvas.scale(1 / scaleFactor, 1 / scaleFactor);
+        Paint paint = new Paint();
+        paint.setFlags(Paint.FILTER_BITMAP_FLAG);
+        canvas.drawBitmap(bkg, 0, 0, paint);
+
+        overlay = Fglass.doBlur(overlay, (int) radius, true);
+        toView.setBackground(new BitmapDrawable(overlay));
+
+    }
+
+    /**
+     * 高斯模糊操作
+     * @param sentBitmap
+     * @param radius
+     * @param canReuseInBitmap
+     * @return
+     */
+    public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
+
         Bitmap bitmap;
         if (canReuseInBitmap) {
             bitmap = sentBitmap;
@@ -171,8 +214,7 @@ public class FastBlur {
             stackpointer = radius;
             for (y = 0; y < h; y++) {
                 // Preserve alpha channel: ( 0xff000000 & pix[yi] )
-                pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16)
-                        | (dv[gsum] << 8) | dv[bsum];
+                pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
 
                 rsum -= routsum;
                 gsum -= goutsum;
@@ -221,58 +263,5 @@ public class FastBlur {
 
         return (bitmap);
     }
-
-
-    public static Bitmap blurBitmap(Bitmap bitmap, Context context) {
-
-        // 用需要创建高斯模糊bitmap创建一个空的bitmap
-        Bitmap outBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-
-        // 初始化Renderscript，这个类提供了RenderScript context，在创建其他RS类之前必须要先创建这个类，他控制RenderScript的初始化，资源管理，释放
-        RenderScript rs = RenderScript.create(context);
-
-        // 创建高斯模糊对象
-        ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-
-        // 创建Allocations，此类是将数据传递给RenderScript内核的主要方法，并制定一个后备类型存储给定类型
-        Allocation allIn = Allocation.createFromBitmap(rs, bitmap);
-        Allocation allOut = Allocation.createFromBitmap(rs, outBitmap);
-
-        // 设定模糊度
-        blurScript.setRadius(25.f);
-
-        // Perform the Renderscript
-        blurScript.setInput(allIn);
-        blurScript.forEach(allOut);
-
-        // Copy the final bitmap created by the out Allocation to the outBitmap
-        allOut.copyTo(outBitmap);
-
-        // recycle the original bitmap
-        bitmap.recycle();
-
-        // After finishing everything, we destroy the Renderscript.
-        rs.destroy();
-
-        return outBitmap;
-    }
-
-//    public static void blurByRender(Context context,Bitmap bkg, View view) {
-//        RenderScript rs = RenderScript.create(context);
-//        Allocation overlayAlloc = Allocation.createFromBitmap(rs, bkg);
-//        ScriptIntrinsicBlur blur =
-//                ScriptIntrinsicBlur.create(rs, overlayAlloc.getElement());
-//        blur.setInput(overlayAlloc);
-//        blur.setRadius(20);
-//        blur.forEach(overlayAlloc);
-//        overlayAlloc.copyTo(bkg);
-//        view.setBackground(new BitmapDrawable(context.getResources(), bkg));
-//        rs.destroy();
-//    }
-
-//    作者：wuqian
-//    链接：https://www.zhihu.com/question/27017363/answer/35679438
-//    来源：知乎
-//    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
 }
+

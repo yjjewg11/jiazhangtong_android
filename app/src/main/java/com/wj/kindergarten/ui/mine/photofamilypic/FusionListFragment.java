@@ -33,12 +33,15 @@ import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.observer.Watcher;
 import com.wj.kindergarten.ui.more.PfRefreshLinearLayout;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 
+import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalDb;
+import net.tsz.afinal.annotation.view.ViewInject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,6 +126,7 @@ public class FusionListFragment extends Fragment implements Watcher{
             ownGridAdapter.setQueryList(queryGroupCounts,allObjects);
         }
     }
+    @ViewInject(id = R.id.fusion_list_fragment_stick_grid)
     private StickyGridHeadersGridView fusion_list_fragment_stick_grid;
     private FusionListOwnGridAdapter ownGridAdapter;
 
@@ -179,6 +183,7 @@ public class FusionListFragment extends Fragment implements Watcher{
         if(mainView != null) return mainView;
         initDb();
         mainView = View.inflate(getActivity(), R.layout.fusion_list_fragment,null);
+        FinalActivity.initInjectedView(this,mainView);
         photoFamilyFragment.getObserver().registerObserver(this);
         fusion_list_fresh_linear = (PfRefreshLinearLayout)mainView.findViewById(R.id.fusion_list_fresh_linear);
         fusion_list_fresh_linear.setPullScroll(new PfRefreshLinearLayout.PullScroll() {
@@ -188,7 +193,6 @@ public class FusionListFragment extends Fragment implements Watcher{
                 return firstItem + visibleItem == totalItem;
             }
         });
-        fusion_list_fragment_stick_grid = (StickyGridHeadersGridView) mainView.findViewById(R.id.fusion_list_fragment_stick_grid);
         fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -213,9 +217,10 @@ public class FusionListFragment extends Fragment implements Watcher{
         fusion_list_fragment_stick_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String time = TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getPhoto_time());
-                String sql = "family_uuid = '"+family_uuid+"' and strftime('%Y-%m-%d',photo_time) = '"+time+"'";
-                List<AllPfAlbumSunObject> shortList =  db.findAllByWhere(AllPfAlbumSunObject.class, sql);
+//                String time = TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getPhoto_time());
+//                String sql = "family_uuid = '"+family_uuid+"' and strftime('%Y-%m-%d',photo_time) = '"+time+"'";
+                List<AllPfAlbumSunObject> shortList =  db.findAll(AllPfAlbumSunObject.class);
+                position =  shortList.indexOf(ownGridAdapter.getItem(position));
                 new TransportListener(getActivity(),position,shortList,null).onItemClick(parent,view,position,id);
             }
         });

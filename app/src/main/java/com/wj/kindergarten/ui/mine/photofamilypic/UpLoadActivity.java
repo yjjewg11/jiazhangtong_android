@@ -203,7 +203,7 @@ public class UpLoadActivity extends BaseActivity {
                 case PF_UPDATE_PROGRESS_LOADING:
                     CGLog.v("上传图片地址及进度更新 ：" + path + " --->" + progressUpdate);
                     if(upload_wait.getVisibility() == View.VISIBLE){
-                        upload_wait.setVisibility(View.INVISIBLE);
+                        upload_wait.setVisibility(View.GONE);
                     }
                     bar.setProgress(progressUpdate);
 //                    tv_progress.setText(""+progressUpdate+"%");

@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.utils.CGLog;
 
 /**
@@ -17,10 +18,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
 
     private FrameLayout contentFl;
     private int poor;
-
-    public void setContentFl(FrameLayout contentFl) {
-        this.contentFl = contentFl;
-    }
 
     public int getFlTopMargin(){
        return  ((LinearLayout.LayoutParams)contentFl.getLayoutParams()).topMargin;
@@ -48,6 +45,12 @@ public class PfFragmentLinearLayout extends LinearLayout {
 
     public PfFragmentLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        contentFl = (FrameLayout) findViewById(R.id.back_pf_scroll_fl);
     }
 
     int startY;
@@ -137,7 +140,7 @@ public class PfFragmentLinearLayout extends LinearLayout {
             return ((LinearLayout.LayoutParams)(frameLayout.getLayoutParams())).topMargin;
         }
 
-        public void setTopMargin(int topMargin) {
+        public synchronized void setTopMargin(int topMargin) {
             ((LinearLayout.LayoutParams)(frameLayout.getLayoutParams())).topMargin = topMargin;
             frameLayout.requestLayout();
         }

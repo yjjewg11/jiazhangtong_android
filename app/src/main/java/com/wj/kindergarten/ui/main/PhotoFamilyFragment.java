@@ -3,6 +3,7 @@ package com.wj.kindergarten.ui.main;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,6 +57,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.observer.ObserverFamilyUuid;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Constant.BitmapUtil;
+import com.wj.kindergarten.utils.Constant.FastBlur;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.PopWindowUtil;
@@ -63,10 +65,15 @@ import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
 
+import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalDb;
+import net.tsz.afinal.annotation.view.ViewInject;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,11 +82,13 @@ import java.util.List;
  */
 public class PhotoFamilyFragment extends Fragment{
     public static final int ADD_PIC = 5001;
+    @ViewInject(id = R.id.common_tab_layout)
     private TabLayout tab_layout;
     //    private FragmentPagerAdapter pagerAdapter;
     private View view;
     private BoutiqueAlbumFragment boutique_album_framgent;
     private FrameLayout back_pf_scroll_fl;
+    @ViewInject(id = R.id.pf_back_ll)
     private PfFragmentLinearLayout pf_back_ll;
     boolean flIsLocationTop ;
     private LocationChanged locationChanged;
@@ -108,6 +117,7 @@ public class PhotoFamilyFragment extends Fragment{
     private PfLoadDataProxy pfProxyLoadData;
     private ImageView pf_family_gif;
     private TextView photo_family_pic_tv_upload;
+
 
     public ObserverFamilyUuid getObserver() {
         return observer;
@@ -183,6 +193,7 @@ public class PhotoFamilyFragment extends Fragment{
             return view;
         }
         view = inflater.inflate(R.layout.photo_family_pic, null);
+        FinalActivity.initInjectedView(this,view);
         instance = this;
         initDb();
         initFamilyAlbumData();
@@ -298,7 +309,7 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     public void initHeadBack(){
-        initHeadViewData();
+        reqetFamilyAlbum();
     }
     private void initHeadViewData() {
         if(pfAlbumListSun == null) return;
@@ -319,10 +330,11 @@ public class PhotoFamilyFragment extends Fragment{
         }
         pf_background_show_number.setText(""+n);
         if(!TextUtils.isEmpty(pfAlbumListSun.getHerald())){
-            ImageLoaderUtil.displayImage(pfAlbumListSun.getHerald(),pf_backGround_image);
+//            ImageLoaderUtil.displayImage(pfAlbumListSun.getHerald(),pf_backGround_image);
             BitmapCallBack.loadBitmap(pfAlbumListSun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
             @Override
             public void callback(Bitmap bitmap) {
+                pf_backGround_image.setImageBitmap(bitmap);
                 BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
                 pf_backGround_rl.setBackground(drawable);
             }
@@ -351,6 +363,13 @@ public class PhotoFamilyFragment extends Fragment{
             public void onClick(View v) {
 //                  Intent intent = new Intent(getActivity(), PfAlbumListActivity.class);
 //                startActivity(intent);
+            }
+        });
+        photo_family_pic_tv_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UpLoadActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -467,11 +486,7 @@ public class PhotoFamilyFragment extends Fragment{
 
     private void initViews(View v) {
         tab_layout = (TabLayout) v.findViewById(R.id.common_tab_layout);
-
-//        viewPager = (ViewPager) v.findViewById(R.id.common_viewPager);
         back_pf_scroll_fl = (FrameLayout) v.findViewById(R.id.back_pf_scroll_fl);
-        pf_back_ll = (PfFragmentLinearLayout) v.findViewById(R.id.pf_back_ll);
-        pf_back_ll.setContentFl(back_pf_scroll_fl);
         pf_background_show_number = (TextView) v.findViewById(R.id.pf_background_show_number);
     }
 
@@ -559,43 +574,6 @@ public class PhotoFamilyFragment extends Fragment{
                 }
             }
         });
-
-//        pagerAdapter = new FragmentPagerAdapter(getFragmentManager()) {
-//            @Override
-//            public int getCount() {
-//                return 2;
-//            }
-//
-//            @Override
-//            public Fragment getItem(int position) {
-//
-//                switch (position) {
-//                    case 0:
-//                        if (pfFusionFragment == null) {
-//                            pfFusionFragment = new PfFusionFragment();
-//                        }
-//                        pf_back_ll.setOnInterceptTouchEvent(new MyTouch());
-//                        return pfFusionFragment;
-//                    case 1:
-//                        return new TestFragment();
-//                    case 2:
-//                        return new TestFragment();
-//                }
-//
-//
-//                return null;
-//            }
-//
-//            @Override
-//            public CharSequence getPageTitle(int position) {
-//                return titles[position];
-//            }
-//        };
-
-        //取消viewPager，改用动态添加fragment，原因为上下滑动和左右滑动容易冲突。
-
-//        viewPager.setAdapter(pagerAdapter);
-//        tab_layout.setupWithViewPager(viewPager);
 
     }
 

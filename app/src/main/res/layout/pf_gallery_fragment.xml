@@ -23,6 +23,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                 <ImageView
                     android:scaleType="centerCrop"
                     android:layout_marginBottom="@dimen/margin_20"
@@ -30,8 +34,17 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/zhanweitu"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
                     android:id="@+id/pf_gallery_image" />
+                    <ProgressBar
+                        android:layout_marginTop="60dp"
+                        android:layout_width="wrap_content"
+                        style="?android:starStyle"
+                        android:id="@+id/pf_gallery_fragment_progressBar"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -55,7 +56,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     private String hearld;//封面图片
     private ArrayList<AllPfAlbumSunObject> objectList;//照片地址集合
     private BoutiqueReviewAddress address;
-    private BoutiqueSingleInfoObject boutiqueSingleInfoObject;
 
     @Override
     protected void setContentLayout() {
@@ -72,7 +72,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         //清空前面的选择集合。
 
         FinalActivity.initInjectedView(this);
-        setTitleText("相册模板预览", "音乐");
+        setTitleText("精品相册", "音乐");
         initViews();
         getData();
         loadData(1);
@@ -81,17 +81,11 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     private void getData() {
         Intent intent = getIntent();
         objectList = (ArrayList<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
-        boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
         modeObj = (PfModeNameObject) intent.getSerializableExtra("objectMode");
-        if(boutiqueSingleInfoObject != null){
-            title = boutiqueSingleInfoObject.getTitle();
-            hearld = boutiqueSingleInfoObject.getHerald();
-            uuid = boutiqueSingleInfoObject.getUuid();
-        }
-        if(modeObj != null){
-            title = boutiqueSingleInfoObject.getTitle();
-            hearld = boutiqueSingleInfoObject.getHerald();
-            uuid = boutiqueSingleInfoObject.getUuid();
+        if (modeObj != null) {
+            title = modeObj.getTitle();
+            hearld = modeObj.getHerald();
+            uuid = modeObj.getAlbumUUid();
             mp3 = modeObj.getMp3();
             key = modeObj.getKey();
         }
@@ -99,17 +93,17 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-        Intent intent = new Intent(this,FindMusicOfPfActivity.class);
-        intent.putExtra("music",mp3);
+        Intent intent = new Intent(this, FindMusicOfPfActivity.class);
+        intent.putExtra("music", mp3);
         startActivityForResult(intent, GET_MODE_MUSIC, null);
     }
 
     private void initViews() {
         setWebView(boutique_review_webview);
-        boutique_review_webview.setWebViewClient(new WebViewClient(){
+        boutique_review_webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                if(commonDialog.isShowing()){
+                if (commonDialog.isShowing()) {
                     commonDialog.dismiss();
                 }
                 super.onPageFinished(view, url);
@@ -137,6 +131,8 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
                 }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+//                        hideSoft();
+                        onBackPressed();
                         saveAlbum();
                         dialog.cancel();
                     }
@@ -149,7 +145,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     private void saveAlbum() {
         Editable editable = editText.getText();
-        if(editable != null){
+        if (editable != null) {
             title = editable.toString();
         }
         loadData(0);
@@ -157,9 +153,9 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != RESULT_OK) return;
-        switch (requestCode){
-            case GET_MODE_MUSIC :
+        if (resultCode != RESULT_OK) return;
+        switch (requestCode) {
+            case GET_MODE_MUSIC:
                 mp3 = data.getStringExtra("mp3");
                 loadData(1);
                 break;
@@ -171,15 +167,15 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         commonDialog.show();
         commonDialog.setText("正在加载模板，请稍候!");
         StringBuilder builder = new StringBuilder();
-        for(int i = 0 ; i < objectList.size() ; i++){
+        for (int i = 0; i < objectList.size(); i++) {
             AllPfAlbumSunObject object = objectList.get(i);
-            if(i != objectList.size() -1 ){
-                builder.append(object.getUuid()+",");
-            }else{
+            if (i != objectList.size() - 1) {
+                builder.append(object.getUuid() + ",");
+            } else {
                 builder.append(object.getUuid());
             }
         }
-        if(TextUtils.isEmpty(title)){
+        if (TextUtils.isEmpty(title)) {
             title = "相册预览!";
         }
         UserRequest.getBoutiqueReviewUrl(this, title,
@@ -187,22 +183,29 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
                 , builder.toString(), cacheStatus, new RequestResultI() {
                     @Override
                     public void result(BaseModel domain) {
-                        try{
-                        if(commonDialog.isShowing()){
-                            commonDialog.dismiss();
-                        }
-                        if(cacheStatus == 0){
-                            boutique_review_webview.destroy();
-                            ActivityManger.getInstance().finishPfActivities();
-//                            sendBroadcast(new Intent(GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED));
-                            finish();
-                            return;
-                        }
-                        address = (BoutiqueReviewAddress) domain;
-                        if (address != null) {
-                            updateData();
-                        }
-                        } catch (Exception e){
+                        try {
+                            if (commonDialog.isShowing()) {
+                                commonDialog.dismiss();
+                            }
+                            if (cacheStatus == 0) {
+                                boutique_review_webview.destroy();
+                                ActivityManger.getInstance().finishPfActivities();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        sendBroadcast(new Intent(GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED));
+                                        finish();
+                                    }
+                                }, 300);
+                                finish();
+                                return;
+                            }
+                            address = (BoutiqueReviewAddress) domain;
+                            if (address != null) {
+                                updateData();
+                            }
+                        } catch (Exception e) {
                             CGLog.v("这是保存精品相册后的异常!");
                             e.printStackTrace();
                         }
@@ -218,6 +221,10 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    private void hideSoft() {
+        Utils.inputMethod(BoutiqueModeReviewActivity.this, false, editText);
     }
 
     private void updateData() {

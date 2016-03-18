@@ -85,6 +85,10 @@ public class ImageLoaderUtil {
     public static void displayAlbumImage(String path,ImageView imageView){
         imageLoader.displayImage(path,imageView,albumOptions);
     }
+    public static void displayAlbumImageListener(String path,ImageView imageView,ImageLoadingListener loadingListener){
+        imageLoader.displayImage(path,imageView,albumOptions,loadingListener);
+    }
+
 
     public static void displayMyImage(String uri,ImageView imageView){
         imageLoader.displayImage(uri,imageView,myOptions);

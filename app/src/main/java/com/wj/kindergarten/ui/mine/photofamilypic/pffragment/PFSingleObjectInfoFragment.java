@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine.photofamilypic.pffragment;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,8 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -146,17 +149,11 @@ public class PFSingleObjectInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //在每次重用view之后都会更新数据
-
-        if (innerView != null) {
-            initData();
-            showPic();
-            return innerView;
-        }
-        progressBar = new ProgressBar(getActivity());
         dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
+        progressBar = (ProgressBar) innerView.findViewById(R.id.pf_gallery_fragment_progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         initExtraView();
         pf_pic_bottom_assess_count = (TextView) innerView.findViewById(R.id.pf_pic_bottom_assess_count);
         pf_pic_bottom_viewGroup = (LinearLayout) innerView.findViewById(R.id.pf_pic_bottom_viewGroup);
@@ -331,45 +328,28 @@ public class PFSingleObjectInfoFragment extends Fragment {
                     path = path.substring(0, path.indexOf("@"));
                 }
             }
-
-            ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
+            ImageLoaderUtil.displayAlbumImageListener(path, pf_gallery_image, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
-                    if(dialog.isShowing()){
-                        dialog.cancel();
-                    }
+
                 }
 
                 @Override
                 public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                    if(progressDialog.isShowing()) progressDialog.cancel();
-                    showBitmap(loadedImage);
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onLoadingCancelled(String imageUri, View view) {
-
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }
-    }
-
-    private float convertFloat(int number) {
-        return Float.valueOf(number);
-    }
-
-    private void showBitmap(Bitmap loadedImage) {
-        float height = (convertFloat(WindowUtils.dm.widthPixels) / convertFloat(loadedImage.getWidth())) * convertFloat(loadedImage.getHeight());
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) pf_gallery_image.getLayoutParams();
-        params.height = (int) height;
-        pf_gallery_image.setLayoutParams(params);
-        pf_gallery_image.requestLayout();
-        pf_gallery_image.setImageBitmap(loadedImage);
     }
 
     private void queSingleAssess() {

@@ -13,6 +13,16 @@ import java.io.Serializable;
         private String herald;@Expose
         private String title;@Expose
         private String key;
+        private String albumUUid;
+
+    public String getAlbumUUid() {
+        return albumUUid;
+    }
+
+    public void setAlbumUUid(String albumUUid) {
+        this.albumUUid = albumUUid;
+    }
+
 
     @Override
     public String toString() {
@@ -21,6 +31,7 @@ import java.io.Serializable;
                 ", herald='" + herald + '\'' +
                 ", title='" + title + '\'' +
                 ", key='" + key + '\'' +
+                ", albumUUid='" + albumUUid + '\'' +
                 '}';
     }
 
