@@ -1,81 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:padding="@dimen/margin_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_10">
 
 
         <ImageView
-            android:scaleType="fitXY"
-            android:src="@drawable/zhanweitu"
+            android:id="@+id/up_load_progress_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:id="@+id/up_load_progress_image"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+            android:scaleType="fitXY"
+            android:src="@drawable/zhanweitu" />
 
-        <!--<ProgressBar-->
-            <!--android:layout_toLeftOf="@+id/upload_tv_progress"-->
-            <!--android:max="100"-->
-            <!--android:progressDrawable="@drawable/progress_drawable"-->
-            <!--android:backgroundTint="@color/color_e5e5e5"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginLeft="@dimen/margin_10"-->
-            <!--android:layout_toRightOf="@+id/up_load_progress_image"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--style="?android:attr/progressBarStyleHorizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/up_load_progressBar" />-->
 
         <LinearLayout
-            android:layout_marginLeft="@dimen/margin_10"
-            android:layout_toRightOf="@+id/up_load_progress_image"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true">
-        <com.daimajia.numberprogressbar.NumberProgressBar
-            android:id="@+id/up_load_progressBar"
-            android:layout_width="wrap_content"
-            android:layout_marginRight="@dimen/margin_10"
-            app:progress_text_size="15sp"
-            android:background="@drawable/upload_progress_item_back"
-            android:layout_weight="1"
-            app:progress_reached_bar_height="5dp"
-            app:progress_unreached_bar_height="3dp"
-            android:layout_centerVertical="true"
-            style="@style/NumberProgressBar_Passing_Green"
-            android:layout_height="wrap_content" />
-
-        <!--<TextView-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginRight="@dimen/margin_10"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:text="0%"-->
-            <!--android:layout_toLeftOf="@+id/up_Load_wait"-->
-            <!--android:id="@+id/upload_tv_progress"-->
-            <!--android:layout_width="45dp"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <ImageView
-            android:id="@+id/up_Load_wait"
-            android:src="@drawable/wait_translate"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_toRightOf="@+id/up_load_progress_image"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/up_load_progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_weight="1"
+                app:rcBackgroundColor="@color/gray_line"
+                app:rcMax="100"
+                app:rcProgress="0"
+                app:rcProgressColor="@color/title_bg" />
+
+
+            <FrameLayout
+                android:id="@+id/up_load_wait_fl"
+                android:layout_width="wrap_content"
+                android:minHeight="15dp"
+                android:layout_height="wrap_content"
+                android:minWidth="30dp">
+
+                <ImageView
+                    android:minHeight="15dp"
+                    android:id="@+id/up_Load_wait"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/wait_translate" />
+
+                <TextView
+                    android:textSize="12sp"
+                    android:id="@+id/upload_tv_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:minWidth="30dp"
+                    android:text="0%"
+                    android:visibility="gone" />
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
-
 
 
 </RelativeLayout>

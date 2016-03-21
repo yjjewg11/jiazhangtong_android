@@ -63,7 +63,7 @@ public class UpLoadProgressAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.upload_progress_item,null);
             viewHolder = new ViewHolder();
             viewHolder.up_load_progress_image = (ImageView) convertView.findViewById(R.id.up_load_progress_image);
-            viewHolder.up_load_progressBar = (ProgressBar) convertView.findViewById(R.id.up_load_progressBar);
+//            viewHolder.up_load_progressBar = (ProgressBar) convertView.findViewById(R.id.up_load_progressBar);
             viewHolder.up_Load_wait = (ImageView) convertView.findViewById(R.id.up_Load_wait);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();

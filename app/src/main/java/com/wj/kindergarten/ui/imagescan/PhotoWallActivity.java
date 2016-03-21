@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -50,6 +51,14 @@ public class PhotoWallActivity extends BaseActivity {
     private int preSize = 0;
     private PhotoWallAdapter photoWallAdapter = null;
     private ArrayList<String> list = null;
+    private RelativeLayout photo_wall_back;
+    private boolean parseQR;
+
+    public boolean isParseQR() {
+        return parseQR;
+    }
+
+
 
     @Override
     protected void setContentLayout() {
@@ -63,7 +72,14 @@ public class PhotoWallActivity extends BaseActivity {
     @Override
     protected void onCreate() {
         titleRightButton.setVisibility(View.VISIBLE);
-
+        parseQR = getIntent().getBooleanExtra("parse",true);
+        photo_wall_back = (RelativeLayout) findViewById(R.id.photo_wall_back);
+        photo_wall_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         int position = getIntent().getIntExtra(KEY_POSITION, 0);
         list = getIntent().getStringArrayListExtra(KEY_LIST);
         titleRightT = getIntent().getStringExtra(KEY_TYPE);

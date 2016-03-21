@@ -1,5 +1,6 @@
 package com.wj.kindergarten.utils;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -81,4 +82,7 @@ public interface GloablUtils {
     int ALREADY_DB_VERSION = 4;
     String DELETE_PF_SINGLE_INFO_SUCCESSED = "delete_pf_single_info_successed";
     String UPDATE_BOUTIQUE_ALBUM_SUCCESSED = "update_boutique_album_successed";
+    //存放相片的数据库表名
+    String FAMILY_UUID_OBJECT_TABLE_NAME = "com_wj_kindergarten_bean_AllPfAlbumSunObject";
+    String FINISH_UPLOAD_PIC = "finish_upload_pic";
 }

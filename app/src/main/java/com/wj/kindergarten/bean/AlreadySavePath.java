@@ -13,7 +13,7 @@ import java.util.Date;
 public class AlreadySavePath implements Serializable {
     private int id;
     private String localPath;
-    //0是成功，1是等待，2是失败
+    //0是成功，1是等待，3是失败
     private int status;
     private Date success_time;
     private String family_uuid;

@@ -1,8 +1,11 @@
 package com.wj.kindergarten.services;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -38,6 +41,7 @@ public class PicUploadService extends Service {
 
     private ArrayList<AlreadySavePath> listObject;
     int successCount = 0;
+    private StopUploadReceiver receiver;
 
     public PicUploadService() {
     }
@@ -88,11 +92,14 @@ public class PicUploadService extends Service {
         }
     }
 
+
+    boolean isUpLoad = true;
     private UploadImage uploadImage = new UploadImage() {
         @Override
         public void success(Result result) {
             //直接把地址写入到数据库
             String data_id = null;
+
             PfResult pfResult = (PfResult) result;
             if(pfResult != null) {
                 data_id = pfResult.getData_id();
@@ -117,6 +124,7 @@ public class PicUploadService extends Service {
 
     private void checkAlreadyUpload(String localPath, ProgressCallBack progressCallBack) {
         //检查数据库是否有此数据，否则不上传
+        if(!isUpLoad) return;
         uploadFile.upLoadPf(localPath, progressCallBack);
     }
 
@@ -130,17 +138,27 @@ public class PicUploadService extends Service {
         super.onCreate();
         db = FinalUtil.getAlreadyUploadDb(this);
         uploadFile = new UploadFile(getApplicationContext(), uploadImage, 0, 720, 1280);
+        register();
     }
 
-    public void destory() {
-        stopSelf();
+    private void register() {
+        receiver = new StopUploadReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(GloablUtils.FINISH_UPLOAD_PIC);
+        registerReceiver(receiver,filter);
     }
 
     @Override
     public void onDestroy() {
+        unregisterReceiver(receiver);
         super.onDestroy();
-        CGLog.v("intentService线程已被销毁");
     }
+
+    public void destory() {
+        isUpLoad = false;
+        stopSelf();
+    }
+
 
     @Nullable
     @Override
@@ -159,7 +177,7 @@ public class PicUploadService extends Service {
         if(listObject == null || listObject.size() == 0) return super.onStartCommand(intent,flags,startId);
 
         if(!Utils.isWifi(getApplicationContext())){
-            ToastUtils.showDialog(MainActivity.instance, "提示！", "当前处于非WIFI网络，确定上传?", new DialogInterface.OnClickListener() {
+            ToastUtils.showDialog(MainActivity.instance, "提示！", "当前移动网络，建议WiFi下上传，是否继续?", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
@@ -254,5 +272,18 @@ public class PicUploadService extends Service {
                 checkAlreadyUpload(listObject.get(count).getLocalPath(), progressCallBack);
             }
     }
+
+    class StopUploadReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()){
+                case GloablUtils.FINISH_UPLOAD_PIC:
+                    destory();
+                    break;
+            }
+        }
+    }
+
 
 }

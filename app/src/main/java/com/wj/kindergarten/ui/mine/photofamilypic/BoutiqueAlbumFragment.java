@@ -65,7 +65,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
 
         dialog = new HintInfoDialog(getActivity());
         photoFamilyFragment.getObserver().registerObserver(this);
-        view = inflater.inflate(R.layout.fragment_test, null);
+        view = inflater.inflate(R.layout.fragment_test,container,false);
         FinalActivity.initInjectedView(this, view);
         pullListView.getRefreshableView().setDividerHeight(0);
         boutiqueAdapter = new BoutiqueAdapter(getActivity());

@@ -22,4 +22,8 @@ public abstract class FinalUtil {
     public static FinalDb getFamilyUuidObjectDb(Context context){
         return FinalDb.create(context,GloablUtils.FAMILY_UUID_OBJECT);
     }
+    //存放已family_uuid为单位的家庭相册
+    public static FinalDb getAllFamilyAlbum(Context context){
+        return FinalDb.create(context,GloablUtils.FAMILY_UUID);
+    }
 }

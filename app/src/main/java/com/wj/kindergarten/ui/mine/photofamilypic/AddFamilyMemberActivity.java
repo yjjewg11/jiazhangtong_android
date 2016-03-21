@@ -20,6 +20,7 @@ import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AddFamilyMemberParams;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.MyConstact;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -31,6 +32,7 @@ import com.wj.kindergarten.utils.Utils;
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddFamilyMemberActivity extends BaseActivity {
@@ -51,6 +53,7 @@ public class AddFamilyMemberActivity extends BaseActivity {
     @ViewInject(id = R.id.add_family_member_get_contact,click = "onClick")
     TextView add_family_member_get_contact;
     private AddFamilyMemberParams member;
+    private boolean allowPutIn;
 
 
     @Override
@@ -71,6 +74,60 @@ public class AddFamilyMemberActivity extends BaseActivity {
         setTitleText("添加家人");
 
     }
+    private void initContactList() {
+        List<MyConstact> contactList = new ArrayList<MyConstact>();
+
+        // 查询联系人数据
+        Cursor cursor = getContentResolver().query(
+                ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        while (cursor.moveToNext()) {
+            MyConstact contact = new MyConstact();
+            // 获取联系人的Id
+            String contactId = cursor.getString(cursor
+                    .getColumnIndex(ContactsContract.Contacts._ID));
+            // 获取联系人的姓名
+            String contactName = cursor.getString(cursor
+                    .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            contact.setContantName(contactName);
+
+            // 有联系人姓名得到对应的拼音
+//            String pinyin = PinyinUtils.getPinyin(contactName);
+//            contact.setPinyin(pinyin);
+
+            Cursor phoneCursor = getContentResolver().query(
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    null,
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "="
+                            + contactId, null, null);
+
+            while (phoneCursor.moveToNext()) {
+                String phoneNumber = phoneCursor
+                        .getString(phoneCursor
+                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                contact.setPhoneNumber(phoneNumber);
+            }
+
+            if (null != phoneCursor && !phoneCursor.isClosed()) {
+                phoneCursor.close();
+            }
+
+            contactList.add(contact);
+        }
+
+        if (null != cursor && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        CGLog.v(contactList.toString());
+
+        if(contactList == null || contactList.size() == 0){
+            allowPutIn = false;
+        }else {
+            allowPutIn = true;
+        }
+    }
+
+
 
     private void initViewData() {
         editPhone.setText("" + Utils.isNull(member.getTel()));
@@ -99,23 +156,25 @@ public class AddFamilyMemberActivity extends BaseActivity {
     }
 
     private void addMember() {
-        if(checkOwnPermersion()){
+        initContactList();
+        if(allowPutIn){
             startConstact();
+        }else {
+            ToastUtils.showMessage("无法获取联系人，请到系统设置里开启联系人权限!");
         }
     }
 
-    private boolean checkOwnPermersion() {
-
-        if (checkCallingOrSelfPermission(Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.getp
+//    private boolean checkOwnPermersion() {
+//
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            //申请WRITE_EXTERNAL_STORAGE权限
 //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
 //                    READ_CONSTANTS_PREMISSION);
-            return false;
-        }
-        return true;
-    }
+//            return false;
+//        }
+//        return true;
+//    }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode){
@@ -185,6 +244,7 @@ public class AddFamilyMemberActivity extends BaseActivity {
                 String [] constacts =  getPhoneContacts(result);
                 if(constacts != null){
                     editPhone.setText(""+constacts[1]);
+                    editRelation.setText(""+constacts[0]);
                 }
                 break;
         }

@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.func.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.text.TextUtils;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueAlbum;
@@ -98,7 +101,27 @@ public class BoutiqueAdapter extends BaseAdapter{
             if(path.contains("@")){
                 path = path.substring(0,path.indexOf("@"));
             }
-            ImageLoaderUtil.displayAlbumImage(path, viewHolder.boutique_album_item_image);
+            ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    viewHolder.boutique_album_item_image.setImageBitmap(loadedImage);
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+
+                }
+            });
             viewHolder.boutique_album_item_title.setText("" + sun.getTitle());
             String text = "<font color='#6f2d0c'>"+ Utils.isNull(sun.getCreate_username())+"</font>"+
                     "制作于"+"<font color='#6f2d0c'>"+Utils.isNull(sun.getCreate_time())+"</font>,"+

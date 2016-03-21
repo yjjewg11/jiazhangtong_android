@@ -20,16 +20,16 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AlreadySavePath;
-import com.wj.kindergarten.bean.FindAlreadyPath;
-import com.wj.kindergarten.bean.PfProgressItem;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
-import com.wj.kindergarten.ui.func.adapter.UpLoadProgressAdapter;
+
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -37,10 +37,6 @@ import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import net.tsz.afinal.FinalDb;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by tangt on 2016/1/20.
@@ -93,6 +89,7 @@ public class UpLoadActivity extends BaseActivity {
             final View view = View.inflate(this, R.layout.upload_progress_item, null);
             ImageView up_load_progress_image = (ImageView) view.findViewById(R.id.up_load_progress_image);
             ImageView up_Load_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
+            TextView upload_tv_progress = (TextView) view.findViewById(R.id.upload_tv_progress);
             up_Load_wait.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -193,11 +190,12 @@ public class UpLoadActivity extends BaseActivity {
             int progress = intent.getIntExtra("progress", -1);
             int total = intent.getIntExtra("total", -1);
             CGLog.v("打印progress : " + progress + " total : " + total);
-            View view = linearLayout.findViewWithTag(path);
+            final View view = linearLayout.findViewWithTag(path);
             if(view == null) return;
-            NumberProgressBar bar = (NumberProgressBar) (view.findViewById(R.id.up_load_progressBar));
-//            TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
+            RoundCornerProgressBar bar = (RoundCornerProgressBar) (view.findViewById(R.id.up_load_progressBar));
+            TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
             ImageView upload_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
+            if(total < progress) return;
             int progressUpdate =(int) (Double.valueOf(progress)/Double.valueOf(total) * 100);
             switch (intent.getAction()) {
                 case PF_UPDATE_PROGRESS_LOADING:
@@ -205,16 +203,49 @@ public class UpLoadActivity extends BaseActivity {
                     if(upload_wait.getVisibility() == View.VISIBLE){
                         upload_wait.setVisibility(View.GONE);
                     }
+                    if(tv_progress.getVisibility() == View.GONE){
+                        tv_progress.setVisibility(View.VISIBLE);
+                    }
                     bar.setProgress(progressUpdate);
-//                    tv_progress.setText(""+progressUpdate+"%");
+                    tv_progress.setText("" + progressUpdate + "%");
                     break;
                 case PF_UPDATE_PROGRESS_SUCCESSED:
                     bar.setProgress(100);
-//                    tv_progress.setText("" + 100+"%");
-                        linearLayout.removeView(view);
+                    tv_progress.setText("" + 100 + "%");
+//                    ObjectAnimator animator =
+//                            ObjectAnimator.ofFloat(new LinearWrapper(view), "height", 0);
+//                    animator.setDuration(150);
+//                    animator.addListener(new Animator.AnimatorListener() {
+//                        @Override
+//                        public void onAnimationStart(Animator animation) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onAnimationEnd(Animator animation) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onAnimationCancel(Animator animation) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onAnimationRepeat(Animator animation) {
+//
+//                        }
+//                    });
+//                    animator.start();
+                    linearLayout.removeView(view);
                     judgeAddNoContent();
+
+
+
                     break;
                 case PF_UPDATE_PROGRESS_FAILED:
+                    tv_progress.setVisibility(View.GONE);
+                    upload_wait.setVisibility(View.VISIBLE);
                     upload_wait.setImageResource(R.drawable.upload_failed);
                     bar.setProgress(0);
                     judgeAddNoContent();
@@ -230,6 +261,22 @@ public class UpLoadActivity extends BaseActivity {
             textView.setText("暂时还没有上传内容!");
             textView.setGravity(Gravity.CENTER);
             linearLayout.addView(textView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+    }
+    class LinearWrapper{
+        private View view;
+
+        public LinearWrapper(View view) {
+            this.view = view;
+        }
+
+        public int getHeight() {
+            return ((LinearLayout.LayoutParams)view.getLayoutParams()).height;
+        }
+
+        public void setHeight(int height) {
+            ((LinearLayout.LayoutParams)view.getLayoutParams()).height = height;
+            view.invalidate();
         }
     }
 

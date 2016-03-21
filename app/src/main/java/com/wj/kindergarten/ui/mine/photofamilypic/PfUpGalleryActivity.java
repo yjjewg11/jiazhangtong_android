@@ -18,10 +18,13 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.ScanImageAndTime;
 import com.wj.kindergarten.bean.SyncUploadPic;
 import com.wj.kindergarten.bean.SyncUploadPicObj;
 import com.wj.kindergarten.common.CGSharedPreference;
@@ -31,9 +34,11 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.EditPfActivity;
+import com.wj.kindergarten.ui.func.adapter.UploadChooseGridAdapter;
 import com.wj.kindergarten.ui.imagescan.PfGalleryImagesAdapter;
 import com.wj.kindergarten.ui.imagescan.PfPhotoPopAdapter;
 import com.wj.kindergarten.ui.imagescan.PhotoDirModel;
+import com.wj.kindergarten.ui.imagescan.PhotoDirTimeModel;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V1;
 import com.wj.kindergarten.ui.imagescan.ScanPhoto_V2;
@@ -43,6 +48,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathDbTwo;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
@@ -52,6 +58,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -78,15 +85,17 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     //拍照后返回REQUEST
     private final int REQUEST_CAMERA = 1;
     //目录
-    private HashMap<String, List<String>> dirMap = new HashMap<>();
+    private HashMap<String, List<ScanImageAndTime>> dirMap = new HashMap<>();
     //存储图片的选中情况
     private HashMap<String, Boolean> mSelectMap = new HashMap<>();
     //拍照按钮和扫描到的图片列表
-    private List<String> galleryList = new ArrayList<>();
+    private List<ScanImageAndTime> galleryList = new ArrayList<>();
     //扫描到的相册列表
-    private ArrayList<String> scanList = new ArrayList<>();
-    private PfGalleryImagesAdapter adapter;
-    private GridView mGridView;
+    private ArrayList<ScanImageAndTime> scanList = new ArrayList<>();
+    private UploadChooseGridAdapter adapter;
+    //存放所有图片地址的集合
+    private List<String> pathList = new ArrayList<>();
+    private StickyGridHeadersGridView pf_up_gallery_gridView;
     //选择文件夹
     private TextView changeDirButton = null;
     //拍照后图片URI
@@ -109,6 +118,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     private static int SIGN_BOARD;
     private int type;
     private FinalDb uploadDb;
+    private TextView pf_gallery_choose_all;
 
     /**
      * 被选中的图片列表 key
@@ -117,7 +127,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void setContentLayout() {
-        layoutId = R.layout.imagescan_images_activity;
+        layoutId = R.layout.pf_up_gallery_activity;
     }
 
     //如果未从网络同步已上传照片，则需要同步,默认未同步
@@ -203,48 +213,51 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
      * init widget
      */
     private void initWidget() {
-        changeDirButton = (TextView) findViewById(R.id.photo_gallery_dir);
+        changeDirButton = (TextView) findViewById(R.id.pf_gallery_dir);
         changeDirButton.setOnClickListener(this);
 
-        changeDirListView = (ListView) findViewById(R.id.change_dir_list);
-        changeDirListContent = (FrameLayout) findViewById(R.id.change_dir_list_content);
-        changeDirBg = (FrameLayout) findViewById(R.id.change_dir_bg);
+        pf_gallery_choose_all = (TextView) findViewById(R.id.pf_gallery_choose_all);
+        pf_gallery_choose_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = pf_gallery_choose_all.getText().toString();
+                if(text.equals("全部选择")){
+                    pf_gallery_choose_all.setText(""+"取消全选");
+                    adapter.chooseAll();
+                }else {
+                    pf_gallery_choose_all.setText(""+"全部选择");
+                    adapter.giveUpAll();
+                }
+            }
+        });
+
+        changeDirListView = (ListView) findViewById(R.id.pf_change_dir_list);
+        changeDirListContent = (FrameLayout) findViewById(R.id.pf_change_dir_list_content);
+        changeDirBg = (FrameLayout) findViewById(R.id.pf_change_dir_bg);
         changeDirBg.setOnClickListener(this);
 
-        mGridView = (GridView) findViewById(R.id.child_grid);
-//        galleryList.add(0, "");
-//        scanList.add(0, "");
-        adapter = new PfGalleryImagesAdapter(galleryList, canSelect, mSelectMap, mGridView, type);
-        mGridView.setAdapter(adapter);
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        pf_up_gallery_gridView = (StickyGridHeadersGridView) findViewById(R.id.pf_up_gallery_gridView);
+        adapter = new UploadChooseGridAdapter(this,pf_up_gallery_gridView,galleryList,mSelectMap);
+        pf_up_gallery_gridView.setAdapter(adapter);
+        pf_up_gallery_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0 && adapter.isFirstSpecial()) {//判断是否是拍照按钮
-                    ArrayList<String> selected = getSelectItems();
-                    if (null != selected && selected.size() < IMAGE_MAX) {
-                        chooseList.clear();
-                        chooseList.addAll(selected);
-                        SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                        String filename = timeStampFormat.format(System.currentTimeMillis());
-                        ContentValues values = new ContentValues();
-                        values.put(MediaStore.Images.Media.TITLE, filename);
-                        imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        openCameraIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                        openCameraIntent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-                        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                        startActivityForResult(openCameraIntent, REQUEST_CAMERA);
-                    } else {
-                        Utils.showToast(PfUpGalleryActivity.this, getResources()
-                                .getString(R.string.can_select_photo_max, IMAGE_MAX + ""));
+                //查出所有图片。
+                if (pathList.size() <= 0) {
+                    Iterator<ScanImageAndTime> iterator = galleryList.iterator();
+                    while (iterator.hasNext()) {
+                        ScanImageAndTime scanImageAndTime = iterator.next();
+                        pathList.add(scanImageAndTime.getPath());
                     }
-                } else {
-                    Intent intent = new Intent(PfUpGalleryActivity.this, PhotoWallActivity.class);
-                    ArrayList<String> simplePic = new ArrayList<>();
-                    simplePic.add(galleryList.get(position));
-                    intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, simplePic);
-                    startActivity(intent);
                 }
+                position = pathList.indexOf(galleryList.get(position).getPath());
+                Intent intent = new Intent(PfUpGalleryActivity.this, PhotoWallActivity.class);
+                ArrayList<String> simplePic = new ArrayList<>();
+                simplePic.addAll(pathList);
+                intent.putExtra(PhotoWallActivity.KEY_POSITION, position);
+                intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, simplePic);
+                startActivity(intent);
+
             }
         });
     }
@@ -326,15 +339,15 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
      * 初始化change ListView
      */
     private void initChangeDirList() {
-        final List<PhotoDirModel> dirLN = new ArrayList<>();
-        PhotoDirModel allPDM = new PhotoDirModel();
+        final List<PhotoDirTimeModel> dirLN = new ArrayList<>();
+        PhotoDirTimeModel allPDM = new PhotoDirTimeModel();
         allPDM.setDirName(getString(R.string.all_photo));
-        allPDM.setPaths(getImages(scanList));
+        allPDM.setPaths(scanList);
         dirLN.add(allPDM);
-        for (Map.Entry<String, List<String>> entry : dirMap.entrySet()) {
-            List<String> tempL = entry.getValue();
+        for (Map.Entry<String, List<ScanImageAndTime>> entry : dirMap.entrySet()) {
+            List<ScanImageAndTime> tempL = entry.getValue();
             if (entry != null && tempL != null && tempL.size() > 0) {
-                PhotoDirModel tempPDM = new PhotoDirModel();
+                PhotoDirTimeModel tempPDM = new PhotoDirTimeModel();
                 tempPDM.setDirName(entry.getKey());
                 tempPDM.setPaths((ArrayList) tempL);
                 if (!entry.getKey().contains("CGImage") || !entry.getKey().equals("CGImage")) {
@@ -355,7 +368,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     mHandler.sendMessage(message);
                     nowDir = getString(R.string.all_photo);
                 } else {
-                    PhotoDirModel photoDirModel = dirLN.get(position);
+                    PhotoDirTimeModel photoDirModel = dirLN.get(position);
                     message.obj = dirMap.get(photoDirModel.getDirName());
                     mHandler.sendMessage(message);
                     nowDir = photoDirModel.getDirName();
@@ -370,7 +383,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.photo_gallery_dir:
+            case R.id.pf_gallery_dir:
                 if (scanList == null || scanList.size() <= 0) {
                     return;
                 }
@@ -390,7 +403,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     showChangeDirView();
                 }
                 break;
-            case R.id.change_dir_bg:
+            case R.id.pf_change_dir_bg:
                 hideChangeDirView();
                 break;
         }
@@ -405,27 +418,38 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     break;
                 case SCAN_PHOTO_COMPLETE://扫描结束
                     galleryList.clear();
-                    galleryList.addAll(getImages(scanList));
-                    Collections.reverse(galleryList);
-//                    galleryList.add(0, "");
+                    galleryList.addAll(scanList);
+                    Collections.sort(galleryList, new Comparator<ScanImageAndTime>() {
+                        @Override
+                        public int compare(ScanImageAndTime o1, ScanImageAndTime o2) {
+                            int sort = 0;
+                            long time =TimeUtil.getMillionFromYMD(o2.getTime())- TimeUtil.getMillionFromYMD(o1.getTime());
+                            if(time >0){
+                                sort = 1;
+                            }else if(time < 0){
+                                sort = -1;
+                            }else {
+                                sort = 0;
+                            }
+                            return sort;
+                        }
+                    });
                     adapter.notifyDataSetChanged();
                     nowDir = getString(R.string.all_photo);
                     break;
                 case CHANGE_PHOTO_DIR_S://改变目录 第一个为拍照按钮
                     List<String> showListS = (ArrayList) msg.obj;
                     galleryList.clear();
-                    galleryList.addAll(getImages(showListS));
-                    Collections.reverse(galleryList);
-//                    galleryList.add(0, "");
-                    adapter.setFirstSpecial(true);
+                    galleryList.addAll(scanList);
+//                    Collections.reverse(galleryList);
                     adapter.notifyDataSetChanged();
                     break;
                 case CHANGE_PHOTO_DIR://改变目录
-                    List<String> showList = (ArrayList) msg.obj;
+                    List<ScanImageAndTime> showList = (ArrayList) msg.obj;
                     galleryList.clear();
-                    galleryList.addAll(getImages(showList));
-                    Collections.reverse(galleryList);
-                    adapter.setFirstSpecial(false);
+                    galleryList.addAll(showList);
+                    Collections.reverse(showList);
+//                    adapter.setFirstSpecial(false);
                     adapter.notifyDataSetChanged();
                     break;
             }
@@ -433,15 +457,15 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
         }
     };
 
-    private ArrayList<String> getImages(List<String> list) {
-        ArrayList<String> imgs = new ArrayList<>();
-        for (String path : list) {
-            if (!Utils.stringIsNull(path) && !path.contains("CGImage")) {
-                imgs.add(path);
-            }
-        }
-        return imgs;
-    }
+//    private ArrayList<String> getImages(List<ScanImageAndTime> list) {
+//        ArrayList<String> imgs = new ArrayList<>();
+//        for (ScanImageAndTime path : list) {
+//            if (!Utils.stringIsNull(path) && !path.contains("CGImage")) {
+//                imgs.add(path);
+//            }
+//        }
+//        return imgs;
+//    }
 
     /**
      * 获取当前显示目录名称
@@ -547,8 +571,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
      * 扫描图片
      */
     private void scanPhoto_v2() {
-        ScanPhoto_V2.scanMediaDir(this, scanList, dirMap);
-
+        ScanPhoto_V2.scanMediaTime(this, scanList, dirMap);
         //通知Handler扫描图片完成
         mHandler.sendEmptyMessage(SCAN_PHOTO_COMPLETE);
     }
@@ -572,21 +595,6 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     /**
      * 扫描图片 不再使用
      */
-    @Deprecated
-    private void scanPhoto_v1() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                scanList = new ArrayList<>();
-                String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath();
-                ScanPhoto_V1.getImageFileFromDir(dir, scanList);
-
-                //通知Handler扫描图片完成
-                mHandler.sendEmptyMessage(SCAN_PHOTO_COMPLETE);
-            }
-        }).start();
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

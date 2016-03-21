@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -102,6 +103,14 @@ public final class TimeUtil {
         Date date = new Date();
         return date.getTime();
     }
+    public static long getYMDnowTime(){
+        try {
+            return format.parse(getNowDate()).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     public static String getWeekOfDay(String date) {
         String mWay = getDay(date);
@@ -190,4 +199,6 @@ public final class TimeUtil {
 
         return date3.getTime() - date2.getTime();
     }
+
+//    public static <T>void sortList(List<T> )
 }

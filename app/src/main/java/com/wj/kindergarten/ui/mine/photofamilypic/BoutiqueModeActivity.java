@@ -76,6 +76,8 @@ public class BoutiqueModeActivity extends BaseActivity {
                 }
                 object.setAlbumUUid(boutiqueSingleInfoObject.getUuid());
                 object.setHerald(boutiqueSingleInfoObject.getHerald());
+                String title = boutiqueSingleInfoObject.getTitle();
+                if(title != null && !TextUtils.isEmpty(title)) object.setTitle(title);
                 Intent intent = new Intent(BoutiqueModeActivity.this, BoutiqueModeReviewActivity.class);
                 intent.putExtra("objectList", (ArrayList) objectList);
                 intent.putExtra("objectMode", object);

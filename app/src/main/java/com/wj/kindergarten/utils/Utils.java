@@ -112,9 +112,13 @@ public class Utils {
 
 
     public static void carouselPic(Context context, int position, ArrayList<String> mUrlList) {
+        carouselPic(context,position,mUrlList,true);
+    }
+    public static void carouselPic(Context context, int position, ArrayList<String> mUrlList,boolean parse) {
         Intent intent = new Intent(context, PhotoWallActivity.class);
         intent.putExtra(PhotoWallActivity.KEY_POSITION, position);
         intent.putExtra(PhotoWallActivity.KEY_TYPE, "保存");
+        intent.putExtra("parse",parse);
         intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, (ArrayList<String>) mUrlList);
         context.startActivity(intent);
     }

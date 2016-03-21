@@ -182,7 +182,7 @@ public class FusionListFragment extends Fragment implements Watcher{
         initScrollListen();
         if(mainView != null) return mainView;
         initDb();
-        mainView = View.inflate(getActivity(), R.layout.fusion_list_fragment,null);
+        mainView = inflater.inflate( R.layout.fusion_list_fragment,container,false);
         FinalActivity.initInjectedView(this,mainView);
         photoFamilyFragment.getObserver().registerObserver(this);
         fusion_list_fresh_linear = (PfRefreshLinearLayout)mainView.findViewById(R.id.fusion_list_fresh_linear);

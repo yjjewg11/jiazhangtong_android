@@ -1,38 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/white"
+android:orientation="vertical">
 
-    <include layout="@layout/title_normal"/>
+<include layout="@layout/title_normal" />
 
-    <GridView
-        android:numColumns="3"
-        android:layout_weight="1"
-        android:id="@+id/pf_up_gridView"
-        android:columnWidth="3dp"
-        android:background="@color/color_e5e5e5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/photo_gallery_bg">
 
     <RelativeLayout
-        android:background="@color/title_click"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/layout_height_60">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/pf_photo_gallery_bottom">
 
-        <TextView
-            android:drawablePadding="@dimen/margin_5"
-            android:drawableRight="@drawable/xiajiatou"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/margin_15"
-            android:textSize="17sp"
-            android:gravity="center_vertical"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
+        <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pf_up_gallery_gridView"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/margin_10"
+            android:paddingRight="@dimen/margin_10"
             android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="所有照片"
-            android:id="@+id/textView38"
-            android:layout_alignParentLeft="true" />
+            android:clipToPadding="false"
+            android:background="@color/white"
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:horizontalSpacing="2dp"
+            android:columnWidth="@dimen/margin_5"
+            android:verticalSpacing="2dp" />
+
+        <FrameLayout
+            android:id="@+id/pf_change_dir_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#88000000"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/pf_change_dir_list_content"
+            android:layout_width="wrap_content"
+            android:layout_height="380dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-382dp"
+            android:background="@android:color/white">
+
+            <ListView
+                android:id="@+id/pf_change_dir_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="#e5e5e5"
+                android:dividerHeight="1px"
+                android:scrollbars="none" />
+        </FrameLayout>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/pf_photo_gallery_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/title_bg"
+        android:clickable="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/pf_gallery_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawablePadding="2dp"
+            android:drawableRight="@drawable/change_dir_arrow"
+            android:gravity="center_vertical"
+            android:text="所有图片"
+            android:textColor="@android:color/white"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/pf_gallery_choose_all"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="全部选择"
+            android:textColor="@android:color/white"
+            android:textSize="15dp" />
+    </RelativeLayout>
+</RelativeLayout>
 </LinearLayout>

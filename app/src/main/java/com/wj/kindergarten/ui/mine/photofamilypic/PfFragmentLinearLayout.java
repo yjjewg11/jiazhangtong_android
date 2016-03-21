@@ -17,6 +17,11 @@ import com.wj.kindergarten.utils.CGLog;
 public class PfFragmentLinearLayout extends LinearLayout {
 
     private FrameLayout contentFl;
+
+    public void setContentFl(FrameLayout contentFl) {
+        this.contentFl = contentFl;
+    }
+
     private int poor;
 
     public int getFlTopMargin(){
@@ -50,7 +55,6 @@ public class PfFragmentLinearLayout extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        contentFl = (FrameLayout) findViewById(R.id.back_pf_scroll_fl);
     }
 
     int startY;

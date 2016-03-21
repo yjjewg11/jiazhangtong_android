@@ -1,9 +1,7 @@
 package com.wj.kindergarten.ui.main;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,9 +14,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,11 +21,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.ant.liao.GifView;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfAlbumListSun;
@@ -52,14 +45,12 @@ import com.wj.kindergarten.ui.mine.photofamilypic.PfFusionFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfLoadDataProxy;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumFragment;
-import com.wj.kindergarten.ui.mine.photofamilypic.PointPositionListener;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.observer.ObserverFamilyUuid;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Constant.BitmapUtil;
-import com.wj.kindergarten.utils.Constant.FastBlur;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
-import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.PopWindowUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -69,11 +60,6 @@ import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.annotation.view.ViewInject;
 
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +86,7 @@ public class PhotoFamilyFragment extends Fragment{
     private RelativeLayout pf_pic_left_bt;
     private TextView pf_pic_center_tv;
     private RelativeLayout pf_pic_right_iv;
-    private FinalDb db;
+    private FinalDb familyObjDb;
     private FusionListFragment pfFusionListFragment;
     private TextView pf_background_show_number;
     private List<PfAlbumListSun> pfAlbumListSunList = new ArrayList<>();
@@ -117,6 +103,7 @@ public class PhotoFamilyFragment extends Fragment{
     private PfLoadDataProxy pfProxyLoadData;
     private ImageView pf_family_gif;
     private TextView photo_family_pic_tv_upload;
+    private FinalDb alreadyPathDb;
 
 
     public ObserverFamilyUuid getObserver() {
@@ -142,17 +129,22 @@ public class PhotoFamilyFragment extends Fragment{
         popNewData.showAsDropDown(pf_backGround_family_name,0,20);
     }
 
-    int successCount = 0;
     public void startGif(){
-        successCount++;
+        //每成功一次，进行数据库查询还有多少未显示。
+        String sql = "status ='1' or status = '3';";
+//        and family_uuid = '"+currentFamily_uuid+"';";
+        List<AlreadySavePath> alreadySavePathList = alreadyPathDb.findAllByWhere(AlreadySavePath.class, sql);
+        if(alreadySavePathList == null || alreadySavePathList.size() == 0){
+            stopGif();
+            return;
+        }
         if(pf_family_gif.getVisibility() == View.INVISIBLE){
             pf_family_gif.setVisibility(View.VISIBLE);
             photo_family_pic_tv_upload.setVisibility(View.VISIBLE);
         }
-        photo_family_pic_tv_upload.setText(""+successCount);
+        photo_family_pic_tv_upload.setText(""+alreadySavePathList.size());
     }
     public void stopGif(){
-        successCount = 0;
         if(pf_family_gif != null){
             pf_family_gif.setVisibility(View.INVISIBLE);
             photo_family_pic_tv_upload.setVisibility(View.INVISIBLE);
@@ -228,8 +220,9 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void initDb() {
-        db = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
-        dbFamilyAlbum = FinalDb.create(getActivity(),GloablUtils.FAMILY_UUID);
+        alreadyPathDb = FinalUtil.getAlreadyUploadDb(getActivity());
+        familyObjDb = FinalUtil.getFamilyUuidObjectDb(getActivity());
+        dbFamilyAlbum = FinalUtil.getAllFamilyAlbum(getActivity());
         pfProxyLoadData = new PfLoadDataProxy(getActivity(),handler);
     }
 
@@ -313,6 +306,8 @@ public class PhotoFamilyFragment extends Fragment{
     }
     private void initHeadViewData() {
         if(pfAlbumListSun == null) return;
+        int position = pfAlbumListSunList.indexOf(pfAlbumListSun);
+        pfAlbumListSun = pfAlbumListSunList.get(position);
         if(TextUtils.isEmpty(pfAlbumListSun.getTitle())) return;
         int count = 0;
         if(pfAlbumListSun.getPhoto_count() != null && !TextUtils.isEmpty(pfAlbumListSun.getPhoto_count())){
@@ -322,7 +317,7 @@ public class PhotoFamilyFragment extends Fragment{
         pf_background_show_number.setVisibility(View.VISIBLE);
         if(count > 1000){
             n =  pfAlbumListSun.getPhoto_count().substring(0,1);
-            n = n+".k";
+            n = n+" k";
         }else if(count > 0){
             n = pfAlbumListSun.getPhoto_count();
         }else {
@@ -344,6 +339,7 @@ public class PhotoFamilyFragment extends Fragment{
         if(TextUtils.isEmpty(text)){
             text = "家庭相册--" + topPosition;
         }
+        pf_pic_center_tv.setText("" + text);
         pf_backGround_family_name.setText("" + text);
 
     }
@@ -361,8 +357,7 @@ public class PhotoFamilyFragment extends Fragment{
         pf_backGround_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                  Intent intent = new Intent(getActivity(), PfAlbumListActivity.class);
-//                startActivity(intent);
+                startAlbumInfo();
             }
         });
         photo_family_pic_tv_upload.setOnClickListener(new View.OnClickListener() {
@@ -427,19 +422,23 @@ public class PhotoFamilyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 //点击启动相册详细页面
-                if (pfAlbumListSun == null) {
-                    ToastUtils.showMessage("暂无相册信息!");
-                    return;
-                }
-                Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
-                intent.putExtra("uuid", currentFamily_uuid);
-                MainActivity.instance.startActivityForResult(intent, GloablUtils.UPDATE_SUCCESSED_REFRESH);
+                startAlbumInfo();
                 popupWindow.dismiss();
             }
         });
 
         Utils.setPopWindow(popupWindow);
         popupWindow.showAsDropDown(pf_pic_left_bt);
+    }
+
+    private void startAlbumInfo() {
+        if (pfAlbumListSun == null) {
+            ToastUtils.showMessage("暂无相册信息!");
+            return ;
+        }
+        Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
+        intent.putExtra("uuid", currentFamily_uuid);
+        MainActivity.instance.startActivityForResult(intent, GloablUtils.UPDATE_SUCCESSED_REFRESH);
     }
 
     public void addRightListener() {
@@ -451,6 +450,11 @@ public class PhotoFamilyFragment extends Fragment{
         pop_of_choose_new_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<AllPfAlbumSunObject> list = familyObjDb.findAll(AllPfAlbumSunObject.class);
+                if(list == null || list.size() == 0) {
+                    ToastUtils.showMessage("您还没有上传过照片，请先上传照片！");
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), BoutiqueGalleryActivity.class);
 //                Bundle bundle = new Bundle();
 //                intent.putExtra("bundle",bundle);
@@ -488,6 +492,7 @@ public class PhotoFamilyFragment extends Fragment{
         tab_layout = (TabLayout) v.findViewById(R.id.common_tab_layout);
         back_pf_scroll_fl = (FrameLayout) v.findViewById(R.id.back_pf_scroll_fl);
         pf_background_show_number = (TextView) v.findViewById(R.id.pf_background_show_number);
+        pf_back_ll.setContentFl(back_pf_scroll_fl);
     }
 
 

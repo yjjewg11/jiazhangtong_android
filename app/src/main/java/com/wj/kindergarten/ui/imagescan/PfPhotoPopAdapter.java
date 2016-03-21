@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.ScanImageAndTime;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
@@ -23,10 +24,10 @@ import java.util.List;
  * @version: v1.0
  */
 public class PfPhotoPopAdapter extends BaseAdapter {
-    private List<PhotoDirModel> dataList;
+    private List<PhotoDirTimeModel> dataList;
     private PfUpGalleryActivity pfUpGalleryActivity = null;
 
-    public PfPhotoPopAdapter(PfUpGalleryActivity pfUpGalleryActivity, List<PhotoDirModel> dataList) {
+    public PfPhotoPopAdapter(PfUpGalleryActivity pfUpGalleryActivity, List<PhotoDirTimeModel> dataList) {
         this.dataList = dataList;
         this.pfUpGalleryActivity = pfUpGalleryActivity;
     }
@@ -60,9 +61,9 @@ public class PfPhotoPopAdapter extends BaseAdapter {
         } else {
             holder = (Holder) convertView.getTag();
         }
-        PhotoDirModel item = dataList.get(position);
+        PhotoDirTimeModel item = dataList.get(position);
         String dirName = item.getDirName();
-        ArrayList<String> paths = item.getPaths();
+        ArrayList<ScanImageAndTime> paths = item.getPaths();
         if (paths != null) {
             holder.sub.setText(paths.size() + "张");
         } else {
@@ -71,11 +72,11 @@ public class PfPhotoPopAdapter extends BaseAdapter {
         holder.text.setText(dirName);
         if (parent.getContext().getString(R.string.all_photo).equals(dirName)) {
             if (paths != null && paths.size() > 1) {
-                ImageLoaderUtil.displayImage("file://" + paths.get(1), holder.image);
+                ImageLoaderUtil.displayImage("file://" + paths.get(1).getPath(), holder.image);
             }
         } else {
             if (paths != null && paths.size() > 0) {
-                ImageLoaderUtil.displayImage("file://" + paths.get(0), holder.image);
+                ImageLoaderUtil.displayImage("file://" + paths.get(0).getPath(), holder.image);
             }
         }
         if (pfUpGalleryActivity != null && !Utils.stringIsNull(dirName)) {

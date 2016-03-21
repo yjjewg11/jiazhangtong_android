@@ -28,6 +28,7 @@ import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
 
+
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,7 +41,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 
 
@@ -137,6 +137,8 @@ public class UploadFile {
                         super.onProgress(bytesWritten, totalSize);
                         progressCallBack.progress((int)bytesWritten, (int)totalSize);
                     }
+
+
                 });
             } catch (Exception e) {
                 e.printStackTrace();

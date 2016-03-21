@@ -62,7 +62,7 @@
             android:layout_height="match_parent" />
         <EditText
             android:id="@+id/add_family_relation"
-            android:hint="请输入宝宝对Ta的称呼"
+            android:hint="家庭昵称"
             style="@style/add_family_edit_style"
             android:layout_alignParentRight="true"
             android:minWidth="100dp"

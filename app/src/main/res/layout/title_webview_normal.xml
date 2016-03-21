@@ -30,7 +30,7 @@
                 android:maxHeight="40dp"
                 android:maxWidth="40dp"
                 android:scaleType="center"
-                android:src="@drawable/title_back" />
+                android:src="@drawable/all_arrow" />
         </LinearLayout>
 
         <LinearLayout

@@ -56,6 +56,7 @@ import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 import com.wj.kindergarten.ui.more.ListenScrollView;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -66,9 +67,11 @@ import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
 
 import net.tsz.afinal.FinalDb;
+import net.tsz.afinal.db.sqlite.DbModel;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -135,6 +138,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     };
     private TextView pf_fragment_extra_dianzan_count;
     private List<PfInfoDianZanObj> dianZanList;
+    private FinalDb dbObj;
 
     public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter, PfSingleInfoFragment pfSingleInfoFragment) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
@@ -147,9 +151,10 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
+        dbObj = FinalUtil.getFamilyUuidObjectDb(getActivity());
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
         progressBar = (ProgressBar) innerView.findViewById(R.id.pf_gallery_fragment_progressBar);
@@ -171,9 +176,18 @@ public class PFSingleObjectInfoFragment extends Fragment {
         pf_gallery_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //查询所有照片地址，进行显示.
                 ArrayList<String> list = new ArrayList();
-                list.add(sunObject.getPath());
-                Utils.carouselPic(getActivity(), 0, (ArrayList<String>) list);
+                String sql = "select path from "+GloablUtils.FAMILY_UUID_OBJECT_TABLE_NAME+";";
+                List<DbModel> listDb =  dbObj.findDbModelListBySQL(sql);
+                Iterator<DbModel> iterator = listDb.iterator();
+                while (iterator.hasNext()){
+                    DbModel dbModel = iterator.next();
+                    list.add((String) dbModel.get("path"));
+                }
+                int position = list.indexOf(sunObject.getPath());
+                if(position < 0) position = 0;
+                Utils.carouselPic(getActivity(), position,list,false);
             }
         });
         pf_single_scroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -319,6 +333,18 @@ public class PFSingleObjectInfoFragment extends Fragment {
         Utils.setPopWindow(popAssessWindow);
         popAssessWindow.showAsDropDown(textViews[1], Gravity.BOTTOM, 0, 0);
     }
+    private float convertFloat(int number) {
+        return Float.valueOf(number);
+    }
+
+    private void showBitmap(Bitmap loadedImage) {
+        float height = (convertFloat(WindowUtils.dm.widthPixels) / convertFloat(loadedImage.getWidth())) * convertFloat(loadedImage.getHeight());
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) pf_gallery_image.getLayoutParams();
+        params.height = (int) height;
+        pf_gallery_image.setLayoutParams(params);
+        pf_gallery_image.requestLayout();
+        pf_gallery_image.setImageBitmap(loadedImage);
+    }
 
     private void showPic() {
         if (sunObject != null) {
@@ -328,7 +354,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                     path = path.substring(0, path.indexOf("@"));
                 }
             }
-            ImageLoaderUtil.displayAlbumImageListener(path, pf_gallery_image, new ImageLoadingListener() {
+            ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
 
@@ -341,6 +367,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    showBitmap(loadedImage);
                     progressBar.setVisibility(View.GONE);
                 }
 

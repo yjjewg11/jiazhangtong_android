@@ -102,6 +102,7 @@ public final class DecodeHandler extends Handler {
                     Looper.prepare();
                     Toast.makeText(context, "图片格式有误", Toast.LENGTH_SHORT)
                             .show();
+                    context.sendBroadcast(new Intent("parse_QR_code_failed"));
                     Looper.loop();
                 } else {
                     Log.i("123result", result.toString());

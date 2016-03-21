@@ -1,8 +1,6 @@
 package com.wj.kindergarten.ui.map;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -116,6 +114,11 @@ public class RoutePlanActivity extends BaseActivity {
                     CGLog.v("打印开车全部路线 : " + result.getRouteLines());
                 }
             }
+
+//            @Override
+//            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
+//
+//            }
         });
     }
 
