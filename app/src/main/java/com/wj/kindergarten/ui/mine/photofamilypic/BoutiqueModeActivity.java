@@ -94,7 +94,6 @@ public class BoutiqueModeActivity extends BaseActivity {
             if(object == null) object = new PfModeNameObject();
             object.setHerald(boutiqueSingleInfoObject.getHerald());
             object.setKey(boutiqueSingleInfoObject.getTemplate_key());
-            object.setTitle(boutiqueSingleInfoObject.getTitle());
             object.setAlbumUUid(boutiqueSingleInfoObject.getUuid());
         }
     }
@@ -104,6 +103,7 @@ public class BoutiqueModeActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 object = (PfModeNameObject) adapter.getItem(position);
+                object.setTitle("");
                 adapter.setKey(object.getKey());
                 adapter.notifyDataSetChanged();
             }

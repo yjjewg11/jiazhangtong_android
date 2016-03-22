@@ -11,19 +11,22 @@
 
         <!--android:background="@drawable/album_pf_background"-->
         <FrameLayout
-            android:layout_marginTop="15dp"
+            android:paddingTop="@dimen/margin_5"
+            android:padding="0.5dp"
+            android:background="@drawable/pf_back_border"
+            android:layout_marginTop="20dp"
             android:id="@+id/pic_back_fl"
             android:layout_centerHorizontal="true"
-            android:layout_width="80dp"
-            android:layout_height="80dp">
+            android:layout_width="70dp"
+            android:layout_height="70dp">
+            <!--android:background="@drawable/album_pf_background"-->
 
             <ImageView
                 android:layout_gravity="center"
-                android:background="@drawable/album_pf_background"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/pf_backGround_image" />
 
         </FrameLayout>
@@ -31,9 +34,9 @@
 
         <TextView
             android:layout_below="@+id/pic_back_fl"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"

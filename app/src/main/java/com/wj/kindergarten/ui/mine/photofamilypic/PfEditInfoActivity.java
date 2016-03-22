@@ -76,7 +76,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        setTitleText("相册信息", "保存");
+        setTitleText("相册信息");
         initViews();
         initClicks();
         initData();
@@ -111,9 +111,13 @@ public class PfEditInfoActivity extends BaseActivity {
         });
     }
 
+    String initTitle;
+    String initHearld;
     private void initHttpData() {
         title = info.getTitle();
         hearld = info.getHerald();
+        initTitle = info.getTitle();
+        initHearld = info.getHerald();
         tv_album_name.setText("" + title);
         ImageLoaderUtil.displayImage(hearld, iv_appear_image);
         memer_linear.removeAllViews();
@@ -126,11 +130,24 @@ public class PfEditInfoActivity extends BaseActivity {
         memer_linear.removeAllViews();
         if (memberList != null && memberList.size() > 0) {
             for (final PFAlbumMember member : memberList) {
-                View view = View.inflate(this, R.layout.pf_album_member_info, null);
-                TextView pf_album_member_name = (TextView) view.findViewById(R.id.pf_album_member_name);
-                TextView pf_album_member_phone = (TextView) view.findViewById(R.id.pf_album_member_phone);
+                View addView = View.inflate(this, R.layout.pf_album_member_info, null);
+                TextView pf_album_member_name = (TextView) addView.findViewById(R.id.pf_album_member_name);
+                TextView pf_album_member_phone = (TextView) addView.findViewById(R.id.pf_album_member_phone);
                 pf_album_member_name.setText(""+ Utils.isNull(member.getFamily_name()));
                 pf_album_member_phone.setText(""+Utils.isNull(member.getTel()));
+                addView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        ToastUtils.showDialog(PfEditInfoActivity.this, "提示！", "您确认删除此成员吗?", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                deleteMember(member);
+                            }
+                        });
+                        return false;
+                    }
+                });
                 pf_album_member_phone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -158,17 +175,38 @@ public class PfEditInfoActivity extends BaseActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         if(dialogInfo != null) dialogInfo.cancel();
                                         dialog.dismiss();
-                                        memberList.remove(member);
-                                        addAllViews();
+                                        deleteMember(member);
                                     }
                                 });
                             }
                         });
                     }
                 });
-                memer_linear.addView(view);
+                memer_linear.addView(addView);
             }
         }
+    }
+
+    public void deleteMember(final PFAlbumMember member){
+        commonDialog.show();
+        UserRequest.deleteAlbumMember(this, member.getUuid(), new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                if (commonDialog.isShowing()) commonDialog.cancel();
+                memberList.remove(member);
+                addAllViews();
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
     }
 
     private void initData() {
@@ -179,19 +217,23 @@ public class PfEditInfoActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-        saveAlbum();
+
     }
 
 
 
 
     private void saveAlbum() {
+        showCommonDialog();
         String uuid = pfAlbumInfo == null ? "" : pfAlbumInfo.getData().getUuid();
         UserRequest.AddOrEditPfAlbum(this, title, uuid, "0", hearld, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                cancleCommonDialog();
                 ToastUtils.showMessage("保存成功!");
                 editObject();
+                setOwnResult();
+                finish();
             }
 
             @Override
@@ -298,7 +340,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
         editText = new EditText(this);
         builder = new AlertDialog.Builder(this);
-        editText.setText(""+Utils.isNull(title));
+        editText.setText("" + Utils.isNull(title));
         dialog = builder.setTitle("设置标题").setNegativeButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -315,7 +357,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
     private void editMember(AddFamilyMemberParams params) {
         Intent intent = new Intent(PfEditInfoActivity.this,AddFamilyMemberActivity.class);
-        intent.putExtra("member",params);
+        intent.putExtra("member", params);
         startActivityForResult(intent, GloablUtils.ADD_FAMILY_MEMBER);
     }
 
@@ -337,8 +379,22 @@ public class PfEditInfoActivity extends BaseActivity {
 
     @Override
     protected void titleLeftButtonListener() {
-        setOwnResult();
-        super.titleLeftButtonListener();
+        showSave();
+//        super.titleLeftButtonListener();
+    }
+
+    private void showSave() {
+            if(initTitle != title || initHearld != hearld){
+                ToastUtils.showDialog(this, "提示!", "相册信息已修改,是否保存?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        saveAlbum();
+                    }
+                });
+            }else {
+                finish();
+            }
     }
 
     private void setOwnResult(){
@@ -347,8 +403,9 @@ public class PfEditInfoActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        setOwnResult();
-        super.onBackPressed();
+        showSave();
+//        setOwnResult();
+//        super.onBackPressed();
 
     }
 

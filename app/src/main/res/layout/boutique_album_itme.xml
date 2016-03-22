@@ -18,7 +18,7 @@
             android:layout_height="200dp">
             <ImageView
                 android:id="@+id/boutique_album_item_image"
-                android:src="@drawable/new_album"
+                android:src="@drawable/zhanweitu"
                 android:scaleType="centerCrop"
                 android:background="@color/share_background"
                 android:layout_width="match_parent"

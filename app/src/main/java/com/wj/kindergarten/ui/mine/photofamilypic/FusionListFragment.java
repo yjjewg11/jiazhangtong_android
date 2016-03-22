@@ -38,6 +38,7 @@ import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
+import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.FinalDb;
@@ -106,26 +107,31 @@ public class FusionListFragment extends Fragment implements Watcher{
         String sql = "family_uuid = '"+family_uuid+"';";
         List<AllPfAlbumSunObject> list = db.findAllByWhere(AllPfAlbumSunObject.class, sql);
         if(list != null ){
-            Collections.sort(list, new Comparator<AllPfAlbumSunObject>() {
-                @Override
-                public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {
-                    int cha = 0;
-                    long t1 = TimeUtil.getYMDHMSTime(o.getPhoto_time());
-                    long t2 = TimeUtil.getYMDHMSTime(t.getPhoto_time());
-                    if(t2 - t1 >= 0){
-                        cha = 1;
-                    }else {
-                        cha = -1;
-                    }
-
-                    return cha;
-                }
-            });
+            sortList(list);
             allObjects.clear();
             allObjects.addAll(list);
             ownGridAdapter.setQueryList(queryGroupCounts,allObjects);
         }
     }
+
+    private void sortList(List<AllPfAlbumSunObject> list) {
+        Collections.sort(list, new Comparator<AllPfAlbumSunObject>() {
+            @Override
+            public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {
+                int cha = 0;
+                long t1 = TimeUtil.getYMDHMSTime(o.getPhoto_time());
+                long t2 = TimeUtil.getYMDHMSTime(t.getPhoto_time());
+                if (t2 - t1 >= 0) {
+                    cha = 1;
+                } else {
+                    cha = -1;
+                }
+
+                return cha;
+            }
+        });
+    }
+
     @ViewInject(id = R.id.fusion_list_fragment_stick_grid)
     private StickyGridHeadersGridView fusion_list_fragment_stick_grid;
     private FusionListOwnGridAdapter ownGridAdapter;
@@ -220,6 +226,7 @@ public class FusionListFragment extends Fragment implements Watcher{
 //                String time = TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getPhoto_time());
 //                String sql = "family_uuid = '"+family_uuid+"' and strftime('%Y-%m-%d',photo_time) = '"+time+"'";
                 List<AllPfAlbumSunObject> shortList =  db.findAll(AllPfAlbumSunObject.class);
+                sortList(shortList);
                 position =  shortList.indexOf(ownGridAdapter.getItem(position));
                 new TransportListener(getActivity(),position,shortList,null).onItemClick(parent,view,position,id);
             }

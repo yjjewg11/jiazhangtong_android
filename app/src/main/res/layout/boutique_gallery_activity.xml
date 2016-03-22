@@ -81,6 +81,7 @@
             <TextView
                 android:id="@+id/boutique_gallery_confirms"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:layout_alignParentRight="true"
                 android:text="确定(0)"
                 android:layout_width="wrap_content"

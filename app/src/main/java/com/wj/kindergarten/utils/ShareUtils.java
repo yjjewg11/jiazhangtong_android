@@ -246,9 +246,9 @@ public class ShareUtils {
         intent.putExtra("url",url);
         intent.putExtra("isListFrom",false);
         context.startActivity(intent);
-        if(context instanceof Activity){
-            ((Activity) context).finish();
-        }
+//        if(context instanceof Activity){
+//            ((Activity) context).finish();
+//        }
     }
 
     private static void copyAddress(String url) {

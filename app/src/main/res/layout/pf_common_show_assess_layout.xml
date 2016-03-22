@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp" />
     <FrameLayout
+        android:layout_weight="1"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -33,5 +34,26 @@
         android:id="@+id/pf_comon_show_assess_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/pf_common_show_asseess_send"
+        android:paddingRight="@dimen/margin_20"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:hint="写下您的评论"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_marginLeft="@dimen/margin_10"
+            android:src="@drawable/send2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

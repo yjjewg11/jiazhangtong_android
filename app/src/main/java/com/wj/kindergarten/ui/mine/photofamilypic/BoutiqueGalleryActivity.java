@@ -44,6 +44,7 @@ import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
@@ -530,6 +531,10 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
             if (isCut) {
 
             } else {
+                if(adapter.getSelectList().size() < 5){
+                    ToastUtils.showMessage("至少选择5张照片!");
+                    return;
+                }
                 Intent intent = new Intent(this, PfChoosedPicActivity.class);
                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
                 startActivityForResult(intent, PF_CHOOSE_PIC, null);

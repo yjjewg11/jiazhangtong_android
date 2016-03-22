@@ -88,6 +88,7 @@
             android:layout_alignParentRight="true" />
     </LinearLayout>
     <TextView
+        android:visibility="gone"
         android:id="@+id/pf_edit_family_delete"
         android:background="@drawable/add_family_add_background"
         android:textColor="@color/white"

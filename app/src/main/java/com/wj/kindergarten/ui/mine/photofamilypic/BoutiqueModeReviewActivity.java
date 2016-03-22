@@ -78,6 +78,12 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         loadData(1);
     }
 
+    @Override
+    protected void titleLeftButtonListener() {
+        boutique_review_webview.destroy();
+        super.titleLeftButtonListener();
+    }
+
     private void getData() {
         Intent intent = getIntent();
         objectList = (ArrayList<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
@@ -89,6 +95,18 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
             mp3 = modeObj.getMp3();
             key = modeObj.getKey();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        boutique_review_webview.onResume();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        boutique_review_webview.onPause();
+        super.onPause();
     }
 
     @Override

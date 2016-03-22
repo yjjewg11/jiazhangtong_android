@@ -139,10 +139,11 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private TextView pf_fragment_extra_dianzan_count;
     private List<PfInfoDianZanObj> dianZanList;
     private FinalDb dbObj;
-
-    public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter, PfSingleInfoFragment pfSingleInfoFragment) {
+    private int position;
+    public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter, PfSingleInfoFragment pfSingleInfoFragment,int position) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
         this.pfInfoFragmentAdapter = pfInfoFragmentAdapter;
+        this.position = position;
     }
 
     public PFSingleObjectInfoFragment() {
@@ -155,6 +156,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
         dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
         dbObj = FinalUtil.getFamilyUuidObjectDb(getActivity());
+        sunObject = pfInfoFragmentAdapter.getPositionObject(position);
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
         progressBar = (ProgressBar) innerView.findViewById(R.id.pf_gallery_fragment_progressBar);
@@ -222,10 +224,10 @@ public class PFSingleObjectInfoFragment extends Fragment {
     }
 
     private void initData() {
-        if (pfInfoFragmentAdapter != null) {
-            sunObject = pfInfoFragmentAdapter.getCurrentObject();
+//        if (pfInfoFragmentAdapter != null) {
+//            sunObject = pfInfoFragmentAdapter.getCurrentObject();
             updatePfInfo();
-        }
+//        }
     }
 
     private void initTopView() {
@@ -271,7 +273,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void updatePfInfo() {
         pf_gallery_fragment_extra_info_description.setText("" + Utils.isNull(sunObject.getNote()));
         pf_gallery_fragment_extra_info_time.setText("拍摄时间: " + Utils.isNull(sunObject.getPhoto_time()));
-        pf_gallery_fragment_extra_info_address.setText("拍摄地点: " + Utils.isNull(sunObject.getAddress()));
+        pf_gallery_fragment_extra_info_address.setText("拍摄地点: " + Utils.isNull(sunObject.getAddress()).replace("null",""));
         pf_gallery_fragment_extra_info_human.setText("上传人: " + Utils.isNull(sunObject.getCreate_user()));
     }
 
@@ -348,35 +350,50 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     private void showPic() {
         if (sunObject != null) {
-            String path = sunObject.getPath();
-            if (!TextUtils.isEmpty(path)) {
-                if (path.contains("@")) {
-                    path = path.substring(0, path.indexOf("@"));
+            String lishipath = sunObject.getPath();
+            if (!TextUtils.isEmpty(lishipath)) {
+                if (lishipath.contains("@")) {
+                    lishipath = lishipath.substring(0, lishipath.indexOf("@"));
                 }
             }
-            ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
+            pf_gallery_image.setTag(lishipath);
+            Bitmap bitmap = NativeImageLoader.getInstance().getBitmapFromMemCache(lishipath);
+            if(bitmap == null){
+                loadBitmap(lishipath);
+            }else {
+                showBitmap(bitmap);
+                progressBar.setVisibility(View.GONE);
+            }
 
-                }
-
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                    progressBar.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    showBitmap(loadedImage);
-                    progressBar.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-                    progressBar.setVisibility(View.GONE);
-                }
-            });
         }
+    }
+
+    private void loadBitmap(final String path) {
+        ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                String tag = pf_gallery_image.getTag().toString();
+                if(tag != null && !tag.equals(path)) return;
+                showBitmap(loadedImage);
+                NativeImageLoader.getInstance().addBitmapToMemoryCache(path,loadedImage);
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void queSingleAssess() {

@@ -315,7 +315,27 @@ public class CGSharedPreference {
     public  void setPfMaxAndMinTime(String [] times){
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString("pf_maxtime",times[0]);
-        editor.putString("pf_mintime",times[1]);
+        editor.putString("pf_mintime", times[1]);
+        editor.commit();
+    }
+
+    public static void setCanReadConstact(boolean open){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("openreadconstanctpermession", open);
+        editor.commit();
+    }
+    public static boolean getCanReadConstact(){
+        SharedPreferences preferences= getSharedPreferences();
+        return preferences.getBoolean("openreadconstanctpermession",false);
+    }
+
+    public static boolean initReadConstact() {
+        SharedPreferences preferences= getSharedPreferences();
+        return preferences.getBoolean("initReadConstact",false);
+    }
+    public static void alreadyInitReadConstact(){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("initReadConstact", true);
         editor.commit();
     }
 }

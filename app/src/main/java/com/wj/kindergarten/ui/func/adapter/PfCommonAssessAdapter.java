@@ -91,12 +91,12 @@ public class PfCommonAssessAdapter extends BaseAdapter {
         holder.common_assess_item_write_assess.setOnClickListener(bottomListener);
         final PfSingleAssessObject object = objectList.get(position);
         if (object != null) {
-            if (position == objectList.size() - 1) {
-                holder.common_assess_item_write_assess.setVisibility(View.VISIBLE);
-                holder.common_assess_item_write_assess.setOnClickListener(bottomListener);
-            } else {
-                holder.common_assess_item_write_assess.setVisibility(View.GONE);
-            }
+//            if (position == objectList.size() - 1) {
+//                holder.common_assess_item_write_assess.setVisibility(View.VISIBLE);
+//                holder.common_assess_item_write_assess.setOnClickListener(bottomListener);
+//            } else {
+//                holder.common_assess_item_write_assess.setVisibility(View.GONE);
+//            }
             if(TextUtils.isEmpty(object.getCreate_user())){
                 holder.common_assess_item_write_assess.setVisibility(View.VISIBLE);
                 holder.common_assess_item_rl.setVisibility(View.INVISIBLE);

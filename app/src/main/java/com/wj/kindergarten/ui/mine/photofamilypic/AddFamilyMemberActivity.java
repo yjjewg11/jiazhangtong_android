@@ -21,6 +21,7 @@ import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AddFamilyMemberParams;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.MyConstact;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -53,7 +54,7 @@ public class AddFamilyMemberActivity extends BaseActivity {
     @ViewInject(id = R.id.add_family_member_get_contact,click = "onClick")
     TextView add_family_member_get_contact;
     private AddFamilyMemberParams member;
-    private boolean allowPutIn;
+    private boolean allowPutIn = true;
 
 
     @Override
@@ -75,55 +76,22 @@ public class AddFamilyMemberActivity extends BaseActivity {
 
     }
     private void initContactList() {
-        List<MyConstact> contactList = new ArrayList<MyConstact>();
 
         // 查询联系人数据
+        String [] sec = new String[]{
+                ContactsContract.Contacts._ID
+        };
         Cursor cursor = getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        while (cursor.moveToNext()) {
-            MyConstact contact = new MyConstact();
-            // 获取联系人的Id
-            String contactId = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Contacts._ID));
-            // 获取联系人的姓名
-            String contactName = cursor.getString(cursor
-                    .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            contact.setContantName(contactName);
-
-            // 有联系人姓名得到对应的拼音
-//            String pinyin = PinyinUtils.getPinyin(contactName);
-//            contact.setPinyin(pinyin);
-
-            Cursor phoneCursor = getContentResolver().query(
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null,
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "="
-                            + contactId, null, null);
-
-            while (phoneCursor.moveToNext()) {
-                String phoneNumber = phoneCursor
-                        .getString(phoneCursor
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                contact.setPhoneNumber(phoneNumber);
-            }
-
-            if (null != phoneCursor && !phoneCursor.isClosed()) {
-                phoneCursor.close();
-            }
-
-            contactList.add(contact);
+                ContactsContract.Contacts.CONTENT_URI, sec, null, null, null);
+        CGLog.v("打印查询数量 : "+cursor.getCount());
+        if(cursor != null ){
+            CGSharedPreference.setCanReadConstact(true);
+        }else {
+            CGSharedPreference.setCanReadConstact(false);
         }
 
         if (null != cursor && !cursor.isClosed()) {
             cursor.close();
-        }
-
-        CGLog.v(contactList.toString());
-
-        if(contactList == null || contactList.size() == 0){
-            allowPutIn = false;
-        }else {
-            allowPutIn = true;
         }
     }
 
@@ -156,8 +124,11 @@ public class AddFamilyMemberActivity extends BaseActivity {
     }
 
     private void addMember() {
-        initContactList();
-        if(allowPutIn){
+        if(!CGSharedPreference.initReadConstact()){
+            initContactList();
+            CGSharedPreference.alreadyInitReadConstact();
+        }
+        if(CGSharedPreference.getCanReadConstact()){
             startConstact();
         }else {
             ToastUtils.showMessage("无法获取联系人，请到系统设置里开启联系人权限!");
@@ -219,10 +190,10 @@ public class AddFamilyMemberActivity extends BaseActivity {
     }
 
     private boolean checkData() {
-        if(!Utils.checkEdit(editName)) {
-            editName.setError("请输入正确用户名!");
-            return false;
-        }
+//        if(!Utils.checkEdit(editName)) {
+//            editName.setError("请输入正确用户名!");
+//            return false;
+//        }
         if(!Utils.checkEdit(editRelation)) {
             editRelation.setError("请输入您和宝宝的关系!");
             return false;
@@ -251,9 +222,15 @@ public class AddFamilyMemberActivity extends BaseActivity {
     }
     private String[] getPhoneContacts(Uri uri) {
         String[] contact = new String[2];
+        try{
+
         //得到ContentResolver对象
         ContentResolver cr = getContentResolver();
         //取得电话本中开始一项的光标
+        String [] columns = {
+                ContactsContract.Contacts._ID,
+                ContactsContract.PhoneLookup.DISPLAY_NAME,
+        };
         Cursor cursor = cr.query(uri, null, null, null, null);
 
         if(cursor != null){
@@ -278,6 +255,9 @@ public class AddFamilyMemberActivity extends BaseActivity {
             CGLog.v("get Contacts is fail");
         }
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return contact;
     }
 }

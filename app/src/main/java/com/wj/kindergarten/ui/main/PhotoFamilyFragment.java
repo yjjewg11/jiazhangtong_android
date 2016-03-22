@@ -279,7 +279,7 @@ public class PhotoFamilyFragment extends Fragment{
             popTop = new PopAttributes();
             popTop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
             popTop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-            popTop.setGrarity(Gravity.NO_GRAVITY);
+            popTop.setGrarity(Gravity.TOP|Gravity.RIGHT);
             popTop.setLeftOffset(0);
         }
         final TopViewAdapter topAdapter = new TopViewAdapter(getActivity(), pfAlbumListSunList,currentFamily_uuid);

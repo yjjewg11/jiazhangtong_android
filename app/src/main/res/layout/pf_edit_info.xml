@@ -160,13 +160,12 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:paddingTop="@dimen/margin_20"
                     android:id="@+id/pf_edit_info_invite"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/memer_linear"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:text="邀请更多亲戚家属共同维护相册"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -179,6 +178,11 @@
                     android:orientation="vertical" />
 
             </RelativeLayout>
+           <View
+               android:layout_marginBottom="120dp"
+               android:background="#86000000"
+               android:layout_width="match_parent"
+               android:layout_height="0.5dp"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
     </LinearLayout>

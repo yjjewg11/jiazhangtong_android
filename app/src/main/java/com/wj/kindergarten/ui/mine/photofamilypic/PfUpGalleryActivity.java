@@ -172,9 +172,10 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void saveUploadObj(SyncUploadPicObj obj) {
-        AlreadySavePath savePath =  uploadDb.findById(obj.getMd5(), AlreadySavePath.class);
-        if(savePath == null){
-            savePath = new AlreadySavePath();
+        String sql = "localPath = '"+obj.getMd5()+"';";
+        List<AlreadySavePath> list =  uploadDb.findAllByWhere(AlreadySavePath.class,sql);
+        if(list == null){
+            AlreadySavePath savePath = new AlreadySavePath();
             savePath.setStatus(0);
             savePath.setLocalPath(obj.getMd5());
             uploadDb.save(savePath);

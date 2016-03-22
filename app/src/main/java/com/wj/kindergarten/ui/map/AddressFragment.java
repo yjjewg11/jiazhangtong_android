@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.mapapi.search.route.WalkingRouteLine;
+//import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
@@ -31,7 +31,7 @@ public class AddressFragment extends Fragment {
     View view;
     private TextView tv_by_way_where,map_tv_time,tv_map_distance;
     private RelativeLayout map_route_container;
-    private List<WalkingRouteLine> routeList = new ArrayList<>();
+//    private List<WalkingRouteLine> routeList = new ArrayList<>();
     private PullToRefreshListView pullList;
     private MapRouteAdapter routeAdapter;
 
@@ -53,25 +53,26 @@ public class AddressFragment extends Fragment {
         return view;
     }
 
-    public void setRouteList(List<WalkingRouteLine> routeList){
-        this.routeList = routeList;
-        showView();
-    }
+//    public void setRouteList(List<WalkingRouteLine> routeList){
+//        this.routeList = routeList;
+//        showView();
+//    }
 
-    private void showView() {
-        if(routeList.size() == 0){
-            map_route_container.removeAllViews();
-            ((BaseActivity)getActivity()).noView(map_route_container);
-        }else{
-            routeAdapter.notifyDataSetChanged();
-        }
-    }
+//    private void showView() {
+//        if(routeList.size() == 0){
+//            map_route_container.removeAllViews();
+//            ((BaseActivity)getActivity()).noView(map_route_container);
+//        }else{
+//            routeAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     class MapRouteAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
-            return routeList.size();
+            return 0;
+//            return routeList.size();
         }
 
         @Override
@@ -97,12 +98,12 @@ public class AddressFragment extends Fragment {
             }else{
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            WalkingRouteLine plan = routeList.get(position);
-            if(plan != null){
-                viewHolder.map_tv_time.setText(""+plan.getDuration());
-                viewHolder.tv_by_way_where.setText(""+plan.getTitle());
-                viewHolder.tv_map_distance.setText(""+plan.getDistance());
-            }
+//            WalkingRouteLine plan = routeList.get(position);
+//            if(plan != null){
+//                viewHolder.map_tv_time.setText(""+plan.getDuration());
+//                viewHolder.tv_by_way_where.setText(""+plan.getTitle());
+//                viewHolder.tv_map_distance.setText(""+plan.getDistance());
+//            }
             return convertView;
         }
     }

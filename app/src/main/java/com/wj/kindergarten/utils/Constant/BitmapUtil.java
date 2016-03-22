@@ -17,7 +17,7 @@ public abstract class BitmapUtil {
             radius = 20;
         }
         long startMs = System.currentTimeMillis();
-        float scaleFactor = 6;//图片缩放比例；//模糊程度
+        float scaleFactor = 9;//图片缩放比例；//模糊程度
 
         Bitmap overlay = Bitmap.createBitmap(
                 (int) (bkg.getWidth() / scaleFactor),

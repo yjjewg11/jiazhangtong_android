@@ -13,16 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
-import com.baidu.mapapi.search.route.DrivingRouteResult;
-import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
-import com.baidu.mapapi.search.route.PlanNode;
-import com.baidu.mapapi.search.route.RoutePlanSearch;
-import com.baidu.mapapi.search.route.TransitRoutePlanOption;
-import com.baidu.mapapi.search.route.TransitRouteResult;
-import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
-import com.baidu.mapapi.search.route.WalkingRouteResult;
+
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.GeoPoint;
 import com.wj.kindergarten.bean.MapRouteData;
@@ -40,9 +31,9 @@ public class RoutePlanActivity extends BaseActivity {
     private ViewPager map_viewPager;
     private RadioButton[] radioButtons;
     private RadioGroup radioGroup;
-    private RoutePlanSearch mSearch;
-    private PlanNode enNode;
-    private PlanNode stNode;
+//    private RoutePlanSearch mSearch;
+//    private PlanNode enNode;
+//    private PlanNode stNode;
     private AddressFragment car, bus, walk;
 
     @Override
@@ -63,8 +54,8 @@ public class RoutePlanActivity extends BaseActivity {
         en = (GeoPoint) intent.getSerializableExtra("en");
         initViews();
         initMaps();
-        stNode = PlanNode.withLocation(new LatLng(st.getLat(), st.getLon()));
-        enNode = PlanNode.withLocation(new LatLng(en.getLat(), en.getLon()));
+//        stNode = PlanNode.withLocation(new LatLng(st.getLat(), st.getLon()));
+//        enNode = PlanNode.withLocation(new LatLng(en.getLat(), en.getLon()));
 //        mSearch.drivingSearch((new DrivingRoutePlanOption())
 //                .from(stNode).to(enNode));
 //        mSearch.transitSearch((new TransitRoutePlanOption())
@@ -72,54 +63,54 @@ public class RoutePlanActivity extends BaseActivity {
     }
 
     private void initMaps() {
-        mSearch = RoutePlanSearch.newInstance();
-        mSearch.setOnGetRoutePlanResultListener(new OnGetRoutePlanResultListener() {
-            @Override
-            public void onGetWalkingRouteResult(WalkingRouteResult result) {
-                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                    ToastUtils.showMessage("抱歉，未找到结果");
-                    return;
-                }
-                if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
-                    // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
-                    // result.getSuggestAddrInfo()
-                    ToastUtils.showMessage("起点或终点输入有歧义！");
-                    return;
-                }
-                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-//                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
-                    CGLog.v("打印推荐路线： " + result.getSuggestAddrInfo());
-                    CGLog.v("打印全部路线 : " + result.getRouteLines());
-                    CGLog.v("打印信息 : " + result.getTaxiInfo());
-                    result.getTaxiInfo();
-                    walk.setRouteList(result.getRouteLines());
-                }
-            }
-
-            @Override
-            public void onGetTransitRouteResult(TransitRouteResult result) {
-                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-//                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
-                    CGLog.v("打印公交推荐路线： " + result.getSuggestAddrInfo());
-                    CGLog.v("打印公交全部路线 : " + result.getRouteLines());
-//                    result.
-                }
-            }
-
-            @Override
-            public void onGetDrivingRouteResult(DrivingRouteResult result) {
-                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-//                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
-                    CGLog.v("打印开车推荐路线： " + result.getSuggestAddrInfo());
-                    CGLog.v("打印开车全部路线 : " + result.getRouteLines());
-                }
-            }
-
+//        mSearch = RoutePlanSearch.newInstance();
+//        mSearch.setOnGetRoutePlanResultListener(new OnGetRoutePlanResultListener() {
 //            @Override
-//            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
-//
+//            public void onGetWalkingRouteResult(WalkingRouteResult result) {
+//                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+//                    ToastUtils.showMessage("抱歉，未找到结果");
+//                    return;
+//                }
+//                if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
+//                    // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+//                    // result.getSuggestAddrInfo()
+//                    ToastUtils.showMessage("起点或终点输入有歧义！");
+//                    return;
+//                }
+//                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+////                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
+//                    CGLog.v("打印推荐路线： " + result.getSuggestAddrInfo());
+//                    CGLog.v("打印全部路线 : " + result.getRouteLines());
+//                    CGLog.v("打印信息 : " + result.getTaxiInfo());
+//                    result.getTaxiInfo();
+//                    walk.setRouteList(result.getRouteLines());
+//                }
 //            }
-        });
+//
+//            @Override
+//            public void onGetTransitRouteResult(TransitRouteResult result) {
+//                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+////                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
+//                    CGLog.v("打印公交推荐路线： " + result.getSuggestAddrInfo());
+//                    CGLog.v("打印公交全部路线 : " + result.getRouteLines());
+////                    result.
+//                }
+//            }
+//
+//            @Override
+//            public void onGetDrivingRouteResult(DrivingRouteResult result) {
+//                if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+////                    walk.setMapRouteData(new MapRouteData(result.getRouteLines()));
+//                    CGLog.v("打印开车推荐路线： " + result.getSuggestAddrInfo());
+//                    CGLog.v("打印开车全部路线 : " + result.getRouteLines());
+//                }
+//            }
+//
+////            @Override
+////            public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
+////
+////            }
+//        });
     }
 
     private void initViews() {
@@ -146,8 +137,8 @@ public class RoutePlanActivity extends BaseActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mSearch.walkingSearch((new WalkingRoutePlanOption())
-                                        .from(stNode).to(enNode));
+//                                mSearch.walkingSearch((new WalkingRoutePlanOption())
+//                                        .from(stNode).to(enNode));
                             }
                         },500);
                         return walk;
@@ -176,8 +167,8 @@ public class RoutePlanActivity extends BaseActivity {
                         break;
                     case 1:
                         id = R.id.check_bus;
-                        mSearch.transitSearch((new TransitRoutePlanOption())
-                                .from(stNode).city("北京").to(enNode));
+//                        mSearch.transitSearch((new TransitRoutePlanOption())
+//                                .from(stNode).city("北京").to(enNode));
                         break;
                     case 2:
                         id = R.id.check_walk;

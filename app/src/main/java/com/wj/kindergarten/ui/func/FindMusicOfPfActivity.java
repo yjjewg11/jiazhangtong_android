@@ -58,8 +58,8 @@ public class FindMusicOfPfActivity extends BaseActivity {
 
     @Override
     protected void titleLeftButtonListener() {
-        super.titleLeftButtonListener();
         stopMusic();
+        super.titleLeftButtonListener();
     }
 
     @Override

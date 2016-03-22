@@ -34,16 +34,14 @@ public class PfInfoFragmentAdapter extends FragmentPagerAdapter {
            notifyDataSetChanged();
     }
 
-    public AllPfAlbumSunObject getCurrentObject(){
-        if(viewPager != null){
-            return objectList.get(viewPager.getCurrentItem());
-        }
-         return null;
+    public AllPfAlbumSunObject getPositionObject(int position){
+
+         return objectList.get(position);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return new PFSingleObjectInfoFragment(this,pfSingleInfoFragment);
+        return new PFSingleObjectInfoFragment(this,pfSingleInfoFragment,position);
     }
 
     @Override

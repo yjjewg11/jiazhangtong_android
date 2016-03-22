@@ -109,6 +109,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     private FrameLayout boutqiue_single_info_bottom;
     private ObjectAnimator animTop;
     private ObjectAnimator animBottom;
+    private LinearLayout pf_common_show_asseess_send;
     //在主页面底部加入输入框后，在弹出框弹出时，会将它隐藏，所以添加到popwindow中
 //    private LinearLayout pf_comon_show_assess_linear;
 
@@ -356,6 +357,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     private void showAssessList() {
         if (assessView == null) {
             assessView = View.inflate(this, R.layout.pf_common_show_assess_layout, null);
+            pf_common_show_asseess_send = (LinearLayout)assessView.findViewById(R.id.pf_common_show_asseess_send);
+            pf_common_show_asseess_send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomShow();
+                }
+            });
             pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
             assessListView = (PullToRefreshListView) assessView.findViewById(R.id.pulltorefresh_list);
             assessListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
@@ -378,12 +386,6 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 }
             });
             pfCommonAssessAdapter = new PfCommonAssessAdapter(this);
-            pfCommonAssessAdapter.setBottomListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bottomShow();
-                }
-            });
             pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
                 @Override
                 public void deleteData(PfSingleAssessObject object) {
@@ -403,14 +405,14 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
         pfCommonAssessAdapter.setObjectList(assessObjectList);
 
         //指定显示高度
-        int height = WindowUtils.dm.heightPixels / 5 * 3;
+        int height = WindowUtils.dm.heightPixels / 2;
         if(assessObjectList.size() == 0){
             height = 650;
         }
         CGLog.v("打印高度 : " + height);
         popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
         Utils.setPopWindow(popAssessWindow);
-        popAssessWindow.showAsDropDown(textViews[1], Gravity.BOTTOM, 0, 0);
+        popAssessWindow.showAsDropDown(textViews[1]);
     }
 
     private void showMore() {

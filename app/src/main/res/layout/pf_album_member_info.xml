@@ -3,34 +3,37 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-     <LinearLayout
+     <RelativeLayout
          android:orientation="horizontal"
          android:gravity="center_vertical"
          android:layout_width="match_parent"
          android:layout_height="60dp">
 
          <TextView
+             android:gravity="center_vertical"
              android:textSize="17sp"
              android:layout_marginLeft="@dimen/margin_10"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_width="50dp"
+             android:layout_height="match_parent"
              android:textAppearance="?android:attr/textAppearanceMedium"
              android:text="爸爸"
              android:id="@+id/pf_album_member_name" />
 
          <TextView
+             android:layout_alignParentRight="true"
              android:drawablePadding="@dimen/margin_5"
              android:layout_marginRight="@dimen/margin_10"
              android:drawableRight="@drawable/youjiantou"
              android:gravity="right|center_vertical"
-             android:layout_width="match_parent"
+             android:layout_width="wrap_content"
              android:layout_height="match_parent"
              android:textAppearance="?android:attr/textAppearanceMedium"
              android:text="Medium Text"
+             android:minWidth="100dp"
              android:id="@+id/pf_album_member_phone" />
-     </LinearLayout>
+     </RelativeLayout>
     <View
-        android:background="@color/share_background"
+        android:background="#86000000"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
 

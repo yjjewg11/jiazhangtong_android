@@ -2,6 +2,7 @@ package com.wj.kindergarten.utils;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +144,16 @@ public class PopWindowUtil {
                 onItemClickListener.onItemClickListener(position);
             }
         });
-        popupWindow.showAsDropDown(targetView, popAttributes.getLeftOffset(), 0, popAttributes.getGrarity());
+        try{
+            //showAsDropDown(View anchor, int xoff, int yoff, int gravity)此方法会在4.3版本抱NoSuchMethodError,估计是c的错误，无法捕捉异常
+            if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2){
+                popupWindow.showAsDropDown(targetView, popAttributes.getLeftOffset(), 0);
+            }else {
+                popupWindow.showAsDropDown(targetView, popAttributes.getLeftOffset(), 0, popAttributes.getGrarity());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void showPoPWindowLocation(Context context,View targetView,BaseAdapter adapter,PopAttributes popAttributes,

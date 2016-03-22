@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
@@ -25,6 +28,8 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.Utils;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,6 +57,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private RelativeLayout layoutPassword = null;
     private ImageView ivCleanLogin = null;
     private ImageView ivCleanPassword = null;
+    private Tencent mTencent;
 
     @Override
     protected void setContentLayout() {
@@ -65,6 +71,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate() {
         hideActionbar();
+        mTencent = Tencent.createInstance("100330589",getApplicationContext());
+//        mTencent.ask(this,,new BaseUiListener());
+//        mTencent.login(this, "all", new BaseUiListener());
+        CGLog.v("TAG"," 打印 : getAccessToken : "+mTencent.getAccessToken()+"getAppId : "+mTencent.getAppId()
+        +" getQQToken"+mTencent.getQQToken()+"getOpenId ："+mTencent.getOpenId());
 
         circleImage = (CircleImage) findViewById(R.id.login_head);
 
@@ -122,6 +133,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         acc = accEt.getText().toString().trim();
         pwd = pwdEt.getText().toString().trim();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mTencent.onActivityResult(requestCode, resultCode, data) ;
     }
 
     @Override
@@ -195,7 +212,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 CGApplication.getInstance().setLogin((Login) domain);
                 CGSharedPreference.setStoreJESSIONID(login.getJSESSIONID());
                 StoreDataInSerialize.storeUserInfo(login);
-                UserRequest.getUserInfo(LoginActivity.this, CGSharedPreference.getStoreJESSIONID(),login.getMd5());
+                UserRequest.getUserInfo(LoginActivity.this, CGSharedPreference.getStoreJESSIONID(), login.getMd5());
 
                 String imgPath = "";
                 if (null != login && null != login.getUserinfo()) {
@@ -227,5 +244,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         });
     }
+    class BaseUiListener implements IUiListener {
 
+        protected void doComplete(JSONObject values) {
+            CGLog.v("TAG","doComplete : "+values.toString()  );
+        }
+
+        @Override
+        public void onComplete(Object o) {
+            CGLog.v("TAG","onComplete : "+o.toString()  );
+        }
+
+        @Override
+        public void onError(UiError e) {
+            CGLog.v("TAG","onError");
+        }
+        @Override
+        public void onCancel() {
+            CGLog.v("TAG","onCancle");
+        }
+    }
 }

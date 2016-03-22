@@ -932,4 +932,11 @@ public abstract class BaseActivity extends ActionBarActivity {
         startActivityForResult(intent, WEB_SECLECT_PIC);
     }
 
+    protected void showCommonDialog(){
+        commonDialog.show();
+    }
+    protected void cancleCommonDialog(){
+        if(commonDialog.isShowing()) commonDialog.cancel();
+    }
+
 }

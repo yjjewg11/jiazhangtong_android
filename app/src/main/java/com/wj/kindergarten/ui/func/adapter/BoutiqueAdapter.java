@@ -27,6 +27,7 @@ import com.wj.kindergarten.bean.PfDianZan;
 import com.wj.kindergarten.bean.PopAttributes;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.PopWindowUtil;
@@ -101,27 +102,14 @@ public class BoutiqueAdapter extends BaseAdapter{
             if(path.contains("@")){
                 path = path.substring(0,path.indexOf("@"));
             }
-            ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
+            viewHolder.boutique_album_item_image.setTag(path);
+            Bitmap bitmap =  NativeImageLoader.getInstance().getBitmapFromMemCache(path);
+            if (bitmap == null){
+                loadBitmap(viewHolder, path);
+            }else {
+                viewHolder.boutique_album_item_image.setImageBitmap(bitmap);
+            }
 
-                }
-
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                }
-
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    viewHolder.boutique_album_item_image.setImageBitmap(loadedImage);
-                }
-
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-
-                }
-            });
             viewHolder.boutique_album_item_title.setText("" + sun.getTitle());
             String text = "<font color='#6f2d0c'>"+ Utils.isNull(sun.getCreate_username())+"</font>"+
                     "制作于"+"<font color='#6f2d0c'>"+Utils.isNull(sun.getCreate_time())+"</font>,"+
@@ -189,6 +177,32 @@ public class BoutiqueAdapter extends BaseAdapter{
         viewHolder.boutique_album_item_dianzan_count.setText(""+dianCount);
         viewHolder.boutique_album_item_assess_count.setText(""+sun.getReply_count());
         return convertView;
+    }
+
+    private void loadBitmap(final ViewHolder viewHolder, final String path) {
+        ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                if(!viewHolder.boutique_album_item_image.getTag().toString().equals(path))return;
+                viewHolder.boutique_album_item_image.setImageBitmap(loadedImage);
+                NativeImageLoader.getInstance().addBitmapToMemoryCache(path,loadedImage);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
+        });
     }
 
     private void initList(List<BoutiqueDianzanListObj> listObjs,TextView tv) {
