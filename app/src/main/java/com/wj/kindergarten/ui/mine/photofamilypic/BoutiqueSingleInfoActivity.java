@@ -13,6 +13,7 @@ import android.view.animation.LinearInterpolator;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +43,7 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.emot.SendMessage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.PfCommonAssessAdapter;
+import com.wj.kindergarten.ui.more.PfRefreshLinearLayout;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ShareUtils;
@@ -259,6 +261,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     @Override
                     public void result(BaseModel domain) {
                         cancleDialog();
+                        if(assessListView.isRefreshing())assessListView.onRefreshComplete();
                         pfSingleAssess = (PfSingleAssess) domain;
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null
@@ -364,9 +367,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     bottomShow();
                 }
             });
-            pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
             assessListView = (PullToRefreshListView) assessView.findViewById(R.id.pulltorefresh_list);
-            assessListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
             assessListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -379,6 +380,10 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     queryAssess();
                 }
             });
+            assessListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+
+            pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
+
             pf_common_show_assess_title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -406,15 +411,14 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
         //指定显示高度
         int height = WindowUtils.dm.heightPixels / 2;
-        if(assessObjectList.size() == 0){
-            height = 650;
-        }
         CGLog.v("打印高度 : " + height);
         popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
         Utils.setPopWindow(popAssessWindow);
-        popAssessWindow.showAsDropDown(textViews[1]);
+        popAssessWindow.showAsDropDown(pf_common_show_asseess_send);
     }
-
+    int firstItem;
+    int visibleItem;
+    int totalItem;
     private void showMore() {
         if (pf_more_view == null) {
             pf_more_view = View.inflate(this, R.layout.pf_single_more, null);
@@ -739,9 +743,18 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             if(!isVisible){
                 exitBoutiqueScreen();
             }else {
-                finish();
+                CGLog.v("打印bottom : "+boutqiue_single_info_bottom.getVisibility()+
+                "打印assess : "+boutique_single_info_assess.getVisibility());
+                if(boutique_single_info_assess.getVisibility() == View.VISIBLE &&
+                        pf_pic_bottom_viewGroup.getVisibility() == View.GONE){
+                    boutique_single_info_assess.setVisibility(View.GONE);
+                    pf_pic_bottom_viewGroup.setVisibility(View.VISIBLE);
+                    return true;
+                }else {
+                    finish();
+                }
             }
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 }

@@ -1,6 +1,8 @@
 package com.wj.kindergarten.ui.mine;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -8,11 +10,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners;
+import com.umeng.socialize.exception.SocializeException;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.sso.UMSsoHandler;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
@@ -27,11 +37,14 @@ import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
 import com.wj.kindergarten.utils.HintInfoDialog;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * LoginActivity
@@ -57,7 +70,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private RelativeLayout layoutPassword = null;
     private ImageView ivCleanLogin = null;
     private ImageView ivCleanPassword = null;
-    private Tencent mTencent;
+    private UMSocialService mController;
 
     @Override
     protected void setContentLayout() {
@@ -71,11 +84,30 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate() {
         hideActionbar();
-        mTencent = Tencent.createInstance("100330589",getApplicationContext());
-//        mTencent.ask(this,,new BaseUiListener());
-//        mTencent.login(this, "all", new BaseUiListener());
-        CGLog.v("TAG"," 打印 : getAccessToken : "+mTencent.getAccessToken()+"getAppId : "+mTencent.getAppId()
-        +" getQQToken"+mTencent.getQQToken()+"getOpenId ："+mTencent.getOpenId());
+
+
+        mController = UMServiceFactory.getUMSocialService("com.umeng.login");
+        mController.doOauthVerify(this, SHARE_MEDIA.QQ,new SocializeListeners.UMAuthListener() {
+            @Override
+            public void onError(SocializeException e, SHARE_MEDIA platform) {
+
+            }
+            @Override
+            public void onComplete(Bundle value, SHARE_MEDIA platform) {
+                String access_token =  value.getString("access_token");
+                CGLog.v("打印access_token : "+access_token);
+                if (value != null && !TextUtils.isEmpty(value.getString("uid"))) {
+                    ToastUtils.showMessage("授权成功");
+                } else {
+                    ToastUtils.showMessage("授权失败");
+                }
+            }
+            @Override
+            public void onCancel(SHARE_MEDIA platform) {}
+            @Override
+            public void onStart(SHARE_MEDIA platform) {}
+        });
+
 
         circleImage = (CircleImage) findViewById(R.id.login_head);
 
@@ -138,7 +170,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mTencent.onActivityResult(requestCode, resultCode, data) ;
+        UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(requestCode);
+        if(ssoHandler != null){
+            ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+        }
     }
 
     @Override

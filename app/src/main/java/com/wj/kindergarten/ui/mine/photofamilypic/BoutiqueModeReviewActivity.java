@@ -105,7 +105,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
-        boutique_review_webview.onPause();
         super.onPause();
     }
 
@@ -114,6 +113,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         Intent intent = new Intent(this, FindMusicOfPfActivity.class);
         intent.putExtra("music", mp3);
         startActivityForResult(intent, GET_MODE_MUSIC, null);
+        boutique_review_webview.loadUrl(address.getShare_url());
     }
 
     private void initViews() {

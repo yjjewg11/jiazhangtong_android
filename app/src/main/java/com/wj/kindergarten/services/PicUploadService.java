@@ -180,25 +180,24 @@ public class PicUploadService extends Service {
             ToastUtils.showDialog(MainActivity.instance, "提示！", "当前移动网络，建议WiFi下上传，是否继续?", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-
-                }
-            }, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    upLoad = false;
+                    startUpload();
                 }
             });
+        }else {
+            startUpload();
         }
-        if(upLoad){
-            count = 0;
-            if(listObject != null && listObject.size() > 0){
-                size = listObject.size();
-                checkAlreadyUpload(listObject.get(0).getLocalPath(), progressCallBack);
-            }
-        }
+
 
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void startUpload() {
+        count = 0;
+        if(listObject != null && listObject.size() > 0){
+            size = listObject.size();
+            checkAlreadyUpload(listObject.get(0).getLocalPath(), progressCallBack);
+        }
     }
 
     private void findPic() {

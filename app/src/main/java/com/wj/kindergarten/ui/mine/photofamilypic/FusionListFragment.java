@@ -119,8 +119,8 @@ public class FusionListFragment extends Fragment implements Watcher{
             @Override
             public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {
                 int cha = 0;
-                long t1 = TimeUtil.getYMDHMSTime(o.getPhoto_time());
-                long t2 = TimeUtil.getYMDHMSTime(t.getPhoto_time());
+                long t1 = TimeUtil.getYMDHMSTime(o.getCreate_time());
+                long t2 = TimeUtil.getYMDHMSTime(t.getCreate_time());
                 if (t2 - t1 >= 0) {
                     cha = 1;
                 } else {

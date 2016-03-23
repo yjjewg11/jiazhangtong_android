@@ -54,6 +54,7 @@ import com.wj.kindergarten.ui.func.adapter.PfCommonAssessAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfInfoFragmentAdapter;
 import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.viewmodel.SingleLoadPicModel;
 import com.wj.kindergarten.ui.more.ListenScrollView;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.FinalUtil;
@@ -140,6 +141,9 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private List<PfInfoDianZanObj> dianZanList;
     private FinalDb dbObj;
     private int position;
+    private LinearLayout pf_common_show_asseess_send;
+    private SingleLoadPicModel singlePicModel;
+
     public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter, PfSingleInfoFragment pfSingleInfoFragment,int position) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
         this.pfInfoFragmentAdapter = pfInfoFragmentAdapter;
@@ -180,16 +184,16 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void onClick(View v) {
                 //查询所有照片地址，进行显示.
                 ArrayList<String> list = new ArrayList();
-                String sql = "select path from "+GloablUtils.FAMILY_UUID_OBJECT_TABLE_NAME+";";
-                List<DbModel> listDb =  dbObj.findDbModelListBySQL(sql);
+                String sql = "select path from " + GloablUtils.FAMILY_UUID_OBJECT_TABLE_NAME + ";";
+                List<DbModel> listDb = dbObj.findDbModelListBySQL(sql);
                 Iterator<DbModel> iterator = listDb.iterator();
-                while (iterator.hasNext()){
+                while (iterator.hasNext()) {
                     DbModel dbModel = iterator.next();
                     list.add((String) dbModel.get("path"));
                 }
                 int position = list.indexOf(sunObject.getPath());
-                if(position < 0) position = 0;
-                Utils.carouselPic(getActivity(), position,list,false);
+                if (position < 0) position = 0;
+                Utils.carouselPic(getActivity(), position, list, false);
             }
         });
         pf_single_scroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -205,6 +209,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             }
         });
         initData();
+        singlePicModel = new SingleLoadPicModel(getActivity());
         showPic();
         chcekUpadate();
         queryExtraData(sunObject.getUuid());
@@ -273,13 +278,20 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void updatePfInfo() {
         pf_gallery_fragment_extra_info_description.setText("" + Utils.isNull(sunObject.getNote()));
         pf_gallery_fragment_extra_info_time.setText("拍摄时间: " + Utils.isNull(sunObject.getPhoto_time()));
-        pf_gallery_fragment_extra_info_address.setText("拍摄地点: " + Utils.isNull(sunObject.getAddress()).replace("null",""));
+        pf_gallery_fragment_extra_info_address.setText("拍摄地点: " + Utils.isNull(sunObject.getAddress()).replace("null", ""));
         pf_gallery_fragment_extra_info_human.setText("上传人: " + Utils.isNull(sunObject.getCreate_user()));
     }
 
     private void showAssessList() {
         if (assessView == null) {
             assessView = View.inflate(getActivity(), R.layout.pf_common_show_assess_layout, null);
+            pf_common_show_asseess_send = (LinearLayout)assessView.findViewById(R.id.pf_common_show_asseess_send);
+            pf_common_show_asseess_send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomShow();
+                }
+            });
             pf_common_show_assess_title = (TextView) assessView.findViewById(R.id.pf_common_show_assess_title);
             assessListView = (PullToRefreshListView) assessView.findViewById(R.id.pulltorefresh_list);
             assessListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
@@ -329,24 +341,14 @@ public class PFSingleObjectInfoFragment extends Fragment {
         pfCommonAssessAdapter.setObjectList(assessObjectList);
 
         //指定显示高度
-        int height = WindowUtils.dm.heightPixels / 5 * 3;
-        CGLog.v("打印高度 : " + height);
+        int height = WindowUtils.dm.heightPixels / 2;
         popAssessWindow = new PopupWindow(assessView, ViewGroup.LayoutParams.MATCH_PARENT, height);
         Utils.setPopWindow(popAssessWindow);
-        popAssessWindow.showAsDropDown(textViews[1], Gravity.BOTTOM, 0, 0);
-    }
-    private float convertFloat(int number) {
-        return Float.valueOf(number);
+        popAssessWindow.showAsDropDown(pf_common_show_asseess_send);
     }
 
-    private void showBitmap(Bitmap loadedImage) {
-        float height = (convertFloat(WindowUtils.dm.widthPixels) / convertFloat(loadedImage.getWidth())) * convertFloat(loadedImage.getHeight());
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) pf_gallery_image.getLayoutParams();
-        params.height = (int) height;
-        pf_gallery_image.setLayoutParams(params);
-        pf_gallery_image.requestLayout();
-        pf_gallery_image.setImageBitmap(loadedImage);
-    }
+
+
 
     private void showPic() {
         if (sunObject != null) {
@@ -357,44 +359,16 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 }
             }
             pf_gallery_image.setTag(lishipath);
-            Bitmap bitmap = NativeImageLoader.getInstance().getBitmapFromMemCache(lishipath);
-            if(bitmap == null){
-                loadBitmap(lishipath);
-            }else {
-                showBitmap(bitmap);
-                progressBar.setVisibility(View.GONE);
-            }
+            singlePicModel.getBitmap(lishipath,sunObject,pf_gallery_image, new SingleLoadPicModel.LoadSuccessed() {
+                @Override
+                public void loadSuccess() {
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
 
         }
     }
 
-    private void loadBitmap(final String path) {
-        ImageLoaderUtil.downLoadImageLoader(path, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
-
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                String tag = pf_gallery_image.getTag().toString();
-                if(tag != null && !tag.equals(path)) return;
-                showBitmap(loadedImage);
-                NativeImageLoader.getInstance().addBitmapToMemoryCache(path,loadedImage);
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-                progressBar.setVisibility(View.GONE);
-            }
-        });
-    }
 
     private void queSingleAssess() {
         UserRequest.getPfSingleAssess(getActivity(), pageNo, GloablUtils.MODE_OF_PF, sunObject.getUuid(), maxTime,
@@ -404,6 +378,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                         if (pf_single_scroll.isRefreshing()) {
                             pf_single_scroll.onRefreshComplete();
                         }
+                        if(assessListView.isRefreshing()) assessListView.onRefreshComplete();
                         PfSingleAssess pfSingleAssess = (PfSingleAssess) domain;
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null
@@ -415,6 +390,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                             } else {
                                 ToastUtils.showMessage("没有更多内容了!");
                             }
+                            assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
                             pf_single_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
                         }
                     }

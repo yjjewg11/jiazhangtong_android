@@ -26,6 +26,7 @@ import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ScanImageAndTime;
 import com.wj.kindergarten.bean.SyncUploadPic;
+import com.wj.kindergarten.bean.SyncUploadPicList;
 import com.wj.kindergarten.bean.SyncUploadPicObj;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
@@ -138,25 +139,37 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     }
 
     int pageNo = 1;
+    int totalCount = 0;
+    int pageSize = 0;
 
     @Override
     protected void loadData() {
+        showProgressDialog("正在同步照片，请稍候...("+(pageSize*(pageNo - 1))+"/"+totalCount+")");
         UserRequest.initSyncUploadPic(this, pageNo,new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
-                CGSharedPreference.setUploadSyncStatus(true);
                 SyncUploadPic syncUploadPic = (SyncUploadPic) domain;
-                if(syncUploadPic != null && syncUploadPic.getList() != null
-                        &&syncUploadPic.getList().getData() != null && syncUploadPic.getList().getData().size() > 0){
+                SyncUploadPicList syncList = syncUploadPic.getList();
+                if(syncUploadPic != null && syncList != null
+                        &&syncList.getData() != null && syncList.getData().size() > 0){
                     Iterator<SyncUploadPicObj> iterator = syncUploadPic.getList().getData().iterator();
                     while (iterator.hasNext()){
                         SyncUploadPicObj obj = iterator.next();
                         saveUploadObj(obj);
                     }
-                }else {
-                    ToastUtils.showMessage("暂无同步数据!");
                 }
-                loadSuc();
+                if(totalCount == 0){
+                    totalCount = syncList.getTotalCount();
+                    pageSize = syncList.getPageSize();
+                }
+                if(syncList.getPageSize() != syncList.getData().size()){
+                    hideProgressDialog();
+                    CGSharedPreference.setUploadSyncStatus(true);
+                    loadSuc();
+                    return;
+                }
+                pageNo++;
+                loadData();
             }
 
             @Override
@@ -174,12 +187,22 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
     private void saveUploadObj(SyncUploadPicObj obj) {
         String sql = "localPath = '"+obj.getMd5()+"';";
         List<AlreadySavePath> list =  uploadDb.findAllByWhere(AlreadySavePath.class,sql);
-        if(list == null){
+        if(list == null || list.size() == 0){
             AlreadySavePath savePath = new AlreadySavePath();
             savePath.setStatus(0);
             savePath.setLocalPath(obj.getMd5());
+            savePath.setFamily_uuid(obj.getFamily_uuid());
             uploadDb.save(savePath);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isProgressDialogIsShowing()){
+            loadSuc();
+            return;
+        }
+        super.onBackPressed();
     }
 
     @Override

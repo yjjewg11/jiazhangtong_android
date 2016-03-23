@@ -30,8 +30,6 @@ public class PlayMusicService extends Service {
         public void run() {
             Looper.prepare();
             sunHandler = new Handler(){
-
-
                 @Override
                 public void handleMessage(Message msg) {
                     switch (msg.what){

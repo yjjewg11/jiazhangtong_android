@@ -18,6 +18,7 @@ import com.umeng.message.UmengRegistrar;
 import com.umeng.onlineconfig.OnlineConfigAgent;
 import com.umeng.onlineconfig.OnlineConfigLog;
 import com.umeng.onlineconfig.UmengOnlineConfigureListener;
+import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.update.UmengUpdateAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
@@ -44,7 +45,7 @@ import org.json.JSONObject;
  */
 public class SplashActivity extends Activity {
     private static final int SPLASH_DELAY = 0;
-    private static final int SLASH_DELAY_TIME = 3 * 1000;
+    private static final int SLASH_DELAY_TIME = 0;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -85,6 +86,11 @@ public class SplashActivity extends Activity {
         ActivityManger.getInstance().addActivity(this);
 
         try {
+
+
+            UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, "100424468",
+                    "SumAAk7jtaUSnZqd");
+            qqSsoHandler.addToSocialSDK();
 
             OnlineConfigAgent.getInstance().updateOnlineConfig(this);
             OnlineConfigAgent.getInstance().setDebugMode(true);

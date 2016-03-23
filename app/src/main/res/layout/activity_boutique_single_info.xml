@@ -16,12 +16,7 @@
     </FrameLayout>
 
 
-    <LinearLayout
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:id="@+id/boutique_single_info_assess"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
     <FrameLayout
         android:background="@color/white"
         android:id="@+id/boutqiue_single_info_bottom"
@@ -30,4 +25,11 @@
         android:layout_height="wrap_content">
         <include layout="@layout/pf_pic_bottom_edit"/>
     </FrameLayout>
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/boutique_single_info_assess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </FrameLayout>
