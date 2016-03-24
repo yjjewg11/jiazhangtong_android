@@ -165,6 +165,9 @@ public class PhotoFamilyFragment extends Fragment{
     public void setSubViewDecideScroll(PfFragmentLinearLayout.DecideSubViewScroll decideScroll){
         pf_back_ll.setDecideSubViewScroll(decideScroll);
     }
+    public void setPullUpView(View pullUpView){
+        pf_back_ll.setPullUpView(pullUpView);
+    }
 
     public void setLocationChanged(LocationChanged locationChanged) {
         this.locationChanged = locationChanged;
@@ -260,7 +263,7 @@ public class PhotoFamilyFragment extends Fragment{
                  int position =  tab_layout.getSelectedTabPosition();
                  if(position == 0){
                      if(pfFusionFragment != null) pfFusionFragment.setMode();
-                     if(pfFusionListFragment != null) pfFusionListFragment.setMode();
+//                     if(pfFusionListFragment != null) pfFusionListFragment.setMode();
                  }
 
             }
@@ -370,8 +373,11 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void initFragment() {
+        pfFusionFragment = new PfFusionFragment(this,currentFamily_uuid);
+        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[2]).commit();
         pfFusionListFragment = new FusionListFragment(this,currentFamily_uuid);
         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
+
     }
 
     private void initHead() {
@@ -512,7 +518,7 @@ public class PhotoFamilyFragment extends Fragment{
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
+                switch (tab.getPosition()) {
                     case 0:
                         FusionListFragment fusionListFragment = (FusionListFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
                         if (fusionListFragment != null) {
@@ -524,13 +530,15 @@ public class PhotoFamilyFragment extends Fragment{
                     case 1:
                         //精品相册
                         if (getFragmentManager().findFragmentByTag(fragment_tags[1]) == null) {
-                            if(boutique_album_framgent == null)boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this,currentFamily_uuid);
+                            if (boutique_album_framgent == null)
+                                boutique_album_framgent = new BoutiqueAlbumFragment(PhotoFamilyFragment.this, currentFamily_uuid);
                         } else {
                             boutique_album_framgent = (BoutiqueAlbumFragment) getFragmentManager().findFragmentByTag(fragment_tags[1]);
                         }
                         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, boutique_album_framgent, fragment_tags[1]).commit();
                         break;
                 }
+
             }
 
             @Override
@@ -539,9 +547,9 @@ public class PhotoFamilyFragment extends Fragment{
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0 :
-                        if(popleft == null){
+                switch (tab.getPosition()) {
+                    case 0:
+                        if (popleft == null) {
                             popleft = new PopAttributes();
                             popleft.setWidth(WindowUtils.dm.widthPixels / 2);
                             popleft.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -552,25 +560,25 @@ public class PhotoFamilyFragment extends Fragment{
                                 popleft, new PopWindowUtil.OnItemClickListener() {
                                     @Override
                                     public void onItemClickListener(int position) {
-                                        if(fusionPosition == position - 1) return;
+                                        if (fusionPosition == position - 1) return;
                                         fusionPosition = position - 1;
                                         changFusionFragment();
                                     }
                                 });
                         break;
-                    case 1 :
-                        if(popRight == null){
+                    case 1:
+                        if (popRight == null) {
                             popRight = new PopAttributes();
                             popRight.setWidth(WindowUtils.dm.widthPixels / 2);
                             popRight.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
                             popRight.setGrarity(Gravity.NO_GRAVITY);
-                            popRight.setLeftOffset(WindowUtils.dm.widthPixels/2);
+                            popRight.setLeftOffset(WindowUtils.dm.widthPixels / 2);
                         }
                         PopWindowUtil.showPoPWindow(getActivity(), tab_layout, new BoutiqueChooseItemAdapter(getActivity(), boutiquePosition),
                                 popRight, new PopWindowUtil.OnItemClickListener() {
                                     @Override
                                     public void onItemClickListener(int position) {
-                                        if(boutiquePosition == position - 1) return;
+                                        if (boutiquePosition == position - 1) return;
                                         boutiquePosition = position - 1;
                                         boutique_album_framgent.loadDataAccordingType(boutiquePosition);
                                     }
@@ -579,7 +587,6 @@ public class PhotoFamilyFragment extends Fragment{
                 }
             }
         });
-
     }
 
     private void changFusionFragment() {

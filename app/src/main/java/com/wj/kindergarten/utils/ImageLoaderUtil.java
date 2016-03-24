@@ -88,9 +88,11 @@ public class ImageLoaderUtil {
                 .showImageForEmptyUri(R.drawable.zhanweitu)
                 .showImageOnFail(R.drawable.zhanweitu)
                 .cacheInMemory(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .cacheOnDisk(true)
-                .displayer(new RoundedBitmapDisplayer(roundeSize)).build();
+//                .displayer(new RoundedBitmapDisplayer(roundeSize))
+                .build();
 
 
         imageLoader = ImageLoader.getInstance();

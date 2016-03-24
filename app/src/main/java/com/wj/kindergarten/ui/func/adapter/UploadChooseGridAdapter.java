@@ -64,6 +64,7 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
         db = FinalUtil.getAlreadyUploadDb(context);
         String sql = "family_uuid = '"+ PhotoFamilyFragment.instance.getCurrentFamily_uuid()+"' and status = '0';";
         imageAlreadyList =   db.findAllByWhere(AlreadySavePath.class, sql);
+//        List<AlreadySavePath> allList = db.findAll(AlreadySavePath.class);
     }
 
     //选择全部照片

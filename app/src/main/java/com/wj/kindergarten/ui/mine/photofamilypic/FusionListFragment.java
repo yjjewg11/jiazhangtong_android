@@ -121,7 +121,7 @@ public class FusionListFragment extends Fragment implements Watcher{
                 int cha = 0;
                 long t1 = TimeUtil.getYMDHMSTime(o.getCreate_time());
                 long t2 = TimeUtil.getYMDHMSTime(t.getCreate_time());
-                if (t2 - t1 >= 0) {
+                if (t2 - t1 > 0) {
                     cha = 1;
                 } else {
                     cha = -1;
@@ -189,20 +189,43 @@ public class FusionListFragment extends Fragment implements Watcher{
         if(mainView != null) return mainView;
         initDb();
         mainView = inflater.inflate( R.layout.fusion_list_fragment,container,false);
-        FinalActivity.initInjectedView(this,mainView);
+        FinalActivity.initInjectedView(this, mainView);
         photoFamilyFragment.getObserver().registerObserver(this);
         fusion_list_fresh_linear = (PfRefreshLinearLayout)mainView.findViewById(R.id.fusion_list_fresh_linear);
-        fusion_list_fresh_linear.setPullScroll(new PfRefreshLinearLayout.PullScroll() {
+        fusion_list_fresh_linear.setPullScroll(new PfRefreshLinearLayout.PullScrollBoth() {
+            @Override
+            public boolean judgeScrollTop() {
+                CGLog.v("打印firstItem : "+(firstItem == 0)+" weizhi : "+firstItem);
+                return firstItem == 0;
+            }
+
             @Override
             public boolean judgeScrollBotom() {
-                CGLog.v("判断是否滑动到底部了?    " + (firstItem + visibleItem == totalItem));
+                CGLog.v("打印是否到底了 : "+(firstItem + visibleItem == totalItem)
+                +" fir : "+firstItem+" visible : "+visibleItem+" total : "+totalItem);
                 return firstItem + visibleItem == totalItem;
             }
         });
         fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
+
             @Override
-            public void onRefresh() {
+            public void pullUpRefresh() {
                 mPfLoadDataProxy.loadData(family_uuid, 1, true);
+            }
+
+            @Override
+            public void pullDownRefresh() {
+                mPfLoadDataProxy.queryIncrementNewData(family_uuid, new PfLoadDataProxy.DataLoadFinish() {
+                    @Override
+                    public void finish() {
+                        fusion_list_fresh_linear.onRefreshComplete();
+                    }
+
+                    @Override
+                    public void noMoreData() {
+                        ToastUtils.showMessage("暂无更新数据!");
+                    }
+                });
             }
         });
         fusion_list_fragment_stick_grid.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -241,7 +264,7 @@ public class FusionListFragment extends Fragment implements Watcher{
 
             @Override
             public void noMoreData() {
-                fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.DISALBED);
+                fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULLUP);
                 noMoreData = true;
                 ToastUtils.showMessage("没有更多内容了!");
             }
@@ -292,7 +315,4 @@ public class FusionListFragment extends Fragment implements Watcher{
         loadData();
     }
 
-    public void setMode() {
-        fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULLDOWN);
-    }
 }

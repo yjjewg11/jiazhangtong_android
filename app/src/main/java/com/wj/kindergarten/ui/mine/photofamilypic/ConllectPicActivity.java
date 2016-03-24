@@ -1,5 +1,7 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -31,6 +33,12 @@ public class ConllectPicActivity extends BaseActivity{
     private PfCollectPicAdapter adapter;
     private GridView gridView;
     private PfRefreshLinearLayout refreshLinear;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void setContentLayout() {
@@ -64,6 +72,7 @@ public class ConllectPicActivity extends BaseActivity{
                 Utils.showPfSingleinfo(ConllectPicActivity.this, position, (ArrayList<AllPfAlbumSunObject>) collect_list);
             }
         });
+        refreshLinear.setMode(PfRefreshLinearLayout.Mode.PULLDOWN);
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -79,13 +88,30 @@ public class ConllectPicActivity extends BaseActivity{
         });
 
         refreshLinear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
+
             @Override
-            public void onRefresh() {
+            public void pullUpRefresh() {
                 pageNo++;
                 loadData();
             }
+
+            @Override
+            public void pullDownRefresh() {
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLinear.onRefreshComplete();
+                    }
+                }, 3000);
+                ToastUtils.showMessage("这是上拉刷新!");
+            }
         });
-        refreshLinear.setPullScroll(new PfRefreshLinearLayout.PullScroll() {
+        refreshLinear.setPullScroll(new PfRefreshLinearLayout.PullScrollBoth() {
+            @Override
+            public boolean judgeScrollTop() {
+                return firstItem == 0;
+            }
+
             @Override
             public boolean judgeScrollBotom() {
                 return firstItem+visibleItem == totalItem;

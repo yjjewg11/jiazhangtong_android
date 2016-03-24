@@ -109,7 +109,11 @@ public class PfLoadDataProxy {
                 if (dataLoadFinish != null) dataLoadFinish.finish();
                 if (allPfAlbum == null || allPfAlbum.getList() == null || allPfAlbum.getList().getData() == null ||
                         allPfAlbum.getList().getData().size() == 0) {
-                    ToastUtils.showMessage("没有更多内容了！");
+                    if(type == NORMAL_DATA){
+                        ToastUtils.showMessage("没有更多内容了");
+                    }else if(type == REFRESH_DATA){
+                        ToastUtils.showMessage("暂无新数据！");
+                    }
                     dataLoadFinish.noMoreData();
                     return;
                 }
@@ -226,13 +230,18 @@ public class PfLoadDataProxy {
 
     }
 
-    public final void queryIncrementNewData(final String family_uuid) {
+    public final void queryIncrementNewData(final String family_uuid, final DataLoadFinish dataLoadFinish){
         pfFamilyUuid =  familyUuidSql.findById(family_uuid, PfFamilyUuid.class);
         UserRequest.queryIncrementNewData(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                if(dataLoadFinish != null) dataLoadFinish.finish();
                 PfChangeData pfChangeData = (PfChangeData) domain;
-                if (pfChangeData == null) return;
+                if (pfChangeData == null || pfChangeData.getNewDataCount() == 0){
+                    if(dataLoadFinish != null)
+                    dataLoadFinish.noMoreData();
+                    return;
+                }
                 if (pfChangeData.getNewDataCount() > 0) {
                     loadPic(family_uuid, formatTime(pfFamilyUuid.getMaxTime()), "", "", 1, REFRESH_DATA);
                 }
@@ -249,6 +258,11 @@ public class PfLoadDataProxy {
 
             }
         });
+    }
+
+
+    public final void queryIncrementNewData(final String family_uuid) {
+        queryIncrementNewData(family_uuid,null);
     }
 
     private String formatTime(Date date) {

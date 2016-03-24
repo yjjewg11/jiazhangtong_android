@@ -84,7 +84,7 @@ public class AddFamilyMemberActivity extends BaseActivity {
         Cursor cursor = getContentResolver().query(
                 ContactsContract.Contacts.CONTENT_URI, sec, null, null, null);
         CGLog.v("打印查询数量 : "+cursor.getCount());
-        if(cursor != null ){
+        if(cursor.moveToNext()){
             CGSharedPreference.setCanReadConstact(true);
         }else {
             CGSharedPreference.setCanReadConstact(false);

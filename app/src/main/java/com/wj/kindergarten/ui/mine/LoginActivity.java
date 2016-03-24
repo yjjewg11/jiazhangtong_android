@@ -57,8 +57,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private CircleImage circleImage = null;
     private EditText accEt = null;
     private EditText pwdEt = null;
-    private CheckBox checkBox = null;
-    private TextView rememberTv = null;
     private TextView forgetTv = null;
     private TextView actionLoginTv = null;
     private TextView registerTv = null;
@@ -71,6 +69,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private ImageView ivCleanLogin = null;
     private ImageView ivCleanPassword = null;
     private UMSocialService mController;
+    private ImageView login_three_qq;
+    private ImageView login_three_weixin;
+    private ImageView login_three_weibo;
 
     @Override
     protected void setContentLayout() {
@@ -87,34 +88,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
         mController = UMServiceFactory.getUMSocialService("com.umeng.login");
-        mController.doOauthVerify(this, SHARE_MEDIA.QQ,new SocializeListeners.UMAuthListener() {
-            @Override
-            public void onError(SocializeException e, SHARE_MEDIA platform) {
-
-            }
-            @Override
-            public void onComplete(Bundle value, SHARE_MEDIA platform) {
-                String access_token =  value.getString("access_token");
-                CGLog.v("打印access_token : "+access_token);
-                if (value != null && !TextUtils.isEmpty(value.getString("uid"))) {
-                    ToastUtils.showMessage("授权成功");
-                } else {
-                    ToastUtils.showMessage("授权失败");
-                }
-            }
-            @Override
-            public void onCancel(SHARE_MEDIA platform) {}
-            @Override
-            public void onStart(SHARE_MEDIA platform) {}
-        });
-
 
         circleImage = (CircleImage) findViewById(R.id.login_head);
+        login_three_qq = (ImageView) findViewById(R.id.login_three_qq);
+        login_three_weixin = (ImageView) findViewById(R.id.login_three_weixin);
+        login_three_weibo = (ImageView) findViewById(R.id.login_three_weibo);
 
+        login_three_qq.setOnClickListener(this);
+        login_three_weixin.setOnClickListener(this);
+        login_three_weibo.setOnClickListener(this);
         accEt = (EditText) findViewById(R.id.login_acc);
         pwdEt = (EditText) findViewById(R.id.login_pwd);
-        checkBox = (CheckBox) findViewById(R.id.login_check);
-        rememberTv = (TextView) findViewById(R.id.login_check_text);
         forgetTv = (TextView) findViewById(R.id.login_forget);
         actionLoginTv = (TextView) findViewById(R.id.login_action);
         registerTv = (TextView) findViewById(R.id.login_register);
@@ -127,14 +111,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         pwdEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanPassword, pwdEt));
         layoutLogin.setOnClickListener(this);
         layoutPassword.setOnClickListener(this);
-
-        rememberTv.setOnClickListener(this);
         forgetTv.setOnClickListener(this);
         actionLoginTv.setOnClickListener(this);
         registerTv.setOnClickListener(this);
 
         //TODO test acc
-        checkBox.setChecked(CGSharedPreference.getRemerberPassword());
         String[] str = CGSharedPreference.getLogin();
         accEt.setText(str[0]);
         if (CGSharedPreference.getRemerberPassword()) {
@@ -150,12 +131,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //            ImageLoaderUtil.displayImage(str[2], circleImage);
 //        }
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                CGSharedPreference.saveRemerberPassword(isChecked);
-            }
-        });
 
         // accEt.setText("13628037996");
         // pwdEt.setText("123456");
@@ -165,6 +140,34 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         acc = accEt.getText().toString().trim();
         pwd = pwdEt.getText().toString().trim();
+    }
+
+    private void applyQQ() {
+        mController.doOauthVerify(this, SHARE_MEDIA.QQ, new SocializeListeners.UMAuthListener() {
+            @Override
+            public void onError(SocializeException e, SHARE_MEDIA platform) {
+
+            }
+
+            @Override
+            public void onComplete(Bundle value, SHARE_MEDIA platform) {
+                String access_token = value.getString("access_token");
+                CGLog.v("打印access_token : " + access_token);
+                if (value != null && !TextUtils.isEmpty(value.getString("uid"))) {
+                    ToastUtils.showMessage("授权成功");
+                } else {
+                    ToastUtils.showMessage("授权失败");
+                }
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA platform) {
+            }
+
+            @Override
+            public void onStart(SHARE_MEDIA platform) {
+            }
+        });
     }
 
     @Override
@@ -191,11 +194,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login_check_text:
-                checkBox.setChecked(!checkBox.isChecked());
-                CGLog.d("tag: " + checkBox.isChecked());
-                CGSharedPreference.saveRemerberPassword(checkBox.isChecked());
-                break;
             case R.id.login_forget:
                 Intent intentF = new Intent(mContext, RegisterActivity.class);
                 intentF.putExtra("from", "login_forget");
@@ -218,6 +216,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.layout_clean_5:
                 pwdEt.setText("");
+                break;
+            case R.id.login_three_weixin:
+
+                break;
+            case R.id.login_three_qq:
+                applyQQ();
+                break;
+            case R.id.login_three_weibo:
+
                 break;
             default:
                 break;

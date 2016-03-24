@@ -62,6 +62,13 @@ public interface GloablUtils {
     int GET_PIC_ADD_FAMALI_ALBUM = 3057;
     int ADD_NEW_ALBUM_SUCCESSED = 3058;
     //接受二维码链接的广播action
+    //自定义上拉，下拉刷新
+    int PULLDOWN = 3059;
+    int DISALBED = 3060;
+    int PULLUP = 3061;
+    int PULLBOTH = 3062;
+    int UP = 3063;
+    int DOWN = 3064;
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";

@@ -2,29 +2,35 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:background="#352929"
-        android:gravity="center"
+        android:id="@+id/refresh_linear_top_rl"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="50dp">
+
         <ImageView
-            android:id="@+id/image_bottom"
-            android:src="@drawable/pf_refresh_load"
+            android:src="@drawable/down_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/refresh_linear_top_iv"
+            android:layout_marginLeft="127dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/tv_bottom"
-            android:layout_marginRight="26dp" />
+            android:layout_alignParentLeft="true" />
+
         <TextView
-            android:textSize="12sp"
             android:textColor="@color/white"
-            android:gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="上拉刷新.."
-            android:id="@+id/tv_bottom"
+            android:text="下拉刷新"
+            android:id="@+id/refresh_linear_top_tv"
+            android:layout_marginLeft="40dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_toRightOf="@+id/refresh_linear_top_iv" />
     </RelativeLayout>
+
+
 </merge>

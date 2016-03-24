@@ -3,6 +3,7 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -39,6 +40,11 @@ public class PfFragmentLinearLayout extends LinearLayout {
     }
 
     private DecideSubViewScroll decideSubViewScroll;
+    //进行上拉刷新的view，
+    View pullUpView;
+    public void setPullUpView(View pullUpView){
+        this.pullUpView = pullUpView;
+    }
 
     public void setDecideSubViewScroll(DecideSubViewScroll decideSubViewScroll) {
         this.decideSubViewScroll = decideSubViewScroll;
@@ -68,14 +74,26 @@ public class PfFragmentLinearLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 decideSubViewScroll.allowScroll();
-                //情况1：当fl的Math.abs(fl.topMargin < fl.getHeight()) ,进行拦截
+                int poor = (int) (ev.getRawY() - lastY);
+                //特殊情况，先要求必须上滑，那么在fl的topMargin=0时，同时在往下拉就不拦截;
+                // 并且在topMargin == 0时，判断手势如果向上，也不拦截
+                CGLog.v("topMargin : "+getFlTopMargin());
+                if(getFlTopMargin() == 0 && poor > 0 && pullUpView != null){
+                    return super.onInterceptTouchEvent(ev);
+                }
+                if(getFlTopMargin() == 0 && pullUpView != null &&
+                        pullUpView.getScrollY() != 0){
+                    return super.onInterceptTouchEvent(ev);
+                }
+
+                //情况3：当fl的Math.abs(fl.topMargin < fl.getHeight()) ,进行拦截
                 if(judgeScrollByABS() && Math.abs(ev.getRawY() - startY) > 10){
                     return true;
                 }
 
-                //拦截情况2：当fl的topMargin等于fl.getHeight()时，并且子view位于顶部，并判断是上滑还是下滑
+                //拦截情况4：当fl的topMargin等于fl.getHeight()时，并且子view位于顶部，并判断是上滑还是下滑
                 //并且滑动一段距离后进行拦截
-                int poor = (int) (ev.getRawY() - lastY);
+
                 if(contentFl.getHeight() == Math.abs(getFlTopMargin()) &&
                         decideSubViewScroll.subViewLocationTop() && poor > 0
                         && Math.abs(ev.getRawY() - startY) > 10){

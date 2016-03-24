@@ -48,10 +48,10 @@ public class PfCommonAssessAdapter extends BaseAdapter {
     public void setObjectList(List<PfSingleAssessObject> objectList) {
         this.objectList.clear();
         this.objectList.addAll(objectList);
-        if(this.objectList.size() == 0){
-            PfSingleAssessObject object = new PfSingleAssessObject();
-            this.objectList.add(object);
-        }
+//        if(this.objectList.size() == 0){
+//            PfSingleAssessObject object = new PfSingleAssessObject();
+//            this.objectList.add(object);
+//        }
     }
 
     @Override
@@ -87,7 +87,6 @@ public class PfCommonAssessAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        holder.common_assess_item_write_assess.setVisibility(View.VISIBLE);
         holder.common_assess_item_write_assess.setOnClickListener(bottomListener);
         final PfSingleAssessObject object = objectList.get(position);
         if (object != null) {
@@ -97,11 +96,11 @@ public class PfCommonAssessAdapter extends BaseAdapter {
 //            } else {
 //                holder.common_assess_item_write_assess.setVisibility(View.GONE);
 //            }
-            if(TextUtils.isEmpty(object.getCreate_user())){
-                holder.common_assess_item_write_assess.setVisibility(View.VISIBLE);
-                holder.common_assess_item_rl.setVisibility(View.INVISIBLE);
-            }else {
-                holder.common_assess_item_rl.setVisibility(View.VISIBLE);
+//            if(TextUtils.isEmpty(object.getCreate_user())){
+//                holder.common_assess_item_write_assess.setVisibility(View.VISIBLE);
+//                holder.common_assess_item_rl.setVisibility(View.INVISIBLE);
+//            }else {
+//                holder.common_assess_item_rl.setVisibility(View.VISIBLE);
             ImageLoaderUtil.displayImage(object.getCreate_img(), holder.common_assess_item_head_img);
             holder.common_assess_item_name.setText("" + object.getCreate_user());
             holder.common_assess_item_content.setText(EmotUtil.getEmotionContent(context, object.getContent()));
@@ -117,7 +116,7 @@ public class PfCommonAssessAdapter extends BaseAdapter {
                     deleteAssessItemListener.deleteData(object);
                 }
             });
-            }
+//            }
 
         }
         return convertView;

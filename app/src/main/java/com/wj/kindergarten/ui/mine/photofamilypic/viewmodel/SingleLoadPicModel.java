@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
+import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.FinalUtil;
@@ -20,17 +21,18 @@ import com.wj.kindergarten.utils.WindowUtils;
 import net.tsz.afinal.FinalDb;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by tangt on 2016/3/23.
  */
 public class SingleLoadPicModel {
-    private FinalDb dbObj;
+    private FinalDb alreadDb;
     public SingleLoadPicModel(Context context) {
-        dbObj = FinalUtil.getFamilyUuidObjectDb(context);
+        alreadDb = FinalUtil.getAlreadyUploadDb(context);
     }
 
-    public void getBitmap(String lishipath, AllPfAlbumSunObject object, final ImageView imageView, LoadSuccessed loadSuccessed){
+    public void getBitmap(String lishipath, AllPfAlbumSunObject object, final ImageView imageView, final LoadSuccessed loadSuccessed){
         //先通过路径判断内存有无bitmap
         //内存没有，则判断uuid是否为空，为空，则网络获取，不为空，则找到数据库对应的字段，拿出
         //它的path路径，生成bitmap对象，加入内存中,如果本地没有存储这张照片的地址，则从网络获取。
@@ -42,7 +44,7 @@ public class SingleLoadPicModel {
             return;
         }
         //内存中没有图片,看obj对象缓存的md5图片地址是否存在本地
-        String localPath = object.getMd5();
+        String localPath = findLocalPath(object.getUuid());
         if(localPath != null && !TextUtils.isEmpty(localPath)){
             //先判断文件是否存在，存在则本地加载
             if(FileUtil.checkFileExits(localPath)){
@@ -50,20 +52,28 @@ public class SingleLoadPicModel {
                     @Override
                     public void onImageLoader(Bitmap bitsmap, String path) {
                         showBitmap(bitsmap,imageView);
+                        loadSuccessed.loadSuccess();
                         return;
                     }
                 });
                 if(bitmap != null){
                     showBitmap(bitmap,imageView);
+                    loadSuccessed.loadSuccess();
+                    return;
                 }
-                loadSuccessed.loadSuccess();
-                return;
             }
         }
 
         loadBitmap(lishipath,imageView,object.getMd5(),loadSuccessed);
 
 
+    }
+
+    private String findLocalPath(String uuid) {
+        String sql = "data_id = '"+uuid+"';";
+        List<AlreadySavePath> list =  alreadDb.findAllByWhere(AlreadySavePath.class, sql);
+        if(list != null && list.size() > 0) return list.get(0).getLocalPath();
+        return null;
     }
 
     private float convertFloat(int number) {

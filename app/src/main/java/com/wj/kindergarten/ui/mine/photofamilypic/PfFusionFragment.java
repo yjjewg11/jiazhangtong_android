@@ -133,7 +133,8 @@ public class PfFusionFragment extends Fragment implements Watcher{
         pullScroll = (PullToRefreshScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
         fragment_pf_fusion_linear = (LinearLayout) view.findViewById(R.id.fragment_pf_fusion_linear);
         banScrollView = (BanScrollView) view.findViewById(R.id.fragment_pf_fusion_scroll);
-        banScrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        photoFamilyFragment.setPullUpView(banScrollView);
+        banScrollView.setMode(PullToRefreshBase.Mode.BOTH);
         photoFamilyFragment.setLocationChanged(new PhotoFamilyFragment.LocationChanged() {
             @Override
             public void onTop() {
@@ -151,7 +152,12 @@ public class PfFusionFragment extends Fragment implements Watcher{
         pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        banScrollView.onRefreshComplete();
+                    }
+                },3000);
             }
 
             @Override
@@ -198,6 +204,8 @@ public class PfFusionFragment extends Fragment implements Watcher{
                 return banScrollView.getRefreshableView().getScrollY() == 0;
             }
         });
+
+
     }
 
     private void addListDataByDate(List<QueryGroupCount> allList) {

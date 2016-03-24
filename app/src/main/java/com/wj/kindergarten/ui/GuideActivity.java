@@ -59,7 +59,7 @@ public class GuideActivity extends Activity {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
         relativeLayout.setLayoutParams(layoutParams);
-        relativeLayout.setBackground(getDrawable(drawableId));
+        relativeLayout.setBackground(getResources().getDrawable(drawableId));
         return relativeLayout;
     }
 }
