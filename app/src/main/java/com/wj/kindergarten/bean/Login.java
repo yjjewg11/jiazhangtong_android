@@ -22,6 +22,16 @@ public class Login extends BaseModel {
     private List<Class> class_list;
     @Expose
     private String md5;
+    @Expose
+    private String needBindTel;
+
+    public String getNeedBindTel() {
+        return needBindTel;
+    }
+
+    public void setNeedBindTel(String needBindTel) {
+        this.needBindTel = needBindTel;
+    }
 
     public String getMd5() {
         return md5;
@@ -71,6 +81,7 @@ public class Login extends BaseModel {
                 ", group_list=" + group_list +
                 ", class_list=" + class_list +
                 ", md5='" + md5 + '\'' +
+                ", needBindTel='" + needBindTel + '\'' +
                 '}';
     }
 }

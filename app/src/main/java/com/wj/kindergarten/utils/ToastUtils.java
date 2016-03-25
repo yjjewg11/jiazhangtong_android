@@ -56,6 +56,13 @@ public class ToastUtils {
         dialog.show();
         return dialog;
     }
+    public static DialogInterface showDialog(Context context,View customView){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog dialog =  builder.setView(customView).create();
+        dialog.show();
+        return dialog;
+    }
+
 
     public static void showDialog(Context context,String title,String content,AlertDialog.OnClickListener positionListener,AlertDialog.OnClickListener cancle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

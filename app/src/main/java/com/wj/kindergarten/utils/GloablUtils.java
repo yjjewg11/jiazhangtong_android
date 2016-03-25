@@ -69,6 +69,8 @@ public interface GloablUtils {
     int PULLBOTH = 3062;
     int UP = 3063;
     int DOWN = 3064;
+    int CONFIRM_BOUND_TEL = 3065;
+    int BOUND_TEL = 3066;
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";
@@ -86,10 +88,13 @@ public interface GloablUtils {
     // 2  添加family_uuid字段
     // 3同上
     //4 添加uuid字段方便照片删除时，同时删除已上传照片。
-    int ALREADY_DB_VERSION = 4;
+    //5 添加拍摄日期字段
+    int ALREADY_DB_VERSION = 5;
     String DELETE_PF_SINGLE_INFO_SUCCESSED = "delete_pf_single_info_successed";
     String UPDATE_BOUTIQUE_ALBUM_SUCCESSED = "update_boutique_album_successed";
     //存放相片的数据库表名
     String FAMILY_UUID_OBJECT_TABLE_NAME = "com_wj_kindergarten_bean_AllPfAlbumSunObject";
     String FINISH_UPLOAD_PIC = "finish_upload_pic";
+
+
 }

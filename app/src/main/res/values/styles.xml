@@ -228,7 +228,7 @@
     </style>
 
     <style name="add_family_style">
-        <item name="android:textColor">#222222</item>
+        <item name="android:textColor">#616161</item>
         <item name="android:textSize">15sp</item>
         <item name="android:layout_marginLeft">9dp</item>
         <item name="android:gravity">center_vertical</item>

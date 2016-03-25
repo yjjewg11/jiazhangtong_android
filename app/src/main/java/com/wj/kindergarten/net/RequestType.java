@@ -95,4 +95,6 @@ public interface RequestType {
      int ADD_FAMILY_MEMBER = 179;
      int INIT_SYNC_UPLOAD = 180;
      int GET_BOUTIQUE_DIAN_ZAN_LIST = 181;
+     int VALIDATE_BAN_PHONE = 182;
+     int GET_THREE_USER_INFO = 183;
 }

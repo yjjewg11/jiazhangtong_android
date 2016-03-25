@@ -3,7 +3,6 @@ package com.wj.kindergarten.ui.more;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -35,7 +34,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
     public PfRefreshLinearLayout(Context context) {
         super(context);
     }
-    int mode = Mode.PULLBOTH;
+    int mode = Mode.PULL_BOTH;
     public void setMode(int mode){
         this.mode = mode;
     }
@@ -67,6 +66,12 @@ public class PfRefreshLinearLayout extends LinearLayout {
         refresh_linear_top_rl.setLayoutParams(params);
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        CGLog.v("打印分发事件 ： "+ev.getAction());
+        return super.dispatchTouchEvent(ev);
+    }
+
     float startY;
     float lastY;
     float interactLastY;
@@ -84,7 +89,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
                 if(getRefreshing()) return true;
                 if(pullScroll == null) return super.onInterceptTouchEvent(ev);
                 //判断上拉刷新,如果模式为both或者上拉刷新皆可
-                if((mode == Mode.PULLBOTH || mode == Mode.PULLUP) &&
+                if((mode == Mode.PULL_BOTH || mode == Mode.PULL_FROM_DOWN) &&
                         pullScroll.judgeScrollBotom() && scrollValue < 0 ){
                     pullDirection = GloablUtils.DOWN;
                     return true;
@@ -93,7 +98,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
                 PullScrollBoth scrollBoth = (PullScrollBoth) pullScroll;
                 CGLog.v("打印 mode : "+mode+ "scrollTop : "+scrollBoth.judgeScrollTop()+
                 "scrollValue : "+scrollValue);
-                if((mode == Mode.PULLBOTH || mode == Mode.PULLDOWN)
+                if((mode == Mode.PULL_BOTH || mode == Mode.PULL_FROM_UP)
                         && scrollBoth.judgeScrollTop() && scrollValue > 0 ){
                     pullDirection = GloablUtils.UP;
                     CGLog.v("打印已拦截 : ");
@@ -108,6 +113,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
     int pullDirection = -1;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+//        MotionEvent.ACTION_CANCEL
         switch (event.getAction()){
             case MotionEvent.ACTION_MOVE:
                 CGLog.v("打印linearlayout的滑动 : "+getScrollY());
@@ -128,6 +134,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
 
                 lastY = event.getRawY();
                 break;
+
             case MotionEvent.ACTION_UP:
                 //判断是否大于刷新距离，如果是则加载新数据
                 switch (pullDirection){
@@ -207,7 +214,9 @@ public class PfRefreshLinearLayout extends LinearLayout {
         invalidate();
         if(Math.abs(getScrollY())>= REFRESH_DISTANCE){
             refresh_linear_top_tv.setText("松手刷新...");
+            refresh_linear_top_iv.setImageDrawable(getResources().getDrawable(R.drawable.up_refresh));
         }else {
+            refresh_linear_top_iv.setImageDrawable(getResources().getDrawable(R.drawable.down_refresh));
             refresh_linear_top_tv.setText("下拉刷新");
         }
     }
@@ -250,10 +259,10 @@ public class PfRefreshLinearLayout extends LinearLayout {
     }
 
     public interface Mode{
-        int PULLDOWN = GloablUtils.PULLDOWN;
+        int PULL_FROM_UP = GloablUtils.PULLDOWN;
         int DISALBED = GloablUtils.DISALBED;
-        int PULLUP= GloablUtils.PULLUP;
-        int PULLBOTH = GloablUtils.PULLBOTH;
+        int PULL_FROM_DOWN = GloablUtils.PULLUP;
+        int PULL_BOTH = GloablUtils.PULLBOTH;
     }
 
     @Override
@@ -290,6 +299,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
                 if(valueAnimaTop != null) valueAnimaTop.cancel();
                 refresh_linear_top_tv.setText("下拉刷新...");
                 refresh_linear_top_iv.clearAnimation();
+                refresh_linear_top_iv.setRotation(0);
                 refresh_linear_top_iv.setImageDrawable(getResources().getDrawable(R.drawable.down_refresh));
                 break;
             case GloablUtils.DOWN:

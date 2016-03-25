@@ -11,15 +11,19 @@ import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Login;
+import com.wj.kindergarten.bean.ThreeInfo;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.RequestType;
 import com.wj.kindergarten.net.SendRequest;
+import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
+import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -112,6 +116,10 @@ public final class UserRequest {
     private static final String INIT_SYNC_UPLOAD = "rest/fPPhotoItem/queryAlreadyUploaded.json";
     private static final String GET_BOUTIQUE_DIAN_ZAN_LIST = "rest/baseDianzan/queryNameByPage.json";
     private static final String DELETE_ALBUM_MEMBER = "rest/fPFamilyMembers/delete.json";
+    private static final String VALIDATE_BAN_PHONE = "rest/userThirdLoginQQ/access_token.json";
+    private static final String GET_THREE_USER_INFO = "rest/userinfo/thirdLogin.json";
+    private static final String LOGIN_OUT_NOTE = "rest/userinfo/ thirdLogout.json";
+    private static final String BOUND_TEL = "rest/userinfo/bindTel.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -828,6 +836,41 @@ public final class UserRequest {
         SendRequest.getInstance().get(context, RequestType.TRAIN_SCHOOL_DETAIL, params, RequestHttpUtil.BASE_URL + TRAIN_SCHOOL_DETAIL_FROM_RECRUIT, resultI);
     }
 
+    public static void getThreeUserInfo(Context context, final String access_token, final String type,final DoEveryThing doEveryThing) {
+        RequestParams params = new RequestParams();
+        params.put("access_token", access_token);
+        params.put("type", type);
+        SendRequest.getInstance().post(context, RequestType.GET_THREE_USER_INFO, params,
+                RequestHttpUtil.BASE_URL + GET_THREE_USER_INFO, new RequestResultI() {
+                    @Override
+                    public void result(BaseModel domain) {
+                        Login login = (Login) domain;
+                        if (login != null) {
+                            //把获取到的用户信息存入到磁盘中
+//                    CGSharedPreference.setJESSIONID_MD5(login.getMd5());
+                            StoreDataInSerialize.storeUserInfo(login);
+                            CGSharedPreference.setStoreJESSIONID(login.getJSESSIONID());
+                            CGApplication.getInstance().setLogin((Login) domain);
+                            CGSharedPreference.storeAccess_Token(access_token);
+                            CGSharedPreference.storelogin_type(type);
+                            //启动主页
+                            doEveryThing.everyThing();
+                        }
+                    }
+
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
+
+                    }
+
+                    @Override
+                    public void failure(String message) {
+
+                    }
+                });
+
+    }
+
     public static void getUserInfo(Context context, String storeJESSIONID, String jessionid_md5) {
         RequestParams params = new RequestParams();
         params.put("md5", jessionid_md5);
@@ -943,7 +986,7 @@ public final class UserRequest {
     public static void deleteAlbumMember(Context context, String uuid, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("uuid", uuid);
-        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL+DELETE_ALBUM_MEMBER, resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL + DELETE_ALBUM_MEMBER, resultI);
     }
 
     public static void getSinglePfInfo(Context context, String uuid, RequestResultI resultI) {
@@ -1145,4 +1188,47 @@ public final class UserRequest {
         SendRequest.getInstance().post(context, RequestType.GET_BOUTIQUE_REVIEW_URL, object.toString(),
                 RequestHttpUtil.BASE_URL + GET_BOUTIQUE_REVIEW_URL, resultI);
     }
+
+    public static void validateBanPhone(Context context, String openid, String access_token, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("appid", SplashActivity.QQ_APP_ID);
+        params.put("openid", openid);
+        params.put("access_token",access_token);
+
+        SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
+                VALIDATE_BAN_PHONE, resultI);
+    }
+
+    //注销票据
+    public static void loginoutNote(Context context, String access_token, String type, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("type", type);
+        params.put("access_token",access_token);
+
+        SendRequest.getInstance().get(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL +
+                LOGIN_OUT_NOTE, resultI);
+    }
+    //绑定手机,在需要的地方调用绑定
+    public static void boundTel(Context context, String access_token, String tel,String smsCode,String type, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("access_token",access_token);
+        params.put("tel",tel);
+        params.put("smsCode",smsCode);
+        params.put("type",type);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL +
+                BOUND_TEL, resultI);
+    }
+
+    public static void boundAccount(Context context, String access_token, String tel,String smsCode,String type, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("access_token",access_token);
+        params.put("tel",tel);
+        params.put("smsCode",smsCode);
+        params.put("type",type);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params.toString(), RequestHttpUtil.BASE_URL +
+                BOUND_TEL, resultI);
+    }
+
+
+
 }

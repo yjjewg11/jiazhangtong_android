@@ -48,6 +48,7 @@ public class PfCommonAssessAdapter extends BaseAdapter {
     public void setObjectList(List<PfSingleAssessObject> objectList) {
         this.objectList.clear();
         this.objectList.addAll(objectList);
+        notifyDataSetChanged();
 //        if(this.objectList.size() == 0){
 //            PfSingleAssessObject object = new PfSingleAssessObject();
 //            this.objectList.add(object);

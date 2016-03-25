@@ -16,6 +16,26 @@ public class ScanImageAndTime {
     private String time;
     private String choose = "全选";
 
+    public ScanImageAndTime(String path) {
+        this.path = path;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ScanImageAndTime that = (ScanImageAndTime) o;
+
+        return path.equals(that.path);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return path.hashCode();
+    }
+
     public String getChoose() {
         return choose;
     }

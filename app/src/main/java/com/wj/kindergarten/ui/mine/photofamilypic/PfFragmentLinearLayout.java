@@ -81,13 +81,10 @@ public class PfFragmentLinearLayout extends LinearLayout {
                 if(getFlTopMargin() == 0 && poor > 0 && pullUpView != null){
                     return super.onInterceptTouchEvent(ev);
                 }
-                if(getFlTopMargin() == 0 && pullUpView != null &&
-                        pullUpView.getScrollY() != 0){
-                    return super.onInterceptTouchEvent(ev);
-                }
 
                 //情况3：当fl的Math.abs(fl.topMargin < fl.getHeight()) ,进行拦截
                 if(judgeScrollByABS() && Math.abs(ev.getRawY() - startY) > 10){
+                    CGLog.v("打印父控件拦截 : ");
                     return true;
                 }
 

@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.mine.photofamilypic.viewmodel;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,6 +16,7 @@ import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.WindowUtils;
 
@@ -32,41 +34,67 @@ public class SingleLoadPicModel {
         alreadDb = FinalUtil.getAlreadyUploadDb(context);
     }
 
-    public void getBitmap(String lishipath, AllPfAlbumSunObject object, final ImageView imageView, final LoadSuccessed loadSuccessed){
+    public void getBitmap(final String lishipath, final AllPfAlbumSunObject object, final ImageView imageView,final Handler mHanlder, final LoadSuccessed loadSuccessed){
         //先通过路径判断内存有无bitmap
         //内存没有，则判断uuid是否为空，为空，则网络获取，不为空，则找到数据库对应的字段，拿出
         //它的path路径，生成bitmap对象，加入内存中,如果本地没有存储这张照片的地址，则从网络获取。
         //内存中存放照片的键用网络地址
-        Bitmap bitmap =  NativeImageLoader.getInstance().getBitmapFromMemCache(lishipath);
-        if(bitmap != null){
-            loadSuccessed.loadSuccess();
-            showBitmap(bitmap, imageView);
-            return;
-        }
-        //内存中没有图片,看obj对象缓存的md5图片地址是否存在本地
-        String localPath = findLocalPath(object.getUuid());
-        if(localPath != null && !TextUtils.isEmpty(localPath)){
-            //先判断文件是否存在，存在则本地加载
-            if(FileUtil.checkFileExits(localPath)){
-               bitmap =  NativeImageLoader.getInstance().loadNativeImage(localPath, new NativeImageLoader.NativeImageCallBack() {
-                    @Override
-                    public void onImageLoader(Bitmap bitsmap, String path) {
-                        showBitmap(bitsmap,imageView);
-                        loadSuccessed.loadSuccess();
-                        return;
-                    }
-                });
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                final Bitmap bitmap =  NativeImageLoader.getInstance().getBitmapFromMemCache(lishipath);
                 if(bitmap != null){
-                    showBitmap(bitmap,imageView);
-                    loadSuccessed.loadSuccess();
+                    final Bitmap finalBitmap = bitmap;
+                    mHanlder.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            showMap(loadSuccessed, finalBitmap, imageView);
+                        }
+                    });
                     return;
                 }
+                //内存中没有图片,看obj对象缓存的md5图片地址是否存在本地
+                final String localPath = findLocalPath(object.getUuid());
+                if(localPath != null && !TextUtils.isEmpty(localPath)){
+                    //先判断文件是否存在，存在则本地加载
+                    if(FileUtil.checkFileExits(localPath)){
+                        mHanlder.post(new Runnable() {
+                            @Override
+                            public void run() {
+                               Bitmap aBitmap =  NativeImageLoader.getInstance().loadNativeImage(localPath, new NativeImageLoader.NativeImageCallBack() {
+                                    @Override
+                                    public void onImageLoader(Bitmap bitsmap, String path) {
+                                        showMap(loadSuccessed, bitsmap, imageView);
+                                        return;
+                                    }
+                                });
+                                if(aBitmap != null){
+                                    showMap(loadSuccessed, aBitmap, imageView);
+                                }
+                            }
+                        });
+
+                        return;
+                    }
+                }
+
+                mHanlder.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadBitmap(lishipath,imageView,object.getMd5(),loadSuccessed);
+                    }
+                });
             }
-        }
+        };
 
-        loadBitmap(lishipath,imageView,object.getMd5(),loadSuccessed);
+        ThreadManager.instance.excuteRunnable(runnable);
 
 
+    }
+
+    private void showMap(LoadSuccessed loadSuccessed, Bitmap bitmap, ImageView imageView) {
+        loadSuccessed.loadSuccess();
+        showBitmap(bitmap, imageView);
     }
 
     private String findLocalPath(String uuid) {

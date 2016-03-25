@@ -261,7 +261,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                     @Override
                     public void result(BaseModel domain) {
                         cancleDialog();
-                        if(assessListView.isRefreshing())assessListView.onRefreshComplete();
+                        if(assessListView != null && assessListView.isRefreshing())assessListView.onRefreshComplete();
                         pfSingleAssess = (PfSingleAssess) domain;
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null

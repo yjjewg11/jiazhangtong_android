@@ -16,7 +16,9 @@ import com.wj.kindergarten.bean.UUIDListSunObj;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -53,18 +55,15 @@ public class PfLoadDataProxy {
     private FinalDb familyUuidSql;
     private FinalDb familyUuidObjectSql;
     private Context context;
-    private ThreadPoolExecutor threadPoolExecutor;
-    private LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue();
     public static final int REFRESH_DATA = 3060;
     public static final int NORMAL_DATA = 3061;
     private PfFamilyUuid pfFamilyUuid;
 
     public PfLoadDataProxy(Context context, Handler handler) {
-        familyUuidSql = FinalDb.create(context, GloablUtils.FAMILY_UUID, true);
-        familyUuidObjectSql = FinalDb.create(context, GloablUtils.FAMILY_UUID_OBJECT, true);
+        familyUuidSql = FinalUtil.getAllFamilyAlbum(context);
+        familyUuidObjectSql = FinalUtil.getFamilyUuidObjectDb(context);
         this.context = context;
         this.handler = handler;
-        threadPoolExecutor = new ThreadPoolExecutor(1, 1, 60 * 60, TimeUnit.SECONDS, linkedBlockingQueue);
     }
 
 
@@ -72,12 +71,10 @@ public class PfLoadDataProxy {
 
     //根据家庭uuid查询所有照片数量,判断是否是上拉刷新，
     public void loadData(String familyUuid, int pageNo, boolean isPullup) {
-        List<PfFamilyUuid> listT = familyUuidSql.findAll(PfFamilyUuid.class);//验证update是否生效
 //        CGLog.v("打印存放集合 : " + listT.toString() + "集合大小 : " + listT.size());
         //通过familyuuid查找数据库对象
         pfFamilyUuid = familyUuidSql.findById(familyUuid, PfFamilyUuid.class);
         CGLog.v("打印对象　；" + pfFamilyUuid);
-        String minTime = null;
 
         if (!isPullup) {
             //如果为空，则没有获取过数据,从网络获取 ; 有则直接从数据库取
@@ -288,7 +285,7 @@ public class PfLoadDataProxy {
                 familyUuidSql.update(pfFamilyUuid);
                 if (uuidList == null || uuidList.getList() == null || uuidList.getList().getData() == null
                         || uuidList.getList().getData().size() == 0) return;
-                threadPoolExecutor.execute(new Runnable() {
+                ThreadManager.instance.excuteRunnable(new Runnable() {
                     @Override
                     public void run() {
                         List<UUIDListSunObj> listSunObjs = uuidList.getList().getData();
@@ -318,10 +315,6 @@ public class PfLoadDataProxy {
 
             }
         });
-    }
-
-    public void onDestory() {
-        threadPoolExecutor.shutdownNow();
     }
 
     public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date,String limitCount){

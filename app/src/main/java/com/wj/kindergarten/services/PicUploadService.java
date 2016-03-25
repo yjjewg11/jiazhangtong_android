@@ -74,6 +74,7 @@ public class PicUploadService extends Service {
                 size = listObject.size();
                 AlreadySavePath alreadySavePath = listObject.get(count);
                 alreadySavePath.setStatus(0);
+                CGLog.v("打印上传的data_id : "+data_id);
                 alreadySavePath.setSuccess_time(new Date());
                 alreadySavePath.setData_id(data_id);
                 db.update(alreadySavePath);
@@ -95,9 +96,10 @@ public class PicUploadService extends Service {
 
     boolean isUpLoad = true;
     private UploadImage uploadImage = new UploadImage() {
+
+
         @Override
         public void success(Result result) {
-            //直接把地址写入到数据库
             String data_id = null;
 
             PfResult pfResult = (PfResult) result;
@@ -106,6 +108,7 @@ public class PicUploadService extends Service {
             }
             successes(data_id);
         }
+
         @Override
         public void failure(String message) {
             CGLog.v("上传失败 : " + message);

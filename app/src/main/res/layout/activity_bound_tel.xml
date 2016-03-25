@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f0f0f0"
+    tools:context="com.wj.kindergarten.ui.func.BoundTelActivity">
+
+
+
+    <include layout="@layout/title_normal"/>
+        <TextView
+            android:id="@+id/add_family_member_get_contact"
+            android:paddingRight="@dimen/margin_10"
+            android:background="#fff9d2"
+            android:gravity="center_vertical"
+            android:textColor="#8e8e8e"
+            android:textSize="12sp"
+            android:text="绑定手机号后可以用手机号登录，初始密码123456，可以在设置修改你的密码"
+            android:paddingLeft="9dp"
+            android:minHeight="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <RelativeLayout
+
+        android:visibility="gone"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            style="@style/add_family_style"
+            android:text="姓名"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/add_family_name"
+            android:hint="请输入姓名"
+            style="@style/add_family_edit_style"
+            android:layout_alignParentRight="true"
+            android:minWidth="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <View
+        android:background="@color/background_division"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bound_tel_rl_back"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+
+            style="@style/add_family_style"
+            android:text="输入手机号码"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/bound_tel_phone"
+            style="@style/add_family_edit_style"
+            android:layout_alignParentRight="true"
+            android:minWidth="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <View
+        android:background="@color/background_division"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/bound_tel_rl_back"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            style="@style/add_family_style"
+            android:text="输入验证码"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView38" />
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/pf_telephone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/iv_add_member" />
+        <com.wj.kindergarten.compounets.CountDownButton
+            android:layout_marginRight="@dimen/margin_10"
+            android:background="@drawable/add_family_add_background"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="13sp"
+            android:textColor="@color/white"
+            android:text="发送验证码"
+            android:padding="@dimen/margin_10"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:id="@+id/bound_tel_send" />
+
+        <EditText
+            android:gravity="center_vertical"
+            style="@style/add_family_edit_style"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/bound_tel_sms"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView38"
+            android:layout_toLeftOf="@+id/bound_tel_send" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/bound_tel_confirm"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:textSize="17sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/add_family_add_background"
+        android:text="确定"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
+
+</LinearLayout>

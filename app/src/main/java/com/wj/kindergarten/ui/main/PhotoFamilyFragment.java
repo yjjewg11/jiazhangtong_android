@@ -373,8 +373,8 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void initFragment() {
-        pfFusionFragment = new PfFusionFragment(this,currentFamily_uuid);
-        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[2]).commit();
+//        pfFusionFragment = new PfFusionFragment(this,currentFamily_uuid);
+//        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[2]).commit();
         pfFusionListFragment = new FusionListFragment(this,currentFamily_uuid);
         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
 
@@ -595,6 +595,7 @@ public class PhotoFamilyFragment extends Fragment{
             if (fusionListFragment != null) {
                 getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionListFragment, fragment_tags[0]).commit();
             } else {
+                if(pfFusionListFragment == null) pfFusionListFragment = new FusionListFragment(this,currentFamily_uuid);
                 getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
             }
         }else if(fusionPosition == 1){

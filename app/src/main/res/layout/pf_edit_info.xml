@@ -62,11 +62,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_alignParentLeft="true"
-                            android:text="相册名称"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+                            android:text="相册名称" />
                         <TextView
-                            android:gravity="center"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:gravity="right|center_vertical"
                             android:id="@+id/tv_album_name"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -74,7 +74,8 @@
                             android:drawablePadding="4dp"
                             android:drawableRight="@drawable/youjiantou"
                             android:text="我的家庭相册"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_toRightOf="@+id/textView37" />
                     </RelativeLayout>
 
                     <View

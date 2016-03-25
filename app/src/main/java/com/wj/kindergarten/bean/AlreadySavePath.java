@@ -18,6 +18,15 @@ public class AlreadySavePath implements Serializable {
     private Date success_time;
     private String family_uuid;
     private String data_id;
+    private String photo_time;
+
+    public String getPhoto_time() {
+        return photo_time;
+    }
+
+    public void setPhoto_time(String photo_time) {
+        this.photo_time = photo_time;
+    }
 
     public int getId() {
         return id;

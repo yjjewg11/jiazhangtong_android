@@ -16,6 +16,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.PfResult;
 import com.wj.kindergarten.bean.PicObject;
@@ -25,9 +26,12 @@ import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.Utils;
 
+
+import net.tsz.afinal.FinalDb;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -51,6 +55,7 @@ import java.util.List;
 public class UploadFile {
     public static final String URL = RequestHttpUtil.BASE_URL + "rest/uploadFile/upload.json";
     public static final String UP_LOAD_PF_URL = RequestHttpUtil.BASE_URL + "rest/fPPhotoItem/upload.json";
+    private  FinalDb dbAlready;
     private UploadImage uploadImage;
     private Context context;
     private int type;
@@ -64,6 +69,7 @@ public class UploadFile {
         this.type = type;
         this.width = width;
         this.height = height;
+        dbAlready = FinalUtil.getAlreadyUploadDb(context);
     }
     //带进度上传相册图片
 
@@ -118,7 +124,9 @@ public class UploadFile {
                             CGLog.d("back1:" + response.toString());
                             BaseResponse baseResponse = new BaseResponse(response);
                             if (HTTP_SUCCESS.equals(baseResponse.getResMsg().getStatus())) {
-                                uploadImage.success(GsonKdUtil.getGson().fromJson(response.toString(), PfResult.class));
+                                PfResult pfResult = GsonKdUtil.getGson().fromJson(response.toString(), PfResult.class);
+                                CGLog.v("打印pfResult : "+pfResult);
+                                uploadImage.success(pfResult);
                             } else {
                                 uploadImage.failure("上传图片失败");
                             }
@@ -152,8 +160,11 @@ public class UploadFile {
 
     private PicObject queryDetailInfo(String path) throws IOException {
         PicObject picObject = new PicObject();
+        String sql = "localPath = '"+path+"' and status = '1'";
+        List<AlreadySavePath> list = dbAlready.findAllByWhere(AlreadySavePath.class, sql);
+        if(list.size() > 0) picObject.setTime(list.get(0).getPhoto_time());
         ExifInterface exifInterface = new ExifInterface(path);
-        picObject.setTime(exifInterface.getAttribute(ExifInterface.TAG_DATETIME));
+//        picObject.setTime(exifInterface.getAttribute(ExifInterface.TAG_DATETIME));
         float[] location = new float[2];
         exifInterface.getLatLong(location);
         if (location[0] != 0.0f && location[1] != 0.0f) {

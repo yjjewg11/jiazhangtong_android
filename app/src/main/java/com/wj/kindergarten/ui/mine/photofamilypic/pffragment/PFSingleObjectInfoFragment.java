@@ -359,7 +359,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 }
             }
             pf_gallery_image.setTag(lishipath);
-            singlePicModel.getBitmap(lishipath,sunObject,pf_gallery_image, new SingleLoadPicModel.LoadSuccessed() {
+            singlePicModel.getBitmap(lishipath,sunObject,pf_gallery_image,mHanlder, new SingleLoadPicModel.LoadSuccessed() {
                 @Override
                 public void loadSuccess() {
                     progressBar.setVisibility(View.GONE);
@@ -378,7 +378,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                         if (pf_single_scroll.isRefreshing()) {
                             pf_single_scroll.onRefreshComplete();
                         }
-                        if(assessListView.isRefreshing()) assessListView.onRefreshComplete();
+                        if(assessListView != null && assessListView.isRefreshing()) assessListView.onRefreshComplete();
                         PfSingleAssess pfSingleAssess = (PfSingleAssess) domain;
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null

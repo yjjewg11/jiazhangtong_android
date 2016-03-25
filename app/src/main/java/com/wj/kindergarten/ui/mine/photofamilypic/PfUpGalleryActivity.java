@@ -281,7 +281,6 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                 intent.putExtra(PhotoWallActivity.KEY_POSITION, position);
                 intent.putStringArrayListExtra(PhotoWallActivity.KEY_LIST, simplePic);
                 startActivity(intent);
-
             }
         });
     }
@@ -564,10 +563,16 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
             } else {
                 //判断返回类型
                 if (type == PhotoFamilyFragment.ADD_PIC) {
+                    //同时将拍摄时间存入数据库
+
                     //将图片存入数据库
                     for (String path : images) {
+                        ScanImageAndTime imageAndTime = new ScanImageAndTime(path);
+                        imageAndTime = galleryList.get(galleryList.indexOf(imageAndTime)) ;
+
                         AlreadySavePath alreadySavePath = new AlreadySavePath();
                         alreadySavePath.setLocalPath(path);
+                        alreadySavePath.setPhoto_time(imageAndTime.getTime());
                         alreadySavePath.setFamily_uuid(PhotoFamilyFragment.instance.getCurrentFamily_uuid());
                         alreadySavePath.setStatus(1);
                         uploadDb.save(alreadySavePath);

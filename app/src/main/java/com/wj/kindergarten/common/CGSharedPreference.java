@@ -338,4 +338,37 @@ public class CGSharedPreference {
         editor.putBoolean("initReadConstact", true);
         editor.commit();
     }
+
+    public static void storeAccess_Token(String access_token) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("login_access_token", access_token);
+        editor.commit();
+    }
+
+    public static void storelogin_type(String type) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("login_type", type);
+        editor.commit();
+    }
+    public static String getAccess_Token() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("login_access_token", "");
+    }
+
+    public static String getlogin_type() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("login_type", "");
+    }
+
+    public static boolean getLoginOnce() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getBoolean("login_once", false);
+    }
+
+    public static void setLoginOnce() {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("login_once", true);
+        editor.commit();
+    }
+
 }

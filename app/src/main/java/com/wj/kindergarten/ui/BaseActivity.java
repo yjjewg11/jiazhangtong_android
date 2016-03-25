@@ -57,6 +57,8 @@ import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
+import com.wj.kindergarten.ui.func.BoundTelActivity;
+import com.wj.kindergarten.ui.func.ConfirmBoundTelActivity;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.imagescan.GalleryImagesActivity;
 import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
@@ -219,9 +221,12 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+
         if (!getClass().getSimpleName().equals("LoginActivity")
                 && !getClass().getSimpleName().equals("MainActivity")
-                && !getClass().getSimpleName().equals("RegisterActivity")) {
+                && !getClass().getSimpleName().equals("RegisterActivity")
+                && !getClass().getSimpleName().equals("ConfirmBoundTelActivity")
+                && !getClass().getSimpleName().equals("BoundTelActivity")) {
             if (CGApplication.getInstance().getLogin() == null) {
                 hideProgressDialog();
                 Utils.showToast(mContext, "登录超时，请重新登录");
