@@ -34,6 +34,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PfDianZan;
@@ -317,8 +318,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
                 @Override
                 public void deleteData(PfSingleAssessObject object) {
-                    assessObjectList.remove(object);
-                    initBottomAssessCount();
+                    deleteReply(object);
                 }
             });
             pfCommonAssessAdapter.setBottomListener(new View.OnClickListener() {
@@ -347,7 +347,23 @@ public class PFSingleObjectInfoFragment extends Fragment {
         popAssessWindow.showAsDropDown(pf_common_show_asseess_send);
     }
 
+    private void deleteReply(final PfSingleAssessObject object) {
+        UserRequest.deleteCommonReply(getActivity(), "21", object.getUuid(), new RequestFailedResult() {
+            @Override
+            public void result(BaseModel domain) {
+                ToastUtils.showMessage("删除成功!");
+                assessObjectList.remove(object);
+                pfCommonAssessAdapter.setObjectList(assessObjectList);
+                initBottomAssessCount();
+            }
 
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+        });
+
+    }
 
 
     private void showPic() {
@@ -390,7 +406,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                             } else {
                                 ToastUtils.showMessage("没有更多内容了!");
                             }
-                            assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
+                            if(assessListView != null) assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
                             pf_single_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
                         }
                     }

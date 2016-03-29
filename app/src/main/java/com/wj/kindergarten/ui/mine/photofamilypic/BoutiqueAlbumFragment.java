@@ -10,16 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueAlbum;
 import com.wj.kindergarten.bean.BoutiqueAlbumListSun;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.BoutiqueAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
@@ -39,6 +42,8 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
     View view;
     @ViewInject(id = R.id.pulltorefresh_list)
     private PullToRefreshListView pullListView;
+    @ViewInject(id = R.id.fragment_test_wrapper_pullRefresh)
+    private FrameLayout fragment_test_wrapper_pullRefresh;
     private BoutiqueAdapter boutiqueAdapter;
     PhotoFamilyFragment photoFamilyFragment;
     int firstVisibleItemOwn = -1;
@@ -56,6 +61,8 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
         this.family_uuid = family_uuid;
     }
 
+    boolean isCouldLoad = true;
+    int scrollStates = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,7 +78,25 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
         boutiqueAdapter.setRel_uuid(family_uuid);
         pullListView.setAdapter(boutiqueAdapter);
-        pullListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
+        pullListView.getRefreshableView().setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                scrollStates = scrollState;
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                //处于底部，能够加载,状态在滑动中
+                firstVisibleItemOwn = firstVisibleItem;
+                if(firstVisibleItem+visibleItemCount == totalItemCount
+                        && isCouldLoad && scrollStates != 0){
+                    pullListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+                    isCouldLoad = false;
+                    pullListView.setRefreshing();
+                }
+            }
+        });
         pullListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -82,17 +107,6 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 pageNo++;
                 loadData(nowType);
-            }
-        });
-        pullListView.getRefreshableView().setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                firstVisibleItemOwn = firstVisibleItem;
             }
         });
         pullListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -134,7 +148,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
         if (!pullListView.isRefreshing()) {
             dialog.show();
         }
-        UserRequest.getBoutiqueAllbumListFromType(getActivity(), type, pageNo, new RequestResultI() {
+        UserRequest.getBoutiqueAllbumListFromType(getActivity(), type, pageNo, new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 if (pullListView.isRefreshing()) {
@@ -144,18 +158,27 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
                         dialog.dismiss();
                     }
                 }
+                isCouldLoad = true;
                 BoutiqueAlbum boutiqueAlbum = (BoutiqueAlbum) domain;
                 if (boutiqueAlbum != null && boutiqueAlbum.getList() != null
-                        && boutiqueAlbum.getList().getData() != null) {
+                        && boutiqueAlbum.getList().getData() != null &&
+                        boutiqueAlbum.getList().getData().size() > 0) {
                     if (pageNo == 1) boutiqueAlbumList.clear();
+                    //判断先前是否添加无内容提示
+                    if(fragment_test_wrapper_pullRefresh.getChildCount() > 0 &&
+                            fragment_test_wrapper_pullRefresh.getChildAt(0) != pullListView){
+                        fragment_test_wrapper_pullRefresh.removeAllViews();
+                        fragment_test_wrapper_pullRefresh.addView(pullListView);
+                    }
                     boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());
                     boutiqueAdapter.setList(boutiqueAlbumList);
                 } else {
                     if (pageNo == 1) {
-//                        ToastUtils.showMessage("没有");
+                        ((BaseActivity)getActivity()).noView(fragment_test_wrapper_pullRefresh);
                     } else {
                         ToastUtils.showMessage("没有更多内容了!!!");
                         pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
+                        isCouldLoad = false;
                     }
                 }
             }
@@ -164,10 +187,16 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
             public void result(List<BaseModel> domains, int total) {
 
             }
-
             @Override
             public void failure(String message) {
-
+                super.failure(message);
+                if (pullListView.isRefreshing()) {
+                    pullListView.onRefreshComplete();
+                } else {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                }
             }
         });
     }

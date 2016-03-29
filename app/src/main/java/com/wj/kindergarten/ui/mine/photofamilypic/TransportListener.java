@@ -36,6 +36,9 @@ public class TransportListener implements View.OnClickListener,AdapterView.OnIte
         this.context = context;
         this.queryGroupCounts = queryGroupCounts;
     }
+    public TransportListener(Context context){
+        this.context = context;
+    }
 
     @Override
     public void onClick(View v) {
@@ -53,6 +56,13 @@ public class TransportListener implements View.OnClickListener,AdapterView.OnIte
         intent.putExtra("position",position);
         intent.putExtra("list",(ArrayList)list);
         intent.putExtra("countList",(ArrayList)queryGroupCounts);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    public void onAllItem(AllPfAlbumSunObject object){
+        Intent intent = new Intent(context,PfGalleryActivity.class);
+        intent.putExtra("all",object);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

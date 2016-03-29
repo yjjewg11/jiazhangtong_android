@@ -26,9 +26,26 @@ public class UploadPathDbTwo implements FinalDb.DbUpdateListener {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        if(i != i1){
+        do{
+            i++;
+        if(i == 2){
             String sql = "ALTER TABLE already_save_path ADD COLUMN family_uuid char(45);";
             db.execSQL(sql);
         }
+        if(i == 4){
+            String sql = "ALTER TABLE already_save_path ADD COLUMN data_id char(45);";
+            db.execSQL(sql);
+        }
+        if(i == 5){
+            String sql = "ALTER TABLE already_save_path ADD COLUMN photo_time char(45);";
+            db.execSQL(sql);
+        }
+        if(i == 6){
+            String sql = "ALTER TABLE already_save_path ADD COLUMN progress Integer;";
+            db.execSQL(sql);
+            String sql2 = "ALTER TABLE already_save_path ADD COLUMN total Integer;";
+            db.execSQL(sql2);
+        }
+        }while (i <= i1);
     }
 }

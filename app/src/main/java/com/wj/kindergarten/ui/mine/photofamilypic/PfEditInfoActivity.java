@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AddFamilyMemberParams;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.PFAlbumMember;
@@ -74,9 +75,11 @@ public class PfEditInfoActivity extends BaseActivity {
     protected void setNeedLoading() {
     }
 
+
+
     @Override
     protected void onCreate() {
-        setTitleText("相册信息");
+        setTitleText("相册信息","保存");
         initViews();
         initClicks();
         initData();
@@ -86,7 +89,7 @@ public class PfEditInfoActivity extends BaseActivity {
     @Override
     protected void loadData() {
         commonDialog.show();
-        UserRequest.getAlbumInfo(this, family_uuid, new RequestResultI() {
+        UserRequest.getAlbumInfo(this, family_uuid, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 if (commonDialog.isShowing()) {
@@ -104,10 +107,6 @@ public class PfEditInfoActivity extends BaseActivity {
 
             }
 
-            @Override
-            public void failure(String message) {
-
-            }
         });
     }
 
@@ -119,7 +118,11 @@ public class PfEditInfoActivity extends BaseActivity {
         initTitle = info.getTitle();
         initHearld = info.getHerald();
         tv_album_name.setText("" + title);
-        ImageLoaderUtil.displayImage(hearld, iv_appear_image);
+        if(!Utils.stringIsNull(hearld)){
+            ImageLoaderUtil.displayImage(hearld, iv_appear_image);
+        }else {
+            iv_appear_image.setImageDrawable(getResources().getDrawable(R.drawable.family_album_default));
+        }
         memer_linear.removeAllViews();
         memberList = pfAlbumInfo.getMembers_list();
         addAllViews();
@@ -189,7 +192,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
     public void deleteMember(final PFAlbumMember member){
         commonDialog.show();
-        UserRequest.deleteAlbumMember(this, member.getUuid(), new RequestResultI() {
+        UserRequest.deleteAlbumMember(this, member.getUuid(), new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 if (commonDialog.isShowing()) commonDialog.cancel();
@@ -202,10 +205,6 @@ public class PfEditInfoActivity extends BaseActivity {
 
             }
 
-            @Override
-            public void failure(String message) {
-
-            }
         });
     }
 
@@ -217,7 +216,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
     @Override
     protected void titleRightButtonListener() {
-
+        saveAlbum();
     }
 
 
@@ -390,6 +389,12 @@ public class PfEditInfoActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         saveAlbum();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        finish();
                     }
                 });
             }else {

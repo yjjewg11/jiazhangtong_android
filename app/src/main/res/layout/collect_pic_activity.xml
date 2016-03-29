@@ -6,6 +6,11 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/title_normal"/>
+    <FrameLayout
+        android:background="@color/white"
+        android:id="@+id/collect_pic_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <com.wj.kindergarten.ui.more.PfRefreshLinearLayout
         android:layout_width="match_parent"
@@ -29,5 +34,5 @@
             android:layout_height="match_parent"/>
         <include layout="@layout/refresh_linearlayout_header"/>
     </com.wj.kindergarten.ui.more.PfRefreshLinearLayout>
-
+    </FrameLayout>
 </LinearLayout>

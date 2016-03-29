@@ -152,12 +152,23 @@ public class PfFusionFragment extends Fragment implements Watcher{
         pullScroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                mHandler.postDelayed(new Runnable() {
+                mPfLoadDataProxy.queryIncrementNewData(family_uuid, new PfLoadDataProxy.DataLoadFinish() {
                     @Override
-                    public void run() {
-                        banScrollView.onRefreshComplete();
+                    public void finish() {
+                        pullScroll.onRefreshComplete();
                     }
-                },3000);
+                    @Override
+                    public void noMoreData() {
+                        ToastUtils.showMessage("暂无更新数据!");
+                    }
+
+                    @Override
+                    public void loadFailed() {
+                        if (pullScroll.isRefreshing()) {
+                            pullScroll.onRefreshComplete();
+                        }
+                    }
+                });
             }
 
             @Override
@@ -178,6 +189,13 @@ public class PfFusionFragment extends Fragment implements Watcher{
             public void noMoreData() {
                 pullScroll.setMode(PullToRefreshBase.Mode.DISABLED);
                 noMoreData = true;
+            }
+
+            @Override
+            public void loadFailed() {
+                if (pullScroll.isRefreshing()) {
+                    pullScroll.onRefreshComplete();
+                }
             }
 
         });

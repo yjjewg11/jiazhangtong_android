@@ -19,6 +19,7 @@ import com.umeng.onlineconfig.OnlineConfigAgent;
 import com.umeng.onlineconfig.OnlineConfigLog;
 import com.umeng.onlineconfig.UmengOnlineConfigureListener;
 import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
@@ -49,9 +50,10 @@ import org.json.JSONObject;
  */
 public class SplashActivity extends Activity implements DoEveryThing {
     private static final int SPLASH_DELAY = 0;
-    private static final int SLASH_DELAY_TIME = 0;
+    private  int SLASH_DELAY_TIME = 0;
     public static final String QQ_APP_ID = "1104813270";
-
+    public static final String WEIXIN_APP_ID = "wx6699cf8b21e12618";
+    public static final String WEIXIN_SERECT = "639c78a45d012434370f4c1afc57acd1";
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
@@ -109,6 +111,9 @@ public class SplashActivity extends Activity implements DoEveryThing {
                     "SumAAk7jtaUSnZqd");
             qqSsoHandler.addToSocialSDK();
 
+            UMWXHandler wxHandler = new UMWXHandler(this,WEIXIN_APP_ID,WEIXIN_SERECT);
+            wxHandler.addToSocialSDK();
+
             OnlineConfigAgent.getInstance().updateOnlineConfig(this);
             OnlineConfigAgent.getInstance().setDebugMode(true);
             UmengOnlineConfigureListener configureListener = new UmengOnlineConfigureListener() {
@@ -132,8 +137,8 @@ public class SplashActivity extends Activity implements DoEveryThing {
             e.printStackTrace();
         }
         com.umeng.socialize.utils.Log.LOG = true;
-
-        mHandler.sendEmptyMessageDelayed(SPLASH_DELAY, SLASH_DELAY_TIME);
+        int delay = getIntent().getIntExtra("delay",3000);
+        mHandler.sendEmptyMessageDelayed(SPLASH_DELAY, delay);
     }
 
 

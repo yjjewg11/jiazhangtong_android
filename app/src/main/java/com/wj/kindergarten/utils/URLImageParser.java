@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 
 
-
 /**
  * URLImageParser
  *

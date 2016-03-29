@@ -1,6 +1,7 @@
 package com.wj.kindergarten.ui.more;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewPropertyAnimator;
@@ -30,6 +31,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
     private ImageView refresh_linear_top_iv;
     private RelativeLayout refresh_linear_top_rl;
     private ViewPropertyAnimator valueAnimaTop;
+    private Handler mHandler = new Handler();
 
     public PfRefreshLinearLayout(Context context) {
         super(context);
@@ -86,22 +88,21 @@ public class PfRefreshLinearLayout extends LinearLayout {
             case MotionEvent.ACTION_MOVE:
                 if(interactLastY == 0) interactLastY = startY;
                 int scrollValue = (int) (ev.getRawY() - interactLastY);
-                if(getRefreshing()) return true;
+                if(getRefreshing()) return false;
                 if(pullScroll == null) return super.onInterceptTouchEvent(ev);
                 //判断上拉刷新,如果模式为both或者上拉刷新皆可
-                if((mode == Mode.PULL_BOTH || mode == Mode.PULL_FROM_DOWN) &&
-                        pullScroll.judgeScrollBotom() && scrollValue < 0 ){
-                    pullDirection = GloablUtils.DOWN;
+                if((mode == Mode.PULL_BOTH || mode == Mode.PULL_FROM_END) &&
+                        pullScroll.judgeScrollBotom() && scrollValue < 0
+                        && Math.abs(scrollValue) > 10){
+                    pullDirection = GloablUtils.FROM_DOWN;
                     return true;
                 }
                 //这个是下拉刷新
                 PullScrollBoth scrollBoth = (PullScrollBoth) pullScroll;
-                CGLog.v("打印 mode : "+mode+ "scrollTop : "+scrollBoth.judgeScrollTop()+
-                "scrollValue : "+scrollValue);
                 if((mode == Mode.PULL_BOTH || mode == Mode.PULL_FROM_UP)
-                        && scrollBoth.judgeScrollTop() && scrollValue > 0 ){
-                    pullDirection = GloablUtils.UP;
-                    CGLog.v("打印已拦截 : ");
+                        && scrollBoth.judgeScrollTop() && scrollValue > 0 &&
+                        Math.abs(scrollValue) > 10){
+                    pullDirection = GloablUtils.FROM_UP;
                     return true;
                 }
                 interactLastY = ev.getRawY();
@@ -122,12 +123,12 @@ public class PfRefreshLinearLayout extends LinearLayout {
                 if(getRefreshing()) return false;
                 switch (pullDirection){
                     //在顶部方向，做下拉刷新
-                    case GloablUtils.UP:
+                    case GloablUtils.FROM_UP:
                         //判断手势向上还是向下
                         upMove(event);
                         break;
                     //在底部的方向，做上拉刷新
-                    case GloablUtils.DOWN:
+                    case GloablUtils.FROM_DOWN:
                         downMove(event);
                         break;
                 }
@@ -138,10 +139,10 @@ public class PfRefreshLinearLayout extends LinearLayout {
             case MotionEvent.ACTION_UP:
                 //判断是否大于刷新距离，如果是则加载新数据
                 switch (pullDirection){
-                    case GloablUtils.UP:
+                    case GloablUtils.FROM_UP:
                         leaveUp();
                         break;
-                    case GloablUtils.DOWN:
+                    case GloablUtils.FROM_DOWN:
                         leaveDown();
                         break;
                 }
@@ -164,7 +165,7 @@ public class PfRefreshLinearLayout extends LinearLayout {
                 valueAnimaTop = refresh_linear_top_iv.animate().rotation(360*600)
                         .setInterpolator(new LinearInterpolator()).setDuration(500 * 1000);
                 refresh_linear_top_tv.setText("正在刷新...");
-                onRefreshListener.pullDownRefresh();
+                onRefreshListener.pullFromTopRefresh();
             }
         }else{
             if(getRefreshing()){
@@ -178,14 +179,14 @@ public class PfRefreshLinearLayout extends LinearLayout {
     private void leaveDown() {
         if(getScrollY() > REFRESH_DISTANCE){
             scroller.startScroll(0,getScrollY(),0, (int) -(getScrollY()-BOTTOM_HEIGHT* WindowUtils.getDesnity()),400);
-            valueAnima = image_bottom.animate().rotation(359*600).setInterpolator(new LinearInterpolator()).setDuration(500 * 1000);
+            valueAnima = createBottomAnim();
             valueAnima.start();
             if(onRefreshListener == null){
                 onRefreshComplete();
             }else {
                 setRefreshing(true);
                 tv_bottom.setText("正在刷新...");
-                onRefreshListener.pullUpRefresh();
+                onRefreshListener.pullFromEndRefresh();
             }
         }else{
             if(getRefreshing()){
@@ -194,6 +195,10 @@ public class PfRefreshLinearLayout extends LinearLayout {
                 scroller.startScroll(0,getScrollY(),0,-getScrollY(),400);
             }
         }
+    }
+
+    private ViewPropertyAnimator createBottomAnim() {
+        return image_bottom.animate().rotation(359*600).setInterpolator(new LinearInterpolator()).setDuration(500 * 1000);
     }
 
     private void upMove(MotionEvent event) {
@@ -259,10 +264,10 @@ public class PfRefreshLinearLayout extends LinearLayout {
     }
 
     public interface Mode{
-        int PULL_FROM_UP = GloablUtils.PULLDOWN;
+        int PULL_FROM_UP = GloablUtils.PULL_FROM_TOP;
         int DISALBED = GloablUtils.DISALBED;
-        int PULL_FROM_DOWN = GloablUtils.PULLUP;
-        int PULL_BOTH = GloablUtils.PULLBOTH;
+        int PULL_FROM_END = GloablUtils.PULL_FROM_EDN;
+        int PULL_BOTH = GloablUtils.PULL_BOTH;
     }
 
     @Override
@@ -283,8 +288,8 @@ public class PfRefreshLinearLayout extends LinearLayout {
     }
 
     public interface OnRefreshListener{
-        void pullUpRefresh();
-        void pullDownRefresh();
+        void pullFromEndRefresh();
+        void pullFromTopRefresh();
     }
     private OnRefreshListener onRefreshListener;
 
@@ -295,19 +300,38 @@ public class PfRefreshLinearLayout extends LinearLayout {
     public final void onRefreshComplete(){
         setRefreshing(false);
         switch (pullDirection){
-            case GloablUtils.UP:
-                if(valueAnimaTop != null) valueAnimaTop.cancel();
+            case GloablUtils.FROM_UP:
+                if(valueAnimaTop != null)
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            valueAnimaTop.cancel();
+                            refresh_linear_top_iv.setRotation(0);
+                        }
+                    }, 300);
                 refresh_linear_top_tv.setText("下拉刷新...");
-                refresh_linear_top_iv.clearAnimation();
-                refresh_linear_top_iv.setRotation(0);
                 refresh_linear_top_iv.setImageDrawable(getResources().getDrawable(R.drawable.down_refresh));
                 break;
-            case GloablUtils.DOWN:
+            case GloablUtils.FROM_DOWN:
                 tv_bottom.setText("上拉刷新...");
-                if(valueAnima != null) valueAnima.cancel();
+                if(valueAnima != null)
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            valueAnima.cancel();
+                        }
+                    },300);
                 break;
         }
         scroller.startScroll(0, getScrollY(), 0, -getScrollY());
         invalidate();
+    }
+
+    public void fromEndBeginRefresh(){
+        setRefreshing(true);
+        scroller.startScroll(0, 0, 0, (int) (BOTTOM_HEIGHT * WindowUtils.getDesnity()));
+        createBottomAnim();
+        pullDirection = GloablUtils.FROM_DOWN;
+        onRefreshListener.pullFromEndRefresh();
     }
 }

@@ -166,7 +166,7 @@ public class AddFamilyMemberActivity extends BaseActivity {
         }
         member.setTel(tel);
         UserRequest.addFamilyMember(this, member.getFamily_uuid(), member.getFamily_name(), member.getTel(),
-                 member.getUuid(),new RequestFailedResult(){
+                 member.getUuid(),new RequestFailedResult(commonDialog){
 
                     @Override
                     public void result(BaseModel domain) {

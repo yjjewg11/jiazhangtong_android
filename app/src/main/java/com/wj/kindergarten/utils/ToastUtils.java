@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.ui.more.BoundDialog;
 
 public class ToastUtils {
     public static void  showMessage(String message){
@@ -67,7 +70,16 @@ public class ToastUtils {
     public static void showDialog(Context context,String title,String content,AlertDialog.OnClickListener positionListener,AlertDialog.OnClickListener cancle) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         AlertDialog dialog =  builder.setTitle(title).setMessage(content).setNegativeButton("取消",cancle)
-                .setPositiveButton("确定",positionListener).create();
+                .setPositiveButton("确定", positionListener).create();
         dialog.show();
+    }
+
+    public static void showBoundDialog(Context context) {
+        showBoundDialog(context,"",null);
+
+    }
+    public static void showBoundDialog(Context context,String title,BoundDialog.AfterListener afterListener) {
+        BoundDialog d = new BoundDialog(context,title,afterListener);
+        d.show();
     }
 }

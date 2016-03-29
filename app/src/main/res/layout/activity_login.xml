@@ -169,7 +169,7 @@
         <TextView
             android:layout_marginTop="35dp"
             android:id="@+id/login_action"
-            style="@style/loginButtonStyle"
+            style="@style/loginButtonStyle2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="登录" />

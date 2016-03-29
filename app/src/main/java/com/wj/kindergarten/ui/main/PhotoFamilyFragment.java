@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.main;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -332,11 +333,12 @@ public class PhotoFamilyFragment extends Fragment{
             BitmapCallBack.loadBitmap(pfAlbumListSun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
             @Override
             public void callback(Bitmap bitmap) {
-                pf_backGround_image.setImageBitmap(bitmap);
-                BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
-                pf_backGround_rl.setBackground(drawable);
+                blurBackGround(bitmap);
             }
-        });
+            });
+        }else {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.family_album_default);
+            blurBackGround(bitmap);
         }
         String text = Utils.isNull(pfAlbumListSun.getTitle());
         if(TextUtils.isEmpty(text)){
@@ -345,6 +347,12 @@ public class PhotoFamilyFragment extends Fragment{
         pf_pic_center_tv.setText("" + text);
         pf_backGround_family_name.setText("" + text);
 
+    }
+
+    private void blurBackGround(Bitmap bitmap) {
+        pf_backGround_image.setImageBitmap(bitmap);
+        BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
+        pf_backGround_rl.setBackground(drawable);
     }
 
     private void initHeadView() {

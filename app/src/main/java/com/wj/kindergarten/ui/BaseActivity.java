@@ -35,6 +35,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -648,10 +649,14 @@ public abstract class BaseActivity extends ActionBarActivity {
             }
 
         }
-
-
-
     }
+    public void noView(){
+        View noView = View.inflate(this,R.layout.nothing_view,null);
+        FrameLayout nothing_view_title = (FrameLayout) noView.findViewById(R.id.nothing_view_title);
+        nothing_view_title.setVisibility(View.VISIBLE);
+        setContentView(noView);
+    }
+
 
 
     public void cityChoose(final TextView tv_view){

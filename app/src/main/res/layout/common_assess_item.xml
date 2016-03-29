@@ -42,6 +42,7 @@
             android:layout_toLeftOf="@+id/common_assess_item_time" />
 
         <TextView
+            android:layout_marginRight="@dimen/margin_10"
             android:textColor="@color/color_8e8e8e"
             android:textSize="12sp"
             android:layout_width="wrap_content"
@@ -49,13 +50,14 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="1光年前"
             android:id="@+id/common_assess_item_time"
-            android:layout_marginRight="9dp"
-            android:layout_alignTop="@+id/common_assess_item_name"
+            android:layout_above="@+id/common_assess_item_content"
             android:layout_alignParentRight="true" />
 
         <TextView
             android:gravity="bottom"
-            android:padding="@dimen/margin_10"
+            android:paddingLeft="@dimen/margin_10"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingBottom="2dp"
             android:textColor="#cc5c55"
             android:textSize="12sp"
             android:layout_width="wrap_content"

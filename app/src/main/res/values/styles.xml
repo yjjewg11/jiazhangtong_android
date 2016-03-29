@@ -250,4 +250,12 @@
     <style name="pf_classic_by_date">
         <item name="android:scaleType">centerCrop</item>
     </style>
+
+    <style name="loginButtonStyle2">
+        <item name="android:background">@drawable/login_button_selector2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColorHint">@color/normal_text_gray</item>
+        <item name="android:textColor">#ff6666</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

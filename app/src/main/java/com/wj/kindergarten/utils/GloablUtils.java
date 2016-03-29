@@ -63,12 +63,12 @@ public interface GloablUtils {
     int ADD_NEW_ALBUM_SUCCESSED = 3058;
     //接受二维码链接的广播action
     //自定义上拉，下拉刷新
-    int PULLDOWN = 3059;
+    int PULL_FROM_TOP = 3059;
     int DISALBED = 3060;
-    int PULLUP = 3061;
-    int PULLBOTH = 3062;
-    int UP = 3063;
-    int DOWN = 3064;
+    int PULL_FROM_EDN = 3061;
+    int PULL_BOTH = 3062;
+    int FROM_UP = 3063;
+    int FROM_DOWN = 3064;
     int CONFIRM_BOUND_TEL = 3065;
     int BOUND_TEL = 3066;
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
@@ -89,7 +89,8 @@ public interface GloablUtils {
     // 3同上
     //4 添加uuid字段方便照片删除时，同时删除已上传照片。
     //5 添加拍摄日期字段
-    int ALREADY_DB_VERSION = 5;
+    //6 添加上传进度的正在上传进入和总进度
+    int ALREADY_DB_VERSION = 6;
     String DELETE_PF_SINGLE_INFO_SUCCESSED = "delete_pf_single_info_successed";
     String UPDATE_BOUTIQUE_ALBUM_SUCCESSED = "update_boutique_album_successed";
     //存放相片的数据库表名

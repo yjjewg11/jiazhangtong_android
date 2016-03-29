@@ -55,6 +55,7 @@ public class PicUploadService extends Service {
     private UploadFile uploadFile;
     private String failedPath;
     private FinalDb db;
+    private Context mContext;
 
     int count = 0;
     int size = 0;
@@ -89,14 +90,12 @@ public class PicUploadService extends Service {
             intent.putExtra("path",listObject.get(count).getLocalPath());
             intent.putExtra("progress",progress);
             intent.putExtra("total",total);
-            sendBroadcast(intent);
+            mContext.sendBroadcast(intent);
         }
     }
 
-
     boolean isUpLoad = true;
     private UploadImage uploadImage = new UploadImage() {
-
 
         @Override
         public void success(Result result) {
@@ -139,6 +138,7 @@ public class PicUploadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
         db = FinalUtil.getAlreadyUploadDb(this);
         uploadFile = new UploadFile(getApplicationContext(), uploadImage, 0, 720, 1280);
         register();
@@ -247,11 +247,11 @@ public class PicUploadService extends Service {
     class SuccessRunable implements Runnable{
             @Override
             public void run() {
-                sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
+                mContext.sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING));
                 sendBroad(UpLoadActivity.PF_UPDATE_PROGRESS_SUCCESSED, 100, 100);
                 listObject.remove(count);
                 if (listObject.size() == 0) {
-                    sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
+                    mContext.sendBroadcast(new Intent(GloablUtils.ALREADY_UPLOADING_FINISHED));
                     judgeUpdateData();
                     return;
                 }
@@ -261,7 +261,7 @@ public class PicUploadService extends Service {
         private void judgeUpdateData() {
             findPic();
             if(listObject == null || listObject.size() == 0){
-                sendBroadcast(new Intent(GloablUtils.REQUEST_PIC_NEW_DATA));
+                mContext.sendBroadcast(new Intent(GloablUtils.REQUEST_PIC_NEW_DATA));
             }
         }
     }

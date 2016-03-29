@@ -1,14 +1,12 @@
 package com.wj.kindergarten.ui.func;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.CountDownButton;
@@ -34,6 +32,7 @@ public class BoundTelActivity extends BaseActivity{
     @ViewInject(id = R.id.bound_tel_phone)
     EditText bound_tel_phone;
     String access_token;
+    private String boundType;
 
     @Override
     protected void setContentLayout() {
@@ -49,6 +48,7 @@ public class BoundTelActivity extends BaseActivity{
     protected void onCreate() {
         setTitleText("绑定手机");
         FinalActivity.initInjectedView(this);
+        boundType = getIntent().getStringExtra("boundType");
         access_token = getIntent().getStringExtra("access_token");
     }
 
@@ -58,21 +58,43 @@ public class BoundTelActivity extends BaseActivity{
                 sengSms();
                 break;
             case R.id.bound_tel_confirm:
-                boundTel();
+                bound();
                 break;
         }
     }
 
-    private void boundTel() {
+    private void bound() {
         if(!checkData()) return;
-        UserRequest.boundTel(this, access_token,
+        if(boundType.equals("tel")){
+            boundTel();
+        }else if(boundType.equals("account")){
+            boundAccount();
+        }
+    }
+
+    private void boundAccount() {
+        UserRequest.boundAccount(this, access_token,
                 bound_tel_phone.getText().toString(), bound_tel_sms.getText().toString(),
-                CGSharedPreference.getlogin_type(), new RequestResultI() {
+                CGSharedPreference.getlogin_type(), new RequestFailedResult(commonDialog) {
                     @Override
                     public void result(BaseModel domain) {
-                        ToastUtils.showMessage("绑定成功!");
-                        setResult(RESULT_OK);
-                        finish();
+                        commonResult();
+                    }
+
+                    @Override
+                    public void result(List<BaseModel> domains, int total) {
+
+                    }
+                });
+    }
+
+    private void boundTel() {
+        UserRequest.boundTel(this, access_token,
+                bound_tel_phone.getText().toString(), bound_tel_sms.getText().toString(),
+                CGSharedPreference.getlogin_type(), new RequestFailedResult(commonDialog) {
+                    @Override
+                    public void result(BaseModel domain) {
+                        commonResult();
                     }
 
                     @Override
@@ -82,9 +104,15 @@ public class BoundTelActivity extends BaseActivity{
 
                     @Override
                     public void failure(String message) {
-
+                        super.failure(message);
                     }
                 });
+    }
+
+    private void commonResult() {
+        ToastUtils.showMessage("绑定成功!");
+        setResult(RESULT_OK);
+        finish();
     }
 
     private boolean checkData() {

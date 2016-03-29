@@ -144,6 +144,7 @@ public class BoutiqueModeActivity extends BaseActivity {
                 if(commonDialog.isShowing()){
                     commonDialog.dismiss();
                 }
+                if(gridView.isRefreshing()) gridView.onRefreshComplete();
                 PfModeName pfModeName = (PfModeName) domain;
                 if(pfModeName != null && pfModeName.getList() != null
                         && pfModeName.getList().getData() != null && pfModeName.getList().getData().size() > 0){

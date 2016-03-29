@@ -22,6 +22,7 @@ import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueAlbum;
 import com.wj.kindergarten.bean.BoutiqueAlbumListSun;
 import com.wj.kindergarten.bean.BoutiqueDianzanList;
+import com.wj.kindergarten.bean.BoutiqueDianzanListFather;
 import com.wj.kindergarten.bean.BoutiqueDianzanListObj;
 import com.wj.kindergarten.bean.PfDianZan;
 import com.wj.kindergarten.bean.PopAttributes;
@@ -96,7 +97,7 @@ public class BoutiqueAdapter extends BaseAdapter{
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        BoutiqueAlbumListSun sun = list.get(position);
+        final BoutiqueAlbumListSun sun = list.get(position);
         if(sun != null){
             String path = sun.getHerald();
             if(path.contains("@")){
@@ -130,12 +131,14 @@ public class BoutiqueAdapter extends BaseAdapter{
                 attributes.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 attributes.setLeftOffset(0);
 
-                UserRequest.getBoutiqueDianzanList(context, 1,rel_uuid,new RequestResultI() {
+                UserRequest.getBoutiqueDianzanList(context, 1,sun.getUuid(),new RequestResultI() {
                     @Override
                     public void result(BaseModel domain) {
                         View assessView = View.inflate(context, R.layout.boutique_item_dianzan,null);
                         TextView tv = (TextView) assessView.findViewById(R.id.boutique_item_dianzan_tv);
-                        BoutiqueDianzanList dianzanList = (BoutiqueDianzanList) domain;
+                        BoutiqueDianzanListFather dianzanListFather = (BoutiqueDianzanListFather) domain;
+                        if(dianzanListFather == null) return;
+                        BoutiqueDianzanList dianzanList = dianzanListFather.getDianZanNameList();
                         PopupWindow popupWindow = new PopupWindow(assessView,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
                         Utils.setPopWindow(popupWindow);
 
@@ -216,7 +219,7 @@ public class BoutiqueAdapter extends BaseAdapter{
                     builder.append(Utils.isNull(listObjs.get(count).getUsername()));
                 }
             }
-            String text = "<font color='ff5a50'>"+builder.toString()+"</font>"+"\n"+"等人觉得很赞!";
+            String text = "<font color='#ff5a50'>"+builder.toString()+"</font> \n等人觉得很赞!";
             tv.setText(Html.fromHtml(text));
         }else {
             tv.setText("暂无人点赞!");

@@ -34,6 +34,7 @@ import com.wj.kindergarten.ui.imagescan.AutoDownLoadListener;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfInfoAllPIcFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfSingleInfoFragment;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -45,7 +46,10 @@ import com.wj.kindergarten.utils.WindowUtils;
 
 import net.tsz.afinal.FinalDb;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -56,6 +60,9 @@ public class PfGalleryActivity extends BaseActivity {
     public static final int EDIT_SINGLE_PF_REQUEST_CODE = 4060;
     private FrameLayout pf_gallery_new_layout_fl;
     private boolean isSpecial;
+    private AllPfAlbumSunObject allObj;
+    private FinalDb dbObj;
+    private PfSingleInfoFragment singleFragment;
 
     public ArrayList<AllPfAlbumSunObject> getObjectList() {
         return objectList;
@@ -75,7 +82,7 @@ public class PfGalleryActivity extends BaseActivity {
         return tags;
     }
 
-    private ArrayList<AllPfAlbumSunObject> objectList;
+    private ArrayList<AllPfAlbumSunObject> objectList = new ArrayList<>();
     private int position;
     private ArrayList<QueryGroupCount> queryGroupCounts;
 
@@ -95,7 +102,7 @@ public class PfGalleryActivity extends BaseActivity {
         super.titleLeftButtonListener();
     }
 
-    public void commonDelete(){
+    public void commonDelete() {
         sendBroadcast(new Intent(GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED));
     }
 
@@ -107,17 +114,58 @@ public class PfGalleryActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        commonDialog = new HintInfoDialog(this,"数据加载中，请稍后...");
+        commonDialog = new HintInfoDialog(this, "数据加载中，请稍后...");
         setTitleText("选择照片");
+        initDb();
         getData();
         initViews();
         initFragment();
+        getDataFromDataBases();
+    }
+
+    private void sortList(List<AllPfAlbumSunObject> list) {
+        Collections.sort(list, new Comparator<AllPfAlbumSunObject>() {
+            @Override
+            public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {
+                int cha = 0;
+                long t1 = TimeUtil.getYMDHMSTime(o.getCreate_time());
+                long t2 = TimeUtil.getYMDHMSTime(t.getCreate_time());
+                if (t2 - t1 > 0) {
+                    cha = 1;
+                } else if (t2 - t1 < 0) {
+                    cha = -1;
+                }
+
+                return cha;
+            }
+        });
+    }
+    private void initDb() {
+        dbObj = FinalUtil.getFamilyUuidObjectDb(this);
+    }
+
+    private void getDataFromDataBases() {
+        if (allObj != null) {
+            String sql = " strftime('%Y-%m-%d',create_time) DESC;";
+            //按倒序排列
+            List<AllPfAlbumSunObject> shortList = dbObj.findAll(AllPfAlbumSunObject.class);
+            sortList(shortList);
+            if(objectList == null) objectList = new ArrayList<>();
+            objectList.clear();
+            objectList.addAll(shortList);
+            position = shortList.indexOf(allObj);
+            singleFragment.setList(objectList, position);
+        }
     }
 
     private void initFragment() {
-        PfSingleInfoFragment fragment = new PfSingleInfoFragment(position, objectList);
+        if(allObj == null){
+            singleFragment = new PfSingleInfoFragment(position, objectList);
+        }else {
+            singleFragment = new PfSingleInfoFragment();
+        }
         //先添加详情的fragment。
-        getSupportFragmentManager().beginTransaction().replace(R.id.pf_gallery_new_layout_fl, fragment,tags[1]).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.pf_gallery_new_layout_fl, singleFragment, tags[1]).commit();
     }
 
     private void initViews() {
@@ -130,11 +178,12 @@ public class PfGalleryActivity extends BaseActivity {
         objectList = (ArrayList<AllPfAlbumSunObject>) getIntent().getSerializableExtra("list");
         //判断querygroupcounts是否为空，如果是说明显示数据库的全部照片；不是，则返回显示传送过来的指定集合的照片
         queryGroupCounts = (ArrayList<QueryGroupCount>) getIntent().getSerializableExtra("countList");
-        if(queryGroupCounts == null){
+        if (queryGroupCounts == null) {
             isSpecial = true;
-        }else{
+        } else {
             isSpecial = false;
         }
+        allObj = (AllPfAlbumSunObject) getIntent().getSerializableExtra("all");
     }
 
     public void changeToSingleFragment(int position, List<AllPfAlbumSunObject> objectList) {
@@ -156,20 +205,20 @@ public class PfGalleryActivity extends BaseActivity {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
     }
 
-    public void changeTitle(String title){
+    public void changeTitle(String title) {
         setTitleText("" + title);
     }
 
-    public void showDialog(String text){
+    public void showDialog(String text) {
         commonDialog.show();
-        if(!TextUtils.isEmpty(text) && commonDialog.isShowing()){
+        if (!TextUtils.isEmpty(text) && commonDialog.isShowing()) {
             commonDialog.setText(text);
         }
 
     }
 
-    public void startEditActivity(AllPfAlbumSunObject object){
-        Intent intent = new Intent(this,SinglePfEditActivity.class);
+    public void startEditActivity(AllPfAlbumSunObject object) {
+        Intent intent = new Intent(this, SinglePfEditActivity.class);
         intent.putExtra("object", object);
         startActivityForResult(intent, EDIT_SINGLE_PF_REQUEST_CODE, null);
     }
@@ -177,18 +226,18 @@ public class PfGalleryActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK) return;
-        if(requestCode == EDIT_SINGLE_PF_REQUEST_CODE){
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == EDIT_SINGLE_PF_REQUEST_CODE) {
             AllPfAlbumSunObject object = (AllPfAlbumSunObject) data.getSerializableExtra("object");
-            if(object != null)
-            notifiFragmentUpdate(object);
+            if (object != null)
+                notifiFragmentUpdate(object);
         }
     }
 
     private void notifiFragmentUpdate(AllPfAlbumSunObject object) {
         //返回的编辑相片的数据通知fragment进行刷新
-       PfSingleInfoFragment fragment = (PfSingleInfoFragment) getSupportFragmentManager().findFragmentByTag(tags[1]);
-        if(fragment != null){
+        PfSingleInfoFragment fragment = (PfSingleInfoFragment) getSupportFragmentManager().findFragmentByTag(tags[1]);
+        if (fragment != null) {
             fragment.updateSingleData(object);
         }
     }

@@ -103,7 +103,7 @@ public class PfCommonAssessAdapter extends BaseAdapter {
 //            }else {
 //                holder.common_assess_item_rl.setVisibility(View.VISIBLE);
             ImageLoaderUtil.displayImage(object.getCreate_img(), holder.common_assess_item_head_img);
-            holder.common_assess_item_name.setText("" + object.getCreate_user());
+            holder.common_assess_item_name.setText("" + Utils.isNull(object.getCreate_user()));
             holder.common_assess_item_content.setText(EmotUtil.getEmotionContent(context, object.getContent()));
             String time = object.getCreate_time();
             if (Utils.isNull(time) != null && !TextUtils.isEmpty(time)) {
@@ -112,8 +112,6 @@ public class PfCommonAssessAdapter extends BaseAdapter {
             holder.common_assess_item_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    objectList.remove(object);
-                    notifyDataSetChanged();
                     deleteAssessItemListener.deleteData(object);
                 }
             });

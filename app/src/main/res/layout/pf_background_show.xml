@@ -11,8 +11,7 @@
 
         <!--android:background="@drawable/album_pf_background"-->
         <FrameLayout
-            android:paddingTop="@dimen/margin_5"
-            android:padding="0.5dp"
+            android:padding="1dp"
             android:background="@drawable/pf_back_border"
             android:layout_marginTop="20dp"
             android:id="@+id/pic_back_fl"
@@ -24,7 +23,7 @@
             <ImageView
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher"
+                android:src="@drawable/family_album_default"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/pf_backGround_image" />
@@ -104,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="20000"
+            android:text="0"
             android:id="@+id/pf_background_show_number"
             android:layout_alignTop="@+id/pic_back_fl"
             android:layout_toRightOf="@+id/pic_back_fl" />

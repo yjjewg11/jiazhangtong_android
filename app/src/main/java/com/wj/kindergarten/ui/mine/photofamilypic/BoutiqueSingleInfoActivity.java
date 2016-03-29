@@ -27,6 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshWebView;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BoutiqueAllpic;
@@ -394,8 +395,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
                 @Override
                 public void deleteData(PfSingleAssessObject object) {
-                    assessObjectList.remove(object);
-                    initBottomAssessCount();
+                    deleteReply(object);
                 }
             });
             assessListView.setAdapter(pfCommonAssessAdapter);
@@ -419,6 +419,24 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     int firstItem;
     int visibleItem;
     int totalItem;
+
+    private void deleteReply(final PfSingleAssessObject object) {
+        UserRequest.deleteCommonReply(this, "22", object.getUuid(), new RequestFailedResult(commonDialog) {
+            @Override
+            public void result(BaseModel domain) {
+                ToastUtils.showMessage("删除成功!");
+                assessObjectList.remove(object);
+                pfCommonAssessAdapter.setObjectList(assessObjectList);
+                initBottomAssessCount();
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+        });
+
+    }
     private void showMore() {
         if (pf_more_view == null) {
             pf_more_view = View.inflate(this, R.layout.pf_single_more, null);

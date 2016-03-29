@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
@@ -99,13 +100,16 @@ public class PfLoadDataProxy {
     }
 
     private void loadPic(final String familyUuid, final String minTime, final String maxTime, final String updateNewCountTime, int pageNo, final int type) {
-        UserRequest.getPfPicByUuid(context, familyUuid, minTime, maxTime, updateNewCountTime, pageNo, new RequestResultI() {
+        UserRequest.getPfPicByUuid(context, familyUuid, minTime, maxTime, updateNewCountTime, pageNo, new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 AllPfAlbum allPfAlbum = (AllPfAlbum) domain;
                 if (dataLoadFinish != null) dataLoadFinish.finish();
                 if (allPfAlbum == null || allPfAlbum.getList() == null || allPfAlbum.getList().getData() == null ||
                         allPfAlbum.getList().getData().size() == 0) {
+                    if(pfFamilyUuid.getMinTime() == null){
+
+                    }
                     if(type == NORMAL_DATA){
                         ToastUtils.showMessage("没有更多内容了");
                     }else if(type == REFRESH_DATA){
@@ -154,7 +158,8 @@ public class PfLoadDataProxy {
 
             @Override
             public void failure(String message) {
-
+                super.failure(message);
+                dataLoadFinish.loadFailed();
             }
         });
     }
@@ -229,7 +234,7 @@ public class PfLoadDataProxy {
 
     public final void queryIncrementNewData(final String family_uuid, final DataLoadFinish dataLoadFinish){
         pfFamilyUuid =  familyUuidSql.findById(family_uuid, PfFamilyUuid.class);
-        UserRequest.queryIncrementNewData(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestResultI() {
+        UserRequest.queryIncrementNewData(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 if(dataLoadFinish != null) dataLoadFinish.finish();
@@ -252,7 +257,8 @@ public class PfLoadDataProxy {
 
             @Override
             public void failure(String message) {
-
+                super.failure(message);
+                if(dataLoadFinish != null)  dataLoadFinish.loadFailed();
             }
         });
     }
@@ -297,6 +303,10 @@ public class PfLoadDataProxy {
                             CGLog.v("打印obj : " + obj);
                             AllPfAlbumSunObject objSql = familyUuidObjectSql.findById(obj.getU(), AllPfAlbumSunObject.class);
                             if (objSql == null) continue;
+                            if(obj.getS() == 2) {
+                                familyUuidObjectSql.delete(objSql);
+                                continue;
+                            }
                             objSql.setStatus(obj.getS());
                             familyUuidObjectSql.update(objSql);
                         }
@@ -334,7 +344,11 @@ public class PfLoadDataProxy {
 
     public interface DataLoadFinish {
         void finish();
-
         void noMoreData();
+        void loadFailed();
+    }
+    public interface DataLoadFinishFirst extends DataLoadFinish{
+        void noMoreDataFirst();
+
     }
 }

@@ -19,6 +19,24 @@ public class AlreadySavePath implements Serializable {
     private String family_uuid;
     private String data_id;
     private String photo_time;
+    private int progress;
+    private int total;
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
     public String getPhoto_time() {
         return photo_time;
@@ -102,11 +120,15 @@ public class AlreadySavePath implements Serializable {
     @Override
     public String toString() {
         return "AlreadySavePath{" +
-                "localPath='" + localPath + '\'' +
+                "id=" + id +
+                ", localPath='" + localPath + '\'' +
                 ", status=" + status +
                 ", success_time=" + success_time +
                 ", family_uuid='" + family_uuid + '\'' +
                 ", data_id='" + data_id + '\'' +
+                ", photo_time='" + photo_time + '\'' +
+                ", progress=" + progress +
+                ", total=" + total +
                 '}';
     }
 }

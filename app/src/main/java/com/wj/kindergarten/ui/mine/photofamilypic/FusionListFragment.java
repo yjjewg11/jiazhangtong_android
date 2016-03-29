@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.QueryGroupCount;
+import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.FusionAdapter;
 import com.wj.kindergarten.ui.func.adapter.FusionListOwnGridAdapter;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
@@ -66,6 +68,12 @@ public class FusionListFragment extends Fragment implements Watcher{
             switch (msg.what){
                     //查询指定时间前的数据
                     case PfLoadDataProxy.NORMAL_DATA:
+                        //判断是否是没有数据，新请求的数据，是的话，去掉无内容提醒
+                        if(fusion_list_root.getChildCount() > 0 &&
+                                fusion_list_root.getChildAt(0) != fusion_list_fresh_linear){
+                            fusion_list_root.removeAllViews();
+                            fusion_list_root.addView(fusion_list_fresh_linear);
+                        }
                         List<QueryGroupCount> allList = (List<QueryGroupCount>) msg.obj;
                         if(allList != null){
                             queryGroupCounts.clear();
@@ -99,6 +107,9 @@ public class FusionListFragment extends Fragment implements Watcher{
             allObjects.addAll(list);
             ownGridAdapter.setQueryList(queryGroupCounts,allObjects);
         }
+        if(list != null && list.size() == 0){
+            ((BaseActivity)getActivity()).noView(fusion_list_root);
+        }
     }
 
     private void sortList(List<AllPfAlbumSunObject> list) {
@@ -110,7 +121,7 @@ public class FusionListFragment extends Fragment implements Watcher{
                 long t2 = TimeUtil.getYMDHMSTime(t.getCreate_time());
                 if (t2 - t1 > 0) {
                     cha = 1;
-                } else {
+                } else if(t2 - t1 < 0){
                     cha = -1;
                 }
 
@@ -122,6 +133,8 @@ public class FusionListFragment extends Fragment implements Watcher{
     @ViewInject(id = R.id.fusion_list_fragment_stick_grid)
     private StickyGridHeadersGridView fusion_list_fragment_stick_grid;
     private FusionListOwnGridAdapter ownGridAdapter;
+    @ViewInject(id = R.id.fusion_list_root)
+    FrameLayout fusion_list_root;
 
     private void queryAllpic() {
         ThreadManager.instance.excuteRunnable(new Runnable() {
@@ -169,6 +182,9 @@ public class FusionListFragment extends Fragment implements Watcher{
     public FusionListFragment() {
     }
 
+    //防止多次下拉造成的重复加载
+    boolean isCouldLoad = true;
+    public int scrollStateS;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -179,9 +195,11 @@ public class FusionListFragment extends Fragment implements Watcher{
         FinalActivity.initInjectedView(this, mainView);
         photoFamilyFragment.getObserver().registerObserver(this);
         fusion_list_fragment_stick_grid.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+                scrollStateS = scrollState;
             }
 
             @Override
@@ -189,6 +207,12 @@ public class FusionListFragment extends Fragment implements Watcher{
                 firstItem = firstVisibleItem;
                 visibleItem = visibleItemCount;
                 totalItem = totalItemCount;
+                //滑到底部自动加载,并且能够加载更多，而且处于滚动状态
+                if(firstVisibleItem + visibleItemCount == totalItemCount && isCouldLoad
+                        && scrollStateS != 0){
+                    isCouldLoad = false;
+                    fusion_list_fresh_linear.fromEndBeginRefresh();
+                }
             }
         });
         photoFamilyFragment.setPullUpView(fusion_list_fragment_stick_grid);
@@ -199,10 +223,16 @@ public class FusionListFragment extends Fragment implements Watcher{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                String time = TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getPhoto_time());
 //                String sql = "family_uuid = '"+family_uuid+"' and strftime('%Y-%m-%d',photo_time) = '"+time+"'";
-                List<AllPfAlbumSunObject> shortList = dbObj.findAll(AllPfAlbumSunObject.class);
-                sortList(shortList);
-                position = shortList.indexOf(ownGridAdapter.getItem(position));
-                new TransportListener(getActivity(), position, shortList, null).onItemClick(parent, view, position, id);
+//                String sql = " strftime('%Y-%m-%d',create_time) DESC limit 50;";
+//                //按倒序排列
+//                List<AllPfAlbumSunObject> shortList = dbObj.findAll(AllPfAlbumSunObject.class,sql);
+////                sortList(shortList);
+//                position = shortList.indexOf(ownGridAdapter.getItem(position));
+                //传递查询效率太低，改为传递过去进行查询
+//                new TransportListener(getActivity(), position, shortList, null).onItemClick(parent, view, position, id);
+                new TransportListener(getActivity()).onAllItem((AllPfAlbumSunObject) ownGridAdapter.getItem(position));
+
+
             }
         });
         fusion_list_fresh_linear = (PfRefreshLinearLayout)mainView.findViewById(R.id.fusion_list_fresh_linear);
@@ -215,20 +245,20 @@ public class FusionListFragment extends Fragment implements Watcher{
 
             @Override
             public boolean judgeScrollBotom() {
-                CGLog.v("打印是否到底了 : " + (firstItem + visibleItem == totalItem)
-                        + " fir : " + firstItem + " visible : " + visibleItem + " total : " + totalItem);
                 return firstItem + visibleItem == totalItem;
             }
         });
+
+        fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULL_FROM_UP);
         fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
 
             @Override
-            public void pullUpRefresh() {
-                mPfLoadDataProxy.loadData(family_uuid, 1, true);
+            public void pullFromEndRefresh() {
+                loadBottomData();
             }
 
             @Override
-            public void pullDownRefresh() {
+            public void pullFromTopRefresh() {
                 mPfLoadDataProxy.queryIncrementNewData(family_uuid, new PfLoadDataProxy.DataLoadFinish() {
                     @Override
                     public void finish() {
@@ -239,28 +269,49 @@ public class FusionListFragment extends Fragment implements Watcher{
                     public void noMoreData() {
                         ToastUtils.showMessage("暂无更新数据!");
                     }
+
+                    @Override
+                    public void loadFailed() {
+                        if(fusion_list_fresh_linear.getRefreshing())
+                            fusion_list_fresh_linear.onRefreshComplete();
+                    }
                 });
             }
         });
         mPfLoadDataProxy = new PfLoadDataProxy(getActivity(), mHandler);
         mPfLoadDataProxy.setQUERY_CLOUMN(QUERY_CLOUMN);
-        mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinish() {
+        mPfLoadDataProxy.setDataLoadFinish(new PfLoadDataProxy.DataLoadFinishFirst() {
+            @Override
+            public void noMoreDataFirst() {
+                ((BaseActivity)getActivity()).noView(fusion_list_root);
+            }
+
             @Override
             public void finish() {
+                isCouldLoad = true;
                 fusion_list_fresh_linear.onRefreshComplete();
             }
 
             @Override
             public void noMoreData() {
-                fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULL_FROM_UP);
-                noMoreData = true;
-                ToastUtils.showMessage("没有更多内容了!");
+                    fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULL_FROM_UP);
+                    isCouldLoad = false;
+            }
+
+            @Override
+            public void loadFailed() {
+                if(fusion_list_fresh_linear.getRefreshing())
+                fusion_list_fresh_linear.onRefreshComplete();
             }
 
         });
         loadData();
 
         return mainView;
+    }
+
+    public void loadBottomData(){
+        mPfLoadDataProxy.loadData(family_uuid, 1, true);
     }
 
     private void initDb() {
@@ -300,6 +351,7 @@ public class FusionListFragment extends Fragment implements Watcher{
     }
 
     public void refreshData() {
+        isCouldLoad = true;
         loadData();
     }
 

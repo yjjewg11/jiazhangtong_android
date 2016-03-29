@@ -11,6 +11,7 @@ import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BoutiqueDianzanList;
+import com.wj.kindergarten.bean.BoutiqueDianzanListFather;
 import com.wj.kindergarten.bean.NeedBoundPhoneResult;
 import com.wj.kindergarten.bean.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddChild;
@@ -83,7 +84,6 @@ import com.wj.kindergarten.utils.Utils;
 
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -530,7 +530,7 @@ public class SendRequest {
                 resultI.result(getDomain(domain, BoutiqueAllpic.class));
                 break;
             case RequestType.GET_BOUTIQUE_DIAN_ZAN_LIST:
-                resultI.result(getDomain(domain, BoutiqueDianzanList.class));
+                resultI.result(getDomain(domain, BoutiqueDianzanListFather.class));
                 break;
             case RequestType.VALIDATE_BAN_PHONE:
                 resultI.result(getDomain(domain, NeedBoundPhoneResult.class));

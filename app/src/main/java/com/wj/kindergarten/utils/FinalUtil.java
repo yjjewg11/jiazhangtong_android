@@ -5,6 +5,7 @@ import android.content.Context;
 import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathDbTwo;
 import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathFive;
 import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathFour;
+import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathSix;
 
 import net.tsz.afinal.FinalDb;
 
@@ -17,7 +18,7 @@ public abstract class FinalUtil {
 
     //创建存放已经上传的照片的数据库
     public static FinalDb getAlreadyUploadDb(Context context){
-       return FinalDb.create(context,"afinal.db",true,GloablUtils.ALREADY_DB_VERSION,new UploadPathFive());
+       return FinalDb.create(context,"afinal.db",true,GloablUtils.ALREADY_DB_VERSION,new UploadPathDbTwo(context));
     }
     //创建单张时光轴照片的对象
     public static FinalDb getFamilyUuidObjectDb(Context context){

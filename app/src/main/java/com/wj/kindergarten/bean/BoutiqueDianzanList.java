@@ -11,7 +11,7 @@ public class BoutiqueDianzanList extends BaseModel{
     @Expose
     private int pageSize;@Expose
     private int pageNo;@Expose
-    private List<BoutiqueDianzanListObj>data;
+    private List<BoutiqueDianzanListObj> data;
 
     @Override
     public String toString() {

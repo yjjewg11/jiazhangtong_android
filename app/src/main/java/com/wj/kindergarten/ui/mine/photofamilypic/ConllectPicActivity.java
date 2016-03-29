@@ -5,6 +5,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import com.wenjie.jiazhangtong.R;
@@ -36,6 +37,7 @@ public class ConllectPicActivity extends BaseActivity{
             super.handleMessage(msg);
         }
     };
+    private FrameLayout collect_pic_activity_container;
 
     @Override
     protected void setContentLayout() {
@@ -59,6 +61,7 @@ public class ConllectPicActivity extends BaseActivity{
     int visibleItem = 0;
 
     private void initViews() {
+        collect_pic_activity_container = (FrameLayout) findViewById(R.id.collect_pic_activity_container);
         refreshLinear = (PfRefreshLinearLayout) findViewById(R.id.collect_pic_refresh_linear);
         gridView = (GridView) findViewById(R.id.collect_pic_refresh_gridView);
         adapter = new PfCollectPicAdapter(ConllectPicActivity.this);
@@ -69,7 +72,7 @@ public class ConllectPicActivity extends BaseActivity{
                 Utils.showPfSingleinfo(ConllectPicActivity.this, position, (ArrayList<AllPfAlbumSunObject>) collect_list);
             }
         });
-        refreshLinear.setMode(PfRefreshLinearLayout.Mode.PULL_FROM_UP);
+        refreshLinear.setMode(PfRefreshLinearLayout.Mode.PULL_FROM_END);
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -87,20 +90,14 @@ public class ConllectPicActivity extends BaseActivity{
         refreshLinear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
 
             @Override
-            public void pullUpRefresh() {
+            public void pullFromEndRefresh() {
                 pageNo++;
                 loadData();
             }
 
             @Override
-            public void pullDownRefresh() {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshLinear.onRefreshComplete();
-                    }
-                }, 3000);
-                ToastUtils.showMessage("这是上拉刷新!");
+            public void pullFromTopRefresh() {
+
             }
         });
         refreshLinear.setPullScroll(new PfRefreshLinearLayout.PullScrollBoth() {
@@ -129,7 +126,7 @@ public class ConllectPicActivity extends BaseActivity{
                         adapter.setList(collect_list);
                 }else{
                     if(pageNo == 1){
-                        loadEmpty();
+                        noView(collect_pic_activity_container);
                     }else {
                         ToastUtils.showMessage("没有更多数据了！");
                         refreshLinear.onRefreshComplete();

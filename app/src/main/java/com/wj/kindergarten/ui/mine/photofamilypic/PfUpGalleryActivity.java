@@ -2,6 +2,7 @@ package com.wj.kindergarten.ui.mine.photofamilypic;
 
 import android.animation.ObjectAnimator;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -49,6 +50,7 @@ import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.UploadPathDbTwo;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.ThreadManager;
 import com.wj.kindergarten.utils.TimeUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
@@ -69,6 +71,7 @@ import java.util.Map;
  * Created by tangt on 2016/1/19.
  */
 public class PfUpGalleryActivity extends BaseActivity implements View.OnClickListener {
+    private final int TOAST_DELAY = 1002;
     //开始扫描
     private final int SCAN_PHOTO_BEGIN = 0;
     //扫描完成
@@ -214,6 +217,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
         initWidget();
 
         mHandler.sendEmptyMessage(SCAN_PHOTO_BEGIN);
+        mHandler.sendEmptyMessageDelayed(TOAST_DELAY,300);
     }
 
     private void initSelectPic(ArrayList<String> pics) {
@@ -475,6 +479,11 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
 //                    adapter.setFirstSpecial(false);
                     adapter.notifyDataSetChanged();
                     break;
+                case TOAST_DELAY:
+                    if(!Utils.isWifi(getApplicationContext())) {
+                        ToastUtils.showMessage("当前处于移动网络下，建议WIFI下进行上传！");
+                    }
+                    break;
             }
             super.handleMessage(msg);
         }
@@ -556,7 +565,7 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
      * @param images   需要返回上一页的图片数组
      * @param isCamera 是否是拍照
      */
-    private void chooseImageFinish(List<String> images, boolean isCamera) {
+    private void chooseImageFinish(final List<String> images, boolean isCamera) {
         if (null != images && images.size() > 0) {
             if (isCut) {
 
@@ -566,20 +575,12 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     //同时将拍摄时间存入数据库
 
                     //将图片存入数据库
-                    for (String path : images) {
-                        ScanImageAndTime imageAndTime = new ScanImageAndTime(path);
-                        imageAndTime = galleryList.get(galleryList.indexOf(imageAndTime)) ;
-
-                        AlreadySavePath alreadySavePath = new AlreadySavePath();
-                        alreadySavePath.setLocalPath(path);
-                        alreadySavePath.setPhoto_time(imageAndTime.getTime());
-                        alreadySavePath.setFamily_uuid(PhotoFamilyFragment.instance.getCurrentFamily_uuid());
-                        alreadySavePath.setStatus(1);
-                        uploadDb.save(alreadySavePath);
-                    }
-                    Intent intent = new Intent(this, PicUploadService.class);
-                    startService(intent);
-                    ToastUtils.showMessage("已将" + images.size() + "张图片加入下载队列");
+                    ThreadManager.instance.excuteRunnable(new Runnable() {
+                        @Override
+                        public void run() {
+                            upPic(images);
+                        }
+                    });
                 } else if (type == EditPfActivity.CHOOSE_NEW) {
                     Intent intent = new Intent();
                     intent.putExtra(RESULT_LIST, (ArrayList<String>) images);
@@ -594,6 +595,30 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                 Toast.makeText(PfUpGalleryActivity.this, getString(R.string.please_choose_image), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void upPic(final List<String> images) {
+        for (String path : images) {
+            ScanImageAndTime imageAndTime = new ScanImageAndTime(path);
+            imageAndTime = galleryList.get(galleryList.indexOf(imageAndTime)) ;
+
+            AlreadySavePath alreadySavePath = new AlreadySavePath();
+            alreadySavePath.setLocalPath(path);
+            alreadySavePath.setPhoto_time(imageAndTime.getTime());
+            alreadySavePath.setFamily_uuid(PhotoFamilyFragment.instance.getCurrentFamily_uuid());
+            alreadySavePath.setStatus(1);
+            uploadDb.save(alreadySavePath);
+        }
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtils.showMessage("已将" + images.size() + "张图片加入上传队列");
+                Intent intent = new Intent(PfUpGalleryActivity.this, PicUploadService.class);
+                startService(intent);
+            }
+        });
+
     }
 
     /**

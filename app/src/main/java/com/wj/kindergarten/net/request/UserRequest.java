@@ -8,10 +8,10 @@ import android.content.Context;
 import com.loopj.android.http.RequestParams;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ChildInfo;
 import com.wj.kindergarten.bean.Login;
-import com.wj.kindergarten.bean.ThreeInfo;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.net.RequestHttpUtil;
@@ -21,8 +21,6 @@ import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
-import com.wj.kindergarten.ui.mine.LoginActivity;
-import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity;
 import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
@@ -116,10 +114,12 @@ public final class UserRequest {
     private static final String INIT_SYNC_UPLOAD = "rest/fPPhotoItem/queryAlreadyUploaded.json";
     private static final String GET_BOUTIQUE_DIAN_ZAN_LIST = "rest/baseDianzan/queryNameByPage.json";
     private static final String DELETE_ALBUM_MEMBER = "rest/fPFamilyMembers/delete.json";
-    private static final String VALIDATE_BAN_PHONE = "rest/userThirdLoginQQ/access_token.json";
+    private static final String VALIDATE_BAN_PHONE_QQ = "rest/userThirdLoginQQ/access_token.json";
     private static final String GET_THREE_USER_INFO = "rest/userinfo/thirdLogin.json";
     private static final String LOGIN_OUT_NOTE = "rest/userinfo/ thirdLogout.json";
     private static final String BOUND_TEL = "rest/userinfo/bindTel.json";
+    private static final String VALIDATE_BAN_PHONE_WEIXIN = "rest/userThirdLoginWenXin/access_token.json";
+    private static final String COMMON_DELETE_REPLY = "rest/baseReply/delete.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -1189,14 +1189,22 @@ public final class UserRequest {
                 RequestHttpUtil.BASE_URL + GET_BOUTIQUE_REVIEW_URL, resultI);
     }
 
-    public static void validateBanPhone(Context context, String openid, String access_token, RequestResultI resultI) {
+    public static void validateBanPhoneQQ(Context context, String openid, String access_token, RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("appid", SplashActivity.QQ_APP_ID);
         params.put("openid", openid);
         params.put("access_token",access_token);
 
         SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
-                VALIDATE_BAN_PHONE, resultI);
+                VALIDATE_BAN_PHONE_QQ, resultI);
+    }
+    public static void validateBanPhoneWEIXIN(Context context,String access_token, RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("appid", SplashActivity.WEIXIN_APP_ID);
+        params.put("code",access_token);
+
+        SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
+                VALIDATE_BAN_PHONE_WEIXIN, resultI);
     }
 
     //注销票据
@@ -1209,14 +1217,14 @@ public final class UserRequest {
                 LOGIN_OUT_NOTE, resultI);
     }
     //绑定手机,在需要的地方调用绑定
-    public static void boundTel(Context context, String access_token, String tel,String smsCode,String type, RequestResultI resultI) {
+    public static void boundTel(Context context, String access_token, String tel,String smsCode,String type, RequestFailedResult requestFailedResult) {
         RequestParams params = new RequestParams();
         params.put("access_token",access_token);
         params.put("tel",tel);
         params.put("smsCode",smsCode);
         params.put("type",type);
         SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL +
-                BOUND_TEL, resultI);
+                BOUND_TEL, requestFailedResult);
     }
 
     public static void boundAccount(Context context, String access_token, String tel,String smsCode,String type, RequestResultI resultI) {
@@ -1229,6 +1237,12 @@ public final class UserRequest {
                 BOUND_TEL, resultI);
     }
 
-
+    public static void deleteCommonReply(Context context,String type, String uuid,RequestResultI resultI) {
+        RequestParams params = new RequestParams();
+        params.put("uuid",uuid);
+        params.put("type",type);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params.toString(), RequestHttpUtil.BASE_URL +
+                COMMON_DELETE_REPLY, resultI);
+    }
 
 }

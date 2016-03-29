@@ -31,9 +31,15 @@ public class ConfirmBoundTelActivity extends BaseActivity{
 
     }
 
+    String type = "绑定手机";
     @Override
     protected void onCreate() {
         FinalActivity.initInjectedView(this);
+        String nowType =  getIntent().getStringExtra("type");
+        if(nowType.equals("account")){
+            type = "绑定账号";
+        }
+        bound_tel_confirm_now.setText(""+type);
     }
     public void onClick(View view){
         Intent intent = new Intent();

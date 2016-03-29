@@ -1,6 +1,5 @@
 package com.wj.kindergarten.net.upload;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +32,7 @@ import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
 
+
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,6 +45,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+
 
 
 
@@ -146,7 +147,11 @@ public class UploadFile {
                         progressCallBack.progress((int)bytesWritten, (int)totalSize);
                     }
 
-
+//                    @Override
+//                    public void onProgress(long bytesWritten, long totalSize) {
+//                        super.onProgress(bytesWritten, totalSize);
+//                        progressCallBack.progress((int) bytesWritten, (int) totalSize);
+//                    }
                 });
             } catch (Exception e) {
                 e.printStackTrace();

@@ -45,6 +45,18 @@ public class PfSingleInfoFragment extends Fragment {
         this.list.addAll(list);
     }
 
+    public PfSingleInfoFragment() {
+    }
+
+    public void setList(List<AllPfAlbumSunObject> list,int position) {
+        this.list.clear();
+        this.list.addAll(list);
+        this.position = position;
+        if(pagerAdapter == null || viewPager == null) return;
+        pagerAdapter.setObjectList(list);
+        viewPager.setCurrentItem(position);
+    }
+
     private View view;
     private GridView pf_pop_gridView;
     private PfPopPicAdapter pfAdapter;
@@ -156,6 +168,8 @@ public class PfSingleInfoFragment extends Fragment {
         pagerAdapter = new PfInfoFragmentAdapter(getFragmentManager(),viewPager,this);
         viewPager.setAdapter(pagerAdapter);
         pagerAdapter.setObjectList(list);
-        viewPager.setCurrentItem(position);
+        if(list.size() > 0){
+            viewPager.setCurrentItem(position);
+        }
     }
 }

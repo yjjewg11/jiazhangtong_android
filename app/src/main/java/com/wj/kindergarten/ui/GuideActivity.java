@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.imagescan.HackyViewPager;
+import com.wj.kindergarten.ui.more.MyCircleView;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +26,9 @@ public class GuideActivity extends Activity {
 
     private HackyViewPager mPager;
     private ArrayList<View> viewList;
-    int [] guide = {R.drawable.page_fir1,R.drawable.page_sec2,R.drawable.page_thr3};
+    int [] guide = {R.drawable.android_yindaoye1,R.drawable.android_yindaoye2,R.drawable.android_yindaoye3};
+    private ImageView activity_guide_tiaoguo;
+    private MyCircleView activity_guide_mycircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +36,37 @@ public class GuideActivity extends Activity {
 
         //判断是否显示,如果登录过，则直接跳入主页
         if(CGSharedPreference.getLoginOnce()){
-            startAnother();
+            startAnother(3000);
             return;
         }
         setContentView(R.layout.activity_guide);
         initList();
         mPager = (HackyViewPager) findViewById(R.id.guide_pager);
         mPager.setAdapter(new ViewPagerAdapter(viewList));
+        activity_guide_tiaoguo = (ImageView) findViewById(R.id.activity_guide_tiaoguo);
+        activity_guide_mycircle = (MyCircleView) findViewById(R.id.activity_guide_mycircle);
+        activity_guide_tiaoguo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAnother(0);
+            }
+        });
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                activity_guide_mycircle.setScale(position+positionOffset);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initList() {
@@ -49,7 +78,7 @@ public class GuideActivity extends Activity {
                 image_bt_tiyan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startAnother();
+                        startAnother(0);
                     }
                 });
                 viewList.add(view);
@@ -61,8 +90,10 @@ public class GuideActivity extends Activity {
 
     }
 
-    private void startAnother() {
-        startActivity(new Intent(GuideActivity.this,SplashActivity.class));
+    private void startAnother(int seconds) {
+        Intent intent = new Intent(GuideActivity.this,SplashActivity.class);
+        intent.putExtra("delay",seconds);
+        startActivity(intent);
         CGSharedPreference.setLoginOnce();
         finish();
     }

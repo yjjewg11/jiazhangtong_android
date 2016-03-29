@@ -2,263 +2,263 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.3\a85588bec3e2c4584d593d3f15df1677321bca72\universal-image-loader-1.9.3.jar"
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\AdsMOGO_Android_SDK_1.6.3.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\universal-image-loader-1.9.3-650e5027c71fda69ab246770328b9bf0b1c68f18.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\internal_impl-22.2.1-18a4a1555816ba78c650e5fb0a8e4cbb87f82d6f.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\Adwo_Android_SDK6.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8e06dc4ecd361a63a7df8b0b4d02d090a307ca24">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\Adwo_Android_SDK6.1-5d639b35a57e67c09fa1c72b6d31558bcf0343e3.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\classes-6a069ced2623bf8ee009eaee21185deb25eccdf7.jar" />
+        sha1="421cbf8745fd9a88676f424ab159324baf7bcbc7">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\AdsMOGO_Android_SDK_1.6.3-cd898e937f62924f0458a7ab2073507b49862a70.jar" />
     </item>
     <item
         jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\AndroidViewAnimations-1.1.3.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="d8db345547f7a025130d1622f2608ec68e761641">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\AndroidViewAnimations-1.1.3-ac96ce6c41878bf7d66dd84452b91272f09ea951.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_QQZone_1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c184c69f43b1fe46390f7123717c65bd844bccb6">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\SocialSDK_QQZone_1-2e22aedab289d0a2dc984f97e8bb0dfa05a68a08.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_WeiXin_1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\SocialSDK_WeiXin_1-9696b9f6f8712b2d3eb6f2da59023bb7b117336c.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng-onlineconfig_v1.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="3a1276002febee0f4b50d4ba1b94d41a65d6c75d">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\umeng-onlineconfig_v1.0.0-9d92782627dccd98e8cc3b51a92e84a93c0c5b4e.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\jiazhangtong_android-master\pulltorefreshlib\unspecified\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="389a2215a1de2fb34d9ac154eed93e3907b984df">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\classes-a3bdaef8719161b16331bad1fbaf5c3de3be54aa.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_Sina.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a6eee0ece63ba5e74411057d09eda1a5a01ca940">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\SocialSDK_Sina-ca896489501fe2570b4a7586de02d9c5d8607c63.jar" />
-    </item>
-    <item
-        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.48\afa06f539a4026c10b247386312aa67404b80a16\ormlite-android-4.48.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="afa06f539a4026c10b247386312aa67404b80a16">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\ormlite-android-4.48-2f79bd046823f77cd78fd077b0a25159db8f93e5.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\AndroidEasingFunctions-1.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ae609e93bcbe4988aa371ab615b7abb43e9399bf">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\AndroidEasingFunctions-1.0.0-4588c57ad46a70119854f80a589eb5b4438bbd3e.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\locSDK_6.13.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\locSDK_6.13-7ba5ac3d6252b4a1780396f5655ce4ce05bd558d.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng-analytics-v5.2.4.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="0f9eccf79ae6006e4346725b09114182dca0c023">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\umeng-analytics-v5.2.4-cd7909d7886520032849dd9a84e04538d2968b7b.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_QQZone_3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="931ab461b91c2a2fd5c697e7f622cdca8c2b3ac5">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\SocialSDK_QQZone_3-b0e4035b4295cf1f2fbbffa612ecbb13c059ea9d.jar" />
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\AndroidViewAnimations-1.1.3-ac96ce6c41878bf7d66dd84452b91272f09ea951.jar" />
     </item>
     <item
         jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\gdt_mob_release_v4.4.479.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="51df12ab6c1c4a0641dad98ac9630b7088383237">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\gdt_mob_release_v4.4.479-2cec223106f8644a6185b00aa1eda66b6096656b.jar" />
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\gdt_mob_release_v4.4.479-2cec223106f8644a6185b00aa1eda66b6096656b.jar" />
     </item>
     <item
-        jar="D:\android_sdk_location\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.3\a85588bec3e2c4584d593d3f15df1677321bca72\universal-image-loader-1.9.3.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\support-annotations-22.2.1-3831f9e53a0bd625d18bb1e90ef6d66c1aca5e13.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\jiazhangtong_android-master\QrCodeScan\unspecified\jars\libs\zxing.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5cf8fe9735729561c334c4a33803c332d32de888">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\zxing-b61bc9abf5604ad9042aaefde6fbc659d7e202a9.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\jiazhangtong_android-master\QrCodeScan\unspecified\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d47a7346103f551a056183d347017357b21d539a">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\classes-84d5dd447912c2f2a89660429a6d42faf473d4e7.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng-update-v2.6.0.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="7bfeea30c4995f90a4374ce4177772a4579f2797">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\umeng-update-v2.6.0.1-5c1475f91c5562c73623022f033900c143848fcf.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_WeiXin_2.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b651be701cb256e3972e7c5a07119f26bb7b44a4">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\SocialSDK_WeiXin_2-e6e9eba9a166c063d2e6da4f6a1866c28fcfbc6c.jar" />
-    </item>
-    <item
-        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.4\695b63d702f505b9b916e02272e3b6381bade7f\gson-2.4.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="0695b63d702f505b9b916e02272e3b6381bade7f">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\gson-2.4-d5a07adfd55081a2b351c60095950c0916e30b75.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\httpmime-4.1.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\httpmime-4.1.3-6a0867339976851a963efb02839070c35317d8f8.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\com.umeng.fb.5.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="993055275c65a58d47e98493d8028a74a0e1c06e">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\com.umeng.fb.5.4.0-c7b07f70a5cd9d1f4f7aa7fac2f580aa9f53670a.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.github.chrisbanes.photoview\library\1.2.3\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="81aa0e8e77d948204aa6754019c6f3c04dd922e3">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\classes-def789cc72c5ef34a902ac1651fc73478a1b4506.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\com.umeng.message.lib.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="677c0952a131b25534391ee916f180de4fde8371">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\com.umeng.message.lib-ee9d594b8c7981eb370ef1967f983a7da3dde23c.jar" />
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-650e5027c71fda69ab246770328b9bf0b1c68f18.jar" />
     </item>
     <item
         jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\library-2.4.0-591c01b94e9274d09cca956b42a91fbc117dad71.jar" />
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\library-2.4.0-591c01b94e9274d09cca956b42a91fbc117dad71.jar" />
     </item>
     <item
-        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.loopj.android\android-async-http\1.4.6\a845a88238be0b5be9d238652c1bc0605ef91f52\android-async-http-1.4.6.jar"
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_WeiXin_1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a845a88238be0b5be9d238652c1bc0605ef91f52">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\android-async-http-1.4.6-665f440225d00d7b1e4be9117817361ea6abeb80.jar" />
+        sha1="47f4993168154fa73377d7470b9f6887d48a8023">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\SocialSDK_WeiXin_1-9696b9f6f8712b2d3eb6f2da59023bb7b117336c.jar" />
     </item>
     <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-android\4.48\afa06f539a4026c10b247386312aa67404b80a16\ormlite-android-4.48.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\classes-a74648ac54a5a0ff699c570b7942f6d98455cc6a.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\baidumapapi_base_v3_6_1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="683a7fe2d903826fc8ff46832b0be142d4b6576d">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\baidumapapi_base_v3_6_1-2ed5b24c585d5b46f4c3379f07ff890ef13daefe.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\baidumapapi_map_v3_6_1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="23ebff6260f4903de73a88f877f7c32025205c53">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\baidumapapi_map_v3_6_1-ed8cf05d19be5af00e52a5b1d45e65b4df43c99c.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\AdsMOGO_Android_SDK_1.6.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="421cbf8745fd9a88676f424ab159324baf7bcbc7">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\AdsMOGO_Android_SDK_1.6.3-cd898e937f62924f0458a7ab2073507b49862a70.jar" />
-    </item>
-    <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\afinal_0.5.1_bin.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ae398c74701392473b9cb488c76a92576d6f548c">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\afinal_0.5.1_bin-9d5053523c9105b5ce06d38212a338ef4e2b4f8c.jar" />
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\ormlite-android-4.48-2f79bd046823f77cd78fd077b0a25159db8f93e5.jar" />
     </item>
     <item
         jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng_social_sdk.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4688dc44ccef22b7f057301ee6abbe187a8d35ea">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\umeng_social_sdk-4268018d71cfff30db5848d51ca6a4067c26c2c7.jar" />
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\umeng_social_sdk-4268018d71cfff30db5848d51ca6a4067c26c2c7.jar" />
     </item>
     <item
-        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\design\22.2.1\jars\classes.jar"
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\baidumapapi_map_v3_6_1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="1821601ddbec5ff125653097812823388700af74">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\classes-273fbaf3d83e2672a7676d09a41465de86f2260d.jar" />
+        sha1="23ebff6260f4903de73a88f877f7c32025205c53">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\baidumapapi_map_v3_6_1-ed8cf05d19be5af00e52a5b1d45e65b4df43c99c.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\classes-a74648ac54a5a0ff699c570b7942f6d98455cc6a.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\afinal_0.5.1_bin.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ae398c74701392473b9cb488c76a92576d6f548c">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\afinal_0.5.1_bin-9d5053523c9105b5ce06d38212a338ef4e2b4f8c.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.github.chrisbanes.photoview\library\1.2.3\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="81aa0e8e77d948204aa6754019c6f3c04dd922e3">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\classes-def789cc72c5ef34a902ac1651fc73478a1b4506.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng-onlineconfig_v1.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3a1276002febee0f4b50d4ba1b94d41a65d6c75d">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\umeng-onlineconfig_v1.0.0-9d92782627dccd98e8cc3b51a92e84a93c0c5b4e.jar" />
     </item>
     <item
         jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.j256.ormlite\ormlite-core\4.48\e579bd2905d0399af5029aaaf9817d5fa0ca88a5\ormlite-core-4.48.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\ormlite-core-4.48-171691553fea11880eb3a5e5c2278bf1f4a2afeb.jar" />
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\ormlite-core-4.48-171691553fea11880eb3a5e5c2278bf1f4a2afeb.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\jiazhangtong_android-master\QrCodeScan\unspecified\jars\libs\zxing.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5cf8fe9735729561c334c4a33803c332d32de888">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\zxing-b61bc9abf5604ad9042aaefde6fbc659d7e202a9.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_WeiXin_2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b651be701cb256e3972e7c5a07119f26bb7b44a4">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\SocialSDK_WeiXin_2-e6e9eba9a166c063d2e6da4f6a1866c28fcfbc6c.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\com.umeng.fb.5.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="993055275c65a58d47e98493d8028a74a0e1c06e">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\com.umeng.fb.5.4.0-c7b07f70a5cd9d1f4f7aa7fac2f580aa9f53670a.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng-update-v2.6.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7bfeea30c4995f90a4374ce4177772a4579f2797">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\umeng-update-v2.6.0.1-5c1475f91c5562c73623022f033900c143848fcf.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_Sina.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a6eee0ece63ba5e74411057d09eda1a5a01ca940">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\SocialSDK_Sina-ca896489501fe2570b4a7586de02d9c5d8607c63.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\AndroidEasingFunctions-1.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ae609e93bcbe4988aa371ab615b7abb43e9399bf">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\AndroidEasingFunctions-1.0.0-4588c57ad46a70119854f80a589eb5b4438bbd3e.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-18a4a1555816ba78c650e5fb0a8e4cbb87f82d6f.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_QQZone_3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="931ab461b91c2a2fd5c697e7f622cdca8c2b3ac5">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\SocialSDK_QQZone_3-b0e4035b4295cf1f2fbbffa612ecbb13c059ea9d.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\Adwo_Android_SDK6.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8e06dc4ecd361a63a7df8b0b4d02d090a307ca24">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\Adwo_Android_SDK6.1-5d639b35a57e67c09fa1c72b6d31558bcf0343e3.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\baidumapapi_base_v3_6_1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="683a7fe2d903826fc8ff46832b0be142d4b6576d">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\baidumapapi_base_v3_6_1-2ed5b24c585d5b46f4c3379f07ff890ef13daefe.jar" />
+    </item>
+    <item
+        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.loopj.android\android-async-http\1.4.6\a845a88238be0b5be9d238652c1bc0605ef91f52\android-async-http-1.4.6.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a845a88238be0b5be9d238652c1bc0605ef91f52">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.6-665f440225d00d7b1e4be9117817361ea6abeb80.jar" />
     </item>
     <item
         jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_QQZone_2.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4a69b33758dcba3ef519cbd4b6c8af5f41603c4f">
-        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\release\SocialSDK_QQZone_2-7ad0c561d6251490c849e199ab3d19476ec424b3.jar" />
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\SocialSDK_QQZone_2-7ad0c561d6251490c849e199ab3d19476ec424b3.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\SocialSDK_QQZone_1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c184c69f43b1fe46390f7123717c65bd844bccb6">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\SocialSDK_QQZone_1-2e22aedab289d0a2dc984f97e8bb0dfa05a68a08.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\com.umeng.message.lib.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="677c0952a131b25534391ee916f180de4fde8371">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\com.umeng.message.lib-ee9d594b8c7981eb370ef1967f983a7da3dde23c.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\design\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1821601ddbec5ff125653097812823388700af74">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\classes-273fbaf3d83e2672a7676d09a41465de86f2260d.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\jiazhangtong_android-master\QrCodeScan\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b6d24838ed9b6a0eca2f734af3926a15ab04fd42">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\classes-84d5dd447912c2f2a89660429a6d42faf473d4e7.jar" />
+    </item>
+    <item
+        jar="D:\android_sdk_location\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-3831f9e53a0bd625d18bb1e90ef6d66c1aca5e13.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\httpmime-4.1.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\httpmime-4.1.3-6a0867339976851a963efb02839070c35317d8f8.jar" />
+    </item>
+    <item
+        jar="C:\Users\tangt\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.4\695b63d702f505b9b916e02272e3b6381bade7f\gson-2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0695b63d702f505b9b916e02272e3b6381bade7f">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\gson-2.4-d5a07adfd55081a2b351c60095950c0916e30b75.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\jiazhangtong_android-master\pulltorefreshlib\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="db5622681c1a7f18ee703dc90b2942731ed37566">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\classes-a3bdaef8719161b16331bad1fbaf5c3de3be54aa.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\locSDK_6.13.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\locSDK_6.13-7ba5ac3d6252b4a1780396f5655ce4ce05bd558d.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\umeng-analytics-v5.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0f9eccf79ae6006e4346725b09114182dca0c023">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\umeng-analytics-v5.2.4-cd7909d7886520032849dd9a84e04538d2968b7b.jar" />
+    </item>
+    <item
+        jar="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="D:\work-wenjie-project\jiazhangtong_android-master\app\build\intermediates\pre-dexed\debug\classes-6a069ced2623bf8ee009eaee21185deb25eccdf7.jar" />
     </item>
 
 </items>

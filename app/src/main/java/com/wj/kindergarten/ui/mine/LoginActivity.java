@@ -19,19 +19,20 @@ import com.umeng.socialize.sso.UMSsoHandler;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.NeedBoundPhoneResult;
-import com.wj.kindergarten.bean.ThreeInfo;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.BoundTelActivity;
-import com.wj.kindergarten.ui.func.ConfirmBoundTelActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.ui.more.BoundDialog;
 import com.wj.kindergarten.ui.more.DoEveryThing;
+import com.wj.kindergarten.ui.more.MyProgressDialog;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -70,6 +71,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private ImageView login_three_weibo;
     private String access_token;
     private String openid;
+    private MyProgressDialog myProgressBar;
 
     @Override
     protected void setContentLayout() {
@@ -85,6 +87,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         hideActionbar();
 
 
+        myProgressBar = new MyProgressDialog(this);
         mController = UMServiceFactory.getUMSocialService("com.umeng.login");
 
         circleImage = (CircleImage) findViewById(R.id.login_head);
@@ -142,22 +145,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     private void successGetAssess_token() {
-        UserRequest.validateBanPhone(this, openid, access_token, new RequestResultI() {
+        if(loginType.equals("qq")){
+            qqValidate();
+        }else if(loginType.equals("weixin")){
+            weixinValidate();
+        }
+
+    }
+
+    private void weixinValidate() {
+        UserRequest.validateBanPhoneWEIXIN(this, access_token, new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 NeedBoundPhoneResult needBoundPhoneResult = (NeedBoundPhoneResult) domain;
-                if (needBoundPhoneResult != null) {
-                    String needBound = needBoundPhoneResult.getNeedBindTel();
-                    if (needBound == null || TextUtils.isEmpty(needBound)) return;
-                    //需要绑定电话
-                    if(needBound.equals("1")){
-                        judgeHaveData();
-                        //不需要绑定电话,直接进入主页，调试暂屏蔽
-                    }
-                    else if (needBound.equals("0")){
-                        getThreeInfoToMainPage();
-                    }
-                }
+                validateResult(needBoundPhoneResult);
             }
 
             @Override
@@ -167,68 +168,113 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void failure(String message) {
-
+                super.failure(message);
+                ToastUtils.showDialog(LoginActivity.this, "微信", access_token+"   :   "+message, null);
             }
         });
     }
 
-    //判断是否有用户数据
-    private void judgeHaveData() {
-       String [] infos =  CGSharedPreference.getLogin();
-        //有数据,进行账号绑定
-        if(infos != null && !Utils.stringIsNull(infos[0]) && !Utils.stringIsNull(infos[1])){
-            bindAccount(infos[0]);
-            //没有登录数据进入确认绑定页面提示是否绑定
-        }else {
-            Intent intent = new Intent(this, ConfirmBoundTelActivity.class);
-            startActivityForResult(intent
-                    , GloablUtils.CONFIRM_BOUND_TEL
-            );
+    private void qqValidate() {
+        UserRequest.validateBanPhoneQQ(this, openid, access_token, new RequestFailedResult() {
+            @Override
+            public void result(BaseModel domain) {
+                NeedBoundPhoneResult needBoundPhoneResult = (NeedBoundPhoneResult) domain;
+                validateResult(needBoundPhoneResult);
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+                super.failure(message);
+                ToastUtils.showDialog(LoginActivity.this, "QQ", message, null);
+            }
+        });
+    }
+
+    private void validateResult(NeedBoundPhoneResult needBoundPhoneResult) {
+        if (needBoundPhoneResult != null) {
+            String needBound = needBoundPhoneResult.getNeedBindTel();
+            if (needBound == null || TextUtils.isEmpty(needBound)) return;
+            //需要绑定电话
+            if (needBound.equals("1")) {
+                judgeHaveData();
+                //不需要绑定电话,直接进入主页，调试暂屏蔽
+            } else if (needBound.equals("0")) {
+                getThreeInfoToMainPage();
+            }
         }
     }
 
-    private void bindAccount(String info) {
-        UserRequest.boundTel(this, access_token,
-                info,"",
-                CGSharedPreference.getlogin_type(), new RequestResultI() {
-                    @Override
-                    public void result(BaseModel domain) {
-                        ToastUtils.showMessage("绑定成功!");
-                        getThreeInfoToMainPage();
-                    }
+    //判断是否有用户数据
+    private void judgeHaveData() {
+        String[] infos = CGSharedPreference.getLogin();
+        //有数据,进行账号绑定
+        if (infos != null && !Utils.stringIsNull(infos[0]) && !Utils.stringIsNull(infos[1])) {
+            ToastUtils.showBoundDialog(this, "绑定账号", new BoundDialog.AfterListener() {
+                @Override
+                public void bound() {
+                    beginBound("account");
+                }
 
-                    @Override
-                    public void result(List<BaseModel> domains, int total) {
+                @Override
+                public void igone() {
+                    getThreeInfoToMainPage();
+                }
+            });
+            //没有登录数据进入确认绑定页面提示是否绑定
+        } else {
+            ToastUtils.showBoundDialog(this, "绑定手机", new BoundDialog.AfterListener() {
+                @Override
+                public void bound() {
+                    beginBound("tel");
+                }
 
-                    }
+                @Override
+                public void igone() {
+                    getThreeInfoToMainPage();
+                }
+            });
+        }
 
-                    @Override
-                    public void failure(String message) {
-
-                    }
-                });
     }
 
+    private void cancleMyDialog(){
+        if(myProgressBar.isShowing()) myProgressBar.cancel();
+    }
 
     //获取用户信息并进入主页面
     private void getThreeInfoToMainPage() {
-        UserRequest.getThreeUserInfo(mContext, access_token, loginType,this);
+        UserRequest.getThreeUserInfo(mContext, access_token, loginType, this);
     }
 
-    private void applyQQ() {
-        mController.doOauthVerify(this, SHARE_MEDIA.QQ, new SocializeListeners.UMAuthListener() {
+    private void apply() {
+        SHARE_MEDIA share_media = SHARE_MEDIA.QQ;
+        if(loginType.equals("qq")){
+
+        }else if (loginType.equals("weixin")) {
+            share_media = SHARE_MEDIA.WEIXIN;
+        }
+        mController.doOauthVerify(this, share_media, new SocializeListeners.UMAuthListener() {
             @Override
             public void onError(SocializeException e, SHARE_MEDIA platform) {
+                CGLog.v("Denglu  异常");
+                e.printStackTrace();
+
 
             }
 
             @Override
             public void onComplete(Bundle value, SHARE_MEDIA platform) {
+                cancleMyDialog();
                 access_token = value.getString("access_token");
                 openid = value.getString("openid");
                 CGLog.v("打印access_token : " + access_token);
                 if (value != null && !TextUtils.isEmpty(value.getString("uid"))) {
-                    ToastUtils.showMessage("授权成功");
+                    ToastUtils.showMessage("授权成功 : access_token : "+access_token+"   oppenid : "+openid);
                     successGetAssess_token();
                 } else {
                     ToastUtils.showMessage("授权失败");
@@ -236,9 +282,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             }
 //成功获取assess_token
 
-
             @Override
             public void onCancel(SHARE_MEDIA platform) {
+                CGLog.v("登录取消");
             }
 
             @Override
@@ -255,17 +301,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             ssoHandler.authorizeCallBack(requestCode, resultCode, data);
         }
 
-        if(resultCode != RESULT_OK) return;
-        switch (requestCode){
+        if (resultCode != RESULT_OK) return;
+        switch (requestCode) {
             case GloablUtils.CONFIRM_BOUND_TEL:
                 String status = data.getStringExtra("status");
                 //要绑定，进入绑定页面
-                if(status.equals("now")){
-                    Intent intent = new Intent(LoginActivity.this, BoundTelActivity.class);
-                    intent.putExtra("access_token",access_token);
-                    startActivityForResult(intent, GloablUtils.BOUND_TEL);
+                if (status.equals("now")) {
+                    beginBound("tel");
                     //不绑定，直接登陆
-                }else {
+                } else {
                     getThreeInfoToMainPage();
                 }
                 break;
@@ -274,6 +318,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 getThreeInfoToMainPage();
                 break;
         }
+    }
+
+    private void beginBound(String type) {
+        Intent intent = new Intent(LoginActivity.this, BoundTelActivity.class);
+        intent.putExtra("access_token", access_token);
+        intent.putExtra("boundType",type);
+        startActivityForResult(intent, GloablUtils.BOUND_TEL);
     }
 
     @Override
@@ -315,14 +366,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 pwdEt.setText("");
                 break;
             case R.id.login_three_weixin:
+                myProgressBar.show();
                 loginType = "weixin";
+                apply();
                 break;
             case R.id.login_three_qq:
+                myProgressBar.show();
                 loginType = "qq";
-                applyQQ();
+                apply();
                 break;
             case R.id.login_three_weibo:
                 loginType = "weibo";
+                ToastUtils.showMessage("暂未开放此功能!");
                 break;
             default:
                 break;

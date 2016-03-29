@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AllPfAlbumSun;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
@@ -198,7 +199,7 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
         }
         UserRequest.getBoutiqueReviewUrl(this, title,
                 mp3, uuid, hearld, key
-                , builder.toString(), cacheStatus, new RequestResultI() {
+                , builder.toString(), cacheStatus, new RequestFailedResult(commonDialog) {
                     @Override
                     public void result(BaseModel domain) {
                         try {
@@ -234,10 +235,6 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
 
                     }
 
-                    @Override
-                    public void failure(String message) {
-
-                    }
                 });
     }
 
