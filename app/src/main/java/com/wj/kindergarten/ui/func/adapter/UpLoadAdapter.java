@@ -11,7 +11,12 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity;
+import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ToastUtils;
+
+import net.tsz.afinal.FinalDb;
+import net.tsz.afinal.db.sqlite.DbModel;
 
 import java.util.List;
 
@@ -21,9 +26,11 @@ import java.util.List;
 public class UpLoadAdapter extends BaseAdapter{
     List<AlreadySavePath> alreadySavePathsList;
     Context context;
+    FinalDb finalDb;
     public UpLoadAdapter(Context context, List<AlreadySavePath> alreadySavePathsList) {
         this.alreadySavePathsList = alreadySavePathsList;
         this.context = context;
+        finalDb = FinalUtil.getAlreadyUploadDb(context);
     }
 
     @Override
@@ -56,6 +63,19 @@ public class UpLoadAdapter extends BaseAdapter{
             holder = (Holder) convertView.getTag();
         }
 
+        holder.up_Load_wait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String sql = "select count(*) from already_save_path where status = '1'";
+//                DbModel dbModel  = finalDb.findDbModelBySQL(sql);
+//                if(dbModel != null && dbModel.get("status") != null &&
+//                        Integer.valueOf(dbModel.get("status").toString()) > 0){
+//                    ToastUtils.showMessage("图片正在上传中，请稍候...");
+//                }else {
+                    ((UpLoadActivity)context).getBinder().reStartUpload();
+//                }
+            }
+        });
         AlreadySavePath alreadySavePath = alreadySavePathsList.get(position);
         ImageLoaderUtil.displayMyImage("file://" + alreadySavePath.getLocalPath(), holder.up_load_progress_image);
         int progressUpdate =(int) (Double.valueOf(alreadySavePath.getProgress())/Double.valueOf(alreadySavePath.getTotal()) * 100);

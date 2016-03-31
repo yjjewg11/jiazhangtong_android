@@ -1,5 +1,7 @@
 package com.wj.kindergarten.bean;
 
+import com.wj.kindergarten.utils.GloablUtils;
+
 import net.tsz.afinal.annotation.sqlite.Id;
 import net.tsz.afinal.annotation.sqlite.Table;
 
@@ -9,6 +11,7 @@ import java.util.Date;
 /**
  * Created by tangt on 2016/1/22.
  */
+@Table(name = GloablUtils.PF_ALL_TABLE_FAMILY)
 public class PfFamilyUuid implements Serializable {
     private Date maxTime;
     private Date minTime;

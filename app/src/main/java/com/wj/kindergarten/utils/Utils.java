@@ -87,6 +87,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -965,7 +967,7 @@ public class Utils {
     }
 
     public static void picCommonCancleStore(Context context,String uuid,RequestResultI resultI){
-        UserRequest.picCommonCancleStore(context,uuid,resultI);
+        UserRequest.picCommonCancleStore(context, uuid, resultI);
     }
 
     public static void showDianzanStatus(Context context, TextView textView) {
@@ -1019,6 +1021,7 @@ public class Utils {
     public static void showPfSingleinfo(Context context, int position, ArrayList<AllPfAlbumSunObject> collect_list) {
         Intent intent = new Intent(context, PfGalleryActivity.class);
         intent.putExtra("list",collect_list);
+        intent.putExtra("position",position);
         context.startActivity(intent);
     }
     public static int[] getLocation(View view) {
@@ -1026,5 +1029,23 @@ public class Utils {
         int [] location = new int[2];
         view.getLocationInWindow(location);
         return location;
+    }
+
+    public static void sortAlbumObj(List<AllPfAlbumSunObject> collect_list) {
+        Collections.sort(collect_list, new Comparator<AllPfAlbumSunObject>() {
+            @Override
+            public int compare(AllPfAlbumSunObject o, AllPfAlbumSunObject t) {
+                int cha = 0;
+                long t1 = TimeUtil.getYMDHMSTime(o.getCreate_time());
+                long t2 = TimeUtil.getYMDHMSTime(t.getCreate_time());
+                if (t2 - t1 > 0) {
+                    cha = 1;
+                } else if (t2 - t1 < 0) {
+                    cha = -1;
+                }
+
+                return cha;
+            }
+        });
     }
 }

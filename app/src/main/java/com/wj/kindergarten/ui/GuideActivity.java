@@ -2,11 +2,7 @@ package com.wj.kindergarten.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,11 +12,12 @@ import android.widget.RelativeLayout;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.imagescan.HackyViewPager;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.more.MyCircleView;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
+import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GuideActivity extends Activity {
 
@@ -36,7 +33,7 @@ public class GuideActivity extends Activity {
 
         //判断是否显示,如果登录过，则直接跳入主页
         if(CGSharedPreference.getLoginOnce()){
-            startAnother(3000);
+            startAnother(0);
             return;
         }
         setContentView(R.layout.activity_guide);
@@ -48,7 +45,7 @@ public class GuideActivity extends Activity {
         activity_guide_tiaoguo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startAnother(0);
+                startAnother(0, "later");
             }
         });
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -78,7 +75,7 @@ public class GuideActivity extends Activity {
                 image_bt_tiyan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startAnother(0);
+                        startAnother(0,"now");
                     }
                 });
                 viewList.add(view);
@@ -90,13 +87,20 @@ public class GuideActivity extends Activity {
 
     }
 
-    private void startAnother(int seconds) {
-        Intent intent = new Intent(GuideActivity.this,SplashActivity.class);
-        intent.putExtra("delay",seconds);
+    private void startAnother(int seconds, String now) {
+        Intent intent = new Intent(GuideActivity.this,MainActivity.class);
+        if(!Utils.stringIsNull(getIntent().getStringExtra("from"))){
+            intent.putExtra("from","splash");
+        }
+        intent.putExtra("tiaozhuan",now);
         startActivity(intent);
         CGSharedPreference.setLoginOnce();
         finish();
     }
+    private void startAnother(int seconds) {
+        startAnother(seconds,"");
+    }
+
 
     private RelativeLayout getView(int drawableId){
         RelativeLayout relativeLayout = new RelativeLayout(this);

@@ -93,8 +93,8 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
 
     @Override
     public long getHeaderId(int position) {
-        long  time =  TimeUtil.getMillionFromYMD(galleryList.get(position).getTime());
-        return time;
+        String ymd = TimeUtil.getDateToString(Long.valueOf(galleryList.get(position).getTime()));
+        return TimeUtil.getMillionFromYMD(ymd);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
         }
         final ScanImageAndTime scanImageAndTime = galleryList.get(position);
         if(scanImageAndTime != null){
-            headHolder.pf_family_first_item_time.setText(""+ scanImageAndTime.getTime());
+            headHolder.pf_family_first_item_time.setText(""+ TimeUtil.getDateToString(Long.valueOf(scanImageAndTime.getTime())));
             headHolder.pf_family_first_item_count.setText(""+scanImageAndTime.getChoose());
             headHolder.pf_family_first_item_count.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,14 +120,15 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
                     String text = headHolder.pf_family_first_item_count.getText().toString();
                     //先判断是否还有可选择的
 
+                    String ymdTime = TimeUtil.getDateToString(Long.valueOf(scanImageAndTime.getTime()));
                     if(text.equals("全选")){
-                        if(!judgeChoose(scanImageAndTime.getTime())){
+                        if(!judgeChoose(ymdTime)){
                             return;
                         }
-                        operation(scanImageAndTime.getTime(), "add");
+                        operation(ymdTime, "add");
                         headHolder.pf_family_first_item_count.setText("取消全选");
                     }else {
-                        operation(scanImageAndTime.getTime(),"remove");
+                        operation(ymdTime,"remove");
                         headHolder.pf_family_first_item_count.setText("全选");
                     }
                     notifyDataSetChanged();
@@ -142,7 +143,8 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
         Iterator<ScanImageAndTime> iterator = galleryList.iterator();
         while (iterator.hasNext()){
             ScanImageAndTime scanImageAndTime = iterator.next();
-            if(scanImageAndTime.getTime().equals(time) && !judgePicInput(scanImageAndTime.getPath())){
+            String ymdTime = TimeUtil.getDateToString(Long.valueOf(scanImageAndTime.getTime()));
+            if(ymdTime.equals(time) && !judgePicInput(scanImageAndTime.getPath())){
                 return true;
             }
         }
@@ -154,8 +156,9 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
         if(type.equals("add")){
             while (iterator.hasNext()){
                 ScanImageAndTime imageAndTime = iterator.next();
+                String ymdTime = TimeUtil.getDateToString(Long.valueOf(imageAndTime.getTime()));
                 //如果导入则不选中
-                if(imageAndTime.getTime().equals(time)){
+                if(ymdTime.equals(time)){
                     imageAndTime.setChoose("取消全选");
                     if(!judgePicInput(imageAndTime.getPath())){
                         mSelectMap.put(imageAndTime.getPath(),true);
@@ -165,13 +168,13 @@ public class UploadChooseGridAdapter extends BaseAdapter implements StickyGridHe
         }else {
             while (iterator.hasNext()){
                 ScanImageAndTime scanImageAndTime = iterator.next();
-                if(scanImageAndTime.getTime().equals(time)){
+                String ymd = TimeUtil.getDateToString(Long.valueOf(scanImageAndTime.getTime()));
+                if(ymd.equals(time)){
                     scanImageAndTime.setChoose("全选");
                     if(mSelectMap.containsKey(scanImageAndTime.getPath())){
                         mSelectMap.remove(scanImageAndTime.getPath());
                     }
                 }
-
             }
         }
 

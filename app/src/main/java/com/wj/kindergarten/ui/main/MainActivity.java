@@ -266,6 +266,11 @@ public class MainActivity extends BaseActivity {
                             mTabHost.setCurrentTabByTag(mTabIdArray[2]);
                         }
                     }
+                    if (getIntent().hasExtra("tiaozhuan") && "now".equals(getIntent().getStringExtra("tiaozhuan"))) {
+                        if (!mTabIdArray[3].equals(nowTab)) {
+                            mTabHost.setCurrentTabByTag(mTabIdArray[3]);
+                        }
+                    }
                     break;
                 case START_UPLOAD_PIC:
                     startService(new Intent(MainActivity.this, PicUploadService.class));

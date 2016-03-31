@@ -32,6 +32,7 @@ import com.wj.kindergarten.ui.func.adapter.PfPopPicAdapter;
 import com.wj.kindergarten.ui.func.adapter.RecycleAdapter;
 import com.wj.kindergarten.ui.imagescan.AutoDownLoadListener;
 import com.wj.kindergarten.ui.main.MainActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PFSingleObjectInfoFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfInfoAllPIcFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PfSingleInfoFragment;
 import com.wj.kindergarten.utils.FinalUtil;
@@ -50,7 +51,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Created by tangt on 2016/1/14.
@@ -63,6 +70,14 @@ public class PfGalleryActivity extends BaseActivity {
     private AllPfAlbumSunObject allObj;
     private FinalDb dbObj;
     private PfSingleInfoFragment singleFragment;
+
+    private Queue<PFSingleObjectInfoFragment> infoFragmentQueue = new LinkedBlockingDeque<>(3);
+
+    public void addFragment(PFSingleObjectInfoFragment pfSingleObjectInfoFragment){
+        if(infoFragmentQueue.size() == 3) infoFragmentQueue.remove();
+        infoFragmentQueue.add(pfSingleObjectInfoFragment);
+    }
+
 
     public ArrayList<AllPfAlbumSunObject> getObjectList() {
         return objectList;
@@ -108,6 +123,18 @@ public class PfGalleryActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+
+        Iterator<PFSingleObjectInfoFragment> iterator = infoFragmentQueue.iterator();
+        while (iterator.hasNext()){
+            PFSingleObjectInfoFragment pfSingleObjectInfoFragment = iterator.next();
+            if (pfSingleObjectInfoFragment != null){
+                if(pfSingleObjectInfoFragment.bottomIsShow()){
+                    pfSingleObjectInfoFragment.onlyCancleBottom();
+                    return;
+                }
+            }
+        }
+        infoFragmentQueue.clear();
         commonDelete();
         super.onBackPressed();
     }

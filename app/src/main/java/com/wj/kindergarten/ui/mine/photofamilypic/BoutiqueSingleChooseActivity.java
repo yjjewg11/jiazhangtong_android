@@ -59,6 +59,7 @@ public class BoutiqueSingleChooseActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
+        setTitleText("选择照片");
         db = FinalDb.create(this, GloablUtils.FAMILY_UUID_OBJECT,true);
         initViews();
         loadData();

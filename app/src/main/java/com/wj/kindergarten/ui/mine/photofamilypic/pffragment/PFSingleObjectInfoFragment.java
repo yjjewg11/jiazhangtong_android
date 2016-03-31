@@ -1,24 +1,18 @@
 package com.wj.kindergarten.ui.mine.photofamilypic.pffragment;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,8 +24,6 @@ import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.abstractbean.RequestFailedResult;
@@ -42,18 +34,17 @@ import com.wj.kindergarten.bean.PfInfoDianZan;
 import com.wj.kindergarten.bean.PfInfoDianZanObj;
 import com.wj.kindergarten.bean.PfSingleAssess;
 import com.wj.kindergarten.bean.PfSingleAssessObject;
-import com.wj.kindergarten.bean.Reply;
 import com.wj.kindergarten.bean.SingleNewInfo;
 import com.wj.kindergarten.bean.SinlePfExtraInfo;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.emot.EmotUtil;
 import com.wj.kindergarten.ui.emot.SendMessage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
 import com.wj.kindergarten.ui.func.adapter.PfCommonAssessAdapter;
 import com.wj.kindergarten.ui.func.adapter.PfInfoFragmentAdapter;
-import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
 import com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.viewmodel.SingleLoadPicModel;
 import com.wj.kindergarten.ui.more.ListenScrollView;
@@ -155,6 +146,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     }
 
+
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -162,6 +154,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
         dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
         dbObj = FinalUtil.getFamilyUuidObjectDb(getActivity());
         sunObject = pfInfoFragmentAdapter.getPositionObject(position);
+        ((PfGalleryActivity)getActivity()).addFragment(this);
         family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
         innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
         progressBar = (ProgressBar) innerView.findViewById(R.id.pf_gallery_fragment_progressBar);
@@ -185,7 +178,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void onClick(View v) {
                 //查询所有照片地址，进行显示.
                 ArrayList<String> list = new ArrayList();
-                String sql = "select path from " + GloablUtils.FAMILY_UUID_OBJECT_TABLE_NAME + ";";
+                String sql = "select path from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME + ";";
                 List<DbModel> listDb = dbObj.findDbModelListBySQL(sql);
                 Iterator<DbModel> iterator = listDb.iterator();
                 while (iterator.hasNext()) {
@@ -219,6 +212,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
         initTopView();
 
         return innerView;
+    }
+    public void showDia(){
+//        ((BaseActivity)getActivity()).showCommonDialog();
+    }
+    public void cancleDia(){
+//        ((BaseActivity)getActivity()).cancleCommonDialog();
     }
 
     private void initExtraView() {
@@ -387,10 +386,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
 
     private void queSingleAssess() {
+        showDia();
         UserRequest.getPfSingleAssess(getActivity(), pageNo, GloablUtils.MODE_OF_PF, sunObject.getUuid(), maxTime,
                 new RequestResultI() {
                     @Override
                     public void result(BaseModel domain) {
+                        cancleDia();
                         if (pf_single_scroll.isRefreshing()) {
                             pf_single_scroll.onRefreshComplete();
                         }
@@ -399,7 +400,12 @@ public class PFSingleObjectInfoFragment extends Fragment {
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null
                                 && pfSingleAssess.getList().getData().size() > 0) {
+                            if(pageNo == 1) assessObjectList.clear();
                             assessObjectList.addAll(pfSingleAssess.getList().getData());
+                            initBottomAssessCount();
+                            if(pfCommonAssessAdapter != null) {
+                                pfCommonAssessAdapter.setObjectList(assessObjectList);
+                            }
                         } else {
                             if (pageNo == 1) {
                                 addNothing();
@@ -450,9 +456,11 @@ public class PFSingleObjectInfoFragment extends Fragment {
     }
 
     private void queryItemNewInfo(String uuid) {
-        UserRequest.getSinglePfInfo(getActivity(), uuid, new RequestResultI() {
+        showDia();
+        UserRequest.getSinglePfInfo(getActivity(), uuid, new RequestFailedResult(((BaseActivity)getActivity()).getCommonDialog()) {
             @Override
             public void result(BaseModel domain) {
+                cancleDia();
                 SingleNewInfo singleNewInfo = (SingleNewInfo) domain;
                 if (singleNewInfo != null) {
                     sunObject = singleNewInfo.getData();
@@ -465,18 +473,15 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void result(List<BaseModel> domains, int total) {
 
             }
-
-            @Override
-            public void failure(String message) {
-
-            }
         });
     }
 
     private void queryExtraData(String uuid) {
+        showDia();
         UserRequest.getSinglePfExtraInfo(getActivity(), uuid, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
+                cancleDia();
                 singleInfo = (SinlePfExtraInfo) domain;
                 if (singleInfo != null) {
                     //初始化底部按钮显示状态
@@ -669,10 +674,18 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     public void bottomCancle() {
         if (emot2 == null) return;
+        onlyCancleBottom();
+        showAssessList();
+    }
+    public boolean bottomIsShow(){
+        CGLog.v("打印bottomIsShow : "+bottom_assess.getVisibility());
+        return bottom_assess.getVisibility() == View.VISIBLE;
+    }
+    public void onlyCancleBottom(){
+        if (emot2 == null) return;
         emot2.hideSoftKeyboard();
         bottom_assess.setVisibility(View.GONE);
         pf_pic_bottom_viewGroup.setVisibility(View.VISIBLE);
-        showAssessList();
     }
 
     private void sendReply(final String message) {
@@ -682,15 +695,9 @@ public class PFSingleObjectInfoFragment extends Fragment {
             public void result(BaseModel domain) {
                 cancleDialog();
                 ToastUtils.showMessage("评论回复成功!");
-                PfSingleAssessObject object = new PfSingleAssessObject();
-                if (object == null) return;
-                object.setContent(message);
-                object.setCreate_user(sunObject.getCreate_user());
-                object.setCreate_time(TimeUtil.getNowDate());
-                object.setCreate_img(sunObject.getPath());
-                assessObjectList.add(object);
-                initBottomAssessCount();
+                queSingleAssess();
                 bottomCancle();
+                emot2.cleanEditText();
             }
 
             @Override
@@ -836,5 +843,6 @@ public class PFSingleObjectInfoFragment extends Fragment {
             }
         });
     }
+    //构建接口和activity进行通信
 }
 

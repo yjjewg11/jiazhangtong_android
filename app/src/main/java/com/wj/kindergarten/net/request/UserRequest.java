@@ -3,6 +3,7 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.EditText;
 
 
 import com.loopj.android.http.RequestParams;
@@ -21,11 +22,13 @@ import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.TimeUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import org.json.JSONException;
@@ -153,6 +156,7 @@ public final class UserRequest {
     private static final String LOOK_FOR_ALL_PF = "rest/fPPhotoItem/queryMy.json";
     private static final String DETE_ALBUM_LIST = "rest/fpFamilyPhotoCollection/delete.json";
     private static final String EDIT_SINGLE_PF = "rest/fPPhotoItem/save.json";
+    private static final String BOUND_ACCOUNT = "rest/userinfo/bindAccount.json";
 
     private UserRequest() {
     }
@@ -852,7 +856,6 @@ public final class UserRequest {
                             CGSharedPreference.setStoreJESSIONID(login.getJSESSIONID());
                             CGApplication.getInstance().setLogin((Login) domain);
                             CGSharedPreference.storeAccess_Token(access_token);
-                            CGSharedPreference.storelogin_type(type);
                             //启动主页
                             doEveryThing.everyThing();
                         }
@@ -1198,14 +1201,6 @@ public final class UserRequest {
         SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
                 VALIDATE_BAN_PHONE_QQ, resultI);
     }
-    public static void validateBanPhoneWEIXIN(Context context,String access_token, RequestResultI resultI) {
-        RequestParams params = new RequestParams();
-        params.put("appid", SplashActivity.WEIXIN_APP_ID);
-        params.put("code",access_token);
-
-        SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
-                VALIDATE_BAN_PHONE_WEIXIN, resultI);
-    }
 
     //注销票据
     public static void loginoutNote(Context context, String access_token, String type, RequestResultI resultI) {
@@ -1222,27 +1217,37 @@ public final class UserRequest {
         params.put("access_token",access_token);
         params.put("tel",tel);
         params.put("smsCode",smsCode);
-        params.put("type",type);
+        params.put("type", type);
         SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL +
                 BOUND_TEL, requestFailedResult);
     }
 
-    public static void boundAccount(Context context, String access_token, String tel,String smsCode,String type, RequestResultI resultI) {
+    public static void boundAccount(Context context, String access_token,String smsCode,String type, RequestResultI resultI) {
         RequestParams params = new RequestParams();
+        String [] pa = CGSharedPreference.getLogin();
+        String md5 = Utils.getMd5(pa[1]);
         params.put("access_token",access_token);
-        params.put("tel",tel);
-        params.put("smsCode",smsCode);
+        params.put("loginname",pa[0]);
+        params.put("password",md5);
         params.put("type",type);
-        SendRequest.getInstance().post(context, RequestType.ZAN, params.toString(), RequestHttpUtil.BASE_URL +
-                BOUND_TEL, resultI);
+        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL +
+                BOUND_ACCOUNT, resultI);
     }
 
     public static void deleteCommonReply(Context context,String type, String uuid,RequestResultI resultI) {
         RequestParams params = new RequestParams();
         params.put("uuid",uuid);
         params.put("type",type);
-        SendRequest.getInstance().post(context, RequestType.ZAN, params.toString(), RequestHttpUtil.BASE_URL +
+        SendRequest.getInstance().post(context, RequestType.ZAN, params, RequestHttpUtil.BASE_URL +
                 COMMON_DELETE_REPLY, resultI);
     }
 
+    public static void validateBanPhoneWEIXIN(Context context, String openid, String access_token, RequestFailedResult requestFailedResult) {
+        RequestParams params = new RequestParams();
+        params.put("appid", SplashActivity.WEIXIN_APP_ID);
+        params.put("openid", openid);
+        params.put("access_token",access_token);
+        SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
+                VALIDATE_BAN_PHONE_WEIXIN, requestFailedResult);
+    }
 }

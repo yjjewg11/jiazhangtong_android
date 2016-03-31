@@ -450,13 +450,11 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                         @Override
                         public int compare(ScanImageAndTime o1, ScanImageAndTime o2) {
                             int sort = 0;
-                            long time =TimeUtil.getMillionFromYMD(o2.getTime())- TimeUtil.getMillionFromYMD(o1.getTime());
+                            long time =Long.valueOf(o2.getTime())-Long.valueOf(o1.getTime());
                             if(time >0){
                                 sort = 1;
                             }else if(time < 0){
                                 sort = -1;
-                            }else {
-                                sort = 0;
                             }
                             return sort;
                         }
@@ -578,7 +576,24 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
                     ThreadManager.instance.excuteRunnable(new Runnable() {
                         @Override
                         public void run() {
-                            upPic(images);
+                            for (String path : images) {
+                                ScanImageAndTime imageAndTime = new ScanImageAndTime(path);
+                                imageAndTime = galleryList.get(galleryList.indexOf(imageAndTime)) ;
+                                AlreadySavePath alreadySavePath = new AlreadySavePath();
+                                alreadySavePath.setLocalPath(path);
+                                alreadySavePath.setPhoto_time(TimeUtil.getYMDHMSFromMillion(Long.valueOf(imageAndTime.getTime())));
+                                alreadySavePath.setFamily_uuid(PhotoFamilyFragment.instance.getCurrentFamily_uuid());
+                                alreadySavePath.setStatus(1);
+                                uploadDb.save(alreadySavePath);
+                            }
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ToastUtils.showMessage("已将" + images.size() + "张图片加入上传队列");
+                                    Intent intent = new Intent(PfUpGalleryActivity.this, PicUploadService.class);
+                                    startService(intent);
+                                }
+                            });
                         }
                     });
                 } else if (type == EditPfActivity.CHOOSE_NEW) {
@@ -596,31 +611,6 @@ public class PfUpGalleryActivity extends BaseActivity implements View.OnClickLis
             }
         }
     }
-
-    private void upPic(final List<String> images) {
-        for (String path : images) {
-            ScanImageAndTime imageAndTime = new ScanImageAndTime(path);
-            imageAndTime = galleryList.get(galleryList.indexOf(imageAndTime)) ;
-
-            AlreadySavePath alreadySavePath = new AlreadySavePath();
-            alreadySavePath.setLocalPath(path);
-            alreadySavePath.setPhoto_time(imageAndTime.getTime());
-            alreadySavePath.setFamily_uuid(PhotoFamilyFragment.instance.getCurrentFamily_uuid());
-            alreadySavePath.setStatus(1);
-            uploadDb.save(alreadySavePath);
-        }
-
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                ToastUtils.showMessage("已将" + images.size() + "张图片加入上传队列");
-                Intent intent = new Intent(PfUpGalleryActivity.this, PicUploadService.class);
-                startService(intent);
-            }
-        });
-
-    }
-
     /**
      * 扫描图片
      */

@@ -92,19 +92,21 @@
                         android:paddingRight="@dimen/margin_10">
 
                         <TextView
+                            android:gravity="center"
                             android:id="@+id/textView39"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_alignParentLeft="true"
                             android:text="封面图片"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         <ImageView
+                            android:padding="@dimen/margin_10"
                             android:id="@+id/iv_appear_image"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
-                            android:scaleType="fitXY"
+                            android:scaleType="centerInside"
                             android:src="@drawable/ic_launcher" />
                     </RelativeLayout>
 

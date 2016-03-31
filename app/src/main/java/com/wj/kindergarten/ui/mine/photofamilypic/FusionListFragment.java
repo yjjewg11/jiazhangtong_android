@@ -169,7 +169,7 @@ public class FusionListFragment extends Fragment implements Watcher{
         String sql = " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "'";
         return dbObj.findAllByWhere(AllPfAlbumSunObject.class,sql);
     }
-
+    int listSize = allObjects.size();
     private boolean noMoreData;
     private int pageNo = 1;
     private FinalDb dbObj;
@@ -208,8 +208,8 @@ public class FusionListFragment extends Fragment implements Watcher{
                 visibleItem = visibleItemCount;
                 totalItem = totalItemCount;
                 //滑到底部自动加载,并且能够加载更多，而且处于滚动状态
-                if(firstVisibleItem + visibleItemCount == totalItemCount && isCouldLoad
-                        && scrollStateS != 0){
+                if (firstVisibleItem + visibleItemCount == totalItemCount && isCouldLoad
+                        && scrollStateS != 0) {
                     isCouldLoad = false;
                     fusion_list_fresh_linear.fromEndBeginRefresh();
                 }
@@ -235,6 +235,7 @@ public class FusionListFragment extends Fragment implements Watcher{
 
             }
         });
+
         fusion_list_fresh_linear = (PfRefreshLinearLayout)mainView.findViewById(R.id.fusion_list_fresh_linear);
         fusion_list_fresh_linear.setPullScroll(new PfRefreshLinearLayout.PullScrollBoth() {
             @Override
@@ -267,7 +268,13 @@ public class FusionListFragment extends Fragment implements Watcher{
 
                     @Override
                     public void noMoreData() {
-                        ToastUtils.showMessage("暂无更新数据!");
+                        //监听有无数据
+                        if(listSize == allObjects.size()){
+                            ToastUtils.showMessage("暂无更新数据!");
+                        }else {
+                            listSize = allObjects.size();
+                        }
+
                     }
 
                     @Override

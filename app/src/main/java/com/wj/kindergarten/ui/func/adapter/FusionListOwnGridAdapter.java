@@ -56,12 +56,8 @@ public class FusionListOwnGridAdapter extends BaseAdapter implements
     @Override
     public long getHeaderId(int position) {
         long time = -1;
-        try {
-            String ymdTime =  TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getPhoto_time());
-            time = TimeUtil.formatYMD.parse(ymdTime).getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            String ymdTime =  TimeUtil.getYMDTimeFromYMDHMS(allObjects.get(position).getCreate_time());
+            time = TimeUtil.getMillionFromYMD(ymdTime);
         return time;
     }
 
@@ -79,8 +75,8 @@ public class FusionListOwnGridAdapter extends BaseAdapter implements
         }
         AllPfAlbumSunObject object = allObjects.get(position);
         if(object != null){
-            headHolder.pf_family_first_item_time.setText(""+ TimeUtil.getYMDTimeFromYMDHMS(object.getPhoto_time()));
-            String time = TimeUtil.getYMDTimeFromYMDHMS(object.getPhoto_time());
+            headHolder.pf_family_first_item_time.setText(""+ TimeUtil.getYMDTimeFromYMDHMS(object.getCreate_time()));
+            String time = TimeUtil.getYMDTimeFromYMDHMS(object.getCreate_time());
             int count = -1;
             if(mapSize.size() > 0 && mapSize.containsKey(time)){
                 count = mapSize.get(time);

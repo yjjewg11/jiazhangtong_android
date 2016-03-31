@@ -94,8 +94,9 @@ public interface GloablUtils {
     String DELETE_PF_SINGLE_INFO_SUCCESSED = "delete_pf_single_info_successed";
     String UPDATE_BOUTIQUE_ALBUM_SUCCESSED = "update_boutique_album_successed";
     //存放相片的数据库表名
-    String FAMILY_UUID_OBJECT_TABLE_NAME = "com_wj_kindergarten_bean_AllPfAlbumSunObject";
     String FINISH_UPLOAD_PIC = "finish_upload_pic";
 
 
+    String PF_FAMILY_TABLE_OBJ_NAME = "pf_family_allobj";
+    String PF_ALL_TABLE_FAMILY = "pf_all_family";
 }

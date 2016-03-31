@@ -35,7 +35,8 @@ public class SingleLoadPicModel {
     }
 
     public void getBitmap(final String lishipath, final AllPfAlbumSunObject object, final ImageView imageView,final Handler mHanlder, final LoadSuccessed loadSuccessed){
-        //先通过路径判断内存有无bitmap
+        //先通过路径判断内存有无bitmap.废弃，不能框架和本机LruCache同时缓存照片，改为
+        //本地查找地址，读取缓存，否则网络获取
         //内存没有，则判断uuid是否为空，为空，则网络获取，不为空，则找到数据库对应的字段，拿出
         //它的path路径，生成bitmap对象，加入内存中,如果本地没有存储这张照片的地址，则从网络获取。
         //内存中存放照片的键用网络地址
@@ -53,7 +54,7 @@ public class SingleLoadPicModel {
                     });
                     return;
                 }
-                //内存中没有图片,看obj对象缓存的md5图片地址是否存在本地
+//                内存中没有图片,看obj对象缓存的md5图片地址是否存在本地
                 final String localPath = findLocalPath(object.getUuid());
                 if(localPath != null && !TextUtils.isEmpty(localPath)){
                     //先判断文件是否存在，存在则本地加载
@@ -87,6 +88,7 @@ public class SingleLoadPicModel {
             }
         };
 
+//        loadBitmap(lishipath,imageView,object.getMd5(),loadSuccessed);
         ThreadManager.instance.excuteRunnable(runnable);
 
 
@@ -132,10 +134,10 @@ public class SingleLoadPicModel {
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                String tag = imageView.getTag().toString();
-                if (tag != null && !tag.equals(path)) return;
+//                String tag = imageView.getTag().toString();
+//                if (tag != null && !tag.equals(path)) return;
                 showBitmap(loadedImage,imageView);
-                NativeImageLoader.getInstance().addBitmapToMemoryCache(path, loadedImage);
+//                NativeImageLoader.getInstance().addBitmapToMemoryCache(path, loadedImage);
                 loadSuccessed.loadSuccess();
             }
 

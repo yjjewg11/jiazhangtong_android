@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.net.RequestResultI;
@@ -32,7 +33,6 @@ public class SinglePfEditActivity extends BaseActivity {
     private ImageView single_pf_edit_image;
     private EditText single_pf_edit_edit;
     private TextView single_pf_edit_place, single_pf_edit_time;
-    private HintInfoDialog dialog;
     private FinalDb db;
 
     @Override
@@ -65,7 +65,6 @@ public class SinglePfEditActivity extends BaseActivity {
     }
 
     private void initViews() {
-        dialog = new HintInfoDialog(this,"保存中，请稍候!");
         single_pf_edit_image = (ImageView) findViewById(R.id.single_pf_edit_image);
         single_pf_edit_edit = (EditText) findViewById(R.id.single_pf_edit_edit);
         single_pf_edit_place = (TextView) findViewById(R.id.single_pf_edit_place);
@@ -78,7 +77,7 @@ public class SinglePfEditActivity extends BaseActivity {
     }
 
     public void editPf(){
-        dialog.show();
+        commonDialog.show();
         String note = null;
         String address = null;
         if(single_pf_edit_edit.getText() != null){
@@ -89,14 +88,12 @@ public class SinglePfEditActivity extends BaseActivity {
         }
         final String finalAddress = address;
         final String finalNote = note;
-        UserRequest.editSinglePf(this, object.getUuid(), address, note, new RequestResultI() {
+        UserRequest.editSinglePf(this, object.getUuid(), address, note, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 object.setAddress(finalAddress);
                 object.setNote(finalNote);
-                if(dialog.isShowing()){
-                    dialog.cancel();
-                }
+                cancleCommonDialog();
                 db.update(object);
                 Intent intent = new Intent();
                 intent.putExtra("object",object);
@@ -106,11 +103,6 @@ public class SinglePfEditActivity extends BaseActivity {
 
             @Override
             public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
 
             }
         });

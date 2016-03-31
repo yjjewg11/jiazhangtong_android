@@ -148,6 +148,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    public HintInfoDialog getCommonDialog() {
+        return commonDialog;
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -942,10 +946,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         startActivityForResult(intent, WEB_SECLECT_PIC);
     }
 
-    protected void showCommonDialog(){
+    public void showCommonDialog(){
         commonDialog.show();
     }
-    protected void cancleCommonDialog(){
+    public void cancleCommonDialog(){
         if(commonDialog.isShowing()) commonDialog.cancel();
     }
 

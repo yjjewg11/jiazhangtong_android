@@ -4,17 +4,10 @@
     android:layout_height="match_parent">
     <include layout="@layout/title_normal"/>
 
+    <FrameLayout
+        android:id="@+id/upload_activity_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <include layout="@layout/layout_pulltorefresh"/>
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <!--<LinearLayout-->
-            <!--android:id="@+id/pf_scroll_progress_linear"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
-        <!--</LinearLayout>-->
-    <!--</ScrollView>-->
-
+    </FrameLayout>
 </LinearLayout>

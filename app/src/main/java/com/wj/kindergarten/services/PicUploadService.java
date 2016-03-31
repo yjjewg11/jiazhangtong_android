@@ -218,11 +218,11 @@ public class PicUploadService extends Service {
     public class TransportBinder extends Binder {
 
         public void reStartUpload(){
+            isUpLoad = true;
             findPic();
             if(listObject != null && listObject.size() > 0)
             checkAlreadyUpload(listObject.get(0).getLocalPath(),progressCallBack);
         }
-
         public void startTransMission() {
             isTransMission = true;
         }
@@ -241,6 +241,10 @@ public class PicUploadService extends Service {
                 db.delete(alreadySavePath);
                 ToastUtils.showMessage("删除成功!");
             }
+        }
+
+        public void giveUpLoad() {
+              isUpLoad = false;
         }
     }
 

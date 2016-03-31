@@ -67,7 +67,7 @@ import java.util.List;
 /**
  * Created by tangt on 2016/1/14.
  */
-public class PhotoFamilyFragment extends Fragment{
+public class PhotoFamilyFragment extends Fragment {
     public static final int ADD_PIC = 5001;
     @ViewInject(id = R.id.common_tab_layout)
     private TabLayout tab_layout;
@@ -77,7 +77,7 @@ public class PhotoFamilyFragment extends Fragment{
     private FrameLayout back_pf_scroll_fl;
     @ViewInject(id = R.id.pf_back_ll)
     private PfFragmentLinearLayout pf_back_ll;
-    boolean flIsLocationTop ;
+    boolean flIsLocationTop;
     private LocationChanged locationChanged;
     private RelativeLayout pf_backGround_rl;
     private ImageView pf_backGround_image;
@@ -116,9 +116,9 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void showView() {
-        View viewNewData = View.inflate(getActivity(),R.layout.pf_new_data_info,null);
+        View viewNewData = View.inflate(getActivity(), R.layout.pf_new_data_info, null);
         TextView tv_new_data = (TextView) viewNewData.findViewById(R.id.pf_new_data_tv);
-        final PopupWindow popNewData = new PopupWindow(viewNewData,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        final PopupWindow popNewData = new PopupWindow(viewNewData, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         Utils.setPopWindow(popNewData);
         tv_new_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,35 +127,37 @@ public class PhotoFamilyFragment extends Fragment{
                 observer.setFamily_uuid(currentFamily_uuid);
             }
         });
-        popNewData.showAsDropDown(pf_backGround_family_name,0,20);
+        popNewData.showAsDropDown(pf_backGround_family_name, 0, 20);
     }
 
-    public void startGif(){
+    public void startGif() {
         //每成功一次，进行数据库查询还有多少未显示。
         String sql = "status ='1' or status = '3';";
 //        and family_uuid = '"+currentFamily_uuid+"';";
         List<AlreadySavePath> alreadySavePathList = alreadyPathDb.findAllByWhere(AlreadySavePath.class, sql);
-        if(alreadySavePathList == null || alreadySavePathList.size() == 0){
+        if (alreadySavePathList == null || alreadySavePathList.size() == 0) {
             stopGif();
             return;
         }
-        if(pf_family_gif.getVisibility() == View.INVISIBLE){
+        if (pf_family_gif.getVisibility() == View.INVISIBLE) {
             pf_family_gif.setVisibility(View.VISIBLE);
             photo_family_pic_tv_upload.setVisibility(View.VISIBLE);
         }
-        photo_family_pic_tv_upload.setText(""+alreadySavePathList.size());
+        photo_family_pic_tv_upload.setText("" + alreadySavePathList.size());
     }
-    public void stopGif(){
-        if(pf_family_gif != null){
+
+    public void stopGif() {
+        if (pf_family_gif != null) {
             pf_family_gif.setVisibility(View.INVISIBLE);
             photo_family_pic_tv_upload.setVisibility(View.INVISIBLE);
         }
     }
-    private Handler handler = new Handler(){
+
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
 
-            switch (msg.what){
+            switch (msg.what) {
                 case PfLoadDataProxy.REFRESH_DATA:
                     showView();
                     break;
@@ -163,33 +165,35 @@ public class PhotoFamilyFragment extends Fragment{
         }
     };
 
-    public void setSubViewDecideScroll(PfFragmentLinearLayout.DecideSubViewScroll decideScroll){
+    public void setSubViewDecideScroll(PfFragmentLinearLayout.DecideSubViewScroll decideScroll) {
         pf_back_ll.setDecideSubViewScroll(decideScroll);
     }
-    public void setPullUpView(View pullUpView){
+
+    public void setPullUpView(View pullUpView) {
         pf_back_ll.setPullUpView(pullUpView);
     }
 
     public void setLocationChanged(LocationChanged locationChanged) {
         this.locationChanged = locationChanged;
     }
+
     private ArrayList<AllPfAlbumSunObject> list = new ArrayList<>();
     public boolean canScroll = true;
 
 
     //标签 ： 时光轴，精品相册
-    private String[] fragment_tags = new String[]{"fusionList", "boutique_album","fusion"};
+    private String[] fragment_tags = new String[]{"fusionList", "boutique_album", "fusion"};
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initHead();
-        if (view != null){
+        if (view != null) {
             return view;
         }
         view = inflater.inflate(R.layout.photo_family_pic, null);
-        FinalActivity.initInjectedView(this,view);
+        FinalActivity.initInjectedView(this, view);
         instance = this;
         initDb();
         initFamilyAlbumData();
@@ -211,12 +215,12 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void initFamilyAlbum() {
-        if(pfAlbumListSunList.size() != 0){
+        if (pfAlbumListSunList.size() != 0) {
             pfAlbumListSun = pfAlbumListSunList.get(0);
             currentFamily_uuid = pfAlbumListSun.getUuid();
-            if(!TextUtils.isEmpty(pfAlbumListSun.getTitle())){
-                pf_pic_center_tv.setText(""+Utils.isNull(pfAlbumListSun.getTitle()));
-            }else {
+            if (!TextUtils.isEmpty(pfAlbumListSun.getTitle())) {
+                pf_pic_center_tv.setText("" + Utils.isNull(pfAlbumListSun.getTitle()));
+            } else {
                 pf_pic_center_tv.setText("家庭相册-1");
             }
 
@@ -227,17 +231,17 @@ public class PhotoFamilyFragment extends Fragment{
         alreadyPathDb = FinalUtil.getAlreadyUploadDb(getActivity());
         familyObjDb = FinalUtil.getFamilyUuidObjectDb(getActivity());
         dbFamilyAlbum = FinalUtil.getAllFamilyAlbum(getActivity());
-        pfProxyLoadData = new PfLoadDataProxy(getActivity(),handler);
+        pfProxyLoadData = new PfLoadDataProxy(getActivity(), handler);
     }
 
     private void initFamilyAlbumData() {
-        if(MainActivity.instance.getAlbumList() != null && MainActivity.instance.getAlbumList().size() > 0){
+        if (MainActivity.instance.getAlbumList() != null && MainActivity.instance.getAlbumList().size() > 0) {
             pfAlbumListSunList.addAll(MainActivity.instance.getAlbumList());
-        }else {
-            List<PfFamilyUuid> pfFamilyUuids =  dbFamilyAlbum.findAll(PfFamilyUuid.class);
-            if(pfFamilyUuids == null || pfFamilyUuids.size() == 0) return;
+        } else {
+            List<PfFamilyUuid> pfFamilyUuids = dbFamilyAlbum.findAll(PfFamilyUuid.class);
+            if (pfFamilyUuids == null || pfFamilyUuids.size() == 0) return;
             int size = pfFamilyUuids.size();
-            for(int k = 0 ; k < size ; k ++){
+            for (int k = 0; k < size; k++) {
                 PfAlbumListSun sun = new PfAlbumListSun();
                 sun.setUuid(pfFamilyUuids.get(k).getFamily_uuid());
                 pfAlbumListSunList.add(sun);
@@ -260,12 +264,12 @@ public class PhotoFamilyFragment extends Fragment{
         pf_pic_center_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  changePFAlbum();
-                 int position =  tab_layout.getSelectedTabPosition();
-                 if(position == 0){
-                     if(pfFusionFragment != null) pfFusionFragment.setMode();
+                changePFAlbum();
+                int position = tab_layout.getSelectedTabPosition();
+                if (position == 0) {
+                    if (pfFusionFragment != null) pfFusionFragment.setMode();
 //                     if(pfFusionListFragment != null) pfFusionListFragment.setMode();
-                 }
+                }
 
             }
         });
@@ -279,14 +283,14 @@ public class PhotoFamilyFragment extends Fragment{
 
     private void changePFAlbum() {
 
-        if(popTop == null){
+        if (popTop == null) {
             popTop = new PopAttributes();
             popTop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
             popTop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-            popTop.setGrarity(Gravity.TOP|Gravity.RIGHT);
+            popTop.setGrarity(Gravity.TOP | Gravity.RIGHT);
             popTop.setLeftOffset(0);
         }
-        final TopViewAdapter topAdapter = new TopViewAdapter(getActivity(), pfAlbumListSunList,currentFamily_uuid);
+        final TopViewAdapter topAdapter = new TopViewAdapter(getActivity(), pfAlbumListSunList, currentFamily_uuid);
         PopWindowUtil.showPoPWindow(getActivity(), pf_pic_center_tv, topAdapter,
                 popTop, new PopWindowUtil.OnItemClickListener() {
                     @Override
@@ -305,43 +309,42 @@ public class PhotoFamilyFragment extends Fragment{
                 });
     }
 
-    public void initHeadBack(){
+    public void initHeadBack() {
         reqetFamilyAlbum();
     }
+
     private void initHeadViewData() {
-        if(pfAlbumListSun == null) return;
+        if (pfAlbumListSun == null) return;
         int position = pfAlbumListSunList.indexOf(pfAlbumListSun);
         pfAlbumListSun = pfAlbumListSunList.get(position);
-        if(TextUtils.isEmpty(pfAlbumListSun.getTitle())) return;
+        if (TextUtils.isEmpty(pfAlbumListSun.getTitle())) return;
         int count = 0;
-        if(pfAlbumListSun.getPhoto_count() != null && !TextUtils.isEmpty(pfAlbumListSun.getPhoto_count())){
-             count = Integer.valueOf(pfAlbumListSun.getPhoto_count()+"");
+        if (pfAlbumListSun.getPhoto_count() != null && !TextUtils.isEmpty(pfAlbumListSun.getPhoto_count())) {
+            count = Integer.valueOf(pfAlbumListSun.getPhoto_count() + "");
         }
         String n = null;
         pf_background_show_number.setVisibility(View.VISIBLE);
-        if(count > 1000){
-            n =  pfAlbumListSun.getPhoto_count().substring(0,1);
-            n = n+" k";
-        }else if(count > 0){
+
+        if (count > 0) {
             n = pfAlbumListSun.getPhoto_count();
-        }else {
+        } else {
             pf_background_show_number.setVisibility(View.INVISIBLE);
         }
-        pf_background_show_number.setText(""+n);
-        if(!TextUtils.isEmpty(pfAlbumListSun.getHerald())){
+        pf_background_show_number.setText("" + n);
+        if (!TextUtils.isEmpty(pfAlbumListSun.getHerald())) {
 //            ImageLoaderUtil.displayImage(pfAlbumListSun.getHerald(),pf_backGround_image);
             BitmapCallBack.loadBitmap(pfAlbumListSun.getHerald(), new BitmapCallBack.GetBitmapCallback() {
-            @Override
-            public void callback(Bitmap bitmap) {
-                blurBackGround(bitmap);
-            }
+                @Override
+                public void callback(Bitmap bitmap) {
+                    blurBackGround(bitmap);
+                }
             });
-        }else {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.family_album_default);
+        } else {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.family_album_default);
             blurBackGround(bitmap);
         }
         String text = Utils.isNull(pfAlbumListSun.getTitle());
-        if(TextUtils.isEmpty(text)){
+        if (TextUtils.isEmpty(text)) {
             text = "家庭相册--" + topPosition;
         }
         pf_pic_center_tv.setText("" + text);
@@ -351,7 +354,13 @@ public class PhotoFamilyFragment extends Fragment{
 
     private void blurBackGround(Bitmap bitmap) {
         pf_backGround_image.setImageBitmap(bitmap);
-        BitmapDrawable drawable =  BitmapUtil.blur(getResources(), -1, bitmap);
+        BitmapDrawable drawable = null;
+        try {
+            drawable = BitmapUtil.blur(getResources(), -1, bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            pf_backGround_rl.setBackground(getResources().getDrawable(R.drawable.family_album_default));
+        }
         pf_backGround_rl.setBackground(drawable);
     }
 
@@ -383,17 +392,17 @@ public class PhotoFamilyFragment extends Fragment{
     private void initFragment() {
 //        pfFusionFragment = new PfFusionFragment(this,currentFamily_uuid);
 //        getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[2]).commit();
-        pfFusionListFragment = new FusionListFragment(this,currentFamily_uuid);
+        pfFusionListFragment = new FusionListFragment(this, currentFamily_uuid);
         getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
 
     }
 
     private void initHead() {
-        ((MainActivity)getActivity()).hideActionbar();
+        ((MainActivity) getActivity()).hideActionbar();
     }
 
-    public void updateBoutiqueFragmentData(String uuid){
-        if(boutique_album_framgent != null){
+    public void updateBoutiqueFragmentData(String uuid) {
+        if (boutique_album_framgent != null) {
             boutique_album_framgent.updateData(uuid);
         }
     }
@@ -409,8 +418,8 @@ public class PhotoFamilyFragment extends Fragment{
         tv_add_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddFamilyAlbumActivity.class);
-                MainActivity.instance.startActivityForResult(intent, GloablUtils.ADD_NEW_ALBUM_SUCCESSED,null);
+                Intent intent = new Intent(getActivity(), AddFamilyAlbumActivity.class);
+                MainActivity.instance.startActivityForResult(intent, GloablUtils.ADD_NEW_ALBUM_SUCCESSED, null);
             }
         });
 
@@ -448,7 +457,7 @@ public class PhotoFamilyFragment extends Fragment{
     private void startAlbumInfo() {
         if (pfAlbumListSun == null) {
             ToastUtils.showMessage("暂无相册信息!");
-            return ;
+            return;
         }
         Intent intent = new Intent(getActivity(), PfEditInfoActivity.class);
         intent.putExtra("uuid", currentFamily_uuid);
@@ -465,7 +474,7 @@ public class PhotoFamilyFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 List<AllPfAlbumSunObject> list = familyObjDb.findAll(AllPfAlbumSunObject.class);
-                if(list == null || list.size() == 0) {
+                if (list == null || list.size() == 0) {
                     ToastUtils.showMessage("您还没有上传过照片，请先上传照片！");
                     return;
                 }
@@ -510,14 +519,14 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
 
-
     String[] titles = new String[]{"时光轴", "精品相册"};
 
     int boutiquePosition = 0;
     int fusionPosition = 0;
+
     private void initTabLayout() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tab_layout.getLayoutParams();
-        params.height = (int)(Float.valueOf(45)*Float.valueOf(WindowUtils.getDesnity()));
+        params.height = (int) (Float.valueOf(45) * Float.valueOf(WindowUtils.getDesnity()));
         CGLog.v("打印密度 : " + WindowUtils.getDesnity());
         CGLog.v("打印tab高度 : " + params.height);
         tab_layout.setLayoutParams(params);
@@ -598,31 +607,32 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     private void changFusionFragment() {
-        if(fusionPosition == 0){
+        if (fusionPosition == 0) {
             FusionListFragment fusionListFragment = (FusionListFragment) getFragmentManager().findFragmentByTag(fragment_tags[0]);
             if (fusionListFragment != null) {
                 getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionListFragment, fragment_tags[0]).commit();
             } else {
-                if(pfFusionListFragment == null) pfFusionListFragment = new FusionListFragment(this,currentFamily_uuid);
+                if (pfFusionListFragment == null)
+                    pfFusionListFragment = new FusionListFragment(this, currentFamily_uuid);
                 getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionListFragment, fragment_tags[0]).commit();
             }
-        }else if(fusionPosition == 1){
+        } else if (fusionPosition == 1) {
             PfFusionFragment fusionFragment = (PfFusionFragment) getFragmentManager().findFragmentByTag(fragment_tags[2]);
             if (fusionFragment != null) {
                 getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, fusionFragment, fragment_tags[2]).commit();
             } else {
-                pfFusionFragment = new PfFusionFragment(this,currentFamily_uuid);
+                pfFusionFragment = new PfFusionFragment(this, currentFamily_uuid);
                 getFragmentManager().beginTransaction().replace(R.id.pf_change_content_fl, pfFusionFragment, fragment_tags[2]).commit();
             }
 
         }
     }
 
-    public void refreshUpdateData(){
+    public void refreshUpdateData() {
         observer.setFamily_uuid(currentFamily_uuid);
     }
 
-    public void refreshFusionData(){
+    public void refreshFusionData() {
         pfFusionListFragment.refreshData();
     }
 
@@ -655,19 +665,20 @@ public class PhotoFamilyFragment extends Fragment{
     }
 
     public void reBoutiqueData() {
-        if(handler.postDelayed(new Runnable() {
+        if (handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(boutique_album_framgent != null){
+                if (boutique_album_framgent != null) {
                     boutique_album_framgent.refreshUUid(currentFamily_uuid);
                 }
             }
-        },300));
+        }, 300)) ;
     }
 
 
-    public interface LocationChanged{
+    public interface LocationChanged {
         void onTop();
+
         void onBottom();
     }
 

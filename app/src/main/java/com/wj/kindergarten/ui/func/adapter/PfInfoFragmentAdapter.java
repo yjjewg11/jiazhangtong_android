@@ -3,7 +3,9 @@ package com.wj.kindergarten.ui.func.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.ui.mine.photofamilypic.pffragment.PFSingleObjectInfoFragment;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by tangt on 2016/2/23.
  */
-public class PfInfoFragmentAdapter extends FragmentPagerAdapter {
+public class PfInfoFragmentAdapter extends FragmentStatePagerAdapter {
 
     private int mcount;
     private ViewPager viewPager;
@@ -57,10 +59,14 @@ public class PfInfoFragmentAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        super.destroyItem(container, position, object);
+    }
+
+    @Override
     public void notifyDataSetChanged() {
         mcount = getCount();
         super.notifyDataSetChanged();
-
     }
 
 }

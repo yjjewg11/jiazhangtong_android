@@ -41,11 +41,13 @@ import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
 import com.wj.kindergarten.ui.mine.photofamilypic.TransportListener;
 import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.DbUtils;
 import com.wj.kindergarten.ui.more.HtmlActivity;
+import com.wj.kindergarten.ui.more.PfRefreshLinearLayout;
 import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.FinalUtil;
 import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
 import net.tsz.afinal.FinalDb;
@@ -85,7 +87,7 @@ public class MessageFragment extends Fragment {
             albumDb = FinalUtil.getFamilyUuidObjectDb(getActivity());
             message_list_rl = (RelativeLayout) rootView.findViewById(R.id.message_list_rl);
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list_interation);
-            mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+            mListView.setMode(PullToRefreshBase.Mode.BOTH);
             mListView.setDividerPadding(0);
             mListView.setDividerDrawable(null);
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -97,7 +99,7 @@ public class MessageFragment extends Fragment {
 
                 @Override
                 public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    queryMessage(nowPage++);
+                    queryMessage(++nowPage);
                 }
             });
 
@@ -110,7 +112,8 @@ public class MessageFragment extends Fragment {
                     MsgDataModel dataModel = dataList.get(position - 1);
                     if (null != dataModel) {
                         readMessage(dataModel);
-                        if (dataModel.getType() == 0 || dataModel.getType() == 1) {
+                        if(Utils.stringIsNull(dataModel.getRel_uuid())) return;
+                            if (dataModel.getType() == 0 || dataModel.getType() == 1) {
                             Intent intent = new Intent(getActivity(), NoticeActivity.class);
                             intent.putExtra("uuid", dataModel.getRel_uuid());
                             getActivity().startActivity(intent);
@@ -170,7 +173,7 @@ public class MessageFragment extends Fragment {
                             if(objectList != null && objectList.size() > 0){
                                int positionList =  objectList.indexOf(object) ;
                                 if(positionList < 0) positionList = 0;
-                                new TransportListener(getActivity(),positionList,objectList,null).onItemClick(parent,view,positionList,id);
+                                new TransportListener(getActivity(),positionList,objectList,null).onItemClick(parent, view, positionList, id);
                             }
                         } else if (dataModel.getType() == 22) {
                             //精品相册内容
@@ -257,8 +260,10 @@ public class MessageFragment extends Fragment {
                 } else {
                     if (page == 1) {
                         ((BaseActivity) getActivity()).noView(message_list_rl);
+                    }else {
+                        ToastUtils.showMessage("没有更多内容了!");
+                        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }
-                    Utils.showToast(CGApplication.getInstance(), "消息列表为空");
                 }
             }
 

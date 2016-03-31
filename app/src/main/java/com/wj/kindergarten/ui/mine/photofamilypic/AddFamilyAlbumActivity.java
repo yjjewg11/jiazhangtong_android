@@ -135,10 +135,10 @@ public class AddFamilyAlbumActivity extends BaseActivity {
             add_family_album_name.setError("请输入相册名");
             return false;
         }
-        if(localPath == null || TextUtils.isEmpty(localPath.toString())){
-            ToastUtils.showMessage("请选择图片!");
-            return false;
-        }
+//        if(localPath == null || TextUtils.isEmpty(localPath.toString())){
+//            ToastUtils.showMessage("请选择图片!");
+//            return false;
+//        }
         return true;
     }
 

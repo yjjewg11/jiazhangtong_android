@@ -92,7 +92,7 @@ public class SplashActivity extends Activity implements DoEveryThing {
     };
 
     private void startActivityFromSplash() {
-        Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(SplashActivity.this, GuideActivity.class);
         mainIntent.putExtra("from", "splash");
         startActivity(mainIntent);
     }

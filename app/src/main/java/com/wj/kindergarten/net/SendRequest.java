@@ -238,6 +238,7 @@ public class SendRequest {
                     final RequestResultI resultI) {
         if (Utils.isNetworkAvailable(CGApplication.getInstance())) {
             CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
+
             RequestHttpUtil.get(context, url, params, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

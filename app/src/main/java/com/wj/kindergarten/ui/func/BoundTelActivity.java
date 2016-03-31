@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.func;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,6 +50,9 @@ public class BoundTelActivity extends BaseActivity{
         setTitleText("绑定手机");
         FinalActivity.initInjectedView(this);
         boundType = getIntent().getStringExtra("boundType");
+        if(boundType.equals("account")){
+            setTitleText("绑定账号");
+        }
         access_token = getIntent().getStringExtra("access_token");
     }
 
@@ -73,8 +77,8 @@ public class BoundTelActivity extends BaseActivity{
     }
 
     private void boundAccount() {
-        UserRequest.boundAccount(this, access_token,
-                bound_tel_phone.getText().toString(), bound_tel_sms.getText().toString(),
+
+        UserRequest.boundAccount(this, access_token, bound_tel_sms.getText().toString(),
                 CGSharedPreference.getlogin_type(), new RequestFailedResult(commonDialog) {
                     @Override
                     public void result(BaseModel domain) {
@@ -111,6 +115,8 @@ public class BoundTelActivity extends BaseActivity{
 
     private void commonResult() {
         ToastUtils.showMessage("绑定成功!");
+        Intent intent = new Intent();
+        intent.putExtra("type",boundType);
         setResult(RESULT_OK);
         finish();
     }

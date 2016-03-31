@@ -1,14 +1,16 @@
 package com.wj.kindergarten.bean;
 
 import com.google.gson.annotations.Expose;
+import com.wj.kindergarten.utils.GloablUtils;
 
 import net.tsz.afinal.annotation.sqlite.Id;
+import net.tsz.afinal.annotation.sqlite.Table;
 
 /**
  * Created by tangt on 2016/1/13.
  */
 //可自己指定表名 ：
-//    @Table(name = "aaa")
+    @Table(name = GloablUtils.PF_FAMILY_TABLE_OBJ_NAME)
 public class AllPfAlbumSunObject extends BaseModel{
     @Expose
     private String create_time;

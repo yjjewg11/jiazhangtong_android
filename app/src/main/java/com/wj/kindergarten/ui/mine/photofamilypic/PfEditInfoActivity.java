@@ -225,7 +225,7 @@ public class PfEditInfoActivity extends BaseActivity {
     private void saveAlbum() {
         showCommonDialog();
         String uuid = pfAlbumInfo == null ? "" : pfAlbumInfo.getData().getUuid();
-        UserRequest.AddOrEditPfAlbum(this, title, uuid, "0", hearld, new RequestResultI() {
+        UserRequest.AddOrEditPfAlbum(this, title, uuid, "0", hearld, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 cancleCommonDialog();
@@ -237,11 +237,6 @@ public class PfEditInfoActivity extends BaseActivity {
 
             @Override
             public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
 
             }
         });

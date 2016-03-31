@@ -93,8 +93,8 @@ public class ScanPhoto_V2 {
             }
             ScanImageAndTime obj = new ScanImageAndTime();
             obj.setPath(path);
-            if(takeTime == null || TextUtils.isEmpty(takeTime))takeTime = String.valueOf(TimeUtil.getYMDnowTime());
-            obj.setTime(TimeUtil.getDateToString(Long.valueOf(takeTime)));
+            if(takeTime == null || TextUtils.isEmpty(takeTime))takeTime = String.valueOf(TimeUtil.getNowTime());
+            obj.setTime(takeTime);
             scanList.add(obj);
             //获取该图片的父路径名
             String parentName = new File(path).getParentFile().getName();

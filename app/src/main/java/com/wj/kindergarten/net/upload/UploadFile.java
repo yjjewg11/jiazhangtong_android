@@ -94,7 +94,6 @@ public class UploadFile {
                 }else{
                     upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
                 uploadImage.failure("处理图片失败");
@@ -117,7 +116,7 @@ public class UploadFile {
                 params.put("phone_type", Build.MODEL);
                 params.put("phone_uuid", CGApplication.getInstance().getAndroid_id());
                 CGLog.d(URL + "?" + params.toString());
-                RequestHttpUtil.post(context, UP_LOAD_PF_URL, params, new AsyncHttpResponseHandler() {
+                RequestHttpUtil.postPf(context, UP_LOAD_PF_URL, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
                         try {

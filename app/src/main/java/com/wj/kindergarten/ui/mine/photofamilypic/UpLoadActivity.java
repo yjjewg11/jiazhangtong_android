@@ -7,33 +7,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.v7.internal.widget.AdapterViewCompat;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 
-import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.services.PicUploadService;
@@ -42,8 +31,6 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.UpLoadAdapter;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.FinalUtil;
-import com.wj.kindergarten.utils.GloablUtils;
-import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.ToastUtils;
 
 import net.tsz.afinal.FinalDb;
@@ -70,6 +57,12 @@ public class UpLoadActivity extends BaseActivity {
 
     private UpdateBroadCastReceiver receiver;
     private PicUploadService.TransportBinder binder;
+    private FrameLayout upload_activity_fl;
+
+    public PicUploadService.TransportBinder getBinder() {
+        return binder;
+    }
+
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -90,9 +83,10 @@ public class UpLoadActivity extends BaseActivity {
     private void bindSuccess() {
         binder.startTransMission();
         if (binder.getList() == null || binder.getList().size() == 0) {
-            judgeAddNoContent();
+            judgeAddNoContent(binder.getList());
             return;
         }
+        setTitleText("上传进度","全部暂停");
         addView();
     }
 
@@ -154,9 +148,31 @@ public class UpLoadActivity extends BaseActivity {
     protected void onCreate() {
 
         register();
-        setTitleText("上传进度");
         initViews();
         initRemoveView();
+        setTitleText("上传进度", rightText);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bindService(new Intent(UpLoadActivity.this, PicUploadService.class), connection, BIND_AUTO_CREATE);
+            }
+        }, 300);
+
+    }
+
+    String rightText  = "全部开始";
+    @Override
+    protected void titleRightButtonListener() {
+        if(rightText.equals("全部开始")){
+            rightText = "全部暂停";
+            binder.reStartUpload();
+            setTitleText("上传进度",rightText);
+        } else if (rightText.equals("全部暂停")){
+            rightText = "全部开始";
+            binder.giveUpLoad();
+            setTitleText("上传进度", rightText);
+        }
+
     }
 
     private void initRemoveView() {
@@ -188,11 +204,11 @@ public class UpLoadActivity extends BaseActivity {
     }
 
     private void initViews() {
+        upload_activity_fl = (FrameLayout)findViewById(R.id.upload_activity_fl);
         pullListView = (PullToRefreshListView) findViewById(R.id.pulltorefresh_list);
         pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
         upAdapter = new UpLoadAdapter(this,alreadySavePathsList);
         pullListView.setAdapter(upAdapter);
-        bindService(new Intent(this, PicUploadService.class), connection, BIND_AUTO_CREATE);
         pullListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -252,7 +268,11 @@ public class UpLoadActivity extends BaseActivity {
 //            TextView tv_progress = (TextView) (view.findViewById(R.id.upload_tv_progress));
 //            ImageView upload_wait = (ImageView) view.findViewById(R.id.up_Load_wait);
             AlreadySavePath savePath = new AlreadySavePath(path);
-            int index = alreadySavePathsList.indexOf(savePath);
+            int index = alreadySavePathsList.indexOf(savePath) < 0 ? 0 : alreadySavePathsList.indexOf(savePath);
+            if(alreadySavePathsList.size() <= 0){
+                judgeAddNoContent(alreadySavePathsList);
+                return;
+            }
             AlreadySavePath alreadySavePath = alreadySavePathsList.get(index);
             alreadySavePath.setProgress(progress);
             alreadySavePath.setTotal(total);
@@ -300,7 +320,7 @@ public class UpLoadActivity extends BaseActivity {
 //                    });
 //                    animator.start();
 //                    linearLayout.removeView(view);
-//                    judgeAddNoContent();
+                    judgeAddNoContent( alreadySavePathsList);
 
 
 
@@ -311,21 +331,18 @@ public class UpLoadActivity extends BaseActivity {
 //                    upload_wait.setVisibility(View.VISIBLE);
 //                    upload_wait.setImageResource(R.drawable.upload_failed);
 //                    bar.setProgress(0);
-//                    judgeAddNoContent();
+                    judgeAddNoContent(alreadySavePathsList);
                     break;
             }
             upAdapter.notifyDataSetChanged();
         }
     }
 
-    private void judgeAddNoContent() {
-//        if (linearLayout.getChildCount() == 0) {
-////            setContentView(View.inflate(this,R.layout.nothing_view,null));
-//            TextView textView = new TextView(this);
-//            textView.setText("暂时还没有上传内容!");
-//            textView.setGravity(Gravity.CENTER);
-//            linearLayout.addView(textView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        }
+    private void judgeAddNoContent(List<AlreadySavePath> list) {
+        if(list != null &&list.size() == 0){
+            setTitleText("上传进度","");
+            noView(upload_activity_fl);
+        }
     }
     class LinearWrapper{
         private View view;

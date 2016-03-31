@@ -28,6 +28,7 @@ import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.GuideActivity;
 import com.wj.kindergarten.ui.func.BoundTelActivity;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.more.BoundDialog;
@@ -40,7 +41,10 @@ import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * LoginActivity
@@ -72,6 +76,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private String access_token;
     private String openid;
     private MyProgressDialog myProgressBar;
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
 
     @Override
     protected void setContentLayout() {
@@ -154,7 +174,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     private void weixinValidate() {
-        UserRequest.validateBanPhoneWEIXIN(this, access_token, new RequestFailedResult() {
+        UserRequest.validateBanPhoneWEIXIN(this, getOpenid(), getAccess_token(), new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 NeedBoundPhoneResult needBoundPhoneResult = (NeedBoundPhoneResult) domain;
@@ -169,13 +189,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             @Override
             public void failure(String message) {
                 super.failure(message);
-                ToastUtils.showDialog(LoginActivity.this, "微信", access_token+"   :   "+message, null);
+//                ToastUtils.showDialog(LoginActivity.this, "微信", access_token+"   :   "+message, null);
             }
         });
     }
 
     private void qqValidate() {
-        UserRequest.validateBanPhoneQQ(this, openid, access_token, new RequestFailedResult() {
+        UserRequest.validateBanPhoneQQ(this, getOpenid(), getAccess_token(), new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 NeedBoundPhoneResult needBoundPhoneResult = (NeedBoundPhoneResult) domain;
@@ -217,7 +237,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             ToastUtils.showBoundDialog(this, "绑定账号", new BoundDialog.AfterListener() {
                 @Override
                 public void bound() {
-                    beginBound("account");
+                    UserRequest.boundAccount(LoginActivity.this,access_token,"",loginType, new RequestFailedResult(commonDialog) {
+                        @Override
+                        public void result(BaseModel domain) {
+                            getThreeInfoToMainPage();
+                        }
+
+                        @Override
+                        public void result(List<BaseModel> domains, int total) {
+
+                        }
+
+                        @Override
+                        public void failure(String message) {
+                            super.failure(message);
+                            boundTel();
+                        }
+                    });
                 }
 
                 @Override
@@ -227,19 +263,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             });
             //没有登录数据进入确认绑定页面提示是否绑定
         } else {
-            ToastUtils.showBoundDialog(this, "绑定手机", new BoundDialog.AfterListener() {
-                @Override
-                public void bound() {
-                    beginBound("tel");
-                }
-
-                @Override
-                public void igone() {
-                    getThreeInfoToMainPage();
-                }
-            });
+            boundTel();
         }
 
+    }
+
+    private void boundTel() {
+        ToastUtils.showBoundDialog(this, "绑定手机", new BoundDialog.AfterListener() {
+            @Override
+            public void bound() {
+                beginBound("tel", getAccess_token());
+            }
+
+            @Override
+            public void igone() {
+                getThreeInfoToMainPage();
+            }
+        });
     }
 
     private void cancleMyDialog(){
@@ -248,7 +288,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     //获取用户信息并进入主页面
     private void getThreeInfoToMainPage() {
-        UserRequest.getThreeUserInfo(mContext, access_token, loginType, this);
+        UserRequest.getThreeUserInfo(mContext, getAccess_token(), loginType, this);
     }
 
     private void apply() {
@@ -263,18 +303,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             public void onError(SocializeException e, SHARE_MEDIA platform) {
                 CGLog.v("Denglu  异常");
                 e.printStackTrace();
-
+                ToastUtils.showMessage("微信请求异常!!!");
 
             }
 
             @Override
             public void onComplete(Bundle value, SHARE_MEDIA platform) {
                 cancleMyDialog();
-                access_token = value.getString("access_token");
+//                StringBuilder builder = new StringBuilder();
+//                Set<String> stringSet = value.keySet();
+//                Iterator<String> ite = stringSet.iterator();
+//
+//                while (ite.hasNext()){
+//                    builder.append("    --"+ite.next());
+//                }
+//                ToastUtils.showDialog(LoginActivity.this, "标题", "" +builder.toString(), null);
+                CGSharedPreference.storelogin_type(loginType);
+                        access_token = value.getString("access_token");
                 openid = value.getString("openid");
                 CGLog.v("打印access_token : " + access_token);
                 if (value != null && !TextUtils.isEmpty(value.getString("uid"))) {
-                    ToastUtils.showMessage("授权成功 : access_token : "+access_token+"   oppenid : "+openid);
                     successGetAssess_token();
                 } else {
                     ToastUtils.showMessage("授权失败");
@@ -307,22 +355,38 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 String status = data.getStringExtra("status");
                 //要绑定，进入绑定页面
                 if (status.equals("now")) {
-                    beginBound("tel");
+                    beginBound("tel",getAccess_token());
                     //不绑定，直接登陆
                 } else {
                     getThreeInfoToMainPage();
                 }
                 break;
-            //绑定成功，获取用户数据进入主页面
+            //绑定成功，判断绑定类型，如果是账号，则进行手机绑定，否则直接进入主页面
             case GloablUtils.BOUND_TEL:
                 getThreeInfoToMainPage();
+//                String type = getIntent().getStringExtra("type");
+//                if(type.equals("tel")){
+//                    getThreeInfoToMainPage();
+//                }else if(type.equals("account")){
+//                    ToastUtils.showBoundDialog(this, "绑定手机", new BoundDialog.AfterListener() {
+//                        @Override
+//                        public void bound() {
+//                            beginBound("tel", access_token);
+//                        }
+//                        @Override
+//                        public void igone() {
+//
+//                        }
+//                    });
+//                }
+
                 break;
         }
     }
 
-    private void beginBound(String type) {
+    private void beginBound(String type,String access_tokens) {
         Intent intent = new Intent(LoginActivity.this, BoundTelActivity.class);
-        intent.putExtra("access_token", access_token);
+        intent.putExtra("access_token", access_tokens);
         intent.putExtra("boundType",type);
         startActivityForResult(intent, GloablUtils.BOUND_TEL);
     }
@@ -440,7 +504,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         } else {
             UserRequest.deviceSave(LoginActivity.this, 2);//注册设备
         }
-        startActivity(new Intent(mContext, MainActivity.class));
+        startActivity(new Intent(mContext, GuideActivity.class));
         finish();
     }
 

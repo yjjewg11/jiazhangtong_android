@@ -32,7 +32,7 @@ public class RequestHttpUtil {
 
     //专用调试培训机构地址j
 
-    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
+//    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 
 
 //    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
@@ -41,9 +41,13 @@ public class RequestHttpUtil {
 
     //正式地址
 
-//    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
+    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {
+
+        return getClient(0);
+    }
+    public synchronized static AsyncHttpClient getClient(long time) {
         if (client == null) {
             synchronized (RequestHttpUtil.class) {
                 if (client == null) {
@@ -51,6 +55,12 @@ public class RequestHttpUtil {
                 }
             }
         }
+        if(time <= 0){
+            client.setTimeout(Constants.HTTP_TIME_OUT);
+        }else {
+            client.setTimeout((int) time);
+        }
+
         return client;
     }
 
@@ -132,6 +142,9 @@ public class RequestHttpUtil {
 
     protected static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
+    }
+    public static void postPf(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {
+        getClient(Constants.HTTP_PIC_TIME_OUT).post(context, uString, params, resp);
     }
 
 //    private static FinalHttp afinal;

@@ -52,6 +52,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
     private String family_uuid;
     private String[] typeAll = {"mine", "all"};
     String nowType = typeAll[0];
+    String listTag = "pullList";
 
     public BoutiqueAlbumFragment() {
     }
@@ -78,6 +79,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
         boutiqueAdapter = new BoutiqueAdapter(getActivity());
         boutiqueAdapter.setRel_uuid(family_uuid);
         pullListView.setAdapter(boutiqueAdapter);
+        pullListView.setTag(listTag);
         pullListView.setMode(PullToRefreshBase.Mode.DISABLED);
         pullListView.getRefreshableView().setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -165,8 +167,7 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
                         boutiqueAlbum.getList().getData().size() > 0) {
                     if (pageNo == 1) boutiqueAlbumList.clear();
                     //判断先前是否添加无内容提示
-                    if(fragment_test_wrapper_pullRefresh.getChildCount() > 0 &&
-                            fragment_test_wrapper_pullRefresh.getChildAt(0) != pullListView){
+                    if(fragment_test_wrapper_pullRefresh.findViewWithTag(listTag) == null){
                         fragment_test_wrapper_pullRefresh.removeAllViews();
                         fragment_test_wrapper_pullRefresh.addView(pullListView);
                     }

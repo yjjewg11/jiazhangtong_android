@@ -267,7 +267,10 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null
                                 && pfSingleAssess.getList().getData().size() > 0) {
+                            if(pageNo == 1) assessObjectList.clear();
                             assessObjectList.addAll(pfSingleAssess.getList().getData());
+                            pfCommonAssessAdapter.setObjectList(assessObjectList);
+                            initBottomAssessCount();
                         } else {
                             if (pageNo == 1) {
 
@@ -610,7 +613,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     }
 
     private void getBoutiqueInfo() {
-        UserRequest.getBoutiqueSingleInfo(this, uuid, new RequestResultI() {
+        UserRequest.getBoutiqueSingleInfo(this, uuid, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 boutiqueSingleInfo = (BoutiqueSingleInfo) domain;
@@ -628,7 +631,8 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
             @Override
             public void failure(String message) {
-
+                super.failure(message);
+                finish();
             }
         });
     }
@@ -695,17 +699,8 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 if (commonDialog.isShowing()) {
                     commonDialog.dismiss();
                     ToastUtils.showMessage("评论回复成功!");
+                    queryAssess();
                     bottomCancle();
-                    PfSingleAssessObject object = new PfSingleAssessObject();
-                    UserInfo userInfo = CGApplication.getInstance().getLogin().getUserinfo();
-                    object.setContent(message);
-                    object.setCreate_user(userInfo.getName());
-                    object.setCreate_img(userInfo.getImg());
-                    object.setCreate_useruuid(boutiqueSingleInfo.getData().getUuid());
-                    object.setCreate_time(TimeUtil.getNowDate());
-                    assessObjectList.add(0, object);
-                    pfCommonAssessAdapter.setObjectList(assessObjectList);
-                    initBottomAssessCount();
                     emot2.cleanEditText();
                 }
             }

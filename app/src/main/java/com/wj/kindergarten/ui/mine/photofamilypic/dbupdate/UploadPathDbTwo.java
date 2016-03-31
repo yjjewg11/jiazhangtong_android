@@ -26,6 +26,7 @@ public class UploadPathDbTwo implements FinalDb.DbUpdateListener {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        if(i != i1){
         do{
             i++;
         if(i == 2){
@@ -47,5 +48,7 @@ public class UploadPathDbTwo implements FinalDb.DbUpdateListener {
             db.execSQL(sql2);
         }
         }while (i <= i1);
+
+        }
     }
 }

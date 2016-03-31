@@ -123,6 +123,7 @@ public class ConllectPicActivity extends BaseActivity{
                 if(allPfAlbum != null && allPfAlbum.getList() != null && allPfAlbum.getList().getData() != null
                         && allPfAlbum.getList().getData().size() > 0){
                         collect_list.addAll(allPfAlbum.getList().getData());
+                        Utils.sortAlbumObj(collect_list);
                         adapter.setList(collect_list);
                 }else{
                     if(pageNo == 1){

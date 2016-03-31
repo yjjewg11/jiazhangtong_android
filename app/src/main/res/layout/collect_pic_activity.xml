@@ -7,7 +7,7 @@
 
     <include layout="@layout/title_normal"/>
     <FrameLayout
-        android:background="@color/white"
+        android:background="#352929"
         android:id="@+id/collect_pic_activity_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

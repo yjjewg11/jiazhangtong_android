@@ -172,4 +172,5 @@ public class PfSingleInfoFragment extends Fragment {
             viewPager.setCurrentItem(position);
         }
     }
+
 }

@@ -31,6 +31,10 @@ public final class TimeUtil {
     private TimeUtil() {
     }
 
+    public static String getYMDHMSFromMillion(long million){
+        return format.format(new Date(million));
+    }
+
     public static Long getMillionFromYMD(String time) {
         try {
             return formatYMD.parse(time).getTime();
@@ -178,6 +182,7 @@ public final class TimeUtil {
         }
         return d.getTime();
     }
+
 
     //获取的毫秒数转化为时间
     public static String getDateToString(Long m) {

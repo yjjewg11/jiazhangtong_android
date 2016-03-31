@@ -173,7 +173,7 @@ public class PfLoadDataProxy {
     }
 
     private void loadFromSqliteByPhotoTime(){
-        loadFromDataBases("photo_time");
+        loadFromDataBases(QUERY_CLOUMN);
     }
 
 
@@ -185,7 +185,7 @@ public class PfLoadDataProxy {
     }
 
     private void loadFromDataBases(String timeType) {
-        String sql = "SELECT strftime('%Y-%m-%d',"+timeType+"),count(1) from " + "com_wj_kindergarten_bean_AllPfAlbumSunObject" + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() +"'"
+        String sql = "SELECT strftime('%Y-%m-%d',"+timeType+"),count(1) from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() +"'"
 + "GROUP BY strftime('%Y-%m-%d',"+timeType+");";
         if (pfFamilyUuid.getMaxTime() == null &&
                 pfFamilyUuid.getMinTime() == null) return;
@@ -242,6 +242,7 @@ public class PfLoadDataProxy {
                 if (pfChangeData == null || pfChangeData.getNewDataCount() == 0){
                     if(dataLoadFinish != null)
                     dataLoadFinish.noMoreData();
+                    loadFromSqliteByCreateTime();
                     return;
                 }
                 if (pfChangeData.getNewDataCount() > 0) {
