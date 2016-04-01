@@ -51,40 +51,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d02bc208-ab59-48a0-b575-b177b82d9699" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyAlbumActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyAlbumActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAlbumEditAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAlbumEditAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/CGLog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/CGLog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/FusionListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/FusionListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfSingleInfoFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfSingleInfoFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PicObject.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PicObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_edit_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_edit_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/boutique_gallery_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_gallery_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/pf_back_border.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_back_border.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ChildreGarden.iws" />
@@ -185,13 +152,13 @@
       <file leaf-file-name="PFSingleObjectInfoFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24590164">
-              <caret line="281" column="1" selection-start-line="281" selection-start-column="1" selection-end-line="281" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.5409836">
+              <caret line="287" column="5" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
               <folding>
-                <element signature="e#13097#13263#0" expanded="true" />
-                <element signature="e#13262#13263#0" expanded="true" />
-                <element signature="e#31953#32302#0" expanded="true" />
-                <element signature="e#32301#32302#0" expanded="true" />
+                <element signature="e#13096#13262#0" expanded="true" />
+                <element signature="e#13261#13262#0" expanded="true" />
+                <element signature="e#31952#32301#0" expanded="true" />
+                <element signature="e#32300#32301#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -4044,7 +4011,7 @@
     <property name="DEBUGGABLE_DEVICE" value="xiaomi-mi_4c-88dcb9ed" />
     <property name="DEBUGGABLE_PROCESS" value="com.wenjie.jiazhangtong" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.null" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.22918707" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="103" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -4506,12 +4473,6 @@
       <option name="number" value="Default" />
       <updated>1448504406490</updated>
     </task>
-    <task id="LOCAL-00004" summary="1.?????????????????????&#10;">
-      <created>1449657069109</created>
-      <option name="number" value="00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1449657069109</updated>
-    </task>
     <task id="LOCAL-00005" summary="1.????????????????????.&#10;">
       <created>1449743648166</created>
       <option name="number" value="00005" />
@@ -4800,7 +4761,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459420550449</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="1.修复bug&#10;&#10;&#10;&#10;">
+      <created>1459523298179</created>
+      <option name="number" value="00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1459523298182</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4902,7 +4869,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.修复往数据库重复存入图片出错的bug。&#10;2.修复精品相册页面编辑相片描述成功修改后不返回的bug。&#10;3.完成精品相册模板页面。&#10;4.完成精品相册模板预览界面及音乐选择界面和音乐的播" />
     <MESSAGE value=" 1.修复启动程序上传图片崩溃bug。&#10; 2.修复相册二次加载请求更多数据崩溃的bug。&#10; 3.完成进度显示样式和数字化的提醒。&#10; 4.修复图片上传过程中失败的情况，不会更新进度的bug，改变进度条样式和风格。&#10; 5.上传失败接着下个上传，点击可以续传的功能。&#10;" />
     <MESSAGE value="1.照片收藏和取消收藏。&#10;      2.照片发表评论并追加到上述评论中。&#10;      3.点赞和取消点赞。&#10;      4.分享照片详情。&#10;      5. 照片删除和编辑和切换顶部显示，调试追加评论接口。&#10;" />
     <MESSAGE value="1.照片详情控件改版显示更流畅。&#10;      2.修复编辑数据之后返回没有更细的bug。&#10;      3.修复照片照片详情顶部不能点击显示的bug。&#10;      4.解决上传图片文件过大导致传送失败的bug。&#10;      5.进入照片详情显示第一张照片时底部按钮不能点击的bug。&#10;      6.更改返回选择多图为标题栏旁边选择多图。&#10;      7.切换相册首页顶部栏图标。&#10;" />
@@ -4927,7 +4893,8 @@
     <MESSAGE value="1.第三方登录。&#10;2.照片详情大图本地加载&#10;&#10;&#10;&#10;&#10;" />
     <MESSAGE value="1.第三方登录。&#10;2.家庭相册bug查找和修复。&#10;&#10;&#10;&#10;&#10;" />
     <MESSAGE value="0.第三方登录--完成&#10;               1.首页广告。--完成&#10;               2.时间日期不对--完成&#10;               &#10;               4.更多一点崩溃。--完成&#10;               5.消息提醒分页。--完成&#10;               6.消息精品相册删除判断。--完成&#10;               7.照片上传时间超时加长。 --完成&#10;               8.修复下拉没有数据的bug。--完成&#10;               9.详情快速滑动崩溃。 --完成&#10;               10.上传照片添加开始和暂停。  --完成&#10;               11.修复照片详情显示时间为拍摄时间--完成 &#10;&#10;&#10;&#10;&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.第三方登录--完成&#10;               1.首页广告。--完成&#10;               2.时间日期不对--完成&#10;               &#10;               4.更多一点崩溃。--完成&#10;               5.消息提醒分页。--完成&#10;               6.消息精品相册删除判断。--完成&#10;               7.照片上传时间超时加长。 --完成&#10;               8.修复下拉没有数据的bug。--完成&#10;               9.详情快速滑动崩溃。 --完成&#10;               10.上传照片添加开始和暂停。  --完成&#10;               11.修复照片详情显示时间为拍摄时间--完成 &#10;&#10;&#10;&#10;&#10;&#10;" />
+    <MESSAGE value="1.修复bug&#10;&#10;&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.修复bug&#10;&#10;&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -5302,6 +5269,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="326" column="45" selection-start-line="326" selection-start-column="45" selection-end-line="326" selection-end-column="45" />
+          <folding>
+            <element signature="e#9807#9808#0" expanded="true" />
+            <element signature="e#9863#9864#0" expanded="true" />
+            <element signature="e#9917#9918#0" expanded="true" />
+            <element signature="e#9985#9986#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -5309,6 +5282,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5319,6 +5293,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.0625">
           <caret line="90" column="43" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5333,6 +5308,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.366667">
           <caret line="77" column="49" selection-start-line="77" selection-start-column="49" selection-end-line="77" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5340,6 +5316,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="41" selection-start-line="131" selection-start-column="41" selection-end-line="131" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5350,6 +5327,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="27.0">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5401,6 +5379,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="14" selection-start-line="80" selection-start-column="14" selection-end-line="80" selection-end-column="14" />
+          <folding>
+            <element signature="e#2843#3012#0" expanded="true" />
+            <element signature="e#3011#3012#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -5411,6 +5393,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.90625">
           <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+          <folding>
+            <element signature="e#252#270#0" expanded="true" />
+            <element signature="e#296#314#0" expanded="true" />
+            <element signature="e#1153#1171#0" expanded="true" />
+            <element signature="e#1309#1327#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -5440,8 +5428,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
           <folding>
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
+            <element signature="e#714#715#0" expanded="false" />
+            <element signature="e#740#741#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -5461,6 +5449,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <folding>
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#577#578#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -5495,6 +5488,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="48" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5502,6 +5496,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5516,6 +5511,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="42" selection-start-line="60" selection-start-column="42" selection-end-line="60" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5523,6 +5519,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="164" column="10" selection-start-line="164" selection-start-column="10" selection-end-line="164" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5530,6 +5527,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="57" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5540,6 +5538,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.78125">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5550,6 +5549,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.375">
           <caret line="106" column="45" selection-start-line="106" selection-start-column="45" selection-end-line="106" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -5557,6 +5557,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="580" column="0" selection-start-line="580" selection-start-column="0" selection-end-line="580" selection-end-column="0" />
+          <folding>
+            <element signature="e#8526#9555#0" expanded="true" />
+            <element signature="e#9554#9555#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -5579,6 +5583,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="221" column="57" selection-start-line="221" selection-start-column="57" selection-end-line="221" selection-end-column="57" />
+          <folding>
+            <element signature="e#7401#8223#0" expanded="false" />
+            <element signature="e#8222#8223#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -5805,13 +5813,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24590164">
-          <caret line="281" column="1" selection-start-line="281" selection-start-column="1" selection-end-line="281" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.5409836">
+          <caret line="287" column="5" selection-start-line="287" selection-start-column="5" selection-end-line="287" selection-end-column="5" />
           <folding>
-            <element signature="e#13097#13263#0" expanded="true" />
-            <element signature="e#13262#13263#0" expanded="true" />
-            <element signature="e#31953#32302#0" expanded="true" />
-            <element signature="e#32301#32302#0" expanded="true" />
+            <element signature="e#13096#13262#0" expanded="true" />
+            <element signature="e#13261#13262#0" expanded="true" />
+            <element signature="e#31952#32301#0" expanded="true" />
+            <element signature="e#32300#32301#0" expanded="true" />
           </folding>
         </state>
       </provider>

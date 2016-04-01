@@ -279,7 +279,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             updatePfInfo();
         }
     }
- 
+
     private void updatePfInfo() {
         pf_gallery_fragment_extra_info_description.setText("" + Utils.isNull(sunObject.getNote()));
         pf_gallery_fragment_extra_info_time.setText("拍摄时间: " + Utils.isNull(sunObject.getPhoto_time()));
