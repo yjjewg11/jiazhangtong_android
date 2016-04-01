@@ -3,6 +3,7 @@ package com.wj.kindergarten.utils;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -29,6 +30,7 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.func.InteractionSentActivity;
 
 import static com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import static com.umeng.socialize.controller.listener.SocializeListeners.UMAuthListener;
@@ -61,7 +63,8 @@ public class ShareUtils {
      * @param con
      * @param view
      */
-    public static void showShareDialog(final Context con, final View view, String title1, String content1, final String picurl, final String url, boolean isMessage) {
+    public static void showShareDialog(final Context con, final View view, final String title1, String content1,
+                                       String picurl, String url, boolean isMessage) {
 //        if (!isShow) {
         String title = null;
         String content = null;
@@ -76,12 +79,13 @@ public class ShareUtils {
         } else {
             content = content1;
         }
-//
-//        if(picurl!=null && picurl.contains("@")){
-//            pic = picurl.substring(0,picurl.indexOf("@"));
-//        }else{
-//            pic = picurl;
-//        }
+
+        if(picurl!=null && picurl.contains("@")){
+            picurl = picurl.substring(0,picurl.indexOf("@"));
+        }
+        if(url!=null && url.contains("@")){
+            url = url.substring(0,url.indexOf("@"));
+        }
         isShow = true;
         context = con;
         flag = false;
@@ -137,16 +141,26 @@ public class ShareUtils {
         //微信
         final String finalTitle = title;
         final String finalContent = content;
+        final String finalUrl = url;
+        popupView.findViewById(R.id.share_send_interaction).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isShow = false;
+                mPopupWindow.dismiss();
+                sendInteration(title1, finalUrl);
+            }
+        });
+
         popupView.findViewById(R.id.share_copy_address).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isShow = false;
                 mPopupWindow.dismiss();
-                copyAddress(url);
+                copyAddress(finalUrl);
             }
         });
 
-
+        final String finalPicurl = picurl;
         popupView.findViewById(R.id.share_wx_f).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,12 +168,13 @@ public class ShareUtils {
                 mPopupWindow.dismiss();
                 UMWXHandler wxHandler = new UMWXHandler(context, appId, appSecret);
                 wxHandler.addToSocialSDK();
-                shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, picurl, url);
+                shareTo(SHARE_MEDIA.WEIXIN, finalTitle, finalContent, finalPicurl, finalUrl);
                 Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
             }
         });
 
         //微信朋友圈
+        final String finalPicurl1 = picurl;
         popupView.findViewById(R.id.share_wx_c).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +183,7 @@ public class ShareUtils {
                 UMWXHandler wxCircleHandler = new UMWXHandler(context, appId, appSecret);
                 wxCircleHandler.setToCircle(true);
                 wxCircleHandler.addToSocialSDK();
-                shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, picurl, url);
+                shareTo(SHARE_MEDIA.WEIXIN_CIRCLE, finalTitle, finalContent, finalPicurl1, finalUrl);
                 Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
             }
         });
@@ -184,7 +199,7 @@ public class ShareUtils {
                 } else {
                     content = finalContent;
                 }
-                shareTo(SHARE_MEDIA.SINA, finalTitle, content, picurl, url);
+                shareTo(SHARE_MEDIA.SINA, finalTitle, content, finalPicurl1, finalUrl);
                 ToastUtils.showMessage("分享中...请稍候!");
 
 
@@ -199,7 +214,7 @@ public class ShareUtils {
                 UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler((Activity) context, "100424468",
                         "SumAAk7jtaUSnZqd");
                 qqSsoHandler.addToSocialSDK();
-                shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, picurl, url);
+                shareTo(SHARE_MEDIA.QQ, finalTitle, finalContent, finalPicurl1, finalUrl);
                 Toast.makeText(context, "分享中，请稍后...", Toast.LENGTH_SHORT).show();
             }
         });
@@ -223,6 +238,17 @@ public class ShareUtils {
         }
         mPopupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
+    }
+
+    private static void sendInteration(String title1, String url) {
+        Intent intent = new Intent(context, InteractionSentActivity.class);
+        intent.putExtra("title", title1);
+        intent.putExtra("url",url);
+        intent.putExtra("isListFrom",false);
+        context.startActivity(intent);
+//        if(context instanceof Activity){
+//            ((Activity) context).finish();
+//        }
     }
 
     private static void copyAddress(String url) {

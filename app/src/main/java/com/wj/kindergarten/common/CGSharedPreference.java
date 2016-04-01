@@ -289,7 +289,86 @@ public class CGSharedPreference {
         MainTopicSun topic = new MainTopicSun();
         SharedPreferences sharedPreferences = getSharedPreferences();
         topic.setTitle(sharedPreferences.getString("topic_title", ""));
-        topic.setUrl(sharedPreferences.getString("topic_link_url",""));
+        topic.setUrl(sharedPreferences.getString("topic_link_url", ""));
         return topic;
     }
+
+    public static String [] getPfMaxAndMinTime() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        String max =  sharedPreferences.getString("pf_maxtime", null);
+        String min =  sharedPreferences.getString("pf_mintime",null);
+        return new String[]{max,min};
+    }
+
+    public static boolean getUploadSyncStatus() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        boolean upload_sync_status =  sharedPreferences.getBoolean("upload_sync_status", false);
+        return upload_sync_status;
+    }
+
+    public static void setUploadSyncStatus(boolean uploadSyncStatus){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("upload_sync_status", uploadSyncStatus);
+        editor.commit();
+    }
+
+    public  void setPfMaxAndMinTime(String [] times){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("pf_maxtime",times[0]);
+        editor.putString("pf_mintime", times[1]);
+        editor.commit();
+    }
+
+    public static void setCanReadConstact(boolean open){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("openreadconstanctpermession", open);
+        editor.commit();
+    }
+    public static boolean getCanReadConstact(){
+        SharedPreferences preferences= getSharedPreferences();
+        return preferences.getBoolean("openreadconstanctpermession",false);
+    }
+
+    public static boolean initReadConstact() {
+        SharedPreferences preferences= getSharedPreferences();
+        return preferences.getBoolean("initReadConstact",false);
+    }
+    public static void alreadyInitReadConstact(){
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("initReadConstact", true);
+        editor.commit();
+    }
+
+    public static void storeAccess_Token(String access_token) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("login_access_token", access_token);
+        editor.commit();
+    }
+
+    public static void storelogin_type(String type) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("login_type", type);
+        editor.commit();
+    }
+    public static String getAccess_Token() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("login_access_token", "");
+    }
+
+    public static String getlogin_type() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("login_type", "");
+    }
+
+    public static boolean getLoginOnce() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getBoolean("login_once", false);
+    }
+
+    public static void setLoginOnce() {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putBoolean("login_once", true);
+        editor.commit();
+    }
+
 }

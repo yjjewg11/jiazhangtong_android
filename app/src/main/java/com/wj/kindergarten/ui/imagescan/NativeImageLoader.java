@@ -23,7 +23,6 @@ public class NativeImageLoader {
     private ExecutorService mImageThreadPool = Executors.newFixedThreadPool(1);
 
 
-
     private NativeImageLoader(){
         //获取应用程序的最大内存
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
@@ -111,7 +110,7 @@ public class NativeImageLoader {
      * @param key
      * @param bitmap
      */
-    private void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
         if (getBitmapFromMemCache(key) == null && bitmap != null) {
             mMemoryCache.put(key, bitmap);
         }
@@ -122,7 +121,7 @@ public class NativeImageLoader {
      * @param key
      * @return
      */
-    private Bitmap getBitmapFromMemCache(String key) {
+    public Bitmap getBitmapFromMemCache(String key) {
         return mMemoryCache.get(key);
     }
 
@@ -187,6 +186,6 @@ public class NativeImageLoader {
          * @param bitmap
          * @param path
          */
-        public void onImageLoader(Bitmap bitmap, String path);
+        void onImageLoader(Bitmap bitmap, String path);
     }
 }

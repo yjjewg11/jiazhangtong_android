@@ -44,6 +44,7 @@ import com.wj.kindergarten.ui.func.adapter.SpecialCourseGrid;
 import com.wj.kindergarten.ui.func.adapter.SpecialCourseListAdapter;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportFactory;
 import com.wj.kindergarten.ui.map.MapTransportObject;
 import com.wj.kindergarten.ui.other.CustomScrollView;
 import com.wj.kindergarten.ui.other.FullGridView;
@@ -118,6 +119,8 @@ public class WebviewActivity extends BaseActivity implements Serializable{
                         ratingBar.setFloatStar(object.getCt_stars(), true);
                         ImageLoaderUtil.displayMyImage(object.getLogo(), imageView);
 
+                        item_special_course_list_view_tv_adresss.setOnClickListener(new ClickStartMap(WebviewActivity.this, MapTransportFactory.createMapTransport(object.getMap_point(), object.getLogo()
+                                , object.getGroup_name(), object.getAddress())));
                         item_class_name.setText("" + object.getTitle());
                         item_special_course_list_view_tv_adresss.setText("" + object.getAddress());
                         //TODO
@@ -245,6 +248,7 @@ protected void setNeedLoading() {
     private void setViews() {
         dialog = new HintInfoDialog(this);
         dialog.show();
+        setTitleText("特长课程");
 
         tv_hot_course = (RelativeLayout)findViewById(R.id.tv_hot_course);
         tv_hot_course.setOnClickListener(new View.OnClickListener() {
@@ -257,17 +261,8 @@ protected void setNeedLoading() {
                 startActivity(intent);
             }
         });
-        title_webview_normal_back = (ImageView)findViewById(R.id.title_webview_normal_back);
-        title_webview_normal_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        tv_center = (TextView)findViewById(R.id.title_webview_normal_text);
-        tv_center.setText("特长课程");
-        title_webview_normal_spinner = (TextView)findViewById(R.id.title_webview_normal_spinner);
-        cityChoose(title_webview_normal_spinner);
+//        title_webview_normal_spinner = (TextView)findViewById(R.id.title_webview_normal_spinner);
+////        cityChoose(title_webview_normal_spinner);
         special_listView = (LinearLayout)findViewById(R.id.listView_hot_course);
         special_listView.setBackgroundColor(Color.parseColor("#f6f6f6"));
         FrameLayout fl = (FrameLayout) findViewById(R.id.special_ads);

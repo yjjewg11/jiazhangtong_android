@@ -2,14 +2,22 @@ package com.wj.kindergarten.utils;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.bean.PopAttributes;
+import com.wj.kindergarten.ui.func.adapter.TopViewAdapter;
+import com.wj.kindergarten.ui.mine.photofamilypic.PointPositionListener;
 
 
 /**
@@ -89,4 +97,85 @@ public class PopWindowUtil {
     public interface PopWindowInterface {
         public void setViewActions(PopupWindow popupWindow, View popupView);
     }
+
+    public static PopupWindow showPoPWindow(View contentView,View targetView){
+       return showPoPWindow(contentView, targetView, -1, -1, Gravity.NO_GRAVITY,-1);
+    }
+
+    public static PopupWindow showPoPWindow(View contentView,View targetView,int width,int height,int grarity,int leftOffset){
+        if(width < 0){
+            width = ViewGroup.LayoutParams.MATCH_PARENT;
+        }
+        if(height < 0){
+            height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        }
+        if(leftOffset <= 0){
+            leftOffset = 0;
+        }
+        PopupWindow popupWindow = new PopupWindow(contentView,width,height);
+        Utils.setPopWindow(popupWindow);
+        popupWindow.showAsDropDown(targetView,leftOffset,0,grarity);
+        return popupWindow;
+    }
+    public static PopupWindow showPoPWindow(Context context,View targetView,BaseAdapter adapter,PopAttributes popAttributes,final PointPositionListener listener){
+        View topVeiw = View.inflate(context, R.layout.pf_family_top_pop, null);
+        PullToRefreshListView topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
+        topViewPullList.setAdapter(adapter);
+        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listener.positionChange(position);
+            }
+        });
+        return showPoPWindow(topVeiw, targetView, popAttributes.getWidth(), popAttributes.getHeight(), popAttributes.getGrarity(),popAttributes.getLeftOffset());
+    }
+    public static void showPoPWindow(Context context,View targetView,BaseAdapter adapter,PopAttributes popAttributes,
+                                     final OnItemClickListener onItemClickListener){
+        View topVeiw = View.inflate(context, R.layout.pf_family_top_pop, null);
+        PullToRefreshListView topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
+        topViewPullList.setAdapter(adapter);
+        topViewPullList.setMode(PullToRefreshBase.Mode.DISABLED);
+        final PopupWindow popupWindow = new PopupWindow(topVeiw,popAttributes.getWidth(),popAttributes.getHeight());
+        Utils.setPopWindow(popupWindow);
+        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupWindow.dismiss();
+                onItemClickListener.onItemClickListener(position);
+            }
+        });
+        try{
+            //showAsDropDown(View anchor, int xoff, int yoff, int gravity)此方法会在4.3版本抱NoSuchMethodError,估计是c的错误，无法捕捉异常
+            if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2){
+                popupWindow.showAsDropDown(targetView, popAttributes.getLeftOffset(), 0);
+            }else {
+                popupWindow.showAsDropDown(targetView, popAttributes.getLeftOffset(), 0, popAttributes.getGrarity());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void showPoPWindowLocation(Context context,View targetView,BaseAdapter adapter,PopAttributes popAttributes,
+                                     final OnItemClickListener onItemClickListener){
+        View topVeiw = View.inflate(context, R.layout.pf_family_top_pop, null);
+        PullToRefreshListView topViewPullList = (PullToRefreshListView) topVeiw.findViewById(R.id.pulltorefresh_list);
+        topViewPullList.setAdapter(adapter);
+        topViewPullList.setMode(PullToRefreshBase.Mode.DISABLED);
+        final PopupWindow popupWindow = new PopupWindow(topVeiw,popAttributes.getWidth(),popAttributes.getHeight());
+        Utils.setPopWindow(popupWindow);
+        topViewPullList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupWindow.dismiss();
+                onItemClickListener.onItemClickListener(position);
+            }
+        });
+        popupWindow.showAtLocation(targetView, Gravity.NO_GRAVITY, popAttributes.getX(), popAttributes.getY());
+    }
+
+    public interface OnItemClickListener{
+        void onItemClickListener(int position);
+    }
+
 }

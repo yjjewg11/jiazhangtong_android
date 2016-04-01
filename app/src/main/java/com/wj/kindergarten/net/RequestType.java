@@ -1,5 +1,7 @@
 package com.wj.kindergarten.net;
 
+import android.content.Context;
+
 /**
  * RequestType
  *
@@ -74,4 +76,25 @@ public interface RequestType {
      int FOUND_TYPE_COUNT = 160;
      int FOUND_HOT_SELECTION = 161;
      int GET_INTERACTION_LINK = 162;
+     int GET_PF_ALBUM_LIST = 163;
+     int LOOK_FOR_ALL_PF = 164;
+     int PF_PIC_BY_UUID = 165;
+     int QUERY_INCREMENT_NEW_DATA = 166;
+     int PF_OBJ_BY_UPDATE = 167;
+     int GET_SINGLE_PF_INFO = 168;
+     int GET_BOUTIQUE_ALBUM = 169;
+     int GET_BOUTIQUE_MODE = 170;
+     int GET_MODE_MUSIC = 171;
+     int GET_SINGLE_PF_EXTRA_INFO = 172;
+     int GET_SINGLE_PF_ASSESS = 173;
+     int SAVE_BOUTIQUE_ALBUM = 174;
+     int GET_BOUTIQUE_SINGLE_INFO = 175;
+     int GET_BOUTIQUE_REVIEW_URL = 176;
+     int GET_PF_ALBUM_INFO = 177;
+     int GET_ALL_PIC_FROM_BOUTIQUE = 178;
+     int ADD_FAMILY_MEMBER = 179;
+     int INIT_SYNC_UPLOAD = 180;
+     int GET_BOUTIQUE_DIAN_ZAN_LIST = 181;
+     int VALIDATE_BAN_PHONE = 182;
+     int GET_THREE_USER_INFO = 183;
 }

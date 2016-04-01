@@ -30,6 +30,7 @@ public class ChooseTwoCode {
     private Context context;
     private String imgUrl;
     public TextView tv_save;
+    private TextView tv_parse;
 
     public ChooseTwoCode(Context context,String imgUrl) {
         this.context = context;
@@ -43,7 +44,12 @@ public class ChooseTwoCode {
             return;
         }
 
-        TextView tv_parse = (TextView) view.findViewById(R.id.pasre_two_code);
+        tv_parse = (TextView) view.findViewById(R.id.pasre_two_code);
+        if(parse){
+            tv_parse.setVisibility(View.VISIBLE);
+        }else {
+            tv_parse.setVisibility(View.GONE);
+        }
         TextView tv_scan_two_code = (TextView)view.findViewById(R.id.scan_two_code);
         TextView create_two_code = (TextView) view.findViewById(R.id.create_two_code);
         final ImageView image_create_two_code = (ImageView)view.findViewById(R.id.image_create_two_code);
@@ -117,5 +123,11 @@ public class ChooseTwoCode {
                 context.startActivity(intent);
             }
         });
+    }
+
+
+    boolean parse;
+    public void setParse(boolean parse) {
+        this.parse = parse;
     }
 }

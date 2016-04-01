@@ -158,7 +158,7 @@
                     android:layout_height="match_parent" />
 
                 <RelativeLayout
-                    android:visibility="invisible"
+                    android:id="@+id/share_send_interaction"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/margin_5"
@@ -172,8 +172,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
                         android:drawablePadding="@dimen/margin_5"
-                        android:drawableTop="@drawable/share_qq"
-                        android:text="@string/tencentweibo"
+                        android:drawableTop="@drawable/main_hudong"
+                        android:text="发表互动"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
                 </RelativeLayout>

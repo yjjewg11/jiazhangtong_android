@@ -30,6 +30,7 @@ import com.wj.kindergarten.utils.IntervalUtil;
 import com.wj.kindergarten.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -180,9 +181,25 @@ public class NoticeListActivity extends BaseActivity {
             viewHolder.title.setText(notice.getTitle());
             viewHolder.content.setText(notice.getMessage());
             viewHolder.date.setText(IntervalUtil.getInterval(notice.getCreate_time()));
+            viewHolder.place.setText(""+getSchoolName(notice.getGroupuuid()));
 
             return view;
         }
+    }
+
+    private String getSchoolName(String groupuuid) {
+        if(Utils.stringIsNull(groupuuid)) {
+            return "";
+        }
+
+        Iterator<Group> iterator = CGApplication.getInstance().getLogin().getGroup_list().iterator();
+        while (iterator.hasNext()){
+            Group group = iterator.next();
+            if(groupuuid.equals(group.getUuid())){
+                return Utils.isNull(group.getBrand_name());
+            }
+        }
+        return null;
     }
 
     private void getImage(String groupUuid, CircleImage imageView) {

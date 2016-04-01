@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="230dp">
+        <ImageView
+            android:layout_weight="1"
+            style="@style/pf_classic_by_date"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginRight="@dimen/margin_5"
+            android:src="@drawable/zhanweitu"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:id="@+id/pf_iv_0" />
+
+        <LinearLayout
+            android:layout_toLeftOf="@+id/pf_iv_0"
+            android:orientation="vertical"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/pf_iv_0"
+            android:layout_toRightOf="@+id/pf_iv_0"
+            android:id="@+id/linearLayout3">
+
+            <ImageView
+                android:id="@+id/pf_iv_1"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:layout_weight="1"
+                style="@style/pf_classic_by_date"
+                android:src="@drawable/zhanweitu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/pf_iv_2"
+                android:layout_weight="1"
+                style="@style/pf_classic_by_date"
+                android:src="@drawable/zhanweitu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_below="@+id/pf_iv_0"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/linearLayout4">
+            <ImageView
+                android:id="@+id/pf_iv_3"
+                android:layout_marginRight="@dimen/margin_5"
+                android:scaleType="centerCrop"
+                android:layout_weight="1"
+                android:src="@drawable/zhanweitu"
+                android:layout_width="wrap_content"
+                android:layout_height="115dp" />
+            <ImageView
+                android:id="@+id/pf_iv_4"
+                android:layout_marginRight="@dimen/margin_5"
+                style="@style/pf_classic_by_date"
+                android:layout_weight="1"
+                android:src="@drawable/zhanweitu"
+                android:layout_width="wrap_content"
+                android:layout_height="115dp" />
+            <ImageView
+                style="@style/pf_classic_by_date"
+                android:src="@drawable/zhanweitu"
+                android:layout_width="120dp"
+                android:layout_height="115dp"
+                android:id="@+id/pf_iv_5"
+                android:layout_alignTop="@+id/linearLayout4"
+                android:layout_toRightOf="@+id/pf_iv_0"
+                android:layout_alignRight="@+id/linearLayout3" />
+        </LinearLayout>
+
+
+
+
+</LinearLayout>

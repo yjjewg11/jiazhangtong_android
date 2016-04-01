@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal"/>
+    </FrameLayout>
+    <WebView
+        android:layout_weight="1"
+        android:id="@+id/boutique_review_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/boutique_review_tv_upload"
+        android:textSize="17sp"
+        android:textColor="@color/white"
+        android:text="上传保存"
+        android:gravity="center"
+        android:background="@color/title_bg"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+</LinearLayout>

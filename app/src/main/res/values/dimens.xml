@@ -10,7 +10,8 @@
     <dimen name="condition_height">48dp</dimen>
     <dimen name="goods_item_height">108dp</dimen>
 
-    <dimen name="normal_text">15dp</dimen>
+
+    <dimen name="normal_text">15sp</dimen>
     <dimen name="small_text">14dp</dimen>
     <dimen name="big_text">18dp</dimen>
     <dimen name="button_conner">5dp</dimen>
@@ -20,6 +21,7 @@
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_5">5dp</dimen>
     <dimen name="margin_3">3dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="big_padding">24dp</dimen>
     <dimen name="popwindow_padding_lr">16dp</dimen>

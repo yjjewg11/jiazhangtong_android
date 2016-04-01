@@ -1,14 +1,9 @@
 package com.wj.kindergarten.ui.main;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +24,6 @@ import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
 import com.wj.kindergarten.utils.Constant.MessageConstant;
-import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
@@ -163,7 +157,7 @@ public class MineFragment extends Fragment {
                         LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
                 TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
-                headIv.setImageResource(R.drawable.tianjiaxiaohai);
+                headIv.setImageResource(R.drawable.xiaohai_head);
                 nameTv.setText("添加宝宝");
                 setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
                 view.setOnClickListener(addListeners);

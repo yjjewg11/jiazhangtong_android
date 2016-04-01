@@ -12,15 +12,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.ViewPager;
-import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -58,16 +55,12 @@ import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
 import com.wj.kindergarten.ui.viewpager.CirclePageIndicator;
 import com.wj.kindergarten.ui.viewpager.ViewPagerAdapter;
 import com.wj.kindergarten.utils.CGLog;
-import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * InteractionSentActivity
@@ -254,6 +247,23 @@ public class InteractionSentActivity extends BaseActivity {
                 }
             }
         });
+        getIntentData();
+    }
+
+    boolean isListFrom = true;
+    private void getIntentData() {
+        link_title =  getIntent().getStringExtra("title");
+        link_url = getIntent().getStringExtra("url");
+        isListFrom = getIntent().getBooleanExtra("isListFrom",true);
+        if(Utils.isNull(link_title) != null && !TextUtils.isEmpty(link_title)){
+            send_interaction_link.append(""+Utils.isNull(link_title));
+        }
+        if(Utils.isNull(link_url) != null && !TextUtils.isEmpty(link_url)){
+            getLinkTitle(link_url);
+        }
+
+
+
     }
 
     private void getLinkTitle(String url) {
@@ -655,8 +665,15 @@ public class InteractionSentActivity extends BaseActivity {
                 Utils.showToast(mContext, domain.getResMsg().getMessage());
                 images.clear();
                 count = 0;
-                setResult(RESULT_OK);
-                finish();
+                if(isListFrom){
+                    setResult(RESULT_OK);
+                    finish();
+                }else {
+                    Intent intent = new Intent(InteractionSentActivity.this,InteractionListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
 
             @Override

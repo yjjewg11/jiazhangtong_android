@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.MsgDataModel;
 import com.wj.kindergarten.bean.Teacher;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
@@ -30,13 +33,24 @@ import com.wj.kindergarten.ui.func.ArticleActivity;
 import com.wj.kindergarten.ui.func.CourseListActivity;
 import com.wj.kindergarten.ui.func.FoodListActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
+import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.func.NoticeActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
 import com.wj.kindergarten.ui.message.MessageAdapter;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity;
+import com.wj.kindergarten.ui.mine.photofamilypic.TransportListener;
+import com.wj.kindergarten.ui.mine.photofamilypic.dbupdate.DbUtils;
+import com.wj.kindergarten.ui.more.HtmlActivity;
+import com.wj.kindergarten.ui.more.PfRefreshLinearLayout;
 import com.wj.kindergarten.ui.webview.SchoolIntroduceActivity;
 import com.wj.kindergarten.ui.webview.WebviewActivity;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.FinalUtil;
+import com.wj.kindergarten.utils.GloablUtils;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
+
+import net.tsz.afinal.FinalDb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,31 +71,35 @@ public class MessageFragment extends Fragment {
     private int nowPage = 1;
     private RelativeLayout message_list_rl;
     private static final int SET_REFRESH = 10010;
+    private FinalDb albumDb;
 
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((BaseActivity) getActivity()).clearCenterIcon();
+        ((MainActivity) getActivity()).clearLeftIcon();
+        ((MainActivity) getActivity()).clearRightIcon();
         ((BaseActivity) getActivity()).setTitleText("消息");
+
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_interaction, null);
-
-            message_list_rl = (RelativeLayout)rootView.findViewById(R.id.message_list_rl);
+            albumDb = FinalUtil.getFamilyUuidObjectDb(getActivity());
+            message_list_rl = (RelativeLayout) rootView.findViewById(R.id.message_list_rl);
             mListView = (PullToRefreshListView) rootView.findViewById(R.id.pulltorefresh_list_interation);
-            mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+            mListView.setMode(PullToRefreshBase.Mode.BOTH);
             mListView.setDividerPadding(0);
             mListView.setDividerDrawable(null);
             mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-//                    nowPage = 1;
-//                    queryMessage(nowPage);
+                    nowPage = 1;
+                    queryMessage(nowPage);
                 }
 
                 @Override
                 public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    queryMessage(nowPage++);
+                    queryMessage(++nowPage);
                 }
             });
 
@@ -94,7 +112,8 @@ public class MessageFragment extends Fragment {
                     MsgDataModel dataModel = dataList.get(position - 1);
                     if (null != dataModel) {
                         readMessage(dataModel);
-                        if (dataModel.getType() == 0 || dataModel.getType() == 1) {
+                        if(Utils.stringIsNull(dataModel.getRel_uuid())) return;
+                            if (dataModel.getType() == 0 || dataModel.getType() == 1) {
                             Intent intent = new Intent(getActivity(), NoticeActivity.class);
                             intent.putExtra("uuid", dataModel.getRel_uuid());
                             getActivity().startActivity(intent);
@@ -137,23 +156,42 @@ public class MessageFragment extends Fragment {
                             getActivity().startActivity(intent);
                         } else if (dataModel.getType() == 10) {
                             CGLog.d("URL:" + dataModel.getUrl());
-//                            if (!Utils.stringIsNull(dataModel.getUrl())) {
-//                                Intent intent1 = new Intent(getActivity(), WebviewActivity.class);
-//                                intent1.putExtra("title", dataModel.getTitle());
-//                                intent1.putExtra("url", dataModel.getUrl());
-//                                getActivity().startActivity(intent1);
-//                            }
+                            Intent intent = new Intent(getActivity(), HtmlActivity.class);
+                            intent.putExtra("url", dataModel.getUrl());
+                            startActivity(intent);
                         } else if (dataModel.getType() == 13) {
                             startActivity(new Intent(getActivity(), SignListActivity.class));
                         } else if (dataModel.getType() == 99) {
                             startActivity(new Intent(getActivity(), InteractionListActivity.class));
+                        } else if (dataModel.getType() == 20) {
+                            ((MainActivity)getActivity()).setCurrentTab(3);
+                        } else if (dataModel.getType() == 21) {
+                            //照片内容
+                           List<AllPfAlbumSunObject> objectList =  DbUtils.getAllPic(albumDb);
+                            AllPfAlbumSunObject object = new AllPfAlbumSunObject();
+                            object.setUuid(dataModel.getRel_uuid());
+                            if(objectList != null && objectList.size() > 0){
+                               int positionList =  objectList.indexOf(object) ;
+                                if(positionList < 0) positionList = 0;
+                                new TransportListener(getActivity(),positionList,objectList,null).onItemClick(parent, view, positionList, id);
+                            }
+                        } else if (dataModel.getType() == 22) {
+                            //精品相册内容
+                            String uuid = dataModel.getRel_uuid();
+                            if(uuid != null && !TextUtils.isEmpty(uuid)){
+                                Intent intent = new Intent(getActivity(), BoutiqueSingleInfoActivity.class);
+                                intent.putExtra("uuid", uuid);
+                                MainActivity.instance.startActivityForResult(intent, GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED);
+                            }
                         }
                     }
                 }
             });
-            mHandler.sendEmptyMessageDelayed(SET_REFRESH,0);
+            mHandler.sendEmptyMessageDelayed(SET_REFRESH, 0);
         }
-
+        if (!CGSharedPreference.getMessageState()) {
+            mHandler.sendEmptyMessage(SET_REFRESH);
+        }
         return rootView;
     }
 
@@ -199,19 +237,19 @@ public class MessageFragment extends Fragment {
     }
 
     private void queryMessage(final int page) {
-        ((MainActivity)getActivity()).getDialog().show();
+        ((MainActivity) getActivity()).getDialog().show();
 
         UserRequest.queryMessage(getActivity(), page, new RequestResultI() {
             @Override
             public void result(BaseModel domain) {
-                if(((MainActivity)getActivity()).getDialog().isShowing()){
-                ((MainActivity)getActivity()).getDialog().cancel();
+                if (((MainActivity) getActivity()).getDialog().isShowing()) {
+                    ((MainActivity) getActivity()).getDialog().cancel();
                 }
                 if (mListView.isRefreshing()) {
                     mListView.onRefreshComplete();
                 }
                 Msg msg = (Msg) domain;
-                if (msg != null && msg.getList() != null && msg.getList().getData()!= null &&
+                if (msg != null && msg.getList() != null && msg.getList().getData() != null &&
                         msg.getList().getData().size() > 0) {
                     if (page == 1) {
                         dataList.clear();
@@ -220,10 +258,12 @@ public class MessageFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                     nowPage = page;
                 } else {
-                    if(page == 1){
-                        ((BaseActivity)getActivity()).noView(message_list_rl);
+                    if (page == 1) {
+                        ((BaseActivity) getActivity()).noView(message_list_rl);
+                    }else {
+                        ToastUtils.showMessage("没有更多内容了!");
+                        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }
-                    Utils.showToast(CGApplication.getInstance(), "消息列表为空");
                 }
             }
 

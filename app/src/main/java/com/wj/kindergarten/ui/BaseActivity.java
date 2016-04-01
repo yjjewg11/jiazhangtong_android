@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
@@ -34,6 +35,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -56,6 +58,8 @@ import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.emot.ViewEmot2;
+import com.wj.kindergarten.ui.func.BoundTelActivity;
+import com.wj.kindergarten.ui.func.ConfirmBoundTelActivity;
 import com.wj.kindergarten.ui.func.adapter.SpinnerAreaAdapter;
 import com.wj.kindergarten.ui.imagescan.GalleryImagesActivity;
 import com.wj.kindergarten.ui.imagescan.NativeImageLoader;
@@ -88,9 +92,9 @@ import java.util.ArrayList;
  */
 public abstract class BaseActivity extends ActionBarActivity {
     //标题栏左边点击控件
-    protected LinearLayout titleLeftButton = null;
+    public LinearLayout titleLeftButton = null;
     //标题栏左边图标
-    protected ImageView titleLeftImageView = null;
+    public ImageView titleLeftImageView = null;
     //标题栏中间标题
     protected TextView titleCenterTextView = null;
     //标题栏右边点击控件
@@ -138,6 +142,16 @@ public abstract class BaseActivity extends ActionBarActivity {
         return webList;
     }
 
+    public void cancleDialog(){
+        if(commonDialog.isShowing()){
+            commonDialog.dismiss();
+        }
+    }
+
+    public HintInfoDialog getCommonDialog() {
+        return commonDialog;
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -146,6 +160,10 @@ public abstract class BaseActivity extends ActionBarActivity {
                 stopWebview(webView);
             }
         }
+    }
+
+    public void clearLeftIcon(){
+        titleLeftImageView.setImageResource(0);
     }
 
     /**
@@ -179,14 +197,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //加载顶部的状态栏颜色，使用于4.4以上版本
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(true);
-//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//            tintManager.setStatusBarTintEnabled(false);
-//            tintManager.setStatusBarTintResource(R.color.title_bg);//通知栏所需颜色
-//            config = tintManager.getConfig();
-//        }
+
+        commonDialog = new HintInfoDialog(this,"数据加载中...请稍候!");
         mContext = this;
         //新开界面将webview置空
         webView = null;
@@ -214,9 +226,12 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+
         if (!getClass().getSimpleName().equals("LoginActivity")
                 && !getClass().getSimpleName().equals("MainActivity")
-                && !getClass().getSimpleName().equals("RegisterActivity")) {
+                && !getClass().getSimpleName().equals("RegisterActivity")
+                && !getClass().getSimpleName().equals("ConfirmBoundTelActivity")
+                && !getClass().getSimpleName().equals("BoundTelActivity")) {
             if (CGApplication.getInstance().getLogin() == null) {
                 hideProgressDialog();
                 Utils.showToast(mContext, "登录超时，请重新登录");
@@ -512,6 +527,8 @@ public abstract class BaseActivity extends ActionBarActivity {
                     titleRightImageListener();
                 }
             });
+        }else{
+            titleRightImageView.setVisibility(View.INVISIBLE);
         }
 
         if (rightImage2 != 0) {
@@ -615,6 +632,10 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     }
 
+    public void clearRightIcon() {
+        titleRightImageView.setImageResource(0);
+    }
+
     public interface ReLoginConfig {
         public void getConfig();
     }
@@ -632,10 +653,14 @@ public abstract class BaseActivity extends ActionBarActivity {
             }
 
         }
-
-
-
     }
+    public void noView(){
+        View noView = View.inflate(this,R.layout.nothing_view,null);
+        FrameLayout nothing_view_title = (FrameLayout) noView.findViewById(R.id.nothing_view_title);
+        nothing_view_title.setVisibility(View.VISIBLE);
+        setContentView(noView);
+    }
+
 
 
     public void cityChoose(final TextView tv_view){
@@ -700,6 +725,13 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     //这个设置只针对话题，因为在设置下列事件后，webveiw的滑动没有起效果，所以单独针对话题来回调
     public void setWebView(WebView webView){
+        setWebView(webView,null);
+    }
+
+    public void setWebView(WebView webView,WebJavaScript webJavaScript){
+        if(webJavaScript == null){
+            webJavaScript = new WebJavaScript(webView);
+        }
         this.webView = webView;
         if(webView == null) return;
 //        webView.setWebViewClient(new WebViewClient(){
@@ -716,7 +748,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             }
         });
         //给所有的webview添加接口
-        webView.addJavascriptInterface(new WebJavaScript(webView),"JavaScriptCall");
+        webView.addJavascriptInterface(webJavaScript,"JavaScriptCall");
         WebSettings webSettings = webView.getSettings();
 //        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSettings.setUseWideViewPort(false);
@@ -745,17 +777,20 @@ public abstract class BaseActivity extends ActionBarActivity {
         pullView.setMode(PullToRefreshBase.Mode.DISABLED);
     }
 
-    private static final String IMAGE_FILE_NAME = "avatarImage.jpg";
+    public static final String IMAGE_FILE_NAME = "avatarImage.jpg";
     private static final int REQUESTCODE_PICK_WEB = 100101;        // 相册选图标记
     private static final int REQUESTCODE_TAKE_WEB = 100102;        // 相机拍照标记
     private static final int REQUESTCODE_CUTTING_WEB = 2;
     protected static final int UPLOAD_PIC_TO_WEB = 100103;
     public boolean isTure;
-    class WebJavaScript{
+    public class WebJavaScript{
         public WebJavaScript(View view) {
             this.view = view;
         }
         private View view;
+
+        //
+
         //回调注册web回退事件
         @JavascriptInterface
         public void setDoBackFN(String str){
@@ -910,4 +945,12 @@ public abstract class BaseActivity extends ActionBarActivity {
         intent.putExtra("return-data", true);
         startActivityForResult(intent, WEB_SECLECT_PIC);
     }
+
+    public void showCommonDialog(){
+        commonDialog.show();
+    }
+    public void cancleCommonDialog(){
+        if(commonDialog.isShowing()) commonDialog.cancel();
+    }
+
 }

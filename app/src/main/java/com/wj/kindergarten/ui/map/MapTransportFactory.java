@@ -9,6 +9,8 @@ public abstract class MapTransportFactory {
     public static MapTransportObject createMapTransport(Object... objects){
         String mapPotin = (String) objects[0];
         String path = (String) objects[1];
-        return new MapTransportObject(mapPotin,path);
+        String name = (String) objects[2];
+        String address = (String) objects[3];
+        return new MapTransportObject(mapPotin,path,name,address);
     }
 }

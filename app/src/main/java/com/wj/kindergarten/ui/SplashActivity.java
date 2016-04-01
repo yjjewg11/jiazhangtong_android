@@ -18,17 +18,23 @@ import com.umeng.message.UmengRegistrar;
 import com.umeng.onlineconfig.OnlineConfigAgent;
 import com.umeng.onlineconfig.OnlineConfigLog;
 import com.umeng.onlineconfig.UmengOnlineConfigureListener;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wenjie.jiazhangtong.wxapi.message.MyPushIntentService;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
+import com.wj.kindergarten.bean.ThreeInfo;
 import com.wj.kindergarten.common.CGSharedPreference;
 
 import com.wj.kindergarten.handler.GlobalHandler;
+import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
+import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 import org.json.JSONObject;
@@ -42,9 +48,9 @@ import org.json.JSONObject;
  * @data: 2015/5/20
  * @version: v1.0
  */
-public class SplashActivity extends Activity {
+public class SplashActivity extends Activity implements DoEveryThing {
     private static final int SPLASH_DELAY = 0;
-    private static final int SLASH_DELAY_TIME = 3 * 1000;
+    private  int SLASH_DELAY_TIME = 0;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -54,7 +60,7 @@ public class SplashActivity extends Activity {
             switch (msg.what) {
                 case SPLASH_DELAY:
                     //判断是否存有JESSIONID
-                    if (!TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID()) && !CGSharedPreference.getLoginOut()) {
+                    if (!TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID())) {
                         String[] str = CGSharedPreference.getLogin();
 //                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
                         //有在调到主页面的同时获取用户信息
@@ -65,10 +71,16 @@ public class SplashActivity extends Activity {
                         }
                         GlobalHandler.getHandler().sendEmptyMessage(1011);
                         UserRequest.getUserInfo(SplashActivity.this,CGSharedPreference.getStoreJESSIONID(),CGSharedPreference.getJESSIONID_MD5());
-                        Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
-                        mainIntent.putExtra("from", "splash");
-                        startActivity(mainIntent);
-                    } else {
+                        startActivityFromSplash();
+                        //判断是否进行过第三方登录
+                    }
+//                    else if (!Utils.stringIsNull(CGSharedPreference.getAccess_Token())
+//                               && !Utils.stringIsNull(CGSharedPreference.getlogin_type())){
+//                        UserRequest.getThreeUserInfo(SplashActivity.this,
+//                                CGSharedPreference.getAccess_Token(), CGSharedPreference.getlogin_type(),
+//                                SplashActivity.this);
+//                    }
+                    else {
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     }
                     finish();
@@ -76,6 +88,12 @@ public class SplashActivity extends Activity {
             }
         }
     };
+
+    private void startActivityFromSplash() {
+        Intent mainIntent = new Intent(SplashActivity.this, GuideActivity.class);
+        mainIntent.putExtra("from", "splash");
+        startActivity(mainIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +103,9 @@ public class SplashActivity extends Activity {
         ActivityManger.getInstance().addActivity(this);
 
         try {
+
+
+
 
             OnlineConfigAgent.getInstance().updateOnlineConfig(this);
             OnlineConfigAgent.getInstance().setDebugMode(true);
@@ -109,8 +130,8 @@ public class SplashActivity extends Activity {
             e.printStackTrace();
         }
         com.umeng.socialize.utils.Log.LOG = true;
-
-        mHandler.sendEmptyMessageDelayed(SPLASH_DELAY, SLASH_DELAY_TIME);
+        int delay = getIntent().getIntExtra("delay",3000);
+        mHandler.sendEmptyMessageDelayed(SPLASH_DELAY, delay);
     }
 
 
@@ -153,6 +174,11 @@ public class SplashActivity extends Activity {
         AdsMogoLayout.clear();
 //        adsMogoLayoutCode.clearThread();
         super.onDestroy();
+    }
+
+    @Override
+    public void everyThing() {
+        startActivityFromSplash();
     }
 }
 

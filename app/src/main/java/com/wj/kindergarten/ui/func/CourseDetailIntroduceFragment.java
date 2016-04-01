@@ -126,6 +126,7 @@ public class CourseDetailIntroduceFragment extends Fragment implements View.OnTo
 		school_head = view.findViewById(R.id.school_head);
 		school_head.setVisibility(View.GONE);
 		webView = (TopWebView) view.findViewById(R.id.group_webView);
+		activity.setCommonWeb(webView);
 		webView.setWebChromeClient(new WebChromeClient());
 		webView.setWebViewClient(new WebViewClient() {
 			@Override

@@ -89,7 +89,6 @@ public class OwnLinearLayout extends LinearLayout implements View.OnTouchListene
                 }
                 break;
             case MotionEvent.ACTION_UP:
-
                 onMyRefreshListener.freshing();
                 //如果下拉头超出距离，则刷新
 //                if(wrapper.getTopMagin() > -50){

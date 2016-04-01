@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bound_tel_dialog_back"
+        android:paddingTop="35dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="260dp"
+        android:minHeight="350dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/vip_image_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginTop="12dp"
+            android:src="@drawable/bangding_login_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:background="@drawable/confirm_bound_tel_back"
+            android:textSize="15sp"
+            android:textColor="#ff5a50"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="立即绑定"
+            android:id="@+id/bound_tel_confirm_now"
+            android:layout_gravity="center" />
+        <TextView
+            android:background="@drawable/confirm_bound_tel_back2"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="23dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="以后再说"
+            android:id="@+id/bound_tel_confirm_later"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+
+</LinearLayout>

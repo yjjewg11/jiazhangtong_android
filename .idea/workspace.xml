@@ -17,33 +17,672 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3d3e798-db51-4716-888a-ecce04c89805" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/D__android_sdk_location_tools_support_annotations_jar_android_15.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/libs/afinal_0.5.1_bin.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/album_info.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/album_pf_background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/all_arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/android_yindaoye1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/android_yindaoye2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/android_yindaoye3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/bangding_login_remind.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bianji_jpxc_jingpin.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bianji_jpxc_jtxc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/bound_dialog.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/boutique_image_jpxc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/bus_red.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/dianhua_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/down_refresh.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/family_album_default.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gifdownload.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/guide_tiyan.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/hanbao_left.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/heart_shape_collect.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/jiatingxiangcered.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/jiatingxiangcewhite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/jiazhang_72.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/location_pf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/mima_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/modification_pf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/music_btn_pf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/new_album.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/new_album_carema.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/page1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/page3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/page_fir1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/page_one_first.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/page_sec2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/page_thr3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_card_view.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_delete.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_delete.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_down_arrow_gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_download.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_first_new_album.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_hanbao.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_item_choosed.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_more.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_peopel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_refresh_load.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/pf_telephone.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_yidianzan.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/pf_zan.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/place_jingpin.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/play.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ppage2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/qq_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/rectangle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/round_corner_progress_icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/round_corner_progress_icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/round_corner_progress_icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/small_ren_jpxc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/taxi.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/taxi_red.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/techangkechen_school.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/tianjia_jpxc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/tiaoguo_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/time_pf_edit.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/up_refresh.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_circle.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_jtxc_red.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_list_pf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_new.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/update_new2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/upload.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/upload_failed.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/upload_photo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/vip_image_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/wait_translate.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/walk.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/walk_red.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/weibo_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/weixin_login.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/xiaohai_head.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/xinjianxiangce_pf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/xinjianxiangce_pf2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/xinxi_photo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/xuanzhong_pf.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyAlbumActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/AddFamilyMemberActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AddFamilyMemberParams.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/AddressFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbumSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AllPfAlbumSunObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/AlreadySavePath.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/AutoDownLoadListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/BanScrollView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/akexorcist/roundcornerprogressbar/common/BaseRoundCornerProgressBar.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/BitmapCallBack.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/BitmapUtil.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/BoundDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/BoundTelActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumEditActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueAlbumEditAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueAlbumFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAlbumListSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueAllpic.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueChooseItemAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueDianzanAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueDianzanList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueDianzanListFather.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueDianzanListObj.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueGalleryImagesAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueModeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueModeReviewActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiquePopAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueReviewAddress.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleChooseActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/BoutiqueSingleInfoActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/BoutiqueSingleInfoObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSinglePicAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/BoutiqueSingleShowAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/CommonChooseImageImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/CommonWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/ConfirmBoundTelActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/ConllectPicActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/dbupdate/DbUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/abstractbean/DiskLruCache.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/DoEveryThing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/EditPfActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/FastBlur.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Constant/Fglass.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/FinalUtil.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/FindAlreadyPath.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/FindMusicOfPfActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/FrameLayoutWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/FusionAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/FusionChooseItemAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/FusionListFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/FusionListOwnGridAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/GeoPoint.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/GuideActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/akexorcist/roundcornerprogressbar/IconRoundCornerProgressBar.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/ListenScrollView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MapRouteData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/MyCircleView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/MyConstact.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/MyProgressDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/NeedBoundPhoneResult.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/observer/ObserverFamilyUuid.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PFAlbumMember.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PFSingleObjectInfoFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumInfoSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumListActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfAlbumListAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfAlbumListSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfAlbumModelActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfAlbumRecycleAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfChangeData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosePicAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfChoosedPicActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfCollectPicAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfCommonAssessAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfDianZan.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfEditInfoActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfFamilyUuid.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfFirstTimeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFragmentLinearLayout.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfFusionFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/viewmodel/PfFusionViewModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfGalleryFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PfGalleryImagesAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfInfoAllPIcFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfInfoDianZan.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfInfoDianZanObj.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfInfoFragmentAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfInfoListFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfLoadDataProxy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeName.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeNameObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfModeNameSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfMusic.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfMusicSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfMusicSunObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfNestedGridAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PfPhotoPopAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfPopPicAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfProgressItem.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/PfRefreshLinearLayout.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfResult.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfSingleAssess.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfSingleAssessObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PfSingleAssessSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfSingleGridAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/pffragment/PfSingleInfoFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PfUpGalleryActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfUpGalleryAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/PfWallAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PhotoDirTimeModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/PhotoFamilyFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PicObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/services/PicUploadService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/services/PlayMusicService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/PointPositionListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/PopAttributes.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/ProgressCallBack.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/QueryGroupCount.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/RecycleAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/abstractbean/RequestFailedResult.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/akexorcist/roundcornerprogressbar/RoundCornerProgressBar.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/RoutePlanActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/ScaleImageView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/ScanImageAndTime.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/ShowMusicAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/viewmodel/SingleLoadPicModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SingleNewInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/SinglePfEditActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SinlePfExtraInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersBaseAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersBaseAdapterWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersGridView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersListAdapterWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersSimpleAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersSimpleAdapterWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/tonicartos/widget/stickygridheaders/StickyGridHeadersSimpleArrayAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SyncUploadPic.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SyncUploadPicList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/SyncUploadPicObj.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/TeacherDetailInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/akexorcist/roundcornerprogressbar/TextRoundCornerProgressBar.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ThreadManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/ThreeInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/TopViewAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/TransportListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/UUIDList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/UUIDListSun.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/UUIDListSunObj.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/UpLoadActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/UpLoadAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/UpLoadProgressAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/UploadChooseGridAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/dbupdate/UploadPathDbTwo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/dbupdate/UploadPathFive.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/dbupdate/UploadPathFour.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/dbupdate/UploadPathSix.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/UploadSuccessObj.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/observer/Watcher.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/photofamilypic/observer/WatcherNewData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_family_album.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_family_member.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_all_album_list.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bound_tel.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_album_edit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_mode.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_mode_review.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_choose.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_boutique_single_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_confirm_bound_tel.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_guide.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pf_album_model.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pf_choosed_pic.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_single_pf_edit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/add_family_add_background.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/address_fragment.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/afinal_0_5_1_bin.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/already_submit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim_to_bottom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/anim_to_top.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/api-versions-6-23.1.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/assess_circle.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bound_tel_dialog.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bound_tel_dialog_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bound_tel_rl_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_edit_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/boutique_album_item_background.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_item_bottom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_album_itme.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_gallery_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_gallery_pop_layout.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/boutique_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_item_dianzan.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/boutique_item_dianzan_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_review_custom_title.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/boutique_single_pic.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/collect_image.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/collect_pic_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/common_assess_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/common_pf_album_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/common_view_pager.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/confirm_bound_tel_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/confirm_bound_tel_back2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/divilier_line.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_pf_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/find_music_of_pf.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_fusion.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_info_all_pic.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_info_list.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pf_single_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fusion_list_fragment.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/guide_page_three.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_upload_pf.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_icon_round_corner_progress_bar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_round_corner_progress_bar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_text_round_corner_progress_bar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libBaiduMapSDK_cloud_v3_6_1.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libBaiduMapSDK_cloud_v3_6_1.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libBaiduMapSDK_search_v3_6_1.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libBaiduMapSDK_search_v3_6_1.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libBaiduMapSDK_util_v3_6_1.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libBaiduMapSDK_util_v3_6_1.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/libRSSupport.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/libRSSupport.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/library_2_4_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/armeabi-v7a/librsjni.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/jniLibs/x86/librsjni.so" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/login_button_selector2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/look_map_route.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/map_image.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_indicator.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/map_route_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_select_bug.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_select_car.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_select_man.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/map_show.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/map_text_circle.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/my_progress_dialog.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_album.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_album_list_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_album_member_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_album_recycle_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_back_border.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_background_show.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_choose_shape.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_album.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_five.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_four.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_one.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_six.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_three.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_classic_by_date_two.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_common_show_assess_layout.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_family.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_edit_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_family_first_time_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_family_fusion_head.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_family_top_pop.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_first_page.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_gallery_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_gallery_activity_new_layout.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_gallery_fragment.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_gallery_fragment_extra_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_info_aeesee_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_info_four_message.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_info_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_item_music.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_left_choose.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_mine_album.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_new_data_info.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_new_data_tv.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_pic_bottom_edit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_pop_grid.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_pop_list_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_recycle_image_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pf_send_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_single_date.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_single_more.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_up_choose_pic_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pf_up_gallery_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/photo_family_pic.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/photo_tab_boutique_album.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/photo_tab_fusion.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pop_confirm_bind_tel.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pop_list_layout.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/pop_pf_choose_pic.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/progress_drawable.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/refresh_bottom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/refresh_linearlayout_header.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/refresh_linearlayout_top_header.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/route_plan_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/scale_image_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/tangt.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/top_view_title_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/up_load_activity.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/upload_progress_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/upload_progress_item_back.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/white_yingyin.xml" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.gradle\2.8\taskArtifacts\fileSnapshots.bin" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\Baidu_MobAds_SDK_Agg_v3_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\D__android_sdk_location_tools_support_annotations_jar_android_15.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\NineOldAndroid_2_4_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\baidumapapi_cloud_v3_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\baidumapapi_radar_v3_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\baidumapapi_search_v3_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\baidumapapi_util_v3_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\multidex_1_0_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\.idea\libraries\nineoldandroids_2_4_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\debug\res\drawable-hdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\debug\res\drawable-mdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\debug\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\debug\res\drawable-xxhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\release\res\drawable-hdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\release\res\drawable-mdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\release\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\bundles\release\res\drawable-xxhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R$drawable.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R$id.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R$layout.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R$raw.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R$string.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R$style.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\R.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\BuildConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$attr.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$drawable.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$id.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$layout.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$raw.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$string.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R$style.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\classes\androidTest\debug\com\zbar\lib\test\R.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\manifests\tmp\manifestMerger1590414678462001052.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\manifests\tmp\manifestMerger2362972033334226562.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\manifests\tmp\manifestMerger5895833232239543559.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\res\androidTest\debug\drawable-hdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\res\androidTest\debug\drawable-mdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\res\androidTest\debug\drawable-xhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\build\intermediates\res\androidTest\debug\drawable-xxhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\src\main\res\drawable-hdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\src\main\res\drawable-mdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\src\main\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\QrCodeScan\src\main\res\drawable-xxhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\Baidu_MobAds_SDK_Agg_v3.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\android-async-http-1.4.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\libs\nineoldandroids-2.4.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\src\main\java\com\wj\kindergarten\TeacherDetailInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\app\src\main\res\drawable\special_tab.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\build\intermediates\gradle_project_sync_data.bin" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$anim.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$attr.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$dimen.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$drawable.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$id.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$layout.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$string.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R$styleable.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\R.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\BuildConfig.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$anim.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$attr.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$dimen.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$drawable.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$id.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$layout.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$string.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R$styleable.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\classes\androidTest\debug\com\handmark\pulltorefresh\library\test\R.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\manifests\tmp\manifestMerger1672861436932299932.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\manifests\tmp\manifestMerger6019548505154168748.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\work-wenjie-project\jiazhangtong_android-master\pulltorefreshlibrary\build\intermediates\manifests\tmp\manifestMerger8147285754178886408.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/AutoFocusCallback.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/AutoFocusCallback.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/AutoFocusCallback.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/AutoFocusCallback.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/BuildConfig.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/BuildConfig.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/BuildConfig.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/BuildConfig.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/CameraConfigurationManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/CameraConfigurationManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/CameraConfigurationManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/CameraConfigurationManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/CameraManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/CameraManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/CameraManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/CameraManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/CaptureActivity$1.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/CaptureActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/CaptureActivity$1.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/CaptureActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/CaptureActivity.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/CaptureActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/CaptureActivity.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/CaptureActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/CaptureActivityHandler$State.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/CaptureActivityHandler$State.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/CaptureActivityHandler$State.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/CaptureActivityHandler$State.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/CaptureActivityHandler.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/CaptureActivityHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/CaptureActivityHandler.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/CaptureActivityHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/DecodeHandler$1.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/DecodeHandler$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/DecodeHandler$1.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/DecodeHandler$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/DecodeHandler.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/DecodeHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/DecodeHandler.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/DecodeHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/DecodeThread.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/DecodeThread.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/DecodeThread.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/DecodeThread.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/encode/EncodingHandler.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/encode/EncodingHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/encode/EncodingHandler.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/encode/EncodingHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/FinishListener.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/FinishListener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/FinishListener.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/FinishListener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/FlashlightManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/FlashlightManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/FlashlightManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/FlashlightManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/InactivityTimer$1.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/InactivityTimer$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/InactivityTimer$1.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/InactivityTimer$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/InactivityTimer$DaemonThreadFactory.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/InactivityTimer$DaemonThreadFactory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/InactivityTimer$DaemonThreadFactory.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/InactivityTimer$DaemonThreadFactory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/InactivityTimer.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/decode/InactivityTimer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/InactivityTimer.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/decode/InactivityTimer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/bitmap/InvertedLuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/bitmap/InvertedLuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/bitmap/InvertedLuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/bitmap/InvertedLuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/bitmap/LuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/bitmap/LuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/bitmap/LuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/bitmap/LuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/bitmap/PlanarYUVLuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/bitmap/PlanarYUVLuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/bitmap/PlanarYUVLuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/bitmap/PlanarYUVLuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/PreviewCallback.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/camera/PreviewCallback.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/PreviewCallback.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/camera/PreviewCallback.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$InternalWebViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView$InternalWebViewSDK9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/release/com/handmark/pulltorefresh/library/PullToRefreshWebView$InternalWebViewSDK9.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/release/com/handmark/pulltorefresh/library/PullToRefreshWebView$InternalWebViewSDK9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/debug/com/handmark/pulltorefresh/library/PullToRefreshWebView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/release/com/handmark/pulltorefresh/library/PullToRefreshWebView.class" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/classes/release/com/handmark/pulltorefresh/library/PullToRefreshWebView.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/outputs/aar/QrCodeScan-debug.aar" afterPath="$PROJECT_DIR$/QrCodeScan/build/outputs/aar/QrCodeScan-debug.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/outputs/aar/QrCodeScan-release.aar" afterPath="$PROJECT_DIR$/QrCodeScan/build/outputs/aar/QrCodeScan-release.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$attr.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$attr.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$drawable.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$drawable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$drawable.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$drawable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$id.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$id.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$layout.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$layout.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$raw.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$raw.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$raw.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$raw.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$string.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$string.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$style.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$style.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/RGBLuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/RGBLuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/RGBLuminanceSource.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/RGBLuminanceSource.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/ZbarManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/debug/com/zbar/lib/ZbarManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/ZbarManager.class" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/classes/release/com/zbar/lib/ZbarManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/classes.jar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries" afterPath="$PROJECT_DIR$/.idea/libraries" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/outputs/aar/pulltorefreshlib-debug.aar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/outputs/aar/pulltorefreshlib-debug.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/outputs/aar/pulltorefreshlib-release.aar" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/outputs/aar/pulltorefreshlib-release.aar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/resources/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/resources/resources-debug-androidTest.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/resources/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/resources/resources-debug-androidTest.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/AboutSchoolAdatper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/AboutSchoolAdatper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ActivityManger.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ActivityManger.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/AndroidManifest.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/aapt/AndroidManifest.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/aapt/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/manifests/androidTest/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/manifests/androidTest/debug/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/debug/aapt/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/aapt/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/bundles/release/aapt/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/manifests/androidTest/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build/intermediates/manifests/androidTest/debug/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/BaseActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/CGApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/CGLog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/CGLog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/CGSharedPreference.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/CGSharedPreference.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/ChooseTwoCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/ChooseTwoCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/common/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/coursefragments/CourseDetailFragmentThree.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/coursefragments/CourseDetailFragmentThree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/CourseDetailIntroduceFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/src/main/java/com/zbar/lib/decode/DecodeHandler.java" afterPath="$PROJECT_DIR$/QrCodeScan/src/main/java/com/zbar/lib/decode/DecodeHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/EditChildActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/EditChildActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/EditTextCleanWatcher.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/EditTextCleanWatcher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/FileUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/FileUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/FoundFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/FoundFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/GalleryImagesAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/GalleryImagesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/GloablUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/HtmlActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/more/HtmlActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionSentActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/InteractionSentActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Login.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/bean/Login.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/LoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/MapActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/MapActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/MapTransportFactory.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/MapTransportFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/MapTransportObject.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/map/MapTransportObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MessageFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MessageFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/MyCookieManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/MyCookieManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/NativeImageLoader.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/NativeImageLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NoticeListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/NoticeListActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/NstGridPicAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/NstGridPicAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/OwnLinearLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/other/OwnLinearLayout.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PhotoWallActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PhotoWallActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PhotoWallAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/PhotoWallAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/PopWindowUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/PopWindowUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshWebView.java" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/src/main/java/com/handmark/pulltorefresh/library/PullToRefreshWebView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/QrCodeScan.iml" afterPath="$PROJECT_DIR$/QrCodeScan/QrCodeScan.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/androidTest/debug/com/zbar/lib/R.java" afterPath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/androidTest/debug/com/zbar/lib/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/androidTest/debug/com/zbar/lib/test/R.java" afterPath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/androidTest/debug/com/zbar/lib/test/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/debug/com/zbar/lib/R.java" afterPath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/debug/com/zbar/lib/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/release/com/zbar/lib/R.java" afterPath="$PROJECT_DIR$/QrCodeScan/build/generated/source/r/release/com/zbar/lib/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/R.txt" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/R.txt" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/bundles/release/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/symbols/androidTest/debug/R.txt" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/symbols/androidTest/debug/R.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/RegisterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/RegisterActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestHttpUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestHttpUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/RequestType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/ScanPhoto_V2.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/imagescan/ScanPhoto_V2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SchoolDetailInfoActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/SendRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ShareUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/SpecialCourseInfoActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/SplashActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/IOStoreData/StoreDataInSerialize.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/IOStoreData/StoreDataInSerialize.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/mine/store/StoreFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/TeacherDetailInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/TeacherDetailInfoActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/TimeUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/TimeUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ToastUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/URLImageParser.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/URLImageParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/upload/UploadFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/UserHeadImageUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/UserHeadImageUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/net/request/UserRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/wrapper/WrapperFl.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/wrapper/WrapperFl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_photo_wall.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_photo_wall.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_webview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_webview.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/android_async_http_1_4_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/android_async_http_1_4_6.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build.gradle" afterPath="$PROJECT_DIR$/QrCodeScan/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/build.gradle" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/color.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_activity.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/imagescan_images_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jiazhangtong_android-master.iml" afterPath="$PROJECT_DIR$/jiazhangtong_android-master.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/login_button_selector.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/login_button_selector.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/map_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/incremental/mergeResources/androidTest/debug/merger.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/incremental/mergeResources/androidTest/debug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/incremental/packageResources/debug/merger.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/incremental/packageResources/debug/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QrCodeScan/build/intermediates/incremental/packageResources/release/merger.xml" afterPath="$PROJECT_DIR$/QrCodeScan/build/intermediates/incremental/packageResources/release/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/nothing_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/nothing_view.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlib.iml" afterPath="$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlib.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/share_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/share_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/title_normal.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/title_normal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/title_webview_normal.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/title_webview_normal.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ChildreGarden.iws" />
@@ -124,7 +763,21 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="327" column="67" selection-start-line="327" selection-start-column="67" selection-end-line="327" selection-end-column="67" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#3468#3469#0" expanded="false" />
+                <element signature="e#3517#3518#0" expanded="false" />
+                <element signature="e#8661#8662#0" expanded="false" />
+                <element signature="e#8705#8706#0" expanded="false" />
+                <element signature="e#14484#14485#0" expanded="false" />
+                <element signature="e#14523#14524#0" expanded="false" />
+                <element signature="e#14695#14696#0" expanded="false" />
+                <element signature="e#14749#14750#0" expanded="false" />
+                <element signature="e#14900#14901#0" expanded="false" />
+                <element signature="e#14947#14948#0" expanded="false" />
+                <element signature="e#14990#14991#0" expanded="false" />
+                <element signature="e#15023#15024#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,7 +786,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="295" column="40" selection-start-line="295" selection-start-column="40" selection-end-line="295" selection-end-column="40" />
+              <caret line="295" column="19" selection-start-line="295" selection-start-column="19" selection-end-line="295" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -144,7 +797,19 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#715#716#0" expanded="false" />
+                <element signature="e#747#748#0" expanded="false" />
+                <element signature="e#1869#1870#0" expanded="false" />
+                <element signature="e#1960#1961#0" expanded="false" />
+                <element signature="e#2291#2292#0" expanded="false" />
+                <element signature="e#2381#2382#0" expanded="false" />
+                <element signature="e#2551#2552#0" expanded="false" />
+                <element signature="e#2587#2588#0" expanded="false" />
+                <element signature="e#2640#2641#0" expanded="false" />
+                <element signature="e#2679#2680#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,7 +818,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="371" column="80" selection-start-line="371" selection-start-column="80" selection-end-line="371" selection-end-column="80" />
+              <caret line="371" column="76" selection-start-line="371" selection-start-column="76" selection-end-line="371" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -164,7 +829,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="78" column="96" selection-start-line="78" selection-start-column="96" selection-end-line="78" selection-end-column="96" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#9569#9570#0" expanded="false" />
+                <element signature="e#9603#9604#0" expanded="false" />
+                <element signature="e#11028#11029#0" expanded="false" />
+                <element signature="e#11093#11094#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -192,8 +863,8 @@
       <file leaf-file-name="MineFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19672132">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.14754099">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -213,7 +884,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -825,22 +1496,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="collectDebugMultiDexComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="collectReleaseMultiDexComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="createDebugMainDexClassList" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="createReleaseMainDexClassList" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dexDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -870,19 +1525,19 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="packageAllDebugClassesForMultiDex" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="packageAllReleaseClassesForMultiDex" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="packageDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="packageRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preDexDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="preDexRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:appcompat-v7:22.2.1" />
@@ -893,11 +1548,6 @@
                 <option name="description" value="Prepare com.android.support:design:22.2.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportDesign2221Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:multidex:1.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportMultidex101Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:support-v4:22.2.1" />
@@ -918,14 +1568,6 @@
                 <option name="description" value="Prepare jiazhangtong_android-master:QrCodeScan:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareJiazhangtong_androidMasterQrCodeScanUnspecifiedLibrary" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="shrinkDebugMultiDexComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="shrinkReleaseMultiDexComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Debug build." />
@@ -1559,14 +2201,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="collectDebugMultiDexComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="collectReleaseMultiDexComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="compileDebugAidl" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1664,14 +2298,6 @@
                 <option name="description" value="Runs all device checks on currently connected devices." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="connectedCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="createDebugMainDexClassList" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="createReleaseMainDexClassList" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays all dependencies declared in project ':app'." />
@@ -1839,14 +2465,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="packageAllDebugClassesForMultiDex" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="packageAllReleaseClassesForMultiDex" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="packageDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1883,7 +2501,15 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="preDexDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="preDexDebugAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="preDexRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -1902,11 +2528,6 @@
                 <option name="description" value="Prepare com.android.support:design:22.2.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareComAndroidSupportDesign2221Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:multidex:1.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComAndroidSupportMultidex101Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:support-v4:22.2.1" />
@@ -2001,14 +2622,6 @@
                 <option name="description" value="Displays the properties of project ':app'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="shrinkDebugMultiDexComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="shrinkReleaseMultiDexComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the signing info for each variant." />
@@ -2608,7 +3221,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$" value="7254068355034" />
-        <entry key="D:\work-wenjie-project\jiazhangtong_android-master" value="7296586051899" />
+        <entry key="D:\work-wenjie-project\jiazhangtong_android-master" value="7296587022532" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2856,29 +3469,29 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/external/lombok/lombok-ast/0.2.3/lombok-ast-0.2.3.jar" />
-                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/appcompat-v7/22.2.1/appcompat-v7-22.2.1.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nostra13.universalimageloader/universal-image-loader/1.9.3/a85588bec3e2c4584d593d3f15df1677321bca72/universal-image-loader-1.9.3.jar" />
-                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.chrisbanes.photoview/library/1.2.3/208ab4f80277a819e7694c87f84fe3135d5563c8/library-1.2.3.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.j256.ormlite/ormlite-android/4.48/afa06f539a4026c10b247386312aa67404b80a16/ormlite-android-4.48.jar" />
-                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/design/22.2.1/design-22.2.1.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.4/695b63d702f505b9b916e02272e3b6381bade7f/gson-2.4.jar" />
-                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/support-v4/22.2.1/support-v4-22.2.1.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.6/a845a88238be0b5be9d238652c1bc0605ef91f52/android-async-http-1.4.6.jar" />
+                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/design/22.2.1/design-22.2.1.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.j256.ormlite/ormlite-core/4.48/e579bd2905d0399af5029aaaf9817d5fa0ca88a5/ormlite-core-4.48.jar" />
+                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/appcompat-v7/22.2.1/appcompat-v7-22.2.1.aar" />
+                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/support-v4/22.2.1/support-v4-22.2.1.aar" />
+                            <option value="D:/android_sdk_location/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar" />
                             <option value="$MODULE_DIR$/libs/AdsMOGO_Android_SDK_1.6.3.jar" />
                             <option value="$MODULE_DIR$/libs/Adwo_Android_SDK6.1.jar" />
-                            <option value="$MODULE_DIR$/libs/android-async-http-1.4.6.jar" />
+                            <option value="$MODULE_DIR$/libs/afinal_0.5.1_bin.jar" />
                             <option value="$MODULE_DIR$/libs/AndroidEasingFunctions-1.0.0.jar" />
                             <option value="$MODULE_DIR$/libs/AndroidViewAnimations-1.1.3.jar" />
                             <option value="$MODULE_DIR$/libs/baidumapapi_base_v3_6_1.jar" />
                             <option value="$MODULE_DIR$/libs/baidumapapi_map_v3_6_1.jar" />
-                            <option value="$MODULE_DIR$/libs/Baidu_MobAds_SDK_Agg_v3.0.jar" />
                             <option value="$MODULE_DIR$/libs/com.umeng.fb.5.4.0.jar" />
                             <option value="$MODULE_DIR$/libs/com.umeng.message.lib.jar" />
                             <option value="$MODULE_DIR$/libs/gdt_mob_release_v4.4.479.jar" />
                             <option value="$MODULE_DIR$/libs/httpmime-4.1.3.jar" />
                             <option value="$MODULE_DIR$/libs/locSDK_6.13.jar" />
-                            <option value="$MODULE_DIR$/libs/nineoldandroids-2.4.0.jar" />
                             <option value="$MODULE_DIR$/libs/SocialSDK_QQZone_1.jar" />
                             <option value="$MODULE_DIR$/libs/SocialSDK_QQZone_2.jar" />
                             <option value="$MODULE_DIR$/libs/SocialSDK_QQZone_3.jar" />
@@ -2889,12 +3502,7 @@
                             <option value="$MODULE_DIR$/libs/umeng-onlineconfig_v1.0.0.jar" />
                             <option value="$MODULE_DIR$/libs/umeng-update-v2.6.0.1.jar" />
                             <option value="$MODULE_DIR$/libs/umeng_social_sdk.jar" />
-                            <option value="$MODULE_DIR$/libs/NineOldAndroid-2.4.0.jar" />
                             <option value="$PROJECT_DIR$/QrCodeScan/libs/zxing.jar" />
-                            <option value="$MODULE_DIR$/libs/baidumapapi_cloud_v3_6_1.jar" />
-                            <option value="$MODULE_DIR$/libs/baidumapapi_radar_v3_6_1.jar" />
-                            <option value="$MODULE_DIR$/libs/baidumapapi_search_v3_6_1.jar" />
-                            <option value="$MODULE_DIR$/libs/baidumapapi_util_v3_6_1.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/app" />
@@ -3202,6 +3810,55 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChildreGarden" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3252,240 +3909,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kindergarten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kindergarten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kindergarten" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jiazhangtong_android-master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
+              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChildreGarden" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="fb1cd650" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="88dcb9ed" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23_x86" />
     <property name="FullScreen" value="false" />
     <property name="android.project.structure.last.selected" value="app" />
@@ -3505,6 +3939,7 @@
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="settings.editor.selected.configurable" value="com.github.setial.intellijjavadocs.configuration.impl.JavaDocConfigurationImpl" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="GO_FMT" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -3692,7 +4127,7 @@
     </configuration>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1459527875052" />
+    <option name="lastUpdateTimestamp" value="1459528162618" />
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
@@ -3826,39 +4261,39 @@
     <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32423207" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37030718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="SBT" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6348123" sideWeight="0.5030534" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50511944" sideWeight="0.49694657" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6637931" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50344825" sideWeight="0.49694657" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.261035" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle View" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24961832" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42832765" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32423207" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3689655" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6637931" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931036" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26027396" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle View" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977098" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42832765" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24886535" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -3920,7 +4355,9 @@
     <MESSAGE value=" 1.抽象网页上下滑动组件。&#10;&#10; 2.查询百度地图冲突问题。&#10;&#10;" />
     <MESSAGE value="1.添加点击距离启动地图接口。&#10;&#10;2.话题cookie每次同步更新。&#10;&#10;3.增加二维码识别和保存图片的功能。&#10;   &#10; 4.精品文章，优惠活动，互动图片增加二维码识别和保存图片的功能。&#10;&#10; 5.android 版本修复特长课程学校详情不显示bug。&#10;" />
     <MESSAGE value="1.添加友盟计数事件到发现,精品文章,优惠活动.每日推荐,热门精选.消息,特长课程,(分类,学校).我的特长课程,我的收藏,设置." />
-    <option name="LAST_COMMIT_MESSAGE" value="1.添加友盟计数事件到发现,精品文章,优惠活动.每日推荐,热门精选.消息,特长课程,(分类,学校).我的特长课程,我的收藏,设置." />
+    <MESSAGE value="Merge branch 'tang'&#10;&#10;# Conflicts:&#10;#&#9;.gradle/2.8/taskArtifacts/cache.properties.lock&#10;#&#9;.gradle/2.8/taskArtifacts/fileHashes.bin&#10;#&#9;.gradle/2.8/taskArtifacts/fileSnapshots.bin&#10;#&#9;.gradle/2.8/taskArtifacts/outputFileStates.bin&#10;#&#9;.gradle/2.8/taskArtifacts/taskArtifacts.bin&#10;#&#9;.idea/dbnavigator.xml&#10;#&#9;.idea/libraries&#10;#&#9;.idea/workspace.xml&#10;#&#9;QrCodeScan/QrCodeScan.iml&#10;#&#9;QrCodeScan/build/intermediates/resources/resources-debug-androidTest.ap_&#10;#&#9;local.properties&#10;" />
+    <MESSAGE value="Merge branch 'tang'   合并成功&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'tang'   合并成功&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4134,6 +4571,22 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/func/adapter/AboutSchoolAdatper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="103" column="131" selection-start-line="103" selection-start-column="131" selection-end-line="103" selection-end-column="131" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/found_hot_list_item.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -4233,9 +4686,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="129" column="62" selection-start-line="129" selection-start-column="62" selection-end-line="129" selection-end-column="62" />
-          <folding>
-            <element signature="e#7040#7058#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4303,17 +4754,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/QrCodeScan/src/main/res/drawable-hdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/QrCodeScan/src/main/res/drawable-xhdpi/ic_launcher.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -4400,7 +4841,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/utils/ImageLoaderUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -4423,10 +4864,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33213645">
           <caret line="61" column="40" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
-          <folding>
-            <element signature="e#3501#3502#0" expanded="true" />
-            <element signature="e#3531#3532#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4450,7 +4888,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#715#716#0" expanded="false" />
+            <element signature="e#747#748#0" expanded="false" />
+            <element signature="e#1869#1870#0" expanded="false" />
+            <element signature="e#1960#1961#0" expanded="false" />
+            <element signature="e#2291#2292#0" expanded="false" />
+            <element signature="e#2381#2382#0" expanded="false" />
+            <element signature="e#2551#2552#0" expanded="false" />
+            <element signature="e#2587#2588#0" expanded="false" />
+            <element signature="e#2640#2641#0" expanded="false" />
+            <element signature="e#2679#2680#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4458,14 +4908,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="78" column="96" selection-start-line="78" selection-start-column="96" selection-end-line="78" selection-end-column="96" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#9569#9570#0" expanded="false" />
+            <element signature="e#9603#9604#0" expanded="false" />
+            <element signature="e#11028#11029#0" expanded="false" />
+            <element signature="e#11093#11094#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="371" column="80" selection-start-line="371" selection-start-column="80" selection-end-line="371" selection-end-column="80" />
+          <caret line="371" column="76" selection-start-line="371" selection-start-column="76" selection-end-line="371" selection-end-column="76" />
           <folding />
         </state>
       </provider>
@@ -4474,14 +4930,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="327" column="67" selection-start-line="327" selection-start-column="67" selection-end-line="327" selection-end-column="67" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3468#3469#0" expanded="false" />
+            <element signature="e#3517#3518#0" expanded="false" />
+            <element signature="e#8661#8662#0" expanded="false" />
+            <element signature="e#8705#8706#0" expanded="false" />
+            <element signature="e#14484#14485#0" expanded="false" />
+            <element signature="e#14523#14524#0" expanded="false" />
+            <element signature="e#14695#14696#0" expanded="false" />
+            <element signature="e#14749#14750#0" expanded="false" />
+            <element signature="e#14900#14901#0" expanded="false" />
+            <element signature="e#14947#14948#0" expanded="false" />
+            <element signature="e#14990#14991#0" expanded="false" />
+            <element signature="e#15023#15024#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/webview/WebviewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="295" column="40" selection-start-line="295" selection-start-column="40" selection-end-line="295" selection-end-column="40" />
+          <caret line="295" column="19" selection-start-line="295" selection-start-column="19" selection-end-line="295" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -4496,8 +4966,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/wj/kindergarten/ui/main/MineFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19672132">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.14754099">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>

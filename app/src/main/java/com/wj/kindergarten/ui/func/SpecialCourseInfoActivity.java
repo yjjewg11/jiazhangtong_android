@@ -66,8 +66,6 @@ public class SpecialCourseInfoActivity extends BaseActivity {
     private ArrayList<MoreDiscuss> moreList =new ArrayList<>();
     private Button bt_more;
     private RatingBarView rating_bar,assess_rb;
-    private TextView course_detail_train_class_name, detail_course
-            ,teach_place,course_spend_time,nornal_course_price,coupon_price;
     private WebView course_detail_info;
     private LinearLayout more_assess_linera;
 

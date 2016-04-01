@@ -36,7 +36,7 @@
 
                 <EditText
                     android:id="@+id/register_mobile"
-                    style="@style/loginEditStyle"
+                    style="@style/myLoginEditStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/layout_clean_6"
@@ -88,7 +88,7 @@
 
                 <EditText
                     android:id="@+id/register_pwd"
-                    style="@style/loginEditStyle"
+                    style="@style/myLoginEditStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/layout_clean_7"
@@ -137,7 +137,7 @@
 
                 <EditText
                     android:id="@+id/register_pwd_double"
-                    style="@style/loginEditStyle"
+                    style="@style/myLoginEditStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/layout_clean_8"
@@ -194,7 +194,7 @@
 
                     <EditText
                         android:id="@+id/register_sms"
-                        style="@style/loginEditStyle"
+                        style="@style/myLoginEditStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_toLeftOf="@+id/layout_clean_9"

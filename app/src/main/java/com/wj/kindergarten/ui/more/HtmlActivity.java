@@ -53,6 +53,7 @@ public class HtmlActivity extends BaseActivity{
         Log.i("TAG","打印扫码地址 ： "+url);
         webView = (WebView) findViewById(R.id.web_html);
         setWebs(webView);
+        setCommonWeb(webView);
 
     }
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyAlbumActivity">
+
+    <include layout="@layout/title_normal"/>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/album_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:text="相册名称"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:textColorHint="@color/color_999999"
+            android:hint="我的家庭相册"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:id="@+id/add_family_album_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="4dp"
+            android:drawableRight="@drawable/youjiantou"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <include layout="@layout/divilier_line"/>
+
+    <RelativeLayout
+        android:id="@+id/appreance_photo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:text="封面图片"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RelativeLayout
+            android:id="@+id/add_family_album_iv_click"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/add_family_album_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <include layout="@layout/divilier_line"/>
+    <TextView
+        android:id="@+id/add_family_album_bt"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="25dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/add_family_add_background"
+        android:text="添加"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+
+</LinearLayout>

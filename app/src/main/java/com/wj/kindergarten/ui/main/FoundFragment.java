@@ -31,6 +31,8 @@ public class FoundFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setText("发现");
         ((BaseActivity) getActivity()).clearCenterIcon();
+        ((MainActivity) getActivity()).clearLeftIcon();
+        ((MainActivity) getActivity()).clearRightIcon();
         if(view != null) return view;
         instance = this;
         view = inflater.inflate(R.layout.found_fragment,null);

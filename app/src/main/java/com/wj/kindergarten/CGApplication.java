@@ -41,6 +41,7 @@ import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
 import org.w3c.dom.Text;
@@ -74,6 +75,11 @@ public class CGApplication extends Application {
 
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
+    private String android_id;
+
+    public String getAndroid_id() {
+        return android_id;
+    }
 
     public String getLatLongString() {
         return latLongString;
@@ -100,8 +106,15 @@ public class CGApplication extends Application {
 
         requestNetworkLocation();
         SDKInitializer.initialize(getApplicationContext());
+//        initSearch();
 
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
+
+//    private void initSearch() {
+//        mMKSearch = new MKSearch();
+//        mMKSearch.init(mapManager, new MySearchListener());
+//    }
 
     public static CGApplication getInstance() {
         return context;
@@ -210,8 +223,9 @@ public class CGApplication extends Application {
             String city = bdLocation.getCity();
             try{
                 if(!TextUtils.isEmpty(city) && city.contains("市")){
-                   city =  city.replace("市","");
+                   city =  city.substring(0,city.indexOf("市"));
                 }
+                CGLog.v("再次打印城市 : "+city);
                 final String type = "android";
                 final String mobileVersion = android.os.Build.VERSION.RELEASE;
                 PackageManager manager = getInstance().getPackageManager();
@@ -223,10 +237,15 @@ public class CGApplication extends Application {
                     return ;
                 }
                 VersionInfo versionInfo = new VersionInfo(type, mobileVersion, appVersion, city);
+                if(versionInfo == null) return;
+                if(CGSharedPreference.getVersionInfoReference() == null){
+                    sendVersionInfo(type, mobileVersion, appVersion, city);
+                    return;
+                }
                 if (!versionInfo.equals(CGSharedPreference.getVersionInfoReference()) && !TextUtils.isEmpty(CGSharedPreference.getStoreJESSIONID()) ) {
                     sendVersionInfo(type, mobileVersion, appVersion, city);
                 }
-                mLocationClient.stop();
+//                mLocationClient.stop();
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }

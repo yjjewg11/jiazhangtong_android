@@ -93,10 +93,10 @@ public class RegisterActivity extends BaseActivity {
         imageView3 = (ImageView) findViewById(R.id.iv_clean_8);
         imageView4 = (ImageView) findViewById(R.id.iv_clean_9);
 
-        mobileEt.addTextChangedListener(new EditTextCleanWatcher(imageView1,mobileEt));
-        pwdEt.addTextChangedListener(new EditTextCleanWatcher(imageView2,pwdEt));
-        pwdDEt.addTextChangedListener(new EditTextCleanWatcher(imageView3,pwdDEt));
-        smsEt.addTextChangedListener(new EditTextCleanWatcher(imageView4,smsEt));
+//        mobileEt.addTextChangedListener(new EditTextCleanWatcher(imageView1,mobileEt));
+//        pwdEt.addTextChangedListener(new EditTextCleanWatcher(imageView2,pwdEt));
+//        pwdDEt.addTextChangedListener(new EditTextCleanWatcher(imageView3,pwdDEt));
+//        smsEt.addTextChangedListener(new EditTextCleanWatcher(imageView4,smsEt));
 
         layout1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,6 +198,11 @@ public class RegisterActivity extends BaseActivity {
 
         if (Utils.stringIsNull(smsEt.getText().toString())) {
             Utils.showToast(RegisterActivity.this, "验证码不能为空");
+            return false;
+        }
+
+        if(pwdDEt.getText().toString().length() < 6 || pwdEt.getText().toString().length() < 6){
+            ToastUtils.showMessage("密码长度不能小于6位数!");
             return false;
         }
         return true;

@@ -11,7 +11,7 @@
         android:id="@+id/child_image"
         android:layout_width="fill_parent"
         android:layout_height="100dip"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,5 +28,15 @@
             android:layout_marginRight="6dp"
             android:button="@drawable/pictures_select_icon" />
     </RelativeLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_show_already"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="已导入"
+        android:background="@color/share_background"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 
 </FrameLayout>

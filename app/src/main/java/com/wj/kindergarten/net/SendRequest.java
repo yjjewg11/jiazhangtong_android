@@ -2,23 +2,33 @@ package com.wj.kindergarten.net;
 
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceActivity;
+
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
-import com.wj.kindergarten.TeacherDetailInfo;
+import com.wj.kindergarten.bean.BoutiqueDianzanList;
+import com.wj.kindergarten.bean.BoutiqueDianzanListFather;
+import com.wj.kindergarten.bean.NeedBoundPhoneResult;
+import com.wj.kindergarten.bean.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddChild;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.AddressBookEmot;
 import com.wj.kindergarten.bean.AddressBookMessage;
+import com.wj.kindergarten.bean.AllPfAlbum;
 import com.wj.kindergarten.bean.AllTeacherList;
 import com.wj.kindergarten.bean.AppraiseTeacherList;
 import com.wj.kindergarten.bean.ArticleDetail;
 import com.wj.kindergarten.bean.ArticleList;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.BaseResponse;
+import com.wj.kindergarten.bean.BoutiqueAlbum;
+import com.wj.kindergarten.bean.BoutiqueAllpic;
+import com.wj.kindergarten.bean.BoutiqueReviewAddress;
+import com.wj.kindergarten.bean.BoutiqueSingleInfo;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.CourseList;
 import com.wj.kindergarten.bean.FoodList;
@@ -37,16 +47,24 @@ import com.wj.kindergarten.bean.Msg;
 import com.wj.kindergarten.bean.NoticeDetail;
 import com.wj.kindergarten.bean.NoticeList;
 import com.wj.kindergarten.bean.OnceSpecialCourseList;
+import com.wj.kindergarten.bean.PfAlbumInfo;
+import com.wj.kindergarten.bean.PfAlbumList;
+import com.wj.kindergarten.bean.PfChangeData;
+import com.wj.kindergarten.bean.PfModeName;
+import com.wj.kindergarten.bean.PfMusic;
+import com.wj.kindergarten.bean.PfSingleAssess;
 import com.wj.kindergarten.bean.PrivilegeActiveList;
 import com.wj.kindergarten.bean.ReplyList;
 import com.wj.kindergarten.bean.SchoolDetailList;
 import com.wj.kindergarten.bean.SchoolList;
 import com.wj.kindergarten.bean.SignList;
+import com.wj.kindergarten.bean.SinlePfExtraInfo;
 import com.wj.kindergarten.bean.SpecialCourseInfoList;
 import com.wj.kindergarten.bean.SpecialCourseTypeList;
 import com.wj.kindergarten.bean.StoreList;
 
 import com.wj.kindergarten.bean.StudyStateObjectList;
+import com.wj.kindergarten.bean.SyncUploadPic;
 import com.wj.kindergarten.bean.TeacherCountList;
 
 import com.wj.kindergarten.bean.TeacherInfo;
@@ -54,6 +72,7 @@ import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainCourse;
 import com.wj.kindergarten.bean.TrainSchoolInfoListFather;
 
+import com.wj.kindergarten.bean.UUIDList;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
@@ -62,6 +81,7 @@ import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.Utils;
 
+
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
@@ -69,6 +89,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  * SendRequest
@@ -104,7 +126,7 @@ public class SendRequest {
             CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
             RequestHttpUtil.post(context, url, params, new JsonHttpResponseHandler() {
                 @Override
-                public void onSuccess(int statusCode, org.apache.http.Header[] headers, JSONObject response) {
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     super.onSuccess(statusCode, headers, response);
                     try {
                         CGLog.i("SendRequest：" + requestType + "->" + new String(response.toString().getBytes(), "utf-8"));
@@ -138,7 +160,7 @@ public class SendRequest {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                public void onFailure(int statusCode,Header[] headers, Throwable throwable, JSONArray errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
                     CGLog.d("SendRequest：" + requestType + "->" + errorResponse);
                     resultI.failure("请求超时,请检查您的网络是否有问题。");
@@ -216,6 +238,7 @@ public class SendRequest {
                     final RequestResultI resultI) {
         if (Utils.isNetworkAvailable(CGApplication.getInstance())) {
             CGLog.d("SendRequest：" + requestType + "->" + url + "?" + params);
+
             RequestHttpUtil.get(context, url, params, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -311,6 +334,7 @@ public class SendRequest {
             case RequestType.INTERACTION_SEND:
             case RequestType.LOGIN_OUT:
             case RequestType.READ_MESSAGE:
+            case RequestType.ADD_FAMILY_MEMBER:
                 resultI.result(getDomain(domain, BaseModel.class));
                 break;
             case RequestType.CHANGE_CHILD:
@@ -458,6 +482,64 @@ public class SendRequest {
             case RequestType.GET_INTERACTION_LINK:
                 resultI.result(getDomain(domain, HtmlTitle.class));
                 break;
+            case RequestType.GET_PF_ALBUM_LIST :
+                resultI.result(getDomain(domain, PfAlbumList.class));
+                break;
+            case RequestType.LOOK_FOR_ALL_PF :
+                resultI.result(getDomain(domain, AllPfAlbum.class));
+                break;
+            case RequestType.PF_PIC_BY_UUID :
+                resultI.result(getDomain(domain, AllPfAlbum.class));
+                break;
+            case RequestType.QUERY_INCREMENT_NEW_DATA:
+                resultI.result(getDomain(domain, PfChangeData.class));
+                break;
+            case RequestType.PF_OBJ_BY_UPDATE :
+                resultI.result(getDomain(domain, UUIDList.class));
+                break;
+            case RequestType.GET_SINGLE_PF_INFO :
+
+                break;
+            case RequestType.GET_BOUTIQUE_MODE :
+                resultI.result(getDomain(domain, PfModeName.class));
+                break;
+            case RequestType.GET_MODE_MUSIC :
+                resultI.result(getDomain(domain, PfMusic.class));
+                break;
+            case RequestType.GET_SINGLE_PF_EXTRA_INFO :
+                resultI.result(getDomain(domain, SinlePfExtraInfo.class));
+                break;
+            case RequestType.GET_SINGLE_PF_ASSESS :
+                resultI.result(getDomain(domain, PfSingleAssess.class));
+                break;
+            case RequestType.GET_BOUTIQUE_SINGLE_INFO:
+                resultI.result(getDomain(domain, BoutiqueSingleInfo.class));
+                break;
+            case RequestType.GET_BOUTIQUE_REVIEW_URL:
+                resultI.result(getDomain(domain, BoutiqueReviewAddress.class));
+                break;
+            case RequestType.GET_BOUTIQUE_ALBUM :
+                resultI.result(getDomain(domain, BoutiqueAlbum.class));
+                break;
+            case RequestType.GET_PF_ALBUM_INFO :
+                resultI.result(getDomain(domain, PfAlbumInfo.class));
+                break;
+            case RequestType.INIT_SYNC_UPLOAD:
+                resultI.result(getDomain(domain, SyncUploadPic.class));
+                break;
+            case RequestType.GET_ALL_PIC_FROM_BOUTIQUE:
+                resultI.result(getDomain(domain, BoutiqueAllpic.class));
+                break;
+            case RequestType.GET_BOUTIQUE_DIAN_ZAN_LIST:
+                resultI.result(getDomain(domain, BoutiqueDianzanListFather.class));
+                break;
+            case RequestType.VALIDATE_BAN_PHONE:
+                resultI.result(getDomain(domain, NeedBoundPhoneResult.class));
+                break;
+            case RequestType.GET_THREE_USER_INFO:
+                resultI.result(getDomain(domain, Login.class));
+                break;
+
             default:
                 break;
         }

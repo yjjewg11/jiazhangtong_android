@@ -2,7 +2,7 @@ package com.wj.kindergarten.ui.main;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -31,9 +32,9 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.FoundTypeCount;
-import com.wj.kindergarten.bean.FoundTypeCountSun;
 import com.wj.kindergarten.bean.Login;
-import com.wj.kindergarten.bean.MainTopic;
+import com.wj.kindergarten.bean.PfAlbumList;
+import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
 
@@ -43,6 +44,7 @@ import com.wj.kindergarten.handler.MessageHandlerListener;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.AddressBookRequest;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.services.PicUploadService;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.InteractionSentActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
@@ -58,23 +60,30 @@ import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
+    private final int START_UPLOAD_PIC = 999;
     //Fragment界面数组
     private Class fragmentArray[] = {MainFragment.class, FoundFragment.class, MessageFragment.class,
-            SpecialCourseFragment.class,MineFragment.class};
+            PhotoFamilyFragment.class,MineFragment.class};
     //Tab选项卡图片
     private int mImageViewArray[] = {R.drawable.school_tab, R.drawable.found_tab,
-            R.drawable.message_tab_2, R.drawable.special_tab,R.drawable.mine_tab};
+            R.drawable.message_tab_2, R.drawable.pf_album,R.drawable.mine_tab};
 
     private int mImageViewArray2[] = {R.drawable.school_tab, R.drawable.found_tab,
-            R.drawable.message_tab, R.drawable.special_tab,R.drawable.mine_tab};
+            R.drawable.message_tab, R.drawable.pf_album,R.drawable.mine_tab};
     private int [] typeCount = new int[3];
+    private List<PfAlbumListSun> albumList;
+    private UploadBroadCast receiver;
+
+    public List<PfAlbumListSun> getAlbumList() {
+        return albumList;
+    }
 
     public int[] getTypeCount() {
         return typeCount;
     }
 
     //Tab选项卡的文字
-    private String mTabIdArray[] = {"学校", "发现", "消息", "特长课程","我的"};
+    private String mTabIdArray[] = {"学校", "发现", "消息", "家庭相册","我的"};
 
     public String[] getmTabIdArray() {
         return mTabIdArray;
@@ -89,7 +98,7 @@ public class MainActivity extends BaseActivity {
     private long pre_back = 0;
     private boolean isClickMessage = false;
     private ImageView msgImageView = null;
-    private HintInfoDialog dialog ;
+    private HintInfoDialog dialog;
     private List<TrainClass> TC_list ;
     private static TrainChildInfoList TCI;
     public static  MainActivity instance;
@@ -131,7 +140,10 @@ public class MainActivity extends BaseActivity {
         initTab();
         listener();
         checkVersion();
-        handler.sendEmptyMessageDelayed(2, 500);
+        initPfAlbum();
+        //启动服务上传图片
+
+        registerUpload();
 
 
         //获取系统参数
@@ -139,6 +151,8 @@ public class MainActivity extends BaseActivity {
             getTopicConfig();
 //        }
 
+        handler.sendEmptyMessageDelayed(START_UPLOAD_PIC,1000);
+        handler.sendEmptyMessageDelayed(2, 1000);
         //每次应用启动获取话题
 
         //注册广播
@@ -149,6 +163,42 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void registerUpload() {
+        receiver = new UploadBroadCast();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(GloablUtils.ALREADY_UPLOADING);
+        filter.addAction(GloablUtils.ALREADY_UPLOADING_FINISHED);
+        filter.addAction(GloablUtils.REQUEST_PIC_NEW_DATA);
+        filter.addAction(GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED);
+        filter.addAction(GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED);
+        registerReceiver(receiver, filter);
+    }
+
+    private void initPfAlbum() {
+        loadPfData();
+    }
+    //获取家庭相册集
+    private void loadPfData() {
+        UserRequest.getPfAlbumList(this, new RequestResultI() {
+            @Override
+            public void result(BaseModel domain) {
+                PfAlbumList pfAlbumList = (PfAlbumList) domain;
+                if (pfAlbumList != null && pfAlbumList.getList() != null && pfAlbumList.getList().size() > 0) {
+                    albumList = pfAlbumList.getList();
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
 
 
     private void getTopicConfig() {
@@ -217,10 +267,14 @@ public class MainActivity extends BaseActivity {
                             mTabHost.setCurrentTabByTag(mTabIdArray[2]);
                         }
                     }
+                    if (getIntent().hasExtra("tiaozhuan") && "now".equals(getIntent().getStringExtra("tiaozhuan"))) {
+                        if (!mTabIdArray[3].equals(nowTab)) {
+                            mTabHost.setCurrentTabByTag(mTabIdArray[3]);
+                        }
+                    }
                     break;
-                case 100:
-
-                    //
+                case START_UPLOAD_PIC:
+                    startService(new Intent(MainActivity.this, PicUploadService.class));
                     break;
             }
 
@@ -369,11 +423,14 @@ public class MainActivity extends BaseActivity {
             public void onTabChanged(String tabId) {
                 nowTab = tabId;
                 if(tabId.equals(mTabIdArray[3])){
-                    Utils.registerUmengClickEvent(MessageConstant.SPECIAL_COURSE);
+                    titleLeftImageView.setImageResource(R.drawable.xiajiatou);
+                }else{
+                    titleLeftImageView.setImageResource(0);
                 }
                 if (tabId.equals(mTabIdArray[2])) {
                     Utils.registerUmengClickEvent(MessageConstant.MINE_MSG);
                     isClickMessage = true;
+
                     CGSharedPreference.setMessageState(true);
                 } else {
                     if (isClickMessage) {
@@ -454,8 +511,6 @@ public class MainActivity extends BaseActivity {
             tabSpec = mTabHost.newTabSpec(mTabIdArray[i]).setIndicator(getTabItemView(i));
             //将Tab按钮添加进Tab选项卡中
             mTabHost.addTab(tabSpec, fragmentArray[i], null);
-
-
             //给tabSpec添加监听事件
         }
         mTabHost.getTabWidget().getChildTabViewAt(1).setOnClickListener(new View.OnClickListener() {
@@ -517,6 +572,18 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void titleRightImageListener() {
+        if (mTabIdArray [3] .equals(nowTab)){
+            ((PhotoFamilyFragment)getSupportFragmentManager().findFragmentByTag(mTabIdArray[3])).addRightListener();
+        }
+    }
+
+    @Override
+    protected void titleLeftButtonListener() {
+        super.titleLeftButtonListener();
+    }
+
     //屏蔽切换学校
 //    @Override
 //    protected void titleCenterButtonListener() {
@@ -552,6 +619,7 @@ public class MainActivity extends BaseActivity {
         long now_back = System.currentTimeMillis();
         if (now_back - pre_back <= BACK_QUIT) {
             ShareUtils.clear();
+            sendBroadcast(new Intent(GloablUtils.FINISH_UPLOAD_PIC));
             finish();
             return;
         } else {
@@ -562,11 +630,78 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+                unregisterReceiver(receiver);
         Log.i("TAG", "页面被销毁!");
         ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 //        Log.i("TAG","添加运行任务 ： "+activityManager.getAppTasks().size());
         Log.i("TAG","添加任务栈  ： "+activityManager.getRunningTasks(10).size());
         super.onDestroy();
-//        unregisterReceiver(receive);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK) return;
+        switch (requestCode){
+            case GloablUtils.UPDATE_SUCCESSED_REFRESH:
+                CGLog.v("打印currentTab : "+mTabHost.getCurrentTabTag() +" tab ： "+mTabHost.getCurrentTab());
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                   PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    familyFragment.initHeadBack();
+                }
+                break;
+            case GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED:
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    String uuid = data.getStringExtra("uuid");
+                    if(!TextUtils.isEmpty(uuid)){
+                        familyFragment.updateBoutiqueFragmentData(uuid);
+                    }
+                }
+                break;
+            case GloablUtils.DELETE_FUSION_INFO_SUCCESSED:
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    familyFragment.refreshFusionData();
+                }
+                break;
+            case GloablUtils.ADD_NEW_ALBUM_SUCCESSED:
+                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                    familyFragment.reqetFamilyAlbum();
+                }
+                break;
+        }
+    }
+
+    class UploadBroadCast extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            PhotoFamilyFragment photoFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+            if(photoFragment == null ) return;
+            switch (intent.getAction()){
+                case GloablUtils.ALREADY_UPLOADING:
+                    photoFragment.startGif();
+                    break;
+                case GloablUtils.ALREADY_UPLOADING_FINISHED:
+                    photoFragment.stopGif();
+                    break;
+                case GloablUtils.REQUEST_PIC_NEW_DATA:
+                    photoFragment.requestNewData();
+                    break;
+                case GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED:
+                    photoFragment.refreshUpdateData();
+                    break;
+                case GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED:
+                    photoFragment.reBoutiqueData();
+                    break;
+            }
+        }
+    }
+
+    public void setCurrentTab(int position){
+        mTabHost.setCurrentTab(position);
     }
 }

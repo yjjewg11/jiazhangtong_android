@@ -10,8 +10,11 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.wenjie.jiazhangtong.R;
@@ -29,6 +32,8 @@ public class ImageLoaderUtil {
     private static DisplayImageOptions options = null;
     public static ImageLoader imageLoader = null;
     private static DisplayImageOptions myOptions;
+    private static DisplayImageOptions albumOptions;
+    private static DisplayImageOptions zhanWeiOptions;
 
 
     private static void initImageLoader(Context context, int loadingResource, int emptyResource, int failResource, String cachePath, int diskCacheSize, int roundeSize) {
@@ -53,7 +58,8 @@ public class ImageLoaderUtil {
                 .cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .cacheOnDisk(true)
-                .displayer(new RoundedBitmapDisplayer(roundeSize)).build();
+                .displayer(new RoundedBitmapDisplayer(roundeSize))
+                        .build();
 
         int drawable = R.drawable.zhanweitu;
 
@@ -65,11 +71,41 @@ public class ImageLoaderUtil {
 //                         .bitmapConfig(Bitmap.Config.)
                          .cacheOnDisk(true)
                          .build();
+//
+        albumOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(loadingResource)
+                .showImageForEmptyUri(emptyResource)
+                .showImageOnFail(failResource)
+                .cacheInMemory(true)
+//                .bitmapConfig(Bitmap.Config.RGB_565)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .cacheOnDisk(true)
+//                .displayer(new RoundedVignetteBitmapDisplayer(roundeSize,1))
+                .build();
 
+        zhanWeiOptions  = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.zhanweitu)
+                .showImageForEmptyUri(R.drawable.zhanweitu)
+                .showImageOnFail(R.drawable.zhanweitu)
+                .cacheInMemory(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .cacheOnDisk(true)
+//                .displayer(new RoundedBitmapDisplayer(roundeSize))
+                .build();
 
 
         imageLoader = ImageLoader.getInstance();
     }
+    public static void displayZhanWeiChange(String path,ImageView imageView){
+        imageLoader.displayImage(path,imageView,zhanWeiOptions);
+    }
+
+
+    public static void displayAlbumImage(String path,ImageView imageView){
+        imageLoader.displayImage(path,imageView,albumOptions);
+    }
+
 
     public static void displayMyImage(String uri,ImageView imageView){
         imageLoader.displayImage(uri,imageView,myOptions);

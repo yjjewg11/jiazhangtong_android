@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 
@@ -39,10 +40,12 @@ public class GalleryImagesAdapter extends BaseAdapter {
     private GridView mGridView;
     //数据源
     private List<String> list;
-    //还可以选择的图片数
-    private int canSelect = GalleryImagesActivity.IMAGE_MAX;
     //第一个Item是否为特殊按钮(拍照)
     private boolean isFirstSpecial = true;
+    //还可以选择的图片数
+    private int canSelect = BoutiqueGalleryActivity.IMAGE_MAX;
+
+
 
     public GalleryImagesAdapter(List<String> list, int canSelect, HashMap<String, Boolean> selectMap, GridView mGridView) {
         this.list = list;

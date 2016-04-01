@@ -62,8 +62,9 @@ public class PhotoWallAdapter extends PagerAdapter {
         photoView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                boolean parse =  ((PhotoWallActivity) context).isParseQR();
                 ChooseTwoCode chooseTwoCode = new ChooseTwoCode(context, finalUri);
-                chooseTwoCode.tv_save.setVisibility(View.GONE);
+                chooseTwoCode.setParse(parse);
                 chooseTwoCode.choose(v);
                 return false;
             }

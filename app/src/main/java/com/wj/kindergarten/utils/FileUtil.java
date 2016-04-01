@@ -175,4 +175,8 @@ public class FileUtil {
         ToastUtils.showMessage("图片保存成功");
     }
 
+    public static boolean checkFileExits(String localPath) {
+        File file = new File(localPath);
+        return file.exists();
+    }
 }

@@ -16,9 +16,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.cookie.Cookie;
 
-import java.util.List;
 
 /**
  * RequestHttpUtil
@@ -37,7 +35,6 @@ public class RequestHttpUtil {
 //    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 
 
-
 //    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
 
 //    public static final String BASE_URL = "http://192.168.0.108:8080/px-mobile/";
@@ -47,6 +44,10 @@ public class RequestHttpUtil {
     public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {
+
+        return getClient(0);
+    }
+    public synchronized static AsyncHttpClient getClient(long time) {
         if (client == null) {
             synchronized (RequestHttpUtil.class) {
                 if (client == null) {
@@ -54,11 +55,17 @@ public class RequestHttpUtil {
                 }
             }
         }
+        if(time <= 0){
+            client.setTimeout(Constants.HTTP_TIME_OUT);
+        }else {
+            client.setTimeout((int) time);
+        }
+
         return client;
     }
 
 
-//    private void getCookie(AsyncHttpClient httpClient) {
+    //    private void getCookie(AsyncHttpClient httpClient) {
 //        List<Cookie> cookies =  httpClient.getgetCookies();
 //        StringBuffer sb = new StringBuffer();
 //        for (int i = 0; i < cookies.size(); i++) {
@@ -79,11 +86,14 @@ public class RequestHttpUtil {
         getCookie();
         getClient().addHeader("Accept-Encoding", "gzip");
         getClient().addHeader("content/type", "application/json;charset=utf-8");
+
+//        initAfinal();
     }
+
 
     private static void getCookie() {
         PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
-        getClient().setCookieStore(myCookieStore);
+        getClient().setCookieStore(new PersistentCookieStore(CGApplication.getInstance()));
     }
 
     public static void cancel(Context context, boolean isInterrupt) {
@@ -127,14 +137,25 @@ public class RequestHttpUtil {
 
     //带参数 提交数据
     public static void post(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {
-        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
-        List<Cookie> cookies = myCookieStore.getCookies();
-        MyCookieManager.add(cookies);
         getClient().post(context, uString, params, resp);
     }
 
     protected static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
-
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
     }
+    public static void postPf(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {
+        getClient(Constants.HTTP_PIC_TIME_OUT).post(context, uString, params, resp);
+    }
+
+//    private static FinalHttp afinal;
+//
+//    private static void initAfinal() {
+//        afinal = new FinalHttp();
+//        PersistentCookieStore myCookieStore = new PersistentCookieStore(CGApplication.getInstance());
+//        afinal.configCookieStore(myCookieStore);
+//    }
+//
+//    public static void afinalPost(Context context, String path, AjaxParams params, AjaxCallBack ajaxCallBack) {
+//        afinal.post(path,params,ajaxCallBack);
+//    }
 }

@@ -26,6 +26,8 @@ import com.wj.kindergarten.bean.SchoolDetailList;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.map.ClickStartMap;
+import com.wj.kindergarten.ui.map.MapTransportFactory;
 import com.wj.kindergarten.ui.more.CallUtils;
 import com.wj.kindergarten.ui.other.RatingBarView;
 import com.wj.kindergarten.ui.specialcourse.ClassFragment;
@@ -242,6 +244,10 @@ public class SchoolDetailInfoActivity extends BaseActivity {
         tv_coll = (TextView) findViewById(R.id.textview_1_1);
         iv_coll = (ImageView) findViewById(R.id.imageView_1_1);
 
+        adress.setOnClickListener(new ClickStartMap(SchoolDetailInfoActivity.this, MapTransportFactory.createMapTransport(
+                schoolDetail.getMap_point(),schoolDetail.getImg()
+                ,schoolDetail.getBrand_name(),schoolDetail.getAddress())
+        ));
         distance.setVisibility(View.GONE);
         ImageLoaderUtil.displayMyImage(schoolDetail.getImg(), iv_head);
         rating_bar.setFloatStar(schoolDetail.getCt_stars(), true);
