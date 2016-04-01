@@ -13,8 +13,16 @@ public class PfAlbumInfoSun extends BaseModel{
     private String title;@Expose
     private String herald;@Expose
     private String photo_count;@Expose
-    private String status;
+    private String status;@Expose
+    private String create_time;
 
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
 
     @Override
     public String toString() {

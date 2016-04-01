@@ -51,9 +51,7 @@ import org.json.JSONObject;
 public class SplashActivity extends Activity implements DoEveryThing {
     private static final int SPLASH_DELAY = 0;
     private  int SLASH_DELAY_TIME = 0;
-    public static final String QQ_APP_ID = "1104813270";
-    public static final String WEIXIN_APP_ID = "wx6699cf8b21e12618";
-    public static final String WEIXIN_SERECT = "639c78a45d012434370f4c1afc57acd1";
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
@@ -107,12 +105,7 @@ public class SplashActivity extends Activity implements DoEveryThing {
         try {
 
 
-            UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, QQ_APP_ID,
-                    "SumAAk7jtaUSnZqd");
-            qqSsoHandler.addToSocialSDK();
 
-            UMWXHandler wxHandler = new UMWXHandler(this,WEIXIN_APP_ID,WEIXIN_SERECT);
-            wxHandler.addToSocialSDK();
 
             OnlineConfigAgent.getInstance().updateOnlineConfig(this);
             OnlineConfigAgent.getInstance().setDebugMode(true);

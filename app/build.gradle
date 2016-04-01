@@ -7,8 +7,9 @@ android {
         applicationId 'com.wenjie.jiazhangtong'
         minSdkVersion 14
         versionCode 26
-        versionName "1.0.0.1"
+        versionName "1.0.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false

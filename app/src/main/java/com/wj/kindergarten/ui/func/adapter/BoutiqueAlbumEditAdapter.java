@@ -57,6 +57,7 @@ public class BoutiqueAlbumEditAdapter extends BaseAdapter {
         if(convertView == null){
             viewHolder = new ViewHolder();
             convertView = View.inflate(context, R.layout.boutique_album_edit_item,null);
+            viewHolder.boutique_album_edit_image = (ImageView) convertView.findViewById(R.id.boutique_album_edit_image);
             viewHolder.boutique_album_edit_imageView = (ImageView) convertView.findViewById(R.id.boutique_album_edit_imageView);
             viewHolder.boutique_album_edit_title = (TextView) convertView.findViewById(R.id.boutique_album_edit_titlesss);
             convertView.setTag(viewHolder);
@@ -66,28 +67,33 @@ public class BoutiqueAlbumEditAdapter extends BaseAdapter {
             final AllPfAlbumSunObject object = objectList.get(position);
         if(object != null){
             ImageLoaderUtil.displayMyImage(object.getPath(),viewHolder.boutique_album_edit_imageView);
-            if(TextUtils.isEmpty(object.getNote())){
-                Drawable drawable = context.getResources().getDrawable(R.drawable.bianji_jpxc_jingpin);
-                drawable.setBounds(0,0,25,25);
-                viewHolder.boutique_album_edit_title.setCompoundDrawables(null,drawable,null,null);
-                viewHolder.boutique_album_edit_title.setPadding(0,10,0,0);
+            if(Utils.stringIsNull(object.getNote())){
+                viewHolder.boutique_album_edit_image.setVisibility(View.VISIBLE);
             }else{
+                viewHolder.boutique_album_edit_image.setVisibility(View.GONE);
                 viewHolder.boutique_album_edit_title.setText("" + object.getNote());
             }
-            viewHolder.boutique_album_edit_title.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener listener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BoutiqueAlbumEditActivity activity =  (BoutiqueAlbumEditActivity) context;
-                    activity.startForResult(object);
+                    editObj(object);
                 }
-            });
+            };
+            viewHolder.boutique_album_edit_title.setOnClickListener(listener);
+            viewHolder.boutique_album_edit_image.setOnClickListener(listener);
 
         }
         return convertView;
     }
 
+    private void editObj(AllPfAlbumSunObject object) {
+        BoutiqueAlbumEditActivity activity =  (BoutiqueAlbumEditActivity) context;
+        activity.startForResult(object);
+    }
+
     class ViewHolder{
         TextView boutique_album_edit_title;
         ImageView boutique_album_edit_imageView;
+        ImageView boutique_album_edit_image;
     }
 }

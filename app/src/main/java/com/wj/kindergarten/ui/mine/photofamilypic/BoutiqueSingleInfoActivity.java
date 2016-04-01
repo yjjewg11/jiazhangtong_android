@@ -469,7 +469,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
                 intent.putExtra("objectList", objectList);
                 intent.putExtra("edit", true);
                 startActivity(intent);
-                finish();
+                boutiqueWebView.getRefreshableView().loadUrl(boutiqueSingleInfo.getShare_url());
             }
         });
         int[] location = Utils.getLocation(textViews[4]);
@@ -479,7 +479,7 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
     }
 
     private void deleteData(final String uuid) {
-        UserRequest.deleteBoutiqueSingle(this, uuid, new RequestResultI() {
+        UserRequest.deleteBoutiqueSingle(this, uuid, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 ToastUtils.showMessage("删除成功!");
@@ -493,18 +493,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             public void result(List<BaseModel> domains, int total) {
 
             }
-
-            @Override
-            public void failure(String message) {
-
-            }
         });
     }
 
     private void cancleDianzan() {
         commonDialog.show();
         commonDialog.setText("取消点赞中...请稍候!");
-        UserRequest.commonCancleZan(this, boutiqueSingleInfo.getData().getUuid(), GloablUtils.BOUTIQUE_COMMON_TYPE, new RequestResultI() {
+        UserRequest.commonCancleZan(this, boutiqueSingleInfo.getData().getUuid(), GloablUtils.BOUTIQUE_COMMON_TYPE, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 cancleDialog();
@@ -517,10 +512,6 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
 
             }
 
-            @Override
-            public void failure(String message) {
-
-            }
         });
     }
 

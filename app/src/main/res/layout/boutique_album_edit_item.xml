@@ -28,16 +28,28 @@
             android:layout_height="match_parent" />
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
+        android:layout_marginTop="@dimen/margin_10"
         android:id="@+id/boutique_album_edit_titlesss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10"
         android:ellipsize="end"
         android:lines="2"
         android:maxLines="2"
-        android:text="这是编辑的标题!"
+        android:text=""
         android:textColor="@color/color_222222"
         android:textSize="12sp" />
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/boutique_album_edit_image"
+            android:src="@drawable/bianji_jpxc_jingpin"
+            android:scaleType="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
 </LinearLayout>

@@ -107,7 +107,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private List<PfSingleAssessObject> assessObjectList = new ArrayList<>();
     private LinearLayout pf_pic_bottom_viewGroup;
     private TextView pf_pic_bottom_assess_count;
-    private ProgressBar progressBar ;
+    private ProgressBar progressBar;
     private Handler mHanlder = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -136,7 +136,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private LinearLayout pf_common_show_asseess_send;
     private SingleLoadPicModel singlePicModel;
 
-    public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter, PfSingleInfoFragment pfSingleInfoFragment,int position) {
+    public PFSingleObjectInfoFragment(PfInfoFragmentAdapter pfInfoFragmentAdapter, PfSingleInfoFragment pfSingleInfoFragment, int position) {
         this.pfSingleInfoFragment = pfSingleInfoFragment;
         this.pfInfoFragmentAdapter = pfInfoFragmentAdapter;
         this.position = position;
@@ -151,72 +151,77 @@ public class PFSingleObjectInfoFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
-        dbObj = FinalUtil.getFamilyUuidObjectDb(getActivity());
-        sunObject = pfInfoFragmentAdapter.getPositionObject(position);
-        ((PfGalleryActivity)getActivity()).addFragment(this);
-        family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
-        innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
-        progressBar = (ProgressBar) innerView.findViewById(R.id.pf_gallery_fragment_progressBar);
-        progressBar.setVisibility(View.VISIBLE);
-        initExtraView();
-        pf_pic_bottom_assess_count = (TextView) innerView.findViewById(R.id.pf_pic_bottom_assess_count);
-        pf_pic_bottom_viewGroup = (LinearLayout) innerView.findViewById(R.id.pf_pic_bottom_viewGroup);
-        pf_single_scroll = (ListenScrollView) innerView.findViewById(R.id.pf_single_scroll);
-        pf_gallery_image = (ImageView) innerView.findViewById(R.id.pf_gallery_image);
-        pf_single_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
-        maxTime = TimeUtil.getStringDate(new Date());
-        pf_single_scroll.setOnScrollChanged(new ListenScrollView.OnScrollChanged() {
-            @Override
-            public void onScrollChanged(int l, int t, int oldl, int oldt) {
-                //隐藏输入法
-                bottomCancle();
-            }
-        });
-        pf_gallery_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //查询所有照片地址，进行显示.
-                ArrayList<String> list = new ArrayList();
-                String sql = "select path from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME + ";";
-                List<DbModel> listDb = dbObj.findDbModelListBySQL(sql);
-                Iterator<DbModel> iterator = listDb.iterator();
-                while (iterator.hasNext()) {
-                    DbModel dbModel = iterator.next();
-                    list.add((String) dbModel.get("path"));
+        try {
+            dialog = new HintInfoDialog(getActivity(), "加载数据中...请稍后");
+            dbObj = FinalUtil.getFamilyUuidObjectDb(getActivity());
+            sunObject = pfInfoFragmentAdapter.getPositionObject(position);
+            ((PfGalleryActivity) getActivity()).addFragment(this);
+            family_uuid_object = FinalDb.create(getActivity(), GloablUtils.FAMILY_UUID_OBJECT);
+            innerView = View.inflate(getActivity(), R.layout.pf_gallery_fragment, null);
+            progressBar = (ProgressBar) innerView.findViewById(R.id.pf_gallery_fragment_progressBar);
+            progressBar.setVisibility(View.VISIBLE);
+            initExtraView();
+            pf_pic_bottom_assess_count = (TextView) innerView.findViewById(R.id.pf_pic_bottom_assess_count);
+            pf_pic_bottom_viewGroup = (LinearLayout) innerView.findViewById(R.id.pf_pic_bottom_viewGroup);
+            pf_single_scroll = (ListenScrollView) innerView.findViewById(R.id.pf_single_scroll);
+            pf_gallery_image = (ImageView) innerView.findViewById(R.id.pf_gallery_image);
+            pf_single_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
+            maxTime = TimeUtil.getStringDate(new Date());
+            pf_single_scroll.setOnScrollChanged(new ListenScrollView.OnScrollChanged() {
+                @Override
+                public void onScrollChanged(int l, int t, int oldl, int oldt) {
+                    //隐藏输入法
+                    bottomCancle();
                 }
-                int position = list.indexOf(sunObject.getPath());
-                if (position < 0) position = 0;
-                Utils.carouselPic(getActivity(), position, list, false);
-            }
-        });
-        pf_single_scroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+            });
+            pf_gallery_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //查询所有照片地址，进行显示.
+                    ArrayList<String> list = new ArrayList();
+                    String sql = "select path from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME + ";";
+                    List<DbModel> listDb = dbObj.findDbModelListBySQL(sql);
+                    Iterator<DbModel> iterator = listDb.iterator();
+                    while (iterator.hasNext()) {
+                        DbModel dbModel = iterator.next();
+                        list.add((String) dbModel.get("path"));
+                    }
+                    int position = list.indexOf(sunObject.getPath());
+                    if (position < 0) position = 0;
+                    Utils.carouselPic(getActivity(), position, list, false);
+                }
+            });
+            pf_single_scroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+                @Override
+                public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 
-            }
+                }
 
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                pageNo++;
-                queSingleAssess();
-            }
-        });
-        initData();
-        singlePicModel = new SingleLoadPicModel(getActivity());
-        showPic();
-        chcekUpadate();
-        queryExtraData(sunObject.getUuid());
-        queSingleAssess();
-        initBottomBt();
-        initTopView();
-
+                @Override
+                public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                    pageNo++;
+                    queSingleAssess();
+                }
+            });
+            initData();
+            singlePicModel = new SingleLoadPicModel(getActivity());
+            showPic();
+            chcekUpadate();
+            queryExtraData(sunObject.getUuid());
+            queSingleAssess();
+            initBottomBt();
+            initTopView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return innerView;
     }
-    public void showDia(){
+
+    public void showDia() {
 //        ((BaseActivity)getActivity()).showCommonDialog();
     }
-    public void cancleDia(){
+
+    public void cancleDia() {
 //        ((BaseActivity)getActivity()).cancleCommonDialog();
     }
 
@@ -231,7 +236,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void initData() {
 //        if (pfInfoFragmentAdapter != null) {
 //            sunObject = pfInfoFragmentAdapter.getCurrentObject();
-            updatePfInfo();
+        updatePfInfo();
 //        }
     }
 
@@ -274,7 +279,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
             updatePfInfo();
         }
     }
-
+ 
     private void updatePfInfo() {
         pf_gallery_fragment_extra_info_description.setText("" + Utils.isNull(sunObject.getNote()));
         pf_gallery_fragment_extra_info_time.setText("拍摄时间: " + Utils.isNull(sunObject.getPhoto_time()));
@@ -285,7 +290,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void showAssessList() {
         if (assessView == null) {
             assessView = View.inflate(getActivity(), R.layout.pf_common_show_assess_layout, null);
-            pf_common_show_asseess_send = (LinearLayout)assessView.findViewById(R.id.pf_common_show_asseess_send);
+            pf_common_show_asseess_send = (LinearLayout) assessView.findViewById(R.id.pf_common_show_asseess_send);
             pf_common_show_asseess_send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -374,7 +379,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
                 }
             }
             pf_gallery_image.setTag(lishipath);
-            singlePicModel.getBitmap(lishipath,sunObject,pf_gallery_image,mHanlder, new SingleLoadPicModel.LoadSuccessed() {
+            singlePicModel.getBitmap(lishipath, sunObject, pf_gallery_image, mHanlder, new SingleLoadPicModel.LoadSuccessed() {
                 @Override
                 public void loadSuccess() {
                     progressBar.setVisibility(View.GONE);
@@ -395,15 +400,16 @@ public class PFSingleObjectInfoFragment extends Fragment {
                         if (pf_single_scroll.isRefreshing()) {
                             pf_single_scroll.onRefreshComplete();
                         }
-                        if(assessListView != null && assessListView.isRefreshing()) assessListView.onRefreshComplete();
+                        if (assessListView != null && assessListView.isRefreshing())
+                            assessListView.onRefreshComplete();
                         PfSingleAssess pfSingleAssess = (PfSingleAssess) domain;
                         if (pfSingleAssess != null && pfSingleAssess.getList() != null
                                 && pfSingleAssess.getList().getData() != null
                                 && pfSingleAssess.getList().getData().size() > 0) {
-                            if(pageNo == 1) assessObjectList.clear();
+                            if (pageNo == 1) assessObjectList.clear();
                             assessObjectList.addAll(pfSingleAssess.getList().getData());
                             initBottomAssessCount();
-                            if(pfCommonAssessAdapter != null) {
+                            if (pfCommonAssessAdapter != null) {
                                 pfCommonAssessAdapter.setObjectList(assessObjectList);
                             }
                         } else {
@@ -412,7 +418,8 @@ public class PFSingleObjectInfoFragment extends Fragment {
                             } else {
                                 ToastUtils.showMessage("没有更多内容了!");
                             }
-                            if(assessListView != null) assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
+                            if (assessListView != null)
+                                assessListView.setMode(PullToRefreshBase.Mode.DISABLED);
                             pf_single_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
                         }
                     }
@@ -457,7 +464,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
 
     private void queryItemNewInfo(String uuid) {
         showDia();
-        UserRequest.getSinglePfInfo(getActivity(), uuid, new RequestFailedResult(((BaseActivity)getActivity()).getCommonDialog()) {
+        UserRequest.getSinglePfInfo(getActivity(), uuid, new RequestFailedResult(((BaseActivity) getActivity()).getCommonDialog()) {
             @Override
             public void result(BaseModel domain) {
                 cancleDia();
@@ -677,11 +684,13 @@ public class PFSingleObjectInfoFragment extends Fragment {
         onlyCancleBottom();
         showAssessList();
     }
-    public boolean bottomIsShow(){
-        CGLog.v("打印bottomIsShow : "+bottom_assess.getVisibility());
+
+    public boolean bottomIsShow() {
+        CGLog.v("打印bottomIsShow : " + bottom_assess.getVisibility());
         return bottom_assess.getVisibility() == View.VISIBLE;
     }
-    public void onlyCancleBottom(){
+
+    public void onlyCancleBottom() {
         if (emot2 == null) return;
         emot2.hideSoftKeyboard();
         bottom_assess.setVisibility(View.GONE);
@@ -795,13 +804,18 @@ public class PFSingleObjectInfoFragment extends Fragment {
         pf_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showDialog(getActivity(), "提示!", "您确认删除此图片吗?", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        popupWindow.dismiss();
-                        deleteData(sunObject);
-                    }
-                });
+                try {
+                    ToastUtils.showDialog(getActivity(), "提示!", "您确认删除此图片吗?", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            popupWindow.dismiss();
+                            deleteData(sunObject);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         pf_edit.setOnClickListener(new View.OnClickListener() {

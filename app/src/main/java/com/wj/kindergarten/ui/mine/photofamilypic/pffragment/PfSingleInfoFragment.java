@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.wenjie.jiazhangtong.R;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AllPfAlbumSunObject;
 import com.wj.kindergarten.bean.AlreadySavePath;
 import com.wj.kindergarten.bean.BaseModel;
@@ -106,7 +107,7 @@ public class PfSingleInfoFragment extends Fragment {
         //从数据库，网络，轮播图中删除
         final AllPfAlbumSunObject object = list.get(viewPager.getCurrentItem());
 
-        UserRequest.deleteSinglePf(getActivity(), object.getUuid(), new RequestResultI() {
+        UserRequest.deleteSinglePf(getActivity(), object.getUuid(), new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 ToastUtils.showMessage("删除成功");
@@ -119,11 +120,6 @@ public class PfSingleInfoFragment extends Fragment {
 
             @Override
             public void result(List<BaseModel> domains, int total) {
-
-            }
-
-            @Override
-            public void failure(String message) {
 
             }
         });

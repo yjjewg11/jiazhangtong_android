@@ -27,6 +27,7 @@ import com.wj.kindergarten.ui.func.adapter.BoutiqueAdapter;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.main.PhotoFamilyFragment;
 import com.wj.kindergarten.ui.mine.photofamilypic.observer.Watcher;
+import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ToastUtils;
@@ -169,6 +170,10 @@ public class BoutiqueAlbumFragment extends Fragment implements Watcher {
                     //判断先前是否添加无内容提示
                     if(fragment_test_wrapper_pullRefresh.findViewWithTag(listTag) == null){
                         fragment_test_wrapper_pullRefresh.removeAllViews();
+                        ViewGroup viewGroup = (ViewGroup) pullListView.getParent();
+                        if(viewGroup != null){
+                            viewGroup.removeView(pullListView);
+                        }
                         fragment_test_wrapper_pullRefresh.addView(pullListView);
                     }
                     boutiqueAlbumList.addAll(boutiqueAlbum.getList().getData());

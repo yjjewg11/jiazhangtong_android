@@ -13,6 +13,11 @@ import com.wj.kindergarten.CGApplication;
  */
 public interface GloablUtils {
 
+    public static final String QQ_APP_ID = "1104813270";
+    public static final String WEIXIN_APP_ID = "wx6699cf8b21e12618";
+    public static final String WEIXIN_SERECT = "639c78a45d012434370f4c1afc57acd1";
+
+
     int ALL_BACK = R.drawable.all_arrow;
 
     //家庭相册根据familyuuid分类的表

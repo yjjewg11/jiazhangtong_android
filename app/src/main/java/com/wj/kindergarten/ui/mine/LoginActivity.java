@@ -15,7 +15,9 @@ import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.controller.listener.SocializeListeners;
 import com.umeng.socialize.exception.SocializeException;
+import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.sso.UMSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
@@ -62,6 +64,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView registerTv = null;
     private String loginType;
 
+
     private String acc;
     private String pwd;
 
@@ -106,7 +109,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate() {
         hideActionbar();
 
+        UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, GloablUtils.QQ_APP_ID,
+                "SumAAk7jtaUSnZqd");
+        qqSsoHandler.addToSocialSDK();
 
+        UMWXHandler wxHandler = new UMWXHandler(this,GloablUtils.WEIXIN_APP_ID,GloablUtils.WEIXIN_SERECT);
+        wxHandler.addToSocialSDK();
         myProgressBar = new MyProgressDialog(this);
         mController = UMServiceFactory.getUMSocialService("com.umeng.login");
 
@@ -234,31 +242,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         String[] infos = CGSharedPreference.getLogin();
         //有数据,进行账号绑定
         if (infos != null && !Utils.stringIsNull(infos[0]) && !Utils.stringIsNull(infos[1])) {
-            ToastUtils.showBoundDialog(this, "绑定账号", new BoundDialog.AfterListener() {
+            myProgressBar.show();
+            UserRequest.boundAccount(LoginActivity.this,access_token,"",loginType, new RequestFailedResult(commonDialog) {
                 @Override
-                public void bound() {
-                    UserRequest.boundAccount(LoginActivity.this,access_token,"",loginType, new RequestFailedResult(commonDialog) {
-                        @Override
-                        public void result(BaseModel domain) {
-                            getThreeInfoToMainPage();
-                        }
-
-                        @Override
-                        public void result(List<BaseModel> domains, int total) {
-
-                        }
-
-                        @Override
-                        public void failure(String message) {
-                            super.failure(message);
-                            boundTel();
-                        }
-                    });
+                public void result(BaseModel domain) {
+                    if(myProgressBar.isShowing()) myProgressBar.cancel();
+                    getThreeInfoToMainPage();
                 }
 
                 @Override
-                public void igone() {
-                    getThreeInfoToMainPage();
+                public void result(List<BaseModel> domains, int total) {
+
+                }
+
+                @Override
+                public void failure(String message) {
+                    super.failure(message);
+                    if(myProgressBar.isShowing()) myProgressBar.cancel();
+                    boundTel();
                 }
             });
             //没有登录数据进入确认绑定页面提示是否绑定
@@ -309,7 +310,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void onComplete(Bundle value, SHARE_MEDIA platform) {
-                cancleMyDialog();
+//                cancleMyDialog();
 //                StringBuilder builder = new StringBuilder();
 //                Set<String> stringSet = value.keySet();
 //                Iterator<String> ite = stringSet.iterator();
@@ -510,6 +511,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void everyThing() {
+        cancleMyDialog();
         registerDevice();
     }
 

@@ -38,13 +38,16 @@ public class ToastUtils {
 
     public static void showDialog(Context context,String title,String content,AlertDialog.OnClickListener positionListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        AlertDialog dialog =  builder.setTitle(title).setMessage(content).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        AlertDialog dialog =  builder.setTitle(title).setMessage(content)
+                .setPositiveButton("确定", positionListener)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         })
-                .setPositiveButton("确定",positionListener).create();
+                .create();
+
         dialog.show();
     }
     public static DialogInterface showDialog(Context context,View customView,DialogInterface.OnClickListener listener){

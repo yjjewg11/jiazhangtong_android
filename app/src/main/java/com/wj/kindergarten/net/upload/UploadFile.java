@@ -90,9 +90,9 @@ public class UploadFile {
                 }
                 PicObject picObject =  queryDetailInfo(path);
                 if(picObject != null){
-                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getNote(), picObject.getMd5(), PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
+                    upLoadFilePf(file, path, picObject.getTime(), picObject.getAddress(), picObject.getNote(), picObject.getMd5(), picObject.getFamily_uuid(),progressCallBack);
                 }else{
-                    upLoadFilePf(file, path, "", "", "", "", PhotoFamilyFragment.instance.getCurrentFamily_uuid(),progressCallBack);
+                    upLoadFilePf(file, path, "", "", "", "", picObject.getFamily_uuid(),progressCallBack);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -166,7 +166,10 @@ public class UploadFile {
         PicObject picObject = new PicObject();
         String sql = "localPath = '"+path+"' and status = '1'";
         List<AlreadySavePath> list = dbAlready.findAllByWhere(AlreadySavePath.class, sql);
-        if(list.size() > 0) picObject.setTime(list.get(0).getPhoto_time());
+        if(list.size() > 0) {
+            picObject.setTime(list.get(0).getPhoto_time());
+            picObject.setFamily_uuid(list.get(0).getFamily_uuid());
+        }
         ExifInterface exifInterface = new ExifInterface(path);
 //        picObject.setTime(exifInterface.getAttribute(ExifInterface.TAG_DATETIME));
         float[] location = new float[2];

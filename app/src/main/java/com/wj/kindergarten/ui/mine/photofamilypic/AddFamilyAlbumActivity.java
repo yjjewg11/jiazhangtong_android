@@ -99,7 +99,12 @@ public class AddFamilyAlbumActivity extends BaseActivity {
                 }
             }
         }, 1, 198, 198);
-        uploadFile.upload(localPath);
+        if(!Utils.stringIsNull(localPath)){
+            uploadFile.upload(localPath);
+        }else {
+            addFamily("");
+        }
+
     }
 
 

@@ -140,10 +140,9 @@ public class MainActivity extends BaseActivity {
         initTab();
         listener();
         checkVersion();
-        handler.sendEmptyMessageDelayed(2, 500);
         initPfAlbum();
         //启动服务上传图片
-        handler.sendEmptyMessageDelayed(START_UPLOAD_PIC,1000);
+
         registerUpload();
 
 
@@ -152,6 +151,8 @@ public class MainActivity extends BaseActivity {
             getTopicConfig();
 //        }
 
+        handler.sendEmptyMessageDelayed(START_UPLOAD_PIC,1000);
+        handler.sendEmptyMessageDelayed(2, 1000);
         //每次应用启动获取话题
 
         //注册广播

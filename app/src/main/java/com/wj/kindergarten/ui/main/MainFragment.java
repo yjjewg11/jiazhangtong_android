@@ -162,11 +162,11 @@ public class MainFragment extends Fragment {
 //            ((MainActivity) getActivity()).setTitleText(chooseTile.getBrand_name());
         }
 
-        if (titles.size() > 1) {
-            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
-        } else {
-            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, null);
-        }
+//        if (titles.size() > 1) {
+//            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, R.drawable.title_down);
+//        } else {
+//            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, null);
+//        }
 
         initTitleNames();
     }
@@ -279,12 +279,15 @@ public class MainFragment extends Fragment {
         mainItems.add(gardenInteraction);//互动
         mainItems.add(gardenDes);//宝宝入学
         mainItems.add(gardenSpecial);
+
         mainItems.add(gardenCourse);//课程表
         mainItems.add(gardenFoods);//食谱
         mainItems.add(gardenNotice);//校园公告
+
         mainItems.add(gardenSign);//签到记录
         mainItems.add(gardenTeacher);//评价老师
         mainItems.add(gradenList);//通讯录
+
         mainItems.add(gardenMore);//更多
 
 
@@ -295,12 +298,12 @@ public class MainFragment extends Fragment {
     }
 
     private String [] clickEvent = new String[]{
-            "interaction","course","food","message","sign","assess","recruit","address","more"
+            "interaction","recruit","special_course","course","food","message","sign","assess","address","more"
     };
     private void mainItemsClick(MainItem mainItem,int position) {
         //  Utils.showToast(mContext, mainItem.getText());
 //        map.put(mainItem.getText(),String.valueOf(map.get(mainItem.getText()) == null ? 1 : map.get(mainItem.getText()) + 1));
-        Utils.registerUmengClickEvent(clickEvent[position - 1]);
+        Utils.registerUmengClickEvent(clickEvent[position]);
         switch (mainItem.getTag()) {
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));

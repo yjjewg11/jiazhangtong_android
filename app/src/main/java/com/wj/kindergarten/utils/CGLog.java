@@ -22,13 +22,13 @@ public final class CGLog{
     }
 
     public static void v(String tag, String log) {
-        if (isDebug) {
-            if (Utils.stringIsNull(tag)) {
-                Log.v(TAG, log);
-            } else {
-                Log.v(tag, log);
-            }
-        }
+//        if (isDebug) {
+//            if (Utils.stringIsNull(tag)) {
+//                Log.v(TAG, log);
+//            } else {
+//                Log.v(tag, log);
+//            }
+//        }
     }
 
     public static void v(String log) {

@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/photo_gallery_bottom">
+            android:layout_above="@+id/boutique_photo_gallery_bottom">
 
             <GridView
                 android:id="@+id/boutique_child_grid"

@@ -31,8 +31,8 @@ public class PfChoosedPicActivity extends BaseActivity {
 
     private GridView gridView;
     private RelativeLayout next_step_rl;
-    private List<AllPfAlbumSunObject> objectList ;
-    private HashMap<String,Boolean> selectMap = new HashMap<>();
+    private List<AllPfAlbumSunObject> objectList;
+    private HashMap<String, Boolean> selectMap = new HashMap<>();
     private PfChoosePicAdapter adapter;
     private ArrayList<String> images = new ArrayList<>();
     private String uuid;
@@ -65,17 +65,19 @@ public class PfChoosedPicActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //带着集合进入编辑页面
-                 Intent intent = new Intent(PfChoosedPicActivity.this,BoutiqueAlbumEditActivity.class);
-                 intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
-                 intent.putExtra("object",boutiqueSingleInfoObject);
-                 startActivity(intent);
+                Intent intent = new Intent(PfChoosedPicActivity.this, BoutiqueAlbumEditActivity.class);
+                intent.putExtra("objectList", (ArrayList) adapter.getSelectList());
+                intent.putExtra("object", boutiqueSingleInfoObject);
+                startActivity(intent);
             }
         });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == objectList.size() - 1) {
-                    returnList();
+                    Intent intent = new Intent(PfChoosedPicActivity.this,BoutiqueGalleryActivity.class);
+                    intent.putExtra("objectList", (ArrayList) objectList);
+                    startActivity(intent);
                     finish();
                 } else {
                     //不要查看详细，改成切换封面
@@ -97,38 +99,34 @@ public class PfChoosedPicActivity extends BaseActivity {
         objectList = (List<AllPfAlbumSunObject>) intent.getSerializableExtra("objectList");
         boutiqueSingleInfoObject = (BoutiqueSingleInfoObject) intent.getSerializableExtra("object");
         //说明是新建，
-        if(boutiqueSingleInfoObject == null) boutiqueSingleInfoObject = new BoutiqueSingleInfoObject();
-        if(objectList != null && objectList.size() > 0){
+        if (boutiqueSingleInfoObject == null)
+            boutiqueSingleInfoObject = new BoutiqueSingleInfoObject();
+        if (objectList != null && objectList.size() > 0) {
             boutiqueSingleInfoObject.setHerald(objectList.get(0).getPath());
             Iterator<AllPfAlbumSunObject> iterator = objectList.iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 AllPfAlbumSunObject object = iterator.next();
-                selectMap.put(object.getPath(),true);
+                selectMap.put(object.getPath(), true);
                 images.add(object.getPath());
             }
-            setTitleText("选择图片("+objectList.size()+")");
+            setTitleText("选择图片(" + objectList.size() + ")");
         }
     }
 
     private void initViews() {
-              gridView = (GridView) findViewById(R.id.choose_pf_grid);
-              next_step_rl = (RelativeLayout) findViewById(R.id.pf_choose_rl);
-              adapter = new PfChoosePicAdapter(objectList,100,selectMap,gridView);
-              gridView.setAdapter(adapter);
+        gridView = (GridView) findViewById(R.id.choose_pf_grid);
+        next_step_rl = (RelativeLayout) findViewById(R.id.pf_choose_rl);
+        adapter = new PfChoosePicAdapter(objectList, 100, selectMap, gridView);
+        gridView.setAdapter(adapter);
     }
 
-    public void returnList(){
-          Intent intent = new Intent();
-          if(getIntent().getBooleanExtra("edit",false)){
-              intent.setClass(this,BoutiqueGalleryActivity.class);
-              intent.putExtra("objectList",(ArrayList)objectList);
-              startActivity(intent);
-          }else {
+    public void returnList() {
+        Intent intent = new Intent();
+        if (!getIntent().getBooleanExtra("edit", false)) {
 
-              intent.putExtra("selectList", (ArrayList) adapter.getSelectList());
-              setResult(RESULT_OK, intent);
-          }
-
+            intent.putExtra("selectList", (ArrayList) adapter.getSelectList());
+            setResult(RESULT_OK, intent);
+        }
     }
 
     @Override
@@ -144,6 +142,6 @@ public class PfChoosedPicActivity extends BaseActivity {
     }
 
     public void selectChange(HashMap<String, Boolean> mSelectMap) {
-        setTitleText("选择图片("+mSelectMap.size()+")");
+        setTitleText("选择图片(" + mSelectMap.size() + ")");
     }
 }

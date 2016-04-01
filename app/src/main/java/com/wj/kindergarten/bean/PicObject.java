@@ -10,6 +10,15 @@ public class PicObject implements Serializable {
     private String address;
     private String note;
     private String md5;
+    private String family_uuid;
+
+    public String getFamily_uuid() {
+        return family_uuid;
+    }
+
+    public void setFamily_uuid(String family_uuid) {
+        this.family_uuid = family_uuid;
+    }
 
     public String getTime() {
         return time;

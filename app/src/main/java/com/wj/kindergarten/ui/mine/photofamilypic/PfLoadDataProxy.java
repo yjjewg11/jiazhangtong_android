@@ -72,10 +72,12 @@ public class PfLoadDataProxy {
 
     //根据家庭uuid查询所有照片数量,判断是否是上拉刷新，
     public void loadData(String familyUuid, int pageNo, boolean isPullup) {
-//        CGLog.v("打印存放集合 : " + listT.toString() + "集合大小 : " + listT.size());
-        //通过familyuuid查找数据库对象
+        //如果家庭uuid为空，则返回
+        if (Utils.stringIsNull(familyUuid)) {
+            return;
+        }
+
         pfFamilyUuid = familyUuidSql.findById(familyUuid, PfFamilyUuid.class);
-        CGLog.v("打印对象　；" + pfFamilyUuid);
 
         if (!isPullup) {
             //如果为空，则没有获取过数据,从网络获取 ; 有则直接从数据库取
@@ -86,7 +88,7 @@ public class PfLoadDataProxy {
                 savePfFamilyUUid(pfFamilyUuid.getFamily_uuid());
             } else {
                 //同时查询有没有新数据
-                if(!queryChangeandUpdate) {
+                if (!queryChangeandUpdate) {
                     queryChangeandUpdate = true;
                     loadDataIsChange(pfFamilyUuid.getFamily_uuid());
                 }
@@ -107,15 +109,18 @@ public class PfLoadDataProxy {
                 if (dataLoadFinish != null) dataLoadFinish.finish();
                 if (allPfAlbum == null || allPfAlbum.getList() == null || allPfAlbum.getList().getData() == null ||
                         allPfAlbum.getList().getData().size() == 0) {
-                    if(pfFamilyUuid.getMinTime() == null){
+                    if (pfFamilyUuid.getMinTime() == null) {
 
                     }
-                    if(type == NORMAL_DATA){
+                    if (type == NORMAL_DATA) {
                         ToastUtils.showMessage("没有更多内容了");
-                    }else if(type == REFRESH_DATA){
+                    } else if (type == REFRESH_DATA) {
                         ToastUtils.showMessage("暂无新数据！");
                     }
                     dataLoadFinish.noMoreData();
+
+                    //在数据为空的时候还要从数据库查询一次，避免切换相册后不会更换数据的情况
+                    loadFromSqliteByCreateTime();
                     return;
                 }
                 //如果是查询指定时间后的数据，maxtime为空，获取到的lasttime赋值给maxtime
@@ -142,7 +147,7 @@ public class PfLoadDataProxy {
                 //在获取到maxtime和mintime的值之后，查询有没有更新
                 //在获取到新数据之后，保存到数据库中后再从数据库查出来取出来。
                 loadFromSqliteByCreateTime();
-                if(!queryChangeandUpdate){
+                if (!queryChangeandUpdate) {
                     loadDataIsChange(familyUuid);
                     queryChangeandUpdate = true;
                 }
@@ -151,6 +156,7 @@ public class PfLoadDataProxy {
                     handler.sendEmptyMessage(REFRESH_DATA);
                 }
             }
+
             @Override
             public void result(List<BaseModel> domains, int total) {
 
@@ -172,28 +178,31 @@ public class PfLoadDataProxy {
         }
     }
 
-    private void loadFromSqliteByPhotoTime(){
+    private void loadFromSqliteByPhotoTime() {
         loadFromDataBases(QUERY_CLOUMN);
     }
-
 
 
     private void loadFromSqliteByCreateTime() {
         //根据family_uuid把对象根据日期分组，显示多少组及其数量
 //        List<AllPfAlbumSunObject> listTest = familyUuidObjectSql.findAll(AllPfAlbumSunObject.class);
-        loadFromDataBases(QUERY_CLOUMN);
+        try {
+            loadFromDataBases(QUERY_CLOUMN);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadFromDataBases(String timeType) {
-        String sql = "SELECT strftime('%Y-%m-%d',"+timeType+"),count(1) from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() +"'"
-+ "GROUP BY strftime('%Y-%m-%d',"+timeType+");";
+        String sql = "SELECT strftime('%Y-%m-%d'," + timeType + "),count(1) from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME + "  WHERE family_uuid ='" + pfFamilyUuid.getFamily_uuid() + "'"
+                + "GROUP BY strftime('%Y-%m-%d'," + timeType + ");";
         if (pfFamilyUuid.getMaxTime() == null &&
                 pfFamilyUuid.getMinTime() == null) return;
         List<QueryGroupCount> dateArray = new ArrayList<>();
         List<DbModel> dbList = familyUuidObjectSql.findDbModelListBySQL(sql);
         for (DbModel model : dbList) {
             QueryGroupCount count = new QueryGroupCount();
-            String date = (String) model.getDataMap().get("strftime('%Y-%m-%d',"+timeType+")");
+            String date = (String) model.getDataMap().get("strftime('%Y-%m-%d'," + timeType + ")");
             int sumCount = Integer.valueOf((String) model.getDataMap().get("count(1)"));
             if (!TextUtils.isEmpty(date)) {
                 count.setDate(date);
@@ -209,9 +218,9 @@ public class PfLoadDataProxy {
                 int cha = 0;
                 long o = TimeUtil.getMillionFromYMD(one.getDate());
                 long t = TimeUtil.getMillionFromYMD(two.getDate());
-                if(t - o >= 0){
+                if (t - o >= 0) {
                     cha = 1;
-                }else {
+                } else {
                     cha = -1;
                 }
                 return cha;
@@ -232,16 +241,16 @@ public class PfLoadDataProxy {
 
     }
 
-    public final void queryIncrementNewData(final String family_uuid, final DataLoadFinish dataLoadFinish){
-        pfFamilyUuid =  familyUuidSql.findById(family_uuid, PfFamilyUuid.class);
+    public final void queryIncrementNewData(final String family_uuid, final DataLoadFinish dataLoadFinish) {
+        pfFamilyUuid = familyUuidSql.findById(family_uuid, PfFamilyUuid.class);
         UserRequest.queryIncrementNewData(context, pfFamilyUuid.getFamily_uuid(), TimeUtil.getStringDate(pfFamilyUuid.getMaxTime()), new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
-                if(dataLoadFinish != null) dataLoadFinish.finish();
+                if (dataLoadFinish != null) dataLoadFinish.finish();
                 PfChangeData pfChangeData = (PfChangeData) domain;
-                if (pfChangeData == null || pfChangeData.getNewDataCount() == 0){
-                    if(dataLoadFinish != null)
-                    dataLoadFinish.noMoreData();
+                if (pfChangeData == null || pfChangeData.getNewDataCount() == 0) {
+                    if (dataLoadFinish != null)
+                        dataLoadFinish.noMoreData();
                     loadFromSqliteByCreateTime();
                     return;
                 }
@@ -259,18 +268,18 @@ public class PfLoadDataProxy {
             @Override
             public void failure(String message) {
                 super.failure(message);
-                if(dataLoadFinish != null)  dataLoadFinish.loadFailed();
+                if (dataLoadFinish != null) dataLoadFinish.loadFailed();
             }
         });
     }
 
 
     public final void queryIncrementNewData(final String family_uuid) {
-        queryIncrementNewData(family_uuid,null);
+        queryIncrementNewData(family_uuid, null);
     }
 
     private String formatTime(Date date) {
-        if(date == null)return null;
+        if (date == null) return null;
         return TimeUtil.getStringDate(date);
     }
 
@@ -304,7 +313,7 @@ public class PfLoadDataProxy {
                             CGLog.v("打印obj : " + obj);
                             AllPfAlbumSunObject objSql = familyUuidObjectSql.findById(obj.getU(), AllPfAlbumSunObject.class);
                             if (objSql == null) continue;
-                            if(obj.getS() == 2) {
+                            if (obj.getS() == 2) {
                                 familyUuidObjectSql.delete(objSql);
                                 continue;
                             }
@@ -328,27 +337,30 @@ public class PfLoadDataProxy {
         });
     }
 
-    public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date,String limitCount){
+    public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date, String limitCount) {
 //        "limit 6"
 
-        String sql = " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' " + limitCount;
+        String sql = " strftime('%Y-%m-%d'," + QUERY_CLOUMN + ") ='" + date + "' and family_uuid ='" + family_uuid + "' " + limitCount;
         List<AllPfAlbumSunObject> objectList = familyUuidObjectSql.findAllByWhere(AllPfAlbumSunObject.class, sql);
-//        String count = "select count(*) from com_wj_kindergarten_bean_AllPfAlbumSunObject where " +
-//                " strftime('%Y-%m-%d',"+QUERY_CLOUMN+") ='" + date + "' and family_uuid ='" + family_uuid + "' ";
+
+
         return objectList;
     }
 
     public List<AllPfAlbumSunObject> queryListByDate(String family_uuid, String date) {
-       return queryListByDate(family_uuid,date,"");
+        return queryListByDate(family_uuid, date, "");
     }
 
 
     public interface DataLoadFinish {
         void finish();
+
         void noMoreData();
+
         void loadFailed();
     }
-    public interface DataLoadFinishFirst extends DataLoadFinish{
+
+    public interface DataLoadFinishFirst extends DataLoadFinish {
         void noMoreDataFirst();
 
     }

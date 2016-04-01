@@ -73,7 +73,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
     //开始扫描
     private final int SCAN_PHOTO_BEGIN = 0;
     //扫描完成
-    private final int SCAN_PHOTO_COMPLETE = 1;
+    private final int SCAN_PHOTO_COMPLETE = 6;
     //改变目录
 
     private final int SCAN_GROUP_BY_DATE = 2;
@@ -369,10 +369,10 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case UPDATE_DATA:
-                    if(selectList != null && selectList.size() > 0){
-                        HashMap<String,Boolean> map  =  getSelectMapFromList(selectList);
-                        for(AllPfAlbumSunObject object : galleryList){
-                            if(!map.containsKey(object.getPath())){
+                    if (selectList != null && selectList.size() > 0) {
+                        HashMap<String, Boolean> map = getSelectMapFromList(selectList);
+                        for (AllPfAlbumSunObject object : galleryList) {
+                            if (!map.containsKey(object.getPath())) {
                                 map.remove(object.getPath());
                             }
                         }
@@ -380,7 +380,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                     }
                     break;
                 case SCAN_PHOTO_BEGIN:
-                //开始扫描
+                    //开始扫描
 //                    scanPhoto_v2();
                     objectList = db.findAll(AllPfAlbumSunObject.class);
                     if (objectList != null && objectList.size() > 0) {
@@ -389,15 +389,14 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
                     }
                     break;
                 case SCAN_PHOTO_COMPLETE:
-                //扫描结束
-
-                        adapter.notifyDataSetChanged();
-
+                    //扫描结束
+                    adapter.notifyDataSetChanged();
                     mHandler.sendEmptyMessage(UPDATE_DATA);
+
                     nowDir = getString(R.string.all_photo);
                     break;
                 case SCAN_GROUP_BY_DATE:
-                    String sql = "SELECT strftime('%Y-%m-%d',create_time),count(1) from " + "com_wj_kindergarten_bean_AllPfAlbumSunObject" +
+                    String sql = "SELECT strftime('%Y-%m-%d',create_time),count(1) from " + GloablUtils.PF_FAMILY_TABLE_OBJ_NAME +
                             " GROUP BY strftime('%Y-%m-%d',create_time)";
                     List<QueryGroupCount> dateArray = new ArrayList<>();
                     List<DbModel> dbList = db.findDbModelListBySQL(sql);
@@ -531,7 +530,7 @@ public class BoutiqueGalleryActivity extends BaseActivity implements View.OnClic
             if (isCut) {
 
             } else {
-                if(adapter.getSelectList().size() < 5){
+                if (adapter.getSelectList().size() < 5) {
                     ToastUtils.showMessage("至少选择5张照片!");
                     return;
                 }

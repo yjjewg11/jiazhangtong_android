@@ -151,16 +151,18 @@ public class FusionListFragment extends Fragment implements Watcher{
                 }
                 mHandler.sendEmptyMessage(QUERY_FINISHED);
             }
+
+            private void queryData(QueryGroupCount queryGroupCount) {
+                String sql = " strftime('%Y-%m-%d'," + QUERY_CLOUMN + ") ='" + queryGroupCount.getDate() +
+                        "' and family_uuid ='" +family_uuid + "'";
+                List<AllPfAlbumSunObject> list =  dbObj.findAllByWhere(AllPfAlbumSunObject.class, sql);
+                map.put(queryGroupCount.getDate(),list);
+                mapSize.put(queryGroupCount.getDate(),list.size());
+            }
+
         });
     }
 
-    private void queryData(QueryGroupCount queryGroupCount) {
-        String sql = " strftime('%Y-%m-%d'," + QUERY_CLOUMN + ") ='" + queryGroupCount.getDate() +
-                "' and family_uuid ='" +family_uuid + "'";
-        List<AllPfAlbumSunObject> list =  dbObj.findAllByWhere(AllPfAlbumSunObject.class, sql);
-        map.put(queryGroupCount.getDate(),list);
-        mapSize.put(queryGroupCount.getDate(),list.size());
-    }
 
     private FusionAdapter fusionAdapter;
 

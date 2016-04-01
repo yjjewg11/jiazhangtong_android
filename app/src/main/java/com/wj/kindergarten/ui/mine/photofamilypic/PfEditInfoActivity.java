@@ -118,6 +118,14 @@ public class PfEditInfoActivity extends BaseActivity {
         initTitle = info.getTitle();
         initHearld = info.getHerald();
         tv_album_name.setText("" + title);
+        if(!Utils.stringIsNull(info.getCreate_time())){
+            try{
+            pf_tv_birthday.setText(""+TimeUtil.getYMDTimeFromYMDHMS(info.getCreate_time()));
+            }catch (Exception e){
+                pf_tv_birthday.setText(""+TimeUtil.getNowDate());
+            }
+        }
+
         if(!Utils.stringIsNull(hearld)){
             ImageLoaderUtil.displayImage(hearld, iv_appear_image);
         }else {
@@ -411,7 +419,7 @@ public class PfEditInfoActivity extends BaseActivity {
 
     private void editInfo(final PFAlbumMember member){
         UserRequest.addFamilyMember(this, member.getFamily_uuid(), member.getFamily_name(), member.getTel(),
-                member.getUuid(), new RequestResultI() {
+                member.getUuid(), new RequestFailedResult(commonDialog) {
                     @Override
                     public void result(BaseModel domain) {
                         ToastUtils.showMessage("修改成功!");
@@ -424,10 +432,6 @@ public class PfEditInfoActivity extends BaseActivity {
 
                     }
 
-                    @Override
-                    public void failure(String message) {
-                        ToastUtils.showMessage(message);
-                    }
                 });
     }
 }

@@ -71,6 +71,15 @@
         <item name="android:paddingLeft">@dimen/small_padding</item>
         <item name="android:paddingRight">@dimen/small_padding</item>
     </style>
+    <style name="myLoginEditStyle">
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:textColorHint">@color/textcolor_8e8e8e</item>
+        <item name="android:textColor">@color/hint_gray</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingLeft">@dimen/small_padding</item>
+        <item name="android:paddingRight">@dimen/small_padding</item>
+    </style>
 
     <style name="detail_left">
         <item name="android:gravity">center_vertical</item>

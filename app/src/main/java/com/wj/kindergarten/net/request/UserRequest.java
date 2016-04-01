@@ -1194,7 +1194,7 @@ public final class UserRequest {
 
     public static void validateBanPhoneQQ(Context context, String openid, String access_token, RequestResultI resultI) {
         RequestParams params = new RequestParams();
-        params.put("appid", SplashActivity.QQ_APP_ID);
+        params.put("appid", GloablUtils.QQ_APP_ID);
         params.put("openid", openid);
         params.put("access_token",access_token);
 
@@ -1244,7 +1244,7 @@ public final class UserRequest {
 
     public static void validateBanPhoneWEIXIN(Context context, String openid, String access_token, RequestFailedResult requestFailedResult) {
         RequestParams params = new RequestParams();
-        params.put("appid", SplashActivity.WEIXIN_APP_ID);
+        params.put("appid",GloablUtils.WEIXIN_APP_ID);
         params.put("openid", openid);
         params.put("access_token",access_token);
         SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +

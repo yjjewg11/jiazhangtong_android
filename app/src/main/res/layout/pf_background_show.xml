@@ -13,7 +13,7 @@
         <FrameLayout
             android:padding="1dp"
             android:background="@drawable/pf_back_border"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:id="@+id/pic_back_fl"
             android:layout_centerHorizontal="true"
             android:layout_width="70dp"
