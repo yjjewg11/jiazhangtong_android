@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/radio_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_head_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/heart_shape_collect"
+            android:drawablePadding="15dp"
+            android:padding="@dimen/margin_15"
+            android:text="我的收藏"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_cccccc" />
+
+        <TextView
+            android:id="@+id/tv_up_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/upload_photo"
+            android:drawablePadding="15dp"
+            android:padding="@dimen/margin_15"
+            android:text="上传列表"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_cccccc" />
+
+        <TextView
+            android:id="@+id/tv_album_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/album_info"
+            android:drawablePadding="15dp"
+            android:padding="@dimen/margin_15"
+            android:text="相册信息"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_cccccc" />
+
+        <TextView
+            android:id="@+id/tv_add_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/xinjianxiangce_pf2"
+            android:drawablePadding="15dp"
+            android:padding="@dimen/margin_15"
+            android:text="添加相册"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+</LinearLayout>
+

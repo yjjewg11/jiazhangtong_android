@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/share_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <GridView
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:id="@+id/pf_pop_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:columnWidth="100dip"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="图片列表"
+            android:id="@+id/textView40"
+            android:layout_above="@+id/pf_pop_gridView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

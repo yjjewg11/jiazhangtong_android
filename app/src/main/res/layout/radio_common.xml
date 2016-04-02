@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RadioGroup
+        android:id="@+id/three_rb_all"
+        android:checkedButton="@+id/rb_three_corse"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <RadioButton
+            android:textSize="17sp"
+            android:textColor="@drawable/choose_text_three"
+            android:id="@+id/rb_three_corse"
+            android:button="@null"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="课程详情"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:background="#bbbbbb"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0.5dp"
+            android:layout_height="25dp" />
+        <RadioButton
+            android:textSize="17sp"
+            android:textColor="@drawable/choose_text_three"
+            android:id="@+id/rb_three_school"
+            android:button="@null"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="学校简介"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:background="#bbbbbb"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0.5dp"
+            android:layout_height="25dp" />
+        <RadioButton
+            android:textSize="17sp"
+            android:id="@+id/rb_three_assess"
+            android:textColor="@drawable/choose_text_three"
+            android:button="@null"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="家长评论"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RadioGroup>
+
+</LinearLayout>

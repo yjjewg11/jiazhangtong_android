@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/father_ll"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/web_fl"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/content_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <include layout="@layout/title_normal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_above="@+id/ll_items"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                <WebView
+                    android:layout_weight="1"
+                    android:id="@+id/article_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/small_padding"
+                    android:textColor="@color/hint_gray"
+                    android:background="@color/translate"
+                    android:alpha="1"
+                    android:textSize="@dimen/normal_text"
+                    android:layout_above="@+id/ll_items" />
+
+               </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_items"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <include layout="@layout/line" />
+
+
+            <include layout="@layout/article_common"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_con"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

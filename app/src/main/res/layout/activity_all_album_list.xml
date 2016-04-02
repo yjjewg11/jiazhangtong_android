@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.wj.kindergarten.ui.mine.photofamilypic.AllAlbumListActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal"/>
+    </FrameLayout>
+    <GridView
+        android:id="@+id/all_album_list_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="2"
+        android:horizontalSpacing="8dp"
+        android:columnWidth="@dimen/margin_10"
+        android:verticalSpacing="@dimen/small_padding"
+        android:visibility="visible" />
+</LinearLayout>

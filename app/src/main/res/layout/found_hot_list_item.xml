@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:textColor="#313131"
+        android:textSize="17sp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="秋冬季如何让孩子吃好穿暖?"
+        android:id="@+id/tv_found_hot_theme"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="9dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginBottom="@dimen/margin_15"
+        android:gravity="center"
+        android:textSize="@dimen/margin_10"
+        android:textColor="@color/white"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:minWidth="30dp"
+        android:background="@drawable/found_count_selector"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="299"
+        android:id="@+id/tv_found_hot_count"
+        android:layout_below="@+id/tv_found_hot_theme"
+        android:layout_alignParentLeft="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_alignTop="@+id/tv_found_hot_count"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_found_hot_count">
+            <TextView
+                android:paddingBottom="@dimen/margin_15"
+                android:textColor="@color/textcolor_8e8e8e"
+                android:textSize="14sp"
+                android:lines="3"
+                android:ellipsize="end"
+                android:paddingRight="9dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="每到秋冬季季天气装量，总会有互粉多的孩子感冒生病转，那么责骂么减少这种影响."
+                android:id="@+id/tv_found_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" />
+
+            <com.wj.kindergarten.compounets.NestedGridView
+                android:id="@+id/item_found_hot_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/margin_15"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="3"
+                android:columnWidth="8dp"
+                android:verticalSpacing="@dimen/small_padding"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+
+</LinearLayout>

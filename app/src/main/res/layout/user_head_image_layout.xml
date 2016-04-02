@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#88666666"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:clickable="true"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/take_photo"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/take_photo_selector"
+            android:gravity="center"
+            android:text="拍照"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/choose_form_images"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/choose_photo_selector"
+            android:gravity="center"
+            android:text="从相册选择"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/choose_image_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@drawable/choose_photo_cancel_selector"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

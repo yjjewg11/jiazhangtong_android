@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:paddingBottom="@dimen/margin_10"
+        android:paddingTop="@dimen/margin_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_centerInParent="true"
+            android:src="@drawable/zhanweitu"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:id="@+id/iv_left"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:textColor="#000000"
+            android:textSize="17sp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingRight="@dimen/margin_10"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="一些优惠活动!!!"
+            android:id="@+id/tv_privilege_active"
+            android:layout_alignTop="@+id/iv_left"
+            android:layout_toRightOf="@+id/iv_left"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:layout_alignBottom="@+id/iv_left"
+            android:layout_marginRight="20dp"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="晨钟教育中心"
+            android:id="@+id/tv_ecducation"
+            android:layout_alignLeft="@+id/tv_privilege_active" />
+
+        <TextView
+            android:textSize="15sp"
+            android:drawablePadding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="111人"
+            android:id="@+id/tv_zan_people"
+            android:layout_alignTop="@+id/tv_ecducation"
+            android:layout_toLeftOf="@+id/tv_distance"
+            android:layout_marginRight="20dp" />
+
+        <TextView
+            android:layout_alignTop="@+id/tv_zan_people"
+            android:textSize="15sp"
+            android:drawablePadding="@dimen/margin_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="1.5km"
+            android:id="@+id/tv_distance"
+            android:layout_marginRight="15dp"
+            android:layout_alignBottom="@+id/tv_ecducation"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+</LinearLayout>

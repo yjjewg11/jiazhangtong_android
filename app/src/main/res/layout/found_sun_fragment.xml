@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:layout_width="match_parent"
+        android:id="@+id/scroll_found_fragment"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <GridView
+        android:id="@+id/found_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3" />
+
+    <TextView
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="44dp" >
+
+
+        <TextView
+            android:layout_marginLeft="9dp"
+            android:textSize="@dimen/margin_15"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="每日推荐"
+            android:textColor="#ff5a50"
+            android:id="@+id/tv_everyday_recommon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:lines="2"
+            android:ellipsize="end"
+            android:textSize="12sp"
+            android:textColor="#8e8e8e"
+            android:drawableLeft="@drawable/tuijian_xian_big"
+            android:drawablePadding="@dimen/margin_10"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="怎么打能够让孩子受到教训不受伤!"
+            android:id="@+id/tv_everyday_topic"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_everyday_recommon"
+            android:layout_marginLeft="10dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:background="@color/background_division"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_15" />
+    <TextView
+        android:textColor="#aaaaaa"
+        android:textSize="12sp"
+        android:text="热门精选"
+        android:gravity="center_vertical"
+        android:paddingLeft="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:background="@color/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <LinearLayout
+        android:id="@+id/contain_hot_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+
+</LinearLayout>

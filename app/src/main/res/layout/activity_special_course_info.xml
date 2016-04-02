@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:weightSum="1">
+
+    <FrameLayout
+        android:id="@+id/head_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/radio_common"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/draw_line_ll"
+        android:layout_width="match_parent"
+        android:layout_height="3dp">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/three_line_common"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/black_width"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/tab_bg" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/container_ll_three"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
+
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/btom_llll"
+        android:background="#cccccc" />
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:id="@+id/btom_llll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/train_course_common" />
+    </FrameLayout>
+</LinearLayout>
+

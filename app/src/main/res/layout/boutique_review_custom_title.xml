@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:textColor="@color/title_bg"
+        android:textSize="17sp"
+        android:padding="@dimen/margin_5"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="保存相册"
+        android:id="@+id/textView29"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:background="@color/background_division"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView31"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_marginRight="@dimen/margin_15"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:padding="@dimen/margin_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/boutique_custom_edittext"
+        android:hint="输入相册标题名称"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/zhanweitu"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/pf_mine_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/pf_mine_tv"
+        android:layout_below="@+id/pf_mine_image"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

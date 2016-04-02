@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/anim_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/about_school_item"/>
+
+    </FrameLayout>
+
+    </LinearLayout>
+    <TextView
+        android:background="#e5e5e5"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/common_tab_layout"/>
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_above="@+id/frameLayout"
+            android:id="@+id/common_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_shadow"
+            android:layout_above="@+id/frameLayout"
+            android:layout_marginTop="@dimen/title_shadow_"
+            android:background="@drawable/fix_detail_shadow_down"
+            android:contentDescription="下部阴影" />
+        <FrameLayout
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frameLayout">
+            <include layout="@layout/train_course_common"/>
+        </FrameLayout>
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

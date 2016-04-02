@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/map_indicator"
+        android:paddingBottom="@dimen/margin_20">
+
+
+        <TextView
+            android:id="@+id/tv_map_school_name"
+            style="@style/map_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:text="晨钟中心"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_map_address"
+            style="@style/map_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_map_school_name"
+            android:text="武侯大道旁"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/look_route"
+            style="@style/map_text_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_map_address"
+            android:layout_below="@+id/tv_map_address"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/margin_20"
+            android:background="@drawable/map_text_circle"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="查看路线" />
+
+        <TextView
+            android:id="@+id/report_mistake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/tv_map_address"
+            android:layout_alignTop="@+id/look_route"
+            android:layout_marginRight="37dp"
+            android:background="@drawable/map_text_circle"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="我要报错"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+</LinearLayout>

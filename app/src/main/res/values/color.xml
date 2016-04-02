@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="gray_line">#e0e0e0</color>
+
+
+    <color name="special_gray">#f6f6f6</color>
+
+    <color name="normal_bg">#ffffff</color>
+    <color name="normal_text_gray">#b3b3b3</color>
+    <color name="hint_gray">#666666</color>
+    <color name="blue">#191970</color>
+
+    <color name="tab_bg">#e5e5e5</color>
+    <color name="main_pop_bg">#333333</color>
+
+    <color name="main_bg">#efeff4</color>
+
+    <color name="line">#cccccc</color>
+
+    <color name="title_bg">#ff6666</color>
+    <color name="title_click">#e56969</color>
+    <color name="title_center">#ffffff</color>
+    <color name="title_right">#ffffff</color>
+    <color name="often_red">#cf3020</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_929292">#929292</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
+    <color name="color_e0e0e0">#e0e0e0</color>
+    <color name="color_8e8e8e">#8e8e8e</color>
+    <color name="color_blue">#1697d3</color>
+
+    <color name="text_green">#59bb3e</color>
+
+    <color name="photo_gallery_bg">#444444</color>
+
+    <color name="radio_white">#f5f5f5</color>
+
+
+
+    <color name="course_over">#ffffff</color>
+    <color name="course_been_down">#ff7800</color>
+    <color name="course_not_do">#49a3ff</color>
+    <color name="background_division">#f0f0f0</color>
+    <color name="textcolor_8e8e8e">#8e8e8e</color>
+    <color name="unit_line_division">#e9e9e9</color>
+    <color name="color_313131">#313131</color>
+    <color name="color_b9b9b9">#b9b9b9</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_ff5a50">#ff5a50</color>
+    <color name="color_6f2d03">#6f2d03</color>
+    <color name="color_222222">#222222</color>
+
+
+
+</resources>
