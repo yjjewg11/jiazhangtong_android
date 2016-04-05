@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_checked="true" android:drawable="@drawable/xuexiaottt"/>
-    <item android:state_checked="false" android:drawable="@drawable/xuexiaofff"/>
+    <item android:state_checked="true" android:drawable="@drawable/tongxunlu_red_message"/>
+    <item android:state_checked="false" android:drawable="@drawable/tongxunlu_white_message"/>
 
 
 

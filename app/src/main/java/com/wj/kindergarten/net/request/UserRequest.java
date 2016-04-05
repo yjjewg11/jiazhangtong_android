@@ -22,6 +22,7 @@ import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.messagepag.EditMyInfoActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
@@ -123,6 +124,7 @@ public final class UserRequest {
     private static final String BOUND_TEL = "rest/userinfo/bindTel.json";
     private static final String VALIDATE_BAN_PHONE_WEIXIN = "rest/userThirdLoginWenXin/access_token.json";
     private static final String COMMON_DELETE_REPLY = "rest/baseReply/delete.json";
+    private static final String SAVE_USER_INFO = "rest/userinfo/update.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -1249,5 +1251,21 @@ public final class UserRequest {
         params.put("access_token",access_token);
         SendRequest.getInstance().get(context, RequestType.VALIDATE_BAN_PHONE, params, RequestHttpUtil.BASE_URL +
                 VALIDATE_BAN_PHONE_WEIXIN, requestFailedResult);
+    }
+
+
+    public static void saveUserInfo(Context context, String imgUrl, String name, String relname, RequestFailedResult resultI) {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("imgUrl", imgUrl);
+            object.put("name", name);
+            object.put("relname", relname);
+            object.put("email", CGApplication.getInstance().getLogin().getUserinfo().getEmail());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        SendRequest.getInstance().post(context, RequestType.ZAN, object.toString(),
+                RequestHttpUtil.BASE_URL + SAVE_USER_INFO, resultI);
     }
 }

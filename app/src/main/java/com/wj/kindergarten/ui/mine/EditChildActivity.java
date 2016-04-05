@@ -555,7 +555,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         StoreDataInSerialize.storeUserInfo(CGApplication.getInstance().getLogin());
 //        Intent intent = new Intent(GloablUtils.MINE_ADD_CHILD_FINISH);
 //        sendBroadcast(intent);
-        MineFragment.instance.addChildren();
+//        MineFragment.instance.addChildren();
 
 
     }

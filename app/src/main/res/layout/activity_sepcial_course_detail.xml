@@ -48,9 +48,8 @@
                 android:layout_alignTop="@+id/radioButton"
                 android:layout_alignLeft="@+id/radioGroup"
                 android:checked="false" />
-
-
         </RadioGroup>
+
         <TextView
             android:id="@+id/spinner_city_special"
             android:textColor="#ffffff"

@@ -1,6 +1,8 @@
 package com.wj.kindergarten.ui.main;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,11 +21,13 @@ import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.compounets.CircleImage;
 import com.wj.kindergarten.ui.func.MineSchoolActivity;
 import com.wj.kindergarten.ui.func.MineSpecialCourseActivity;
+import com.wj.kindergarten.ui.messagepag.EditMyInfoActivity;
 import com.wj.kindergarten.ui.mine.ChildActivity;
 import com.wj.kindergarten.ui.mine.EditChildActivity;
 import com.wj.kindergarten.ui.mine.SettingActivity;
 import com.wj.kindergarten.ui.mine.store.StoreActivity;
 import com.wj.kindergarten.utils.Constant.MessageConstant;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
@@ -38,7 +42,6 @@ import com.wj.kindergarten.utils.WindowUtils;
  */
 public class MineFragment extends Fragment {
     private View rootView;
-    private LinearLayout childContent;
     private LinearLayout llSetting;
     private Login login;
     private LinearLayout mine_collect;
@@ -46,9 +49,9 @@ public class MineFragment extends Fragment {
     private LinearLayout recruit_school;
     private ImageView mine_add_child;
     private View.OnClickListener addListeners;
-    private HorizontalScrollView mine_head_horizontal_scroll;
     public static MineFragment instance;
-    private LinearLayout hs_container_mine;
+    private CircleImage circle_mine_image;
+    private TextView tv_my_name;
 
 
     @Nullable
@@ -67,9 +70,30 @@ public class MineFragment extends Fragment {
         if (parent != null) {
             parent.removeView(rootView);
         }
-        addChildren();
+        initHeadData();
+
+//        addChildren();
         return rootView;
     }
+
+    private void initHeadData() {
+        Login login = CGApplication.getInstance().getLogin();
+        if(login == null || login.getUserinfo() == null)return;
+        tv_my_name.setText(""+Utils.isNull(CGApplication.getInstance().getLogin().getUserinfo().getName()));
+        String head = login.getUserinfo().getImg();
+        if(!Utils.stringIsNull(head)){
+            ImageLoaderUtil.displayImage(head,circle_mine_image);
+        }
+    }
+
+    View.OnClickListener myListener = new View.OnClickListener() {
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(),EditMyInfoActivity.class);
+            getActivity().startActivityForResult(intent, GloablUtils.UPDATE_MY_INFO,null);
+        }
+    };
 
     private void initViews(View rootView) {
         addListeners = new View.OnClickListener() {
@@ -81,12 +105,12 @@ public class MineFragment extends Fragment {
                 startActivity(intent);
             }
         };
-        hs_container_mine = (LinearLayout)rootView.findViewById(R.id.hs_container_mine);
-        mine_head_horizontal_scroll = (HorizontalScrollView)rootView.findViewById(R.id.mine_head_horizontal_scroll);
-        mine_head_horizontal_scroll.setOnTouchListener(null);
+        circle_mine_image = (CircleImage)rootView.findViewById(R.id.circle_mine_image);
+        tv_my_name = (TextView)rootView.findViewById(R.id.tv_children_name);
+        circle_mine_image.setOnClickListener(myListener);
+        tv_my_name.setOnClickListener(myListener);
         mine_add_child = (ImageView) rootView.findViewById(R.id.mine_add_child);
         mine_add_child.setOnClickListener(addListeners);
-        childContent = (LinearLayout) rootView.findViewById(R.id.mine_content);
         mine_collect = (LinearLayout) rootView.findViewById(R.id.ll_store);
         mine_course = (LinearLayout) rootView.findViewById(R.id.ll_special_course);
         recruit_school = (LinearLayout) rootView.findViewById(R.id.ll_mine_school);
@@ -131,40 +155,40 @@ public class MineFragment extends Fragment {
 
     }
 
-    public void addChildren() {
-        Login loginNew = CGApplication.getInstance().getLogin();
-        childContent.removeAllViews();
-        if (loginNew != null && loginNew.getList() != null) {
-            //如果小于等于3，均分
-            if(loginNew.getList().size() <= 3 && loginNew.getList().size() != 0){
-                hs_container_mine.removeAllViews();
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
-                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.weight = 1;
-                addSmallChild(loginNew,hs_container_mine,layoutParams);
-            }else if(loginNew.getList().size() > 3){
-                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.
-                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams2.leftMargin = 80;
-                addSmallChild(loginNew,childContent,layoutParams2);
-            }
-
-
-
-            if (loginNew.getList().size() == 0) {
-                View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
-                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
-                TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
-                headIv.setImageResource(R.drawable.xiaohai_head);
-                nameTv.setText("添加宝宝");
-                setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
-                view.setOnClickListener(addListeners);
-                childContent.addView(view, layoutParams);
-            }
-        }
-    }
+//    public void addChildren() {
+//        Login loginNew = CGApplication.getInstance().getLogin();
+//        childContent.removeAllViews();
+//        if (loginNew != null && loginNew.getList() != null) {
+//            //如果小于等于3，均分
+//            if(loginNew.getList().size() <= 3 && loginNew.getList().size() != 0){
+//                hs_container_mine.removeAllViews();
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
+//                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                layoutParams.weight = 1;
+//                addSmallChild(loginNew,hs_container_mine,layoutParams);
+//            }else if(loginNew.getList().size() > 3){
+//                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.
+//                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                layoutParams2.leftMargin = 80;
+//                addSmallChild(loginNew,childContent,layoutParams2);
+//            }
+//
+//
+//
+//            if (loginNew.getList().size() == 0) {
+//                View view = View.inflate(getActivity(), R.layout.mine_children_head, null);
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.
+//                        LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                CircleImage headIv = (CircleImage) view.findViewById(R.id.circle_mine_image);
+//                TextView nameTv = (TextView) view.findViewById(R.id.tv_children_name);
+//                headIv.setImageResource(R.drawable.xiaohai_head);
+//                nameTv.setText("添加宝宝");
+//                setMargin(layoutParams, WindowUtils.dm.widthPixels / 2);
+//                view.setOnClickListener(addListeners);
+//                childContent.addView(view, layoutParams);
+//            }
+//        }
+//    }
 
     private void addSmallChild(Login loginNew, LinearLayout contain,LinearLayout.LayoutParams layoutParams) {
         for (final ChildInfo childInfo : loginNew.getList()) {

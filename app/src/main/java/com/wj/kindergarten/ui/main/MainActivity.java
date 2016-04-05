@@ -292,7 +292,7 @@ public class MainActivity extends BaseActivity {
                     MessageFragment messageFragment = (MessageFragment) getSupportFragmentManager()
                             .findFragmentByTag(mTabIdArray[2]);
                     if (messageFragment != null) {
-                        messageFragment.loadMessage();
+//                        messageFragment.loadMessage();
                     }
                 } else if (msg.what == 1010) {
                     Utils.showToast(MainActivity.this, "登录超时，请重新登录。");
@@ -322,7 +322,7 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         if (mTabIdArray[4].equals(nowTab)) {
             MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
-            mineFragment.addChildren();
+//            mineFragment.addChildren();
         }
 
 

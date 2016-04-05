@@ -40,7 +40,16 @@ public class UserInfo extends BaseModel {
     private int disable;
     @Expose
     private String uuid;
+    @Expose
+    private String realname;
 
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
     public String getOffice() {
         return office;

@@ -76,6 +76,10 @@ public interface GloablUtils {
     int FROM_DOWN = 3064;
     int CONFIRM_BOUND_TEL = 3065;
     int BOUND_TEL = 3066;
+    int UPDATE_MY_INFO = 3067;
+    int MY_INFO_REQUESTCODE_TAKE = 3068;
+    int MY_INFO_REQUESTCODE_PICK = 3069;
+    int MY_INFO_REQUESTCODE_CUTTING = 3070;
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";
@@ -104,4 +108,6 @@ public interface GloablUtils {
 
     String PF_FAMILY_TABLE_OBJ_NAME = "pf_family_allobj";
     String PF_ALL_TABLE_FAMILY = "pf_all_family";
+
+
 }

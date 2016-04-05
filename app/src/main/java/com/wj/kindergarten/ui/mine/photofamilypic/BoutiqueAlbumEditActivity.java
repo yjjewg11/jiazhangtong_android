@@ -1,6 +1,8 @@
 package com.wj.kindergarten.ui.mine.photofamilypic;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -70,6 +72,7 @@ public class BoutiqueAlbumEditActivity extends BaseActivity {
         });
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void startForResult(AllPfAlbumSunObject object){
         Intent intent = new Intent(this, SinglePfEditActivity.class);
         intent.putExtra("object", object);

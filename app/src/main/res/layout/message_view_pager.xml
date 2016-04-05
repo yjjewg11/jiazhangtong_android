@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@color/title_bg"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <RadioGroup
+            android:id="@+id/message_view_radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/course_sectlect"
+                android:button="@null"
+                android:id="@+id/message_view_chooose"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/address_view_chooose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/school_sectlect"
+                android:button="@null"
+                android:layout_alignTop="@+id/radioButton"
+                android:layout_alignLeft="@+id/radioGroup"
+                android:checked="false" />
+        </RadioGroup>
+        <ImageView
+            android:layout_marginRight="@dimen/margin_5"
+            android:id="@+id/message_view_add_constact"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/tianjiaxiaohai"
+            android:scaleType="center"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/message_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
