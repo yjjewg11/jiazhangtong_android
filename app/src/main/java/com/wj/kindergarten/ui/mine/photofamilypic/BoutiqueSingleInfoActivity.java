@@ -397,8 +397,13 @@ public class BoutiqueSingleInfoActivity extends BaseActivity {
             pfCommonAssessAdapter = new PfCommonAssessAdapter(this);
             pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
                 @Override
-                public void deleteData(PfSingleAssessObject object) {
-                    deleteReply(object);
+                public void deleteData(final PfSingleAssessObject object) {
+                    ToastUtils.showDialog(BoutiqueSingleInfoActivity.this, "提示", "你确认删除吗?", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteReply(object);
+                        }
+                    });
                 }
             });
             assessListView.setAdapter(pfCommonAssessAdapter);

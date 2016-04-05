@@ -321,8 +321,13 @@ public class PFSingleObjectInfoFragment extends Fragment {
             pfCommonAssessAdapter = new PfCommonAssessAdapter(getActivity());
             pfCommonAssessAdapter.setDeleteDataListener(new PfCommonAssessAdapter.DeleteAssessItemListener() {
                 @Override
-                public void deleteData(PfSingleAssessObject object) {
-                    deleteReply(object);
+                public void deleteData(final PfSingleAssessObject object) {
+                    ToastUtils.showDialog(getActivity(), "提示", "你确认删除吗?", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteReply(object);
+                        }
+                    });
                 }
             });
             pfCommonAssessAdapter.setBottomListener(new View.OnClickListener() {
