@@ -2,30 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/normal_padding"
     android:orientation="vertical">
 
     <TextView
+        android:textStyle="bold"
+        android:gravity="center_vertical"
         android:id="@+id/item_child_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/normal_padding"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/margin_15"
         android:drawableLeft="@drawable/mine_pre_text"
         android:drawablePadding="@dimen/small_padding"
         android:paddingBottom="@dimen/small_padding"
         android:paddingTop="@dimen/small_padding"
         android:text="爸爸"
-        android:textColor="@color/black"
+        android:textColor="@color/color_ff6666"
         android:textSize="@dimen/normal_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/normal_padding">
+        android:orientation="vertical">
 
         <TextView
+            android:paddingLeft="@dimen/margin_15"
             android:id="@+id/item_child_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/condition_height"
@@ -42,6 +43,7 @@
             android:background="@color/line" />
 
         <TextView
+            android:paddingLeft="@dimen/margin_15"
             android:id="@+id/item_child_tel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/condition_height"
@@ -50,6 +52,11 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:singleLine="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/item_child_parent_teachers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:id="@+id/item_child_work_layout"
@@ -64,6 +71,7 @@
                 android:background="@color/line" />
 
             <TextView
+                android:paddingLeft="@dimen/margin_15"
                 android:id="@+id/item_child_work"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
@@ -73,5 +81,12 @@
                 android:gravity="center_vertical"
                 android:singleLine="true" />
         </LinearLayout>
+        <LinearLayout
+            android:paddingRight="@dimen/margin_15"
+            android:orientation="vertical"
+            android:id="@+id/item_child_parent_relative_card"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

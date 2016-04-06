@@ -672,6 +672,12 @@ public class MainActivity extends BaseActivity {
                     familyFragment.reqetFamilyAlbum();
                 }
                 break;
+            case GloablUtils.UPDATE_MY_INFO:
+                if(mTabHost.getCurrentTab() == 4 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]) != null){
+                    MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
+                    mineFragment.initHeadData();
+                }
+                break;
         }
     }
 

@@ -134,6 +134,7 @@ public class EditOthersActivity extends BaseActivity {
                     intent.putExtra("tel2", telEt2.getText().toString());
                     intent.putExtra("tel3", telEt3.getText().toString());
                     intent.putExtra("tel4", telEt4.getText().toString());
+                    intent.putExtra("uuid",childInfo.getUuid());
                     setResult(RESULT_OK, intent);
                     finish();
                 }

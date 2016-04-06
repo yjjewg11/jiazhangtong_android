@@ -101,7 +101,7 @@ public class MessageSunFragment extends Fragment {
                     MsgDataModel dataModel = dataList.get(position - 1);
                     if (null != dataModel) {
                         readMessage(dataModel);
-                        if(Utils.stringIsNull(dataModel.getRel_uuid())) return;
+                        if (Utils.stringIsNull(dataModel.getRel_uuid())) return;
                         if (dataModel.getType() == 0 || dataModel.getType() == 1) {
                             Intent intent = new Intent(getActivity(), NoticeActivity.class);
                             intent.putExtra("uuid", dataModel.getRel_uuid());
@@ -153,21 +153,21 @@ public class MessageSunFragment extends Fragment {
                         } else if (dataModel.getType() == 99) {
                             startActivity(new Intent(getActivity(), InteractionListActivity.class));
                         } else if (dataModel.getType() == 20) {
-                            ((MainActivity)getActivity()).setCurrentTab(3);
+                            ((MainActivity) getActivity()).setCurrentTab(3);
                         } else if (dataModel.getType() == 21) {
                             //照片内容
-                            List<AllPfAlbumSunObject> objectList =  DbUtils.getAllPic(albumDb);
+                            List<AllPfAlbumSunObject> objectList = DbUtils.getAllPic(albumDb);
                             AllPfAlbumSunObject object = new AllPfAlbumSunObject();
                             object.setUuid(dataModel.getRel_uuid());
-                            if(objectList != null && objectList.size() > 0){
-                                int positionList =  objectList.indexOf(object) ;
-                                if(positionList < 0) positionList = 0;
-                                new TransportListener(getActivity(),positionList,objectList,null).onItemClick(parent, view, positionList, id);
+                            if (objectList != null && objectList.size() > 0) {
+                                int positionList = objectList.indexOf(object);
+                                if (positionList < 0) positionList = 0;
+                                new TransportListener(getActivity(), positionList, objectList, null).onItemClick(parent, view, positionList, id);
                             }
                         } else if (dataModel.getType() == 22) {
                             //精品相册内容
                             String uuid = dataModel.getRel_uuid();
-                            if(uuid != null && !TextUtils.isEmpty(uuid)){
+                            if (uuid != null && !TextUtils.isEmpty(uuid)) {
                                 Intent intent = new Intent(getActivity(), BoutiqueSingleInfoActivity.class);
                                 intent.putExtra("uuid", uuid);
                                 MainActivity.instance.startActivityForResult(intent, GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED);
@@ -249,7 +249,7 @@ public class MessageSunFragment extends Fragment {
                 } else {
                     if (page == 1) {
                         ((BaseActivity) getActivity()).noView(message_list_rl);
-                    }else {
+                    } else {
                         ToastUtils.showMessage("没有更多内容了!");
                         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                     }

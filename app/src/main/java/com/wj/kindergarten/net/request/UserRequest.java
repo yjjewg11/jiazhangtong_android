@@ -3,6 +3,7 @@ package com.wj.kindergarten.net.request;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.widget.EditText;
 
 
@@ -125,6 +126,7 @@ public final class UserRequest {
     private static final String VALIDATE_BAN_PHONE_WEIXIN = "rest/userThirdLoginWenXin/access_token.json";
     private static final String COMMON_DELETE_REPLY = "rest/baseReply/delete.json";
     private static final String SAVE_USER_INFO = "rest/userinfo/update.json";
+    private static final String GET_MINE_CHILD_TEACHERS = "rest/student/getClassHeaderTeacher.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -1267,5 +1269,12 @@ public final class UserRequest {
 
         SendRequest.getInstance().post(context, RequestType.ZAN, object.toString(),
                 RequestHttpUtil.BASE_URL + SAVE_USER_INFO, resultI);
+    }
+
+    public static void getMineChildTeacher(Context context, RequestFailedResult requestFailedResult) {
+
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context, RequestType.GET_MINE_CHILD_TEACHERS, params, RequestHttpUtil.BASE_URL +
+                GET_MINE_CHILD_TEACHERS, requestFailedResult);
     }
 }

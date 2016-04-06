@@ -313,4 +313,20 @@ public class ChildInfo extends BaseModel {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ChildInfo childInfo = (ChildInfo) o;
+
+        return uuid.equals(childInfo.uuid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
 }

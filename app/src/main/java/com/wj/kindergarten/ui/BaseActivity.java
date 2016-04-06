@@ -947,8 +947,13 @@ public abstract class BaseActivity extends ActionBarActivity {
     }
 
     public void showCommonDialog(){
-        commonDialog.show();
+        showCommonDialog("数据加载中,请稍候...");
     }
+    public void showCommonDialog(String text){
+        commonDialog.show();
+        commonDialog.setText(text);
+    }
+
     public void cancleCommonDialog(){
         if(commonDialog.isShowing()) commonDialog.cancel();
     }

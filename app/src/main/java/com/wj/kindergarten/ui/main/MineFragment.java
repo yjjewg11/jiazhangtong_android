@@ -29,8 +29,11 @@ import com.wj.kindergarten.ui.mine.store.StoreActivity;
 import com.wj.kindergarten.utils.Constant.MessageConstant;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
+
+import java.util.ArrayList;
 
 
 /**
@@ -52,6 +55,7 @@ public class MineFragment extends Fragment {
     public static MineFragment instance;
     private CircleImage circle_mine_image;
     private TextView tv_my_name;
+    private LinearLayout ll_mine_child;
 
 
     @Nullable
@@ -76,7 +80,7 @@ public class MineFragment extends Fragment {
         return rootView;
     }
 
-    private void initHeadData() {
+    public void initHeadData() {
         Login login = CGApplication.getInstance().getLogin();
         if(login == null || login.getUserinfo() == null)return;
         tv_my_name.setText(""+Utils.isNull(CGApplication.getInstance().getLogin().getUserinfo().getName()));
@@ -105,6 +109,7 @@ public class MineFragment extends Fragment {
                 startActivity(intent);
             }
         };
+        ll_mine_child = (LinearLayout) rootView.findViewById(R.id.ll_mine_child);
         circle_mine_image = (CircleImage)rootView.findViewById(R.id.circle_mine_image);
         tv_my_name = (TextView)rootView.findViewById(R.id.tv_children_name);
         circle_mine_image.setOnClickListener(myListener);
@@ -116,6 +121,21 @@ public class MineFragment extends Fragment {
         recruit_school = (LinearLayout) rootView.findViewById(R.id.ll_mine_school);
 
         llSetting = (LinearLayout) rootView.findViewById(R.id.ll_setting);
+        ll_mine_child.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Login login = CGApplication.getInstance().getLogin();
+                if(login == null || login.getList() == null ||
+                        login.getList().size() <= 0){
+                    ToastUtils.showMessage("暂无孩子信息!");
+                    return;
+                }
+                Intent intent = new Intent(getActivity(), ChildActivity.class);
+                intent.putExtra("childInfo", (ArrayList)login.getList());
+                getActivity().startActivity(intent);
+            }
+        });
+
         llSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

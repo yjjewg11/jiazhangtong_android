@@ -63,6 +63,7 @@ public class EditRemarkActivity extends BaseActivity {
                     dialog.dismiss();
                     Intent parentIntent = new Intent();
                     parentIntent.putExtra("remark", remarkEt.getText().toString());
+                    parentIntent.putExtra("uuid",childInfo.getUuid());
                     setResult(RESULT_OK, parentIntent);
                     finish();
                 }

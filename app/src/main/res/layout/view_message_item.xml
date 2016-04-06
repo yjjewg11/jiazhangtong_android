@@ -50,6 +50,7 @@
                 android:paddingLeft="@dimen/margin_10">
 
                 <TextView
+                    android:layout_marginTop="@dimen/margin_10"
                     android:id="@+id/message_title"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -75,6 +76,7 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginTop="@dimen/margin_10"
             android:id="@+id/message_date"
             android:layout_marginRight="5dp"
             android:textSize="12sp"

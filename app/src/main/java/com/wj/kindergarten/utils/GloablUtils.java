@@ -49,7 +49,7 @@ public interface GloablUtils {
 
 
     //图片查询地址
-    Uri QUERY_PIC =  MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+    Uri QUERY_PIC = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
     int INTERRACTION_REFRESH_LIST = 136;
     int GET_PF_ALBUM_LIST_SUCCESS = 3000;
@@ -80,6 +80,13 @@ public interface GloablUtils {
     int MY_INFO_REQUESTCODE_TAKE = 3068;
     int MY_INFO_REQUESTCODE_PICK = 3069;
     int MY_INFO_REQUESTCODE_CUTTING = 3070;
+    int OWN = 3071;
+    int BA = 3072;
+    int MA = 3073;
+    int OTHER = 3074;
+    int SCHOOL = 3075;
+    int REMARK = 3076;
+
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";

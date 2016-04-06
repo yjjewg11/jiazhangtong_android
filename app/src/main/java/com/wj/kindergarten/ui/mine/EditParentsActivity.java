@@ -133,6 +133,7 @@ public class EditParentsActivity extends BaseActivity {
                     intent.putExtra("name", nameEt.getText().toString());
                     intent.putExtra("tel", telEt.getText().toString());
                     intent.putExtra("work", workEt.getText().toString());
+                    intent.putExtra("uuid",childInfo.getUuid());
                     setResult(RESULT_OK, intent);
                     finish();
                 }

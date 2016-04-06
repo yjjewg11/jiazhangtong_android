@@ -12,6 +12,7 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.bean.BoutiqueDianzanList;
 import com.wj.kindergarten.bean.BoutiqueDianzanListFather;
+import com.wj.kindergarten.bean.MineChildTeachers;
 import com.wj.kindergarten.bean.NeedBoundPhoneResult;
 import com.wj.kindergarten.bean.TeacherDetailInfo;
 import com.wj.kindergarten.bean.AddChild;
@@ -538,6 +539,9 @@ public class SendRequest {
                 break;
             case RequestType.GET_THREE_USER_INFO:
                 resultI.result(getDomain(domain, Login.class));
+                break;
+            case RequestType.GET_MINE_CHILD_TEACHERS:
+                resultI.result(getDomain(domain, MineChildTeachers.class));
                 break;
 
             default:

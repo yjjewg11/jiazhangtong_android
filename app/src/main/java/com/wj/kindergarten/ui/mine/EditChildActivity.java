@@ -113,7 +113,6 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
             circleImage.setImageResource(R.drawable.touxiang);
             return;
         }
-        childInfo = ChildActivity.instance.getChildInfo();
 
         et_name.setText("" + childInfo.getName());
         et_small_name.setText("" + childInfo.getNickname());
@@ -500,7 +499,11 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                     //如果是添加新的小孩，直接返回主页面
                     childInfo.setUuid(sun.getUuid());
                     CGApplication.getInstance().getLogin().getList().add(childInfo);
+                    List<ChildInfo> childInfoList = CGApplication.getInstance().getLogin().getList();
                     storeData();
+                    Intent intent = new Intent();
+                    intent.putExtra("newData",true);
+                    setResult(RESULT_OK,intent);
                     finish();
                     return;
                 }
@@ -514,6 +517,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 ownIntent.putExtra("idCard", et_ID_card.getText().toString());
                 ownIntent.putExtra("oldTel", oldTel);
                 ownIntent.putExtra("newTel", newTel);
+                ownIntent.putExtra("uuid",childInfo.getUuid());
                 setResult(RESULT_OK, ownIntent);
                 storeData();
                 //将内存中的修改的childInfo替换掉

@@ -2,6 +2,7 @@
 
 package com.wj.kindergarten.ui.messagepag;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.Login;
@@ -70,7 +72,7 @@ public class EditMyInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(){
         FinalActivity.initInjectedView(this);
-        setTitleText("个人信息", R.drawable.bianji_jpxc_jingpin);
+        setTitleText("个人信息", "保存");
         initHeadData();
         initClick();
     }
@@ -85,7 +87,7 @@ public class EditMyInfoActivity extends BaseActivity {
     }
 
     public boolean isNeedUploadPic() {
-        return Utils.stringIsNull(imageUrl);
+        return Utils.stringIsNull(imageUrl) || oneImg == imageUrl;
     }
 
     private class ChooseImageImpl implements ChooseImage {
@@ -170,12 +172,17 @@ public class EditMyInfoActivity extends BaseActivity {
         }
     }
 
+    String initName;
+    String initRelName;
+    String oneImg;
+    String oneIName;
+    String oneIRelName;
     private void initHeadData() {
         Login login = CGApplication.getInstance().getLogin();
         if(login == null || login.getUserinfo() == null)return;
         UserInfo userInfo = login.getUserinfo();
-        String name = userInfo.getName();
-        et_myInfo_name.setText(""+ Utils.isNull(name));
+        initName = userInfo.getName();
+        et_myInfo_name.setText(""+ Utils.isNull(initName));
         String img = userInfo.getImg();
         if(!Utils.stringIsNull(img)){
             imageUrl = img;
@@ -188,6 +195,10 @@ public class EditMyInfoActivity extends BaseActivity {
             et_myinfo_tel.setText("" + Utils.isNull(tel));
         }
         et_myInfo_relname.setText("" + Utils.isNull(userInfo.getRealname()));
+        initRelName = userInfo.getRealname();
+        oneImg = img;
+        oneIName = userInfo.getName();
+        oneIRelName = userInfo.getRealname();
 
     }
 
@@ -202,7 +213,7 @@ public class EditMyInfoActivity extends BaseActivity {
             if (isNeedUploadPic()) {
                 saveInfo(imageUrl);
             } else {
-                showCommonDialog();
+                showCommonDialog("照片上传中,请稍候...");
                 UploadFile uploadFile = new UploadFile(EditMyInfoActivity.this, new UploadImage() {
                     @Override
                     public void success(Result result) {
@@ -226,12 +237,30 @@ public class EditMyInfoActivity extends BaseActivity {
         }
     }
 
-    private void saveInfo(String imgUrl) {
-        UserRequest.saveUserInfo(this,imgUrl,et_myInfo_name.getText().toString(),
-                et_myInfo_relname.getText().toString(),new RequestFailedResult() {
+
+    private void saveInfo(final String imgUrl) {
+        showCommonDialog("信息保存中,请稍候...");
+        initName = et_myInfo_name.getText().toString();
+        initRelName = et_myInfo_relname.getText().toString();
+        UserRequest.saveUserInfo(this,imgUrl,initName,initRelName,new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
+                cancleCommonDialog();
                 ToastUtils.showMessage("修改成功");
+                Login login = CGApplication.getInstance().getLogin();
+                if(login == null) return;
+                try{
+                UserInfo userInfo = login.getUserinfo();
+                userInfo.setImg(imgUrl);
+                userInfo.setName(initName);
+                userInfo.setRealname(initRelName);
+                CGApplication.getInstance().setLogin(login);
+                StoreDataInSerialize.storeUserInfo(login);
+                }catch (Exception e){
+                    CGLog.v("在修改我的信息成功后,保存到磁盘时抛出了异常!");
+                }
+                setResult(RESULT_OK);
+                finish();
             }
 
             @Override
@@ -242,7 +271,48 @@ public class EditMyInfoActivity extends BaseActivity {
 
     }
 
-//    POST  http://jz.wenjienet.com/px-mobile/rest/userinfo/update.json
+    @Override
+    public void onBackPressed() {
+
+        showSave();
+    }
+
+    @Override
+    protected void titleLeftButtonListener() {
+
+        showSave();
+    }
+
+    private void showSave() {
+        if(CGApplication.getInstance().getLogin() == null || CGApplication.getInstance().getLogin()
+                .getUserinfo() == null){
+
+        }else {
+            initName = et_myInfo_name.getText().toString();
+            initRelName = et_myInfo_relname.getText().toString();
+            if(!oneImg.equals(imageUrl) || !oneIName.equals(initName) ||
+                    !oneIRelName.equals(initRelName)){
+                ToastUtils.showDialog(this, "提示!", "相册信息已修改,是否保存?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        upData();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+            }else {
+                finish();
+            }
+        }
+
+    }
+
+    //    POST  http://jz.wenjienet.com/px-mobile/rest/userinfo/update.json
 
     private boolean checkData() {
         if(Utils.stringIsNull(et_myInfo_name.getText().toString())) return false;
