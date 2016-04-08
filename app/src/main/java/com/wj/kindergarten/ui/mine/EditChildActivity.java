@@ -1,5 +1,6 @@
 package com.wj.kindergarten.ui.mine;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,25 +23,34 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.umeng.socialize.utils.Log;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.AddChild;
 import com.wj.kindergarten.bean.AddChildSun;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.BaseResponse;
 import com.wj.kindergarten.bean.ChildInfo;
+import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.compounets.CircleImage;
+import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
+import com.wj.kindergarten.net.RequestType;
+import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.BoundTelActivity;
 import com.wj.kindergarten.ui.func.SpecialCourseDetailActivity;
 import com.wj.kindergarten.ui.func.adapter.OwnAdapter;
 import com.wj.kindergarten.ui.main.MineFragment;
+import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.DateTimePickDialogUtil;
 import com.wj.kindergarten.utils.EditTextCleanWatcher;
@@ -48,14 +58,22 @@ import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
+import com.wj.kindergarten.utils.ToastUtils;
 import com.wj.kindergarten.utils.UserHeadImageUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
 
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * EditChildActivity
@@ -64,7 +82,7 @@ import java.util.List;
  * @Author: Wave
  * @CreateDate: 2015/7/26 1:37
  */
-public class EditChildActivity extends BaseActivity implements View.OnClickListener {
+public class EditChildActivity extends BaseActivity implements View.OnClickListener, DoEveryThing {
     private CircleImage circleImage;
     private TextView headTv;
     private ChildInfo childInfo = null;
@@ -84,10 +102,6 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
     private String oldTel;
     private String newTel;
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
 
     @Override
     protected void setContentLayout() {
@@ -286,6 +300,11 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void everyThing() {
+        ToastUtils.showMessage("绑定成功,可继续添加小孩!");
+    }
+
 
     private class ChooseImageImpl implements ChooseImage {
 
@@ -325,6 +344,10 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
                 if (data != null) {
                     setPicToView(data);
                 }
+                break;
+            case GloablUtils.BOUND_TEL_FROM_CHILD:// 取得裁剪后的图片
+                UserRequest.getThreeUserInfo(mContext, CGSharedPreference.getAccess_Token(),
+                        CGSharedPreference.getlogin_type(), this);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -419,7 +442,7 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    private void saveInfo(final String imgPath) {
+    private void saveInfo(final String imgPath){
         final HintInfoDialog dialog = new HintInfoDialog(EditChildActivity.this, "信息保存中，请稍后...");
         dialog.show();
         childInfo.setName(et_name.getText().toString().trim());
@@ -484,7 +507,8 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
         } else {
             addressName = "save";
         }
-        UserRequest.changeChild(mContext, childInfo, addressName, new RequestResultI() {
+
+        UserRequest.changeChild(mContext, childInfo, addressName, new RequestFailedResult(dialog) {
             @Override
             public void result(BaseModel domain) {
                 if(dialog.isShowing()){
@@ -532,9 +556,17 @@ public class EditChildActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void failure(String message) {
-                dialog.dismiss();
-                if (!Utils.stringIsNull(message)) {
-                    Utils.showToast(mContext, message);
+                super.failure(message);
+                if(!Utils.stringIsNull(message) && message.contains("绑定手机")){
+                    ToastUtils.showDialog(EditChildActivity.this, "提示", "是否前去绑定号码?", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(EditChildActivity.this, BoundTelActivity.class);
+                            intent.putExtra("boundType","tel");
+                            intent.putExtra("access_token", CGSharedPreference.getAccess_Token());
+                            startActivityForResult(intent, GloablUtils.BOUND_TEL_FROM_CHILD);
+                        }
+                    });
                 }
             }
         });

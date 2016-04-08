@@ -13,8 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/normal_padding">
+            android:orientation="vertical">
 
             <include layout="@layout/mine_child_new_head"/>
 
@@ -39,6 +38,7 @@
                 layout="@layout/item_child_other" />
 
             <include
+                android:visibility="gone"
                 android:id="@+id/child_ka"
                 layout="@layout/item_child_ka_info" />
 

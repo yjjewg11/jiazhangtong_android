@@ -22,6 +22,11 @@ import android.util.Log;
 //import com.baidu.location.BDLocationListener;
 //import com.baidu.location.LocationClient;
 //import com.baidu.location.LocationClientOption;
+
+import com.alibaba.mobileim.FeedbackAPI;
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.wxlib.util.IWxCallback;
+import com.alibaba.wxlib.util.SysUtil;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -42,6 +47,7 @@ import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.utils.CGLog;
+import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 
 import org.w3c.dom.Text;
@@ -91,6 +97,43 @@ public class CGApplication extends Application {
         super.onCreate();
         context = this;
         String cachePath = Constants.cachePath;
+//        FeedbackAPI.initAnnoy(this, String appKey);
+
+
+
+
+////Application.onCreate中，首先执行这部分代码, 因为，如果在":TCMSSevice"进程中，无需进行openIM和app业务的初始化，以节省内存
+////特别注意:这段代码不能封装到其他方法中，必须在onCreate顶层代码中!
+        SysUtil.setApplication(this);
+        if(SysUtil.isTCMSServiceProcess(this)){
+            return;  //特别注意：此处return是退出onCreate函数，因此不能封装到其他任何方法中!
+        }
+
+//第一个参数是Application Context，这里的APP_KEY即应用创建时申请的APP_KEY
+        YWAPI.init(this, GloablUtils.TABBAO_APPKEY);
+
+//第三个参数是自自定义的反馈界面标题，第四个参数是初始化反馈接口的回调，异步通知成功或者失败
+        if (SysUtil.isMainProcess(this)){
+            FeedbackAPI.initFeedback(context, GloablUtils.TABBAO_APPKEY, "消息反馈", new com.alibaba.mobileim.channel.event.IWxCallback() {
+                @Override
+                public void onSuccess(Object... objects) {
+                    CGLog.v("反馈成功");
+                }
+
+                @Override
+                public void onError(int i, String s) {
+
+                }
+
+                @Override
+                public void onProgress(int i) {
+
+                }
+            });
+        }
+
+
+
         ImageLoaderUtil.initImageLoader(this, R.drawable.touxiang, cachePath, 10, 0);
         RequestHttpUtil.initClient();
 //        initDirs();
@@ -110,6 +153,8 @@ public class CGApplication extends Application {
 
         android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
+
+
 
 //    private void initSearch() {
 //        mMKSearch = new MKSearch();

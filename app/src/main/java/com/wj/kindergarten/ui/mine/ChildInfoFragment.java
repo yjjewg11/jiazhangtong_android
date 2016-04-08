@@ -29,6 +29,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.MineSchoolActivity;
 import com.wj.kindergarten.ui.func.adapter.FragmentChildStateAdapter;
+import com.wj.kindergarten.ui.more.MyCircleView;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -63,7 +64,10 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
     private TextView mine_child_new_head_circle_age;
     private CircleImage mine_child_new_head_circle_img;
     private TextView mine_child_new_head_circle_name;
+    private MyCircleView mine_child_new_head_circle;
 
+    public ChildInfoFragment() {
+    }
 
     public ChildInfoFragment(FragmentChildStateAdapter pagerAdapter, int position) {
         this.position = position;
@@ -135,6 +139,13 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
     private void initViews(View rootView) {
 
 
+        mine_child_new_head_circle = (MyCircleView) rootView.findViewById(R.id.mine_child_new_head_circle);
+        mine_child_new_head_circle.setRadius(10);
+        mine_child_new_head_circle.setScale(position);
+        mine_child_new_head_circle.setDistance(40);
+        mine_child_new_head_circle.setCount(pagerAdapter.getCount());
+
+
         mine_child_new_head_back = (ImageView) rootView.findViewById(R.id.mine_child_new_head_back);
         mine_child_new_head_add_child = (ImageView) rootView.findViewById(R.id.mine_child_new_head_add_child);
         mine_child_new_head_circle_img = (CircleImage) rootView.findViewById(R.id.mine_child_new_head_circle_img);
@@ -161,6 +172,8 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
         otherView = rootView.findViewById(R.id.child_other);
         schoolView = rootView.findViewById(R.id.child_school);
         kaView = rootView.findViewById(R.id.child_ka);
+        //隐藏关联卡号
+        kaView.setVisibility(View.GONE);
 
         remarkTv = (TextView) rootView.findViewById(R.id.child_remark);
         remarkIv = (ImageView) rootView.findViewById(R.id.child_remark_edit);
@@ -231,7 +244,8 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
     }
 
     private void queryTeachers() {
-        UserRequest.getMineChildTeacher(getActivity(), new RequestFailedResult() {
+        if(Utils.stringIsNull(childInfo.getClassuuid())) return;
+        UserRequest.getMineChildTeacher(getActivity(), childInfo.getClassuuid(),new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 MineChildTeachers mineChildTeachers = (MineChildTeachers) domain;
@@ -254,8 +268,17 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
             if (null != info) {
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_child_ka_info_1, null);
                 TextView textView = (TextView) view.findViewById(R.id.item_ka);
+                Drawable drawable = getResources().getDrawable(R.drawable.youjiantou);
+                drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
+                textView.setCompoundDrawables(null,null,drawable,null);
                 LinearLayout line = (LinearLayout) view.findViewById(R.id.view_ka);
                 textView.setText("班主任" + (i + 1) + ":" + Utils.isNull(info.getName()));
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
                 if (i + 1 == list.size()) {
                     line.setVisibility(View.GONE);
                 } else {
@@ -277,7 +300,7 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
             public void result(BaseModel domain) {
                 Ka ka = (Ka) domain;
                 if (null != ka && ka.getList() != null && ka.getList().size() > 0) {
-                    kaView.setVisibility(View.VISIBLE);
+                    kaView.setVisibility(View.GONE);
                     bindKa(ka);
                 } else {
                     kaView.setVisibility(View.GONE);
@@ -329,6 +352,7 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
         TextView telTv = (TextView) schoolView.findViewById(R.id.item_child_tel);
         LinearLayout item_child_parent_relative_card = (LinearLayout) schoolView.findViewById(R.id.item_child_parent_relative_card);
         titleTv.setVisibility(View.GONE);
+        telTv.setVisibility(View.GONE);
         item_child_parent_relative_card.setVisibility(View.VISIBLE);
 
         String schoolName = getSchool(sid);

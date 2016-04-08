@@ -39,14 +39,14 @@ public class MessageAdapter extends BaseAdapter {
         sparseIntArray.append(5,R.drawable.techangkechen_school);
         sparseIntArray.append(6,R.drawable.shipu);
         sparseIntArray.append(7,R.drawable.kechenbiao);
-        sparseIntArray.append(8,R.drawable.message_image);
-        sparseIntArray.append(10,R.drawable.message_image);
-        sparseIntArray.append(11,R.drawable.message_image);
-        sparseIntArray.append(12,R.drawable.message_image);
-        sparseIntArray.append(13,R.drawable.message_image);
-        sparseIntArray.append(20,R.drawable.message_image);
-        sparseIntArray.append(21,R.drawable.message_image);
-        sparseIntArray.append(22,R.drawable.message_image);
+        sparseIntArray.append(8,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(10,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(11,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(12,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(13,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(20,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(21,R.drawable.tongzhi_xiaoxi_btn);
+        sparseIntArray.append(22,R.drawable.tongzhi_xiaoxi_btn);
         sparseIntArray.append(99,R.drawable.banjihudong);
 
     }

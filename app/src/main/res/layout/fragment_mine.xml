@@ -10,26 +10,27 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:background="@color/title_bg"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:background="@color/title_bg">
 
             <ImageView
-                android:visibility="invisible"
-                android:layout_marginTop="@dimen/margin_9dp"
                 android:id="@+id/mine_add_child"
-                android:layout_marginRight="@dimen/margin_9dp"
-                android:src="@drawable/tianjiaxiaohai"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/margin_9dp"
+                android:layout_marginTop="@dimen/margin_9dp"
+                android:src="@drawable/tianjiaxiaohai"
+                android:visibility="invisible" />
 
             <FrameLayout
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <include layout="@layout/mine_children_head"/>
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <include layout="@layout/mine_children_head" />
             </FrameLayout>
 
 
@@ -50,21 +51,39 @@
                 android:visibility="gone" />
 
 
-
-            <TextView
-                android:background="@drawable/setting_item_click_selector"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/condition_height"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginRight="@dimen/normal_padding"
-                android:drawableLeft="@drawable/minemybaby_i"
-                android:drawablePadding="@dimen/small_padding"
-                android:drawableRight="@drawable/arrow_right"
-                android:gravity="center_vertical"
-                android:text="我的小孩"
-                android:textColor="@color/black"
-                android:textSize="@dimen/normal_text" />
+                android:layout_height="match_parent">
 
+                <TextView
+                    android:layout_marginRight="16dp"
+                    android:drawableRight="@drawable/youjiantou"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:id="@+id/fragment_mine_child_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/fragment_mine_child_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/condition_height"
+                        android:layout_marginLeft="@dimen/normal_padding"
+                        android:layout_marginRight="@dimen/normal_padding"
+                        android:background="@drawable/setting_item_click_selector"
+                        android:drawableLeft="@drawable/minemybaby_i"
+                        android:drawablePadding="@dimen/small_padding"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:text="我的小孩"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/normal_text" />
+                </LinearLayout>
+
+            </FrameLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -72,7 +91,6 @@
                 android:background="@color/hint_gray"
                 android:visibility="gone" />
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -89,14 +107,13 @@
                 android:visibility="visible" />
 
 
-
             <TextView
-                android:background="@drawable/setting_item_click_selector"
                 android:id="@+id/mine_collect"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
                 android:layout_marginLeft="@dimen/normal_padding"
                 android:layout_marginRight="@dimen/normal_padding"
+                android:background="@drawable/setting_item_click_selector"
                 android:drawableLeft="@drawable/shoucang_mine"
                 android:drawablePadding="@dimen/small_padding"
                 android:drawableRight="@drawable/arrow_right"
@@ -114,7 +131,6 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:id="@+id/ll_special_course"
             android:layout_width="match_parent"
@@ -130,18 +146,18 @@
 
             <TextView
 
-                android:background="#e0e0e0"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp" />
+                android:layout_height="0.5dp"
+                android:background="#e0e0e0" />
 
             <TextView
-                android:background="@drawable/setting_item_click_selector"
-
                 android:id="@+id/mine_course"
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
                 android:layout_marginLeft="@dimen/normal_padding"
                 android:layout_marginRight="@dimen/normal_padding"
+                android:background="@drawable/setting_item_click_selector"
                 android:drawableLeft="@drawable/my_kecheng"
                 android:drawablePadding="@dimen/small_padding"
                 android:drawableRight="@drawable/arrow_right"
@@ -158,17 +174,13 @@
         </LinearLayout>
 
 
-
-
-
-
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/ll_mine_school"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/setting_item_click_selector"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <View
                 android:layout_width="match_parent"
@@ -178,16 +190,16 @@
 
             <TextView
 
-                android:background="#e0e0e0"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp" />
+                android:layout_height="0.5dp"
+                android:background="#e0e0e0" />
 
             <TextView
-                android:background="@drawable/setting_item_click_selector"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/condition_height"
                 android:layout_marginLeft="@dimen/normal_padding"
                 android:layout_marginRight="@dimen/normal_padding"
+                android:background="@drawable/setting_item_click_selector"
                 android:drawableLeft="@drawable/school"
                 android:drawablePadding="@dimen/small_padding"
                 android:drawableRight="@drawable/arrow_right"

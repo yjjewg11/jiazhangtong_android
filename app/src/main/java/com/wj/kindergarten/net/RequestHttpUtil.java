@@ -30,7 +30,7 @@ public class RequestHttpUtil {
 //     public static final String BASE_URL = "http://120.25.248.31/px-mobile/";
     //测试地址
 
-    //专用调试培训机构地址j
+    //专用测试服务器地址
 
 //    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 
@@ -140,7 +140,7 @@ public class RequestHttpUtil {
         getClient().post(context, uString, params, resp);
     }
 
-    protected static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
+    public static void post(Context context, String urlString, HttpEntity httpEntity, ResponseHandlerInterface responseHandlerInterface) {
         getClient().post(context, urlString, httpEntity, "application/json;charset=UTF-8", responseHandlerInterface);
     }
     public static void postPf(Context context, String uString, RequestParams params, ResponseHandlerInterface resp) {

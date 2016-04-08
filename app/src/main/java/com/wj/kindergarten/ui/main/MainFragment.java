@@ -168,7 +168,7 @@ public class MainFragment extends Fragment {
 //            ((MainActivity) getActivity()).showCenterIcon(BaseActivity.TITLE_CENTER_TYPE_RIGHT, null);
 //        }
 
-        initTitleNames();
+//        initTitleNames();
     }
 
     private void initTitleNames() {

@@ -99,4 +99,5 @@ public interface RequestType {
      int GET_THREE_USER_INFO = 183;
      int SAVE_USER_INFO = 184;
      int GET_MINE_CHILD_TEACHERS = 185;
+     int GET_MINE_TEL = 186;
 }

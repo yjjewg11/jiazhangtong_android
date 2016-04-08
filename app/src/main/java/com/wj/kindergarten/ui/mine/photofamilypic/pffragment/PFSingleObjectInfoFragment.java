@@ -378,6 +378,7 @@ public class PFSingleObjectInfoFragment extends Fragment {
     private void showPic() {
         if (sunObject != null) {
             String lishipath = sunObject.getPath();
+            ImageLoaderUtil.displayImage(lishipath,pf_gallery_image);
             if (!TextUtils.isEmpty(lishipath)) {
                 if (lishipath.contains("@")) {
                     lishipath = lishipath.substring(0, lishipath.indexOf("@"));

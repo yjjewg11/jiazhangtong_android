@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@drawable/mine_child_head_back"
+        android:layout_width="41dp"
+        android:gravity="center"
+        android:layout_height="41dp">
+    <com.wj.kindergarten.compounets.CircleImage
+        android:layout_width="35dp"
+        android:id="@+id/add_more_head_iv"
+        android:layout_height="35dp" />
+</RelativeLayout>
+</LinearLayout>

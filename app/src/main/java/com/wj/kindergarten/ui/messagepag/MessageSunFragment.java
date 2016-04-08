@@ -248,7 +248,7 @@ public class MessageSunFragment extends Fragment {
                     nowPage = page;
                 } else {
                     if (page == 1) {
-                        ((BaseActivity) getActivity()).noView(message_list_rl);
+//                        ((BaseActivity) getActivity()).noView(message_list_rl);
                     } else {
                         ToastUtils.showMessage("没有更多内容了!");
                         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);

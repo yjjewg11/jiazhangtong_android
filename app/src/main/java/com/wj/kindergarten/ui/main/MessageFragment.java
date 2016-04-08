@@ -79,7 +79,8 @@ public class MessageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ((MainActivity)getActivity()).hideActionbar();
+        ((MainActivity) getActivity()).setText("消息");
+//        ((MainActivity)getActivity()).hideActionbar(); TODO 暂时先隐藏,后续开发通讯录
         if(view != null) return view;
         view = inflater.inflate(R.layout.message_view_pager,null);
         message_view_add_constact = (ImageView) view.findViewById(R.id.message_view_add_constact);
@@ -113,7 +114,7 @@ public class MessageFragment extends Fragment {
 
             @Override
             public int getCount() {
-                return 2;
+                return 1;
             }
         });
         message_viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.alibaba.mobileim.FeedbackAPI;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengDialogButtonListener;
 import com.umeng.update.UmengUpdateAgent;
@@ -93,7 +94,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(SettingActivity.this, NoticeActivity.class));
                 break;
             case R.id.layout_3://意见反馈
-                startActivity(new Intent(SettingActivity.this, FeedBackActivty.class));
+                Intent intent = FeedbackAPI.getFeedbackActivityIntent();
+                if(intent!=null){
+                    startActivity(intent);
+                }
+//                startActivity(new Intent(SettingActivity.this, FeedBackActivty.class));
                 break;
             case R.id.layout_4://关于我们
                 startActivity(new Intent(SettingActivity.this, AboutActivity.class));

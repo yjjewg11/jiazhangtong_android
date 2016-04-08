@@ -17,6 +17,7 @@ public class BaseModel implements Serializable {
     @Expose
     private BaseResMsg ResMsg;
 
+
     public String getJSESSIONID() {
         return JSESSIONID;
     }

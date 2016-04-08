@@ -63,14 +63,14 @@ public class MainActivity extends BaseActivity {
     private final int START_UPLOAD_PIC = 999;
     //Fragment界面数组
     private Class fragmentArray[] = {MainFragment.class, FoundFragment.class, MessageFragment.class,
-            PhotoFamilyFragment.class,MineFragment.class};
+            PhotoFamilyFragment.class, MineFragment.class};
     //Tab选项卡图片
     private int mImageViewArray[] = {R.drawable.school_tab, R.drawable.found_tab,
-            R.drawable.message_tab_2, R.drawable.pf_album,R.drawable.mine_tab};
+            R.drawable.message_tab_2, R.drawable.pf_album, R.drawable.mine_tab};
 
     private int mImageViewArray2[] = {R.drawable.school_tab, R.drawable.found_tab,
-            R.drawable.message_tab, R.drawable.pf_album,R.drawable.mine_tab};
-    private int [] typeCount = new int[3];
+            R.drawable.message_tab, R.drawable.pf_album, R.drawable.mine_tab};
+    private int[] typeCount = new int[3];
     private List<PfAlbumListSun> albumList;
     private UploadBroadCast receiver;
 
@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
     }
 
     //Tab选项卡的文字
-    private String mTabIdArray[] = {"学校", "发现", "消息", "家庭相册","我的"};
+    private String mTabIdArray[] = {"学校", "发现", "消息", "家庭相册", "我的"};
 
     public String[] getmTabIdArray() {
         return mTabIdArray;
@@ -99,14 +99,15 @@ public class MainActivity extends BaseActivity {
     private boolean isClickMessage = false;
     private ImageView msgImageView = null;
     private HintInfoDialog dialog;
-    private List<TrainClass> TC_list ;
+    private List<TrainClass> TC_list;
     private static TrainChildInfoList TCI;
-    public static  MainActivity instance;
+    public static MainActivity instance;
 
 
-    public TrainChildInfoList getTrainChildInfoList(){
+    public TrainChildInfoList getTrainChildInfoList() {
         return TCI;
     }
+
     @Override
     protected void setContentLayout() {
         layoutId = R.layout.activity_main;
@@ -120,7 +121,7 @@ public class MainActivity extends BaseActivity {
         return dialog;
     }
 
-    public void setText(String text){
+    public void setText(String text) {
         titleCenterTextView.setText(text);
     }
 
@@ -132,7 +133,7 @@ public class MainActivity extends BaseActivity {
         getCount();
         instance = this;
         hideLeftButton();
-        dialog= new HintInfoDialog(this);
+        dialog = new HintInfoDialog(this);
         setTitleText("");
         MainFragment.GRID_ITEM_HW = Utils.getWidthByScreenWeight(4);
         ActivityManger.getInstance().addActivity(this);
@@ -148,10 +149,10 @@ public class MainActivity extends BaseActivity {
 
         //获取系统参数
 //        if(CGSharedPreference.getEnoughOneDay()){
-            getTopicConfig();
+        getTopicConfig();
 //        }
 
-        handler.sendEmptyMessageDelayed(START_UPLOAD_PIC,1000);
+        handler.sendEmptyMessageDelayed(START_UPLOAD_PIC, 1000);
         handler.sendEmptyMessageDelayed(2, 1000);
         //每次应用启动获取话题
 
@@ -171,12 +172,14 @@ public class MainActivity extends BaseActivity {
         filter.addAction(GloablUtils.REQUEST_PIC_NEW_DATA);
         filter.addAction(GloablUtils.DELETE_PF_SINGLE_INFO_SUCCESSED);
         filter.addAction(GloablUtils.UPDATE_BOUTIQUE_ALBUM_SUCCESSED);
+        filter.addAction(GloablUtils.ADD_NEW_CHILD);
         registerReceiver(receiver, filter);
     }
 
     private void initPfAlbum() {
         loadPfData();
     }
+
     //获取家庭相册集
     private void loadPfData() {
         UserRequest.getPfAlbumList(this, new RequestResultI() {
@@ -256,11 +259,13 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public Handler  handler = new Handler() {
+    public Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 1: AddressBookRequest.getEmot(MainActivity.this); break;//获取表情列表
+            switch (msg.what) {
+                case 1:
+                    AddressBookRequest.getEmot(MainActivity.this);
+                    break;//获取表情列表
                 case 2:
                     if (getIntent().hasExtra("from") && "Push".equals(getIntent().getStringExtra("from"))) {
                         if (!mTabIdArray[2].equals(nowTab)) {
@@ -329,7 +334,7 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-<<<<<<< HEAD
+     * <<<<<<< HEAD
      * 版本检测,设置统计在线参数
      */
     private void checkVersion() {
@@ -390,8 +395,8 @@ public class MainActivity extends BaseActivity {
             public void result(BaseModel domain) {
                 //获取成功，
                 FoundTypeCount foundTypeCount = (FoundTypeCount) domain;
-                if(foundTypeCount != null && foundTypeCount.getData() != null)
-                typeCount[0] = foundTypeCount.getData().getToday_goodArticle();
+                if (foundTypeCount != null && foundTypeCount.getData() != null)
+                    typeCount[0] = foundTypeCount.getData().getToday_goodArticle();
                 typeCount[1] = foundTypeCount.getData().getToday_snsTopic();
                 typeCount[2] = foundTypeCount.getData().getToday_pxbenefit();
 
@@ -408,10 +413,12 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     /**
      * init tab
      */
     boolean isSecondOnce;
+
     private void initTab() {
         //实例化TabHost对象，得到TabHost
         mTabHost = (FragmentTabHost) findViewById(R.id.main_tab_host);
@@ -422,9 +429,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabChanged(String tabId) {
                 nowTab = tabId;
-                if(tabId.equals(mTabIdArray[3])){
+                if (tabId.equals(mTabIdArray[3])) {
                     titleLeftImageView.setImageResource(R.drawable.xiajiatou);
-                }else{
+                } else {
                     titleLeftImageView.setImageResource(0);
                 }
                 if (tabId.equals(mTabIdArray[2])) {
@@ -458,9 +465,9 @@ public class MainActivity extends BaseActivity {
                             getSupportActionBar().show();
                         }
                     }
+                }
             }
-        }
-    });
+        });
 
         loadTab();
     }
@@ -474,7 +481,7 @@ public class MainActivity extends BaseActivity {
 
     public void cancleMainWeb() {
         FoundFragment fragment = (FoundFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[1]);
-        if(fragment.webIsShow()){
+        if (fragment.webIsShow()) {
             fragment.cancleWeb();
         }
     }
@@ -516,8 +523,8 @@ public class MainActivity extends BaseActivity {
         mTabHost.getTabWidget().getChildTabViewAt(1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               reagain(nowTab);
-               mTabHost.setCurrentTab(1);
+                reagain(nowTab);
+                mTabHost.setCurrentTab(1);
             }
         });
     }
@@ -574,8 +581,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void titleRightImageListener() {
-        if (mTabIdArray [3] .equals(nowTab)){
-            ((PhotoFamilyFragment)getSupportFragmentManager().findFragmentByTag(mTabIdArray[3])).addRightListener();
+        if (mTabIdArray[3].equals(nowTab)) {
+            ((PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3])).addRightListener();
         }
     }
 
@@ -601,13 +608,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(mTabHost.getCurrentTab() == 1 && keyCode == KeyEvent.KEYCODE_BACK){
-           return super.onKeyDown(keyCode,event);
-        }else{
-            if (keyCode == KeyEvent.KEYCODE_BACK ) {
+        if (mTabHost.getCurrentTab() == 1 && keyCode == KeyEvent.KEYCODE_BACK) {
+            return super.onKeyDown(keyCode, event);
+        } else {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
                 quitApp();
-            return true;
-        }
+                return true;
+            }
 
         }
 
@@ -630,11 +637,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-                unregisterReceiver(receiver);
+        unregisterReceiver(receiver);
         Log.i("TAG", "页面被销毁!");
-        ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 //        Log.i("TAG","添加运行任务 ： "+activityManager.getAppTasks().size());
-        Log.i("TAG","添加任务栈  ： "+activityManager.getRunningTasks(10).size());
+        Log.i("TAG", "添加任务栈  ： " + activityManager.getRunningTasks(10).size());
         super.onDestroy();
 
     }
@@ -642,38 +649,38 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK) return;
-        switch (requestCode){
+        if (resultCode != RESULT_OK) return;
+        switch (requestCode) {
             case GloablUtils.UPDATE_SUCCESSED_REFRESH:
-                CGLog.v("打印currentTab : "+mTabHost.getCurrentTabTag() +" tab ： "+mTabHost.getCurrentTab());
-                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
-                   PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
+                CGLog.v("打印currentTab : " + mTabHost.getCurrentTabTag() + " tab ： " + mTabHost.getCurrentTab());
+                if (mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null) {
+                    PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
                     familyFragment.initHeadBack();
                 }
                 break;
             case GloablUtils.DELETE_BOUTIQUE_ALBUM_SUCCESSED:
-                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                if (mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null) {
                     PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
                     String uuid = data.getStringExtra("uuid");
-                    if(!TextUtils.isEmpty(uuid)){
+                    if (!TextUtils.isEmpty(uuid)) {
                         familyFragment.updateBoutiqueFragmentData(uuid);
                     }
                 }
                 break;
             case GloablUtils.DELETE_FUSION_INFO_SUCCESSED:
-                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                if (mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null) {
                     PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
                     familyFragment.refreshFusionData();
                 }
                 break;
             case GloablUtils.ADD_NEW_ALBUM_SUCCESSED:
-                if(mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null){
+                if (mTabHost.getCurrentTab() == 3 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]) != null) {
                     PhotoFamilyFragment familyFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
                     familyFragment.reqetFamilyAlbum();
                 }
                 break;
             case GloablUtils.UPDATE_MY_INFO:
-                if(mTabHost.getCurrentTab() == 4 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]) != null){
+                if (mTabHost.getCurrentTab() == 4 && getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]) != null) {
                     MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
                     mineFragment.initHeadData();
                 }
@@ -681,13 +688,19 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    class UploadBroadCast extends BroadcastReceiver{
+    class UploadBroadCast extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(GloablUtils.ADD_NEW_CHILD)) {
+                MineFragment mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[4]);
+                if(mineFragment != null)
+                mineFragment.initChildCount();
+                return;
+            }
             PhotoFamilyFragment photoFragment = (PhotoFamilyFragment) getSupportFragmentManager().findFragmentByTag(mTabIdArray[3]);
-            if(photoFragment == null ) return;
-            switch (intent.getAction()){
+            if (photoFragment == null) return;
+            switch (intent.getAction()) {
                 case GloablUtils.ALREADY_UPLOADING:
                     photoFragment.startGif();
                     break;
@@ -707,7 +720,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void setCurrentTab(int position){
+    public void setCurrentTab(int position) {
         mTabHost.setCurrentTab(position);
     }
 }

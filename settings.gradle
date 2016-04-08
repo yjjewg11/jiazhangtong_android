@@ -1,2 +1,2 @@
-include ':app', ':QrCodeScan', ':pulltorefreshlib'
+include ':app', ':QrCodeScan', ':pulltorefreshlib', ':OneSDK'
 project(':pulltorefreshlib').projectDir = new File('pulltorefreshlibrary')

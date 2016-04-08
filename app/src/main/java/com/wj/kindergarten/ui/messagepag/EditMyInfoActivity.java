@@ -21,14 +21,18 @@ import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
 import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.GetMineTel;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.UserInfo;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.net.upload.Result;
 import com.wj.kindergarten.net.upload.UploadFile;
 import com.wj.kindergarten.net.upload.UploadImage;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.func.BoundTelActivity;
 import com.wj.kindergarten.ui.mine.ChooseImage;
+import com.wj.kindergarten.ui.more.DoEveryThing;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.FileUtil;
 import com.wj.kindergarten.utils.GloablUtils;
@@ -43,7 +47,8 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import java.io.File;
 import java.util.List;
 
-public class EditMyInfoActivity extends BaseActivity {
+
+public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
 
 
     @ViewInject(id = R.id.et_myInfo_name)
@@ -75,6 +80,31 @@ public class EditMyInfoActivity extends BaseActivity {
         setTitleText("个人信息", "保存");
         initHeadData();
         initClick();
+        queryTel();
+
+    }
+
+    private void queryTel() {
+
+        UserRequest.queryMineTel(this, new RequestFailedResult(commonDialog) {
+            @Override
+            public void result(BaseModel domain) {
+                GetMineTel getMineTel = (GetMineTel) domain;
+                if(getMineTel != null && getMineTel.getData() != null){
+                    String tel = getMineTel.getData().getTel();
+                    if(!Utils.stringIsNull(tel)){
+                        et_myinfo_tel.setText(""+Utils.isNull(getMineTel.getData().getTel()));
+                        et_myinfo_tel.setOnClickListener(null);
+                    }
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+        });
+
     }
 
     private void initClick() {
@@ -88,6 +118,11 @@ public class EditMyInfoActivity extends BaseActivity {
 
     public boolean isNeedUploadPic() {
         return Utils.stringIsNull(imageUrl) || oneImg == imageUrl;
+    }
+
+    @Override
+    public void everyThing() {
+        queryTel();
     }
 
     private class ChooseImageImpl implements ChooseImage {
@@ -149,6 +184,10 @@ public class EditMyInfoActivity extends BaseActivity {
                     setPicToView(data);
                 }
                 break;
+            case GloablUtils.BOUND_TEL_FROM_MINE_INFO:// 取得裁剪后的图片
+                UserRequest.getThreeUserInfo(mContext, CGSharedPreference.getAccess_Token(),
+                        CGSharedPreference.getlogin_type(), this);
+                break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -190,15 +229,24 @@ public class EditMyInfoActivity extends BaseActivity {
         }
         String tel = userInfo.getTel();
         if(Utils.stringIsNull(tel)){
-            et_myinfo_tel.setText("暂未绑定手机号码");
+            et_myinfo_tel.setText("暂未绑定手机号码,点击绑定");
+            et_myinfo_tel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(EditMyInfoActivity.this, BoundTelActivity.class);
+                    intent.putExtra("boundType","tel");
+                    intent.putExtra("access_token", CGSharedPreference.getAccess_Token());
+                    startActivityForResult(intent, GloablUtils.BOUND_TEL_FROM_MINE_INFO);
+                }
+            });
         }else {
             et_myinfo_tel.setText("" + Utils.isNull(tel));
         }
         et_myInfo_relname.setText("" + Utils.isNull(userInfo.getRealname()));
         initRelName = userInfo.getRealname();
         oneImg = img;
-        oneIName = userInfo.getName();
-        oneIRelName = userInfo.getRealname();
+        oneIName = et_myInfo_name.getText().toString();
+        oneIRelName = et_myInfo_relname.getText().toString();
 
     }
 
@@ -290,8 +338,13 @@ public class EditMyInfoActivity extends BaseActivity {
         }else {
             initName = et_myInfo_name.getText().toString();
             initRelName = et_myInfo_relname.getText().toString();
-            if(!oneImg.equals(imageUrl) || !oneIName.equals(initName) ||
-                    !oneIRelName.equals(initRelName)){
+            if(Utils.stringIsNull(initName) || Utils.stringIsNull(initName)){
+                finish();
+            }
+            if(!Utils.stringIsNull(oneImg) && !Utils.stringIsNull(oneIName)
+                    && oneImg.equals(imageUrl) && oneIName.equals(initName)){
+                finish();
+            }else {
                 ToastUtils.showDialog(this, "提示!", "相册信息已修改,是否保存?", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -305,8 +358,6 @@ public class EditMyInfoActivity extends BaseActivity {
                         finish();
                     }
                 });
-            }else {
-                finish();
             }
         }
 

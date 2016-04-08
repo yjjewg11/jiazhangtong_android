@@ -6,8 +6,8 @@ android {
     defaultConfig {
         applicationId 'com.wenjie.jiazhangtong'
         minSdkVersion 14
-        versionCode 26
-        versionName "1.0.0.1"
+        versionCode 27
+        versionName "1.1.0"
     }
 
     buildTypes {
@@ -31,6 +31,13 @@ android {
 //        }
 //    }
 }
+
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
+}
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -80,4 +87,5 @@ dependencies {
     compile 'com.android.support:design:22.2.1'
     compile 'se.emilsjolander:stickylistheaders:2.7.0'
     compile 'com.android.support:support-v4:22.2.1'
+    compile project(':OneSDK')
 }

@@ -86,7 +86,8 @@ public interface GloablUtils {
     int OTHER = 3074;
     int SCHOOL = 3075;
     int REMARK = 3076;
-
+    int BOUND_TEL_FROM_MINE_INFO = 3077;
+    int BOUND_TEL_FROM_CHILD = 3088;
     String RECEVIER_TWO_CODE_URL = "receiver_two_code_url";
     //停止音乐播放的广播
     String STOP_MUSIC_PLAY = "stop_music_play";
@@ -117,4 +118,8 @@ public interface GloablUtils {
     String PF_ALL_TABLE_FAMILY = "pf_all_family";
 
 
+    String ADD_NEW_CHILD = "add_new_child";
+
+    String TABBAO_APPKEY = "23285145";
+    
 }
