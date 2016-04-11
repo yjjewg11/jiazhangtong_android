@@ -84,14 +84,15 @@ import com.wj.kindergarten.bean.GsonKdUtil;
 import com.wj.kindergarten.utils.Utils;
 
 
-import org.apache.http.Header;
-import org.apache.http.entity.StringEntity;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 
 /**

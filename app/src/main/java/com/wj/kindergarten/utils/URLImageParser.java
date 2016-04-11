@@ -7,13 +7,14 @@ import android.text.Html;
 import android.view.View;
 
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import com.loopj.android.http.HttpGet;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 
 
 /**

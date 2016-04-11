@@ -75,7 +75,7 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
     }
 
     @Override
-    protected void onCreate(){
+    protected void onCreate() {
         FinalActivity.initInjectedView(this);
         setTitleText("个人信息", "保存");
         initHeadData();
@@ -90,10 +90,10 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
             @Override
             public void result(BaseModel domain) {
                 GetMineTel getMineTel = (GetMineTel) domain;
-                if(getMineTel != null && getMineTel.getData() != null){
+                if (getMineTel != null && getMineTel.getData() != null) {
                     String tel = getMineTel.getData().getTel();
-                    if(!Utils.stringIsNull(tel)){
-                        et_myinfo_tel.setText(""+Utils.isNull(getMineTel.getData().getTel()));
+                    if (!Utils.stringIsNull(tel)) {
+                        et_myinfo_tel.setText("" + Utils.isNull(getMineTel.getData().getTel()));
                         et_myinfo_tel.setOnClickListener(null);
                     }
                 }
@@ -148,6 +148,7 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
         Intent intent = createIntentCrop(uri);
         startActivityForResult(intent, GloablUtils.MY_INFO_REQUESTCODE_CUTTING);
     }
+
     @NonNull
     private Intent createIntentCrop(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -199,7 +200,7 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
             Bitmap photo = picdata.getParcelableExtra("data");
             Log.i("TAG", "拿到bitmap图片对象的引用" + photo);
             // Drawable drawable = new BitmapDrawable(null, photo);
-            if(!Utils.stringIsNull(urlpath)){
+            if (!Utils.stringIsNull(urlpath)) {
                 File file = new File(urlpath);
                 if (file != null && file.exists()) {
                     file.delete();
@@ -216,30 +217,31 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
     String oneImg;
     String oneIName;
     String oneIRelName;
+
     private void initHeadData() {
         Login login = CGApplication.getInstance().getLogin();
-        if(login == null || login.getUserinfo() == null)return;
+        if (login == null || login.getUserinfo() == null) return;
         UserInfo userInfo = login.getUserinfo();
         initName = userInfo.getName();
-        et_myInfo_name.setText(""+ Utils.isNull(initName));
+        et_myInfo_name.setText("" + Utils.isNull(initName));
         String img = userInfo.getImg();
-        if(!Utils.stringIsNull(img)){
+        if (!Utils.stringIsNull(img)) {
             imageUrl = img;
-            ImageLoaderUtil.displayImage(img,et_myinfo_iv);
+            ImageLoaderUtil.displayImage(img, et_myinfo_iv);
         }
         String tel = userInfo.getTel();
-        if(Utils.stringIsNull(tel)){
+        if (Utils.stringIsNull(tel)) {
             et_myinfo_tel.setText("暂未绑定手机号码,点击绑定");
             et_myinfo_tel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditMyInfoActivity.this, BoundTelActivity.class);
-                    intent.putExtra("boundType","tel");
+                    intent.putExtra("boundType", "tel");
                     intent.putExtra("access_token", CGSharedPreference.getAccess_Token());
                     startActivityForResult(intent, GloablUtils.BOUND_TEL_FROM_MINE_INFO);
                 }
             });
-        }else {
+        } else {
             et_myinfo_tel.setText("" + Utils.isNull(tel));
         }
         et_myInfo_relname.setText("" + Utils.isNull(userInfo.getRealname()));
@@ -290,21 +292,21 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
         showCommonDialog("信息保存中,请稍候...");
         initName = et_myInfo_name.getText().toString();
         initRelName = et_myInfo_relname.getText().toString();
-        UserRequest.saveUserInfo(this,imgUrl,initName,initRelName,new RequestFailedResult(commonDialog) {
+        UserRequest.saveUserInfo(this, imgUrl, initName, initRelName, new RequestFailedResult(commonDialog) {
             @Override
             public void result(BaseModel domain) {
                 cancleCommonDialog();
                 ToastUtils.showMessage("修改成功");
                 Login login = CGApplication.getInstance().getLogin();
-                if(login == null) return;
-                try{
-                UserInfo userInfo = login.getUserinfo();
-                userInfo.setImg(imgUrl);
-                userInfo.setName(initName);
-                userInfo.setRealname(initRelName);
-                CGApplication.getInstance().setLogin(login);
-                StoreDataInSerialize.storeUserInfo(login);
-                }catch (Exception e){
+                if (login == null) return;
+                try {
+                    UserInfo userInfo = login.getUserinfo();
+                    userInfo.setImg(imgUrl);
+                    userInfo.setName(initName);
+                    userInfo.setRealname(initRelName);
+                    CGApplication.getInstance().setLogin(login);
+                    StoreDataInSerialize.storeUserInfo(login);
+                } catch (Exception e) {
                     CGLog.v("在修改我的信息成功后,保存到磁盘时抛出了异常!");
                 }
                 setResult(RESULT_OK);
@@ -332,19 +334,25 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
     }
 
     private void showSave() {
-        if(CGApplication.getInstance().getLogin() == null || CGApplication.getInstance().getLogin()
-                .getUserinfo() == null){
+        if (CGApplication.getInstance().getLogin() == null || CGApplication.getInstance().getLogin()
+                .getUserinfo() == null) {
 
-        }else {
+        } else {
             initName = et_myInfo_name.getText().toString();
             initRelName = et_myInfo_relname.getText().toString();
-            if(Utils.stringIsNull(initName) || Utils.stringIsNull(initName)){
-                finish();
-            }
-            if(!Utils.stringIsNull(oneImg) && !Utils.stringIsNull(oneIName)
-                    && oneImg.equals(imageUrl) && oneIName.equals(initName)){
-                finish();
-            }else {
+            //判断不相等的两种情况,1.姓名值前后不等,初始为空,后不空,b.初始和后都不为空,且不相等C.初始不空,后为空.
+            if (((Utils.stringIsNull(oneImg) && !Utils.stringIsNull(imageUrl)) ||
+                    (!Utils.stringIsNull(oneImg) && !Utils.stringIsNull(imageUrl) && !oneImg.equals(imageUrl)) ||
+                    (!Utils.stringIsNull(oneImg) && Utils.stringIsNull(imageUrl))) ||
+
+                    ((Utils.stringIsNull(oneIName) && !Utils.stringIsNull(initName)) ||
+                            (!Utils.stringIsNull(oneIName) && !Utils.stringIsNull(initName) && !oneIName.equals(initName)) ||
+                            (!Utils.stringIsNull(oneIName) && Utils.stringIsNull(initName))) ||
+
+                    ((Utils.stringIsNull(oneIRelName) && !Utils.stringIsNull(initRelName)) ||
+                            (!Utils.stringIsNull(oneIRelName) && !Utils.stringIsNull(initRelName) && !oneIRelName.equals(initRelName)) ||
+                            (!Utils.stringIsNull(oneIRelName) && Utils.stringIsNull(initRelName)))) {
+
                 ToastUtils.showDialog(this, "提示!", "相册信息已修改,是否保存?", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -358,6 +366,9 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
                         finish();
                     }
                 });
+
+            } else {
+                finish();
             }
         }
 
@@ -366,7 +377,7 @@ public class EditMyInfoActivity extends BaseActivity implements DoEveryThing {
     //    POST  http://jz.wenjienet.com/px-mobile/rest/userinfo/update.json
 
     private boolean checkData() {
-        if(Utils.stringIsNull(et_myInfo_name.getText().toString())) return false;
+        if (Utils.stringIsNull(et_myInfo_name.getText().toString())) return false;
         return true;
     }
 

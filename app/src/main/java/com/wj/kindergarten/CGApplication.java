@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -66,7 +67,7 @@ import java.util.Map;
  * @data: 2015/5/20
  * @version: v1.0
  */
-public class CGApplication extends Application {
+public class CGApplication extends MultiDexApplication {
     public static CGApplication context = null;
 
     public static double latitude = -1;
@@ -147,8 +148,8 @@ public class CGApplication extends Application {
                 .displayer(new RoundedBitmapDisplayer(0)).build();
 
 
-        requestNetworkLocation();
-        SDKInitializer.initialize(getApplicationContext());
+//        requestNetworkLocation();
+//        SDKInitializer.initialize(getApplicationContext());
 //        initSearch();
 
         android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);

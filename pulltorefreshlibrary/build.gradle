@@ -6,6 +6,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 22
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -14,7 +15,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
 }
 
 dependencies {
+
 }

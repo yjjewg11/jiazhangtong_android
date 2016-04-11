@@ -8,12 +8,19 @@ android {
 //        applicationId "com.zbar.lib"
         minSdkVersion 14
         targetSdkVersion 22
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

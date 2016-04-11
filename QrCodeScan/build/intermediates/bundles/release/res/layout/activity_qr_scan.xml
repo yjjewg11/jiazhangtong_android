@@ -77,4 +77,4 @@
         android:textColor="@android:color/white"
         android:textSize="15sp" />
 
-</RelativeLayout><!-- From: file:/Users/tanghongbin/Documents/work_wenjie_project/jiazhangtong_android-master/QrCodeScan/src/main/res/layout/activity_qr_scan.xml -->
+</RelativeLayout>

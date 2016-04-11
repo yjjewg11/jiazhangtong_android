@@ -33,7 +33,6 @@ import com.wj.kindergarten.utils.Utils;
 import net.tsz.afinal.FinalDb;
 
 
-import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,7 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-
+import cz.msebera.android.httpclient.Header;
 
 
 /**
@@ -140,17 +139,17 @@ public class UploadFile {
                         uploadImage.failure("上传图片失败");
                     }
 
-                    @Override
-                    public void onProgress(int bytesWritten, int totalSize) {
-                        super.onProgress(bytesWritten, totalSize);
-                        progressCallBack.progress((int)bytesWritten, (int)totalSize);
-                    }
-
 //                    @Override
-//                    public void onProgress(long bytesWritten, long totalSize) {
+//                    public void onProgress(int bytesWritten, int totalSize) {
 //                        super.onProgress(bytesWritten, totalSize);
-//                        progressCallBack.progress((int) bytesWritten, (int) totalSize);
+//                        progressCallBack.progress((int)bytesWritten, (int)totalSize);
 //                    }
+
+                    @Override
+                    public void onProgress(long bytesWritten, long totalSize) {
+                        super.onProgress(bytesWritten, totalSize);
+                        progressCallBack.progress((int) bytesWritten, (int) totalSize);
+                    }
                 });
             } catch (Exception e) {
                 e.printStackTrace();

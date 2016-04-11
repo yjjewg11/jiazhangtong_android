@@ -63,8 +63,7 @@ import com.wj.kindergarten.utils.UserHeadImageUtil;
 import com.wj.kindergarten.utils.Utils;
 import com.wj.kindergarten.utils.WindowUtils;
 
-import org.apache.http.Header;
-import org.apache.http.entity.StringEntity;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

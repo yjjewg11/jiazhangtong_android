@@ -15,7 +15,7 @@ import com.loopj.android.http.ResponseHandlerInterface;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.common.Constants;
 
-import org.apache.http.HttpEntity;
+import cz.msebera.android.httpclient.HttpEntity;
 
 
 /**
