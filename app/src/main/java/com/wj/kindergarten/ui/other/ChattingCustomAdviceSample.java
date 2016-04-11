@@ -22,7 +22,7 @@ public class ChattingCustomAdviceSample extends IMChattingPageUI {
     public View getCustomTitleView(final Fragment fragment, final Context context, LayoutInflater inflater, YWConversation conversation) {
         YWConversationType type = conversation.getConversationType();
 
-        if (type == YWConversationType.SHOP) {
+        if (type == YWConversationType.P2P) {
             View cusView = inflater.inflate(R.layout.my_default_chatting_title, null);
             TextView title = (TextView) cusView.findViewById(R.id.my_title);
             TextView aliwx_title_button = (TextView) cusView.findViewById(R.id.my_back);
