@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.alibaba.mobileim.conversation.EServiceContact;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.AddressBook;
 import com.wj.kindergarten.bean.BaseModel;
@@ -22,6 +23,7 @@ import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
 import com.wj.kindergarten.ui.addressbook.LeaderMessageActivty;
 import com.wj.kindergarten.ui.addressbook.TeacherMessageActivty;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
 import com.wj.kindergarten.utils.Utils;
 
@@ -129,7 +131,7 @@ public class TeachersActivity extends BaseActivity {
         }
     }
 
-    private void addLeader(int i, final Teacher teacher, int count) {
+    private void addLeader(final int i, final Teacher teacher, int count) {
         if (null != teacher) {
             View view = LayoutInflater.from(this).inflate(R.layout.fragment_teacher_item, null);
             CircleImage head = (CircleImage) view.findViewById(R.id.iv_head);
@@ -143,14 +145,36 @@ public class TeachersActivity extends BaseActivity {
             ImageView call = (ImageView) view.findViewById(R.id.iv_call);
             call.setVisibility(View.GONE);
             ImageView message = (ImageView) view.findViewById(R.id.iv_message);
-            message.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(TeachersActivity.this, LeaderMessageActivty.class);
-                    intent.putExtra("teacher", teacher);
-                    startActivity(intent);
-                }
-            });
+
+                message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        String uuid = teacher.getTeacher_uuid();
+                        if(uuid.contains("group_wjd")){
+//userid是客服帐号，第一个参数是客服帐号，第二个是组ID，如果没有，传0
+
+                            EServiceContact contact = new EServiceContact("飨受人生",
+//                        teacher.getTeacher_uuid()
+//                        159945127
+                                    159945127);
+//如果需要发给指定的客服帐号，不需要Server进行分流(默认Server会分流)，请调用EServiceContact对象
+//的setNeedByPass方法，参数为false。
+//contact.setNeedByPass(false);
+                            Intent mkintent = MainActivity.instance.getmIMKit().getChattingActivityIntent(contact);
+                            startActivity(mkintent);
+                        }else {
+
+                            Intent intent = new Intent(TeachersActivity.this, LeaderMessageActivty.class);
+                            intent.putExtra("teacher", teacher);
+                            startActivity(intent);
+                        }
+
+                    }
+                });
+
+
             LinearLayout line = (LinearLayout) view.findViewById(R.id.layout_line);
             if (i + 1 == count) {
                 line.setVisibility(View.GONE);

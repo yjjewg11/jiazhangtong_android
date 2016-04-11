@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.alibaba.mobileim.FeedbackAPI;
+import com.alibaba.mobileim.IYWLoginService;
+import com.alibaba.mobileim.YWLoginParam;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengDialogButtonListener;
 import com.umeng.update.UmengUpdateAgent;
@@ -20,6 +23,7 @@ import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.bean.BaseModel;
+import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
@@ -94,6 +98,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(SettingActivity.this, NoticeActivity.class));
                 break;
             case R.id.layout_3://意见反馈
+                String customContact = null;
+                Login login = CGApplication.getInstance().getLogin();
+                if(login != null && login.getUserinfo() != null){
+                    customContact = login.getUserinfo().getLoginname()+" :";
+                }
+                FeedbackAPI.setCustomContact(customContact, true);
                 Intent intent = FeedbackAPI.getFeedbackActivityIntent();
                 if(intent!=null){
                     startActivity(intent);
@@ -101,7 +111,13 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 //                startActivity(new Intent(SettingActivity.this, FeedBackActivty.class));
                 break;
             case R.id.layout_4://关于我们
-                startActivity(new Intent(SettingActivity.this, AboutActivity.class));
+
+
+                //TODO 暂时修改为测试即时通讯
+
+                Intent mIKntent = MainActivity.instance.getmIMKit().getConversationActivityIntent();
+                startActivity(mIKntent);
+//                startActivity(new Intent(SettingActivity.this, AboutActivity.class));
                 break;
             case R.id.layout_5://检查更新
                 checkVersion();

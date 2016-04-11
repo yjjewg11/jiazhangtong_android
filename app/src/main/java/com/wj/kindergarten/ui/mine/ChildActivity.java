@@ -24,6 +24,7 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.MineSchoolActivity;
 import com.wj.kindergarten.ui.func.adapter.FragmentChildStateAdapter;
+import com.wj.kindergarten.ui.more.MyCircleView;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -47,6 +48,8 @@ public class ChildActivity extends BaseActivity {
     private ViewPager activity_child_pager;
     private List<ChildInfo> childInfos;
     private LinearLayout activity_child_viewpager_container;
+    private int position;
+    private MyCircleView mine_child_new_head_circle;
 
     @Override
     protected void setContentLayout() {
@@ -69,6 +72,27 @@ public class ChildActivity extends BaseActivity {
         activity_child_pager = (ViewPager) findViewById(R.id.activity_child_mine_viewPager);
         pagerAdapter = new FragmentChildStateAdapter(getSupportFragmentManager(), childInfos);
         activity_child_pager.setAdapter(pagerAdapter);
+        mine_child_new_head_circle = (MyCircleView) findViewById(R.id.mine_child_new_head_circle);
+        mine_child_new_head_circle.setRadius(10);
+        mine_child_new_head_circle.setDistance(40);
+        mine_child_new_head_circle.setCount(childInfos.size());
+
+        activity_child_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int pos) {
+                mine_child_new_head_circle.setScale(pos);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         if (childInfos.size() == 0) {
             activity_child_viewpager_container.removeAllViews();

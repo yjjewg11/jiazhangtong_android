@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
@@ -17,6 +19,7 @@ import com.umeng.socialize.controller.listener.SocializeListeners;
 import com.umeng.socialize.exception.SocializeException;
 import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.sso.UMSsoHandler;
+import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
@@ -104,10 +107,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void setNeedLoading() {
     }
+    public static LoginActivity instance;
+
+
 
     @Override
     protected void onCreate() {
+        instance = this;
         hideActionbar();
+
+
+
 
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, GloablUtils.QQ_APP_ID,
                 "SumAAk7jtaUSnZqd");
@@ -118,31 +128,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         myProgressBar = new MyProgressDialog(this);
         mController = UMServiceFactory.getUMSocialService("com.umeng.login");
 
-        circleImage = (CircleImage) findViewById(R.id.login_head);
-        login_three_qq = (ImageView) findViewById(R.id.login_three_qq);
-        login_three_weixin = (ImageView) findViewById(R.id.login_three_weixin);
-        login_three_weibo = (ImageView) findViewById(R.id.login_three_weibo);
+        initViews();
 
-        login_three_qq.setOnClickListener(this);
-        login_three_weixin.setOnClickListener(this);
-        login_three_weibo.setOnClickListener(this);
-        accEt = (EditText) findViewById(R.id.login_acc);
-        pwdEt = (EditText) findViewById(R.id.login_pwd);
-        forgetTv = (TextView) findViewById(R.id.login_forget);
-        actionLoginTv = (TextView) findViewById(R.id.login_action);
-        registerTv = (TextView) findViewById(R.id.login_register);
-        layoutLogin = (RelativeLayout) findViewById(R.id.layout_clean_4);
-        layoutPassword = (RelativeLayout) findViewById(R.id.layout_clean_5);
-        ivCleanLogin = (ImageView) findViewById(R.id.iv_clean_1);
-        ivCleanPassword = (ImageView) findViewById(R.id.iv_clean_2);
-
-        accEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanLogin, accEt));
-        pwdEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanPassword, pwdEt));
-        layoutLogin.setOnClickListener(this);
-        layoutPassword.setOnClickListener(this);
-        forgetTv.setOnClickListener(this);
-        actionLoginTv.setOnClickListener(this);
-        registerTv.setOnClickListener(this);
+        initClicks();
 
         //TODO test acc
         String[] str = CGSharedPreference.getLogin();
@@ -170,6 +158,36 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
         acc = accEt.getText().toString().trim();
         pwd = pwdEt.getText().toString().trim();
+    }
+
+    private void initClicks() {
+        accEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanLogin, accEt));
+        pwdEt.addTextChangedListener(new EditTextCleanWatcher(ivCleanPassword, pwdEt));
+        layoutLogin.setOnClickListener(this);
+        layoutPassword.setOnClickListener(this);
+        forgetTv.setOnClickListener(this);
+        actionLoginTv.setOnClickListener(this);
+        registerTv.setOnClickListener(this);
+    }
+
+    private void initViews() {
+        circleImage = (CircleImage) findViewById(R.id.login_head);
+        login_three_qq = (ImageView) findViewById(R.id.login_three_qq);
+        login_three_weixin = (ImageView) findViewById(R.id.login_three_weixin);
+        login_three_weibo = (ImageView) findViewById(R.id.login_three_weibo);
+
+        login_three_qq.setOnClickListener(this);
+        login_three_weixin.setOnClickListener(this);
+        login_three_weibo.setOnClickListener(this);
+        accEt = (EditText) findViewById(R.id.login_acc);
+        pwdEt = (EditText) findViewById(R.id.login_pwd);
+        forgetTv = (TextView) findViewById(R.id.login_forget);
+        actionLoginTv = (TextView) findViewById(R.id.login_action);
+        registerTv = (TextView) findViewById(R.id.login_register);
+        layoutLogin = (RelativeLayout) findViewById(R.id.layout_clean_4);
+        layoutPassword = (RelativeLayout) findViewById(R.id.layout_clean_5);
+        ivCleanLogin = (ImageView) findViewById(R.id.iv_clean_1);
+        ivCleanPassword = (ImageView) findViewById(R.id.iv_clean_2);
     }
 
     private void successGetAssess_token() {

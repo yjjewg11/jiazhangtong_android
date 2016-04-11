@@ -23,6 +23,7 @@ import com.wj.kindergarten.net.SendRequest;
 import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.CourseInteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.messagepag.EditMyInfoActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.DoEveryThing;
@@ -128,6 +129,7 @@ public final class UserRequest {
     private static final String SAVE_USER_INFO = "rest/userinfo/update.json";
     private static final String GET_MINE_CHILD_TEACHERS = "rest/student/getClassHeaderTeacher.json";
     private static final String GET_MINE_TEL = "rest/userinfo/getParentBaseInfo.json";
+    private static final String GET_IM_ACCOUNT = "rest/im/getMyLoginUser.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -1284,6 +1286,13 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         SendRequest.getInstance().get(context, RequestType.GET_MINE_TEL, params, RequestHttpUtil.BASE_URL +
                 GET_MINE_TEL, requestFailedResult);
+
+    }
+
+    public static void getImAccount(Context context, RequestResultI requestResultI) {
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context, RequestType.GET_IM_ACCOUNT, params, RequestHttpUtil.BASE_URL +
+                GET_IM_ACCOUNT, requestResultI);
 
     }
 }

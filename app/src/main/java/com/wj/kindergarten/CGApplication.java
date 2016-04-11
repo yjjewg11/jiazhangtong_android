@@ -26,6 +26,8 @@ import android.util.Log;
 
 import com.alibaba.mobileim.FeedbackAPI;
 import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.aop.AdviceBinder;
+import com.alibaba.mobileim.aop.PointCutEnum;
 import com.alibaba.wxlib.util.IWxCallback;
 import com.alibaba.wxlib.util.SysUtil;
 import com.baidu.location.BDLocation;
@@ -47,6 +49,7 @@ import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.net.RequestHttpUtil;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.other.ChattingCustomAdviceSample;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.ImageLoaderUtil;
@@ -133,7 +136,7 @@ public class CGApplication extends MultiDexApplication {
             });
         }
 
-
+        AdviceBinder.bindAdvice(PointCutEnum.CHATTING_FRAGMENT_UI_POINTCUT,ChattingCustomAdviceSample.class);
 
         ImageLoaderUtil.initImageLoader(this, R.drawable.touxiang, cachePath, 10, 0);
         RequestHttpUtil.initClient();

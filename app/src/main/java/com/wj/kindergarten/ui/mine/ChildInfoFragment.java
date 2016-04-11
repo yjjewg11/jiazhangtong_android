@@ -64,7 +64,7 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
     private TextView mine_child_new_head_circle_age;
     private CircleImage mine_child_new_head_circle_img;
     private TextView mine_child_new_head_circle_name;
-    private MyCircleView mine_child_new_head_circle;
+
 
     public ChildInfoFragment() {
     }
@@ -138,12 +138,6 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
 
     private void initViews(View rootView) {
 
-
-        mine_child_new_head_circle = (MyCircleView) rootView.findViewById(R.id.mine_child_new_head_circle);
-        mine_child_new_head_circle.setRadius(10);
-        mine_child_new_head_circle.setScale(position);
-        mine_child_new_head_circle.setDistance(40);
-        mine_child_new_head_circle.setCount(pagerAdapter.getCount());
 
 
         mine_child_new_head_back = (ImageView) rootView.findViewById(R.id.mine_child_new_head_back);

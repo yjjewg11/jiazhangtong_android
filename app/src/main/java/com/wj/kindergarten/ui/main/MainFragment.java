@@ -344,7 +344,7 @@ public class MainFragment extends Fragment {
                     MoreUtil.more(getActivity(), list, mainGv);
                 }
                 break;
-            case Constants.GARDEN_ADDRESS_LIST:
+            case Constants.GARDEN_ADDRESS_LIST://通讯录
                 startActivity(new Intent(getActivity(),TeachersActivity.class));
                 break;
             default:

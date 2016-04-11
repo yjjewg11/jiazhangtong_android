@@ -23,15 +23,23 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 
+import com.alibaba.mobileim.IYWLoginService;
+import com.alibaba.mobileim.YWAPI;
+import com.alibaba.mobileim.YWIMKit;
+import com.alibaba.mobileim.YWLoginParam;
+import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
+import com.wj.kindergarten.abstractbean.RequestFailedResult;
 import com.wj.kindergarten.bean.BaseModel;
 import com.wj.kindergarten.bean.ConfigObject;
 import com.wj.kindergarten.bean.FoundTypeCount;
+import com.wj.kindergarten.bean.ImUserInfo;
+import com.wj.kindergarten.bean.ImUserInfoSun;
 import com.wj.kindergarten.bean.Login;
 import com.wj.kindergarten.bean.PfAlbumList;
 import com.wj.kindergarten.bean.PfAlbumListSun;
@@ -73,6 +81,21 @@ public class MainActivity extends BaseActivity {
     private int[] typeCount = new int[3];
     private List<PfAlbumListSun> albumList;
     private UploadBroadCast receiver;
+    private List<ImUserInfoSun> imUserInfoList;
+    private YWIMKit mIMKit;
+    private ImUserInfoSun singleInfo;
+
+    public ImUserInfoSun getSingleInfo() {
+        return singleInfo;
+    }
+
+    public YWIMKit getmIMKit() {
+        return mIMKit;
+    }
+
+    public List<ImUserInfoSun> getImUserInfoList() {
+        return imUserInfoList;
+    }
 
     public List<PfAlbumListSun> getAlbumList() {
         return albumList;
@@ -151,6 +174,8 @@ public class MainActivity extends BaseActivity {
 //        if(CGSharedPreference.getEnoughOneDay()){
         getTopicConfig();
 //        }
+        //获取Im账号
+        getImAccount();
 
         handler.sendEmptyMessageDelayed(START_UPLOAD_PIC, 1000);
         handler.sendEmptyMessageDelayed(2, 1000);
@@ -162,6 +187,54 @@ public class MainActivity extends BaseActivity {
 //        getActivity().registerReceiver(receive, intentFilter);
 
 
+    }
+
+    private void getImAccount() {
+        UserRequest.getImAccount(this, new RequestFailedResult(dialog) {
+            @Override
+            public void result(BaseModel domain) {
+                ImUserInfo imUserInfo = (ImUserInfo) domain;
+                if(imUserInfo != null && imUserInfo.getUserInfos() != null && imUserInfo.getUserInfos().size() > 0){
+                    imUserInfoList = imUserInfo.getUserInfos();
+                    singleInfo = imUserInfo.getUserInfos().get(0);
+                    mIMKit = YWAPI.getIMKitInstance(singleInfo.getUserid(), GloablUtils.TABBAO_APPKEY);
+                    imLogin(singleInfo.getUserid(),singleInfo.getPassword());
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+
+            @Override
+            public void failure(String message) {
+
+            }
+        });
+    }
+
+    private void imLogin(String userid, String password) {
+        IYWLoginService loginService = mIMKit.getLoginService();
+        YWLoginParam loginParam = YWLoginParam.createLoginParam(userid, password);
+        loginService.login(loginParam, new IWxCallback() {
+
+            @Override
+            public void onSuccess(Object... arg0) {
+                CGLog.v("打印测试登录 : "+arg0.toString());
+            }
+
+            @Override
+            public void onProgress(int arg0) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onError(int errCode, String description) {
+                //如果登录失败，errCode为错误码,description是错误的具体描述信息
+                CGLog.v("打印失败 : "+errCode+" 错误信息 : "+description);
+            }
+        });
     }
 
     private void registerUpload() {

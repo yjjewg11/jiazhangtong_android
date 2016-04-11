@@ -115,6 +115,10 @@ public class PfSingleInfoFragment extends Fragment {
                 String sql = "data_id = '"+object.getUuid()+"'";
                 dbUpload.deleteByWhere(AlreadySavePath.class,sql);
                 list.remove(currentIndex);
+                if(list.size() == 0) {
+                    getActivity().finish();
+                    return;
+                }
                 pagerAdapter.setObjectList(list);
             }
 

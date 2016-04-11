@@ -180,6 +180,7 @@ public class MineFragment extends Fragment {
 
     public void initChildCount() {
 
+
         if (login != null) {
             if (login.getList() != null && login.getList().size() > 0) {
                 List<ChildInfo> infoList = login.getList();
