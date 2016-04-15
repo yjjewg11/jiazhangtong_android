@@ -13,6 +13,7 @@ import com.adsmogo.adview.AdsMogoLayout;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.IUmengUnregisterCallback;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengRegistrar;
 import com.umeng.onlineconfig.OnlineConfigAgent;
@@ -65,7 +66,7 @@ public class SplashActivity extends Activity implements DoEveryThing {
 //                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
                         //有在调到主页面的同时获取用户信息
                         if (CGSharedPreference.getNoticeState(1)) {
-                            UserRequest.deviceSave(SplashActivity.this, 0);//注册设备
+                            UserRequest.deviceSave(getApplicationContext(), 0);//注册设备
                         } else {
                             UserRequest.deviceSave(SplashActivity.this, 2);//注册设备
                         }
@@ -88,6 +89,7 @@ public class SplashActivity extends Activity implements DoEveryThing {
             }
         }
     };
+    private PushAgent mPushAgent;
 
     private void startActivityFromSplash() {
         Intent mainIntent = new Intent(SplashActivity.this, GuideActivity.class);
@@ -103,28 +105,15 @@ public class SplashActivity extends Activity implements DoEveryThing {
         ActivityManger.getInstance().addActivity(this);
 
         try {
-
-
-
-
-            OnlineConfigAgent.getInstance().updateOnlineConfig(this);
+            OnlineConfigAgent.getInstance().updateOnlineConfig(getApplicationContext());
             OnlineConfigAgent.getInstance().setDebugMode(true);
-            UmengOnlineConfigureListener configureListener = new UmengOnlineConfigureListener() {
-                @Override
-                public void onDataReceived(JSONObject json) {
-                    // TODO Auto-generated method stub
-                    OnlineConfigLog.d("OnlineConfig", "json=" + json.toString());
 
-                }
-            };
-            OnlineConfigAgent.getInstance().setOnlineConfigListener(configureListener);
-
-            PushAgent mPushAgent = PushAgent.getInstance(this);
+            mPushAgent = PushAgent.getInstance(getApplicationContext());
             mPushAgent.setDebugMode(true);
             mPushAgent.onAppStart();
             mPushAgent.enable(mRegisterCallback);
             mPushAgent.setPushIntentServiceClass(MyPushIntentService.class);
-            String device_token = UmengRegistrar.getRegistrationId(this);
+            String device_token = UmengRegistrar.getRegistrationId(getApplicationContext());
             CGSharedPreference.saveDeviceId(device_token);
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,13 +136,13 @@ public class SplashActivity extends Activity implements DoEveryThing {
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        MobclickAgent.onResume(getApplicationContext());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        MobclickAgent.onPause(getApplicationContext());
     }
 
     @Override
@@ -170,7 +159,9 @@ public class SplashActivity extends Activity implements DoEveryThing {
         if (mHandler != null) {
             mHandler.removeMessages(SPLASH_DELAY);
         }
-
+        mPushAgent.disable();
+        mPushAgent = null;
+        OnlineConfigAgent.getInstance().removeOnlineConfigListener();
         AdsMogoLayout.clear();
 //        adsMogoLayoutCode.clearThread();
         super.onDestroy();

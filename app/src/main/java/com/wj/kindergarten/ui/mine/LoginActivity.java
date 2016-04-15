@@ -115,10 +115,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate() {
         instance = this;
         hideActionbar();
-
-
-
-
         UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, GloablUtils.QQ_APP_ID,
                 "SumAAk7jtaUSnZqd");
         qqSsoHandler.addToSocialSDK();
@@ -253,6 +249,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 getThreeInfoToMainPage();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        instance = null;
+        super.onDestroy();
     }
 
     //判断是否有用户数据

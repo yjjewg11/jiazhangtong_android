@@ -1,8 +1,10 @@
 package com.wj.kindergarten.ui.mine;
 
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -12,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.abstractbean.RequestFailedResult;
@@ -64,6 +69,8 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
     private TextView mine_child_new_head_circle_age;
     private CircleImage mine_child_new_head_circle_img;
     private TextView mine_child_new_head_circle_name;
+    private PullToRefreshScrollView activity_child_scroll;
+    private MyCircleView mine_child_new_head_circle_fragment;
 
 
     public ChildInfoFragment() {
@@ -86,6 +93,7 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
         }
 
 
+        mine_child_new_head_circle_fragment.setScale(position);
         initData();
         bindData();
         return view;
@@ -138,14 +146,24 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
 
     private void initViews(View rootView) {
 
-
-
+        activity_child_scroll = (PullToRefreshScrollView) rootView.findViewById(R.id.activity_child_scroll);
         mine_child_new_head_back = (ImageView) rootView.findViewById(R.id.mine_child_new_head_back);
         mine_child_new_head_add_child = (ImageView) rootView.findViewById(R.id.mine_child_new_head_add_child);
         mine_child_new_head_circle_img = (CircleImage) rootView.findViewById(R.id.mine_child_new_head_circle_img);
         mine_child_new_head_circle_age = (TextView) rootView.findViewById(R.id.mine_child_new_head_circle_age);
         mine_child_new_head_circle_name = (TextView) rootView.findViewById(R.id.mine_child_new_head_circle_name);
+        mine_child_new_head_circle_fragment = (MyCircleView) rootView.findViewById(R.id.mine_child_new_head_circle_fragment);
+        mine_child_new_head_circle_fragment.setRadius(10);
+        mine_child_new_head_circle_fragment.setDistance(40);
+        mine_child_new_head_circle_fragment.setCount(pagerAdapter.getCount());
 
+        activity_child_scroll.setMode(PullToRefreshBase.Mode.DISABLED);
+//        activity_child_scroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                ((ChildActivity) getActivity()).scrollPoint(activity_child_scroll.getScrollY());
+//            }
+//        });
         mine_child_new_head_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,8 +256,8 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
     }
 
     private void queryTeachers() {
-        if(Utils.stringIsNull(childInfo.getClassuuid())) return;
-        UserRequest.getMineChildTeacher(getActivity(), childInfo.getClassuuid(),new RequestFailedResult() {
+        if (Utils.stringIsNull(childInfo.getClassuuid())) return;
+        UserRequest.getMineChildTeacher(getActivity(), childInfo.getClassuuid(), new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
                 MineChildTeachers mineChildTeachers = (MineChildTeachers) domain;
@@ -263,8 +281,8 @@ public class ChildInfoFragment extends Fragment implements View.OnClickListener 
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_child_ka_info_1, null);
                 TextView textView = (TextView) view.findViewById(R.id.item_ka);
                 Drawable drawable = getResources().getDrawable(R.drawable.youjiantou);
-                drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
-                textView.setCompoundDrawables(null,null,drawable,null);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                textView.setCompoundDrawables(null, null, drawable, null);
                 LinearLayout line = (LinearLayout) view.findViewById(R.id.view_ka);
                 textView.setText("班主任" + (i + 1) + ":" + Utils.isNull(info.getName()));
                 view.setOnClickListener(new View.OnClickListener() {

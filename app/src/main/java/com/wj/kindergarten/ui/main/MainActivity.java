@@ -435,7 +435,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.update(getApplicationContext());
     }
 
     private void showUpdateDialog(final String downloadUrl, final String message) {
@@ -711,7 +711,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         unregisterReceiver(receiver);
+        instance = null;
         Log.i("TAG", "页面被销毁!");
+        UmengUpdateAgent.setUpdateListener(null);
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 //        Log.i("TAG","添加运行任务 ： "+activityManager.getAppTasks().size());
         Log.i("TAG", "添加任务栈  ： " + activityManager.getRunningTasks(10).size());

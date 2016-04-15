@@ -5,7 +5,8 @@
     android:background="@color/main_bg"
     android:orientation="vertical">
 
-    <ScrollView
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/activity_child_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -80,5 +81,5 @@
                 android:layout_width="1dp"
                 android:layout_height="@dimen/normal_padding" />
         </LinearLayout>
-    </ScrollView>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
 </LinearLayout>

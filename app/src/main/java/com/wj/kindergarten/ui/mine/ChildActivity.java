@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -194,5 +195,16 @@ public class ChildActivity extends BaseActivity {
             }
         }
         return null;
+    }
+
+    int cicleY = -1;
+    public void scrollPoint(int scrollY) {
+        if(cicleY == -1){
+           cicleY =  Utils.getLocation(mine_child_new_head_circle)[1];
+        }
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mine_child_new_head_circle.getLayoutParams();
+        params.topMargin = cicleY - scrollY;
+        mine_child_new_head_circle.setLayoutParams(params);
+        mine_child_new_head_circle.invalidate();
     }
 }

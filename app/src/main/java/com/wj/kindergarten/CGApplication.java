@@ -37,6 +37,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.squareup.leakcanary.LeakCanary;
 import com.wenjie.jiazhangtong.R;
 
 import com.wj.kindergarten.bean.BaseModel;
@@ -103,9 +104,7 @@ public class CGApplication extends MultiDexApplication {
         String cachePath = Constants.cachePath;
 //        FeedbackAPI.initAnnoy(this, String appKey);
 
-
-
-
+        LeakCanary.install(this);
 ////Application.onCreate中，首先执行这部分代码, 因为，如果在":TCMSSevice"进程中，无需进行openIM和app业务的初始化，以节省内存
 ////特别注意:这段代码不能封装到其他方法中，必须在onCreate顶层代码中!
         SysUtil.setApplication(this);

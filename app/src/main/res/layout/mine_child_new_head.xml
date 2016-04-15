@@ -28,8 +28,8 @@
 
             <RelativeLayout
                 android:id="@+id/mine_child_new_head_rl"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/mine_child_head_back">
@@ -88,6 +88,23 @@
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:layout_width="wrap_content"
+            android:minWidth="150dp"
+            android:layout_height="wrap_content">
+            <com.wj.kindergarten.ui.more.MyCircleView
+                android:visibility="visible"
+                android:paddingLeft="0dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/mine_child_new_head_circle_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
