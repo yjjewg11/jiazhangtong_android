@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\pulltorefreshlibrary\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\pulltorefreshlibrary\\src\\main\\res\\drawable-xhdpi\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\pulltorefreshlibrary\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\default_ptr_flip.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\pulltorefreshlibrary\\src\\main\\res\\drawable-xhdpi\\default_ptr_flip.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\pulltorefreshlibrary\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\pulltorefreshlibrary\\src\\main\\res\\drawable-xhdpi\\indicator_arrow.png"
+    }
+]

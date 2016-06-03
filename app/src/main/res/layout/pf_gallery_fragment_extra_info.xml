@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_15">
+
+        <TextView
+            android:id="@+id/pf_gallery_fragment_extra_info_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="这是描述"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/color_222222"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/pf_fragment_extra_dianzan_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:drawableLeft="@drawable/dianzanxiao"
+            android:drawablePadding="@dimen/margin_10"
+            android:text="0人点过赞"
+            android:textSize="11sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_15"
+            android:background="@color/color_cccccc" />
+
+        <TextView
+            android:id="@+id/pf_gallery_fragment_extra_info_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="时间"
+            style="@style/pf_info_style"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            style="@style/pf_info_style"
+            android:id="@+id/pf_gallery_fragment_extra_info_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="地点"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            style="@style/pf_info_style"
+            android:id="@+id/pf_gallery_fragment_extra_info_human"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="老师"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+</LinearLayout>

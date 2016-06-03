@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/childen_bgpicter_android_child">
+
+        <ImageView
+            android:id="@+id/mine_child_new_head_add_child"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="center"
+            android:src="@drawable/tianjiaxiaohai"
+            android:visibility="visible" />
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:id="@+id/mine_child_new_head_rl"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/mine_child_head_back">
+
+                <com.wj.kindergarten.compounets.CircleImage
+                    android:id="@+id/mine_child_new_head_circle_img"
+                    android:layout_width="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_height="60dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mine_child_new_head_circle_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mine_child_new_head_rl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="13dp"
+                android:drawablePadding="@dimen/margin_5"
+                android:drawableRight="@drawable/boy_child"
+                android:paddingLeft="@dimen/margin_20"
+                android:text="周星星"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/mine_child_new_head_circle_age"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/mine_child_new_head_rl"
+                android:background="@drawable/mine_child_new_head_aage"
+                android:gravity="center"
+                android:padding="@dimen/margin_5"
+                android:text="4岁"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/mine_child_new_head_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            android:src="@drawable/all_arrow" />
+        <RelativeLayout
+            android:paddingLeft="@dimen/margin_20"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:layout_width="wrap_content"
+            android:minWidth="150dp"
+            android:layout_height="wrap_content">
+            <com.wj.kindergarten.ui.more.MyCircleView
+                android:visibility="visible"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/mine_child_new_head_circle_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_alpha_fade_in.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_alpha_fade_in.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_new_msg_notify_slide_right_in.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_new_msg_notify_slide_right_in.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_slide_right_out.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_slide_right_out.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_menu_out.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_menu_out.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\popup_window_in.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\popup_window_in.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_new_msg_notify_slide_right_out.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_new_msg_notify_slide_right_out.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_slide_left_in.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_slide_left_in.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_alpha_fade_out.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_alpha_fade_out.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\popup_window_out.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\popup_window_out.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_slide_right_in.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_slide_right_in.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_menu_in.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_menu_in.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\anim\\aliwx_slide_left_out.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\anim\\aliwx_slide_left_out.xml"
+    }
+]

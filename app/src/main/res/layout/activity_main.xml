@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+            <include layout="@layout/title_normal" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@+id/main_tab_content"
+            android:background="@color/background_division" />
+
+        <FrameLayout
+            android:id="@+id/main_tab_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/main_tab_host" />
+
+        <android.support.v4.app.FragmentTabHost
+            android:id="@+id/main_tab_host"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:background="@color/white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_shadow"
+            android:layout_above="@+id/main_tab_host"
+            android:layout_marginTop="@dimen/title_shadow_"
+            android:background="@drawable/fix_detail_shadow_down"
+            android:contentDescription="下部阴影" />
+    </RelativeLayout>
+</LinearLayout>

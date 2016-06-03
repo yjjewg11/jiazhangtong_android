@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/item_child_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_padding"
+        android:drawableLeft="@drawable/mine_pre_text"
+        android:drawablePadding="@dimen/small_padding"
+        android:paddingBottom="@dimen/small_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:text="其他联系人"
+        android:textColor="@color/color_ff6666"
+        android:textSize="@dimen/normal_text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/normal_padding">
+
+        <TextView
+            android:id="@+id/item_child_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/condition_height"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:drawableRight="@drawable/arrow_right"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/item_child_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/condition_height"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:drawableRight="@drawable/arrow_right"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/item_child_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/condition_height"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:drawableRight="@drawable/arrow_right"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/item_child_4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/condition_height"
+            android:layout_marginRight="@dimen/normal_padding"
+            android:drawableRight="@drawable/arrow_right"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true" />
+    </LinearLayout>
+</LinearLayout>

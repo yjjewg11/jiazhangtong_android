@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/title_normal" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/school_top_fl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/item_special_course_list_view"/>
+    </FrameLayout>
+    </LinearLayout>
+    <TextView
+        android:background="#cccccc"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <RadioGroup
+            android:id="@+id/special_radio_group"
+            android:checkedButton="@+id/tab_course"
+            android:background="@drawable/radio_shape"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal">
+
+
+
+            <RadioButton
+                android:textSize="17sp"
+                android:id="@+id/tab_course"
+                android:textColor="@drawable/radio_font_color"
+                android:background="@drawable/radio_bt_selector"
+                android:layout_weight="1"
+                android:text="课程"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:background="#bbbbbb"
+                android:layout_width="1dp"
+                android:layout_height="30dp" />
+            <RadioButton
+                android:textSize="17sp"
+                android:id="@+id/tab_teacher"
+                android:textColor="@drawable/radio_font_color"
+                android:background="@drawable/radio_bt_selector"
+                android:layout_weight="1"
+                android:text="师资"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:background="#bbbbbb"
+                android:layout_width="1dp"
+                android:layout_height="30dp" />
+
+            <RadioButton
+                android:textSize="17sp"
+                android:id="@+id/tab_introduce"
+                android:textColor="@drawable/radio_font_color"
+                android:background="@drawable/radio_bt_selector"
+                android:layout_weight="1"
+                android:text="简介"
+                android:gravity="center"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/shcool_detail_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="253dp"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/frameLayout2">
+        </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:layout_above="@+id/frameLayout2"
+            android:background="#bbbbbb"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
+       <FrameLayout
+           android:layout_alignParentBottom="true"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/frameLayout2">
+
+           <include layout="@layout/train_course_common"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content" />
+       </FrameLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

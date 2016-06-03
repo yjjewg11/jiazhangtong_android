@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="9dp"
+        android:paddingTop="@dimen/margin_10"
+        android:paddingBottom="@dimen/margin_10"
+        android:id="@+id/rl_all_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--app:roundAsCircle="false"-->
+        <!--app:roundedCornerRadius="@dimen/margin_5"-->
+
+        <com.wj.kindergarten.ui.other.CircleImageView
+            android:layout_alignTop="@+id/item_class_name"
+            android:padding="0dp"
+            app:roundAsCircle="false"
+            app:roundedCornerRadius="@dimen/margin_5"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_width="75dp"
+            android:adjustViewBounds="true"
+            android:layout_height="75dp"
+            android:id="@+id/item_special_course_list_view_image_view"
+            android:src="@drawable/zhanweitu"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:paddingRight="@dimen/margin_5"
+            android:textSize="16sp"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="层中幼儿英语"
+            android:id="@+id/item_class_name"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/item_special_course_list_view_image_view" />
+
+        <TextView
+            android:textSize="12sp"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            style="@style/schooltextstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="教学点：武侯区"
+            android:id="@+id/item_special_course_list_view_tv_adresss"
+            android:layout_below="@+id/item_class_name"
+            android:layout_alignLeft="@+id/item_class_name"
+            android:layout_alignParentRight="true" />
+        <FrameLayout
+            android:layout_marginTop="2dp"
+            android:layout_alignLeft="@+id/item_class_name"
+            android:layout_below="@+id/item_class_name"
+            android:id="@+id/rating_fl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></FrameLayout>
+
+
+        <RelativeLayout
+            style="@style/schooltextstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="有一个优秀幼儿园"
+            android:id="@+id/ll_school_medal_one"
+            android:orientation="vertical"
+            android:layout_below="@+id/item_special_course_list_view_tv_adresss"
+            android:layout_alignLeft="@+id/item_special_course_list_view_tv_adresss">
+
+            <include layout="@layout/common_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/include" />
+
+            <TextView
+                android:textColor="@color/color_blue"
+                android:drawablePadding="@dimen/margin_5"
+                android:drawableLeft="@drawable/juli_blue"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="1.2km"
+                android:id="@+id/recruit_student_tv_distance"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" />
+
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#ff4966"
+                android:textSize="12sp"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/renshu_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="100"
+                android:id="@+id/tv_study_people"
+                android:layout_alignBaseline="@+id/recruit_student_tv_distance"
+                android:layout_alignBottom="@+id/recruit_student_tv_distance"
+                android:layout_toLeftOf="@+id/recruit_student_tv_distance" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_marginTop="12dp"
+            android:src="@drawable/jiangbei_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_madle"
+            android:layout_below="@+id/ll_school_medal_one"
+            android:layout_alignRight="@+id/item_special_course_list_view_image_view" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@color/color_e0e0e0"
+            android:id="@+id/tv_division_line"
+            android:layout_below="@+id/ll_school_medal_one"
+            android:layout_alignLeft="@+id/ll_school_medal_one"
+            android:layout_alignRight="@+id/ll_school_medal_one" />
+
+        <LinearLayout
+            android:id="@+id/contain_include_medal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_madle"
+            android:layout_alignLeft="@+id/tv_division_line"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

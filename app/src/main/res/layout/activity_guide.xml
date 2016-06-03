@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.wj.kindergarten.ui.GuideActivity">
+
+    <FrameLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <include layout="@layout/title_normal"/>
+    </FrameLayout>
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.wj.kindergarten.ui.imagescan.HackyViewPager
+        android:id="@+id/guide_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <ImageView
+        android:id="@+id/activity_guide_tiaoguo"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:scaleType="center"
+        android:layout_gravity="right"
+        android:src="@drawable/tiaoguo_login"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+        <com.wj.kindergarten.ui.more.MyCircleView
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:id="@+id/activity_guide_mycircle"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+</LinearLayout>

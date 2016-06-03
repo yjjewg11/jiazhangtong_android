@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/fusion_list_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<com.wj.kindergarten.ui.more.PfRefreshLinearLayout
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="#352929"
+        android:id="@+id/fusion_list_fresh_linear"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/refresh_linearlayout_top_header"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+        <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fusion_list_fragment_stick_grid"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/margin_9dp"
+            android:paddingRight="@dimen/margin_9dp"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="3"
+            android:horizontalSpacing="2dp"
+            android:columnWidth="@dimen/margin_5"
+            android:verticalSpacing="2dp" />
+        <include layout="@layout/refresh_linearlayout_header"/>
+</com.wj.kindergarten.ui.more.PfRefreshLinearLayout>
+</FrameLayout>

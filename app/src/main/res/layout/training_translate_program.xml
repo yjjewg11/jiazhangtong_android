@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/id_training_translate_program"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="课程名称"
+            android:paddingTop="@dimen/course_padding_top"
+            style="@style/trainContentStyle"
+            android:id="@+id/tv_training_classname"
+            android:minHeight="30dp"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:minHeight="30dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:background="#bbbbbb"
+            android:id="@+id/textView8"
+            android:layout_toRightOf="@+id/tv_training_classname"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="少儿美术"
+            android:paddingTop="@dimen/course_padding_top"
+            style="@style/trainContentStyle"
+            android:id="@+id/tv_training_classname_content"
+            android:layout_marginLeft="15dp"
+            android:minHeight="30dp"
+            android:layout_toRightOf="@+id/textView8" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:background="#bbbbbb"
+            android:layout_height="1dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:minHeight="30dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:paddingTop="@dimen/course_padding_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="上课时间"
+            style="@style/trainContentStyle"
+            android:id="@+id/textView10"
+            android:minHeight="@dimen/course_height"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:background="#bbbbbb"
+            android:id="@+id/textView11"
+            android:layout_toRightOf="@+id/textView10"
+            android:layout_marginLeft="15dp"
+            android:minHeight="@dimen/course_height"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:paddingTop="@dimen/course_padding_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="下午5：30至7：30"
+            style="@style/trainContentStyle"
+            android:id="@+id/tv_training_classtime"
+            android:layout_marginLeft="15dp"
+            android:minHeight="@dimen/course_height"
+            android:layout_toRightOf="@+id/textView11" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:background="#bbbbbb"
+            android:layout_height="1dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:minHeight="30dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:paddingTop="@dimen/course_padding_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="上课地点"
+            android:minHeight="@dimen/course_height"
+            style="@style/trainContentStyle"
+            android:id="@+id/textView13"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:background="#bbbbbb"
+            android:id="@+id/textView14"
+            android:minHeight="@dimen/course_height"
+            android:layout_toRightOf="@+id/textView13"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:paddingTop="@dimen/course_padding_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="中国四川省成都市武侯区"
+            style="@style/trainContentStyle"
+            android:id="@+id/tv_trainning_adress"
+            android:minHeight="@dimen/course_height"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/textView14" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:background="#bbbbbb"
+            android:layout_height="1dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:minHeight="30dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:paddingTop="@dimen/course_padding_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="准备物品"
+            android:textColor="#ff4966"
+            android:minHeight="@dimen/course_height"
+            style="@style/trainContentStyle"
+            android:id="@+id/textView16"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:background="#bbbbbb"
+            android:id="@+id/textView17"
+            android:minHeight="@dimen/course_height"
+            android:layout_toRightOf="@+id/textView16"
+            android:layout_marginLeft="15dp"
+
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:paddingTop="@dimen/course_padding_top"
+            android:textColor="#ff4966"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="铅笔和钢笔"
+            android:minHeight="@dimen/course_height"
+            style="@style/trainContentStyle"
+            android:id="@+id/tv_trainning_preparething"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/textView17" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:background="#bbbbbb"
+            android:layout_height="1dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#bbbbbb"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView" />
+</LinearLayout>

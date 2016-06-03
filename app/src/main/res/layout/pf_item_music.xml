@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/pf_item_music_linear"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/margin_10"
+            android:src="@drawable/music_btn_pf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/pf_item_music_text"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:gravity="center_vertical"
+            android:text="这是第一条音乐"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

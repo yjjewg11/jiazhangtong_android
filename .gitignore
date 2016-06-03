@@ -4,6 +4,9 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
+fileHashes.bin
+fileSnapshots.bin
+outputFileStates.bin
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

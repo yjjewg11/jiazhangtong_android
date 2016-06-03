@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+    </style>
+
+    <style name="AppStyle" parent="BaseStyle">
+        <item name="android:windowTitleSize">@dimen/title_height</item>
+        <item name="android:windowContentOverlay">@android:color/transparent</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+        <item name="android:windowAnimationStyle">@style/ActivityNormalAnimation</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/title_bg</item>
+    </style>
+</resources>

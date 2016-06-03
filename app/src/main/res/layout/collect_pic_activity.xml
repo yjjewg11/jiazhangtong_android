@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#352929"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_normal"/>
+    <FrameLayout
+        android:background="#352929"
+        android:id="@+id/collect_pic_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.wj.kindergarten.ui.more.PfRefreshLinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/collect_pic_refresh_linear"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/refresh_linearlayout_top_header"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <GridView
+            android:background="@color/white"
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:horizontalSpacing="1dp"
+            android:columnWidth="1dp"
+            android:id="@+id/collect_pic_refresh_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <include layout="@layout/refresh_linearlayout_header"/>
+    </com.wj.kindergarten.ui.more.PfRefreshLinearLayout>
+    </FrameLayout>
+</LinearLayout>

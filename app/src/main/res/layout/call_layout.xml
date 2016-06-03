@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#88666666"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="#88666666"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/lltop"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/white"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="拨打电话到"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+            <TextView
+                android:background="#cccccc"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout
+                android:id="@+id/call_count_ll"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:scaleType="fitXY"
+                    android:src="@color/color_cccccc" />
+
+                <TextView
+                    android:id="@+id/special_call_cancel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/normal_click_selector"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
