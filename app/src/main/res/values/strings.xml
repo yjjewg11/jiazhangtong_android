@@ -525,5 +525,6 @@
     <string name="ez_device_upgrade">设备升级</string>
     <string name="interface_test_show_limit_dialog">LimitStream Dialog</string>
     <string name="interface_test_v33_api">测试v3.3接口</string>
+    <string name="video_list">视频列表</string>
 
 </resources>

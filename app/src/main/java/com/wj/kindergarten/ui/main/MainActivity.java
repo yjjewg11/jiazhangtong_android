@@ -204,10 +204,10 @@ public class MainActivity extends BaseActivity {
                     if(!Utils.stringIsNull(videoAccessToken.getAccessToken())){
                         CGSharedPreference.setVideoAccessToken(videoAccessToken.getAccessToken());
                     }
-                    if(!Utils.stringIsNull(videoAccessToken.getAppKey())){
-                        CGSharedPreference.setVideoAppkey(videoAccessToken.getAppKey());
-//                        EZOpenSDK.initLib(CGApplication.getInstance(), videoAccessToken.getAppKey(), "");
-                    }
+//                    if(!Utils.stringIsNull(videoAccessToken.getAppKey())){
+//                        CGSharedPreference.setVideoAppkey(videoAccessToken.getAppKey());
+////                        EZOpenSDK.initLib(CGApplication.getInstance(), videoAccessToken.getAppKey(), "");
+//                    }
 
                 }
             }

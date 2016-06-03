@@ -2115,8 +2115,7 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
             Runnable run = new Runnable() {
                 @Override
                 public void run() {
-                    //// TODO: 2016/6/1 写死的cameraID
-                    mEZPlayer = mEZOpenSDK.createPlayer(RealPlayActivity.this, "800388");
+                    mEZPlayer = mEZOpenSDK.createPlayer(RealPlayActivity.this, mCameraInfo.getCameraId());
                     if (mEZPlayer == null)
                         return;
                     if (mDeviceInfo == null) {

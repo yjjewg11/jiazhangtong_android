@@ -19,6 +19,7 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
 import com.wj.kindergarten.ui.func.adapter.VideoListAdapter;
 import com.wj.kindergarten.ui.more.PfRefreshLinearLayout;
+import com.wj.kindergarten.utils.ToastUtils;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
@@ -46,9 +47,9 @@ public class VideoListActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        setTitle(getResources().getString(R.string.video));
+        setTitleText(getResources().getString(R.string.video_list));
         FinalActivity.initInjectedView(this);
-        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
         initRefreshListener();
         initOnItemClickListener();
         adapter = new VideoListAdapter(this);
@@ -71,7 +72,8 @@ public class VideoListActivity extends BaseActivity {
         listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
+                pageNo = 1;
+                queryViewByPage(pageNo);
             }
 
             @Override
@@ -83,15 +85,24 @@ public class VideoListActivity extends BaseActivity {
     }
 
     int pageNo = 1;
-    public void queryViewByPage(int pageNo){
+    public void queryViewByPage(final int pageNo){
         UserRequest.getVideoListByPage(this, pageNo, new RequestFailedResult() {
             @Override
             public void result(BaseModel domain) {
+                listView.onRefreshComplete();
                 VideoList videoList = (VideoList) domain;
                 if(videoList != null && videoList.getList() != null &&
                         videoList.getList().getData() != null && videoList.getList().getData().size()> 0){
+                    if(pageNo == 1)list.clear();
                     list.addAll(videoList.getList().getData());
                     adapter.setList(list);
+                }else {
+                    if(pageNo == 1){
+                        listView.setMode(PullToRefreshBase.Mode.DISABLED);
+                    }else {
+                        listView.setMode(PullToRefreshBase.Mode.DISABLED);
+                    }
+                    ToastUtils.showMessage("没有更多内容了!!！");
                 }
             }
 

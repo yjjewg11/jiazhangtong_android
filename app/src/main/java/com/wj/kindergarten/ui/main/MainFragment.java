@@ -309,7 +309,7 @@ public class MainFragment extends Fragment {
         Utils.registerUmengClickEvent(clickEvent[position]);
         switch (mainItem.getTag()) {
             case Constants.GARDEN_VIDEO:
-                startActivity(new Intent(mContext, VideoListActivity.class));
+                startActivity(new Intent(mContext, VideoListActivity.class));//视频
                 break;
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));
