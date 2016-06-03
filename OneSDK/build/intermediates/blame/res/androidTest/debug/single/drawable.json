@@ -236,12 +236,12 @@
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\aliwx_reply_bar_expand_checked.xml"
     },
     {
-        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\aliwx_common_dialog_white_bg.xml",
-        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\aliwx_common_dialog_white_bg.xml"
-    },
-    {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\aliwx_record_btn_orange_bg.xml",
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\aliwx_record_btn_orange_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\aliwx_common_dialog_white_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\drawable\\aliwx_common_dialog_white_bg.xml"
     },
     {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\aliwx_comment_r_orange_bg.xml",

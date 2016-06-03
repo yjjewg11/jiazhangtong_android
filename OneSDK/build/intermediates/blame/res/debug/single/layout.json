@@ -384,12 +384,12 @@
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_chatting_detail_gif.xml"
     },
     {
-        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\debug\\layout\\aliwx_tooltip_chatwindow.xml",
-        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_tooltip_chatwindow.xml"
-    },
-    {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\debug\\layout\\aliwx_gif_smily_item.xml",
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_gif_smily_item.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\debug\\layout\\aliwx_tooltip_chatwindow.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_tooltip_chatwindow.xml"
     },
     {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\debug\\layout\\aliwx_record_dialog.xml",

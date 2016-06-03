@@ -261,7 +261,6 @@ public class MainFragment extends Fragment {
         });
     }
 
-
     private void initMainItem() {
         mainItems.clear();
 

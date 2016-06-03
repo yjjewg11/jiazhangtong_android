@@ -24,12 +24,12 @@
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\aliwx_tribe_member_layout.xml"
     },
     {
-        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\aliwx_template_text_item.xml",
-        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\aliwx_template_text_item.xml"
-    },
-    {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\aliwx_chatting_detail_custom_msg.xml",
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\aliwx_chatting_detail_custom_msg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\aliwx_template_text_item.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\bundles\\debug\\res\\layout\\aliwx_template_text_item.xml"
     },
     {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\aliwx_list_dialog_layout.xml",

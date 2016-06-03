@@ -9,7 +9,7 @@ android {
         versionCode 29
         versionName "1.2.3_调试版"
         multiDexEnabled true
-22
+
 
         ndk {
             //设置支持的SO库架构

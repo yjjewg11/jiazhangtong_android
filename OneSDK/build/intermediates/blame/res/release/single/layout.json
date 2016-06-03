@@ -32,12 +32,12 @@
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_fragment_contacts.xml"
     },
     {
-        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_chatting_detail_smily_radio.xml",
-        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_chatting_detail_smily_radio.xml"
-    },
-    {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_chatting_expand_view_pager_layout.xml",
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_chatting_expand_view_pager_layout.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_chatting_detail_smily_radio.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_chatting_detail_smily_radio.xml"
     },
     {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_chatting_detail.xml",
@@ -212,12 +212,12 @@
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_search_text.xml"
     },
     {
-        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_imageview.xml",
-        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_imageview.xml"
-    },
-    {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_tooltip_chatwindow_2.xml",
         "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_tooltip_chatwindow_2.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\aliwx_imageview.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\layout\\aliwx_imageview.xml"
     },
     {
         "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\layout\\com_taobao_tea_sdk_web_view_actvity_selectpicturepopwindows.xml",
