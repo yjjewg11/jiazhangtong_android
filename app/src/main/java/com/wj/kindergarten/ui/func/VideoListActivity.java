@@ -47,7 +47,7 @@ public class VideoListActivity extends BaseActivity {
 
     @Override
     protected void onCreate() {
-        setTitleText(getResources().getString(R.string.video_list));
+        setTitleText(getResources().getString(R.string.video));
         FinalActivity.initInjectedView(this);
         listView.setMode(PullToRefreshBase.Mode.BOTH);
         initRefreshListener();

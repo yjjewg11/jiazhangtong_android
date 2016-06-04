@@ -71,6 +71,7 @@ public class VideoListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.video_list_item,null);
             viewHolder.view_list_item_img = (ImageView) convertView.findViewById(R.id.view_list_item_img);
             viewHolder.view_list_item_line_status = (TextView) convertView.findViewById(R.id.view_list_item_line_status);
+            viewHolder.video_list_item_name = (TextView) convertView.findViewById(R.id.video_list_item_name);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -79,6 +80,7 @@ public class VideoListAdapter extends BaseAdapter {
         if(sun != null){
             ImageLoaderUtil.displayImage(sun.getPicUrl(),viewHolder.view_list_item_img);
             viewHolder.view_list_item_line_status.setText((sun.isOnline() ? "在线" : "离线"));
+            viewHolder.video_list_item_name.setText(""+sun.getCameraName());
         }
         return convertView;
     }
@@ -86,5 +88,6 @@ public class VideoListAdapter extends BaseAdapter {
     class ViewHolder {
         ImageView view_list_item_img;
         TextView view_list_item_line_status;
+        TextView video_list_item_name;
     }
 }
