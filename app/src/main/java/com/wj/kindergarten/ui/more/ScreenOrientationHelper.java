@@ -24,6 +24,10 @@ public class ScreenOrientationHelper implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor[] mSensors;
 
+    public Boolean getmPortraitOrLandscape() {
+        return mPortraitOrLandscape;
+    }
+
     private float[] mAccelerometerValues = new float[3];
     private float[] mMagneticFieldValues = new float[3];
 

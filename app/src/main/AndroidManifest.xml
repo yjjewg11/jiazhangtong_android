@@ -730,10 +730,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.wj.kindergarten.ui.func.VideoListActivity">
-        </activity>
-        <activity android:name="com.wj.kindergarten.ui.func.RealPlayActivity">
-        </activity>
+        <activity android:name="com.wj.kindergarten.ui.func.VideoListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name="com.wj.kindergarten.ui.func.RealPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
 
         <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver" >
             <intent-filter>

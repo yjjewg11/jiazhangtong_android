@@ -80,7 +80,7 @@ public class VideoListAdapter extends BaseAdapter {
         if(sun != null){
             ImageLoaderUtil.displayImage(sun.getPicUrl(),viewHolder.view_list_item_img);
             viewHolder.view_list_item_line_status.setText((sun.isOnline() ? "在线" : "离线"));
-            viewHolder.video_list_item_name.setText(""+sun.getCameraName());
+            viewHolder.video_list_item_name.setText(""+Utils.isNull(sun.getCameraName()));
         }
         return convertView;
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -55,6 +56,7 @@ public class VideoListActivity extends BaseActivity {
         adapter = new VideoListAdapter(this);
         listView.setAdapter(adapter);
         queryViewByPage(pageNo);
+        WebView webView = new WebView(this);
     }
 
     private void initOnItemClickListener() {

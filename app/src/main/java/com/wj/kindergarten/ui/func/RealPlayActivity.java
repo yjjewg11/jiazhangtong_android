@@ -102,6 +102,7 @@ import com.videogo.widget.RingView;
 import com.videogo.widget.TitleBar;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.bean.SingleCameraInfo;
+import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.OpenYSService;
 import com.wj.kindergarten.common.RealPlaySquareInfo;
 import com.wj.kindergarten.common.SecureValidate;
@@ -128,7 +129,6 @@ import java.util.TimerTask;
  */
 public class RealPlayActivity extends Activity implements OnClickListener, SurfaceHolder.Callback,
         Handler.Callback, OnTouchListener, OpenYSService.OpenYSServiceListener, SecureValidate.SecureValidateListener
-//        , SecureValidate.SecureValidateListener, OpenYSService.OpenYSServiceListener
 {
     private static final String TAG = "RealPlayerActivity";
     /**
@@ -334,6 +334,7 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EZOpenSDK.getInstance().setAccessToken(CGSharedPreference.getVideoAccessToken());
         super.onCreate(savedInstanceState);
         initData();
         initView();
@@ -1218,13 +1219,17 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            closePtzPopupWindow();
-            closeTalkPopupWindow(true, false);
-            if (mStatus != RealPlayStatus.STATUS_STOP) {
-                stopRealPlay();
-                setRealPlayStopUI();
+            if(!mScreenOrientationHelper.getmPortraitOrLandscape()){
+                mScreenOrientationHelper.portrait();
+            }else {
+                closePtzPopupWindow();
+                closeTalkPopupWindow(true, false);
+                if (mStatus != RealPlayStatus.STATUS_STOP) {
+                    stopRealPlay();
+                    setRealPlayStopUI();
+                }
+                finish();
             }
-            finish();
             return true;
         }
 
