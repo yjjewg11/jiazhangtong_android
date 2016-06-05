@@ -1,0 +1,338 @@
+[
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_blue_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_blue_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_record_dialog_bg1.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_record_dialog_bg1.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_grey_btn_textcolor.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_grey_btn_textcolor.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\feedback_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\feedback_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_back_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_back_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_image_viewer_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_image_viewer_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_album.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_album.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_comment_l_orange_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_comment_l_orange_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_divider.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_divider.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_contacts_search_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_contacts_search_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_record_btn_green_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_record_btn_green_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_activity_sendfeedback_addpicture.9.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_activity_sendfeedback_addpicture.9.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_activity_sendfeedback_newimagewithdelete_delete_drawable.9.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_activity_sendfeedback_newimagewithdelete_delete_drawable.9.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_expand_unchecked.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_expand_unchecked.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_comment_l_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_comment_l_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_smily_tab_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_smily_tab_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_white_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_white_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_friend_item_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_friend_item_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_column_second_grade_color.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_column_second_grade_color.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_search_icon_delete_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_search_icon_delete_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_smily_text_color.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_smily_text_color.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_commont_title_btn_text.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_commont_title_btn_text.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_download_original_button.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_download_original_button.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_cloud_msg_forget_password.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_cloud_msg_forget_password.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_first_checked.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_first_checked.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_middle.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_middle.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_time_text_view_border.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_time_text_view_border.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_title_bar_back.9.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_title_bar_back.9.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\yw_1222.jpg",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\yw_1222.jpg"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_title_bar_more.9.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_title_bar_more.9.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_root_cer.jpg",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_root_cer.jpg"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_expand_checked.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_expand_checked.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_back_btn_bg_white.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_back_btn_bg_white.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_first.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_first.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_comment_r_green_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_comment_r_green_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_wq_common_grey_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_wq_common_grey_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_dialog_content_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_dialog_content_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_weitao_msg_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_weitao_msg_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_dialog_white_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_dialog_white_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_topbar_icon_download_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_topbar_icon_download_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_menu_item_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_menu_item_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_record_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_record_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_green_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_green_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_alert_dialog_item_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_alert_dialog_item_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_camera.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_camera.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_column_third_grade_color.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_column_third_grade_color.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_record_btn_orange_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_record_btn_orange_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_middle_with_right.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_middle_with_right.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_last.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_last.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_check_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_check_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_center_audio_backgroud_from.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_center_audio_backgroud_from.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_wq_common_green_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_wq_common_green_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_loading_progress.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_loading_progress.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_send_tab_icon.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_send_tab_icon.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_pic_more_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_pic_more_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_sysmsgbg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_sysmsgbg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_comment_r_orange_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_comment_r_orange_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_face_view_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_face_view_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_activity_sendfeedback_rounded_edittext.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_activity_sendfeedback_rounded_edittext.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_middle_checked.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_middle_checked.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_column_first_grade_color.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_column_first_grade_color.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_contacts_search_btn_text_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_contacts_search_btn_text_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_topbar_icon_message_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_topbar_icon_message_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_grey_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_grey_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_smily_delete_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_smily_delete_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_my_progress.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_my_progress.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_comment_l_green_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_comment_l_green_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_button_last_checked.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_button_last_checked.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_record_btn_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_record_btn_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_receive_tab_icon.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_receive_tab_icon.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_record_view_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_record_view_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_top_delete_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_top_delete_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_keyboard_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_keyboard_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_unread_msg_notify_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_unread_msg_notify_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_record_dialog_bg2.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_record_dialog_bg2.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\com_taobao_tae_sdk_web_view_title_bar_close.9.png",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\com_taobao_tae_sdk_web_view_title_bar_close.9.png"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_comment_r_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_comment_r_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_bg_photo_window.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_bg_photo_window.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_expand.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_expand.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_tooltip_listview_divider.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_tooltip_listview_divider.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_common_blue_oval_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_common_blue_oval_bg.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_btn_text_color.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_btn_text_color.xml"
+    },
+    {
+        "merged": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\build\\intermediates\\res\\merged\\release\\drawable\\aliwx_reply_bar_face_bg.xml",
+        "source": "D:\\work-wenjie-project\\jiazhangtong_android-master\\OneSDK\\res\\drawable\\aliwx_reply_bar_face_bg.xml"
+    }
+]

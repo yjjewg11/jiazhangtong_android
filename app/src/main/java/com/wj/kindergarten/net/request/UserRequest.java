@@ -130,6 +130,9 @@ public final class UserRequest {
     private static final String GET_MINE_CHILD_TEACHERS = "rest/student/getClassHeaderTeacher.json";
     private static final String GET_MINE_TEL = "rest/userinfo/getParentBaseInfo.json";
     private static final String GET_IM_ACCOUNT = "rest/im/getMyLoginUser.json";
+    private static final String NOTICE_INFO = "rest/share/getAnnUrlJSON.json";
+    private static final String GET_VIDEO_ACCESS_TOKEN = "rest/eZCamera/getAccessToken.json";
+    private static final String GET_VIDEO_LIST_BY_PAGE = "rest/eZCamera/getCameraList.json";
     private static String groupUuid;
     private static String ONCE_COURSE_CLICK = "rest/pxCourse/get2.json";
     private static final String ALL_TRAINC_SCHOOL = "rest/group/pxlistByPage.json";
@@ -503,6 +506,12 @@ public final class UserRequest {
                 RequestHttpUtil.BASE_URL + ARTICLE, requestResultI);
     }
 
+    public static void getNoticeInfo(Context context, String uuid, RequestResultI requestResultI) {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("uuid", uuid);
+        SendRequest.getInstance().get(context, RequestType.NOTICE_INFO, requestParams,
+                RequestHttpUtil.BASE_URL + NOTICE_INFO, requestResultI);
+    }
     public static void getPrivilegeActive(Context context, String uuid, RequestResultI requestResultI) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("uuid", uuid);
@@ -1262,7 +1271,7 @@ public final class UserRequest {
     public static void saveUserInfo(Context context, String imgUrl, String name, String relname, RequestFailedResult resultI) {
         JSONObject object = new JSONObject();
         try {
-            object.put("imgUrl", imgUrl);
+            object.put("img", imgUrl);
             object.put("name", name);
             object.put("relname", relname);
             object.put("email", CGApplication.getInstance().getLogin().getUserinfo().getEmail());
@@ -1286,13 +1295,22 @@ public final class UserRequest {
         RequestParams params = new RequestParams();
         SendRequest.getInstance().get(context, RequestType.GET_MINE_TEL, params, RequestHttpUtil.BASE_URL +
                 GET_MINE_TEL, requestFailedResult);
-
     }
 
     public static void getImAccount(Context context, RequestResultI requestResultI) {
         RequestParams params = new RequestParams();
         SendRequest.getInstance().get(context, RequestType.GET_IM_ACCOUNT, params, RequestHttpUtil.BASE_URL +
                 GET_IM_ACCOUNT, requestResultI);
-
+    }
+    public static void getVideoAccessToken(Context context, RequestResultI requestResultI) {
+        RequestParams params = new RequestParams();
+        SendRequest.getInstance().get(context, RequestType.GET_VIDEO_ACCESS_TOKEN, params, RequestHttpUtil.BASE_URL +
+                GET_VIDEO_ACCESS_TOKEN, requestResultI);
+    }
+    public static void getVideoListByPage(Context context,int pageNo, RequestResultI requestResultI) {
+        RequestParams params = new RequestParams();
+        params.put("pageNo",pageNo);
+        SendRequest.getInstance().get(context, RequestType.GET_VIDEO_LIST_BY_PAGE, params, RequestHttpUtil.BASE_URL +
+                GET_VIDEO_LIST_BY_PAGE, requestResultI);
     }
 }

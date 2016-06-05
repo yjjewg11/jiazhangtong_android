@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wenjie.jiazhangtong">
+          package="com.wenjie.jiazhangtong">
 
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
-        android:smallScreens="true" />
+        android:smallScreens="true"/>
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     >
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="INTERACT_ACROSS_USERS_FULL"/>
 
     <!-- 这个权限用于进行网络定位 -->
 
@@ -51,23 +51,23 @@
     <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
     <!-- 允许应用读取低级别的系统日志文件 -->
     <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
     <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
     <!-- 【可选】如果需要设置前台是否显示通知，需要设置这个权限 -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
     <!-- 连接网络权限INTERNET ，用于请求广告(必须)，mogo会使用该权限 -->
     <!-- <uses-permission android:name="android.permission.INTERNET" /> -->
@@ -78,40 +78,64 @@
     <!-- 获取用户地理信息权限，用于帮助精确统计开发者的程序发布之后的用户分布情况 ，mogo会 使用该权限 -->
     <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
     <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
     <!-- 读写sd 卡的权限，用于缓存广告所用到的图片，节省流量，并可获得更好的用户体验 ，mogo 会使用该权限 -->
     <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
     <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
     <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
     <!-- MIX(智游汇) -->
     <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
     <!-- 宾谷 -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
     <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
     <!-- adchina -->
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
     <!-- 拨打电话权限，请谨慎添加 -->
     <!-- <uses-permission android:name="android.permission.CALL_PHONE" /> -->
     <!-- 微云所需权限 此权限为开机启动，请谨慎添加 -->
     <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> -->
     <!-- wooboo  此权限会读取短信和联系人，请谨慎添加 -->
     <!-- <uses-permission android:name="android.permission.READ_SMS" /> -->
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <!-- 艾德尔 可选权限  写入日程，但不可读取 -->
-    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
     <!-- 艾德尔 可选权限 允许程序读取用户的日程信息 -->
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <!-- 多盟所需权限，无此权限多盟将无法展示广告 -->
     <!-- <uses-permission android:name="android.permission.VIBRATE" /> -->
     <!-- <uses-permission android:name="android.permission.WAKE_LOCK" /> -->
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+
+    <!-- //视频接入需要的权限 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.xiaomi.market.sdk.UPDATE" />
 
     <application
         android:name="com.wj.kindergarten.CGApplication"
@@ -126,328 +150,329 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueAlbumEditActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.EditPfActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.FindMusicOfPfActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueGalleryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.UpLoadActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfUpGalleryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfEditInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.ConllectPicActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfGalleryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.map.RoutePlanActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.map.MapActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.TeachersActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.MineSchoolActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.SchoolHtmlActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.LoadSchoolHtmlActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.webview.LoadHtmlActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.PrivilegeDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.PrivilegeActiveActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.CourseInteractionListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.TeacherDetailInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.more.HtmlActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.MineCourseDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.MineSpecialCourseActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.AllWebActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.MoreSpecialDiscussActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.SpecialCourseMoreDicussActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.SpecialCourseDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.SpecialCourseInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.SchoolDetailInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.main.MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name=".wxapi.message.MessageActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.RegisterActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.ForgetPwdActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.SettingActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.ChildActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.EditParentsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.EditChildActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.EditRemarkActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.InteractionSentActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.InteractionListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.NoticeListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.NoticeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.SignListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.CourseListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.FoodListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.ArticleActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.ArticleListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.AppraiseTeacherActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
         <!-- setting -->
         <activity
             android:name="com.wj.kindergarten.ui.mine.UpdatePasswordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.AboutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.FeedBackActivty"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.addressbook.TeacherMessageActivty"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.NoticeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.NormalReplyListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.webview.WebviewActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.webview.SchoolIntroduceActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.store.StoreActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.EditOthersActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.imagescan.GalleryImagesActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.imagescan.PhotoWallActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.TestActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <!-- setting -->
 
 
@@ -456,27 +481,27 @@
             android:name="com.wj.kindergarten.ui.addressbook.LeaderMessageActivty"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <!-- address book -->
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55be14c867e58ed6b800592e" />
+            android:value="55be14c867e58ed6b800592e"/>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="360" />
+            android:value="360"/>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="4e6a1bbf710ec8f006be6148ea5d78d0" />
+            android:value="4e6a1bbf710ec8f006be6148ea5d78d0"/>
 
         <!-- version update -->
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" />
+            android:process=":DownloadingService"/>
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!-- version update -->
 
 
@@ -486,82 +511,23 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
             android:launchMode="singleTask"
             android:noHistory="true"
             android:theme="@style/Theme.UMDialog"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!-- um share -->
 
-
-        <!-- um message -->
-        <receiver
-            android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
-            android:exported="false" />
-        <receiver android:name="com.umeng.message.RegistrationReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.umeng.message.UmengBroadcastReceiver">
-            <intent-filter>
-                <action android:name="org.agoo.android.intent.action.RECEIVE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.wenjie.jiazhangtong.intent.action.COMMAND" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="org.agoo.android.intent.action.RE_ELECTION_V2" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.umeng.message.BootBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name="com.wj.kindergarten.services.PlayMusicService" />
-        <service android:name="com.wj.kindergarten.services.PicUploadService" />
-        <service
-            android:name="com.umeng.message.UmengService"
-            android:exported="true"
-            android:label="PushService"
-            android:process=":pushService_v1">
-            <intent-filter>
-                <action android:name="com.wenjie.jiazhangtong.intent.action.START" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.wenjie.jiazhangtong.intent.action.COCKROACH" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="org.agoo.android.intent.action.PING" />
-            </intent-filter>
-        </service>
-        <service
-            android:name="org.android.agoo.service.ElectionService"
-            android:exported="true"
-            android:process=":pushService_v1">
-            <intent-filter>
-                <action android:name="org.agoo.android.intent.action.ELECTION_V2" />
-            </intent-filter>
-        </service>
-        <service android:name="com.umeng.message.UmengIntentService" />
-        <service android:name=".wxapi.message.MyPushIntentService" />
+        <service android:name="com.wj.kindergarten.services.PlayMusicService"/>
+        <service android:name="com.wj.kindergarten.services.PicUploadService"/>
+        <service android:name=".wxapi.message.MyPushIntentService"/>
         <!-- um message -->
 
 
@@ -593,9 +559,9 @@
 
         <receiver android:name="com.wj.kindergarten.ui.func.NetworkConnectChangedReceiver">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-                <action android:name="android.net.wifi.STATE_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="android.net.wifi.STATE_CHANGE"/>
             </intent-filter>
         </receiver>
         <!-- <receiver android:name="com.wj.kindergarten.ui.main.MineFragment$MyReceiver"> -->
@@ -610,26 +576,26 @@
         <activity
             android:name="com.adsmogo.adview.AdsMogoWebView"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"/>
          
         <!--  注册Service，自主广告与交换广告的应用下载功能所需   -->
          
         <service
             android:name="com.adsmogo.controller.service.UpdateService"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
          
         <!--  注册Service，安装应用所用   -->
          
         <service
             android:name="com.adsmogo.controller.service.CountService"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
          
         <service
             android:name="com.adsmogo.natives.service.ActService"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
 
         <!-- <activity -->
         <!-- android:name="com.baidu.mobads.AppActivity" -->
@@ -640,7 +606,7 @@
             android:enabled="true"
             android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2" />
+                <action android:name="com.baidu.location.service_v2.2"/>
             </intent-filter>
         </service>
 
@@ -648,16 +614,16 @@
 
         <service
             android:name="com.qq.e.comm.DownloadService"
-            android:exported="false" />
+            android:exported="false"/>
 
         <activity
             android:name="com.qq.e.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent"/>
 
         <receiver android:name="com.wj.kindergarten.receiver.ReceiverTwoCodeURl">
             <intent-filter>
-                <action android:name="receiver_two_code_url" />
+                <action android:name="receiver_two_code_url"/>
             </intent-filter>
         </receiver>
 
@@ -665,69 +631,69 @@
         <!-- 调试版本的密匙   OsYjK06n1U8Rb2qZvVF7CwiX -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="OsYjK06n1U8Rb2qZvVF7CwiX" />
+            android:value="OsYjK06n1U8Rb2qZvVF7CwiX"/>
 
-        <uses-permission android:name="android.permission.INTERNET" />
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="1104813270" />
+                <data android:scheme="1104813270"/>
             </intent-filter>
         </activity>
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.SinglePfEditActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfChoosedPicActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.PfAlbumModelActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueModeReviewActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyMemberActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.mine.photofamilypic.BoutiqueSingleChooseActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyAlbumActivity" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name="com.wj.kindergarten.ui.mine.photofamilypic.AddFamilyAlbumActivity"/>
         <activity
             android:name="com.wj.kindergarten.ui.GuideActivity"
             android:label="@string/app_name"
@@ -737,18 +703,44 @@
             android:name="com.wj.kindergarten.ui.func.BoundTelActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.func.ConfirmBoundTelActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name="com.wj.kindergarten.ui.messagepag.EditMyInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name="com.videogo.main.EzvizWebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
+        </activity>
+        <!-- 用于sdk中间页显示，包含登录、设备添加、设备操作等页面 -->
+
+        <receiver
+            android:name="com.wj.kindergarten.receiver.EzvizBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.videogo.action.OAUTH_SUCCESS_ACTION"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="com.wj.kindergarten.ui.func.VideoListActivity">
+        </activity>
+        <activity android:name="com.wj.kindergarten.ui.func.RealPlayActivity">
+        </activity>
+
+        <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

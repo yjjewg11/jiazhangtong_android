@@ -101,4 +101,7 @@ public interface RequestType {
     int GET_MINE_CHILD_TEACHERS = 185;
     int GET_MINE_TEL = 186;
     int GET_IM_ACCOUNT = 187;
+    int NOTICE_INFO = 188;
+    int GET_VIDEO_ACCESS_TOKEN = 189;
+    int GET_VIDEO_LIST_BY_PAGE = 190;
 }

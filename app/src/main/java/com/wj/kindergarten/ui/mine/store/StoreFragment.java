@@ -26,6 +26,7 @@ import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.func.ArticleActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
+import com.wj.kindergarten.ui.func.NoticeActivity;
 import com.wj.kindergarten.ui.func.PrivilegeDetailActivity;
 import com.wj.kindergarten.ui.func.SchoolDetailInfoActivity;
 import com.wj.kindergarten.ui.func.SchoolHtmlActivity;
@@ -112,6 +113,10 @@ public class StoreFragment extends Fragment {
                             startActivity(intent);
                         }else if(store.getType() == NormalReplyListActivity.RECRUIT_STUDENT){
                             Intent intent = new Intent(getActivity(), SchoolHtmlActivity.class);
+                            intent.putExtra("uuid",store.getReluuid());
+                            startActivity(intent);
+                        }else if(store.getType() == NormalReplyListActivity.REPLY_TYPE_SCHOOL_NOTICE){
+                            Intent intent = new Intent(getActivity(), NoticeActivity.class);
                             intent.putExtra("uuid",store.getReluuid());
                             startActivity(intent);
                         }

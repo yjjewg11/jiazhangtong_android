@@ -344,16 +344,17 @@ public class CGSharedPreference {
         editor.putString("login_access_token", access_token);
         editor.commit();
     }
+    public static String getAccess_Token() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("login_access_token", "");
+    }
 
     public static void storelogin_type(String type) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putString("login_type", type);
         editor.commit();
     }
-    public static String getAccess_Token() {
-        SharedPreferences sharedPreferences = getSharedPreferences();
-        return sharedPreferences.getString("login_access_token", "");
-    }
+
 
     public static String getlogin_type() {
         SharedPreferences sharedPreferences = getSharedPreferences();
@@ -371,4 +372,25 @@ public class CGSharedPreference {
         editor.commit();
     }
 
+    public static void setVideoAccessToken(String accessToken) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("video_access_token", accessToken);
+        editor.commit();
+    }
+
+    public static void setVideoAppkey(String appKey) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString("video_app_key", appKey);
+        editor.commit();
+    }
+
+    public static String getVideoAccessToken() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("video_access_token", "");
+    }
+
+    public static String getVideoAppkey() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString("video_app_key", "");
+    }
 }

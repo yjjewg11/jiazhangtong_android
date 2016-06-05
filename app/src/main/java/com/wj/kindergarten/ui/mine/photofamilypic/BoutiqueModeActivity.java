@@ -78,6 +78,8 @@ public class BoutiqueModeActivity extends BaseActivity {
                 object.setHerald(boutiqueSingleInfoObject.getHerald());
                 String title = boutiqueSingleInfoObject.getTitle();
                 if(title != null && !TextUtils.isEmpty(title)) object.setTitle(title);
+                String mp3 = boutiqueSingleInfoObject.getMp3();
+                if(mp3 != null && !TextUtils.isEmpty(mp3)) object.setMp3(mp3);
                 Intent intent = new Intent(BoutiqueModeActivity.this, BoutiqueModeReviewActivity.class);
                 intent.putExtra("objectList", (ArrayList) objectList);
                 intent.putExtra("objectMode", object);
@@ -95,6 +97,7 @@ public class BoutiqueModeActivity extends BaseActivity {
             object.setHerald(boutiqueSingleInfoObject.getHerald());
             object.setKey(boutiqueSingleInfoObject.getTemplate_key());
             object.setAlbumUUid(boutiqueSingleInfoObject.getUuid());
+            object.setMp3(boutiqueSingleInfoObject.getMp3());
         }
     }
 

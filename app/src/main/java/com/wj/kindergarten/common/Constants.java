@@ -38,6 +38,7 @@ public abstract class Constants {
 
     public static final String ALREADY_SELECT_KEY = "select_list";
     public static final int HTTP_PIC_TIME_OUT = 120 * 1000;
+    public static final String GARDEN_VIDEO = "garden_video";
 
     public static boolean isStore = true;
 }

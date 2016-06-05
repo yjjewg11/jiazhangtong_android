@@ -2,7 +2,6 @@ package com.wj.kindergarten.net;
 
 import android.content.Context;
 import android.content.Intent;
-import android.preference.PreferenceActivity;
 
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -10,7 +9,6 @@ import com.loopj.android.http.RequestParams;
 import com.umeng.socialize.utils.Log;
 import com.wj.kindergarten.CGApplication;
 import com.wj.kindergarten.IOStoreData.StoreDataInSerialize;
-import com.wj.kindergarten.bean.BoutiqueDianzanList;
 import com.wj.kindergarten.bean.BoutiqueDianzanListFather;
 import com.wj.kindergarten.bean.GetMineTel;
 import com.wj.kindergarten.bean.ImUserInfo;
@@ -76,6 +74,8 @@ import com.wj.kindergarten.bean.TrainCourse;
 import com.wj.kindergarten.bean.TrainSchoolInfoListFather;
 
 import com.wj.kindergarten.bean.UUIDList;
+import com.wj.kindergarten.bean.VideoAccessToken;
+import com.wj.kindergarten.bean.VideoList;
 import com.wj.kindergarten.bean.ZanItem;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.ui.addressbook.EmotManager;
@@ -551,6 +551,15 @@ public class SendRequest {
                 break;
             case RequestType.GET_IM_ACCOUNT:
                 resultI.result(getDomain(domain, ImUserInfo.class));
+                break;
+            case RequestType.NOTICE_INFO:
+                resultI.result(getDomain(domain, ArticleDetail.class));
+                break;
+            case RequestType.GET_VIDEO_ACCESS_TOKEN:
+                resultI.result(getDomain(domain, VideoAccessToken.class));
+                break;
+            case RequestType.GET_VIDEO_LIST_BY_PAGE:
+                resultI.result(getDomain(domain, VideoList.class));
                 break;
 
             default:

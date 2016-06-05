@@ -23,6 +23,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 
+import com.adsmogo.adview.AdsMogoLayout;
 import com.alibaba.mobileim.IYWLoginService;
 import com.alibaba.mobileim.YWAPI;
 import com.alibaba.mobileim.YWIMKit;
@@ -31,6 +32,7 @@ import com.alibaba.mobileim.channel.event.IWxCallback;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
+import com.videogo.openapi.EZOpenSDK;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.ActivityManger;
 import com.wj.kindergarten.CGApplication;
@@ -46,6 +48,7 @@ import com.wj.kindergarten.bean.PfAlbumListSun;
 import com.wj.kindergarten.bean.TrainChildInfoList;
 import com.wj.kindergarten.bean.TrainClass;
 
+import com.wj.kindergarten.bean.VideoAccessToken;
 import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.handler.GlobalHandler;
 import com.wj.kindergarten.handler.MessageHandlerListener;
@@ -62,6 +65,7 @@ import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.HintInfoDialog;
 import com.wj.kindergarten.utils.ShareUtils;
 import com.wj.kindergarten.utils.Utils;
+import com.xiaomi.market.sdk.XiaomiUpdateAgent;
 
 
 import java.util.List;
@@ -151,7 +155,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate() {
 
-
         getSupportActionBar().setElevation(0);
         getCount();
         instance = this;
@@ -159,6 +162,7 @@ public class MainActivity extends BaseActivity {
         dialog = new HintInfoDialog(this);
         setTitleText("");
         MainFragment.GRID_ITEM_HW = Utils.getWidthByScreenWeight(4);
+        XiaomiUpdateAgent.update(this);
         ActivityManger.getInstance().addActivity(this);
         handler.sendEmptyMessageAtTime(1, 2000);
         initTab();
@@ -177,6 +181,9 @@ public class MainActivity extends BaseActivity {
         //获取Im账号
         getImAccount();
 
+        //获取视频的assessToken
+        getVideoAccessToken();
+
         handler.sendEmptyMessageDelayed(START_UPLOAD_PIC, 1000);
         handler.sendEmptyMessageDelayed(2, 1000);
         //每次应用启动获取话题
@@ -186,7 +193,30 @@ public class MainActivity extends BaseActivity {
 //        receive = new MyReceiver();
 //        getActivity().registerReceiver(receive, intentFilter);
 
+    }
 
+    private void getVideoAccessToken() {
+        UserRequest.getVideoAccessToken(this, new RequestFailedResult() {
+            @Override
+            public void result(BaseModel domain) {
+                VideoAccessToken videoAccessToken = (VideoAccessToken) domain;
+                if(videoAccessToken != null){
+                    if(!Utils.stringIsNull(videoAccessToken.getAccessToken())){
+                        CGSharedPreference.setVideoAccessToken(videoAccessToken.getAccessToken());
+                    }
+//                    if(!Utils.stringIsNull(videoAccessToken.getAppKey())){
+//                        CGSharedPreference.setVideoAppkey(videoAccessToken.getAppKey());
+////                        EZOpenSDK.initLib(CGApplication.getInstance(), videoAccessToken.getAppKey(), "");
+//                    }
+
+                }
+            }
+
+            @Override
+            public void result(List<BaseModel> domains, int total) {
+
+            }
+        });
     }
 
     private void getImAccount() {
@@ -691,7 +721,6 @@ public class MainActivity extends BaseActivity {
 
         }
 
-
         return true;
     }
 
@@ -700,7 +729,7 @@ public class MainActivity extends BaseActivity {
         if (now_back - pre_back <= BACK_QUIT) {
             ShareUtils.clear();
             sendBroadcast(new Intent(GloablUtils.FINISH_UPLOAD_PIC));
-            finish();
+            ActivityManger.getInstance().exitAll();
             return;
         } else {
             Utils.showToast(this, getString(R.string.quit_app));
@@ -714,6 +743,7 @@ public class MainActivity extends BaseActivity {
         instance = null;
         Log.i("TAG", "页面被销毁!");
         UmengUpdateAgent.setUpdateListener(null);
+        AdsMogoLayout.clear();
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 //        Log.i("TAG","添加运行任务 ： "+activityManager.getAppTasks().size());
         Log.i("TAG", "添加任务栈  ： " + activityManager.getRunningTasks(10).size());

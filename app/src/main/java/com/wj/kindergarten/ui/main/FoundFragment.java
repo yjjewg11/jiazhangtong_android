@@ -76,5 +76,9 @@ public class FoundFragment extends Fragment {
         return topicWebFragment;
     }
 
-
+    @Override
+    public void onDestroy() {
+        instance = null;
+        super.onDestroy();
+    }
 }

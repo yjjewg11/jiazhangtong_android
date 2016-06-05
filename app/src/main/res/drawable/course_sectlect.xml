@@ -3,7 +3,4 @@
 
     <item android:state_checked="true" android:drawable="@drawable/xiaoxi_red_message"/>
     <item android:state_checked="false" android:drawable="@drawable/xiaoxi_white_message"/>
-
-
-
 </selector>

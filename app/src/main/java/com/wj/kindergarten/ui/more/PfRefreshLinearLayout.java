@@ -18,7 +18,7 @@ import com.wj.kindergarten.utils.GloablUtils;
 import com.wj.kindergarten.utils.WindowUtils;
 
 /**
- * Created by tangt on 2016/3/4.
+ * Created by tangt on 2016/3/4.通用的下拉刷新组件!！！
  */
 public class PfRefreshLinearLayout extends LinearLayout {
     private static final float CRITICAL_REFRESH_DISTANCE = 150;

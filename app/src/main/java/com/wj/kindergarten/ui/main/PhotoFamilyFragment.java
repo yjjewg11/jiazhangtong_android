@@ -636,6 +636,12 @@ public class PhotoFamilyFragment extends Fragment {
         pfFusionListFragment.refreshData();
     }
 
+    @Override
+    public void onDestroy() {
+        instance = null;
+        super.onDestroy();
+    }
+
     public void requestNewData() {
         pfProxyLoadData.queryIncrementNewData(currentFamily_uuid);
     }

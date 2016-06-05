@@ -116,7 +116,6 @@ public abstract class BaseActivity extends ActionBarActivity {
     //是否显示加载界面
     protected boolean isNeedLoading = false;
     private NormalProgressDialog progressDialog = null;//加载对话框
-
     private boolean isReload = false;
     private TextView loadText;
     private ProgressBar progressBar;
@@ -358,7 +357,6 @@ public abstract class BaseActivity extends ActionBarActivity {
                 titleLeftButtonListener();
             }
         });
-
         titleLeftImageView = (ImageView) findViewById(R.id.normal_title_left_image);
         titleCenterTextView = (TextView) findViewById(R.id.normal_title_center_text);
         titleRightButton = (RelativeLayout) findViewById(R.id.normal_title_right_layout);

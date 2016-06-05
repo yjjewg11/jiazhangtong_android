@@ -39,9 +39,11 @@ public class MyCircleView extends View {
         this.scale = scale;
         invalidate();
     }
+
     int padlet = 15;
     int padrig = 15;
-    public void setPad(int left,int right){
+
+    public void setPad(int left, int right) {
         padlet = left;
         padrig = right;
         invalidate();
@@ -52,12 +54,16 @@ public class MyCircleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         paintNor.setColor(Color.parseColor("#ffffff"));
-        for(int i = 0 ; i < count ; i++){
-            canvas.drawCircle(15+distance*i, radius + 10, radius, paintNor);
+        for (int i = 0; i < count; i++) {
+            canvas.drawCircle(35 + distance * i, radius + 10, radius, paintNor);
         }
-        canvas.drawCircle(15 + distance * scale, radius + 10, radius, paintSingle);
+
+        canvas.drawCircle(35 + distance * scale, radius + 10, radius, paintSingle);
+
+
         setPadding(padlet, 15, padrig, 15);
     }
+
     int distance = 80;
 
     public void setDistance(int distance) {
@@ -81,7 +87,7 @@ public class MyCircleView extends View {
         if (widthMode == MeasureSpec.EXACTLY) {
 
         } else if (widthMode == MeasureSpec.AT_MOST) {
-            widthSize = getPaddingLeft() + count*distance + getPaddingRight();
+            widthSize = getPaddingLeft() + count * distance + getPaddingRight();
         }
         if (heightMode == MeasureSpec.EXACTLY) {
 

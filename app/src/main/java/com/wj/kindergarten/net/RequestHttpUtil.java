@@ -32,19 +32,18 @@ public class RequestHttpUtil {
 
     //专用测试服务器地址
 
-//    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
+    public static final String BASE_URL = "http://120.25.212.44/px-mobile/";
 
 
 //    public static final String BASE_URL = "http://192.168.0.115:8080/px-mobile/";
 
 //    public static final String BASE_URL = "http://192.168.0.108:8080/px-mobile/";
 
-    //正式地址
+//正式地址
 
-    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
+//    public static final String BASE_URL = "http://jz.wenjienet.com/px-mobile/";
 
     public synchronized static AsyncHttpClient getClient() {
-
         return getClient(0);
     }
     public synchronized static AsyncHttpClient getClient(long time) {

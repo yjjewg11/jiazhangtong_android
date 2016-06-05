@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.adsmogo.adview.AdsMogoLayout;
 import com.umeng.analytics.MobclickAgent;
 import com.wenjie.jiazhangtong.R;
 import com.wj.kindergarten.CGApplication;
@@ -32,6 +33,7 @@ import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.BaseActivity;
+import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.AppraiseTeacherActivity;
 import com.wj.kindergarten.ui.func.ArticleListActivity;
 import com.wj.kindergarten.ui.func.CourseListActivity;
@@ -40,6 +42,7 @@ import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NoticeListActivity;
 import com.wj.kindergarten.ui.func.SignListActivity;
 import com.wj.kindergarten.ui.func.TeachersActivity;
+import com.wj.kindergarten.ui.func.VideoListActivity;
 import com.wj.kindergarten.ui.mine.PrivilegeActiveActivity;
 
 import com.wj.kindergarten.ui.more.MoreUtil;
@@ -76,7 +79,7 @@ public class MainFragment extends Fragment {
     private boolean isShow = false;
     private ArrayList<More> list = new ArrayList<>();
     private HashMap<String ,String> map = new HashMap<>();
-
+    private AdsMogoLayout adsMogoLayout;
 
 
     @Nullable
@@ -89,7 +92,7 @@ public class MainFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_main, null, false);
             ViewGroup viewGroup = (ViewGroup) rootView.findViewById(R.id.other_ads);
-            Utils.ads(getActivity(), viewGroup);
+            adsMogoLayout =  Utils.ads(getActivity(), viewGroup);
 
             initViews(rootView);
             new Handler().postDelayed(new Runnable() {
@@ -258,7 +261,6 @@ public class MainFragment extends Fragment {
         });
     }
 
-
     private void initMainItem() {
         mainItems.clear();
 
@@ -275,6 +277,7 @@ public class MainFragment extends Fragment {
         MainItem gardenTeacher = new MainItem(R.drawable.pingjialaoshi, "评价老师", Constants.GARDEN_TEACHER);
         MainItem gardenMore = new MainItem(R.drawable.gengduo, "更多", Constants.GARDEN_MORE);
         MainItem gradenList = new MainItem(R.drawable.tongxunlu,"通讯录",Constants.GARDEN_ADDRESS_LIST);
+        MainItem video = new MainItem(R.drawable.video_shiping,"视频",Constants.GARDEN_VIDEO);
 
         mainItems.add(gardenInteraction);//互动
         mainItems.add(gardenDes);//宝宝入学
@@ -285,9 +288,9 @@ public class MainFragment extends Fragment {
         mainItems.add(gardenNotice);//校园公告
 
         mainItems.add(gardenSign);//签到记录
-        mainItems.add(gardenTeacher);//评价老师
+        mainItems.add(video);//视频
         mainItems.add(gradenList);//通讯录
-
+        mainItems.add(gardenTeacher);//评价老师
         mainItems.add(gardenMore);//更多
 
 
@@ -298,13 +301,16 @@ public class MainFragment extends Fragment {
     }
 
     private String [] clickEvent = new String[]{
-            "interaction","recruit","special_course","course","food","message","sign","assess","address","more"
+            "interaction","recruit","special_course","course","food","message","sign","video","assess","address","more"
     };
     private void mainItemsClick(MainItem mainItem,int position) {
         //  Utils.showToast(mContext, mainItem.getText());
 //        map.put(mainItem.getText(),String.valueOf(map.get(mainItem.getText()) == null ? 1 : map.get(mainItem.getText()) + 1));
         Utils.registerUmengClickEvent(clickEvent[position]);
         switch (mainItem.getTag()) {
+            case Constants.GARDEN_VIDEO:
+                startActivity(new Intent(mContext, VideoListActivity.class));//视频
+                break;
             case Constants.GARDEN_INTERACTION://互动
                 startActivity(new Intent(mContext, InteractionListActivity.class));
                 break;
@@ -408,6 +414,12 @@ public class MainFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        AdsMogoLayout.clear();
+        adsMogoLayout.clearThread();
+        super.onDestroy();
+    }
 
     public Group getChooseTile() {
         return chooseTile;

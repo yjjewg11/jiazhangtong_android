@@ -32,7 +32,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class PfInfoAllPIcFragment extends Fragment {
     View view;
     private List<AllPfAlbumSunObject> objectList = new ArrayList<>();

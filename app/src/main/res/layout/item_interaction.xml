@@ -185,7 +185,7 @@
         android:layout_marginLeft="@dimen/normal_padding"
         android:paddingLeft="@dimen/small_padding"
         android:text="显示更多"
-        android:textColor="@color/blue"
+        android:textColor="@color/own_blue"
         android:textSize="@dimen/small_text"
         android:visibility="gone" />
 

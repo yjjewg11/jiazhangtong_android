@@ -51,8 +51,8 @@ public class BoutiqueModeReviewActivity extends BaseActivity {
     private PfModeNameObject modeObj;
     private int status = 1;//可见状态,临存，未发布
     private String title;//上传标题
-    private String uuid;//精品相册uuid
     private String key;//模板主键
+    private String uuid;//精品相册uuid
     private String mp3;//音乐地址
     private String hearld;//封面图片
     private ArrayList<AllPfAlbumSunObject> objectList;//照片地址集合

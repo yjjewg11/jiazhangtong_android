@@ -37,7 +37,8 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.squareup.leakcanary.LeakCanary;
+//import com.squareup.leakcanary.LeakCanary;
+import com.videogo.openapi.EZOpenSDK;
 import com.wenjie.jiazhangtong.R;
 
 import com.wj.kindergarten.bean.BaseModel;
@@ -72,6 +73,7 @@ import java.util.Map;
  * @version: v1.0
  */
 public class CGApplication extends MultiDexApplication {
+    private static final String APP_KEY = "44b89d0bea824201ad557c48f73635d9";
     public static CGApplication context = null;
 
     public static double latitude = -1;
@@ -102,11 +104,31 @@ public class CGApplication extends MultiDexApplication {
         super.onCreate();
         context = this;
         String cachePath = Constants.cachePath;
+        boolean in = EZOpenSDK.initLib(this, APP_KEY, "");
 //        FeedbackAPI.initAnnoy(this, String appKey);
 
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
 ////Application.onCreate中，首先执行这部分代码, 因为，如果在":TCMSSevice"进程中，无需进行openIM和app业务的初始化，以节省内存
 ////特别注意:这段代码不能封装到其他方法中，必须在onCreate顶层代码中!
+
+        ImageLoaderUtil.initImageLoader(this, R.drawable.touxiang, cachePath, 10, 0);
+        RequestHttpUtil.initClient();
+//        initDirs();
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.friends_sends_pictures_no)
+                .showImageForEmptyUri(R.drawable.friends_sends_pictures_no)
+                .showImageOnFail(R.drawable.friends_sends_pictures_no)
+                .cacheInMemory(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .cacheOnDisk(true)
+                .displayer(new RoundedBitmapDisplayer(0)).build();
+
+//        requestNetworkLocation();
+//        SDKInitializer.initialize(getApplicationContext());
+//        initSearch();
+
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
         SysUtil.setApplication(this);
         if(SysUtil.isTCMSServiceProcess(this)){
             return;  //特别注意：此处return是退出onCreate函数，因此不能封装到其他任何方法中!
@@ -137,24 +159,7 @@ public class CGApplication extends MultiDexApplication {
 
         AdviceBinder.bindAdvice(PointCutEnum.CHATTING_FRAGMENT_UI_POINTCUT,ChattingCustomAdviceSample.class);
 
-        ImageLoaderUtil.initImageLoader(this, R.drawable.touxiang, cachePath, 10, 0);
-        RequestHttpUtil.initClient();
-//        initDirs();
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.friends_sends_pictures_no)
-                .showImageForEmptyUri(R.drawable.friends_sends_pictures_no)
-                .showImageOnFail(R.drawable.friends_sends_pictures_no)
-                .cacheInMemory(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .cacheOnDisk(true)
-                .displayer(new RoundedBitmapDisplayer(0)).build();
 
-
-//        requestNetworkLocation();
-//        SDKInitializer.initialize(getApplicationContext());
-//        initSearch();
-
-        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
 

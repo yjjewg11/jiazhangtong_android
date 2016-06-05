@@ -273,4 +273,9 @@ public class MineFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        instance = null;
+        super.onDestroy();
+    }
 }

@@ -53,7 +53,7 @@ public class GalleryImagesActivity extends BaseActivity implements View.OnClickL
     //拍照ICON
     //private final String CAMERA_ICON = "android.resource://com.wenjie.jiazhangtong/drawable/photo";
     //最多能选择图片数量
-    public final static int IMAGE_MAX = 9;
+    public final static int IMAGE_MAX = 99;
     //取值key
     public static final String RESULT_LIST = "ResultList";
     //拍照后返回REQUEST

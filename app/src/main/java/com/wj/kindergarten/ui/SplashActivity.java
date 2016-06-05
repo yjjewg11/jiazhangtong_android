@@ -36,6 +36,7 @@ import com.wj.kindergarten.net.request.UserRequest;
 import com.wj.kindergarten.ui.main.MainActivity;
 import com.wj.kindergarten.ui.mine.LoginActivity;
 import com.wj.kindergarten.ui.more.DoEveryThing;
+import com.wj.kindergarten.ui.other.CustomIUmengRegisterCallback;
 import com.wj.kindergarten.utils.CGLog;
 import com.wj.kindergarten.utils.Utils;
 import org.json.JSONObject;
@@ -52,6 +53,7 @@ import org.json.JSONObject;
 public class SplashActivity extends Activity implements DoEveryThing {
     private static final int SPLASH_DELAY = 0;
     private  int SLASH_DELAY_TIME = 0;
+    public static SplashActivity instance;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -65,10 +67,12 @@ public class SplashActivity extends Activity implements DoEveryThing {
                         String[] str = CGSharedPreference.getLogin();
 //                        UserRequest.login2(SplashActivity.this, str[0], str[1]);
                         //有在调到主页面的同时获取用户信息
-                        if (CGSharedPreference.getNoticeState(1)) {
-                            UserRequest.deviceSave(getApplicationContext(), 0);//注册设备
-                        } else {
-                            UserRequest.deviceSave(SplashActivity.this, 2);//注册设备
+                        if(!Utils.stringIsNull(CGSharedPreference.getDeviceId())){
+                            if (CGSharedPreference.getNoticeState(1)) {
+                                UserRequest.deviceSave(getApplicationContext(), 0);//注册设备
+                            } else {
+                                UserRequest.deviceSave(SplashActivity.this, 2);//注册设备
+                            }
                         }
                         GlobalHandler.getHandler().sendEmptyMessage(1011);
                         UserRequest.getUserInfo(SplashActivity.this,CGSharedPreference.getStoreJESSIONID(),CGSharedPreference.getJESSIONID_MD5());
@@ -101,20 +105,21 @@ public class SplashActivity extends Activity implements DoEveryThing {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        instance = this;
         ActivityManger.getInstance().addActivity(this);
 
         try {
             OnlineConfigAgent.getInstance().updateOnlineConfig(getApplicationContext());
             OnlineConfigAgent.getInstance().setDebugMode(true);
-
             mPushAgent = PushAgent.getInstance(getApplicationContext());
             mPushAgent.setDebugMode(true);
-            mPushAgent.onAppStart();
-            mPushAgent.enable(mRegisterCallback);
+            mPushAgent.enable(new CustomIUmengRegisterCallback());
             mPushAgent.setPushIntentServiceClass(MyPushIntentService.class);
             String device_token = UmengRegistrar.getRegistrationId(getApplicationContext());
-            CGSharedPreference.saveDeviceId(device_token);
+            if(!Utils.stringIsNull(device_token)){
+                CGSharedPreference.saveDeviceId(device_token);
+            }
+            mPushAgent.onAppStart();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -122,16 +127,6 @@ public class SplashActivity extends Activity implements DoEveryThing {
         int delay = getIntent().getIntExtra("delay",3000);
         mHandler.sendEmptyMessageDelayed(SPLASH_DELAY, delay);
     }
-
-
-    public IUmengRegisterCallback mRegisterCallback = new IUmengRegisterCallback() {
-
-        @Override
-        public void onRegistered(String registrationId) {
-            CGSharedPreference.saveDeviceId(registrationId);
-            CGLog.d("device token = " + registrationId);
-        }
-    };
 
     @Override
     protected void onResume() {
@@ -159,9 +154,11 @@ public class SplashActivity extends Activity implements DoEveryThing {
         if (mHandler != null) {
             mHandler.removeMessages(SPLASH_DELAY);
         }
-        mPushAgent.disable();
-        mPushAgent = null;
+        instance = null;
+        mPushAgent.enable(null);
+        mPushAgent.setUnregisterCallback(null);
         OnlineConfigAgent.getInstance().removeOnlineConfigListener();
+
         AdsMogoLayout.clear();
 //        adsMogoLayoutCode.clearThread();
         super.onDestroy();

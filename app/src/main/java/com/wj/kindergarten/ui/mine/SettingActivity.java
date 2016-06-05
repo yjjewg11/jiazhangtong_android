@@ -108,16 +108,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 if(intent!=null){
                     startActivity(intent);
                 }
-//                startActivity(new Intent(SettingActivity.this, FeedBackActivty.class));
                 break;
             case R.id.layout_4://关于我们
 
 
                 //TODO 暂时修改为测试即时通讯
 
-                Intent mIKntent = MainActivity.instance.getmIMKit().getConversationActivityIntent();
-                startActivity(mIKntent);
-//                startActivity(new Intent(SettingActivity.this, AboutActivity.class));
+//                Intent mIKntent = MainActivity.instance.getmIMKit().getConversationActivityIntent();
+//                startActivity(mIKntent);
+                startActivity(new Intent(SettingActivity.this, AboutActivity.class));
                 break;
             case R.id.layout_5://检查更新
                 checkVersion();

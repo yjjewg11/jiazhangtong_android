@@ -13,7 +13,16 @@ public class BoutiqueSingleInfoObject extends BaseModel{
     private int photo_count;@Expose
     private int status;@Expose
     private String photo_uuids;@Expose
-    private String template_key;
+    private String template_key;@Expose
+    private String mp3;
+
+    public String getMp3() {
+        return mp3;
+    }
+
+    public void setMp3(String mp3) {
+        this.mp3 = mp3;
+    }
 
     public String getTemplate_key() {
         return template_key;
@@ -33,6 +42,7 @@ public class BoutiqueSingleInfoObject extends BaseModel{
                 ", status=" + status +
                 ", photo_uuids='" + photo_uuids + '\'' +
                 ", template_key='" + template_key + '\'' +
+                ", mp3='" + mp3 + '\'' +
                 '}';
     }
 

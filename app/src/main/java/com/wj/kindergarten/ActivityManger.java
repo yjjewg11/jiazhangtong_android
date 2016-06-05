@@ -67,4 +67,25 @@ public class ActivityManger extends Application {
             pfActivities.clear();
         }
     }
+    public void exitAll(){
+        if (this.activities != null && this.activities.size() > 0) {
+            Iterator var1 = this.activities.iterator();
+
+            while (var1.hasNext()) {
+                Activity activity = (Activity) var1.next();
+                activity.finish();
+            }
+        }
+
+
+
+        if(pfActivities.size() > 0){
+            Iterator<Activity> pfIterator = pfActivities.iterator();
+            while (pfIterator.hasNext()){
+                Activity pfActivity = pfIterator.next();
+                pfActivity.finish();
+            }
+        }
+         System.exit(0);
+    }
 }

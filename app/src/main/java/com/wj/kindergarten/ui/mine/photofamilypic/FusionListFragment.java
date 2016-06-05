@@ -254,7 +254,6 @@ public class FusionListFragment extends Fragment implements Watcher{
 
         fusion_list_fresh_linear.setMode(PfRefreshLinearLayout.Mode.PULL_FROM_UP);
         fusion_list_fresh_linear.setOnRefreshListener(new PfRefreshLinearLayout.OnRefreshListener() {
-
             @Override
             public void pullFromEndRefresh() {
                 loadBottomData();
@@ -315,7 +314,6 @@ public class FusionListFragment extends Fragment implements Watcher{
 
         });
         loadData();
-
         return mainView;
     }
 

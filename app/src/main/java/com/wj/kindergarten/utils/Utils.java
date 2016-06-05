@@ -62,6 +62,7 @@ import com.wj.kindergarten.common.CGSharedPreference;
 import com.wj.kindergarten.common.Constants;
 import com.wj.kindergarten.net.RequestResultI;
 import com.wj.kindergarten.net.request.UserRequest;
+import com.wj.kindergarten.ui.SplashActivity;
 import com.wj.kindergarten.ui.func.InteractionListActivity;
 import com.wj.kindergarten.ui.func.NormalReplyListActivity;
 import com.wj.kindergarten.ui.imagescan.PhotoWallActivity;
@@ -182,7 +183,11 @@ public class Utils {
         return mTextPaint.measureText(text);
     }
 
-    public static void ads(Activity activity, ViewGroup viewGrop) {
+
+    private static Activity mogoActivity;
+    //因为芒果广告造成内存泄漏，所以改为静态实例,无法去掉芒果广告的引用
+
+    public static AdsMogoLayout ads(Activity activity, ViewGroup viewGrop) {
         AdsMogoLayout adsMogoLayoutCode = new AdsMogoLayout(activity, GloablUtils.MOGO_ID, 360, 150, AdsMogoType.Custom, true);
         adsMogoLayoutCode.isOtherSizes = true;
         adsMogoLayoutCode.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -219,6 +224,7 @@ public class Utils {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
         viewGrop.addView(adsMogoLayoutCode, params);
+        return adsMogoLayoutCode;
     }
 
 
