@@ -19,12 +19,13 @@ public class ScreenOrientationHelper implements SensorEventListener {
     private Activity mActivity;
     private CheckTextButton mButton1, mButton2;
     private int mOriginOrientation;
-    private Boolean mPortraitOrLandscape;
+    private Boolean mPortraitOrLandscape=true;
 
     private SensorManager mSensorManager;
     private Sensor[] mSensors;
 
     public Boolean getmPortraitOrLandscape() {
+        if(mPortraitOrLandscape==null)return true;
         return mPortraitOrLandscape;
     }
 

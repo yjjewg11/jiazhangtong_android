@@ -36,6 +36,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -890,7 +891,7 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
 
             mRealPlayCaptureBtnLy.setVisibility(View.VISIBLE);
             mRealPlayFullCaptureBtn.setVisibility(View.VISIBLE);
-            mRealPlayRecordContainerLy.setVisibility(View.VISIBLE);
+            mRealPlayRecordContainerLy.setVisibility(View.INVISIBLE);
             mRealPlayFullRecordContainer.setVisibility(View.VISIBLE);
             mRealPlayQualityBtn.setVisibility(View.VISIBLE);
             mRealPlayFullSoundBtn.setVisibility(View.VISIBLE);
@@ -1218,20 +1219,28 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(!mScreenOrientationHelper.getmPortraitOrLandscape()){
-                mScreenOrientationHelper.portrait();
-            }else {
-                closePtzPopupWindow();
-                closeTalkPopupWindow(true, false);
-                if (mStatus != RealPlayStatus.STATUS_STOP) {
-                    stopRealPlay();
-                    setRealPlayStopUI();
+
+        try{
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if(mScreenOrientationHelper!=null&&!mScreenOrientationHelper.getmPortraitOrLandscape()){
+                    mScreenOrientationHelper.portrait();
+                }else {
+                    closePtzPopupWindow();
+                    closeTalkPopupWindow(true, false);
+                    if (mStatus != RealPlayStatus.STATUS_STOP) {
+                        stopRealPlay();
+                        setRealPlayStopUI();
+                    }
+                    finish();
                 }
-                finish();
+                return true;
             }
-            return true;
+        }catch (NullPointerException ex){
+            Log.e("RealPlayActivity",ex.getMessage());
+        }catch (Exception ex){
+            Log.e("RealPlayActivity",ex.getMessage());
         }
+
 
         return super.onKeyDown(keyCode, event);
     }
@@ -1936,7 +1945,7 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
                         mRealPlayRecordBtn, 0, 90);
             } else {
                 mRealPlayRecordStartBtn.setVisibility(View.GONE);
-                mRealPlayRecordBtn.setVisibility(View.VISIBLE);
+                mRealPlayRecordBtn.setVisibility(View.INVISIBLE);
             }
             mRealPlayFullRecordStartBtn.setVisibility(View.GONE);
             mRealPlayFullRecordBtn.setVisibility(View.VISIBLE);
@@ -1950,7 +1959,7 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
 
             }
             mRealPlayRecordStartBtn.setVisibility(View.GONE);
-            mRealPlayRecordBtn.setVisibility(View.VISIBLE);
+            mRealPlayRecordBtn.setVisibility(View.INVISIBLE);
         }
         mAudioPlayUtil.playAudioFile(AudioPlayUtil.RECORD_SOUND);
         mEZPlayer.stopLocalRecord();
@@ -2793,7 +2802,7 @@ public class RealPlayActivity extends Activity implements OnClickListener, Surfa
                 mRealPlayFullRecordBtn.setVisibility(View.GONE);
                 mRealPlayFullRecordStartBtn.setVisibility(View.VISIBLE);
             }
-            mRealPlayRecordBtn.setVisibility(View.GONE);
+            mRealPlayRecordBtn.setVisibility(View.INVISIBLE);
             mRealPlayRecordStartBtn.setVisibility(View.VISIBLE);
         }
         mIsRecording = true;
